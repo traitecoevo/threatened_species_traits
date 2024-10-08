@@ -1,0 +1,88 @@
+---
+title: "threatened_species_scripts"
+format: html
+editor: visual
+---
+
+## startup
+```{r}
+library(tidyverse)
+
+austraits <- readRDS("data/austraits/austraits-6.0.0.rds")
+
+threatened_species <- read_csv("data/threatened_species_masterlist.csv")
+```
+```{r}
+species <- "Rhodamnia angustifolia"
+
+austraits$traits %>% filter(taxon_name == species) %>% View()
+
+read_csv("data/threatened_species_masterlist.csv") %>%
+  left_join(austraits$taxa %>% select(suggested_name = taxon_name, family)) %>%
+  write_csv("data/threatened_species_masterlist.csv")
+```
+
+
+```{r}
+App4 <- read_csv("data/datasets_from_manuscripts/Phytophthora_abatement_plant_Appendix4.csv")
+OGara_all <- read_csv("data/datasets_from_manuscripts/OGara_2006_all_columns.csv")
+
+App4_corrected_names <- APCalign::create_taxonomic_update_lookup(App4$Species, full = TRUE)
+App4_corrected_names_tmp <- App4_corrected_names %>% select(original_name, suggested_name, accepted_name, family, taxon_distribution) %>% rename(Species = original_name) 
+
+App4 <- App4 %>% distinct(Species, .keep_all = TRUE) %>% left_join(App4_corrected_names_tmp)
+
+App4 %>% filter(suggested_name %in% threatened_species$suggested_name)
+
+write_csv(App4, "data/datasets_from_manuscripts/Phytophthora_abatement_plant_Appendix4.csv", na="")
+
+data_McDougall_2024a <- read_csv("data/datasets_from_manuscripts/data_McDougall_2024a.csv")
+
+data_McDougall_2024a_corrected_names <- APCalign::create_taxonomic_update_lookup(data_McDougall_2024a$Species, full = TRUE, resources = resources)
+
+data_McDougall_2024a_corrected_names_tmp <- data_McDougall_2024a_corrected_names %>% select(original_name, suggested_name, accepted_name, family, taxon_distribution) %>% rename(Species = original_name) 
+
+data_McDougall_2024a <- data_McDougall_2024a %>% distinct(Species, .keep_all = TRUE) %>% left_join(data_McDougall_2024a_corrected_names_tmp)
+
+write_csv(data_McDougall_2024a, "data/datasets_from_manuscripts/data_McDougall_2024a.csv", na="")
+
+App4 %>% filter(!suggested_name %in% data_McDougall_2024a$suggested_name) %>% left_join(OGara_all) %>% View()
+
+data_McDougall_2024a %>% filter(!suggested_name %in% App4$suggested_name)
+```
+
+
+```{r}
+flowering_times <- austraits$traits %>% 
+  filter(trait_name == "flowering_time") %>% 
+  select(taxon_name, dataset_id, trait_name, value) %>%
+  group_by(taxon_name, dataset_id, trait_name) %>%
+  mutate(value = first(value)) %>%
+  ungroup() %>%
+  group_by(taxon_name, trait_name) %>%
+  mutate(
+    value = paste0(value, collapse = "--"),
+    dataset_id = paste0(dataset_id, collapse = "--")
+  ) %>%
+  ungroup() %>%
+  distinct()
+```
+
+
+
+```{r}
+LMA_means <- austraits$traits %>% 
+  filter(trait_name == "leaf_mass_per_area") %>% 
+  filter(str_detect(life_stage, "adult")) %>% 
+  filter(basis_of_record == "field") %>% 
+  select(taxon_name, value) %>% 
+  group_by(taxon_name) %>% 
+  summarise(
+    value = mean(as.numeric(value))
+  ) %>%
+  ungroup()
+```
+
+susceptible_myrtaceae <- read_csv("data/myrtaceae_susceptibility.csv")
+
+

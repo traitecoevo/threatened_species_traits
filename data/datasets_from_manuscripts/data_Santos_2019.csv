@@ -1,0 +1,22 @@
+﻿species,susceptibility_classification,hexadecanoid acid presence
+Eucalyptus botryoides,susceptible,
+Eucalyptus brassiana,low_resistance,
+Eucalyptus camaldulensis,low_resistance,
+Eucalyptus cloeziana,low_resistance,
+Eucalyptus deglupta,susceptible,
+Eucalyptus dunnii,low_resistance,
+Eucalyptus exserta,low_resistance,
+Eucalyptus grandis,susceptible,high
+Eucalyptus microcorys,low_resistance,
+Eucalyptus paniculata,low_resistance,
+Eucalyptus pellita,low_resistance,
+Eucalyptus phaeotricha,susceptible,high
+Eucalyptus pilularis,low_resistance,
+Eucalyptus propinqua,low_resistance,
+Eucalyptus resinifera,high_resistance,
+Eucalyptus robusta,low_resistance,
+Eucalyptus saligna,low_resistance,
+Eucalyptus tereticornis,low_resistance,
+Eucalyptus toreliodora,high_resistance,
+Eucalyptus urograndis,low_resistance,
+Eucalyptus urophylla,low_resistance,
