@@ -11,9 +11,11 @@ library(tidyverse)
 austraits <- readRDS("data/austraits/austraits-6.0.0.rds")
 
 threatened_species <- read_csv("data/threatened_species_masterlist.csv")
+
+phytophthora <- read_csv("data/datasets_from_manuscripts/Phytophthora_abatement_plant_Appendix4.csv")
 ```
 ```{r}
-species <- "Rhodamnia angustifolia"
+species <- "Styphelia perileuca"
 
 austraits$traits %>% filter(taxon_name == species) %>% View()
 
@@ -68,6 +70,17 @@ flowering_times <- austraits$traits %>%
   distinct()
 ```
 
+```{r}
+growth_form_exists <- austraits$traits %>% 
+  filter(trait_name == "plant_growth_form") %>% 
+  distinct(taxon_name)
+
+growth_form_exists_updates <- create_taxonomic_update_lookup(growth_form_exists$taxon_name) 
+
+threatened_species %>% filter(!suggested_name %in% growth_form_exists_updates$accepted_name) %>% left_join(growth_form_exists_updates %>% select(suggested_name = accepted_name, original_name)) -> v1
+
+threatened_species %>% filter(!suggested_name %in% growth_form_exists$taxon_name) -> v2
+```
 
 
 ```{r}
@@ -83,6 +96,110 @@ LMA_means <- austraits$traits %>%
   ungroup()
 ```
 
-susceptible_myrtaceae <- read_csv("data/myrtaceae_susceptibility.csv")
+```{r}
+nitrogen_fixing <- austraits$traits %>% 
+  filter(trait_name == "nitrogen_fixing") %>% 
+  select(taxon_name, value) %>% 
+  group_by(taxon_name) %>% 
+  mutate(
+    value = paste0(value, collapse = "-")
+  ) %>%
+  ungroup() %>%
+  select(taxon_name, nitrogen_fixing = value) %>%
+  distinct()
 
+
+phytophthora_with_N_fixing <- phytophthora %>%
+  left_join(nitrogen_fixing %>% rename(suggested_name = taxon_name))
+```
+
+```{r}
+resprouting_capacity <- austraits$traits %>% 
+  filter(trait_name == "resprouting_capacity") %>%
+  select(taxon_name, value) %>% 
+  mutate(value_numeric = case_when(
+      value == "fire_killed" ~ 0,
+      value == "resprouts" ~ 1,
+      value == "fire_killed resprouts" ~ 0.5,
+      value == "partial_resprouting" ~ 0.5,
+      value == "fire_killed partial_resprouting" ~ 0.25,
+      value == "partial_resprouting resprouts" ~ 0.75,
+      value == "fire_killed partial_resprouting resprouts" ~0.5
+    )
+  ) %>%
+  select(-value) %>%
+  group_by(taxon_name) %>% 
+  summarise(
+    value_numeric = mean(value_numeric, na.rm = T)
+  ) %>%
+  ungroup() %>%
+  select(taxon_name, resprouting_capacity = value_numeric) %>%
+  distinct()
+
+
+phytophthora_with_resprouting_capacity <- phytophthora %>%
+  left_join(resprouting_capacity %>% rename(suggested_name = taxon_name)) %>%
+  filter(!is.na(resprouting_capacity)) %>%
+  select(suggested_name, susceptibility = `Susceptibility Rating`, resprouting_capacity) %>%
+  mutate(
+    susceptibility_simple = ifelse(str_detect(susceptibility, "resistant") & !str_detect(susceptibility, "susceptible"), "resistant", NA),
+    susceptibility_simple = ifelse(!str_detect(susceptibility, "resistant") & str_detect(susceptibility, "susceptible"), "susceptible", susceptibility_simple),
+    susceptibility_simple = ifelse(str_detect(susceptibility, "resistant") & str_detect(susceptibility, "susceptible"), NA, susceptibility_simple)
+         ) %>%
+  filter(!is.na(susceptibility_simple))
+
+phytophthora_with_resprouting_capacity %>% group_by(susceptibility) %>% summarise(count = n()) %>% ungroup() %>% distinct()
+
+ggplot(data = phytophthora_with_resprouting_capacity, aes(x = resprouting_capacity)) + geom_histogram() + facet_wrap(vars(susceptibility_simple))
+```
+
+
+
+```{r}
+susceptible_myrtaceae <- read_csv("data/myrtaceae_susceptibility.csv") %>%
+  rename(taxon_name = `Scientific Name`)
+```
+
+```{r}
+susceptible_myrtaceae_LMA <- susceptible_myrtaceae %>% left_join(LMA_means, by = "taxon_name")
+
+ggplot(data = susceptible_myrtaceae_LMA, aes(x = Susceptibilty_binary, y = value)) + geom_point()
+
+model_LMA <- lm(value ~ Susceptibilty_binary, data = susceptible_myrtaceae_LMA)
+```
+
+
+
+```{r}
+Begg <- read_csv("data/datasets_from_manuscripts/Beggs_2010_data.csv")
+
+new_names <- APCalign::create_taxonomic_update_lookup(Begg$species) %>% select(original_name, accepted_name, suggested_name)
+
+Begg <- Begg %>% left_join(new_names %>% rename(species = original_name))
+
+categorical <- austraits$traits %>%
+  filter(taxon_name %in% Begg$accepted_name) %>%
+  filter(trait_name %in% c("plant_growth_form", "resprouting_capacity", "life_history", "vegetative_regeneration", "bud_bank_location", "seedbank_location", "photosynthetic_pathway")) %>%
+  select(taxon_name, trait_name, value) %>%
+  group_by(taxon_name, trait_name) %>%
+  mutate(value = paste0(value, collapse = "-")) %>%
+  ungroup() %>%
+  distinct() %>%
+  pivot_wider(names_from = trait_name, values_from = value)
+
+numeric <- austraits$traits %>%
+  filter(taxon_name %in% Begg$accepted_name) %>%
+  filter(trait_name %in% c("leaf_mass_per_area", "leaf_N_per_dry_mass")) %>%
+  select(taxon_name, trait_name, value) %>%
+  group_by(taxon_name, trait_name) %>%
+  summarise(value = mean(as.numeric(value))) %>%
+  ungroup() %>%
+  distinct() %>%
+  pivot_wider(names_from = trait_name, values_from = value)
+
+
+Begg_with_traits <- Begg %>% 
+  left_join(categorical %>% rename(accepted_name = taxon_name)) %>%
+  left_join(numeric %>% rename(accepted_name = taxon_name)) 
+```
 

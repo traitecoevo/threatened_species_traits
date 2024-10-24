@@ -47,8 +47,7 @@ inst/doc
 /docs/
 output/
 ignore/
-
-data/austraits/
+.remake
 
 #
 *.pdf
