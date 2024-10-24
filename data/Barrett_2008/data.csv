@@ -1,0 +1,34 @@
+﻿Plant taxon,Life-history characteristics,Juvenile period (years),Habitat,Landform,Threatened ecological community,Threatening procevses,mortailty-curve-parmeter-K{max} (%),mortailty-curve-parmeter-t{1/2K} (days),mortailty-curve-parmeter-r(%perday),susceptibility score,direct impact score,habitat susceptible,Number of extant populations (0-5-ordinal),Population extinctions known to have already occurred (0-5-ordinal),Percentage of extant populations infected by Phytophthora cinnamomi (0-5-ordinal),Percentage of extant populations<500 m from Phytophthora cinnamomi (0-5-ordinal),Percentage of extant populations at least 100 m upslope from Phytophthora cinnamomi (0-5-ordinal),Percentage of extant populations <500 m from trach (0-3-ordinal),Number of additional threatening processes (1-3-ordinal),Extinction risk (0-36) VL-VH
+Acacia awestoniana,OSS,<=4,woodland,flat,,,0.0,0,0.00,0,0.0,N,,,,,,,,0
+Acacia veronica,OSS,<=4,"woodland, mallee-heath/thicket, thicket",upper to lower slope,MMT,climate change,0.0,0,0.00,0,0.0,Y,2,0,3,5,0,3,1,14.0 VL
+Adenanihos pungens subsp. pungens,OSS,>4,mallee-heath/thicket,midslope,,"fire, climate change",97.6,38,0.27,187,8.7,Y,5,0,0,0,-3,3,2,15.7 L
+Andersonia echinocephala,OSS,>4,mallee-heath/thicket,"lower to upper slope, summit, flat","MT, MMT","fire, climate change, herbivory",76.6,82,0.05,99,4.6,Y,0,0,3,5,-2,2,3,15.6 L
+Banksia aculeata,OSC,>4,mallee-heath,flat,,fire,0.0,0,0.00,0,0.0,Y,3,0,1,5,1,3,1,12.0 VL
+Banksia anatona,OSC,>4,mallee-thicket,"lower to midslope, valley flat",,"fire, herbivory, climate change",98.0,30,0.15,183,8.6,Y,5,5,5,5,0,2,3,33.6 VH
+Banksia brownii,OSC,>4,"mallee-heath/thicket, thicket","mid- to upper slope, summit","MT, MMT","fire, climate change, aerial canker disease",100.0,28,0.22,194,9.1,Y,3,5,5,5,0,3,3,33.1 VH
+Banksia concinna,OSC,>4,"mallee-heath, thicket","mid- to upper slope, summit","MT, MMT","fire, herbivory, climate change",72.9,42,0.11,142,6.6,Y,2,5,5,5,-1,2,3,27 6 H
+Banksia hirta,OSC,>4,mallee-heath/thicket,"lower- to upper slope, summit",MMT,"fire, climate change",85.8,38,0.13,160,7.5,Y,2,0,5,5,-1,2,2,22.5 M
+Banksia montana,OSC,>4,thicket,summit,MT,"fire, herbivory, climate change",55.0,31,0.76,200,9.3,Y,5,5,5,5,0,3,3,35.3 VH
+Banksia pseudoplumosa ,OSC,>4,"mallee-heath, thicket",ridge,,fire,97.0,30,0.11,178,8.3,Y,5,0,0,2,0,3,1,19.3 L
+Banksia rufa subsp. pumila,OSC,>4,mallee-heath/thicket,mid to upper slope,MMT,"fire, climate change",100.0,31,0.16,185,8.7,Y,5,0,5,5,0,2,2,27.7 H
+Banksia solandri,OSC,>4,"mallee-heath/thicket, thicket","mid- to upper slope, summit","MT, MMT","fire, herbivory, climate change",87.5,36,0.19,171,8.0,Y,0,5,5,5,-1,2,3,27.0 H
+Calothamnus affinis,OSC,>4,"woodland, mallee-heath","lower slope, ridge",,fire,13.3,48,0.10,75,3.5,Y,2,0,2,3,-3,2,1,13.5 VL
+Calothamnus crassus,FSR,>4,"mallee-heath/thicket, thicket",summit,"MT, MMT",climate change,18.0,56,0.04,66,3.1,Y,2,0,5,5,-1,3,1,18 I L
+Danvinia collina,OSS,>4,thicket,summit,MT,"fire, climate change",72.8,47,0.15,141,6.6,Y,5,5,5,5,0,3,2,31.6 VH
+Darwinia leiostyla ,OSS,<=4,"mallee-heath/thicket, thicket","lower- to upper slope, summit","MT, MMT",climate change,40.0,86,0.04,58,2.7,Y,2,0,3,5,-2,2,1,13.7 VL
+Darwinia squarrosa,OSS,<=4,"mallee-heath/thicket, thicket","mid- to upper slope, summit","MT, MMT",climate change,30.9,62,0.05,74,3.5,Y,2,5,5,5,0,3,1,24.5 M
+Daviesia glossosema,OSS,<=4,mallee-heath,flat,,climate change,94.7,33,0.22,184,8.6,Y,5,5,5,5,0,3,1,32.6 VH
+Daviesia obovata,FSR,>4,mallee-heath/thicket,"mid- to upper slope, summit","MT, MMT","fire, herbivory, climate change",73.5,43,0.20,150,7.0,Y,5,5,5,5,-1,2,3,31.0 VH
+Daviesia pseudaphylla,OSS,<=4,mallee-heath,flat,,climate change,33.0,50,0.09,92,4.3,Y,5,0,5,5,0,3,1,23.1 M
+Deyeuxia drummondii,OSS,<=4,"thicket, scrub",summit,"MT, MMT",climate change,0.0,0,0.00,0,0.0,Y,3,0,5,5,0,3,1,17.0 L
+Eucalyptus ligulata subsp. stirlingica,RS,<=4,mallee-heath/thicket,"lower- to upper slope, summit",MMT,climate change,6.1,53,0.06,59,2.7,Y,2,0,5,5,-1,2,1,16.7 L
+Gastrolobium leakeanum,OSS,<=4,"mallee-heath/thicket, thicket","lower- to upper slope, summit","MT, MMT","herbivory, climate change",59.7,43,0.13,130,6.1,Y,3,0,5,5,0,3,2,24.1 M
+Gastrolobium vestitum,OSS,<=4,"woodland, thicket","mid- to upper slope, summit",MMT,climate change,80.0,37,0.10,153,7.1,Y,5,0,5,5,0,3,1,26.1 H
+Isopogon latifolius,OSC,>4,"mallee-heath/thicket, thicket","mid- to upper slope, summit","MT, MMT","fire, climate change",95.0,20,0.39,214,10.0,Y,0,5,3,5,-1,2,2,26.0 H
+Kunzea montana,OSS,>4,"mallee-heath/thicket, thicket","mid- to upper slope, summit","MT, MMT","fire, herbivory, climate change",26.3,30,0.17,113,5.3,Y,0,0,3,5,-2,2,3,15.3 L
+Lambertia ericifolia,OSC,>4,mallee-heath/thicket,"lower to upper slope, summit, flat",MMT,"fire, climate change",93.0,36,0.13,170,7.9,Y,0,5,3,5,-2,3,2,23.9 M
+Lambertia fairallii,OSC,>4,mallee-thicket/heath,midslope,MMT,"fire, climate change",94.7,30,0.16,181,8.4,Y,5,5,5,5,0,2,2,32.4 VH
+Leucopogon gnaphalioides,OSS,>4,"thicket, scrub",summit,"MT, MMT","fire, herbivory, climate change",100.0,35,0.20,184,8.6,Y,3,5,5,5,-1,3,3,31.6 VH
+Persoonia micranthera,OSS,>4,thicket,summit,MT,"aerial canker disease, fire, herbivory, climate change",70.1,46,0.10,134,6.3,Y,5,5,5,5,0,3,4,33.3 VH
+Sphenotoma drummondii ,OSS,>4,scrub,summit,"MT, MMT","fire, climate change",65.0,42,0.13,135,6.3,Y,2,0,5,5,-1,3,2,22.3 M
+Velleia foliosa,OSS,<=4,"thicket, scrub",summit,"MT, MMT",climate change,7.8,19,0.08,96,4.5,Y,2,0,5,5,-2,3,1,18.3 L

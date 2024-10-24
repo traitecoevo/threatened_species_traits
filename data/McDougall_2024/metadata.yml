@@ -1,0 +1,124 @@
+source:
+  primary:
+    key: Mcdougall_2024
+    bibtype: Article
+    year: '2024'
+    author: Keith L. McDougall and Sarah Barrett and Renate Velzeboer and David M.
+      Cahill and Tim Rudman
+    journal: Australian Journal of Botany
+    title: Evaluating the risk to Australia's flora from Phytophthora cinnamomi
+    volume: '72'
+    number: '4'
+    doi: 10.1071/bt23086
+    issn: 1444-9862
+    editor: Noushka Reiter
+contributors:
+  data_collectors:
+  - last_name: McDougall
+    given_name: Keith
+    ORCID: 0000-0002-8288-6444
+    affiliation: La Trobe University
+  assistants: unknown
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(
+        none = ifelse(is.na(`No response`), "", "none"),
+        mild = ifelse(is.na(`Mild response`), "", " mild"),
+        severe = ifelse(is.na(`Severe response`), "", " severe"),
+        susceptibility = paste0(none, mild, severe) %>% stringr::str_squish(),
+        meausurement_remarks = paste0(
+          "no response: ", `No response`,
+          "; mild response: ", `Mild response`,
+          "; severe response: ", `Severe response`,
+          "; isolated from plant tissue: ", `Isolated from plant tissue`
+        )
+      )  
+  '
+  collection_date: unknown/2024
+  taxon_name: Species
+  location_name: unknown
+  description: A database of the susceptibility of Australia's native vegetation to
+    Phytophthora cinnamomi, including data for 1773 species.
+  basis_of_record: literature
+  life_stage: adult
+  meausurement_remarks: meausurement_remarks
+  sampling_strategy: The list of O'Gara et al. (2006) was checked and updated with
+    recent taxonomic changes and more recently published and unpublished data on species
+    responses were added. These data included records from the Western Australian
+    Department of Biodiversity, Conservation and Attractions Vegetation Health Services
+    Phytophthora database (accessed 14 January 2022), which has over 20,000 records
+    of isolations from plants and soil in Western Australia, dating from 1982. These
+    records are primarily derived from single baiting of soil and plant root material
+    for the presence or absence of Phytophthora pathogens, but some samples may have
+    been double-baited or sent to the Centre for Phytophthora Science and Management
+    (Murdoch University) for DNA sequencing; approximately 85% of isolations in the
+    database are for P. cinnamomi. Data for glasshouse inoculation trials on more
+    than 400, mostly Western Australian, native plant species were utilised (C. E.
+    Crane and B. L. Shearer, unpubl. data). Pots containing test species were inoculated
+    with P. cinnamomi as described by Shearer et al. (2007). The species tested included
+    170 threatened and 217 priority flora from the WA ex situ conservation program,
+    which were provided for research on Phytophthora susceptibility. The full list
+    of data sources is in Supplementary material S1. We aimed to gather all available
+    data but do not include all data sources where a subsequent review included preceding
+    data (e.g. Weste 2001). In addition, data from a few sources cited in O'Gara et
+    al. (2006), which could not be checked, were omitted from the list.
+  original_file: SI for publication, which includes a full reference list.
+  notes: There are 218 species in excluded data - these are taxa for which P. cinnamomi
+    has been isolated from plant tissues but for which the response was not recorded.
+locations: .na
+contexts: .na
+traits:
+- var_in: susceptibility
+  unit_in: .na
+  trait_name: phytophthora_cinnamomi_susceptibility
+  entity_type: species
+  value_type: mode
+  basis_of_value: field glasshouse
+  replicates: .na
+  methods: The list of O'Gara et al. (2006) was checked and updated with recent taxonomic
+    changes and more recently published and unpublished data on species responses
+    were added. These data included records from the Western Australian Department
+    of Biodiversity, Conservation and Attractions Vegetation Health Services Phytophthora
+    database (accessed 14 January 2022), which has over 20,000 records of isolations
+    from plants and soil in Western Australia, dating from 1982. These records are
+    primarily derived from single baiting of soil and plant root material for the
+    presence or absence of Phytophthora pathogens, but some samples may have been
+    double-baited or sent to the Centre for Phytophthora Science and Management (Murdoch
+    University) for DNA sequencing; approximately 85% of isolations in the database
+    are for P. cinnamomi. Data for glasshouse inoculation trials on more than 400,
+    mostly Western Australian, native plant species were utilised (C. E. Crane and
+    B. L. Shearer, unpubl. data). Pots containing test species were inoculated with
+    P. cinnamomi as described by Shearer et al. (2007). The species tested included
+    170 threatened and 217 priority flora from the WA ex situ conservation program,
+    which were provided for research on Phytophthora susceptibility. The full list
+    of data sources is in Supplementary material S1. We aimed to gather all available
+    data but do not include all data sources where a subsequent review included preceding
+    data (e.g. Weste 2001). In addition, data from a few sources cited in O'Gara et
+    al. (2006), which could not be checked, were omitted from the list.
+- var_in: Habitat suitability
+  unit_in: .na
+  trait_name: phytophthora_cinnamomi_habitat_suitability
+  entity_type: species
+  value_type: mode
+  basis_of_value: field
+  replicates: .na
+  methods: XX
+substitutions:
+- trait_name: phytophthora_cinnamomi_habitat_suitability
+  find: Suitable
+  replace: suitable_habitat
+- trait_name: phytophthora_cinnamomi_habitat_suitability
+  find: Unsuitable
+  replace: unsuitable_habitat
+- trait_name: phytophthora_cinnamomi_habitat_suitability
+  find: Half unsuitable
+  replace: half_unsuitable_habitat
+- trait_name: phytophthora_cinnamomi_habitat_suitability
+  find: Mostly unsuitable
+  replace: mostly_unsuitable_habitat
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
