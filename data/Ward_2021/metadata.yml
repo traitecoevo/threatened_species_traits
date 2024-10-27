@@ -1,0 +1,58 @@
+source:
+  primary:
+    key: Ward_2021
+    bibtype: Article
+    year: '2021'
+    author: Michelle Ward and Josie Carwardine and Chuan J. Yong and James E. M. Watson
+      and Jennifer Silcock and Gary S. Taylor and Mark Lintermans and Graeme R. Gillespie
+      and Stephen T. Garnett and John Woinarski and Reid Tingley and Rod J. Fensham
+      and Conrad J. Hoskin and Harry B. Hines and J. Dale Roberts and Mark J. Kennard
+      and Mark S. Harvey and David G. Chapple and April E. Reside
+    journal: Ecology and Evolution
+    title: A national-scale dataset for threats impacting Australia's imperiled flora
+      and fauna
+    volume: '11'
+    number: '17'
+    pages: 11749-11761
+    doi: 10.1002/ece3.7920
+    issn: 2045-7758
+contributors:
+  data_collectors:
+  - last_name: Ward
+    given_name: Michelle
+    ORCID: 0000-0002-0658-855X
+    affiliation: Griffith University, Brisbane, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(`IUCN threat level 3 description (or finest level available)` = str_to_sentence(`IUCN threat level 3 description (or finest level available)`)) %>%
+      filter(Group == "Plants") 
+  '
+  collection_date: 2021/2021
+  taxon_name: Species name adjusted
+  description: A database documenting eight broad-level threats and 51 subcategory
+    threats (based on the IUCN Threat Classification Scheme and Threat Impact Scoring
+    System) for all of Australia's 1,795 threatened terrestrial and aquatic threatened
+    taxa.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: unknown
+  original_file: Supplementary Information linked to manuscript
+  notes: none
+locations: .na
+contexts: .na
+traits:
+- var_in: IUCN threat level 3 description (or finest level available)
+  unit_in: .na
+  trait_name: threatened_species_key_threatening_processes
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: unknown
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
