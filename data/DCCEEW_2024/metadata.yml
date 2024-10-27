@@ -1,0 +1,77 @@
+source:
+  primary:
+    key: DCCEEW_2024
+    bibtype: Online
+    year: 2024
+    author: Department of Climate Change, Energy, the Environment and Water
+    title: Threatened species & ecological communities
+    url: https://www.dcceew.gov.au/environment/biodiversity/threatened
+contributors:
+  data_collectors:
+  - last_name: Department of Climate Change, Energy, the Environment and Water
+    given_name: .na
+    ORCID: unknown
+    affiliation: Department of Climate Change, Energy, the Environment and Water
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(jurisdication = "Australia")
+  '
+  collection_date: Listing date
+  taxon_name: taxon_name
+  location_name: taxon_distribution
+  individual_id: EPBCA no.
+  description: Environment Protection and Biodiversity Conservation Act status for
+    Australian plant species.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: See https://www.dcceew.gov.au/environment/biodiversity/threatened/nominations
+    for a description of the process of listing species as threatened. Australia is
+    home to between 600,000 and 700,000 species, many of which are found nowhere else
+    in the world. About 84 per cent of plants, 83 per cent of mammals, and 45 per
+    cent of birds are only found in Australia. Changes to the landscape and native
+    habitat as a result of human activity have put many of these unique species at
+    risk. Over the last two hundred years many species of plants and animals have
+    become extinct. For the other species of plants and animals whose survival is
+    threatened, a range of management and conservation measures are in place. Ecological
+    communities are unique and naturally occurring groups of plants and animals. Their
+    presence can be determined by factors such as soil type, position in the landscape,
+    climate and water availability. The Australian Government is working in partnership
+    with state, territory and local governments, non-government organisations, tertiary
+    institutions and community groups to ensure the protection of our native species.
+  original_file: Sourced from https://www.environment.gov.au/cgi-bin/sprat/public/publicthreatenedlist.pl?wanted=flora
+  notes: none
+locations: .na
+contexts:
+- context_property: unknown
+  category: entity_context
+  var_in: jurisdication
+traits:
+- var_in: EBPCA_Status
+  unit_in: .na
+  trait_name: threatened_species_listing_status
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: See https://www.dcceew.gov.au/environment/biodiversity/threatened/nominations
+    for a description of the process of listing species as threatened under the Environment
+    Protection and Biodiversity Conservation Act.
+substitutions:
+- trait_name: threatened_species_listing_status
+  find: CR
+  replace: critically_endangered
+- trait_name: threatened_species_listing_status
+  find: VU
+  replace: vulnerable
+- trait_name: threatened_species_listing_status
+  find: EN
+  replace: endangered
+- trait_name: threatened_species_listing_status
+  find: EX
+  replace: extinct
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
