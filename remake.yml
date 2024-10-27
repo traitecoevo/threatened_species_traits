@@ -30,6 +30,25 @@ targets:
     command: read_csv_char("config/taxon_list.csv")
 
 # Build each source
+  DCCEEW_2024_config:
+    command: >
+      dataset_configure("data/DCCEEW_2024/metadata.yml",
+                 definitions
+                 )
+  DCCEEW_2024_raw:
+    command: >
+      dataset_process("data/DCCEEW_2024/data.csv",
+                  DCCEEW_2024_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  DCCEEW_2024:
+    command: >
+      dataset_update_taxonomy(DCCEEW_2024_raw,
+                  taxon_list
+                 )
+
   McDougall_2024_config:
     command: >
       dataset_configure("data/McDougall_2024/metadata.yml",
@@ -53,6 +72,7 @@ targets:
   threatened_species_raw:
     command: >
       build_combine(
+        DCCEEW_2024,
         McDougall_2024,
         NULL)
 

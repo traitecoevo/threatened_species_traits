@@ -21,6 +21,39 @@ traits:
         none: Plants are apparently unaffected when Phytophthora cinnamomi is present. Although such species may be susceptible to infection, as discussed above, they are likely to rarely, if ever, experience disease;
         mild: Plant are infected by Phytophthora cinnamomi when present and their symptoms are mild and/or infrequently severe.
         severe: Plant are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.
+    threatened_species_listing_status:
+      label: Australian Environment Protection and Biodiversity Conservation Act status
+      description: Conservation status as assessed under Australia's Environment Protection and Biodiversity Conservation Act. Allowed status valies are those used by the IUCN Red List.
+      comments: See https://www.epa.wa.gov.au/sites/default/files/Referral_Documentation/Conservation%20Council%20%20Previous%20referral%20part%203.pdf
+      type: categorical
+      allowed_values_levels:
+        extinct: Taxa not definitely located in the wild during the past 50 years.
+        extinct_in_the_wild: Taxa known to survive only in captivity.
+        critically_endangered: Taxa facing an extremely high risk of extinction in the wild in the immediate future.
+        endangered: Taxa facing a very high risk of extinction in the wild in the near future.
+        vulnerable: Taxa facing a high risk of extinction in the wild in the medium-term.
+        near_threatened: Taxa that risk becoming Vulnerable in the wild.
+        conservation_dependent: Taxa whose survival depends upon ongoing conservation measures. Without these measures, a conservation dependent taxon would be classified as Vulnerable or more severely threatened.
+        data_deficient: Taxa suspected of being Rare, Vulnerable or Endangered, but whose true status cannot be determined without more information.
+        least_concern: Taxa that are not considered Threatened.
+    threatened_species_key_threatening_processes:
+      label: Key threatening processes
+      description: A pressure identified by the EPBC Act to threaten the survival, abundance or evolutionary development of a native species or ecological community.
+      comments: See https://soe.dcceew.gov.au/biodiversity/pressures/threats-and-key-threatening-processes#key-threatening-processes.
+      type: categorical
+      allowed_values_levels:
+        fire: Fire regimes that cause biodiversity decline.
+        chytrid: Infection of amphibians with chytrid fungus resulting in chytridiomycosis.
+        phytophthora_cinnamomi: Dieback caused by the root-rot fungus (Phytophthora cinnamomi).
+        myrtle_rust:
+        cats: Predation by feral cats.
+        cane_toads: The biological effects, including lethal toxic ingestion, caused by cane toads (Bufo marinus).
+        foxes: Predation by European red fox.
+        goats: Competition and land degradation by unmanaged goats.
+        pigs: Predation, habitat degradation, competition and disease transmission by feral pigs
+        rabbits: Competition and land degradation by rabbits.
+        rats_offshore_islands: Predation by exotic rats on Australian offshore islands of less than 100,000 ha.
+        gamba: Invasion of northern Australia by Gamba grass (Andropogon gayanus) and other introduced grasses.
     leaf_Al_per_dry_mass:
       label: Leaf aluminium (Al) content per unit leaf dry mass
       description: The ratio [PATO:0001470] of the mass [PATO:0000125] of aluminium

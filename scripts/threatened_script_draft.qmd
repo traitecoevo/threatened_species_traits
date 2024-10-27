@@ -5,15 +5,29 @@ editor: visual
 ---
 
 ## startup
+
 ```{r}
 library(tidyverse)
+library(remake)
+library(traits.build)
+library(austraits)
+source("R/custom_R_code.R")
+
+build_setup_pipeline(method = "base", database_name = "threatened_species")
+build_setup_pipeline(method = "remake", database_name = "threatened_species")
 
 austraits <- readRDS("data/austraits/austraits-6.0.0.rds")
 
-threatened_species <- read_csv("data/threatened_species_masterlist.csv")
+threatened_species <- remake::make("threatened_species")
 
+list_of_threatened_species <- threatened_species %>% 
+  filter(dataset_id == "DCCEEW_2024") %>%
+  
+  select(taxon_name, value)
+  
 phytophthora <- read_csv("data/datasets_from_manuscripts/Phytophthora_abatement_plant_Appendix4.csv")
 ```
+
 ```{r}
 species <- "Styphelia perileuca"
 
@@ -23,7 +37,6 @@ read_csv("data/threatened_species_masterlist.csv") %>%
   left_join(austraits$taxa %>% select(suggested_name = taxon_name, family)) %>%
   write_csv("data/threatened_species_masterlist.csv")
 ```
-
 
 ```{r}
 App4 <- read_csv("data/datasets_from_manuscripts/Phytophthora_abatement_plant_Appendix4.csv")
@@ -53,7 +66,6 @@ App4 %>% filter(!suggested_name %in% data_McDougall_2024a$suggested_name) %>% le
 data_McDougall_2024a %>% filter(!suggested_name %in% App4$suggested_name)
 ```
 
-
 ```{r}
 flowering_times <- austraits$traits %>% 
   filter(trait_name == "flowering_time") %>% 
@@ -81,7 +93,6 @@ threatened_species %>% filter(!suggested_name %in% growth_form_exists_updates$ac
 
 threatened_species %>% filter(!suggested_name %in% growth_form_exists$taxon_name) -> v2
 ```
-
 
 ```{r}
 LMA_means <- austraits$traits %>% 
@@ -153,8 +164,6 @@ phytophthora_with_resprouting_capacity %>% group_by(susceptibility) %>% summaris
 ggplot(data = phytophthora_with_resprouting_capacity, aes(x = resprouting_capacity)) + geom_histogram() + facet_wrap(vars(susceptibility_simple))
 ```
 
-
-
 ```{r}
 susceptible_myrtaceae <- read_csv("data/myrtaceae_susceptibility.csv") %>%
   rename(taxon_name = `Scientific Name`)
@@ -167,8 +176,6 @@ ggplot(data = susceptible_myrtaceae_LMA, aes(x = Susceptibilty_binary, y = value
 
 model_LMA <- lm(value ~ Susceptibilty_binary, data = susceptible_myrtaceae_LMA)
 ```
-
-
 
 ```{r}
 Begg <- read_csv("data/datasets_from_manuscripts/Beggs_2010_data.csv")
@@ -202,4 +209,3 @@ Begg_with_traits <- Begg %>%
   left_join(categorical %>% rename(accepted_name = taxon_name)) %>%
   left_join(numeric %>% rename(accepted_name = taxon_name)) 
 ```
-
