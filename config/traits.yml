@@ -90,6 +90,51 @@ traits:
       units: '{count}/{count}'
       allowed_values_min: 0.0
       allowed_values_max: 1.0
+    population_count:
+      label: Number of wild populations
+      description: Number of wild populations known for a species.
+      type: numeric
+      units: '{count}'
+      allowed_values_min: 0.0
+      allowed_values_max: 1000.0
+    subpopulation_count:
+      label: Number of wild sub-populations
+      description: Number of wild subpopulations known for a species.
+      type: numeric
+      units: '{count}'
+      allowed_values_min: 0.0
+      allowed_values_max: 1000.0      
+    individual_count:
+      label: Number of wild individuals
+      description: Number of wild individuals known for a species.
+      type: numeric
+      units: '{count}'
+      allowed_values_min: 0.0
+      allowed_values_max: 10000000.0
+    extent_of_occurrence:
+      label: Extent of occurrence (EOO)
+      description: The area contained within the shortest continuous imaginary boundary which can be drawn to encompass all the known, inferred or projected sites of present occurrence of a taxon, excluding cases of vagrancy. The extent of occurrence is generally measured by a minimum convex polygon.
+      comments: From the IUCN 2012 definition; see also https://www.ala.org.au/spatial-portal-help/aoo/ for good definitions. As the EOO must be a convex polygon, other measures of geographic range which base range on geographically suitable habitats may be smaller.
+      type: numeric
+      units: km2
+      allowed_values_min: 0.0
+      allowed_values_max: 10000000.0
+    area_of_occupancy:
+      label: Area of occupancy (AOO)
+      description: Area within a taxon's extent of occurrence (EOO) which is occupied by the taxon, excluding cases of vagrancy. The measure reflects the fact that a taxon will not usually occur throughout the area of its extent of occurrence, which may contain unsuitable or unoccupied habitats. The IUCN recommendation for the grid size used to calculate AOO is 2km but this is user-defineable and the size of the area of occupancy will be a function of the scale at which it is measured.
+      comments: From the IUCN 2012 definition; see also https://www.ala.org.au/spatial-portal-help/aoo/ for good definitions.
+      type: numeric
+      units: km2
+      allowed_values_min: 0.0
+      allowed_values_max: 10000000.0
+    geographic_range:
+      label: Geographic range
+      description: Polygon delineating species range, guided by geographic features.
+      comments: A taxon's geographic range will often be smaller than its extent of occurrence, as geographic range does not need to be a convex polygon that encompasses all taxon observations.
+      type: numeric
+      units: km2
+      allowed_values_min: 0.0
+      allowed_values_max: 10000000.0
     leaf_Al_per_dry_mass:
       label: Leaf aluminium (Al) content per unit leaf dry mass
       description: The ratio [PATO:0001470] of the mass [PATO:0000125] of aluminium
