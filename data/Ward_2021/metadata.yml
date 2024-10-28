@@ -52,7 +52,79 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: unknown
-substitutions: .na
+substitutions:
+- trait_name: threatened_species_key_threatening_processes
+  find: Fire and fire suppression
+  replace: fire_suppression
+- trait_name: threatened_species_key_threatening_processes
+  find: Increase in fire frequency/intensity
+  replace: fire_increase
+- trait_name: threatened_species_key_threatening_processes
+  find: Livestock farming and ranching
+  replace: livestock
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (buffel grass)
+  replace: buffel_grass
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (deer)
+  replace: deer
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (gamba grass)
+  replace: gamba
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (goats)
+  replace: goats
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (horses)
+  replace: horses
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (kangaroo)
+  replace: kangaroos
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (lantana)
+  replace: lantana
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (myrtle rust)
+  replace: myrtle_rust
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (phytophthora)
+  replace: phytophthora_cinnamomi
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (pigs)
+  replace: pigs
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (rabbits)
+  replace: rabbits
+- trait_name: threatened_species_key_threatening_processes
+  find: Named species (rats)
+  replace: rats
+- trait_name: threatened_species_key_threatening_processes
+  find: Nutrient loads
+  replace: nutrient_loads
+- trait_name: threatened_species_key_threatening_processes
+  find: Suppression in fire frequency/intensity
+  replace: fire_suppression
+- trait_name: threatened_species_key_threatening_processes
+  find: Unspecified species (disease)
+  replace: disease
+- trait_name: threatened_species_key_threatening_processes
+  find: Unspecified species (grazers)
+  replace: grazer
+- trait_name: threatened_species_key_threatening_processes
+  find: Unspecified species (invertebrate)
+  replace: invertebrates
+- trait_name: threatened_species_key_threatening_processes
+  find: Unspecified species (invertebrates)
+  replace: invertebrates
+- trait_name: threatened_species_key_threatening_processes
+  find: Unspecified species (livestock)
+  replace: livestock
+- trait_name: threatened_species_key_threatening_processes
+  find: Unspecified species (plants)
+  replace: invasive_plant
+- trait_name: threatened_species_key_threatening_processes
+  find: Unspecified species (weeds)
+  replace: invasive_plant
 taxonomic_updates: .na
 exclude_observations: .na
 questions: .na

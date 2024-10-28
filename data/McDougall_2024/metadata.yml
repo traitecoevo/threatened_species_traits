@@ -107,6 +107,9 @@ traits:
   replicates: .na
   methods: XX
 substitutions:
+- trait_name: phytophthora_cinnamomi_susceptibility
+  find: none
+  replace: resistant
 - trait_name: phytophthora_cinnamomi_habitat_suitability
   find: Suitable
   replace: suitable_habitat

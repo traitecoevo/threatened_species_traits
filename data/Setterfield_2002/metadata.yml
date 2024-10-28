@@ -1,0 +1,87 @@
+source:
+  primary:
+    key: Setterfield_2002
+    bibtype: Article
+    year: '2002'
+    author: S. A. Setterfield
+    journal: Journal of Applied Ecology
+    title: 'Seedling establishment in an Australian tropical savanna: effects of seed
+      supply, soil disturbance and fire'
+    volume: '39'
+    number: '6'
+    pages: 949--959
+    doi: 10.1046/j.1365-2664.2002.00772.x
+    issn: 1365-2664
+contributors:
+  data_collectors:
+  - last_name: Setterfield
+    given_name: Samantha
+    ORCID: 0000-0002-7470-4997
+    affiliation: University of Western Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: x/x
+  taxon_name: Species
+  location_name: location
+  description: unknown
+  basis_of_record: field
+  sampling_strategy: study site ^p The study was part of a landscape-scale fire experiment (Andersen et al. 1998) conducted at the CSIRO Kapalga Research Station in Kakadu National Park, Northern Territory, Australia (132°25' E, 12°40' S). The study was undertaken in tall (to 25 m) open forest dominated by Eucalyptus miniata and Eucalyptus tetrodonta F.Muell. The mid-layer (4-10 m) included a number of Acacia species. The ground layer was dominated by a mixture of annual and perennial grasses (up to 3 m), particularly Sorghum spp. and Heteropogon spp. Woody vegetative sprouts formed a conspicuous component of the ground layer (Lacey & Whelan 1976). These included vegetative reshoots originating from lignotubers or the buried stem base, and vegetative suckers that originate from rhizomes and root buds at a distance from the parent plant. The climate is monsoonal, characterized by high temperatures throughout the year and a highly seasonal rainfall. Average mean monthly maximum temperatures vary from 31 °C in June and July, to 36 °C in January. Approximately 90% of the 1300 mm annual rainfall falls between December and March (Taylor & Tulloch 1985). ^p The study area was subjected to fires annually or biennially until 1987, and then remained unburnt until the commencement of a fire experiment in 1990. Fire treatment units were 15-20 km2 catchments, each based on seasonal creek-lines. This study considered three fire regimes that had been applied to catchments since 1990, (i) 'unburnt'; (ii) 'early', burnt annually early in the dry season (May/June); and (iii) 'late', burnt annually late in the dry season (September). Three replicate catchments of each regime were used. Although there was considerable spatial and annual variation, fires lit early in the dry season (April-June) were typically low in intensity (approximately 2100 kW) and patchy (Williams, Griffiths & Allan 2001), whereas fires that occurred late in the dry season (July-November) are usually more intense (approximately 7700 kW m-1), often scorching the canopy completely and burning extensive areas (Williams 1995). These fire regimes are typical of those occurring across the broader region that supports mesic savanna vegetation (Russell-Smith, Ryan & Durieu 1997). ^p  effects of fire regime on seedling emergence ^p The experiment was undertaken in three replicate catchments of each of three experimental fire regimes, unburnt, early and late. Two experimental sites were located within each catchment, and six 75 x 75 cm quadrats were randomly located at each site. In November 1993, 200 Eucalyptus miniata seeds were sown into each of three of the quadrats, and 200 Acacia oncinocarpa seeds were sown in the remaining three quadrats at each site. Therefore, in the early and late catchments, the seeds were sown onto a seedbed that had been burnt during the dry season. Each quadrat was bordered by a fly wire mesh fence (described above). ^p The number of seedlings was initially counted on 10 January 1994, and each was marked with a wooden skewer. Seedling emergence was monitored in February, March, April, May, July (post-early burn) and October 1994 (post-late burn). Sites were censused again in June 1995 (i.e. at the end of the second wet season) by which time seedlings were considered to be established. The cumulative total of seedlings that emerged in 1994 was compared with four-way mixed model anova with the factors species (fixed), fire regime (fixed), catchment (random and nested) and site (random and nested). The data were log-transformed prior to anova following an assessment of Cochran's test and probability plot. In September 1994, a wildfire entered one of the unburnt catchments, killing all marked seedlings. Therefore, data on seedling survival in October 1994 and June 1995 are from the two remaining unburnt catchments.
+  original_file: transcribed from manuscript
+  notes: none
+locations:
+  CSIRO Kapalga Research Station in Kakadu National Park:
+    latitude (deg): -12.6667
+    longitude (deg): 132.4167
+contexts:
+- context_property: fire regime
+  category: treatment_context
+  var_in: Fire regime
+  values:
+  - find: Unburnt
+    value: unburnt
+    description: Plot unburnt.
+  - find: Early
+    value: early dry season
+    description: Plot burnt early in the dry season.
+  - find: Late
+    value: late dry season
+    description: Plot burnt late in the dry season.
+traits:
+- var_in: Proportion lost (%)
+  unit_in: '%'
+  trait_name: .na
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: 24
+  methods: seeds_proportion_lost_to_ants; To determine whether differences in seedling establishment could be due to differences in seed lost to ants, a seed removal experiment was established in three replicate catchments of each experimental fire regimes. Losses to seed removal were assessed by recording the loss of seeds from seed caches (Andersen & Ashton 1985) located at four random sites within each replicate catchment. At each site, caches of 10 seeds of each species were placed out in a 3-4-3 grid pattern. To ensure that the seed could be easily relocated, each seed was placed on a small amount of white sand and the seed within a cache was separated by 30 cm. Seeds were checked daily for 3 days. The trial was undertaken twice for each species; between 28 and 31 October, and 10 and 13 November 1994 for A. oncinocarpa, and between 10 and 13 November, and 24 and 27 November for E. miniata.
+- var_in: Germination success
+  unit_in: '%'
+  trait_name: seed_germination
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: 18
+  methods: The number of seedlings was initially counted on 10 January 1994, and each was marked with a wooden skewer. Seedling emergence was monitored in February, March, April, May, July (post-early burn) and October 1994 (post-late burn). Sites were censused again in June 1995 (i.e. at the end of the second wet season) by which time seedlings were considered to be established.
+- var_in: Seedfall (seeds m-2)
+  unit_in: '{count}/m2'
+  trait_name: seedfall
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: 18
+  methods: The effects of fire regime on seedling emergence are summarized in Table 3, with seed budgets calculated from measurements of seedfall beneath and adjacent to fecund canopies in 1994, which was a year of high seed production for both species (Setterfield & Williams 1996; Setterfield 1997a), and therefore represents the upper level of expected seedling recruitment. 
+- var_in: Establishment (proportion of 200 sown seeds)
+  unit_in: '{count}/{count}'
+  trait_name: seedling_establishment_proportion
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: 18
+  methods: The number of seedlings was initially counted on 10 January 1994, and each was marked with a wooden skewer. Seedling emergence was monitored in February, March, April, May, July (post-early burn) and October 1994 (post-late burn). Sites were censused again in June 1995 (i.e. at the end of the second wet season) by which time seedlings were considered to be established.
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

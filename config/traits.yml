@@ -14,13 +14,24 @@ traits:
         unsuitable_habitat: Species entire range in Australia is unsuitable for Phytophthora cinnamomi.
     phytophthora_cinnamomi_susceptibility:
       label: susceptibility to Phytophthora cinnamomi
-      description: Susceptibility of species to Phytophthora cinnamomi, based on their field response to the pathogen or response observed in glasshouse susceptibility trials.
+      description: Susceptibility of species to Phytophthora cinnamomi, based on their field response to the pathogen or response observed in glasshouse inoculation trials.
       comments: This is the definition of Phytophthora cinnamomi susceptibility used by McDougall et al. 2024 (doi:10.1071/BT23086). For glasshouse susceptibility trials where susceptibility had not been assigned as a category, we regarded the response of species with no mortality and no re-isolation of the pathogen as None, <25% mortality and re-isolation as Mild and greater than or equal to 25% and re-isolation as Severe.
       type: categorical
       allowed_values_levels:
-        none: Plants are apparently unaffected when Phytophthora cinnamomi is present. Although such species may be susceptible to infection, as discussed above, they are likely to rarely, if ever, experience disease;
+        resistant: Plants are apparently unaffected when Phytophthora cinnamomi is present. Although such species may be susceptible to infection, as discussed above, they are likely to rarely, if ever, experience disease;
         mild: Plant are infected by Phytophthora cinnamomi when present and their symptoms are mild and/or infrequently severe.
-        severe: Plant are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.
+        severe: Plant are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.  
+    myrtle_rust_susceptibility:
+      label: susceptibility to myrtle rust
+      description: Susceptibility of species to myrtle rust (Austropuccinia psidii), based on their field response to the pathogen or response observed in glasshouse inoculation trials.
+      comments: Definition based on Berthon 2018 (doi, 10.1016/j.biocon.2017.11.035), referencing previous definitions by Morin 2012 (doi, 10.1371/journal.pone.0035434), Winzer 2017 (doi, 10.1111/aec.12534), Pegg 2014 (doi, 10.1111/ppa.12173), Sandu and Park 2013 (doi, 10.1002/9781118506271.ch1).
+      type: categorical
+      allowed_values_levels:
+        resistant: Plants are apparently unaffected by myrtle rust (Austropuccinia psidii), when the disease is present.  
+        low: Plant are infected by myrtle rust (Austropuccinia psidii) when present but there is no sporulation.
+        medium: Plant are infected by myrtle rust (Austropuccinia psidii) when present and there is minimal sporulation.
+        high: Plant are infected by myrtle rust (Austropuccinia psidii) when present and there is abundant sporulation on leaves, twigs and/or fruits.
+        susceptible: Plant are infected by myrtle rust (Austropuccinia psidii) when present, but the degree of susceptibility and sporulation is unknown.
     threatened_species_listing_status:
       label: Australian Environment Protection and Biodiversity Conservation Act status
       description: Conservation status as assessed under Australia's Environment Protection and Biodiversity Conservation Act. Allowed status valies are those used by the IUCN Red List.
@@ -39,13 +50,25 @@ traits:
     threatened_species_key_threatening_processes:
       label: Key threatening processes
       description: A pressure identified by the EPBC Act to threaten the survival, abundance or evolutionary development of a native species or ecological community.
-      comments: See https://soe.dcceew.gov.au/biodiversity/pressures/threats-and-key-threatening-processes#key-threatening-processes.
+      comments: See https://soe.dcceew.gov.au/biodiversity/pressures/threats-and-key-threatening-processes#key-threatening-processes and Ward 2021 (https://onlinelibrary.wiley.com/doi/abs/10.1002/ece3.7920). Only a subset of Ward's designations are currently included as `allowed_values_levels`.
       type: categorical
       allowed_values_levels:
+        population_small: Where the threatening process is a small, restricted or reduced population, which has flow on effects impacting the population.
         fire: Fire regimes that cause biodiversity decline.
+        fire_suppression: Decreased fire frequency or fire intensity have a negative impact on threatened species.
+        fire_increase: Increased fire frequency or fire intensity have a negative impact on threatened species.
+        fire_regime: The nature of the fire regime has a negatively impact on threatened species.
+        disease: Unspecified disease(s), including Chytridiomycosis, myrtle rust, and Phytophthora cinnamomi.
         chytrid: Infection of amphibians with chytrid fungus resulting in chytridiomycosis.
-        phytophthora_cinnamomi: Dieback caused by the root-rot fungus (Phytophthora cinnamomi).
-        myrtle_rust:
+        phytophthora_cinnamomi: Dieback caused by the root-rot fungus Phytophthora cinnamomi.
+        myrtle_rust: Dieback caused by the myrtle rust fungus (Austropuccinia psidii).
+        invasive_species: Unspecified invasive species has a negative impact on threatened species.        
+        invasive_plant: Unspecified invasive plant (weed) has a negative impact on threatened species.
+        gamba: Invasion of northern Australia by Gamba grass (Andropogon gayanus) and other introduced grasses.
+        buffel_grass: 
+        livestock: Unspecified livestock species has a negative impact on threatened species.
+        ungulate: Unspecified ungulate species has a negative impact on threatened species. Includes fallow (Dama dama), red (Cervus elaphus), sambar (Cervus unicolor), chital (Axis axis) and rusa (Cervus timorensis) deer, pigs (Sus scrofa domesticus), water buffalo (Bubalus bubalis), goats (Capra aegagrus hircus), feral (unmanaged) cattle (Bos taurus), feral (unmanaged) horses (Equus caballus), unspecified species (grazers), unspecified species (livestock), donkeys (Equus asinus).
+        grazer: Unspecified grazing species has a negative impact on threatened species.
         cats: Predation by feral cats.
         cane_toads: The biological effects, including lethal toxic ingestion, caused by cane toads (Bufo marinus).
         foxes: Predation by European red fox.
@@ -53,7 +76,20 @@ traits:
         pigs: Predation, habitat degradation, competition and disease transmission by feral pigs
         rabbits: Competition and land degradation by rabbits.
         rats_offshore_islands: Predation by exotic rats on Australian offshore islands of less than 100,000 ha.
-        gamba: Invasion of northern Australia by Gamba grass (Andropogon gayanus) and other introduced grasses.
+    seedfall:
+      label: Natural seedfall
+      description: The density of seeds dropped beneath a canopy of a seeding individual.
+      type: numeric
+      units: '{count}/m2'
+      allowed_values_min: 0.0
+      allowed_values_max: 10000.0    
+    seedling_establishment_proportion:
+      label: Seedling establishment proportion
+      description: The number of seedlings that successfully establish.
+      type: numeric
+      units: '{count}/{count}'
+      allowed_values_min: 0.0
+      allowed_values_max: 1.0
     leaf_Al_per_dry_mass:
       label: Leaf aluminium (Al) content per unit leaf dry mass
       description: The ratio [PATO:0001470] of the mass [PATO:0000125] of aluminium
