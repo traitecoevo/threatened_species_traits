@@ -1,0 +1,240 @@
+source:
+  primary:
+    key: Berthon_2018
+    bibtype: Article
+    year: 2018
+    author: K. Berthon and M. Esperon-Rodriguez and L.j. Beaumont and A.j. Carnegie
+      and M.r. Leishman
+    journal: Biological Conservation
+    title: Assessment and prioritisation of plant species at risk from myrtle rust
+      (Austropuccinia psidii) under current and future climates in Australia
+    volume: '218'
+    pages: 154--162
+    doi: 10.1016/j.biocon.2017.11.035
+    issn: 0006-3207
+  original_01:
+    key: Giblin_2014
+    bibtype: Online
+    year: 2014
+    author: F. Giblin and A.J. Carnegie AJ
+    title: Puccinia psidii (Myrtle Rust) - Australian host list. Version current at
+      24 Sept. 2014.
+    url: http://www.anpc.asn.au/resources/Myrtle_Rust.html
+  original_02:
+    key: Morin_2012
+    bibtype: Article
+    year: 2012
+    author: Louise Morin and Ruth Aveyard and Jonathan R. Lidbetter and Peter G. Wilson
+    journal: PLoS ONE
+    title: Investigating the Host-Range of the Rust Fungus Puccinia psidii sensu lato
+      across Tribes of the Family Myrtaceae Present in Australia
+    volume: '7'
+    number: '4'
+    pages: e35434
+    doi: 10.1371/journal.pone.0035434
+    issn: 1932-6203
+    editor: Zhengguang Zhang
+  original_03:
+    key: Pegg_2013
+    bibtype: Article
+    year: 2013
+    author: G. S. Pegg and F. R. Giblin and A. R. Mctaggart and G. P. Guymer and H.
+      Taylor and K. B. Ireland and R. G. Shivas and S. Perry
+    journal: Plant Pathology
+    title: 'Puccinia psidii in Queensland, Australia: disease symptoms, distribution
+      and impact'
+    volume: '63'
+    number: '5'
+    pages: 1005--1021
+    doi: 10.1111/ppa.12173
+    issn: 1365-3059
+  original_04:
+    key: Pegg_2016
+    bibtype: Unpublished
+    year: 2016
+    author: G. S. Pegg
+    title: 'Unpublished data: Mount Cootha Infection Statistics.'
+  original_05:
+    key: Sandhu_2013
+    bibtype: Misc
+    year: 2013
+    author: Harpinder Sandhu and Steve Wratten
+    journal: Ecosystem Services in Agricultural and Urban Landscapes
+    title: Ecosystem Services in Farmland and Cities
+    pages: 1--15
+    doi: 10.1002/9781118506271.ch1
+    publisher: Wiley
+    isbn: '9781118506271'
+  original_06:
+    key: Potts_2016
+    bibtype: Article
+    year: '2016'
+    author: Brad M. Potts and Karanjeet S. Sandhu and Tim Wardlaw and Jules Freeman
+      and Haifeng Li and Paul Tilyard and Robert F. Park
+    journal: Forest Ecology and Management
+    title: Evolutionary history shapes the susceptibility of an island tree flora
+      to an exotic pathogen
+    volume: '368'
+    pages: 183--193
+    doi: 10.1016/j.foreco.2016.02.027
+    issn: 0378-1127
+contributors:
+  data_collectors:
+  - last_name: Berthon
+    given_name: Katherine
+    ORCID: .na
+    affiliation: Macquarie University, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(
+        basis_of_record = case_when(
+          Observation == "I" ~ "lab",
+          Observation == "NI" ~ "lab field",
+          Observation == "N" ~ "field"
+        )
+      )
+  '
+  collection_date: unknown/2018
+  taxon_name: accepted_name
+  location_name: .na
+  source_id: original_source
+  description: unknown
+  life_stage: adult
+  sampling_strategy: unknown
+  original_file: SI Table 3 from manuscript
+  notes: unknown
+locations: .na
+contexts:
+- context_property: type of observation
+  category: treatment_context
+  var_in: Observation
+  values:
+  - find: I
+    value: inoculation trial
+    description: Results based on an experimental inoculation trial.
+  - find: NI
+    value: native plants and inoculation trial
+    description: Results based on a combination of experimental inoculation trials
+      and native plants.
+  - find: 'N'
+    value: native result
+    description: Results based on native plants.
+traits:
+- var_in: Susceptibility
+  unit_in: .na
+  trait_name: myrtle_rust_susceptibility
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  basis_of_record: basis_of_record
+  replicates: .na
+  methods: literature compilation and modeling
+substitutions:
+- trait_name: myrtle_rust_susceptibility
+  find: R
+  replace: resistant
+- trait_name: myrtle_rust_susceptibility
+  find: H
+  replace: high
+- trait_name: myrtle_rust_susceptibility
+  find: L
+  replace: low
+- trait_name: myrtle_rust_susceptibility
+  find: M
+  replace: medium
+- trait_name: myrtle_rust_susceptibility
+  find: S*
+  replace: susceptible
+- trait_name: myrtle_rust_susceptibility
+  find: L-M
+  replace: low medium
+- trait_name: myrtle_rust_susceptibility
+  find: L-H
+  replace: low high
+- trait_name: myrtle_rust_susceptibility
+  find: R-H
+  replace: resistant high
+- trait_name: myrtle_rust_susceptibility
+  find: MS
+  replace: medium susceptible
+- trait_name: myrtle_rust_susceptibility
+  find: M-H
+  replace: medium high
+- trait_name: myrtle_rust_susceptibility
+  find: R-S*
+  replace: resistant susceptible
+- trait_name: myrtle_rust_susceptibility
+  find: R-L
+  replace: resistant low
+- trait_name: myrtle_rust_susceptibility
+  find: R-M
+  replace: resistant medium
+taxonomic_updates:
+- find: Austromyrtus dulcis x tenuifolia 'copper tops'
+  replace: Austromyrtus x [Austromyrtus dulcis x Austromyrtus tenuifolia 'copper tops']
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Austromyrtus sp. Lockerbie scrub
+  replace: Austromyrtus sp. [Austromyrtus sp. Lockerbie scrub]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2024-10-28)
+  taxon_rank: genus
+- find: Callistemon sp. 'taree pink'
+  replace: Callistemon sp. [Callistemon sp. 'taree pink']
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2024-10-28)
+  taxon_rank: genus
+- find: Corymbia citriodora  x C. torelliana
+  replace: Corymbia x [Corymbia citriodora x C. torelliana]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Corymbia ficifolia  x C. ptychocarpa
+  replace: Corymbia x [Corymbia ficifolia x Corymbia ptychocarpa]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Eucalyptus grandis x camaldulensis
+  replace: Eucalyptus x [Eucalyptus camaldulensis x Eucalyptus grandis]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Eucalyptus pyriformis x E. macrocarpa
+  replace: Eucalyptus x [Eucalyptus macrocarpa x Eucalyptus pyriformis]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Eucalyptus websteriana x E. crucis
+  replace: Eucalyptus x [Eucalyptus crucis x Eucalyptus websteriana]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Eucalyptus websteriana x E. orbifolia
+  replace: Eucalyptus x [Eucalyptus orbifolia x Eucalyptus websteriana]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Eucalyptus youngiana x E. macrocarpa
+  replace: Eucalyptus x [Eucalyptus macrocarpa x Eucalyptus youngiana]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Leptospermum scoparium x L. macrocarpum
+  replace: Leptospermum x [Leptospermum macrocarpum x Leptospermum scoparium]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+- find: Syzygium wilsonii x luehmannii
+  replace: Syzygium x [Syzygium luehmannii x Syzygium wilsonii]
+  reason: Exact match to APC genus. Taxon name includes ' x ' indicating a hybrid
+    taxon and taxon can only be aligned to genus-rank (2024-10-28)
+  taxon_rank: genus
+exclude_observations:
+- variable: taxon_name
+  find: Eucalyptus urophylla, Eugenia capensis natalitia, Eugenia capensis zeyheri, Lophomyrtus bullata, Lophomyrtus obcordata, Lophomyrtus ralphii, Metrosideros carminea, Metrosideros collina x villosa, Metrosideros thomasii, Metrosideros vitiensis, Plinia cauliflora, Syzygium megacarpum, Syzygium polyanthum, Ugni molinae, Xanthostemon fruticosus
+  reason: species not occurring in Australia
+questions: .na
