@@ -1,0 +1,14 @@
+﻿species,plants_scored,susceptibility_classification,susceptibility_fewer_categories,disease_score_mean,disease_score_mode,disease_score 1 (% plants),disease_score 2 (% plants),disease_score 3 (% plants),disease_score 4 (% plants),disease_score 5 (% plants)
+Melaleuca lateralis,31,0.952,high,5,5,6,0,0,0,94
+Melaleuca dempta,11,0.928,high,5,5,9,0,0,0,91
+Melaleuca acutifolia,20,0.88,high,5,5,10,0,0,20,70
+Melaleuca sp. Wanneroo,80,0.888,high,5,5,14,0,0,0,86
+Melaleuca lanceolata,27,0.756,high,4,5,15,0,18,26,41
+Melaleuca fulgens subsp. fulgens,27,0.77,high,4,5,18,0,18,7,57
+Melaleuca similis,45,0.808,resistant high,4,5,24,0,0,0,76
+Melaleuca cajuputi subsp. cajuputi,54,0.564,resistant high,3,4,28,15,13,35,9
+Melaleuca viminea subsp. appressa,25,0.768,resistant high,4,5,28,0,0,4,68
+Melaleuca incana subsp. gingilup,41,0.656,resistant high,3,5,32,5,5,19,39
+Melaleuca argentea,52,0.486,resistant high,2,1,44,23,4,4,25
+Melaleuca penicula,32,0.46,resistant high,2,1,66,0,0,6,28
+Melaleuca sophisma,55,0.216,resistant,1,1,98,0,0,0,2

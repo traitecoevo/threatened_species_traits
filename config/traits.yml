@@ -32,6 +32,14 @@ traits:
         medium: Plant are infected by myrtle rust (Austropuccinia psidii) when present and there is minimal sporulation.
         high: Plant are infected by myrtle rust (Austropuccinia psidii) when present and there is abundant sporulation on leaves, twigs and/or fruits.
         susceptible: Plant are infected by myrtle rust (Austropuccinia psidii) when present, but the degree of susceptibility and sporulation is unknown.
+    myrtle_rust_susceptibility_proportion_resistant:
+      label: proportion plants resistant to myrtle rust infection
+      description: Proportion of plants inoculated with the myrtle rust fungus or exposed to the myrtle rust fungus that exhibit resistance, measured as no sporulation and minimal spots/blotching.
+      comments: This trait can only be scored at the population or species-level, as it should document the proportion of individuals that exhibit resistance. It includes levels 1 & 2 from Morin 2012 susceptibility score (doi, 10.1371/journal.pone.0035434).
+      type: numeric
+      units: '{count}/{count}'
+      allowed_values_min: 0.0
+      allowed_values_max: 1.0
     threatened_species_listing_status:
       label: Australian Environment Protection and Biodiversity Conservation Act status
       description: Conservation status as assessed under Australia's Environment Protection and Biodiversity Conservation Act. Allowed status valies are those used by the IUCN Red List.
