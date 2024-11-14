@@ -451,5 +451,7 @@ Syzygium jambos,myrtle_rust_susceptibility,high_or_extreme,,,,Pegg 2018,"Pegg, G
 Syzygium oleosum,myrtle_rust_susceptibility,high_or_extreme,,,,Pegg 2018,"Pegg, G., Carnegie, A., Giblin, F., Perry, S., 2018. Managing myrtle rust in Australia (No. CRC2063). Plant Biosecurity Cooperative Research Centre."
 Tristania neriifolia,myrtle_rust_susceptibility,high_or_extreme,,,,Pegg 2018,"Pegg, G., Carnegie, A., Giblin, F., Perry, S., 2018. Managing myrtle rust in Australia (No. CRC2063). Plant Biosecurity Cooperative Research Centre."
 Xanthostemon oppositifolius,myrtle_rust_susceptibility,high_or_extreme,,,,Pegg 2018,"Pegg, G., Carnegie, A., Giblin, F., Perry, S., 2018. Managing myrtle rust in Australia (No. CRC2063). Plant Biosecurity Cooperative Research Centre."
-Eucalyptus caesia,pollination_syndrome,birds,,,trait certainty: certain,Bezemer_2016,
-Eucalyptus caesia,pollination_syndrome,bees insects,,,trait certainty: presumed,Bezemer_2016,
+Eucalyptus caesia,pollination_syndrome,birds,,,pollinator importance: major pollinator,Bezemer_2016,
+Eucalyptus caesia,pollination_syndrome,bees insects,,,pollinator importance: minor pollinator,Bezemer_2016,
+Eucalyptus incrassata,pollination_syndrome,birds,,,pollinator importance: major pollinator,Breed_2012,
+Eucalyptus incrassata,pollination_syndrome,insects,,,pollinator importance: minor pollinator,Breed_2012,

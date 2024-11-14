@@ -1,0 +1,39 @@
+﻿Species,seed provenance,No. parent trees,Average disease severity (mean),Average disease severity (SE),Resistant seedlings (%),% seedling per severity class R1/R2/R3/R4/R5,state,Location,seedlot,latitude (deg),longitude (deg),elevation (m)
+Melaleuca leucadendra,"Buffalo Ck, NT",5,3.62,0.12,14.29,7.8/6.5/18.2/50.7/16.9,Northern Territory,Buffalo Creek,"20,179",-12.2,130.54,3
+Melaleuca leucadendra,"Cambridge Gulf, WA",5,2.37,0.13,53.16,32.9/20.3/26.6/17.7/2.5,Western Australia,Cambridge Gulf,"18,909",-14.55,128.34,20
+Melaleuca leucadendra,"Iron Range, QLD",1,3.69,0.14,21.25,6.3/15/11.3/38.8/28.8,Queensland,Iron Range,"13,532",-12.42,143.2,40
+Melaleuca leucadendra,"Kalumburu Mission, WA",5,4.22,0.09,2.53,1.3/1.3/10.1/49.4/38,Western Australia,Kalumburu Mission,"18,914",-14.18,126.38,20
+Melaleuca leucadendra,"King River, NT",7,3.62,0.12,16.67,2.6/14.1/24.4/37.2/21.8,Northern Territory,King River,"18,424",-14.37,132.36,180
+Melaleuca leucadendra,"Mareeba, QLD",3,1.86,0.15,80.52,58.4/22.1/2.6/9.1/7.8,Queensland,Mareeba,"13,567",-17,145.3,500
+Melaleuca leucadendra,"Nimalaica Claypan, WA",6,4.1,0.08,1.35,0/1.4/13.5/59.5/25.7,Western Australia,Nimalaica Claypan,"19,574",-17.4435,122.13,10
+Melaleuca leucadendra,"St Lawrence, QLD",20,3.42,0.14,27.85,6.3/21.5/16.5/35.4/20.3,Queensland,St Lawrence,"15,575",-22.23,149.3,25
+Melaleuca leucadendra,"Wangi, Litchfield NP, NT",5,3.84,0.1,8.86,1.3/7.6/17.7/53.2/20.3,Northern Territory,"Wangi, Litchfield NP","18,900",-13.09,130.35,30
+Melaleuca quinquenervia,"Boggy Ck, NSW",9,2.27,0.16,68.6,37.1/31.4/8.6/12.9/10,New South Wales,Boggy Creek,–,-29.5731,153.1426,3.3
+Melaleuca quinquenervia,"Bribie Island, QLD",10,2.68,0.2,50.8,39.7/11.1/7.9/23.8/17.5,Queensland,Bribie Island,"17,517",-27.04,153.11,10
+Melaleuca quinquenervia,"Caloundra, QLD",20,1.94,0.17,73.4,59.4/14/4.7/17.2/4.7,Queensland,Caloundra,"15,565",-26.48,152.59,90
+Melaleuca quinquenervia,"Dohles Rocks, QLD",10,2.29,0.19,59.7,51.6/8.1/11.3/17.7/11.3,Queensland,Dohles Rocks,"17,518",-27.16,153.01,20
+Melaleuca quinquenervia,"Gympie, QLD",6,2.44,0.2,57.3,50/7.3/10.3/13.2/19.2,Queensland,Gympie,"15,583",-25.47,152.5,40
+Melaleuca quinquenervia,"Hawks Nest, NSW",8,3.21,0.19,42.6,13.1/29.5/9.8/18.1/29.5,New South Wales,Hawks Nest,"20,593",-32.4007,152.1013,6
+Melaleuca quinquenervia,"Julatten, QLD",5,2.91,0.14,31.8,16.7/15.2/33.3/30.3/4.5,Queensland,Julatten,"18,551",-16.36,145.41,400
+Melaleuca quinquenervia,"Kuranda, QLD",5,3.73,0.12,8.7,5.8/2.9/21.7/52.2/17.4,Queensland,Kuranda,"18,549",-16.44,145.34,450
+Melaleuca quinquenervia,"Long Jetty, NSW",10,3.62,0.15,20.6,10.3/10.3/14.7/36.8/27.9,New South Wales,Long Jetty,"20,502",-33.2146,151.2896,2
+Melaleuca quinquenervia,"Moreton Island, QLD",20,3.16,0.19,34.4,22.9/11.5/13.1/31.2/21.3,Queensland,Moreton Island,"15,571",-27.05,153.26,5
+Melaleuca quinquenervia,"Mt Molloy, QLD",25,2.76,0.15,40.9,22.7/18.2/24.3/30.3/4.5,Queensland,Mt Molloy,"14,902",-16.38,145.23,375
+Melaleuca quinquenervia,"Port Macquarie, NSW",5,3.43,0.17,27.9,16.2/11.8/8.8/39.7/23.5,New South Wales,Port Macquarie,"15,936",-31.3,152.4,1
+Melaleuca quinquenervia,"Rokeby NP, QLD",5,1.78,0.13,76.8,59.4/17.4/8.7/14.5/0,Queensland,Rokeby NP,"15,869",-13.44,143.19,500
+Melaleuca quinquenervia,"Teddington, QLD",12,2.86,0.22,49.2,40/9.2/3.1/20/27.7,Queensland,Teddington,"20,645",-25.3122,152.4319,37
+Melaleuca quinquenervia,"Tozers Gap, QLD",8,2.64,0.16,47.1,30/17.1/18.6/27.2/7.1,Queensland,Tozer’s Gap,"15,866",-12.43,143.11,120
+Melaleuca quinquenervia,"Tuggerah Lake, NSW",9,3.54,0.18,27.9,14.7/13.2/11.8/23.5/36.8,New South Wales,Tuggerah Lake,"20,424",-33.21,151.28,5
+Melaleuca quinquenervia,"Worrel Ck, NSW",12,3.12,0.17,34.3,19.5/14.9/14.9/35.8/14.9,New South Wales,Worrel Creek,"20,591",-30.4555,152.575,20
+Melaleuca viridiflora,"Chillagoe, QLD",5,2.64,0.18,47.76,37.3/10.5/14.9/25.4/11.9,Queensland,Chillagoe,"14,558",-16.36,144.07,265
+Melaleuca viridiflora,"East Baines River, NT",5,3.57,0.14,11.11,9.5/1.6/27/46/15.9,Northern Territory,East Baines River,"18,903",-15.43,130.06,50
+Melaleuca viridiflora,"Kennedy River, QLD",5,3.4,0.16,20,15.4/4.6/23.1/38.5/18.5,Queensland,Kennedy River,"20,855",-15.1607,143.593,85
+Melaleuca viridiflora,"Lakeland, QLD",8,3.61,0.17,21.43,8.9/12.5/19.6/26.8/32.1,Queensland,Lakeland,"20,639",-15.4602,144.4137,146
+Melaleuca viridiflora,"Laura, QLD",5,3.55,0.16,18.33,11.7/6.7/15/48.3/18.3,Queensland,Laura,"18,555",-15.32,144.22,150
+Melaleuca viridiflora,"Ningbing Range, WA",5,3.46,0.21,22.92,18.8/4.2/16.7/33.3/27.1,Western Australia,Ningbing Range,"18,911",-15.02,128.36,50
+Melaleuca viridiflora,"Proserpine, QLD",12,3.31,0.17,29.73,21.6/8.1/13.5/31.1/25.7,Queensland,Proserpine,"15,572",-20.29,148.36,10
+Melaleuca viridiflora,"Rockhampton, QLD",10,2.01,0.15,76.12,43.3/32.8/8.9/8.9/6,Queensland,Rockhampton,"14,589",-22.52,150.17,30
+Melaleuca viridiflora,"Round Hill Head, QLD",17,2.91,0.19,44.83,20.7/24.1/15.5/22.4/17.2,Queensland,Round Hill Head,"15,580",-24.13,151.52,10
+Melaleuca viridiflora,"Theda Stn. Kalumburu, WA",5,3.23,0.13,21.67,8.3/13.3/31.7/40/6.7,Western Australia,Theda Stn Kalumburu,"18,915",-14.48,126.23,40
+Melaleuca viridiflora,"Wangi, Litchfield NP, NT",5,2.79,0.18,45.71,30/15.7/14.3/25.7/14.3,Northern Territory,"Wangi, Litchfield NP","18,899",-13.09,130.35,30
+Melaleuca viridiflora,"Weipa, QLD",10,3.97,0.15,9.68,9.7/0/16.1/32.3/41.9,Queensland,Weipa,"14,152",-12.31,141.48,10
