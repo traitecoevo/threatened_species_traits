@@ -1,0 +1,1462 @@
+Species,Susceptibility Rating,suggested_name,accepted_name,family,taxon_distribution,Species,In,In cultivation,By experiment,
+Eucalyptus imlayensis E,highly_susceptible,Eucalyptus imlayensis,Eucalyptus imlayensis,Myrtaceae,NSW,Cheilanthes austrotenuifolia,,,,FR59
+Cheilanthes austrotenuifolia,field_resistant,Cheilanthes austrotenuifolia,Cheilanthes austrotenuifolia,Pteridaceae,"WA, SA, NSW, ACT, Vic, Tas",Cordyline murchisoniae,16,,,
+Ptilotus declinatus,field_resistant,Ptilotus declinatus,Ptilotus declinatus,Amaranthaceae,WA,Ptilotus manglesii,24,,,FR24
+Ptilotus manglesii,field_resistant,Ptilotus manglesii,Ptilotus manglesii,Amaranthaceae,WA,Goniothalamus australis,,,,FR36
+Goniothalamus australis,field_resistant,Goniothalamus australis,Goniothalamus australis,Annonaceae,Qld,Borya mirabilis E,25,44,,HS44
+Laxmannia grandiflora subsp. stirlingensis,field_resistant,Laxmannia grandiflora subsp. stirlingensis,Laxmannia grandiflora subsp. stirlingensis,Asparagaceae,WA,Chamaescilla corymbosa var. corymbosa,25,,,"S43,FR21"
+Laxmannia jamesii V,field_resistant,Laxmannia jamesii,Laxmannia jamesii,Asparagaceae,WA,Laxmannia grandiflora subsp. stirlingensis,,,,FR58
+Laxmannia squarrosa,field_resistant,Laxmannia squarrosa,Laxmannia squarrosa,Asparagaceae,WA,Laxmannia jamesii V,,,,FR58
+Thysanotus dichotomus,field_resistant,Thysanotus dichotomus,Thysanotus dichotomus,Asparagaceae,WA,Laxmannia orientalis,"25,29",,,
+Actinotus bellidioides,field_resistant,Actinotus bellidioides,Actinotus bellidioides,Apiaceae,"Vic (presumed extinct), Tas",Laxmannia sessiliflora,,,,
+Actinotus rhomboideus,field_resistant,Actinotus rhomboideus,Actinotus rhomboideus,Apiaceae,WA,Laxmannia squarrosa,,,,FR21
+Platysace lanceolata s.l.,field_resistant,Platysace lanceolata,Platysace lanceolata,Apiaceae,"Qld, NSW, ACT, Vic",Thysanotus dichotomus,24,,,FR24
+Platysace tenuissima,field_resistant,Platysace tenuissima,Platysace tenuissima,Apiaceae,WA,Thysanotus multiflorus,,,21,Q21
+Xanthosia huegelii,field_resistant,Xanthosia huegelii,Xanthosia huegelii,Apiaceae,"WA, SA, Vic",Thysanotus thyrsoides,,,,Q21
+Sphenostemon lobosporus,field_resistant,Sphenostemon lobosporus,Sphenostemon lobosporus,Paracryphiaceae,Qld,Actinotus bellidioides,17,,33,FR61
+Polyscias australiana,field_resistant,Polyscias australiana,Polyscias australiana,Araliaceae,"NT, Qld",Actinotus helianthi,1,,,
+Helichrysum macranthum,field_resistant,Xerochrysum macranthum,Xerochrysum macranthum,Asteraceae,WA,Actinotus rhomboideus,,,,FR59
+Hyalosperma cotula,field_resistant,Hyalosperma cotula,Hyalosperma cotula,Asteraceae,WA,Hydrocotyle hirta,25,,,
+Lagenophora huegelii,field_resistant,Lagenophora huegelii,Lagenophora huegelii,Asteraceae,WA,Pentapeltis peltigera,24,,,"FR24,Q21"
+Millotia tenuifolia s.l.,field_resistant,Millotia tenuifolia,Millotia tenuifolia,Asteraceae,"WA, SA, NSW, Vic, Tas",Platysace compressa,"14,15",,,"FR59,S54, HS14,21"
+Olearia paucidentata,field_resistant,Olearia paucidentata,Olearia paucidentata,Asteraceae,WA,Platysace heterophylla s.l.,25,,,
+Olearia sp. aff. axillaris (Stirling Range),field_resistant,Olearia sp. [Olearia sp. aff. axillaris (Stirling Range)],,Asteraceae,,Platysace lanceolata s.l.,,,,FR22
+Podolepis gracilis,field_resistant,Podolepis gracilis,Podolepis gracilis,Asteraceae,WA,Platysace sp. Stirling,,,,"FR58,59"
+Podotheca angustifolia,field_resistant,Podotheca angustifolia,Podotheca angustifolia,Asteraceae,"WA, SA, NSW, Vic, Tas (presumed extinct)",Platysace tenuissima,24,,,FR24
+Pterochaeta paniculata,field_resistant,Pterochaeta paniculata,Pterochaeta paniculata,Asteraceae,WA,Xanthosia atkinsoniana,24,,,"FR21,24"
+Waitzia nitida,field_resistant,Waitzia nitida,Waitzia nitida,Asteraceae,WA,Xanthosia candida,24,,,"FR21,24"
+Balanops australiana,field_resistant,Balanops australiana,Balanops australiana,Balanopaceae,Qld,Xanthosia dissecta,"25,29",,,
+Isotoma hypocrateriformis,field_resistant,Isotoma hypocrateriformis,Isotoma hypocrateriformis,Campanulaceae,WA,Xanthosia huegelii,,,,FR21
+Lobelia gibbosa,field_resistant,Lobelia gibbosa,Lobelia gibbosa,Campanulaceae,"WA, NT, SA, Qld, NSW, ACT, Vic, Tas",Xanthosia rotundifolia s.l.,,,,"FR40,59"
+Lobelia rhytidosperma,field_resistant,Lobelia rhytidosperma,Lobelia rhytidosperma,Campanulaceae,WA,Xanthosia tridentata,1,,,
+Allocasuarina decussata,field_resistant,Allocasuarina decussata,Allocasuarina decussata,Casuarinaceae,WA,Alstonia muelleriana,,,,S36
+Allocasuarina lehmanniana s.l.,field_resistant,Allocasuarina lehmanniana,Allocasuarina lehmanniana,Casuarinaceae,WA,Sphenostemon lobosporus,,,,FR36
+Allocasuarina microstachya,field_resistant,Allocasuarina microstachya,Allocasuarina microstachya,Casuarinaceae,WA,Polyscias australiana,,,,FR36
+Allocasuarina trichodon,field_resistant,Allocasuarina trichodon,Allocasuarina trichodon,Casuarinaceae,WA,Polyscias murrayi,,,,S36
+Allocasuarina verticillata,field_resistant,Allocasuarina verticillata,Allocasuarina verticillata,Casuarinaceae,"SA, NSW, ACT, Vic, Tas",Wollemia nobilis ,,12,11,
+Casuarina obesa,field_resistant,Casuarina obesa,Casuarina obesa,Casuarinaceae,"WA, SA (naturalised), NSW, Vic",Archontophoenix cunninghamiana,16,,,
+Centrolepis aristata,field_resistant,Centrolepis aristata,Centrolepis aristata,Centrolepidaceae,"WA, SA, NSW, Vic, Tas",Oraniopsis appendiculata,,,,S36
+Garcinia sp. (Davies Ck JG Tracey 14745),field_resistant,Garcinia zichii,Garcinia zichii,Clusiaceae,Qld,Astelia australiana,30,,,
+Burchardia multiflora,field_resistant,Burchardia multiflora,Burchardia multiflora,Colchicaceae,WA,Argentipallium obtusifolium,"25,29",,,S43
+Burchardia umbellata,field_resistant,Burchardia umbellata,Burchardia umbellata,Colchicaceae,"SA, Qld, NSW, ACT, Vic, Tas",Brachyscome uliginosa,"25,29",,,S43
+Geissois biagiana,field_resistant,Karrabina biagiana,Karrabina biagiana,Cunoniaceae,Qld,Cassinia aculeata,"2,3,17",,,
+Gillbeea whypalliana,field_resistant,Gillbeea whypallana,Gillbeea whypallana,Cunoniaceae,Qld,Helichrysum collinum,3,,,
+Callitris rhomboidea,field_resistant,Callitris rhomboidea,Callitris rhomboidea,Cupressaceae,"WA (naturalised), SA, Qld, NSW, Vic (native and naturalised), Tas",Helichrysum macranthum,,,,FR59
+Caustis dioica,field_resistant,Caustis dioica,Caustis dioica,Cyperaceae,WA,Hyalosperma cotula,,,,FR21
+Cyathochaeta clandestina,field_resistant,Cyathochaeta clandestina,Cyathochaeta clandestina,Cyperaceae,WA,Ixodia achillaeoides subsp. alata,20,,,
+Gahnia grandis,field_resistant,Gahnia grandis,Gahnia grandis,Cyperaceae,"NSW, Vic, Tas",Lagenophora huegelii,,,,FR21
+Gahnia trifida,field_resistant,Gahnia trifida,Gahnia trifida,Cyperaceae,"WA, SA, Vic, Tas",Millotia tenuifolia s.l.,,,,FR21
+Gymnoschoenus sphaerocephalus,field_resistant,Gymnoschoenus sphaerocephalus,Gymnoschoenus sphaerocephalus,Cyperaceae,"SA, NSW, Vic, Tas",Olearia axillaris,,,,LS40
+Lepidosperma angustatum,field_resistant,Lepidosperma angustatum,Lepidosperma angustatum,Cyperaceae,WA,Olearia ciliata s.l.,29,,,
+Lepidosperma brunonianum,field_resistant,Lepidosperma sieberi,Lepidosperma sieberi,Cyperaceae,"SA, NSW, Vic, Tas",Olearia pannosa s.l.,32,,,MS32
+Lepidosperma concavum,field_resistant,Lepidosperma concavum,Lepidosperma concavum,Cyperaceae,NSW,Olearia paucidentata,,,,FR21
+Lepidosperma effusum,field_resistant,Lepidosperma effusum,Lepidosperma effusum,Cyperaceae,WA,Olearia teretifolia,,3,,
+Lepidosperma gladiatum,field_resistant,Lepidosperma gladiatum,Lepidosperma gladiatum,Cyperaceae,"WA, SA, NSW, Vic, Tas",Olearia sp. aff. axillaris (Stirling Range),,,,FR59
+Lepidosperma laterale s.l.,field_resistant,Lepidosperma laterale,Lepidosperma laterale,Cyperaceae,"SA, Qld, NSW, ACT, Vic, Tas",Ozothamnus obcordatus s.l.,,3,,
+Lepidosperma longitudinale,field_resistant,Lepidosperma longitudinale,Lepidosperma longitudinale,Cyperaceae,"WA, Qld, NSW, Vic, Tas",Podolepis gracilis,,,,FR21
+Lepidosperma scabrum,field_resistant,Lepidosperma scabrum,Lepidosperma scabrum,Cyperaceae,WA,Podotheca angustifolia,,,,FR21
+Lepidosperma tenue,field_resistant,Lepidosperma tenue,Lepidosperma tenue,Cyperaceae,WA,Pterochaeta paniculata,,,,FR21
+Lepidosperma tetraquetrum,field_resistant,Lepidosperma tetraquetrum,Lepidosperma tetraquetrum,Cyperaceae,WA,Trichocline spathulata,,,,Q21
+Lepidosperma urophorum,field_resistant,Lepidosperma urophorum,Lepidosperma urophorum,Cyperaceae,"NSW, ACT, Vic",Waitzia nitida,,,,FR21
+Lepidosperma viscidum,field_resistant,Lepidosperma viscidum,Lepidosperma viscidum,Cyperaceae,"WA, SA, Qld, NSW, Vic, Tas",Balanops australiana,,,,FR36
+Mesomelaena stygia s.l.,field_resistant,Mesomelaena stygia,Mesomelaena stygia,Cyperaceae,WA,Blandfordia punicea,"17,34",,,HS34
+Ptilothrix deusta,field_resistant,Ptilothrix deusta,Ptilothrix deusta,Cyperaceae,"Qld, NSW",Blechnum wattsii,17,,,
+Schoenus imberbis,field_resistant,Schoenus imberbis,Schoenus imberbis,Cyperaceae,"NSW, Vic",Brunonia australis,25,,,
+Tetraria octandra,field_resistant,Tetraria octandra,Tetraria octandra,Cyperaceae,WA,Labichea punctata,,,21,Q21
+Chamaexeros serra,field_resistant,Chamaexeros serra,Chamaexeros serra,Asparagaceae,WA,Isotoma hypocrateriformis,,,,FR21
+Kingia australis,field_resistant,Kingia australis,Kingia australis,Dasypogonaceae,WA,Lobelia gibbosa,,,,FR40
+Hibbertia humifusa,field_resistant,Hibbertia humifusa,Hibbertia humifusa,Dilleniaceae,Vic,Lobelia rhytidosperma,,,,FR21
+Hibbertia silvestris,field_resistant,Hibbertia silvestris,Hibbertia silvestris,Dilleniaceae,WA,Allocasuarina acutivalvis s.l.,,3,,
+Drosera huegelii,field_resistant,Drosera huegelii,Drosera huegelii,Droseraceae,WA,Allocasuarina campestris s.l.,,3,,
+Drosera macrantha s.l.,field_resistant,Drosera macrantha,Drosera macrantha,Droseraceae,"WA, SA, Vic, Tas",Allocasuarina crassa,,,9,MS9
+Drosera pallida,field_resistant,Drosera pallida,Drosera pallida,Droseraceae,WA,Allocasuarina decussata,,,,FR59
+Drosera platystigma,field_resistant,Drosera platystigma,Drosera platystigma,Droseraceae,WA,Allocasuarina duncanii,,,9,HS9
+Elaeocarpus eumendi,field_resistant,Elaeocarpus eumundi,Elaeocarpus eumundi,Elaeocarpaceae,"Qld, NSW",Allocasuarina eriochlamys subsp. grossa,,,,LS41
+Elaeocarpus largiflorens subsp. retinervis,field_resistant,Elaeocarpus largiflorens subsp. retinervis,Elaeocarpus largiflorens subsp. retinervis,Elaeocarpaceae,Qld,Allocasuarina fibrosa V,,,,MS41
+Sloanea macbrydei,field_resistant,Sloanea macbrydei,Sloanea macbrydei,Elaeocarpaceae,Qld,Allocasuarina fraseriana,"2,14,15, 24,28",,,"SP21,46, 51,53 HS40,59"
+Leucopogon lanceolatus s.l.,field_resistant,Styphelia affinis,Styphelia affinis,Ericaceae,"SA, Qld, NSW, Vic, Tas",Allocasuarina globosa,,,,LS41
+Leucopogon pendulus,field_resistant,Styphelia pendula,Styphelia pendula,Ericaceae,WA,Allocasuarina grevilleoides,,,,MS41
+Antidesma erostre,field_resistant,Antidesma erostre,Antidesma erostre,Phyllanthaceae,Qld,Allocasuarina helmsii,,3,,
+Hylandia dockrilii,field_resistant,Hylandia dockrillii,Hylandia dockrillii,Euphorbiaceae,Qld,Allocasuarina humilis,40,3,,"S37,46,53     FR40"
+Macaranga subdentata,field_resistant,Macaranga subdentata,Macaranga subdentata,Euphorbiaceae,Qld,Allocasuarina lehmanniana s.l.,40,,,FR40
+Stachystemon vermicularis,field_resistant,Stachystemon vermicularis,Stachystemon vermicularis,Picrodendraceae,WA,Allocasuarina littoralis,,,,SV42
+Bossiaea linophylla,field_resistant,Bossiaea linophylla,Bossiaea linophylla,Fabaceae,WA,Allocasuarina microstachya,40,,,FR40
+Bossiaea rufa,field_resistant,Bossiaea rufa,Bossiaea rufa,Fabaceae,WA,Allocasuarina monilifera,"17,34",,,S60
+Chorizema aciculare s.l.,field_resistant,Chorizema aciculare,Chorizema aciculare,Fabaceae,WA,Allocasuarina muelleriana s.l.,"25,29",,,S43
+Dillwynia sp. A,field_resistant,Dillwynia rupestris,Dillwynia rupestris,Fabaceae,NSW,Allocasuarina paludosa,25,,,S43
+Gastrolobium bilobum,field_resistant,Gastrolobium bilobum,Gastrolobium bilobum,Fabaceae,"WA, Vic (doubtfully naturalised)",Allocasuarina pinaster,,3,,
+Gompholobium capitatum,field_resistant,Gompholobium capitatum,Gompholobium capitatum,Fabaceae,WA,Allocasuarina pusilla,"25,29",,,S43
+Gompholobium marginatum,field_resistant,Gompholobium marginatum,Gompholobium marginatum,Fabaceae,WA,Allocasuarina ramosissima,,,,MS41
+Gompholobium polymorphum,field_resistant,Gompholobium polymorphum,Gompholobium polymorphum,Fabaceae,WA,Allocasuarina rigida s.l.,,3,,
+Gompholobium preissii,field_resistant,Gompholobium preissii,Gompholobium preissii,Fabaceae,WA,Allocasuarina tessellata,,,,MS41
+Jacksonia alata,field_resistant,Jacksonia alata,Jacksonia alata,Fabaceae,WA,Allocasuarina thuyoides,,,,"S56,MS40"
+Kennedia prostrata,field_resistant,Kennedia prostrata,Kennedia prostrata,Fabaceae,"WA, SA, NSW, Vic, Tas",Allocasuarina tortiramula,,,,MS41
+Mirbelia dilatata,field_resistant,Mirbelia dilatata,Mirbelia dilatata,Fabaceae,WA,Allocasuarina torulosa,2,,,
+Pultenaea ericifolia,field_resistant,Pultenaea ericifolia,Pultenaea ericifolia,Fabaceae,WA,Allocasuarina trichodon,,3,,FR59
+Sphaerolobium medium,field_resistant,Sphaerolobium medium,Sphaerolobium medium,Fabaceae,WA,Allocasuarina verticillata,"2,8",,,FR60
+Dampiera fasciculata,field_resistant,Dampiera fasciculata [alternative possible names: Dampiera stricta (pro parte misapplied)],Dampiera fasciculata,Goodeniaceae,WA,Casuarina cunninghamiana subsp. cunninghamiana,2,,,
+Dampiera linearis,field_resistant,Dampiera linearis,Dampiera linearis,Goodeniaceae,WA,Casuarina obesa,50,,,FR50
+Scaevola striata s.l.,field_resistant,Scaevola striata,Scaevola striata,Goodeniaceae,WA,Centrolepis aristata,,,,FR21
+Velleia foliosa,field_resistant,Goodenia brendannarum,Goodenia brendannarum,Goodeniaceae,WA,Garcinia sp. (Davies Ck JG Tracey 14745),,,,FR36
+Polyosma alangiacea,field_resistant,Polyosma alangiacea,Polyosma alangiacea,Escalloniaceae,Qld,Burchardia multiflora,40,,,FR40
+Anigozanthus flavidus,field_resistant,Anigozanthos flavidus,Anigozanthos flavidus,Haemodoraceae,"WA, NSW (naturalised), Tas (doubtfully naturalised)",Burchardia umbellata,40,,,FR40
+Anigozanthus manglesii,field_resistant,Anigozanthos manglesii,Anigozanthos manglesii,Haemodoraceae,"WA, Qld (formerly naturalised)",Anodopetalum biglandulosum,17,,,S60
+Anigozanthus rufus,field_resistant,Anigozanthos rufus,Anigozanthos rufus,Haemodoraceae,WA,Bauera rubioides,"8,17,34",,33,LS61
+Conostylis aculeata s.l.,field_resistant,Conostylis aculeata,Conostylis aculeata,Haemodoraceae,WA,Bauera sessiliflora,,44,,LS44
+Conostylis misera E,field_resistant,Conostylis misera,Conostylis misera,Haemodoraceae,WA,Geissois biagiana,,,,FR36
+Conostylis pusilla,field_resistant,Conostylis pusilla,Conostylis pusilla,Haemodoraceae,WA,Gillbeea adenopetala,,,,S36
+Macropidia fuliginosa,field_resistant,Macropidia fuliginosa,Macropidia fuliginosa,Haemodoraceae,WA,Gillbeea whypalliana,,,,FR36
+Gonocarpus benthamii subsp. Stirling,field_resistant,Gonocarpus benthamii subsp. Stirling (C.J.Robinson 1080),Gonocarpus benthamii subsp. Stirling (C.J.Robinson 1080),Haloragaceae,WA,Actinostrobus pyramidalis,2a,,,S54
+Gonocarpus rudis,field_resistant,Gonocarpus rudis,Gonocarpus rudis,Haloragaceae,WA,Callitris preissii,,3,,
+Gonocarpus teucrioides,field_resistant,Gonocarpus teucrioides,Gonocarpus teucrioides,Haloragaceae,"Qld, NSW, Vic, Tas",Callitris rhomboidea,29,,,FR60
+Apodytes brachstylis,field_resistant,Apodytes brachystylis,Apodytes brachystylis,Icacinaceae,Qld,Caustis dioica,20,,,FR40
+Citronella smythii,field_resistant,Citronella smythii,Citronella smythii,Icacinaceae,Qld,Cyathochaeta avenacea,,,,"FR21,40"
+Irvingbaileya australis,field_resistant,Irvingbaileya australis,Irvingbaileya australis,Icacinaceae,Qld,Cyathochaeta clandestina,24,,,FR24
+Gmelina fasciculiflora,field_resistant,Gmelina fasciculiflora,Gmelina fasciculiflora,Lamiaceae,Qld,Evandra aristata,,,,"S46,LS40"
+Hemigenia curvifolia,field_resistant,Hemigenia curvifolia,Hemigenia curvifolia,Lamiaceae,WA,Gahnia grandis,17,,,FR60
+Hemigenia ramosissima,field_resistant,Hemigenia ramosissima [alternative possible names: Hemigenia pritzelii (pro parte misapplied) | Hemigenia rigida (pro parte misapplied)],Hemigenia ramosissima,Lamiaceae,WA,Gahnia trifida,,,,FR40
+Cassytha glabella,field_resistant,Cassytha glabella,Cassytha glabella,Lauraceae,"WA, SA, Qld, NSW, Vic, Tas",Gymnoschoenus sphaerocephalus,17,,,FR61
+Cryptocarya angulata,field_resistant,Cryptocarya angulata,Cryptocarya angulata,Lauraceae,Qld,Lepidosperma angustatum,,,,FR21
+Cryptocarya corrugata,field_resistant,Cryptocarya corrugata,Cryptocarya corrugata,Lauraceae,Qld,Lepidosperma brunonianum,,,,FR59
+Cryptocarya corrugata,field_resistant,Cryptocarya corrugata,Cryptocarya corrugata,Lauraceae,Qld,Lepidosperma concavum,17,,,FR42
+Cryptocarya densiflora,field_resistant,Cryptocarya densiflora,Cryptocarya densiflora,Lauraceae,Qld,Lepidosperma effusum,,,,FR59
+Cryptocarya leucophylla,field_resistant,Cryptocarya leucophylla,Cryptocarya leucophylla,Lauraceae,Qld,Lepidosperma gladiatum,,,,FR59
+Cryptocarya lividula,field_resistant,Cryptocarya lividula,Cryptocarya lividula,Lauraceae,Qld,Lepidosperma laterale s.l.,2,,,FR60
+Cryptocarya putida,field_resistant,Cryptocarya putida,Cryptocarya putida,Lauraceae,Qld,Lepidosperma longitudinale,,,,FR58
+Endiandra dichrophylla,field_resistant,Endiandra dichrophylla,Endiandra dichrophylla,Lauraceae,Qld,Lepidosperma scabrum,24,,,FR24
+Endiandra monothyra subsp. monothyra,field_resistant,Endiandra monothyra subsp. monothyra,Endiandra monothyra subsp. monothyra,Lauraceae,Qld,Lepidosperma squamatum,,,,"FR21,59"
+Endiandra montana,field_resistant,Endiandra montana,Endiandra montana,Lauraceae,Qld,Lepidosperma tenue,24,,,FR24
+Endiandra sankeyana,field_resistant,Endiandra sankeyana,Endiandra sankeyana,Lauraceae,Qld,Lepidosperma tetraquetrum,,,,FR53
+Endiandra wolfei,field_resistant,Endiandra wolfei,Endiandra wolfei,Lauraceae,Qld,Lepidosperma urophorum,,,,FR42
+Utricularia multifida,field_resistant,Utricularia multifida,Utricularia multifida,Lentibulariaceae,WA,Lepidosperma viscidum,,,,FR40
+Nuytsia floribunda,field_resistant,Nuytsia floribunda,Nuytsia floribunda,Loranthaceae,WA,Mesomelaena graciliceps,,,,Q21
+Synoum glandulosum subsp. paniculatum,field_resistant,Synoum glandulosum subsp. paniculosum,Synoum glandulosum subsp. paniculosum,Meliaceae,Qld,Mesomelaena stygia s.l.,,,,FR40
+Acacia baxteri,field_resistant,Acacia baxteri,Acacia baxteri,Fabaceae,WA,Mesomelaena tetragona,,,,"FR21,24"
+Acacia browniana s.l.,field_resistant,Acacia browniana,Acacia browniana,Fabaceae,WA,Ptilothrix deusta,,,,FR42
+Acacia browniana var. intermedia,field_resistant,Acacia browniana var. intermedia,Acacia browniana var. intermedia,Fabaceae,WA,Schoenus efoliatus,,,,"FR58,59"
+Acacia cyclops,field_resistant,Acacia cyclops,Acacia cyclops,Fabaceae,"WA, SA (native and naturalised), Vic (naturalised)",Schoenus imberbis,,,,FR42
+Acacia dealbata,field_resistant,Acacia dealbata,Acacia dealbata,Fabaceae,"WA (naturalised), SA (naturalised), NSW, NI (doubtfully naturalised), ACT, Vic, Tas",Schoenus sp. Stirling,,,,"FR58,59"
+Acacia extensa,field_resistant,Acacia extensa,Acacia extensa,Fabaceae,"WA, Vic (naturalised)",Tetraria capillaris,,,,"FR21,40"
+Acacia melanoxylon,field_resistant,Acacia melanoxylon,Acacia melanoxylon,Fabaceae,"WA (naturalised), SA, Qld, NSW, ACT, Vic, Tas",Tetraria octandra,,,,FR21
+Acacia obovata,field_resistant,Acacia obovata,Acacia obovata,Fabaceae,WA,Chamaexeros serra,40,,,FR40
+Acacia preissiana,field_resistant,Acacia preissiana,Acacia preissiana,Fabaceae,WA,Dasypogon bromeliifolius,24,,,"S37,46,LS40,59"
+Paraserianthes lophantha,field_resistant,Paraserianthes lophantha,Paraserianthes lophantha,Fabaceae,"WA (native and naturalised), SA (naturalised), NSW (naturalised), NI (naturalised), Vic (naturalised), Tas (naturalised)",Kingia australis,,,,FR22
+Daphnandra repandula,field_resistant,Daphnandra repandula,Daphnandra repandula,Atherospermataceae,Qld,Pteridium esculentum,2,,,"FR40,59,Q21"
+Acmena resa,field_resistant,Syzygium resa,Syzygium resa,Myrtaceae,Qld,Hibbertia acerosa,"48,15,28",,,S48
+Astartea fascicularis,field_resistant,Astartea fascicularis,Astartea fascicularis,Myrtaceae,"WA, ACT (doubtfully naturalised)",Hibbertia acicularis,"17,34",,,
+Astartea heteranthera,field_resistant,Cyathostemon heterantherus,Cyathostemon heterantherus,Myrtaceae,"WA, Vic (naturalised)",Hibbertia amplexicaulis,"14,28",,,"S21,24,48,HS14"
+Austromyrtus sp. (Gillies BG 1484),field_resistant,Gossia grayi,Gossia grayi,Myrtaceae,Qld,Hibbertia australis,25,,,
+Baeckea pachyphylla,field_resistant,Baeckea pachyphylla,Baeckea pachyphylla,Myrtaceae,WA,Hibbertia calycina,,,9,HS9
+Calothamnus quadrifidus,field_resistant,Calothamnus quadrifidus,Calothamnus quadrifidus,Myrtaceae,WA (native and naturalised),Hibbertia commutata ,28,,21,"LS40,59,HS21"
+Calothamnus sanguineus,field_resistant,Calothamnus sanguineus,Calothamnus sanguineus,Myrtaceae,WA,Hibbertia cunninghamii,15,,,
+Calytrix asperula,field_resistant,Calytrix asperula,Calytrix asperula,Myrtaceae,WA,Hibbertia desmophylla,51,,,S51
+Calytrix flavescens,field_resistant,Calytrix flavescens,Calytrix flavescens,Myrtaceae,WA,Hibbertia empetrifolia,"17,34",,,
+Calytrix leschenaultii,field_resistant,Calytrix leschenaultii,Calytrix leschenaultii,Myrtaceae,WA,Hibbertia furfuracea ,,,,S56
+Calytrix tenuiramea,field_resistant,Calytrix tenuiramea,Calytrix tenuiramea,Myrtaceae,WA,Hibbertia glomerata s.l.,,,,HS21
+Corymbia ficifolia,field_resistant,Corymbia ficifolia,Corymbia ficifolia,Myrtaceae,"WA, SA (doubtfully naturalised)",Hibbertia huegelii,,,21,Q21
+Corymbia maculata,field_resistant,Corymbia maculata,Corymbia maculata,Myrtaceae,"WA (naturalised), SA (doubtfully naturalised), NSW, Vic (native and naturalised)",Hibbertia hypericoides,"14,24",,,"S37,46,SP21 MS40,HS14"
+Darwinia citriodora,field_resistant,Darwinia citriodora,Darwinia citriodora,Myrtaceae,"WA, SA (naturalised)",Hibbertia inconspicua ,,,,S46
+Darwinia vestita,field_resistant,Darwinia vestita,Darwinia vestita,Myrtaceae,WA,Hibbertia lineata,"14,24",,,S24
+Eucalyptus accedens,field_resistant,Eucalyptus accedens,Eucalyptus accedens,Myrtaceae,WA,Hibbertia montana ,"14,48,24",,,"S24,48,HS14"
+Eucalyptus amygdalina,field_resistant,Eucalyptus amygdalina [alternative possible names: Eucalyptus falciformis (pro parte misapplied)],Eucalyptus amygdalina,Myrtaceae,Tas,Hibbertia obtusifolia,3,,,
+Eucalyptus angulosa,field_resistant,Eucalyptus angulosa [alternative possible names: Eucalyptus capitanea (pro parte misapplied)],Eucalyptus angulosa,Myrtaceae,"WA, SA",Hibbertia procumbens,"17,34",,,S60
+Eucalyptus astringens,field_resistant,Eucalyptus astringens,Eucalyptus astringens,Myrtaceae,"WA, Vic (naturalised)",Hibbertia prostrata,"17,25,29,34",,,S43
+Eucalyptus buprestium,field_resistant,Eucalyptus buprestium,Eucalyptus buprestium,Myrtaceae,WA,Hibbertia quadricolor,14,,,"S24,HS14,21"
+Eucalyptus camaldulensis,field_resistant,Eucalyptus camaldulensis,Eucalyptus camaldulensis,Myrtaceae,"WA (native and naturalised), NT, SA, Qld, NSW, ACT, Vic",Hibbertia rhadinopoda,26,,21,SP21
+Eucalyptus coccifera,field_resistant,Eucalyptus coccifera,Eucalyptus coccifera,Myrtaceae,Tas,Hibbertia riparia,"17,20,25,29,34",,,S60
+Eucalyptus conferruminata,field_resistant,Eucalyptus conferruminata,Eucalyptus conferruminata,Myrtaceae,"WA, Vic (doubtfully naturalised)",Hibbertia sericea s.l.,"17,34",,,
+Eucalyptus cordata,field_resistant,Eucalyptus cordata,Eucalyptus cordata,Myrtaceae,Tas,Hibbertia silvestris,"14,24",,,FR24
+Eucalyptus dalrympleana s.l.,field_resistant,Eucalyptus dalrympleana,Eucalyptus dalrympleana,Myrtaceae,"SA, Qld, NSW, ACT, Vic, Tas",Hibbertia stricta,"4,7,25",,,S43
+Eucalyptus decurva,field_resistant,Eucalyptus decurva,Eucalyptus decurva,Myrtaceae,WA,Hibbertia subvaginata,"14,15,24,37",,,HS14
+Eucalyptus doratoxylon,field_resistant,Eucalyptus doratoxylon,Eucalyptus doratoxylon,Myrtaceae,WA,Hibbertia virgata,"5,25",,9,"S43, HS9"
+Eucalyptus erectifolia,field_resistant,Eucalyptus erectifolia,Eucalyptus erectifolia,Myrtaceae,WA,Drosera erythrorhiza s.l.,,,,"FR21,40"
+Eucalyptus falcata,field_resistant,Eucalyptus falcata,Eucalyptus falcata,Myrtaceae,WA,Drosera huegelii,,,,FR59
+Eucalyptus forrestiana,field_resistant,Eucalyptus forrestiana,Eucalyptus forrestiana,Myrtaceae,WA,Drosera macrantha s.l.,,,,FR21
+Eucalyptus gardneri,field_resistant,Eucalyptus gardneri,Eucalyptus gardneri,Myrtaceae,WA,Drosera pallida,,,,FR40
+Eucalyptus globulus s.l.,field_resistant,Eucalyptus globulus,Eucalyptus globulus,Myrtaceae,"WA (naturalised), SA, NSW, ACT (naturalised), Vic, Tas",Drosera platystigma,,,,FR21
+Eucalyptus gomphocephala,field_resistant,Eucalyptus gomphocephala,Eucalyptus gomphocephala,Myrtaceae,"WA, Vic (doubtfully naturalised)",Drosera stolonifera s.l.,,,,"FR59,Q21"
+Eucalyptus krusana,field_resistant,Eucalyptus kruseana,Eucalyptus kruseana,Myrtaceae,WA,Elaeocarpus eumendi,,,,FR36
+Eucalyptus laeliae,field_resistant,Eucalyptus laeliae,Eucalyptus laeliae,Myrtaceae,WA,Elaeocarpus foveolatus,,,,S36
+Eucalyptus lehmanniii,field_resistant,Eucalyptus lehmannii,Eucalyptus lehmannii,Myrtaceae,WA,Elaeocarpus holopetalus,,,,MS22
+Eucalyptus megacarpa,field_resistant,Eucalyptus megacarpa,Eucalyptus megacarpa,Myrtaceae,WA,Elaeocarpus largiflorens subsp. retinervis,,,,FR36
+Eucalyptus nitida,field_resistant,Eucalyptus nitida,Eucalyptus nitida,Myrtaceae,Tas,Elaeocarpus sericopetalus,,,,S36
+Eucalyptus occidentalis,field_resistant,Eucalyptus occidentalis,Eucalyptus occidentalis,Myrtaceae,"WA, Vic (naturalised)",Sloanea australis subsp. parviflora,,,,S36
+Eucalyptus ovata s.l.,field_resistant,Eucalyptus ovata,Eucalyptus ovata,Myrtaceae,"SA, NSW, Vic, Tas",Sloanea macbrydei,,,,FR36
+Eucalyptus pachyloma,field_resistant,Eucalyptus pachyloma,Eucalyptus pachyloma,Myrtaceae,WA,Acrotriche cordata,,,9,HS9
+Eucalyptus patens,field_resistant,Eucalyptus patens,Eucalyptus patens,Myrtaceae,WA,Acrotriche fasciculiflora,,,,S57
+Eucalyptus pauciflora s.l.,field_resistant,Eucalyptus pauciflora,Eucalyptus pauciflora,Myrtaceae,"SA, Qld, NSW, ACT, Vic, Tas",Acrotriche halmaturina,19,,,
+Eucalyptus preissiana,field_resistant,Eucalyptus preissiana,Eucalyptus preissiana,Myrtaceae,WA,Acrotriche patula,,,,HS41
+Eucalyptus pulchella,field_resistant,Eucalyptus pulchella,Eucalyptus pulchella,Myrtaceae,Tas,Acrotriche serrulata,"4,17,25, 29",,,S43
+Eucalyptus rudis,field_resistant,Eucalyptus rudis,Eucalyptus rudis,Myrtaceae,WA,Andersonia auriculata,,,,HS41
+Eucalyptus spathulata,field_resistant,Eucalyptus spathulata,Eucalyptus spathulata,Myrtaceae,"WA, Vic (doubtfully naturalised)",Andersonia axilliflora E,58,,,"S49,HS41,58,59"
+Eucalyptus talyuberlup,field_resistant,Eucalyptus talyuberlup,Eucalyptus talyuberlup,Myrtaceae,WA,Andersonia bifida,,,,HS41
+Eucalyptus uncinata,field_resistant,Eucalyptus uncinata,Eucalyptus uncinata,Myrtaceae,WA,Andersonia caerulea,,,,"S46,51,HS40,59"
+Eucalyptus viminalis,field_resistant,Eucalyptus viminalis [alternative possible names: Corymbia tessellaris (taxonomic synonym) | Eucalyptus dalrympleana subsp. dalrympleana (pro parte misapplied) | Eucalyptus diversifolia subsp. diversifolia (pro parte misapplied) | Eucalyptus nobilis (misapplied)],Eucalyptus viminalis,Myrtaceae,"SA, NSW, ACT, Vic, Tas",Andersonia carinata,,,,HS41
+Eucalyptus wandoo,field_resistant,Eucalyptus wandoo,Eucalyptus wandoo,Myrtaceae,WA,Andersonia echinocephala,58,,,"HS41,58,59,MS40"
+Homalospermum firmum,field_resistant,Homalospermum firmum,Homalospermum firmum,Myrtaceae,WA,Andersonia ferricola,39,,,S39
+Hypocalymma phillipsii,field_resistant,Hypocalymma phillipsii,Hypocalymma phillipsii,Myrtaceae,WA,Andersonia grandiflora,,,,"HS41,MS58"
+Hypocalymma speciosum,field_resistant,Hypocalymma speciosum,Hypocalymma speciosum,Myrtaceae,WA,Andersonia heterophylla,37,,,"S37,46"
+Kunzea preissiana,field_resistant,Kunzea preissiana [alternative possible names: Kunzea strigosa (pro parte misapplied)],Kunzea preissiana,Myrtaceae,WA,Andersonia lehmanniana,,,,"S37,46"
+Leptospermum erubescens,field_resistant,Leptospermum erubescens,Leptospermum erubescens,Myrtaceae,WA,Andersonia longifolia,,,,HS41
+Leptospermum scoparium,field_resistant,Leptospermum scoparium,Leptospermum scoparium,Myrtaceae,"NSW, Vic, Tas",Andersonia macranthera,,,,HS41
+Melaleuca cuticularis,field_resistant,Melaleuca cuticularis,Melaleuca cuticularis,Myrtaceae,"WA, SA",Andersonia pinaster V,58,,,"HS40,41,58"
+Melaleuca diosmifolia,field_resistant,Melaleuca diosmifolia,Melaleuca diosmifolia,Myrtaceae,"WA (native and naturalised), Vic (naturalised)",Andersonia setifolia,,,,HS41
+Melaleuca holosericea,field_resistant,Melaleuca holosericea,Melaleuca holosericea,Myrtaceae,WA,Andersonia simplex,51,,,"S51,MS40"
+Melaleuca lanceolata,field_resistant,Melaleuca lanceolata,Melaleuca lanceolata,Myrtaceae,"WA (native and naturalised), SA, Qld, NSW, Vic",Andersonia sprengelioides,,,,"HS40,59"
+Melaleuca laxiflora,field_resistant,Melaleuca laxiflora,Melaleuca laxiflora,Myrtaceae,WA,Astroloma baxteri,,,,LS40
+Melaleuca macronychia,field_resistant,Melaleuca macronychia,Melaleuca macronychia,Myrtaceae,WA,Astroloma ciliatum,"48,28",,,S48
+Melaleuca microphylla,field_resistant,Melaleuca microphylla,Melaleuca microphylla,Myrtaceae,"WA, SA (naturalised)",Astroloma conostephioides,"25,29",,,S43
+Melaleuca nesophila,field_resistant,Melaleuca nesophila,Melaleuca nesophila,Myrtaceae,"WA (native and naturalised), SA (naturalised), Vic (naturalised)",Astroloma foliosum,,,,HS41
+Melaleuca pentagona s.l.,field_resistant,Melaleuca pentagona,Melaleuca pentagona,Myrtaceae,WA (native and naturalised),Astroloma humifusum,"17,25,34",,,"S43,HS10"
+Melaleuca pulchella,field_resistant,Melaleuca pulchella,Melaleuca pulchella,Myrtaceae,WA,Astroloma microcalyx,14,,,
+Melaleuca seriata,field_resistant,Melaleuca seriata,Melaleuca seriata,Myrtaceae,WA,Astroloma microphyllum,,,,LS41
+Melaleuca spathulata,field_resistant,Melaleuca spathulata,Melaleuca spathulata,Myrtaceae,WA,Astroloma pallidum,,,,"FR21,24"
+Melaleuca suberosa,field_resistant,Melaleuca suberosa,Melaleuca suberosa,Myrtaceae,WA,Astroloma pinifolium,"17,34",,,S60
+Melaleuca violacea,field_resistant,Melaleuca violacea,Melaleuca violacea,Myrtaceae,WA,Astroloma xerophyllum,37,,,"S37,46,55"
+Rhodamnia sessiliflora,field_resistant,Rhodamnia sessiliflora,Rhodamnia sessiliflora,Myrtaceae,Qld,Astroloma sp. Cataby (EA Griffin 1022),,,,HS41
+Syzygium cormiflorum,field_resistant,Syzygium cormiflorum,Syzygium cormiflorum,Myrtaceae,Qld,Astroloma sp. Eneabba (N Marchant s.n.),,,,HS41
+Syzygium johnsonii,field_resistant,Syzygium johnsonii,Syzygium johnsonii,Myrtaceae,Qld,Astroloma sp. Fitzgerald (GJ Keighery 8376),,,,LS41
+Syzygium wesa,field_resistant,Syzygium wesa,Syzygium wesa,Myrtaceae,Qld,Astroloma sp. Grass Patch (AJG Wilson 110),,,,LS41
+Verticordia habrantha,field_resistant,Verticordia habrantha,Verticordia habrantha,Myrtaceae,WA,Astroloma sp. Mt Lindesay,,,,HS59
+Waterhousia unipunctata,field_resistant,Syzygium unipunctatum,Syzygium unipunctatum,Myrtaceae,Qld,Astroloma sp. Nannup (RD Royce 3978),,,,HS41
+Brackenridgea nitida subsp. australiana,field_resistant,Brackenridgea australiana,Brackenridgea australiana,Ochnaceae,Qld,Astroloma sp. 2504,,,,HS40
+Olax phyllanthi,field_resistant,Olax phyllanthi,Olax phyllanthi,Olacaceae,WA,Brachyloma ciliatum,25,,,S43
+Chionanthus axillaris,field_resistant,Chionanthus axillaris,Chionanthus axillaris,Oleaceae,Qld,Brachyloma daphnoides s.l.,"3,25,29",,,S43
+Cryptostylis ovata,field_resistant,Cryptostylis ovata,Cryptostylis ovata,Orchidaceae,WA,Brachyloma depressum,29,,,HS29
+Drakea confluens E,field_resistant,Drakaea confluens,Drakaea confluens,Orchidaceae,WA,Coleanthera coelophylla,,,,HS41
+Eriochilus dilatatus,field_resistant,Eriochilus dilatatus,Eriochilus dilatatus,Orchidaceae,WA,Coleanthera virgata,,,,LS41
+Leporella fimbriata,field_resistant,Leporella fimbriata,Leporella fimbriata,Orchidaceae,"WA, SA, Vic",Conostephium marchantiorum,,,,LS41
+Mecopodum parvifolium,field_resistant,Prasophyllum parvifolium,Prasophyllum parvifolium,Orchidaceae,WA,Conostephium minus,,,,HS41
+Pterostylis vittata,field_resistant,Pterostylis vittata,Pterostylis vittata,Orchidaceae,WA,Conostephium pendulum,"14,24,37",,,S46
+Pterostylis aff. nana,field_resistant,Pterostylis angulata,Pterostylis angulata,Orchidaceae,WA,Conostephium uncinatum,,,,LS41
+Pyrorchis nigricans,field_resistant,Pyrorchis nigricans,Pyrorchis nigricans,Orchidaceae,"WA, SA, NSW, Vic, Tas",Cosmelia rubra,,,,MS40
+Thelymitra crinita,field_resistant,Thelymitra crinita,Thelymitra crinita,Orchidaceae,WA,Cyathodes glauca,"2,17,34",,,
+Thelymitra pauciflora s.l.,field_resistant,Thelymitra pauciflora [alternative possible names: Thelymitra albiflora (pro parte misapplied) | Thelymitra arenaria (pro parte misapplied) | Thelymitra batesii (pro parte misapplied) | Thelymitra bracteata (pro parte misapplied) | Thelymitra brevifolia (pro parte misapplied) | Thelymitra crenulata (pro parte misapplied) | Thelymitra cyanapicata (pro parte misapplied) | Thelymitra exigua (pro parte misapplied) | Thelymitra inflata (pro parte misapplied) | Thelymitra latifolia (pro parte misapplied) | Thelymitra malvina (pro parte misapplied) | Thelymitra odora (pro parte misapplied) | Thelymitra pallidifructus (pro parte misapplied) | Thelymitra peniculata (pro parte misapplied) | Thelymitra brevifolia (misapplied) | Thelymitra vulgaris (misapplied)],Thelymitra pauciflora,Orchidaceae,"Qld, NSW, ACT, Vic, Tas",Epacris acuminata E,34,,,
+Johnsonia lupulina s.l.,field_resistant,Johnsonia lupulina,Johnsonia lupulina,Hemerocallidaceae,WA,Epacris apsleyensis E,,,,HS9
+Tricoryne elatior,field_resistant,Tricoryne elatior,Tricoryne elatior,Hemerocallidaceae,"WA, NT, SA, Qld, NSW, ACT, Vic, Tas",Epacris barbata CE,,,,HS61
+Billardiera drummondiana,field_resistant,Marianthus drummondianus,Marianthus drummondianus,Pittosporaceae,WA,Epacris corymbiflora,17,,33,HS61
+Billardiera fraseri,field_resistant,Billardiera fraseri,Billardiera fraseri,Pittosporaceae,WA,Epacris curtisiae,,,9,HS60
+Pittosporum phillyreoides,field_resistant,Pittosporum phillyreoides,Pittosporum phillyreoides,Pittosporaceae,WA,Epacris exserta E,,,9,MS9
+Agrostis aemula,field_resistant,Lachnagrostis aemula,Lachnagrostis aemula,Poaceae,"WA, SA, Qld, NSW, LHI, ACT, Vic, Tas",Epacris glabella E,,,9,MS9
+Amphipogon laguroides s.l.,field_resistant,Amphipogon laguroides,Amphipogon laguroides,Poaceae,WA,Epacris grandis E,,,9,HS9
+Anisopogon avenaceus,field_resistant,Anisopogon avenaceus,Anisopogon avenaceus,Poaceae,"NSW, Vic",Epacris gunnii,"8,17",,,
+Austrostipa compressa,field_resistant,Austrostipa compressa,Austrostipa compressa,Poaceae,WA,Epacris impressa,"2,4,13,1718,25,29,34",3,,"S43,LS60"
+Deyeuxia drummondii E,field_resistant,Deyeuxia drummondii,Deyeuxia drummondii,Poaceae,WA,Epacris lanuginosa,"17,34",,,S60
+Entolasia stricta,field_resistant,Entolasia stricta,Entolasia stricta,Poaceae,"Qld, NSW, Vic",Epacris limbata CE,,,9,HS9
+Neurachne alopecuroidea,field_resistant,Neurachne alopecuroidea,Neurachne alopecuroidea,Poaceae,"WA, SA, Vic",Epacris marginata,,,9,HS9
+Poa poiformis,field_resistant,Poa poiformis,Poa poiformis,Poaceae,"WA, SA, NSW, LHI, Vic, Tas",Epacris myrtifolia,,,9,HS9
+Poa porphyroclados,field_resistant,Poa porphyroclados,Poa porphyroclados,Poaceae,WA,Epacris obtusifolia,17,,,S60
+Poa sieberiana,field_resistant,Poa sieberiana,Poa sieberiana,Poaceae,"SA, Qld, NSW, ACT, Vic, Tas",Epacris paludosa,,,9,HS9
+Tetrarrhena juncea,field_resistant,Tetrarrhena juncea,Tetrarrhena juncea,Poaceae,"SA, Qld, Vic, Tas",Epacris purpurascens ,1,,,
+Comesperma calymega,field_resistant,Comesperma calymega,Comesperma calymega,Polygalaceae,"WA, SA, Vic, Tas",Epacris stuartii CE,,,9,MS9
+Comesperma confertum,field_resistant,Comesperma confertum,Comesperma confertum,Polygalaceae,WA,Epacris virgata,,,9,HS9
+Grevillea hookeriana,field_resistant,Grevillea hookeriana [alternative possible names: Grevillea baxteri (pro parte misapplied) | Grevillea tetragonoloba (pro parte misapplied) | Grevillea cagiana (misapplied)],Grevillea hookeriana,Proteaceae,WA,Epacridaceae gen. nov. (aff. Melichrus),,,,HS41
+Grevillea pilulifera,field_resistant,Grevillea pilulifera,Grevillea pilulifera,Proteaceae,WA,Gaultheria hispida,"17,34",,,
+Grevillea synapheae,field_resistant,Grevillea synapheae,Grevillea synapheae,Proteaceae,WA,Leptecophylla juniperina,17,,,S60
+Grevillea wilsonii,field_resistant,Grevillea wilsonii,Grevillea wilsonii,Proteaceae,WA,Leptecophylla pendulosa,,,9,HS9
+Hakea amplexicaulis,field_resistant,Hakea amplexicaulis,Hakea amplexicaulis,Proteaceae,WA,Leucopogon amplectens,,,,HS41
+Hakea corymbosa,field_resistant,Hakea corymbosa,Hakea corymbosa,Proteaceae,WA,Leucopogon apiculatus,,,,HS41
+Hakea petiolaris,field_resistant,Hakea petiolaris,Hakea petiolaris,Proteaceae,"WA, Vic (doubtfully naturalised)",Leucopogon atherolepis,58,,,"HS59,MS58"
+Hakea stenocarpa,field_resistant,Hakea stenocarpa,Hakea stenocarpa,Proteaceae,WA,Leucopogon australis s.l.,"14,17,25",,,"S37,43,46,53, LS40,59"
+Persoonia levis,field_resistant,Persoonia levis,Persoonia levis,Proteaceae,"NSW, Vic",Leucopogon blepharolepis,,,,HS41
+Persoonia linearis,field_resistant,Persoonia linearis,Persoonia linearis,Proteaceae,"NSW, Vic",Leucopogon bracteolaris,,,,HS41
+Stenocarpus sinuatus,field_resistant,Stenocarpus sinuatus,Stenocarpus sinuatus,Proteaceae,"Qld, NSW",Leucopogon brevicuspis,,,,HS41
+Anarthria gracilis,field_resistant,Anarthria gracilis,Anarthria gracilis,Anarthriaceae,WA,Leucopogon breviflorus,,,,HS41
+Anarthria prolifera,field_resistant,Anarthria prolifera,Anarthria prolifera,Anarthriaceae,WA,Leucopogon capitellatus,"14,28",,,"S24,37,46,48, MS21,40"
+Anarthria scabra,field_resistant,Anarthria scabra,Anarthria scabra,Anarthriaceae,WA,Leucopogon collinus,"17,34",,,HS60
+Calorophus exsulcus,field_resistant,Hypolaena exsulca,Hypolaena exsulca,Restionaceae,WA,Leucopogon concinnus,,,,S46
+Chordifex abortivus E,field_resistant,Chordifex abortivus,Chordifex abortivus,Restionaceae,WA,Leucopogon concurvus,,,,S20
+Chordifex isomorphus,field_resistant,Chordifex isomorphus,Chordifex isomorphus,Restionaceae,WA,Leucopogon conostephioides,"14,24,37",,,"S46,LS40,HS14"
+Harperia confertospicata,field_resistant,Desmocladus confertospicatus,Desmocladus confertospicatus,Restionaceae,WA,Leucopogon cordifolius,,,,HS41
+Leptocarpus tenax,field_resistant,Leptocarpus tenax,Leptocarpus tenax,Restionaceae,"WA, SA, Qld, NSW, Vic, Tas",Leucopogon corifolius,,,,MS40
+Lepyrodia scariosa,field_resistant,Lepyrodia scariosa,Lepyrodia scariosa,Restionaceae,"Qld, NSW",Leucopogon cryptanthus,,,,HS41
+Restio confertospicatus,field_resistant,Desmocladus confertospicatus,Desmocladus confertospicatus,Restionaceae,WA,Leucopogon cucullatus,,,,LS40
+Atractocarpus fitzalanii subsp. tenuipes,field_resistant,Atractocarpus fitzalanii subsp. tenuipes,Atractocarpus fitzalanii subsp. tenuipes,Rubiaceae,Qld,Leucopogon cymbiformis,,,,MS40
+Boronia spathulata,field_resistant,Boronia spathulata,Boronia spathulata,Rutaceae,WA,Leucopogon denticulatus,,,,HS41
+Brombya platynema,field_resistant,Brombya platynema,Brombya platynema,Rutaceae,Qld,Leucopogon distans var. contractus,,,,S40
+Flindersia pimenteliana,field_resistant,Flindersia pimenteliana,Flindersia pimenteliana,Rutaceae,Qld,Leucopogon distans s.l.,,,,HS40
+Melicope elleryana,field_resistant,Melicope elleryana,Melicope elleryana,Rutaceae,"WA, NT, Qld, NSW",Leucopogon elegens,51,,,S51
+Muiriantha hassellii,field_resistant,Muiriantha hassellii,Muiriantha hassellii,Rutaceae,WA,Leucopogon ericoides,"17,25,29,34",3,,"S43,HS60"
+Leptomeria eriocoides,field_resistant,Leptomeria ericoides,Leptomeria ericoides,Santalaceae,WA,Leucopogon esquamatus,,,9,MS9
+Dodonaea viscosa s.l.,field_resistant,Dodonaea viscosa,Dodonaea viscosa,Sapindaceae,"WA, CoI, ChI, NT, SA, Qld, NSW, LHI, NI, ACT, Vic, Tas",Leucopogon flavescens ,,,,"S46,51"
+Mischocarpus macrocarpus,field_resistant,Mischocarpus macrocarpus,Mischocarpus macrocarpus,Sapindaceae,Qld,Leucopogon florulentus,,,,HS41
+Pouteria euphlebia,field_resistant,Planchonella euphlebia,Planchonella euphlebia,Sapotaceae,Qld,Leucopogon gibbosus,,,,"HS40,59"
+Pouteria papyracea,field_resistant,Pleioluma papyracea,Pleioluma papyracea,Sapotaceae,Qld,Leucopogon glabellus,15,,,
+Pouteria pearsoniorum,field_resistant,Pleioluma macrocarpa,Pleioluma macrocarpa,Sapotaceae,Qld,Leucopogon glacialis,"25,29",,,S43
+Tripterococcus brunonis,field_resistant,Tripterococcus brunonis,Tripterococcus brunonis,Celastraceae,WA,Leucopogon glaucifolius,,,,HS41
+Lasiopetalum membranifolium,field_resistant,Lasiopetalum membraniflorum,,Malvaceae,,Leucopogon gnaphaloides E,58,,,"HS58,59"
+Levenhookia pusilla,field_resistant,Levenhookia pusilla,Levenhookia pusilla,Stylidiaceae,"WA, SA, Vic",Leucopogon gracillimus,,,,S46
+Levenhookia stipitata,field_resistant,Levenhookia stipitata,Levenhookia stipitata,Stylidiaceae,"WA, SA",Leucopogon interruptus,,,,HS41
+Stylidium brunonianum,field_resistant,Stylidium brunonianum [alternative possible names: Stylidium araeophyllum (pro parte misapplied) | Stylidium purpureum (pro parte misapplied) | Stylidium tenue subsp. majusculum (pro parte misapplied) | Stylidium tenue subsp. majusculum (misapplied)],Stylidium brunonianum,Stylidiaceae,WA,Leucopogon lanceolatus s.l.,2,,9,FR22
+Stylidium calcaratum,field_resistant,Stylidium calcaratum,Stylidium calcaratum,Stylidiaceae,"WA, SA",Leucopogon lasiophyllus,,,,"MS40,59, HS41"
+Stylidium hispidum,field_resistant,Stylidium hispidum,Stylidium hispidum,Stylidiaceae,WA,Leucopogon lasiostachyus,15,,,"LS40,59"
+Stylidium keigheryi,field_resistant,Stylidium keigheryi,Stylidium keigheryi,Stylidiaceae,WA,Leucopogon macrcraei,,3,,
+Stylidium piliferum subsp. minor,field_resistant,Stylidium piliferum,Stylidium piliferum,Stylidiaceae,WA,Leucopogon marginatus E,,,,HS41
+Stylidium repens,field_resistant,Stylidium repens,Stylidium repens,Stylidiaceae,WA,Leucopogon microphyllus var. pilibundus,3,,,
+Stylidium scandens,field_resistant,Stylidium scandens [alternative possible names: Stylidium nymphaeum (pro parte misapplied)],Stylidium scandens,Stylidiaceae,WA,Leucopogon multiflorus,,,,HS41
+Stylidium spinulosum subsp. montanum,field_resistant,Stylidium spinulosum subsp. montanum,Stylidium spinulosum subsp. montanum,Stylidiaceae,WA,Leucopogon nutans,"14,22",,,"S24,46,HS14 LS40,SP21"
+Stylidium sp. Stirling Range,field_resistant,Stylidium bellum,Stylidium bellum,Stylidiaceae,WA,Leucopogon obtectus E,,,,"S52,HS41"
+Symplocos ampulliformis,field_resistant,Symplocos ampulliformis,Symplocos ampulliformis,Symplocaceae,Qld,Leucopogon oliganthus,,,,HS41
+Symplocos cochinchinenis var. gittonsii,field_resistant,Symplocos gittinsii,Symplocos gittinsii,Symplocaceae,Qld,Leucopogon oxycedrus,"48,28",,,"SP21,48,HS40"
+Athrotaxis selaginoides,field_resistant,Athrotaxis selaginoides,Athrotaxis selaginoides,Cupressaceae,Tas,Leucopogon parviflorus ,,,,"LS59, S46"
+Bubbia semecarpoides,field_resistant,Bubbia semecarpoides,Bubbia semecarpoides,Winteraceae,Qld,Leucopogon pendulus,,,,FR40
+Lomandra confertifolia s.l.,field_resistant,Lomandra confertifolia,Lomandra confertifolia,Asparagaceae,"Qld, NSW, Vic",Leucopogon pleurandroides,,,,HS41
+Lomandra hermaphrodita,field_resistant,Lomandra hermaphrodita,Lomandra hermaphrodita,Asparagaceae,WA,Leucopogon plumulifolius,,,,HS41
+Lomandra longifolia,field_resistant,Lomandra longifolia,Lomandra longifolia,Asparagaceae,"SA, Qld, NSW, ACT, Vic, Tas",Leucopogon pogonocalyx,,,,HS41
+Lomandra nigricans,field_resistant,Lomandra nigricans,Lomandra nigricans,Asparagaceae,WA,Leucopogon polymorphus,,,,"S37,53"
+Lomandra obliqua,field_resistant,Lomandra obliqua,Lomandra obliqua,Asparagaceae,"Qld, NSW",Leucopogon polystachyus,,,,HS41
+Lomandra preisii,field_resistant,Lomandra preissii,Lomandra preissii,Asparagaceae,WA,Leucopogon propinquus,"14,28",,,"FR59,S24,37,46,48"
+Lomandra spartea,field_resistant,Lomandra spartea,Lomandra spartea,Asparagaceae,WA,Leucopogon pulchellus,15,,,S54
+Platysace sp. Stirling,field_resistant,Platysace sp. Stirling (J.M.Fox 88/262),Platysace sp. Stirling (J.M.Fox 88/262),Apiaceae,WA,Leucopogon revolutus,,,,S46
+Xanthosia atkinsoniana,field_resistant,Xanthosia atkinsoniana,Xanthosia atkinsoniana,Apiaceae,"WA, NSW",Leucopogon tamariscinus,,,,HS41
+Xanthosia candida,field_resistant,Xanthosia candida,Xanthosia candida,Apiaceae,WA,Leucopogon unilateralis,,,,LS59
+Xanthosia rotundifolia s.l.,field_resistant,Xanthosia rotundifolia,Xanthosia rotundifolia,Apiaceae,WA,Leucopogon verticillatus,"14,15,28",,,"S24,46,48,HS14,21"
+Cyathochaeta avenacea,field_resistant,Cyathochaeta avenacea,Cyathochaeta avenacea,Cyperaceae,WA,Leucopogon virgatus,"3,17,18, 25,29",,,S43
+Lepidosperma squamatum,field_resistant,Lepidosperma squamatum,Lepidosperma squamatum,Cyperaceae,WA,Leucopogon sp. Cascades (MA Burgman 3700),,,,HS41
+Mesomelaena tetragona,field_resistant,Mesomelaena tetragona,Mesomelaena tetragona,Cyperaceae,WA,Leucopogon sp. Clyde Hill (MA Burgman 1207),,,,HS41
+Schoenus efoliatus,field_resistant,Schoenus efoliatus,Schoenus efoliatus,Cyperaceae,WA,Leucopogon sp. Condingup (MA Burgman 1377),,,,HS41
+Schoenus sp. Stirling,field_resistant,Schoenus sp. Stirling (G.J.Keighery 3427),Schoenus sp. Stirling (G.J.Keighery 3427),Cyperaceae,WA,Leucopogon sp. Coujinup (MA Burgman 1085),,,,HS41
+Tetraria capillaris,field_resistant,Tetraria capillaris,Tetraria capillaris,Cyperaceae,"WA, SA, Qld, NSW, Vic, Tas",Leucopogon sp. Dundas (MA Burgman 1482),,,,HS41
+Drosera erythrorhiza s.l.,field_resistant,Drosera erythrorhiza,Drosera erythrorhiza,Droseraceae,WA,Leucopogon sp. Kau Rock (MA Burgman 1126),,,,HS41
+Astroloma pallidum,field_resistant,Styphelia pallida,Styphelia pallida,Ericaceae,WA,Leucopogon sp. Munglinup (KR Newbey 8123),,,,HS41
+Phyllanthus calycinus,field_resistant,Phyllanthus calycinus,Phyllanthus calycinus,Phyllanthaceae,"WA, SA",Leucopogon sp. Peak Charles (MA Burgman 1476),,,,HS41
+Bossiaea webbii,field_resistant,Bossiaea webbii,Bossiaea webbii,Fabaceae,WA,Leucopogon sp. Roberts Swamp (KR Newbey 8173),,,,HS41
+Goodenia scapigera,field_resistant,Goodenia scapigera,Goodenia scapigera,Goodeniaceae,WA,Leucopogon sp. Yanneymooning (F Mollemans 3797),,,,HS41
+Lechenaultia biloba,field_resistant,Lechenaultia biloba,Lechenaultia biloba,Goodeniaceae,WA,Leucopogon sp. 4,,,,LS40
+Conostylis serrulata,field_resistant,Conostylis serrulata,Conostylis serrulata,Haemodoraceae,WA,Lissanthe strigosa s.l.,"4,25",,,
+Conostylis setigera s.l.,field_resistant,Conostylis setigera,Conostylis setigera,Haemodoraceae,WA,Lysinema ciliatum,,,37,"S37,HS40,59"
+Conostylis setosa,field_resistant,Conostylis setosa,Conostylis setosa,Haemodoraceae,WA,Lysinema conspicuum,,,,MS40
+Lindsaea linearis,field_resistant,Lindsaea linearis,Lindsaea linearis,Lindsaeaceae,"WA, SA, Qld, NSW, Vic, Tas",Lysinema elegans,,,,MS41
+Acacia barbinervis s.l.,field_resistant,Acacia barbinervis,Acacia barbinervis,Fabaceae,WA,Lysinema lasianthum,,,,LS41
+Acacia drummondii s.l.,field_resistant,Acacia drummondii,Acacia drummondii,Fabaceae,WA,Melichrus urceolatus,3,,,
+Acacia nervosa,field_resistant,Acacia nervosa,Acacia nervosa,Fabaceae,WA,Monotoca elliptica,"17,34",,,S60
+Acacia veronica,field_resistant,Acacia veronica,Acacia veronica,Fabaceae,WA,Monotoca glauca,"2,17,34",,,S60
+Hypocalymma angustifolium s.l.,field_resistant,Hypocalymma angustifolium,Hypocalymma angustifolium,Myrtaceae,WA,Monotoca leucantha,,,,HS41
+Hypocalymma myrtifolium,field_resistant,Hypocalymma myrtifolium,Hypocalymma myrtifolium,Myrtaceae,WA,Monotoca linifolia susbp. linifolia,34,,,
+Caladenia flava,field_resistant,Caladenia flava,Caladenia flava,Orchidaceae,WA,Monotoca oligarrhenoides,,,,HS59
+Elythranthera brunonis,field_resistant,Elythranthera brunonis,Elythranthera brunonis,Orchidaceae,WA,Monotoca scoparia,"3,25,29",,,
+Sollya drummondii,field_resistant,Billardiera drummondii,Billardiera drummondii,Pittosporaceae,WA,Monotoca submutica s.l.,"17,34",,,
+Hakea lissocarpha,field_resistant,Hakea lissocarpha,Hakea lissocarpha,Proteaceae,WA,Monotoca tamariscina,15,,,S46
+Desmocladus flexuosa,field_resistant,Desmocladus flexuosus,Desmocladus flexuosus,Restionaceae,WA,Monotoca sp. aff. elliptica (D. Albrecht pers. comm.),13,,,HS13
+Boronia crenulata s.l.,field_resistant,Boronia crenulata,Boronia crenulata,Rutaceae,WA,Monotoca sp. Mt Maxwell (KR Newbey 4727),,,,LS41
+Philotheca spicata,field_resistant,Philotheca spicata,Philotheca spicata,Rutaceae,WA,Prionotes cerinthoides,17,,,
+Thomasia sp. Toolbrunup,field_resistant,Thomasia brachystachys,Thomasia brachystachys,Malvaceae,WA,Richea dracophylla,34,,,
+Stylidium imbricatum,field_resistant,Stylidium imbricatum,Stylidium imbricatum,Stylidiaceae,WA,Richea milliganii,"17,34",,,
+Pimelea hispida,field_resistant,Pimelea hispida,Pimelea hispida,Thymelaeaceae,WA,Richea pandanifolius,"17,34",,,HS60
+Lomandra pauciflora,field_resistant,Lomandra pauciflora,Lomandra pauciflora,Asparagaceae,WA,Sphenotoma dracophylloides,,,,"HS40,59"
+Xyris exilis V,field_resistant,Xyris exilis,Xyris exilis,Xyridaceae,WA,Sphenotoma drummondii E,58,,,"HS58,59,LS41"
+Goodenia caerulea,field_resistant,Goodenia caerulea,Goodenia caerulea,Goodeniaceae,WA,Sphenotoma gracilis,,,,HS40
+Baeckea camphorosmae,field_resistant,Babingtonia camphorosmae,Babingtonia camphorosmae,Myrtaceae,WA,Sphenotoma parviflora,,,,LS41
+Corymbia calophylla,field_resistant,Corymbia calophylla,Corymbia calophylla,Myrtaceae,"WA, SA (doubtfully naturalised)",Sphenotoma squarrosa,15,53,,"S53,HS40,59"
+Stylidium verticillatum,field_resistant,Stylidium verticillatum,Stylidium verticillatum,Stylidiaceae,WA,Sphenotoma sp. Stirling,58,,,"HS58,59"
+Pteridium esculentum,field_resistant presumed_resistant,Pteridium esculentum,Pteridium esculentum,Dennstaedtiaceae,"WA, SA, Qld, NSW, NI, ACT, Vic, Tas",Sprengelia incarnata,"8,13,17, 25,34",,33,SP61
+Hovea chorizemifolia,field_resistant presumed_resistant,Hovea chorizemifolia,Hovea chorizemifolia,Fabaceae,WA,Styphelia adscendens,"25,29,34",,,S60
+Logania serpyllifolia s.l.,field_resistant presumed_resistant,Orianthera serpyllifolia,Orianthera serpyllifolia,Loganiaceae,WA,Styphelia pulchella,,,,LS41
+Acacia urophylla,field_resistant presumed_resistant,Acacia urophylla,Acacia urophylla,Fabaceae,WA,Styphelia tenuiflora,"14,24,46",,,"S24,46,Q21,HS22"
+Acacia pulchella s.l.,field_resistant low_susceptibility,Acacia pulchella,Acacia pulchella,Fabaceae,"WA, NSW (naturalised)",Trochocarpa disticha,17,,,
+Calothamnus affinis,field_resistant low_susceptibility,Calothamnus affinis,Calothamnus affinis,Myrtaceae,WA,Trochocarpa gunnii,17,,,
+Hakea ruscifolia,field_resistant low_susceptibility,Hakea ruscifolia,Hakea ruscifolia,Proteaceae,WA,Trochocarpa parviflora,,,,LS41
+Desmocladus fasciculatus,field_resistant low_susceptibility moderately_susceptible,Desmocladus fasciculatus,Desmocladus fasciculatus,Restionaceae,WA,Woollsia pungens,1,,,
+Darwinia leiostyla,field_resistant low_susceptibility moderately_susceptible,Darwinia leiostyla,Darwinia leiostyla,Myrtaceae,WA,Anopterus glandulosa,"17,34",,,
+Kennedia coccinea,field_resistant moderately_susceptible,Kennedia coccinea,Kennedia coccinea,Fabaceae,WA,Eucryphia lucida,17,,,
+Grevillea fasciculata,field_resistant moderately_susceptible,Grevillea fasciculata,Grevillea fasciculata,Proteaceae,WA,Eucryphia milliganii,17,3,,
+Pentapeltis peltigera,field_resistant presumed_resistant,Pentapeltis peltigera,Pentapeltis peltigera,Apiaceae,WA,Eucryphia moorei,,3,,
+Drosera stolonifera s.l.,field_resistant presumed_resistant,Drosera stolonifera,Drosera stolonifera,Droseraceae,WA,Amperea ericoides,15,,,
+Acacia lateriticola,field_resistant presumed_resistant,Acacia lateriticola,Acacia lateriticola,Fabaceae,WA,Amperea xiphoclada,"17,25,34",,,"S43,60, FR22"
+Tetrarrhena laevis,field_resistant presumed_resistant,Tetrarrhena laevis,Tetrarrhena laevis,Poaceae,WA,Antidesma erostre,,,,FR36
+Clematis pubescens,field_resistant presumed_resistant,Clematis pubescens,Clematis pubescens,Ranunculaceae,WA,Hylandia dockrilii,,,,FR36
+Leptomeria cunninghamii,field_resistant presumed_resistant,Leptomeria cunninghamii,Leptomeria cunninghamii,Santalaceae,WA,Macaranga subdentata,,,,FR36
+Patersonia umbrosa,field_resistant susceptible_but_degree_unknown,Patersonia umbrosa,Patersonia umbrosa,Iridaceae,WA,Mallotus polyadenos,,,,S36
+Leucopogon propinquus,field_resistant susceptible_but_degree_unknown,Styphelia propinqua,Styphelia propinqua,Ericaceae,WA,Monotaxis occidentalis,,,,Q21
+Patersonia occidentalis,field_resistant susceptible_but_degree_unknown field_resistant,Patersonia occidentalis,Patersonia occidentalis,Iridaceae,"WA, SA, Vic, Tas",Phyllanthus calycinus,24,,,"FR21,24"
+Platysace compressa,field_resistant susceptible_but_degree_unknown highly_susceptible,Platysace compressa,Platysace compressa,Apiaceae,WA,Phyllanthus hirtellus,3,,,
+Oxylobium ellipticum,field_resistanthighly_susceptible,Oxylobium ellipticum,Oxylobium ellipticum,Fabaceae,"NSW, ACT, Vic, Tas",Poranthera corymbosa,,,,
+Agrostocrinum scabrum,field_resistant susceptible_but_degree_unknown,Agrostocrinum scabrum,Agrostocrinum scabrum,Hemerocallidaceae,WA,Poranthera microphylla,25,,,
+Borya mirabilis E,highly_susceptible,Borya mirabilis,Borya mirabilis,Boryaceae,Vic,Ricinocarpus glaucus,,3,,
+Blandfordia punicea,highly_susceptible,Blandfordia punicea,Blandfordia punicea,Blandfordiaceae,Tas,Ricinocarpus pinifolius,17,,,
+Allocasuarina duncanii,highly_susceptible,Allocasuarina duncanii,Allocasuarina duncanii,Casuarinaceae,Tas,Stachystemon vermicularis,,,,FR21
+Hibbertia calycina,highly_susceptible,Hibbertia calycina,Hibbertia calycina,Dilleniaceae,"NSW, ACT, Vic, Tas",Aotus ericoides,"15,17,25,34",,,"S37,43,53,54,HS60"
+Hibbertia glomerata s.l.,highly_susceptible,Hibbertia glomerata,Hibbertia glomerata,Dilleniaceae,WA,Aotus genistoides,,,,"MS59,S58"
+Hibbertia subvaginata,highly_susceptible,Hibbertia subvaginata,Hibbertia subvaginata,Dilleniaceae,WA,Aotus passerinoides,15,,,"S53,54"
+Acrotriche cordata,highly_susceptible,Acrotriche cordata,Acrotriche cordata,Ericaceae,"WA, SA, Vic, Tas",Bossiaea aquifolium,14,,,SP21
+Acrotriche patula,highly_susceptible,Acrotriche patula,Acrotriche patula,Ericaceae,"WA, SA",Bossiaea cinerea,"17,25,34",,,"S43,HS60"
+Andersonia auriculata,highly_susceptible,Andersonia auriculata,Andersonia auriculata,Ericaceae,WA,Bossiaea eriocarpa,"14,15,24",,,S51
+Andersonia bifida,highly_susceptible,Andersonia bifida,Andersonia bifida,Ericaceae,WA,Bossiaea linophylla,40,,,FR40
+Andersonia carinata,highly_susceptible,Andersonia carinata,Andersonia carinata,Ericaceae,WA,Bossiaea obcordata,,,9,LS9
+Andersonia longifolia,highly_susceptible,Andersonia longifolia,Andersonia longifolia,Ericaceae,WA,Bossiaea ornata,"14,28",,,"S46,48,SP21"
+Andersonia macranthera,highly_susceptible,Andersonia macranthera,Andersonia macranthera,Ericaceae,WA,Bossiaea prostrate,"25,29",,,"S43,60"
+Andersonia setifolia,highly_susceptible,Andersonia setifolia,Andersonia setifolia,Ericaceae,WA,Bossiaea rufa,40,,,FR40
+Astroloma foliosum,highly_susceptible,Styphelia foliosa,Styphelia foliosa,Ericaceae,WA,Bossiaea webbii,40,,,"FR40,59"
+Astroloma sp. Cataby (EA Griffin 1022),highly_susceptible,Styphelia oblongifolia,Styphelia oblongifolia,Ericaceae,WA,Castanospermum australe,,,16,
+Astroloma sp. Eneabba (N Marchant s.n.),highly_susceptible,Astroloma sp. Eneabba (N.Marchant s.n. PERTH 01291777),,Ericaceae,,Chorizema aciculare s.l.,40,,,FR40
+Astroloma sp. Mt Lindesay,highly_susceptible,Astroloma sp. [Astroloma sp. Mt Lindesay],,Ericaceae,,Chorizema carinatum,,,,MS40
+Astroloma sp. Nannup (RD Royce 3978),highly_susceptible,Styphelia sp. Nannup (R.D.Royce 3978),Styphelia sp. Nannup (R.D.Royce 3978),Ericaceae,WA,Chorizema rhombeum,,,,Q21
+Astroloma sp. 2504,highly_susceptible,Astroloma sp. [Astroloma sp. 2504],,Ericaceae,,Daviesia brevifolia,"25,29",,,S43
+Brachyloma depressum,highly_susceptible,Brachyloma depressum,Brachyloma depressum,Ericaceae,"Vic, Tas",Daviesia bursarioides E,,,,MS41
+Coleanthera coelophylla,highly_susceptible,Styphelia coelophylla,Styphelia coelophylla,Ericaceae,WA,Daviesia chapmanii ,,,,MS41
+Conostephium minus,highly_susceptible,Conostephium minus,Conostephium minus,Ericaceae,WA,Daviesia debilior subsp. sinuans,,,,MS41
+Epacris apsleyensis E,highly_susceptible,Epacris apsleyensis,Epacris apsleyensis,Ericaceae,Tas,Daviesia decurrens,15,,,"S24, SP21"
+Epacris barbata CE,highly_susceptible,Epacris barbata,Epacris barbata,Ericaceae,Tas,Daviesia dielsii,,,,MS41
+Epacris corymbiflora,highly_susceptible,Epacris corymbiflora,Epacris corymbiflora,Ericaceae,Tas,Daviesia epiphyllum,,,,MS41
+Epacris curtisiae,highly_susceptible,Epacris curtisiae,Epacris curtisiae,Ericaceae,Tas,Daviesia euphorbioides E,,,,MS41
+Epacris grandis E,highly_susceptible,Epacris grandis,Epacris grandis,Ericaceae,Tas,Daviesia glossosema,58,,,HS58
+Epacris limbata CE,highly_susceptible,Epacris limbata,Epacris limbata,Ericaceae,Tas,Daviesia incrassata s.l.,,,,S37
+Epacris marginata,highly_susceptible,Epacris marginata,Epacris marginata,Ericaceae,Tas,Daviesia inflata,,,,"S56,HS40"
+Epacris myrtifolia,highly_susceptible,Epacris myrtifolia,Epacris myrtifolia,Ericaceae,Tas,Daviesia latifolia,"17,25,34",,,S43
+Epacris paludosa,highly_susceptible,Epacris paludosa,Epacris paludosa,Ericaceae,"NSW, ACT, Vic, Tas",Daviesia lineata ,,,,MS41
+Epacris virgata,highly_susceptible,Epacris virgata,Epacris virgata,Ericaceae,Tas,Daviesia megacalyx E,,,,"S49,LS41"
+Epacridaceae gen. nov. (aff. Melichrus),highly_susceptible,,,,,Daviesia mesophylla,,,,HS58
+Leptecophylla pendulosa,highly_susceptible,Leptecophylla pendulosa,Leptecophylla pendulosa,Ericaceae,Tas,Daviesia microcarpa E,,,,LS41
+Leucopogon amplectens,highly_susceptible,Leucopogon amplectens,Leucopogon amplectens,Ericaceae,WA,Daviesia microphylla ,,,,LS41
+Leucopogon apiculatus,highly_susceptible,Leucopogon apiculatus,Leucopogon apiculatus,Ericaceae,WA,Daviesia mimosoides s.l.,"2,3",,,
+Leucopogon blepharolepis,highly_susceptible,Styphelia blepharolepis,Styphelia blepharolepis,Ericaceae,WA,Daviesia oppositifolia,,,,LS40
+Leucopogon bracteolaris,highly_susceptible,Leucopogon bracteolaris,Leucopogon bracteolaris,Ericaceae,WA,Daviesia obovata,58,,,HS58
+Leucopogon brevicuspis,highly_susceptible,Styphelia brevicuspis,Styphelia brevicuspis,Ericaceae,WA,Daviesia ovata,,,,LS41
+Leucopogon breviflorus,highly_susceptible,Styphelia breviflora,Styphelia breviflora,Ericaceae,WA,Daviesia oxylobium ,,,,MS41
+Leucopogon collinus,highly_susceptible,Leucopogon collinus [alternative possible names: Leucopogon pilifer (pro parte misapplied) | Leucopogon glacialis (misapplied)],Leucopogon collinus,Ericaceae,"NSW, Vic, Tas",Daviesia pauciflora ,,,,LS41
+Leucopogon cordifolius,highly_susceptible,Styphelia cordifolia,Styphelia cordifolia,Ericaceae,"WA, SA, Vic",Daviesia physodes,,,,"S56,MS41"
+Leucopogon cryptanthus,highly_susceptible,Leucopogon cryptanthus,Leucopogon cryptanthus,Ericaceae,WA,Daviesia polyphylla,14,,,
+Leucopogon denticulatus,highly_susceptible,Leucopogon denticulatus,Leucopogon denticulatus,Ericaceae,WA,Daviesia preissii,,,,HS21
+Leucopogon distans s.l.,highly_susceptible,Leucopogon distans,Leucopogon distans,Ericaceae,WA,Daviesia pseudaphylla E,58,,,"MS58,S49,LS41"
+Leucopogon florulentus,highly_susceptible,Leucopogon florulentus,Leucopogon florulentus,Ericaceae,WA,Daviesia pteroclada ,,,,MS41
+Leucopogon glaucifolius,highly_susceptible,Styphelia glaucifolia,Styphelia glaucifolia,Ericaceae,WA,Daviesia purpurascens,,,,LS41
+Leucopogon interruptus,highly_susceptible,Leucopogon interruptus,Leucopogon interruptus,Ericaceae,WA,Daviesia rhombifolia,"14,24",,,S24
+Leucopogon marginatus E,highly_susceptible,Styphelia marginata,Styphelia marginata,Ericaceae,WA,Daviesia speciosa E,,,,MS41
+Leucopogon multiflorus,highly_susceptible,Styphelia multiflora,Styphelia multiflora,Ericaceae,WA,Daviesia spiralis,,,,MS41
+Leucopogon oliganthus,highly_susceptible,Leucopogon oliganthus,Leucopogon oliganthus,Ericaceae,WA,Daviesia ulicifolia,"2,17,25, 34",,,"S43,60"
+Leucopogon pleurandroides,highly_susceptible,Lissanthe pleurandroides,Lissanthe pleurandroides,Ericaceae,WA,Daviesia wyattiana,,,,HS13
+Leucopogon plumulifolius,highly_susceptible,Leucopogon plumuliflorus,Leucopogon plumuliflorus,Ericaceae,WA,Daviesia sp. [CAM] (KR Newbey 8162),,,,LS41
+Leucopogon pogonocalyx,highly_susceptible,Styphelia pogonocalyx,Styphelia pogonocalyx,Ericaceae,WA,Daviesia sp. [PLE] (AS George 10288),,,,LS41
+Leucopogon polystachyus,highly_susceptible,Leucopogon polystachyus,Leucopogon polystachyus,Ericaceae,WA,Daviesia sp. 4,,,,HS40
+Leucopogon tamariscinus,highly_susceptible,Leucopogon tamariscinus,Leucopogon tamariscinus,Ericaceae,WA,Dillwynia glaberrima,"17,25,29,34",3,,"S43,HS60"
+Leucopogon sp. Cascades (MA Burgman 3700),highly_susceptible,Leucopogon sp. Cascades (M.Hislop 3693),Leucopogon sp. Cascades (M.Hislop 3693),Ericaceae,WA,Dillwynia phylicoides,"2,3,25",,,S43
+Leucopogon sp. Clyde Hill (MA Burgman 1207),highly_susceptible,Leucopogon sp. Clyde Hill (M.A.Burgman 1207),Leucopogon sp. Clyde Hill (M.A.Burgman 1207),Ericaceae,WA,Dillwynia sericea,"17,25,29,34",,,"S43,HS60"
+Leucopogon sp. Condingup (MA Burgman 1377),highly_susceptible,Styphelia woodsii,Styphelia woodsii,Ericaceae,"WA, SA, Vic",Dillwynia uncinata,15,,,
+Leucopogon sp. Coujinup (MA Burgman 1085),highly_susceptible,Leucopogon sp. Coujinup (M.A.Burgman 1085),Leucopogon sp. Coujinup (M.A.Burgman 1085),Ericaceae,WA,Dillwynia sp. A,,,,FR21
+Leucopogon sp. Dundas (MA Burgman 1482),highly_susceptible,Leucopogon sp. [Leucopogon sp. Dundas (MA Burgman 1482)],,Ericaceae,,Eutaxia densifolia,,,,LS40
+Leucopogon sp. Kau Rock (MA Burgman 1126),highly_susceptible,Styphelia subulata,Styphelia subulata,Ericaceae,WA,Gastrolobium bilobum,,,,FR59
+Leucopogon sp. Munglinup (KR Newbey 8123),highly_susceptible,Brachyloma nguba,Brachyloma nguba,Ericaceae,WA,Gastrolobium crenulatum,,,,S58
+Leucopogon sp. Peak Charles (MA Burgman 1476),highly_susceptible,Leucopogon sp. [Leucopogon sp. Peak Charles (MA Burgman 1476)],,Ericaceae,,Gastrolobium leakeanum,,,,"HS58,59,LS40"
+Leucopogon sp. Roberts Swamp (KR Newbey 8173),highly_susceptible,Leucopogon rugulosus,Leucopogon rugulosus,Ericaceae,WA,Gastrolobium luteifolium,58,,,HS58
+Leucopogon sp. Yanneymooning (F Mollemans 3797),highly_susceptible,Leucopogon sp. Yanneymooning (F.Mollemans 3797),Leucopogon sp. Yanneymooning (F.Mollemans 3797),Ericaceae,WA,Gastrolobium mondurup,,,,"HS58,MS59"
+Monotoca leucantha,highly_susceptible,Dielsiodoxa leucantha,Dielsiodoxa leucantha,Ericaceae,WA,Gastrolobium papilio ,,,,S49
+Monotoca oligarrhenoides,highly_susceptible,Dielsiodoxa oligarrhenoides,Dielsiodoxa oligarrhenoides,Ericaceae,WA,Gastrolobium pulchellum,58,,,"HS58, MS59,S46"
+Monotoca sp. aff. elliptica (D. Albrecht pers. comm.),highly_susceptible,Monotoca sp. [Monotoca sp. aff. elliptica (D. Albrecht pers. comm.)],,Ericaceae,,Gastrolobium spinosum ,,,,LS40
+Richea pandanifolius,highly_susceptible,Dracophyllum pandanifolium,Dracophyllum pandanifolium,Ericaceae,Tas,Gastrolobium tetragonophyllum,,,,MS40
+Sphenotoma gracilis,highly_susceptible,Sphenotoma gracilis,Sphenotoma gracilis,Ericaceae,WA,Gastrolobium rubrum,,,,"MS58,59"
+Daviesia glossosema,highly_susceptible,Daviesia glossosema,Daviesia glossosema,Fabaceae,WA,Gompholobium capitatum,24,,,FR24
+Daviesia mesophylla,highly_susceptible,Daviesia mesophylla,Daviesia mesophylla,Fabaceae,WA,Gompholobium confertum,15,,,"S58,HS40"
+Daviesia obovata,highly_susceptible,Daviesia obovata,Daviesia obovata,Fabaceae,WA,Gompholobium ecostatum,"25,29",,,
+Daviesia preissii,highly_susceptible,Daviesia preissii,Daviesia preissii,Fabaceae,WA,Gompholobium huegelii,"17,25,34",,,
+Daviesia wyattiana,highly_susceptible,Daviesia wyattiana,Daviesia wyattiana,Fabaceae,"Qld, NSW, Vic",Gompholobium knightianum,14,,,SP21
+Daviesia sp. 4,highly_susceptible,"Daviesia sp. 4 (sp.""lep""; Fitzgerald River N.P.)",,Fabaceae,,Gompholobium marginatum,,,,FR21
+Gastrolobium luteifolium,highly_susceptible,Gastrolobium luteifolium,Gastrolobium luteifolium,Fabaceae,WA,Gompholobium polymorphum,,,21,FR21
+Jacksonia furcellata,highly_susceptible,Jacksonia furcellata,Jacksonia furcellata,Fabaceae,WA,Gompholobium preissii,,,,FR21
+Jacksonia sternbergiana,highly_susceptible,Jacksonia sternbergiana,Jacksonia sternbergiana,Fabaceae,WA,Hovea chorizemifolia,24,,21,"FR24,59,Q21"
+Phyllota diffusa,highly_susceptible,Phyllota diffusa,Phyllota diffusa,Fabaceae,Tas,Hovea corrickiae,,,9,MS9
+Pultenaea graveolens,highly_susceptible,Pultenaea graveolens,Pultenaea graveolens,Fabaceae,"SA, Vic",Hovea elliptica,"15,54",,,S54
+Pultenaea hibbertioides,highly_susceptible,Pultenaea mollis,Pultenaea mollis,Fabaceae,"NSW, Vic, Tas",Hovea linearis,"25,29",,,S43
+Pultenaea juniperina s.l.,highly_susceptible,Pultenaea juniperina,Pultenaea juniperina,Fabaceae,"NSW, ACT, Vic, Tas",Hovea pungens ,,53,,S53
+Pultenaea palacea var. sericea,highly_susceptible,Pultenaea sericea,Pultenaea sericea,Fabaceae,"NSW, Vic, Tas",Jacksonia alata,,,,FR21
+Pultenaea prostrata,highly_susceptible,Pultenaea prostrata,Pultenaea prostrata,Fabaceae,"SA, Vic, Tas",Jacksonia calycina,,,,S58
+Pultenaea subalpina,highly_susceptible,Pultenaea subalpina,Pultenaea subalpina,Fabaceae,Vic,Jacksonia carduacea,,,,MS41
+Isophysis tasmanica,highly_susceptible,Isophysis tasmanica,Isophysis tasmanica,Iridaceae,Tas,Jacksonia floribunda,37,,,"S37,46,54"
+Cinnamomum oliveri,highly_susceptible,Cinnamomum oliveri,Cinnamomum oliveri,Lauraceae,"Qld, NSW",Jacksonia furcellata,24,,,HS24
+Eucalyptus fraxionoides,highly_susceptible,Eucalyptus fraxinoides,Eucalyptus fraxinoides,Myrtaceae,"NSW, Vic",Jacksonia grevilleoides,,,,MS40
+Eucalyptus smithii,highly_susceptible,Eucalyptus smithii,Eucalyptus smithii,Myrtaceae,"NSW, Vic",Jacksonia horrida ,,,,S46
+Hypocalymma strictum s.l.,highly_susceptible,Hypocalymma strictum,Hypocalymma strictum,Myrtaceae,WA,Jacksonia sericea,,,,MS41
+Melaleuca squamea,highly_susceptible,Melaleuca squamea,Melaleuca squamea,Myrtaceae,"SA, NSW, Vic, Tas",Jacksonia spinosa,51,,,"S51,LS40"
+Thryptomene micrantha,highly_susceptible,Thryptomene micrantha,Thryptomene micrantha,Myrtaceae,"SA, Vic, Tas",Jacksonia sternbergiana,24,,,HS24
+Adenanthos cacomorphus,highly_susceptible,Adenanthos cacomorphus,Adenanthos cacomorphus,Proteaceae,WA,Jacksonia sp. aff. furcelata,,,,MS40
+Adenanthos cygnorum subsp. chamaephyton,highly_susceptible,Adenanthos cygnorum subsp. chamaephyton,Adenanthos cygnorum subsp. chamaephyton,Proteaceae,WA,Kennedia coccinea,"14,24",,21,"FR24,MS21"
+Adenanthos eyrei E,highly_susceptible,Adenanthos eyrei,Adenanthos eyrei,Proteaceae,WA,Kennedia prostrata,"29,24",,,FR24
+Adenanthos glabrescens subsp. exasperatus,highly_susceptible,Adenanthos glabrescens subsp. exasperatus,Adenanthos glabrescens subsp. exasperatus,Proteaceae,WA,Latrobea genistoides ,,,,S51
+Adenanthos gracilipes,highly_susceptible,Adenanthos gracilipes,Adenanthos gracilipes,Proteaceae,WA,Latrobea hirtella ,,,,S51
+Adenanthos velutinus E,highly_susceptible,Adenanthos velutinus,Adenanthos velutinus,Proteaceae,WA,Mirbelia dilatata,24,,,FR24
+Agastachys odorata,highly_susceptible,Agastachys odorata,Agastachys odorata,Proteaceae,Tas,Oxylobium arborescens,"2,8,17",,,
+Banksia chamaephyton,highly_susceptible,Banksia chamaephyton,Banksia chamaephyton,Proteaceae,WA,Oxylobium ellipticum,"2,17,35",,,FR22HS35
+Banksia dryandroides,highly_susceptible,Banksia dryandroides,Banksia dryandroides,Proteaceae,WA,Oxylobium ilicifolium,2,,,
+Banksia elegans,highly_susceptible,Banksia elegans,Banksia elegans,Proteaceae,WA,Phyllota diffusa,"17,34",,,HS34
+Banksia epica,highly_susceptible,Banksia epica,Banksia epica,Proteaceae,WA,Platylobium formosum,"25,34",,,"S43,HS60"
+Banksia lullfitzii,highly_susceptible,Banksia lullfitzii,Banksia lullfitzii,Proteaceae,WA,Platylobium obtusangulum,"4,17,29, 34",,,S43
+Banksia meisneri var. ascendens,highly_susceptible,Banksia meisneri subsp. ascendens,Banksia meisneri subsp. ascendens,Proteaceae,WA,Pultenaea altissima,,3,,
+Banksia ornata,highly_susceptible,Banksia ornata,Banksia ornata,Proteaceae,"SA, Vic",Pultenaea benthamii,13,,,
+Banksia pulchella,highly_susceptible,Banksia pulchella,Banksia pulchella,Proteaceae,WA,Pultenaea cunninghamii,2,,,
+Banksia saxicola,highly_susceptible,Banksia saxicola,Banksia saxicola,Proteaceae,Vic,Pultenaea daphnoides,"2,13,17,34",,,"HS22,34"
+Banksia scabrella,highly_susceptible,Banksia scabrella,Banksia scabrella,Proteaceae,WA,Pultenaea ericifolia,,,,FR40
+Banksia sceptrum,highly_susceptible,Banksia sceptrum,Banksia sceptrum,Proteaceae,WA,Pultenaea graveolens,32,,,HS32
+Banksia victoriae,highly_susceptible,Banksia victoriae,Banksia victoriae,Proteaceae,WA,Pultenaea gunnii,"17,25,34",,,"S43,HS34"
+Cennarrhenes nitida,highly_susceptible,Cenarrhenes nitida,Cenarrhenes nitida,Proteaceae,Tas,Pultenaea hibbertioides,,,9,HS9
+Dryandra acanthopoda,highly_susceptible,Banksia acanthopoda,Banksia acanthopoda,Proteaceae,WA,Pultenaea humilis,"4,25,29",,,S43
+Dryandra baxteri,highly_susceptible,Banksia biterax,Banksia biterax,Proteaceae,WA,Pultenaea involucrata,18,,,
+Dryandra comosa,highly_susceptible,Banksia comosa,Banksia comosa,Proteaceae,WA,Pultenaea juniperina s.l.,"17,34",,,HS34
+Dryandra conferta var. parva,highly_susceptible,Banksia densa var. parva,Banksia densa var. parva,Proteaceae,WA,Pultenaea mollis,"9,25",,,S43
+Dryandra cynaroides,highly_susceptible,Banksia cynaroides,Banksia cynaroides,Proteaceae,WA,Pultenaea palacea var. sericea,,,9,HS9
+Dryandra erythrocephala var. inopinata,highly_susceptible,Banksia erythrocephala var. inopinata,Banksia erythrocephala var. inopinata,Proteaceae,WA,Pultenaea pedunculata,"4,25,34",,,S43
+Dryandra falcata,highly_susceptible,Banksia falcata,Banksia falcata,Proteaceae,WA,Pultenaea procumbens,3,,,
+Dryandra ferruginea subsp. pumila,highly_susceptible,Banksia rufa subsp. pumila,Banksia rufa subsp. pumila,Proteaceae,WA,Pultenaea prostrata,,,9,HS9
+Dryandra foliosissima,highly_susceptible,Banksia foliosissima,Banksia foliosissima,Proteaceae,WA,Pultenaea pycnocephala,13,,,
+Dryandra fraseri var. oxycedra,highly_susceptible,Banksia fraseri var. oxycedra,Banksia fraseri var. oxycedra,Proteaceae,WA,Pultenaea reticulata,"2,15",,,"HS40,59"
+Dryandra horrida,highly_susceptible,Banksia horrida,Banksia horrida,Proteaceae,WA,Pultenaea scabra,25,,,S43
+Dryandra idiogenes,highly_susceptible,Banksia idiogenes,Banksia idiogenes,Proteaceae,WA,Pultenaea stricta,"17,25,34",,,"S43,HS34"
+Dryandra ionthocarpa E,highly_susceptible,Banksia ionthocarpa,Banksia ionthocarpa,Proteaceae,WA,Pultenaea subalpina,,"3,44",,HS44
+Dryandra kippistiana var. paenepeccata,highly_susceptible,Banksia kippistiana var. paenepeccata,Banksia kippistiana var. paenepeccata,Proteaceae,WA,Pultenaea subspicata,,3,,
+Dryandra lepidorhiza,highly_susceptible,Banksia lepidorhiza,Banksia lepidorhiza,Proteaceae,WA,Pultenaea trifida,19,,,
+Dryandra mucronulata,highly_susceptible,Banksia mucronulata,Banksia mucronulata,Proteaceae,WA,Sphaerolobium acanthos,,44,,MS44
+Dryandra octotriginta,highly_susceptible,Banksia octotriginta,Banksia octotriginta,Proteaceae,WA,Sphaerolobium medium,,,,FR21
+Dryandra porrecta,highly_susceptible,Banksia porrecta,Banksia porrecta,Proteaceae,WA,Nothofagus cunninghamii,"2,17,25",,,S43
+Dryandra preissii,highly_susceptible,Banksia acuminata,Banksia acuminata,Proteaceae,WA,Gleichenia dicarpa,25,,,S43
+Dryandra pulchella,highly_susceptible,Banksia bella,Banksia bella,Proteaceae,WA,Coopernookia barbata,,,,
+Dryandra sclerophylla,highly_susceptible,Banksia sclerophylla,Banksia sclerophylla,Proteaceae,WA,Dampiera alata ,,,,S37
+Dryandra shanklandiorum,highly_susceptible,Banksia shanklandiorum,Banksia shanklandiorum,Proteaceae,WA,Dampiera fasciculata,,,,FR59
+Dryandra speciosa,highly_susceptible,Banksia splendida,Banksia splendida,Proteaceae,WA,Dampiera linearis,15,,,FR21
+Dryandra subpinnatifida,highly_susceptible,Banksia subpinnatifida,Banksia subpinnatifida,Proteaceae,WA,Goodenia caerulea,,,,"FR21,40,59"
+Dryandra tenuifolia,highly_susceptible,Banksia tenuis,Banksia tenuis,Proteaceae,WA,Goodenia geniculata,25,,,
+Dryandra tortifolia,highly_susceptible,Banksia tortifolia,Banksia tortifolia,Proteaceae,WA,Goodenia hederacea s.l.,"25,29",,,S43
+Dryandra trifontinalis,highly_susceptible,Banksia trifontinalis,Banksia trifontinalis,Proteaceae,WA,Goodenia humilis,"25,29",,,S43
+Dryandra wonganensis,highly_susceptible,Banksia wonganensis,Banksia wonganensis,Proteaceae,WA,Goodenia lanata,"25,29",,,S43
+Grevillea chrysophaea,highly_susceptible,Grevillea chrysophaea,Grevillea chrysophaea,Proteaceae,Vic,Goodenia ovata,25,,,
+Grevillea irrasa subsp. irrasa,highly_susceptible,Grevillea irrasa subsp. irrasa,Grevillea irrasa subsp. irrasa,Proteaceae,NSW,Goodenia scapigera,,,,"FR40,59"
+Grevillea williamsonii E,highly_susceptible,Grevillea aquifolium,Grevillea aquifolium,Proteaceae,"SA, Vic",Lechenaultia biloba,"14,24",3,,"FR21,24"
+Hakea marginata,highly_susceptible,Hakea marginata,Hakea marginata,Proteaceae,WA,Lechenaultia floribunda,,3,,
+Isopogon alcicornis,highly_susceptible,Isopogon alcicornis,Isopogon alcicornis,Proteaceae,WA,Lechenaultia formosa,,3,,
+Isopogon drummondii,highly_susceptible,Isopogon drummondii,Isopogon drummondii,Proteaceae,WA,Lechenaultia hirsuta,,3,,
+Isopogon tridens,highly_susceptible,Isopogon tridens,Isopogon tridens,Proteaceae,WA,Scaevola calliptera,,,21,Q21
+Isopogon trilobus,highly_susceptible,Isopogon trilobus,Isopogon trilobus,Proteaceae,WA,Scaevola striata s.l.,24,,,FR24
+Persoonia cornifolia,highly_susceptible,Persoonia cornifolia,Persoonia cornifolia,Proteaceae,"Qld, NSW",Scaevola thesioides s.l.,,3,,
+Persoonia muelleri var. densifolia,highly_susceptible,Persoonia muelleri var. densifolia,Persoonia muelleri var. densifolia,Proteaceae,Tas,Velleia foliosa,,,,FR58
+Petrophile anceps,highly_susceptible,Petrophile anceps,Petrophile anceps,Proteaceae,WA,Polyosma alangiacea,,,,FR36
+Petrophile ericifolia,highly_susceptible,Petrophile ericifolia,Petrophile ericifolia,Proteaceae,WA,Anigozanthus flavidus,,,,FR54
+Petrophile longifolia,highly_susceptible,Petrophile longifolia,Petrophile longifolia,Proteaceae,WA,Anigozanthus manglesii,,,,FR22
+Petrophile media,highly_susceptible,Petrophile media,Petrophile media,Proteaceae,WA,Anigozanthus rufus,,,,FR54
+Asterolasia phebalioides V,highly_susceptible,Asterolasia phebalioides,Asterolasia phebalioides,Rutaceae,"SA, Vic",Conostylis aculeata s.l.,24,,,FR24
+Boronia citriodora,highly_susceptible,Boronia citriodora,Boronia citriodora,Rutaceae,Tas,Conostylis misera E,,,,FR58
+Nematolepis squamea s.l.,highly_susceptible,Nematolepis squamea,Nematolepis squamea,Rutaceae,"Qld, NSW, Vic, Tas",Conostylis pusilla,24,,,FR24
+Phebalium daviesii,highly_susceptible,Phebalium daviesii,Phebalium daviesii,Rutaceae,Tas,Conostylis serrulata,24,,,"FR21,24"
+Stylidium amoenum,highly_susceptible,Stylidium amoenum,Stylidium amoenum,Stylidiaceae,WA,Conostylis setigera s.l.,15,,,"FR21,40"
+Pimelea pagophila V,highly_susceptible,Pimelea pagophila,Pimelea pagophila,Thymelaeaceae,Vic,Conostylis setosa,24,,,"FR21,40"
+Tetratheca hirsuta,highly_susceptible,Tetratheca hirsuta,Tetratheca hirsuta,Elaeocarpaceae,WA,Macropidia fuliginosa,,54,,FR54
+Tetratheca subaphylla,highly_susceptible,Tetratheca subaphylla,Tetratheca subaphylla,Elaeocarpaceae,"NSW, Vic",Gonocarpus benthamii subsp. Stirling,,,,FR58
+Tasmannia purpurascens V,highly_susceptible,Tasmannia purpurascens,Tasmannia purpurascens,Winteraceae,NSW,Gonocarpus mezianus,25,,,S43
+Xanthorrhoea glauca subsp. glauca,highly_susceptible,Xanthorrhoea glauca subsp. glauca,Xanthorrhoea glauca subsp. glauca,Xanthorrhoeaceae,"Qld, NSW",Gonocarpus rudis,,,,FR58
+Andersonia sprengelioides,highly_susceptible,Andersonia sprengelioides [alternative possible names: Andersonia lehmanniana (pro parte misapplied)],Andersonia sprengelioides,Ericaceae,WA,Gonocarpus tetragynus,"17,34",,,
+Leucopogon gibbosus,highly_susceptible,Leucopogon gibbosus,Leucopogon gibbosus,Ericaceae,WA,Gonocarpus teucrioides,"2,17,34",,,FR42
+Leucopogon gnaphaloides E,highly_susceptible,Leucopogon gnaphalioides,Leucopogon gnaphalioides,Ericaceae,WA,Haloragodendron monospermum,,3,,
+Sphenotoma dracophylloides,highly_susceptible,Sphenotoma dracophylloides,Sphenotoma dracophylloides,Ericaceae,WA,Apodytes brachstylis,,,,FR36
+Sphenotoma sp. Stirling,highly_susceptible,Sphenotoma sp. Stirling Range (P.G.Wilson 4235),Sphenotoma sp. Stirling Range (P.G.Wilson 4235),Ericaceae,WA,Citronella smythii,,,,FR36
+Pultenaea daphnoides,highly_susceptible,Pultenaea daphnoides,Pultenaea daphnoides,Fabaceae,"SA, Qld, NSW, Vic, Tas",Irvingbaileya australis,,,,FR36
+Pultenaea reticulata,highly_susceptible,Pultenaea reticulata,Pultenaea reticulata,Fabaceae,WA,Diplarrena moraea,"8,13,17",,,
+Adenanthos labillardierei,highly_susceptible,Adenanthos labillardierei,Adenanthos labillardierei,Proteaceae,WA,Isophysis tasmanica,34,,,HS61
+Adenanthos linearis,highly_susceptible,Adenanthos linearis,Adenanthos linearis,Proteaceae,WA,Patersonia babianoides,,,,Q21
+Banksia benthamiana,highly_susceptible,Banksia benthamiana,Banksia benthamiana,Proteaceae,WA,Patersonia fragilis,"17,34",,,
+Banksia violacea,highly_susceptible,Banksia violacea,Banksia violacea,Proteaceae,WA,Patersonia glabrata,,,,S42
+Dryandra concinna,highly_susceptible,Banksia concinna,Banksia concinna,Proteaceae,WA,Patersonia occidentalis,"14,24",,,"FR59,S24,37,46,53FR60"
+Dryandra foliolata,highly_susceptible,Banksia foliolata,Banksia foliolata,Proteaceae,WA,Patersonia pygmaea,28,,,"HS28,FR21,24"
+Dryandra quercifolia,highly_susceptible,Banksia heliantha,Banksia heliantha,Proteaceae,WA,Patersonia rudis,14,,,"S46,SP21"
+Isopogon buxifolius var. obovatus,highly_susceptible,Isopogon spathulatus subsp. obovatus,Isopogon spathulatus subsp. obovatus,Proteaceae,WA,Patersonia sericea,2,,,
+Lambertia uniflora,highly_susceptible,Lambertia uniflora,Lambertia uniflora,Proteaceae,WA,Patersonia umbrosa,14,,,"FR59,S46"
+Petrophile divaricata,highly_susceptible,Petrophile divaricata,Petrophile divaricata,Proteaceae,WA,Gmelina fasciculiflora,,,,FR36
+Tetratheca setigera,highly_susceptible,Tetratheca setigera,Tetratheca setigera,Elaeocarpaceae,WA,Hemigenia curvifolia,24,,,FR24
+Xanthorrhoea arenaria V,highly_susceptible,Xanthorrhoea arenaria,Xanthorrhoea arenaria,Xanthorrhoeaceae,Tas,Hemigenia ramosissima,,,,FR21
+Xanthorrhoea brevistyla,highly_susceptible,Xanthorrhoea brevistyla,Xanthorrhoea brevistyla,Xanthorrhoeaceae,WA,Prostanthera cuneata,,3,,
+Andersonia pinaster V,highly_susceptible,Andersonia pinaster,Andersonia pinaster,Ericaceae,WA,Prostanthera decussata,32,,,S32
+Banksia oreophila,highly_susceptible,Banksia oreophila,Banksia oreophila,Proteaceae,WA,Prostanthera lasianthos,17,3,,
+Xanthorrhoea platyphylla,highly_susceptible,Xanthorrhoea platyphylla,Xanthorrhoea platyphylla,Xanthorrhoeaceae,WA,Prostanthera ovalifolia,,3,,
+Andersonia echinocephala,highly_susceptible moderately_susceptible,Andersonia echinocephala,Andersonia echinocephala,Ericaceae,WA,Prostanthera ringens,,3,,
+Sphenotoma drummondii E,highly_susceptible low_susceptibility,Sphenotoma drummondii,Sphenotoma drummondii,Ericaceae,WA,Prostanthera saxicola var. montana,,3,,
+Gastrolobium leakeanum,highly_susceptible low_susceptibility,Gastrolobium leakeanum,Gastrolobium leakeanum,Fabaceae,WA,Beilschmiedia bancroftii,,,,S36
+Persoonia micranthera E,highly_susceptible low_susceptibility,Persoonia micranthera,Persoonia micranthera,Proteaceae,WA,Beilschmiedia collina,16,,,
+Boronia parviflora,highly_susceptible low_susceptibility variable_susceptibility,Boronia parviflora,Boronia parviflora,Rutaceae,"SA, Qld, NSW, Vic, Tas",Beilschmiedia tooram,,,,S36
+Boronia pilosa s.l.,highly_susceptible moderately_susceptible,Boronia pilosa,Boronia pilosa,Rutaceae,"SA, Vic, Tas",Cassytha glabella,,,,FR22
+Gastrolobium pulchellum,highly_susceptible moderately_susceptible susceptible_but_degree_unknown,Gastrolobium pulchellum,Gastrolobium pulchellum,Fabaceae,WA,Cinnamomum oliveri,16,,,HS45
+Leptospermum glaucescens,highly_susceptible variable_susceptibility moderately_susceptible,Leptospermum glaucescens,Leptospermum glaucescens,Myrtaceae,Tas,Cryptocarya angulata,,,,FR36
+Patersonia pygmaea,highly_susceptible field_resistant,Patersonia pygmaea,Patersonia pygmaea,Iridaceae,WA,Cryptocarya corrugata,,,,FR36
+Isopogon baxteri,highly_susceptible low_susceptibilitymoderately_susceptible,Isopogon baxteri,Isopogon baxteri,Proteaceae,WA,Cryptocarya densiflora,,,,FR36
+Andersonia grandiflora,highly_susceptible moderately_susceptible,Andersonia grandiflora,Andersonia grandiflora,Ericaceae,WA,Cryptocarya corrugata,16,,,FR36
+Leucopogon atherolepis,highly_susceptible moderately_susceptible,Leucopogon atherolepis,Leucopogon atherolepis,Ericaceae,WA,Cryptocarya glaucescens,16,,,
+Gastrolobium mondurup,highly_susceptible moderately_susceptible,Gastrolobium mondurup,Gastrolobium mondurup,Fabaceae,WA,Cryptocarya leucophylla,,,,FR36
+Baeckea leptocaulis,highly_susceptible moderately_susceptible,Baeckea leptocaulis,Baeckea leptocaulis,Myrtaceae,Tas,Cryptocarya lividula,,,,FR36
+Dryandra pseudoplumosa,highly_susceptible moderately_susceptible,Banksia pseudoplumosa,Banksia pseudoplumosa,Proteaceae,WA,Cryptocarya mackinnoniana,,,,S36
+Isopogon latifolius,highly_susceptible moderately_susceptible,Isopogon latifolius,Isopogon latifolius,Proteaceae,WA,Cryptocarya putida,,,,FR36
+Lambertia ericifolia,highly_susceptible moderately_susceptible,Lambertia ericifolia,Lambertia ericifolia,Proteaceae,WA,Endiandra bessaphila,,,,S36
+Dryandra armata s.l.,highly_susceptible susceptible_but_degree_unknown,Banksia armata,Banksia armata,Proteaceae,WA,Endiandra dichrophylla,,,,FR36
+Darwinia oxylepis E,highly_susceptible susceptible_but_degree_unknown,Darwinia oxylepis,Darwinia oxylepis,Myrtaceae,WA,Endiandra monothyra subsp. monothyra,,,,FR36
+Banksia baueri,highly_susceptible susceptible_but_degree_unknown moderately_susceptible,Banksia baueri,Banksia baueri,Proteaceae,WA,Endiandra montana,,,,FR36
+Isopogon formosus,highly_susceptible susceptible_but_degree_unknown low_susceptibility,Isopogon formosus,Isopogon formosus,Proteaceae,WA,Endiandra sankeyana,,,,FR36
+Olearia axillaris,low_susceptibility,Olearia axillaris,Olearia axillaris,Asteraceae,"WA, SA, NSW, Vic, Tas",Endiandra wolfei,,,,FR36
+Allocasuarina eriochlamys subsp. grossa,low_susceptibility,Allocasuarina eriochlamys subsp. grossa,Allocasuarina eriochlamys subsp. grossa,Casuarinaceae,WA,Utricularia multifida,,,,FR40
+Allocasuarina globosa,low_susceptibility,Allocasuarina globosa,Allocasuarina globosa,Casuarinaceae,WA,Lindsaea linearis,,,,"FR40,60"
+Bauera rubioides,low_susceptibility,Bauera rubioides,Bauera rubioides,Cunoniaceae,"SA, Qld, NSW, Vic, Tas",Logania serpyllifolia s.l.,,,21,"FR40,59,Q21"
+Bauera sessiliflora,low_susceptibility,Bauera sessiliflora,Bauera sessiliflora,Cunoniaceae,Vic,Mitrasacme pilosa,17,,,
+Astroloma baxteri,low_susceptibility,Brachyloma baxteri,Brachyloma baxteri,Ericaceae,WA,Nuytsia floribunda,,,,FR22
+Astroloma microphyllum,low_susceptibility,Styphelia pentapogona,Styphelia pentapogona,Ericaceae,WA,Lycopodium deuterodensum,35,,,SV22
+Astroloma sp. Fitzgerald (GJ Keighery 8376),low_susceptibility,Styphelia prostrata,Styphelia prostrata,Ericaceae,WA,Synoum glandulosum subsp. paniculatum,,,16,FR36
+Astroloma sp. Grass Patch (AJG Wilson 110),low_susceptibility,Astroloma sp. Grass Patch (A.J.G.Wilson 110),Astroloma sp. Grass Patch (A.J.G.Wilson 110),Ericaceae,WA,Acacia aculeatissima,25,,,
+Coleanthera virgata,low_susceptibility,Styphelia lanata,Styphelia lanata,Ericaceae,WA (presumed extinct),Acacia axillaris V,,,9,MS9
+Conostephium marchantiorum,low_susceptibility,Conostephium marchantiorum,Conostephium marchantiorum,Ericaceae,WA,Acacia barbinervis s.l.,24,,,"FR21,24"
+Conostephium uncinatum,low_susceptibility,Conostephium uncinatum,Conostephium uncinatum,Ericaceae,WA,Acacia baxteri,,,,FR56
+Leucopogon cucullatus,low_susceptibility,Leucopogon cucullatus,Leucopogon cucullatus,Ericaceae,WA,Acacia browniana s.l.,24,,,FR24
+Leucopogon unilateralis,low_susceptibility,Leucopogon unilateralis,Leucopogon unilateralis,Ericaceae,WA,Acacia browniana var. intermedia,,,,FR40
+Leucopogon sp. 4,low_susceptibility,Styphelia blakei,Styphelia blakei,Ericaceae,Qld,Acacia buxifolia subsp. buxifolia,3,,,
+Lysinema lasianthum,low_susceptibility,Lysinema lasianthum,Lysinema lasianthum,Ericaceae,WA,Acacia campylophylla,24,,,S24
+Monotoca sp. Mt Maxwell (KR Newbey 4727),low_susceptibility,Monotoca aristata,Monotoca aristata,Ericaceae,WA,Acacia cyclops,,,,FR40
+Sphenotoma parviflora,low_susceptibility,Sphenotoma parviflora,Sphenotoma parviflora,Ericaceae,WA,Acacia dealbata,2,,,FR60
+Styphelia pulchella,low_susceptibility,Styphelia exserta,Styphelia exserta,Ericaceae,WA,Acacia drummondii s.l.,24,,,"FR24,59"
+Trochocarpa parviflora,low_susceptibility,Acrotriche parviflora,Acrotriche parviflora,Ericaceae,WA,Acacia extensa,,,,FR24
+Bossiaea obcordata,low_susceptibility,Bossiaea obcordata,Bossiaea obcordata,Fabaceae,"Qld, NSW, Vic, Tas",Acacia genistifolia,"2,3",,,
+Daviesia microcarpa E,low_susceptibility,Daviesia microcarpa,Daviesia microcarpa,Fabaceae,WA,Acacia horridula,3,,,
+Daviesia microphylla,low_susceptibility,Daviesia microphylla,Daviesia microphylla,Fabaceae,WA,Acacia lateriticola,,,,"FR24,Q21"
+Daviesia oppositifolia,low_susceptibility,Daviesia oppositifolia,Daviesia oppositifolia,Fabaceae,WA,Acacia melanoxylon,17,,,FR60
+Daviesia ovata,low_susceptibility,Daviesia ovata,Daviesia ovata,Fabaceae,WA,Acacia mitchelli,25,,,S43
+Daviesia pauciflora,low_susceptibility,Daviesia pauciflora,Daviesia pauciflora,Fabaceae,WA,Acacia mucronata s.l.,"17,25",,,S43
+Daviesia purpurascens,low_susceptibility,Daviesia purpurascens,Daviesia purpurascens,Fabaceae,WA,Acacia myrtifolia,"17,18,25,29",,,"S43,55,MS40,59"
+Daviesia sp. [CAM] (KR Newbey 8162),low_susceptibility,Daviesia campephylla,Daviesia campephylla,Fabaceae,WA,Acacia nervosa,,,,"FR21,24"
+Daviesia sp. [PLE] (AS George 10288),low_susceptibility,Daviesia pleurophylla,Daviesia pleurophylla,Fabaceae,WA,Acacia obovata,,,,FR21
+Eutaxia densifolia,low_susceptibility,Eutaxia parvifolia,Eutaxia parvifolia,Fabaceae,WA,Acacia oxycedrus,25,,,S43
+Gastrolobium spinosum,low_susceptibility,Gastrolobium spinosum,Gastrolobium spinosum,Fabaceae,WA,Acacia paradoxa,,,,S57
+Acacia pataczekii,low_susceptibility,Acacia pataczekii,Acacia pataczekii,Fabaceae,Tas,Acacia pataczekii,,,9,LS9
+Agonis floribunda,low_susceptibility,Taxandria floribunda,Taxandria floribunda,Myrtaceae,WA,Acacia preissiana,,,,FR24
+Beaufortia emprtrifolia,low_susceptibility,Beaufortia empetrifolia,Beaufortia empetrifolia,Myrtaceae,WA,Acacia pulchella s.l.,"24, 50",3,,"FR50,LS40"
+Beaufortia eriocephala,low_susceptibility,Beaufortia eriocephala,Beaufortia eriocephala,Myrtaceae,WA,Acacia retinodes s.l.,,,34,
+Eucalyptus decipiens s.l.,low_susceptibility,Eucalyptus decipiens,Eucalyptus decipiens,Myrtaceae,WA,Acacia siculiformis,,,9,MS9
+Eucalyptus ligulata subsp. stirlingica,low_susceptibility,Eucalyptus ligulata subsp. stirlingica,Eucalyptus ligulata subsp. stirlingica,Myrtaceae,WA,Acacia stenoptera,"14,24",,,
+Leptospermum trinervium,low_susceptibility,Leptospermum trinervium,Leptospermum trinervium,Myrtaceae,"Qld, NSW, ACT, Vic",Acacia suaveolens,"17,25",,,"S43,FR42,LS60"
+Melaleuca pritzellii,low_susceptibility,Melaleuca pritzelii,Melaleuca pritzelii,Myrtaceae,WA,Acacia terminalis s.l.,,,,
+Regelia inops,low_susceptibility,Regelia inops,Regelia inops,Myrtaceae,WA,Acacia ulicifolia,17,,,
+Austrostipa flavescens,low_susceptibility,Austrostipa flavescens,Austrostipa flavescens,Poaceae,"WA, SA, NSW, Vic, Tas",Acacia urophylla,,,21,"FR24,53,Q21"
+Conospermum eatoniae,low_susceptibility,Conospermum eatoniae,Conospermum eatoniae,Proteaceae,WA,Acacia veronica,,,,"FR58,59"
+Conospermum scaposum,low_susceptibility,Conospermum scaposum,Conospermum scaposum,Proteaceae,WA,Acacia verticillata s.l.,"2,8,17,25",,,
+Conospermum undulatum,low_susceptibility,Conospermum undulatum,Conospermum undulatum,Proteaceae,WA,Paraserianthes lophantha,,,,FR22
+Franklandia triaristata,low_susceptibility,Franklandia triaristata,Franklandia triaristata,Proteaceae,WA,Atherosperma moschatum,17,,,
+Grevillea acrobotrya susbp. uniformis,low_susceptibility,Grevillea acrobotrya,Grevillea acrobotrya,Proteaceae,WA,Daphnandra repandula,,,,FR36
+Grevillea aneura,low_susceptibility,Grevillea aneura,Grevillea aneura,Proteaceae,WA,Myristica insipida,,,16,
+Grevillea annulifera,low_susceptibility,Grevillea annulifera,Grevillea annulifera,Proteaceae,WA,Rapanea achradifolia,,,,S36
+Grevillea asparagoides,low_susceptibility,Grevillea asparagoides [alternative possible names: Grevillea maxwellii (pro parte taxonomic synonym)],Grevillea asparagoides,Proteaceae,WA,Acmena resa,,,16,FR36
+Grevillea astericosa,low_susceptibility,Grevillea asteriscosa,Grevillea asteriscosa,Proteaceae,WA,Agonis floribunda,,,,LS59
+Grevillea batrachioides E,low_susceptibility,Grevillea batrachioides,Grevillea batrachioides,Proteaceae,WA,Agonis hypericifolia,15,,,"MS40,59"
+Grevillea baxteri,low_susceptibility,Grevillea baxteri,Grevillea baxteri,Proteaceae,WA,Agonis linearifolia,51,,,"S51,LS40"
+Grevillea brachystylis subsp. australis V,low_susceptibility,Grevillea brachystylis subsp. australis,Grevillea brachystylis subsp. australis,Proteaceae,WA,Agonis parviceps,,,,"LS40,59"
+Grevillea brachystylis subsp. brachystylis,low_susceptibility,Grevillea brachystylis subsp. brachystylis,Grevillea brachystylis subsp. brachystylis,Proteaceae,WA,Agonis spathulata,,,,"LS40,59"
+Grevillea bracteosa,low_susceptibility,Grevillea bracteosa,Grevillea bracteosa,Proteaceae,WA,Angophora costata,12,,,
+Grevillea candicans,low_susceptibility,Grevillea candicans,Grevillea candicans,Proteaceae,WA,Angophora hispida,,,,
+Grevillea christinae E,low_susceptibility,Grevillea christineae,Grevillea christineae,Proteaceae,WA,Astartea fascicularis,40,3,,FR40
+Grevillea costata,low_susceptibility,Grevillea costata,Grevillea costata,Proteaceae,WA,Astartea heteranthera,50,3,,FR50
+Grevillea crowleyae,low_susceptibility,Grevillea crowleyae,Grevillea crowleyae,Proteaceae,WA,Austromyrtus sp. (Gillies BG 1484),,,,FR36
+Grevillea curviloba s.l.,low_susceptibility,Grevillea curviloba,Grevillea curviloba,Proteaceae,WA,Baeckea camphorosmae,,,,"FR21,24,50"
+Grevillea depauperata,low_susceptibility,Grevillea depauperata,Grevillea depauperata,Proteaceae,WA,Baeckea leptocaulis,"17,34",,33,"HS34,MS61"
+Grevillea donaldiana,low_susceptibility,Grevillea donaldiana,Grevillea donaldiana,Proteaceae,WA,Baeckea pachyphylla,20,,,FR40
+Grevillea dryandroides s.l.,low_susceptibility,Grevillea dryandroides,Grevillea dryandroides,Proteaceae,WA,Euryomyrtus ramosissima subsp. prostrata,25,,,
+Grevillea erectiloba,low_susceptibility,Grevillea erectiloba,Grevillea erectiloba,Proteaceae,WA,Beaufortia anisandra,51,,,"S51,MS40,59"
+Grevillea eriobotrya,low_susceptibility,Grevillea eriobotrya,Grevillea eriobotrya,Proteaceae,WA,Beaufortia decussata,,,,"LS40,59"
+Grevillea fistulosa,low_susceptibility,Grevillea fistulosa,Grevillea fistulosa,Proteaceae,WA,Beaufortia elegans,37,,,
+Grevillea flexuosa V,low_susceptibility,Grevillea flexuosa,Grevillea flexuosa,Proteaceae,WA,Beaufortia emprtrifolia,,,,LS40
+Grevillea fulgens,low_susceptibility,Grevillea fulgens,Grevillea fulgens,Proteaceae,WA,Beaufortia eriocephala,,,,LS41
+Grevillea fuscolutea,low_susceptibility,Grevillea fuscolutea,Grevillea fuscolutea,Proteaceae,WA,Beaufortia micrantha,,,,MS40
+Grevillea georgeana,low_susceptibility,Grevillea georgeana,Grevillea georgeana,Proteaceae,WA,Beaufortia sparsa,15,3,,
+Grevillea glabrata subsp. dissectifolia,low_susceptibility,Grevillea manglesii subsp. dissectifolia,Grevillea manglesii subsp. dissectifolia,Proteaceae,WA,Calothamnus affinis,40,,,"FR40,LS58"
+Grevillea glabrata subsp. ornithopoda,low_susceptibility,Grevillea manglesii subsp. ornithopoda,Grevillea manglesii subsp. ornithopoda,Proteaceae,WA,Calothamnus crassus,58,,,"LS58,59"
+Grevillea globosa,low_susceptibility,Grevillea globosa,Grevillea globosa,Proteaceae,WA,Calothamnus quadrifidus,40,,,FR40
+Grevillea granulosa,low_susceptibility,Grevillea granulosa,Grevillea granulosa,Proteaceae,WA,Calothamnus sanguineus,40,,,FR40
+Grevillea inconspicua,low_susceptibility,Grevillea inconspicua,Grevillea inconspicua,Proteaceae,WA,Calothamnus villosus,,,,S37
+Grevillea infundibularis E,low_susceptibility,Grevillea infundibularis,Grevillea infundibularis,Proteaceae,WA,Calytrix alpestris,,3,,
+Grevillea involucrata E,low_susceptibility,Grevillea involucrata,Grevillea involucrata,Proteaceae,WA,Calytrix asperula,40,,,FR40
+Grevillea kenneallyi,low_susceptibility,Grevillea kenneallyi,Grevillea kenneallyi,Proteaceae,WA,Calytrix flavescens,15,,,FR40
+Grevillea latifolia,low_susceptibility,Grevillea latifolia,Grevillea latifolia,Proteaceae,WA,Calytrix leschenaultii,40,,,FR40
+Grevillea leptopoda,low_susceptibility,Grevillea leptopoda,Grevillea leptopoda,Proteaceae,WA,Calytrix tenuiramea,40,,,FR40
+Grevillea lissopleura,low_susceptibility,Grevillea lissopleura,Grevillea lissopleura,Proteaceae,WA,Calytrix tetragona,"17,25,29,34",3,,"S43,SV60"
+Grevillea lullfitzii,low_susceptibility,Grevillea lullfitzii,Grevillea lullfitzii,Proteaceae,WA,Chamelaucium ciliatum,,3,,
+Grevillea makinsonii,low_susceptibility,Grevillea makinsonii,Grevillea makinsonii,Proteaceae,WA,Chamelaucium erythrochlora,,,,S52
+Grevillea manglesioides subsp. papillosa,low_susceptibility,Grevillea papillosa,Grevillea papillosa,Proteaceae,WA,Chamelaucium griffinii ,,,,S52
+Grevillea marriottii,low_susceptibility,Grevillea marriottii,Grevillea marriottii,Proteaceae,WA,Chamelaucium roycei,,,,S52
+Grevillea maxwellii E,low_susceptibility,Grevillea maxwellii,Grevillea maxwellii,Proteaceae,WA,Corymbia calophylla,,,21,"FR24,50,53"
+Grevillea microstegia,low_susceptibility,Grevillea microstegia,Grevillea microstegia,Proteaceae,Vic,Corymbia ficifolia,,,,FR50
+Grevillea miniata,low_susceptibility,Grevillea miniata,Grevillea miniata,Proteaceae,"WA, NT",Corymbia gummifera,2,,,SV42
+Grevillea minutiflora,low_susceptibility,Grevillea minutiflora,Grevillea minutiflora,Proteaceae,WA,Corymbia maculata,,,31,FR22
+Grevillea murex E,low_susceptibility,Grevillea murex,Grevillea murex,Proteaceae,WA,Corymbia tesellaris,,,31,
+Grevillea nana subsp. abbreviata,low_susceptibility,Grevillea nana subsp. abbreviata,Grevillea nana subsp. abbreviata,Proteaceae,WA,Darwinia citriodora,,,,FR50
+Grevillea olivacea,low_susceptibility,Grevillea olivacea,Grevillea olivacea,Proteaceae,WA,Darwinia collina E,58,,,"MS58,S49,52"
+Grevillea phanerophlebia,low_susceptibility,Grevillea phanerophlebia,Grevillea phanerophlebia,Proteaceae,WA,Darwinia hypericifolia,,,,LS-MS58
+Grevillea phillipsiana,low_susceptibility,Grevillea phillipsiana,Grevillea phillipsiana,Proteaceae,WA,Darwinia leiostyla,,,,"FR40,LS-MS58"
+Grevillea pilosa subsp. dissecta,low_susceptibility,Grevillea neodissecta,Grevillea neodissecta,Proteaceae,WA,Darwinia macrostegia ,,,,S49
+Grevillea pimeleoides,low_susceptibility,Grevillea pimeleoides,Grevillea pimeleoides,Proteaceae,WA,Darwinia meeboldii ,,,,"S49,52"
+Grevillea prostrata,low_susceptibility,Grevillea prostrata,Grevillea prostrata,Proteaceae,WA,Darwinia oxylepis E,,,,"HS58,S46,52"
+Grevillea psilantha,low_susceptibility,Grevillea psilantha,Grevillea psilantha,Proteaceae,WA,Darwinia squarrosa V,,,,"LS59,MS58,S46"
+Grevillea rogersoniana,low_susceptibility,Grevillea rogersoniana,Grevillea rogersoniana,Proteaceae,WA,Darwinia vestita,,,,FR40
+Grevillea rosieri,low_susceptibility,Grevillea rosieri,Grevillea rosieri,Proteaceae,WA,Darwinia wittwerorum E,58,,,"MS58,S46"
+Grevillea roycei,low_susceptibility,Grevillea roycei,Grevillea roycei,Proteaceae,WA,Darwinia sp. Stirling Range V,,,,MS58
+Grevillea rudis,low_susceptibility,Grevillea rudis,Grevillea rudis,Proteaceae,WA,Eremaea pauciflora s.l.,37,3,,
+Grevillea scabra,low_susceptibility,Grevillea scabra,Grevillea scabra,Proteaceae,WA,Eucalyptus accedens,,,,FR50
+Grevillea scabrida,low_susceptibility,Grevillea scabrida,Grevillea scabrida,Proteaceae,WA,Eucalyptus acmenoides,2,,,
+Grevillea scapigera E,low_susceptibility,Grevillea scapigera,Grevillea scapigera,Proteaceae,WA,Eucalyptus amygdalina,"2,17",,,FR60
+Grevillea secunda,low_susceptibility,Grevillea secunda,Grevillea secunda,Proteaceae,WA,Eucalyptus andrewsii s.l.,,,31,
+Grevillea spinosissima,low_susceptibility,Grevillea spinosissima,Grevillea spinosissima,Proteaceae,WA,Eucalyptus angulosa,,,,FR40
+Grevillea stenostachya,low_susceptibility,Grevillea stenostachya,Grevillea stenostachya,Proteaceae,WA,Eucalyptus aromaphloia,25,,,S43
+Grevillea subtiliflora,low_susceptibility,Grevillea subtiliflora,Grevillea subtiliflora,Proteaceae,WA,Eucalyptus astringens,,,,FR50
+Grevillea tenuiloba,low_susceptibility,Grevillea tenuiloba,Grevillea tenuiloba,Proteaceae,WA,Eucalyptus baxteri,"2,4,18,2529",3,31,S43
+Grevillea tetrapleura,low_susceptibility,Grevillea tetrapleura,Grevillea tetrapleura,Proteaceae,WA,Eucalyptus botryoides,,,31,
+Grevillea thelemanniana,low_susceptibility,Grevillea thelemanniana,Grevillea thelemanniana,Proteaceae,WA,Eucalyptus buprestium,,,,FR40
+Grevillea triloba,low_susceptibility,Grevillea triloba,Grevillea triloba,Proteaceae,WA,Eucalyptus camaldulensis,,,31,FR50
+Grevillea wittweri,low_susceptibility,Grevillea wittweri,Grevillea wittweri,Proteaceae,WA,Eucalyptus cladocalyx,,,31,
+Hakea aculeata V,low_susceptibility,Hakea aculeata,Hakea aculeata,Proteaceae,WA,Eucalyptus cloeziana,,,31,
+Hakea bicornata,low_susceptibility,Hakea bicornata,Hakea bicornata,Proteaceae,WA,Eucalyptus coccifera,17,,,FR60
+Hakea crassinervia,low_susceptibility,Hakea petiolaris subsp. petiolaris,Hakea petiolaris subsp. petiolaris,Proteaceae,"WA, Vic (doubtfully naturalised)",Eucalyptus conferruminata,,,,FR50
+Hakea laurina,low_susceptibility,Hakea laurina,Hakea laurina,Proteaceae,"WA, SA (naturalised), Tas (formerly naturalised)",Eucalyptus consideniana,25,,,S43
+Hakea longiflora,low_susceptibility,Hakea longiflora,Hakea longiflora,Proteaceae,WA,Eucalyptus cordata,17,,,FR60
+Hakea megalosperma V,low_susceptibility,Hakea megalosperma,Hakea megalosperma,Proteaceae,WA,Eucalyptus dalrympleana s.l.,,,31,FR60
+Hakea myrtoides,low_susceptibility,Hakea myrtoides,Hakea myrtoides,Proteaceae,WA,Eucalyptus decipiens s.l.,,,,LS40
+Hakea neurophylla,low_susceptibility,Hakea neurophylla,Hakea neurophylla,Proteaceae,WA,Eucalyptus decurva,,,,FR40
+Hakea pendens,low_susceptibility,Hakea pendens,Hakea pendens,Proteaceae,WA,Eucalyptus delegatensis,"8,17,25",,,"S43,FR60"
+Hakea rigida,low_susceptibility,Hakea rigida,Hakea rigida,Proteaceae,WA,Eucalyptus diversicolor,2,,,
+Hakea rubrifolia,low_susceptibility,Hakea ruscifolia,Hakea ruscifolia,Proteaceae,WA,Eucalyptus dives,"2,25",,,S43
+Hakea spathulata,low_susceptibility,Hakea neospathulata,Hakea neospathulata,Proteaceae,WA,Eucalyptus doratoxylon,,,,FR59
+Hakea tuberculata,low_susceptibility,Hakea tuberculata,Hakea tuberculata,Proteaceae,WA,Eucalyptus erectifolia,,,,FR59
+Lambertia rariflora s.l.,low_susceptibility,Lambertia rariflora,Lambertia rariflora,Proteaceae,WA,Eucalyptus eugenioides,2,,,
+Persoonia baeckeoides,low_susceptibility,Persoonia baeckeoides,Persoonia baeckeoides,Proteaceae,WA,Eucalyptus falcata,,,,FR40
+Persoonia brachystylis,low_susceptibility,Persoonia brachystylis,Persoonia brachystylis,Proteaceae,WA,Eucalyptus fastigata,25,27,,"S43,HS27"
+Persoonia brevirhachis,low_susceptibility,Persoonia brevirhachis,Persoonia brevirhachis,Proteaceae,WA,Eucalyptus fibrosa s.l.,,,31,
+Persoonia chapmaniana,low_susceptibility,Persoonia chapmaniana,Persoonia chapmaniana,Proteaceae,WA,Eucalyptus forrestiana,,,,FR50
+Persoonia hakeiformis,low_susceptibility,Persoonia hakeiformis,Persoonia hakeiformis,Proteaceae,WA,Eucalyptus fraxionoides,,27,,HS27
+Persoonia kararae,low_susceptibility,Persoonia kararae,Persoonia kararae,Proteaceae,WA,Eucalyptus gardneri,,,,FR50
+Persoonia leucopogon,low_susceptibility,Persoonia leucopogon,Persoonia leucopogon,Proteaceae,WA,Eucalyptus globoidea,"2,25",,,S43
+Persoonia microcarpa,low_susceptibility,Acidonia microcarpa,Acidonia microcarpa,Proteaceae,WA,Eucalyptus globulus s.l.,2,,31,FR60
+Persoonia papillosa,low_susceptibility,Persoonia papillosa,Persoonia papillosa,Proteaceae,WA,Eucalyptus gomphocephala,,,,FR50
+Persoonia rudis,low_susceptibility,Persoonia rudis,Persoonia rudis,Proteaceae,WA,Eucalyptus goniocalyx,,,31,
+Persoonia scabra,low_susceptibility,Persoonia scabra,Persoonia scabra,Proteaceae,WA,Eucalyptus grandis,2,,,
+Persoonia sulcata,low_susceptibility,Persoonia sulcata,Persoonia sulcata,Proteaceae,WA,Eucalyptus imlayensis E,,,,?HS22
+Cryptandra pumila,low_susceptibility,Stenanthemum pumilum,Stenanthemum pumilum,Rhamnaceae,WA,Eucalyptus krusana,,,,FR50
+Leucopogon lasiostachyus,low_susceptibility,Leucopogon lasiostachyus,Leucopogon lasiostachyus,Ericaceae,WA,Eucalyptus laeliae,,,,FR50
+Agonis parviceps,low_susceptibility,Taxandria parviceps,Taxandria parviceps,Myrtaceae,"WA, Vic (naturalised)",Eucalyptus lehmanniii,,,,FR56
+Agonis spathulata,low_susceptibility,Taxandria spathulata,Taxandria spathulata,Myrtaceae,WA,Eucalyptus ligulata subsp. stirlingica,,,,LS58
+Beaufortia decussata,low_susceptibility,Beaufortia decussata,Beaufortia decussata,Myrtaceae,WA,Eucalyptus macrorhyncha,"2,4,25,29",,,S43
+Calothamnus crassus,low_susceptibility,Calothamnus lateralis var. crassus [alternative possible names: Calothamnus montanus (pro parte misapplied)],Calothamnus lateralis var. crassus,Myrtaceae,WA,Eucalyptus mannifera,2,,,
+Eucalyptus staeri,low_susceptibility,Eucalyptus staeri,Eucalyptus staeri,Myrtaceae,WA,Eucalyptus marginata,"2,14,15, 24","46,53",31,"S46,53,MS24 LS40,59"
+Kunzea montana,low_susceptibility,Kunzea montana,Kunzea montana,Myrtaceae,WA,Eucalyptus megacarpa,,,,FR50
+Hakea ceratophylla,low_susceptibility,Hakea ceratophylla,Hakea ceratophylla,Proteaceae,WA,Eucalyptus niphophila,,3,,
+Hakea varia,low_susceptibility,Hakea varia,Hakea varia,Proteaceae,WA,Eucalyptus nitens,"8,25",,,"S43,LS60"
+Hakea victoria,low_susceptibility,Hakea victoria,Hakea victoria,Proteaceae,WA,Eucalyptus nitida,17,,,FR60
+Hibbertia commutata,low_susceptibility highly_susceptible,Hibbertia commutata [alternative possible names: Hibbertia pilosa (pro parte misapplied)],Hibbertia commutata,Dilleniaceae,WA,Eucalyptus oblique,"2,17,18, 19,25,29",,31,"S43,LS60"
+Leucopogon parviflorus,low_susceptibility susceptible_but_degree_unknown,Leucopogon parviflorus,Leucopogon parviflorus,Ericaceae,"WA, SA, Qld, NSW, LHI, Vic, Tas",Eucalyptus occidentalis,,,,FR50
+Darwinia squarrosa V,low_susceptibility moderately_susceptible susceptible_but_degree_unknown,Darwinia squarrosa,Darwinia squarrosa,Myrtaceae,WA,Eucalyptus ovata s.l.,17,,,FR60
+Isopogon attenuatus,low_susceptibility susceptible_but_degree_unknown,Isopogon attenuatus,Isopogon attenuatus,Proteaceae,WA,Eucalyptus pachyloma,,,,FR40
+Darwinia hypericifolia,low_susceptibility moderately_susceptible,Darwinia hypericifolia,Darwinia hypericifolia,Myrtaceae,WA,Eucalyptus paniculata,,,31,
+Verticordia carinata V,low_susceptibility moderately_susceptible,Verticordia carinata,Verticordia carinata,Myrtaceae,WA,Eucalyptus patens,,,,FR50
+Olearia pannosa s.l.,moderately_susceptible,Olearia pannosa,Olearia pannosa,Asteraceae,"SA, Vic",Eucalyptus pauciflora s.l.,25,,31,FR22
+Allocasuarina crassa,moderately_susceptible,Allocasuarina crassa,Allocasuarina crassa,Casuarinaceae,Tas,Eucalyptus pilularis,2,,31,
+Allocasuarina fibrosa V,moderately_susceptible,Allocasuarina fibrosa,Allocasuarina fibrosa,Casuarinaceae,WA,Eucalyptus piperita s.l.,2,,,
+Allocasuarina grevilleoides,moderately_susceptible,Allocasuarina grevilleoides,Allocasuarina grevilleoides,Casuarinaceae,WA,Eucalyptus polyanthemos,3,,,
+Allocasuarina ramosissima,moderately_susceptible,Allocasuarina ramosissima,Allocasuarina ramosissima,Casuarinaceae,WA,Eucalyptus preissiana,,,,FR40
+Allocasuarina tessellata,moderately_susceptible,Allocasuarina tessellata,Allocasuarina tessellata,Casuarinaceae,WA,Eucalyptus pulchella,17,,,FR60
+Allocasuarina tortiramula,moderately_susceptible,Allocasuarina tortiramula,Allocasuarina tortiramula,Casuarinaceae,WA,Eucalyptus racemosa s.l.,,,31,
+Elaeocarpus holopetalus,moderately_susceptible,Elaeocarpus holopetalus,Elaeocarpus holopetalus,Elaeocarpaceae,"NSW, Vic",Eucalyptus radiata,"2,4,25",,31,S43
+Cosmelia rubra,moderately_susceptible,Cosmelia rubra,Cosmelia rubra,Ericaceae,WA,Eucalyptus regnans,"2,25",,,"S43,FR60"
+Epacris exserta E,moderately_susceptible,Epacris exserta,Epacris exserta,Ericaceae,Tas,Eucalyptus rossii,2,,,
+Epacris glabella E,moderately_susceptible,Epacris glabella,Epacris glabella,Ericaceae,Tas,Eucalyptus rudis,,,,FR50
+Epacris stuartii CE,moderately_susceptible,Epacris stuartii,Epacris stuartii,Ericaceae,Tas,Eucalyptus saligna,2,,,
+Leucopogon corifolius,moderately_susceptible,Leucopogon reflexus,Leucopogon reflexus,Ericaceae,WA,Eucalyptus sieberi,"2,17,25",,31,"S43,LS60"
+Leucopogon cymbiformis,moderately_susceptible,Styphelia cymbiformis,Styphelia cymbiformis,Ericaceae,WA,Eucalyptus smithii,,27,,HS27
+Leucopogon esquamatus,moderately_susceptible,Styphelia esquamata,Styphelia esquamata,Ericaceae,"NSW, Vic, Tas",Eucalyptus spathulata,,,,FR50
+Lysinema conspicuum,moderately_susceptible,Lysinema conspicuum,Lysinema conspicuum,Ericaceae,WA,Eucalyptus staeri,,,,"LS40,59"
+Lysinema elegans,moderately_susceptible,Lysinema elegans,Lysinema elegans,Ericaceae,WA,Eucalyptus talyuberlup,,,,FR59
+Chorizema carinatum,moderately_susceptible,Chorizema carinatum,Chorizema carinatum,Fabaceae,WA,Eucalyptus tenuiramis,17,3,,
+Daviesia bursarioides E,moderately_susceptible,Daviesia bursarioides,Daviesia bursarioides,Fabaceae,WA,Eucalyptus todtiana,,"37,53",,"S37,53"
+Daviesia chapmanii,moderately_susceptible,Daviesia chapmanii,Daviesia chapmanii,Fabaceae,WA,Eucalyptus uncinata,,,,FR40
+Daviesia debilior subsp. sinuans,moderately_susceptible,Daviesia debilior subsp. sinuans,Daviesia debilior subsp. sinuans,Fabaceae,WA,Eucalyptus viminalis,"2,25",,31,FR60
+Daviesia dielsii,moderately_susceptible,Daviesia dielsii,Daviesia dielsii,Fabaceae,WA,Eucalyptus wandoo,,,,FR50
+Daviesia epiphyllum,moderately_susceptible,Daviesia epiphyllum,Daviesia epiphyllum,Fabaceae,WA,Eucalyptus willisii s.l.,25,,,S43
+Daviesia euphorbioides E,moderately_susceptible,Daviesia euphorbioides,Daviesia euphorbioides,Fabaceae,WA,Homalospermum firmum,,,,FR59
+Daviesia lineata,moderately_susceptible,Daviesia lineata,Daviesia lineata,Fabaceae,WA,Hypocalymma angustifolium s.l.,"15,28,24",3,,"FR21,24"
+Daviesia oxylobium,moderately_susceptible,Daviesia oxylobium,Daviesia oxylobium,Fabaceae,WA,Hypocalymma cordifolium s.l.,15,,,
+Daviesia pteroclada,moderately_susceptible,Daviesia pteroclada,Daviesia pteroclada,Fabaceae,WA,Hypocalymma myrtifolium,,,,"FR40,59"
+Daviesia speciosa E,moderately_susceptible,Daviesia speciosa,Daviesia speciosa,Fabaceae,WA,Hypocalymma phillipsii,,,,FR59
+Daviesia spiralis,moderately_susceptible,Daviesia spiralis,Daviesia spiralis,Fabaceae,WA,Hypocalymma robustum,"14,15,24",,,"S24,37,46"
+Gastrolobium tetragonophyllum,moderately_susceptible,Gastrolobium tetragonophyllum,Gastrolobium tetragonophyllum,Fabaceae,WA,Hypocalymma speciosum,,,,FR40
+Hovea corrickiae,moderately_susceptible,Hovea corrickiae,Hovea corrickiae,Fabaceae,"Vic, Tas",Hypocalymma strictum s.l.,,,,HS40
+Jacksonia carduacea,moderately_susceptible,Jacksonia carduacea,Jacksonia carduacea,Fabaceae,WA,Kunzea ericifolia,"14,24",3,,
+Jacksonia grevilleoides,moderately_susceptible,Jacksonia grevilleoides,Jacksonia grevilleoides,Fabaceae,WA,Kunzea montana,58,,,"LS58,59"
+Jacksonia sericea,moderately_susceptible,Jacksonia sericea,Jacksonia sericea,Fabaceae,WA,Kunzea parvifolia,25,,,
+Jacksonia sp. aff. furcelata,moderately_susceptible,Jacksonia sp. [Jacksonia sp. aff. furcelata],,Fabaceae,,Kunzea pomifera,,3,,
+Sphaerolobium acanthos,moderately_susceptible,Sphaerolobium acanthos,Sphaerolobium acanthos,Fabaceae,Vic,Kunzea preissiana,,,,FR40
+Acacia axillaris V,moderately_susceptible,Acacia axillaris,Acacia axillaris,Fabaceae,Tas,Kunzea recurva s.l.,,3,,MS40
+Acacia siculiformis,moderately_susceptible,Acacia siculiformis,Acacia siculiformis,Fabaceae,"NSW, ACT, Vic, Tas",Kunzea sulphurea,,,,S46
+Beaufortia micrantha,moderately_susceptible,Beaufortia micrantha,Beaufortia micrantha,Myrtaceae,WA,Leptospermum continentale,25,,,S43
+Darwinia sp. Stirling Range V,moderately_susceptible,Darwinia nubigena,Darwinia nubigena,Myrtaceae,WA,Leptospermum coriaceum,,3,,
+Kunzea recurva s.l.,moderately_susceptible,Kunzea recurva,Kunzea recurva,Myrtaceae,WA,Leptospermum ellipticum,15,,,
+Melaleuca thymoides,moderately_susceptible,Melaleuca thymoides,Melaleuca thymoides,Myrtaceae,WA,Leptospermum erubescens,,,,FR40
+Thryptomene calycina,moderately_susceptible,Thryptomene calycina,Thryptomene calycina,Myrtaceae,"SA (presumed extinct), Vic",Leptospermum glaucescens,"17,34",,,"HS34, VS or MS60"
+Banksia gardneri var. brevidentata,moderately_susceptible,Banksia gardneri var. brevidentata,Banksia gardneri var. brevidentata,Proteaceae,WA,Leptospermum juniperinum,"13,18,19",3,,
+Banksia gardneri var. gardneri,moderately_susceptible,Banksia gardneri var. gardneri,Banksia gardneri var. gardneri,Proteaceae,WA,Leptospermum lanigerum,3,,,
+Banksia repens,moderately_susceptible,Banksia repens,Banksia repens,Proteaceae,WA,Leptospermum myrsinoides,"4,25",,,S43
+Conospermum caeruleum s.l.,moderately_susceptible,Conospermum caeruleum,Conospermum caeruleum,Proteaceae,WA,Leptospermum scoparium,"8,17",,,FR22
+Conospermum coerulescens subsp. dorrienii,moderately_susceptible,Conospermum coerulescens subsp. dorrienii,Conospermum coerulescens subsp. dorrienii,Proteaceae,WA,Leptospermum trinervium,,,,LS42
+Conospermum hookeri,moderately_susceptible,Conospermum hookeri,Conospermum hookeri,Proteaceae,Tas,Lophostemon confertus,2,,,
+Dryandra calophylla,moderately_susceptible,Banksia calophylla,Banksia calophylla,Proteaceae,WA,Melaleuca cuticularis,,,,FR40
+Dryandra cirsioides,moderately_susceptible,Banksia cirsioides,Banksia cirsioides,Proteaceae,WA,Melaleuca diosmifolia,,,,FR50
+Dryandra polycephala,moderately_susceptible,Banksia polycephala,Banksia polycephala,Proteaceae,WA,Melaleuca elliptica,,3,,
+Franklandia fucifolia,moderately_susceptible,Franklandia fucifolia,Franklandia fucifolia,Proteaceae,WA,Melaleuca gibbosa,17,,,
+Grevillea confertifolia,moderately_susceptible,Grevillea confertifolia,Grevillea confertifolia,Proteaceae,Vic,Melaleuca holosericea,,,,FR56
+Grevillea pieroniae,moderately_susceptible,Grevillea pieroniae,,Proteaceae,,Melaleuca incana,,3,,
+Grevillea tripartita,moderately_susceptible,Grevillea tripartita,Grevillea tripartita,Proteaceae,WA,Melaleuca lanceolata,,,,FR50
+Hakea elliptica,moderately_susceptible,Hakea elliptica,Hakea elliptica,Proteaceae,"WA, Vic (doubtfully naturalised)",Melaleuca laxiflora,,,,FR53
+Hakea lasiantha,moderately_susceptible,Hakea lasiantha,Hakea lasiantha,Proteaceae,WA,Melaleuca macronychia,,3,,FR50
+Hakea lasiocarpha,moderately_susceptible,Hakea lasiocarpha [alternative possible names: Hakea varia (pro parte misapplied)],Hakea lasiocarpha,Proteaceae,WA,Melaleuca microphylla,,,,FR59
+Hakea lehmanniana,moderately_susceptible,Hakea lehmanniana,Hakea lehmanniana,Proteaceae,WA,Melaleuca nesophila,,,,FR50
+Isopogon heterophyllus,moderately_susceptible,Isopogon formosus subsp. formosus,Isopogon formosus subsp. formosus,Proteaceae,WA,Melaleuca pentagona s.l.,,3,,FR50
+Isopogon scabriusculus,moderately_susceptible,Isopogon scabriusculus,Isopogon scabriusculus,Proteaceae,WA,Melaleuca pritzellii,,,,LS58
+Isopogon teretifolius var. petrophiloides,moderately_susceptible,Isopogon teretifolius,Isopogon teretifolius,Proteaceae,WA,Melaleuca pulchella,,,,FR50
+Isopogon tripartitus,moderately_susceptible,Isopogon trilobus,Isopogon trilobus,Proteaceae,WA,Melaleuca scabra,37,,,"S37,46"
+Persoonia trinervis,moderately_susceptible,Persoonia trinervis,Persoonia trinervis,Proteaceae,WA,Melaleuca seriata,,,,FR40
+Petrophile biternata,moderately_susceptible,Petrophile biternata,Petrophile biternata,Proteaceae,WA,Melaleuca spathulata,,,,FR50
+Petrophile crispata,moderately_susceptible,Petrophile crispata,Petrophile crispata,Proteaceae,WA,Melaleuca squamea,"17,34",3,33,HS34
+Petrophile incurvata,moderately_susceptible,Petrophile incurvata,Petrophile incurvata,Proteaceae,WA,Melaleuca squarrosa,"17,25",,,"S43,FR21"
+Petrophile plumosa,moderately_susceptible,Petrophile plumosa,Petrophile plumosa,Proteaceae,WA,Melaleuca suberosa,,,,FR40
+Petrophile seminuda,moderately_susceptible,Petrophile seminuda,Petrophile seminuda,Proteaceae,WA,Melaleuca subfalcata ,,,,S40
+Stirlingia tenuifolia var. anethifolia,moderately_susceptible,Stirlingia anethifolia,Stirlingia anethifolia,Proteaceae,WA,Melaleuca thymoides,"14,24",,,MS59
+Stirlingia tenuifolia var. tenuifolia,moderately_susceptible,Stirlingia tenuifolia,Stirlingia tenuifolia,Proteaceae,WA,Melaleuca uncinata,,3,,
+Restio laxocarya,moderately_susceptible,Loxocarya cinerea,Loxocarya cinerea,Restionaceae,WA,Melaleuca violacea,,,,FR50
+Leionema ralstonii V,moderately_susceptible,Leionema ralstonii,Leionema ralstonii,Rutaceae,NSW,Pericalymma ellipticum,"14,24","37,53",,"S37,53"
+Stylidium graminifolium s. l.,moderately_susceptible,Stylidium graminifolium [alternative possible names: Stylidium armeria (pro parte misapplied) | Stylidium montanum (pro parte misapplied) | Stylidium armeria (misapplied) | Stylidium montanum (misapplied)],Stylidium graminifolium,Stylidiaceae,"SA, Qld, NSW, ACT, Vic, Tas",Phymatocarpus maxwellii,,3,,
+Pimelea rosea,moderately_susceptible,Pimelea rosea,Pimelea rosea,Thymelaeaceae,WA,Regelia inops,,3,,LS40
+Tetratheca gunnii CE,moderately_susceptible,Tetratheca gunnii,Tetratheca gunnii,Elaeocarpaceae,Tas,Rhodamnia blairiana,,,,S36 FR36
+Gastrolobium rubrum,moderately_susceptible,Gastrolobium rubrum,Gastrolobium rubrum,Fabaceae,WA,Rhodamnia sessiliflora,,,,FR36
+Agonis hypericifolia,moderately_susceptible,Leptospermum hypericifolium,,Myrtaceae,,Scholtzia involucrata,37,,,S46
+Banksia micrantha,moderately_susceptible,Banksia micrantha,Banksia micrantha,Proteaceae,WA,Syzygium cormiflorum,,,,FR36
+Dryandra hirsuta,moderately_susceptible,Banksia hirta,Banksia hirta,Proteaceae,WA,Syzygium erythrodoxum,,,16,
+Hakea ambigua,moderately_susceptible,Hakea ambigua,Hakea ambigua,Proteaceae,WA,Syzygium kuranda,,,,S36
+Hakea crassifolia,moderately_susceptible,Hakea pandanicarpa subsp. crassifolia,Hakea pandanicarpa subsp. crassifolia,Proteaceae,WA,Syzygium johnsonii,,,,FR36
+Leucopogon lasiophyllus,moderately_susceptible highly_susceptible,Leucopogon lasiophyllus,Leucopogon lasiophyllus,Ericaceae,WA,Syzygium wesa,,,16,FR36
+Banksia solandri,moderately_susceptible highly_susceptible,Banksia solandri,Banksia solandri,Proteaceae,WA,Thryptomene calycina,2,44,,MS44
+Aotus genistoides,moderately_susceptible susceptible_but_degree_unknown,Aotus genistoides,Aotus genistoides,Fabaceae,WA,Thryptomene micrantha,34,,,HS60
+Darwinia wittwerorum E,moderately_susceptible susceptible_but_degree_unknown,Darwinia wittwerorum,Darwinia wittwerorum,Myrtaceae,WA,Thryptomene saxicola,,,,S37
+Banksia aculeata,moderately_susceptible susceptible_but_degree_unknown,Banksia aculeata,Banksia aculeata,Proteaceae,WA,Verticordia carinata V,58,,,LS-MS58
+Darwinia collina E,moderately_susceptible susceptible_but_degree_unknown,Darwinia collina,Darwinia collina,Myrtaceae,WA,Verticordia chrysantha,,3,,
+Daviesia pseudaphylla E,moderately_susceptible susceptible_but_degree_unknown low_susceptibility,Daviesia pseudaphylla,Daviesia pseudaphylla,Fabaceae,WA,Verticordia densiflora,"14,37, 49,53",,,"S37,49,53"
+Dryandra plumosa subsp. denticulata,moderately_susceptible highly_susceptible,Banksia plumosa subsp. denticulata,Banksia plumosa subsp. denticulata,Proteaceae,WA,Verticordia habrantha,,,,FR40
+Thysanotus multiflorus,presumed_resistant,Thysanotus multiflorus,Thysanotus multiflorus,Asparagaceae,WA,Verticordia huegelii,14,,"37, 53","S37,53"
+Thysanotus thyrsoides,presumed_resistant,Thysanotus thyrsoideus,Thysanotus thyrsoideus,Asparagaceae,WA,Verticordia nitens,37,,,"S37,46"
+Trichocline spathulata,presumed_resistant,Trichocline spathulata,Trichocline spathulata,Asteraceae,WA,Verticordia plumosa,14,3,,
+Labichea punctata,presumed_resistant,Labichea punctata,Labichea punctata,Fabaceae,WA,Waterhousia unipunctata,,,,FR36
+Mesomelaena graciliceps,presumed_resistant,Mesomelaena graciliceps,Mesomelaena graciliceps,Cyperaceae,WA,Wehlia coarctata,,3,,
+Hibbertia huegelii,presumed_resistant,Hibbertia huegelii,Hibbertia huegelii,Dilleniaceae,WA,Brackenridgea nitida subsp. australiana,16,,,FR36
+Monotaxis occidentalis,presumed_resistant,Monotaxis occidentalis,Monotaxis occidentalis,Euphorbiaceae,WA,Olax benthamiana,,,,Q21
+Chorizema rhombeum,presumed_resistant,Chorizema rhombeum,Chorizema rhombeum,Fabaceae,WA,Olax phyllanthi,,,,FR40
+Scaevola calliptera,presumed_resistant,Scaevola calliptera,Scaevola calliptera,Goodeniaceae,WA,Chionanthus axillaris,,,,FR36
+Patersonia babianoides,presumed_resistant,Patersonia babianoides,Patersonia babianoides,Iridaceae,WA,Caladenia flava,,,,"FR21,59"
+Olax benthamiana,presumed_resistant,Olax benthamiana,Olax benthamiana,Olacaceae,WA,Cryptostylis ovata,,,,FR40
+Amphipogon amphipogonoides,presumed_resistant,Amphipogon amphipogonoides,Amphipogon amphipogonoides,Poaceae,WA,Drakea confluens E,,,,FR58
+Opercularia echinocephala,presumed_resistant,Opercularia echinocephala,Opercularia echinocephala,Rubiaceae,WA,Elythranthera brunonis,,,,"FR21,59"
+Opercularia vaginata,presumed_resistant,Opercularia vaginata,Opercularia vaginata,Rubiaceae,WA,Eriochilus dilatatus,,,,FR40
+Stylidium junceum,presumed_resistant,Stylidium junceum [alternative possible names: Stylidium hesperium (pro parte misapplied) | Stylidium hygrophilum (pro parte misapplied) | Stylidium laciniatum (pro parte misapplied) | Stylidium scariosum (pro parte misapplied) | Stylidium squamosotuberosum (pro parte misapplied) | Stylidium hesperium (misapplied) | Stylidium scariosum (misapplied)],Stylidium junceum,Stylidiaceae,WA,Leporella fimbriata,,,,FR40
+Stylidium schoenoides,presumed_resistant,Stylidium schoenoides,Stylidium schoenoides,Stylidiaceae,WA,Mecopodum parvifolium,,,,FR21
+Hybanthus floribundus,presumed_resistant,Hybanthus floribundus,Hybanthus floribundus,Violaceae,"WA, SA, NSW, Vic",Pterostylis concinna,25,,,S43
+Comesperma virgatum,presumed_resistant field_resistant,Comesperma virgatum,Comesperma virgatum,Polygalaceae,WA,Pterostylis vittata,,,,FR59
+Alstonia muelleriana,susceptible_but_degree_unknown,Alstonia muelleriana,Alstonia muelleriana,Apocynaceae,Qld,Pterostylis aff. nana,,,,FR59
+Polyscias murrayi,susceptible_but_degree_unknown,Polyscias murrayi,Polyscias murrayi,Araliaceae,"Qld, NSW, Vic",Pyrorchis nigricans,,,,FR21
+Oraniopsis appendiculata,susceptible_but_degree_unknown,Oraniopsis appendiculata,Oraniopsis appendiculata,Arecaceae,Qld,Thelymitra crinita,,,,FR21
+Argentipallium obtusifolium,susceptible_but_degree_unknown,Argentipallium obtusifolium,Argentipallium obtusifolium,Asteraceae,"SA, NSW, Vic, Tas",Thelymitra pauciflora s.l.,,,,FR59
+Brachyscome uliginosa,susceptible_but_degree_unknown,Allittia uliginosa,Allittia uliginosa,Asteraceae,"SA, Vic",Agrostocrinum scabrum,,,21,FR59S21
+Allocasuarina monilifera,susceptible_but_degree_unknown,Allocasuarina monilifera,Allocasuarina monilifera,Casuarinaceae,Tas,Dianella longifolia s.l.,25,,"9,34",
+Allocasuarina muelleriana s.l.,susceptible_but_degree_unknown,Allocasuarina muelleriana,Allocasuarina muelleriana,Casuarinaceae,"SA, Vic",Dianella revoluta s.l.,"14,24",,,S24
+Allocasuarina paludosa,susceptible_but_degree_unknown,Allocasuarina paludosa,Allocasuarina paludosa,Casuarinaceae,"SA, NSW, Vic, Tas",Dianella tasmanica,"8,17",,,
+Allocasuarina pusilla,susceptible_but_degree_unknown,Allocasuarina pusilla,Allocasuarina pusilla,Casuarinaceae,"SA, Vic",Johnsonia lupulina s.l.,,,,FR40
+Anodopetalum biglandulosum,susceptible_but_degree_unknown,Anodopetalum biglandulosum,Anodopetalum biglandulosum,Cunoniaceae,Tas,Tricoryne elatior,,,,FR21
+Gillbeea adenopetala,susceptible_but_degree_unknown,Gillbeea adenopetala,Gillbeea adenopetala,Cunoniaceae,Qld,Phyllocladus aspleniifolius,"17,34",3,,
+Actinostrobus pyramidalis,susceptible_but_degree_unknown,Callitris pyramidalis,Callitris pyramidalis,Cupressaceae,WA,Billardiera drummondiana,,,,FR24
+Hibbertia acerosa,susceptible_but_degree_unknown,Hibbertia acerosa,Hibbertia acerosa,Dilleniaceae,WA,Billardiera fraseri,,,,FR21
+Hibbertia desmophylla,susceptible_but_degree_unknown,Hibbertia desmophylla,Hibbertia desmophylla,Dilleniaceae,WA,Pittosporum phillyreoides,,,,FR50
+Hibbertia furfuracea,susceptible_but_degree_unknown,Hibbertia furfuracea,Hibbertia furfuracea,Dilleniaceae,WA,Rhytidosporum procumbens,,2,,
+Hibbertia inconspicua,susceptible_but_degree_unknown,Hibbertia inconspicua,Hibbertia inconspicua,Dilleniaceae,WA,Sollya drummondii,,,,"FR58,59"
+Hibbertia lineata,susceptible_but_degree_unknown,Hibbertia lineata,Hibbertia lineata,Dilleniaceae,WA,Agrostis aemula,,,,FR59
+Hibbertia procumbens,susceptible_but_degree_unknown,Hibbertia procumbens [alternative possible names: Hibbertia obtusifolia (pro parte misapplied)],Hibbertia procumbens,Dilleniaceae,"NSW, Vic, Tas",Amphipogon amphipogonoides,,,,Q21
+Hibbertia prostrata,susceptible_but_degree_unknown,Hibbertia fasciculata,Hibbertia fasciculata,Dilleniaceae,"SA, Qld, NSW, Vic, Tas",Amphipogon laguroides s.l.,,,,FR59
+Hibbertia riparia,susceptible_but_degree_unknown,Hibbertia riparia [alternative possible names: Hibbertia australis (pro parte misapplied) | Hibbertia devitata (pro parte misapplied) | Hibbertia setifera (pro parte misapplied) | Hibbertia australis (misapplied) | Hibbertia stricta (misapplied)],Hibbertia riparia,Dilleniaceae,"SA, Qld, NSW, Vic, Tas",Anisopogon avenaceus,,,,FR42
+Hibbertia stricta,susceptible_but_degree_unknown,Hibbertia stricta [alternative possible names: Hibbertia australis (pro parte misapplied) | Hibbertia devitata (pro parte misapplied) | Hibbertia glebosa subsp. oblonga (pro parte misapplied) | Hibbertia glebosa (pro parte misapplied) | Hibbertia glebosa subsp. glebosa (pro parte misapplied) | Hibbertia platyphylla (pro parte misapplied) | Hibbertia platyphylla subsp. platyphylla (pro parte misapplied) | Hibbertia riparia (pro parte misapplied) | Hibbertia australis (misapplied) | Hibbertia glebosa (misapplied) | Hibbertia glebosa subsp. glebosa (misapplied) | Hibbertia gracilipes (misapplied) | Hibbertia platyphylla subsp. platyphylla (misapplied) | Hibbertia riparia (misapplied)],Hibbertia stricta,Dilleniaceae,"Qld, NSW",Austrostipa compressa,,,,FR40
+Elaeocarpus foveolatus,susceptible_but_degree_unknown,Elaeocarpus foveolatus,Elaeocarpus foveolatus,Elaeocarpaceae,Qld,Austrostipa flavescens,,,,LS40
+Elaeocarpus sericopetalus,susceptible_but_degree_unknown,Elaeocarpus sericopetalus,Elaeocarpus sericopetalus,Elaeocarpaceae,Qld,Deyeuxia drummondii E,,,,FR58
+Sloanea australis subsp. parviflora,susceptible_but_degree_unknown,Sloanea australis subsp. parviflora,Sloanea australis subsp. parviflora,Elaeocarpaceae,Qld,Entolasia stricta,,,,FR42
+Acrotriche fasciculiflora,susceptible_but_degree_unknown,Acrotriche fasciculiflora,Acrotriche fasciculiflora,Ericaceae,SA,Neurachne alopecuroidea,,,,FR21
+Acrotriche serrulata,susceptible_but_degree_unknown,Acrotriche serrulata [alternative possible names: Acrotriche affinis (pro parte misapplied)],Acrotriche serrulata,Ericaceae,"SA, NSW, ACT, Vic, Tas",Poa poiformis,,,,FR54
+Andersonia ferricola,susceptible_but_degree_unknown,Andersonia ferricola,Andersonia ferricola,Ericaceae,WA,Poa porphyroclados,,,,FR59
+Astroloma ciliatum,susceptible_but_degree_unknown,Styphelia discolor,Styphelia discolor,Ericaceae,WA,Poa sieberiana,,44,,FR44
+Astroloma conostephioides,susceptible_but_degree_unknown,Stenanthera conostephioides,Stenanthera conostephioides,Ericaceae,"SA, Vic",Tetrarrhena juncea,,,,FR22
+Astroloma pinifolium,susceptible_but_degree_unknown,Stenanthera pinifolia,Stenanthera pinifolia,Ericaceae,"NSW, Vic, Tas",Tetrarrhena laevis,,,21,"FR59,Q21"
+Brachyloma ciliatum,susceptible_but_degree_unknown,Brachyloma ciliatum,Brachyloma ciliatum,Ericaceae,"SA, Vic, Tas",Themeda triandra,29,,,S43
+Brachyloma daphnoides s.l.,susceptible_but_degree_unknown,Brachyloma daphnoides,Brachyloma daphnoides,Ericaceae,"SA, Qld, NSW, ACT, Vic",Microstrobos fitzgeraldii,,3,,
+Conostephium pendulum,susceptible_but_degree_unknown,Conostephium pendulum,Conostephium pendulum,Ericaceae,WA,Podocarpus druoynianus,"15,46, 53",3,,"S46,53"
+Epacris lanuginosa,susceptible_but_degree_unknown,Epacris lanuginosa,Epacris lanuginosa,Ericaceae,"NSW, Vic, Tas",Podocarpus lawrencei,17,3,,
+Epacris obtusifolia,susceptible_but_degree_unknown,Epacris obtusifolia,Epacris obtusifolia,Ericaceae,"Qld, NSW, Vic, Tas",Pruminopitys amara,,,16,
+Leptecophylla juniperina,susceptible_but_degree_unknown,Leptecophylla juniperina,,Ericaceae,,Comesperma calymega,40,,,FR21
+Leucopogon concinnus,susceptible_but_degree_unknown,Styphelia concinna,Styphelia concinna,Ericaceae,WA,Comesperma confertum,40,,,FR40
+Leucopogon concurvus,susceptible_but_degree_unknown,Leucopogon concurvus,Leucopogon concurvus,Ericaceae,SA,Comesperma ericinum s. l.,,,,
+Leucopogon distans var. contractus,susceptible_but_degree_unknown,Leucopogon penicillatus,Leucopogon penicillatus,Ericaceae,WA,Comesperma virgatum,,,21,"Q21,FR24"
+Leucopogon elegens,susceptible_but_degree_unknown,Leucopogon elegans,Leucopogon elegans,Ericaceae,WA,Adenanthos apiculatus,,3,,
+Leucopogon glacialis,susceptible_but_degree_unknown,Leucopogon glacialis,Leucopogon glacialis,Ericaceae,"SA, Vic",Adenanthos barbiger,"14,28",,,"S46,HS14"
+Leucopogon gracillimus,susceptible_but_degree_unknown,Leucopogon gracillimus,Leucopogon gracillimus,Ericaceae,WA,Adenanthos cacomorphus,,,,HS41
+Leucopogon pulchellus,susceptible_but_degree_unknown,Leucopogon pulchellus,Leucopogon pulchellus,Ericaceae,WA,Adenanthos cuneatus,,,,"S46,51HS40LS59"
+Leucopogon revolutus,susceptible_but_degree_unknown,Leucopogon obovatus subsp. revolutus,Leucopogon obovatus subsp. revolutus,Ericaceae,WA,Adenanthos cunninghamii E,,,,"S49,52,MS40,41"
+Leucopogon virgatus,susceptible_but_degree_unknown,Leucopogon virgatus,Leucopogon virgatus,Ericaceae,"SA, Qld, NSW, ACT, Vic, Tas",Adenanthos cygnorum s.l.,,,,"S37,46,HS40"
+Monotoca elliptica,susceptible_but_degree_unknown,Monotoca elliptica [alternative possible names: Monotoca oreophila (pro parte misapplied)],Monotoca elliptica,Ericaceae,"NSW, Vic, Tas",Adenanthos cygnorum subsp. chamaephyton,,,,HS41
+Monotoca glauca,susceptible_but_degree_unknown,Monotoca glauca,Monotoca glauca,Ericaceae,"Vic, Tas",Adenanthos detmoldii s.l.,,,,"S46,HS41"
+Monotoca tamariscina,susceptible_but_degree_unknown,Dielsiodoxa tamariscina,Dielsiodoxa tamariscina,Ericaceae,WA,Adenanthos dobagii E,,,,"S49,HS41"
+Styphelia adscendens,susceptible_but_degree_unknown,Styphelia adscendens,Styphelia adscendens,Ericaceae,"SA (native and naturalised), NSW, Vic, Tas",Adenanthos ellipticus V,,,,"S52,HS41,59"
+Mallotus polyadenos,susceptible_but_degree_unknown,Mallotus polyadenos,Mallotus polyadenos,Euphorbiaceae,Qld,Adenanthos eyrei E,,,,HS41
+Bossiaea eriocarpa,susceptible_but_degree_unknown,Bossiaea eriocarpa,Bossiaea eriocarpa,Fabaceae,WA,Adenanthos filifolius,58,,,"S56,MS-HS40,58,59"
+Daviesia brevifolia,susceptible_but_degree_unknown,Daviesia brevifolia,Daviesia brevifolia,Fabaceae,"SA, Vic",Adenanthos glabrescens subsp. exasperatus,,,,HS41
+Daviesia incrassata s.l.,susceptible_but_degree_unknown,Daviesia incrassata,Daviesia incrassata,Fabaceae,WA,Adenanthos gracilipes,,,,HS41
+Daviesia latifolia,susceptible_but_degree_unknown,Daviesia latifolia,Daviesia latifolia,Fabaceae,"Qld, NSW, Vic, Tas",Adenanthos ileticos,,,,"S52,HS41"
+Daviesia rhombifolia,susceptible_but_degree_unknown,Daviesia rhombifolia,Daviesia rhombifolia,Fabaceae,WA,Adenanthos labillardierei,,,,"HS41,59"
+Dillwynia phylicoides,susceptible_but_degree_unknown,Dillwynia phylicoides,Dillwynia phylicoides,Fabaceae,"Qld, NSW, ACT, Vic",Adenanthos linearis,,,,"HS40,41"
+Gastrolobium crenulatum,susceptible_but_degree_unknown,Gastrolobium crenulatum,Gastrolobium crenulatum,Fabaceae,WA,Adenanthos macropodiana,19,,,
+Gastrolobium papilio,susceptible_but_degree_unknown,Gastrolobium papilio,Gastrolobium papilio,Fabaceae,WA,Adenanthos meisneri,,,,S46
+Hovea elliptica,susceptible_but_degree_unknown,Hovea elliptica,Hovea elliptica,Fabaceae,WA,Adenanthos obovatus,"2,14,15, 24",,,"S37,46,53,HS40,59"
+Hovea linearis,susceptible_but_degree_unknown,Hovea linearis [alternative possible names: Hovea heterophylla (pro parte taxonomic synonym) | Hovea heterophylla (misapplied)],Hovea linearis,Fabaceae,"SA, Qld, NSW",Adenanthos oreophilus,,,,"S56,HS40,59"
+Hovea pungens,susceptible_but_degree_unknown,Hovea pungens,Hovea pungens,Fabaceae,WA,Adenanthos pungens subsp. effusus E,,,,"S49,HS41"
+Jacksonia calycina,susceptible_but_degree_unknown,Jacksonia calycina,Jacksonia calycina,Fabaceae,WA,Adenanthos pungens subsp. pungens V,,,,"S49,HS41"
+Jacksonia horrida,susceptible_but_degree_unknown,Jacksonia horrida,Jacksonia horrida,Fabaceae,WA,Adenanthos sericeus ,,,,S46
+Latrobea genistoides,susceptible_but_degree_unknown,Latrobea genistoides,Latrobea genistoides,Fabaceae,WA,Adenanthos terminalis,,,,S57
+Latrobea hirtella,susceptible_but_degree_unknown,Latrobea hirtella,Latrobea hirtella,Fabaceae,WA,Adenanthos velutinus E,,,,HS41
+Platylobium obtusangulum,susceptible_but_degree_unknown,Platylobium obtusangulum,Platylobium obtusangulum,Fabaceae,"SA, Vic, Tas",Agastachys odorata,"17,34",,,HS34
+Pultenaea humilis,susceptible_but_degree_unknown,Pultenaea humilis,Pultenaea humilis,Fabaceae,"NSW, Vic, Tas",Banksia aculeata,,,,"MS40,S58"
+Pultenaea mollis,susceptible_but_degree_unknown,Pultenaea mollis,Pultenaea mollis,Fabaceae,"NSW, Vic, Tas",Banksia ashbyi,47,47,,S47
+Pultenaea pedunculata,susceptible_but_degree_unknown,Pultenaea pedunculata,Pultenaea pedunculata,Fabaceae,"SA, NSW, Vic, Tas",Banksia aspleniifolia,,3,,
+Pultenaea scabra,susceptible_but_degree_unknown,Pultenaea scabra,Pultenaea scabra,Fabaceae,"SA, Qld, NSW, Vic",Banksia attenuata,"14,15,24,37",3,23*,"S46,53,HS23,40"
+Nothofagus cunninghamii,susceptible_but_degree_unknown,Nothofagus cunninghamii,Nothofagus cunninghamii,Nothofagaceae,"Vic, Tas",Banksia audax,,,23*,
+Gleichenia dicarpa,susceptible_but_degree_unknown,Gleichenia dicarpa,Gleichenia dicarpa,Gleicheniaceae,"NT, Qld, NSW, ACT, Vic, Tas",Banksia baueri,"46, 47",,23*,"HS59,S23,46,47,MS40"
+Dampiera alata,susceptible_but_degree_unknown,Dampiera alata,Dampiera alata,Goodeniaceae,WA,Banksia baxteri,"46, 47",,23*,"S46,47,HS40,59"
+Goodenia hederacea s.l.,susceptible_but_degree_unknown,Goodenia hederacea,Goodenia hederacea,Goodeniaceae,"Qld, NSW, ACT, Vic",Banksia benthamiana,,,23*,"HS23,41"
+Goodenia humilis,susceptible_but_degree_unknown,Goodenia humilis,Goodenia humilis,Goodeniaceae,"SA, NSW, Vic, Tas",Banksia brownii E,58,"49, 47, 52",23*,"S49,47,52, HS23,40,41,58,59"
+Goodenia lanata,susceptible_but_degree_unknown,Goodenia lanata,Goodenia lanata,Goodeniaceae,"Vic, Tas",Banksia burdettii,,47,23*,S47
+Gonocarpus mezianus,susceptible_but_degree_unknown,Gonocarpus mezianus,Gonocarpus mezianus,Haloragaceae,"SA, Vic",Banksia caleyi,,"47, 3",23*,"S47,MS40"
+Patersonia glabrata,susceptible_but_degree_unknown,Patersonia glabrata,Patersonia glabrata,Iridaceae,"Qld, NSW, Vic",Banksia candolleana,,47,23*,S47
+Prostanthera decussata,susceptible_but_degree_unknown,Prostanthera decussata,Prostanthera decussata,Lamiaceae,"NSW, ACT, Vic",Banksia chamaephyton,,,,HS41
+Beilschmiedia bancroftii,susceptible_but_degree_unknown,Beilschmiedia bancroftii,Beilschmiedia bancroftii,Lauraceae,Qld,Banksia coccinea,,"46, 47",23*,"S46,47,HS23,40,59"
+Beilschmiedia tooram,susceptible_but_degree_unknown,Beilschmiedia tooram,Beilschmiedia tooram,Lauraceae,Qld,Banksia cuneata E,,52,23*,"S52,HS23,40,41"
+Cryptocarya mackinnoniana,susceptible_but_degree_unknown,Cryptocarya mackinnoniana,Cryptocarya mackinnoniana,Lauraceae,Qld,Banksia dryandroides,,,23*,HS40
+Endiandra bessaphila,susceptible_but_degree_unknown,Endiandra bessaphila,Endiandra bessaphila,Lauraceae,Qld,Banksia elderiana,,3,23*,
+Acacia campylophylla,susceptible_but_degree_unknown,Acacia campylophylla,Acacia campylophylla,Fabaceae,WA,Banksia elegans,,3,,HS41
+Acacia mitchelli,susceptible_but_degree_unknown,Acacia mitchellii,Acacia mitchellii,Fabaceae,"SA, NSW, Vic",Banksia epica,,,,HS41
+Acacia mucronata s.l.,susceptible_but_degree_unknown,Acacia mucronata,Acacia mucronata,Fabaceae,"NSW, Vic, Tas",Banksia ericifolia,"3,6",,23*,SV42
+Acacia oxycedrus,susceptible_but_degree_unknown,Acacia oxycedrus,Acacia oxycedrus,Fabaceae,"SA, NSW, Vic",Banksia gardneri var. brevidentata,,,,MS40
+Acacia paradoxa,susceptible_but_degree_unknown,Acacia paradoxa,Acacia paradoxa,Fabaceae,"WA (naturalised), SA, Qld, NSW, ACT, Vic, Tas (naturalised)",Banksia gardneri var. gardneri,,,,MS40
+Rapanea achradifolia,susceptible_but_degree_unknown,Myrsine achradifolia,Myrsine achradifolia,Primulaceae,Qld,Banksia gardneri var. hiemalis,,,23*,
+Calothamnus villosus,susceptible_but_degree_unknown,Calothamnus villosus,Calothamnus villosus,Myrtaceae,WA,Banksia goodii V,,,,"S49,52,MS41"
+Chamelaucium erythrochlora,susceptible_but_degree_unknown,Chamelaucium erythrochlorum,Chamelaucium erythrochlorum,Myrtaceae,WA,Banksia grandis,"14,15,21,24,28",3,"21,23*","S24,46,47,53, HS14,23,40,59"
+Chamelaucium griffinii,susceptible_but_degree_unknown,Chamelaucium sp. Cataby (G.J.Keighery 11009),Chamelaucium sp. Cataby (G.J.Keighery 11009),Myrtaceae,WA,Banksia hookeriana,,"47,",23?,"S47,HS23"
+Chamelaucium roycei,susceptible_but_degree_unknown,Chamelaucium roycei,Chamelaucium roycei,Myrtaceae,WA,Banksia ilicifolia,"14,15,24,37,46,53",,,"S46,53,HS23,40"
+Darwinia macrostegia,susceptible_but_degree_unknown,Darwinia macrostegia,Darwinia macrostegia,Myrtaceae,WA,Banksia integrifolia s.l.,2,,23*,
+Eucalyptus aromaphloia,susceptible_but_degree_unknown,Eucalyptus aromaphloia,Eucalyptus aromaphloia,Myrtaceae,Vic,Banksia laevigata,,,23*,"S23,HS41"
+Eucalyptus baxteri,susceptible_but_degree_unknown,Eucalyptus baxteri,Eucalyptus baxteri,Myrtaceae,"SA, NSW, Vic",Banksia laricina,37,"47,",23*,"S47,HS23,40"
+Eucalyptus consideniana,susceptible_but_degree_unknown,Eucalyptus consideniana,Eucalyptus consideniana,Myrtaceae,"NSW, Vic",Banksia lemanniana,,3,23*,
+Eucalyptus dives,susceptible_but_degree_unknown,Eucalyptus dives,Eucalyptus dives,Myrtaceae,"NSW, ACT, Vic",Banksia lindleyana,,"47, ",23*,S47
+Eucalyptus globoidea,susceptible_but_degree_unknown,Eucalyptus globoidea,Eucalyptus globoidea,Myrtaceae,"NSW, Vic",Banksia littoralis,"14,15","46, 53",23*,"S46,53,HS40"
+Eucalyptus macrorhyncha,susceptible_but_degree_unknown,Eucalyptus macrorhyncha,Eucalyptus macrorhyncha,Myrtaceae,"SA, NSW, ACT, Vic",Banksia lullfitzii,,,23*,HS41
+Eucalyptus radiata,susceptible_but_degree_unknown,Eucalyptus radiata,Eucalyptus radiata,Myrtaceae,"Qld, NSW, ACT, Vic, Tas",Banksia marginata,"2,4,8,13, 17,18,19,25,29,34",,23*,S43
+Eucalyptus willisii s.l.,susceptible_but_degree_unknown,Eucalyptus willisii,Eucalyptus willisii,Myrtaceae,Vic,Banksia media,,46,23*,S46
+Kunzea sulphurea,susceptible_but_degree_unknown,Kunzea sulphurea,Kunzea sulphurea,Myrtaceae,WA,Banksia meisneri var. ascendens,,,,HS41
+Leptospermum continentale,susceptible_but_degree_unknown,Leptospermum continentale,Leptospermum continentale,Myrtaceae,"SA, NSW, ACT, Vic",Banksia menziesii,"14,15,24,37",,23*,"S46,47,53,HS23,40"
+Leptospermum myrsinoides,susceptible_but_degree_unknown,Leptospermum myrsinoides,Leptospermum myrsinoides,Myrtaceae,"SA, NSW, Vic",Banksia micrantha,,,,"MS40,41"
+Melaleuca subfalcata,susceptible_but_degree_unknown,Melaleuca subfalcata,Melaleuca subfalcata,Myrtaceae,WA,Banksia nutans,,,23*,"S46, 47,HS40"
+Scholtzia involucrata,susceptible_but_degree_unknown,Scholtzia involucrata,Scholtzia involucrata,Myrtaceae,WA,Banksia oblongifolia,,,23*,
+Syzygium kuranda,susceptible_but_degree_unknown,Syzygium kuranda,Syzygium kuranda,Myrtaceae,Qld,Banksia occidentalis s.l.,,3,23*,"S40,46,47,HS40,41"
+Thryptomene saxicola,susceptible_but_degree_unknown,Thryptomene saxicola,Thryptomene saxicola,Myrtaceae,WA,Banksia oligantha E,,,,"S49,52,HS41"
+Pterostylis concinna,susceptible_but_degree_unknown,Pterostylis concinna,Pterostylis concinna,Orchidaceae,"SA, NSW, Vic, Tas",Banksia oreophila,58,,,"HS40,58,59"
+Dianella revoluta s.l.,susceptible_but_degree_unknown,Dianella revoluta,Dianella revoluta,Hemerocallidaceae,"WA, SA, Qld, NSW, ACT, Vic, Tas",Banksia ornata ,,3,23*,HS23
+Themeda triandra,susceptible_but_degree_unknown,Themeda triandra,Themeda triandra,Poaceae,"WA, NT, SA, Qld, NSW, ACT, Vic, Tas",Banksia paludosa subsp. paludosa,,,23*,SV42
+Adenanthos meisneri,susceptible_but_degree_unknown,Adenanthos meisneri,Adenanthos meisneri,Proteaceae,WA,Banksia petiolaris,,,23*,
+Adenanthos sericeus,susceptible_but_degree_unknown,Adenanthos sericeus [alternative possible names: Adenanthos cygnorum (pro parte misapplied) | Adenanthos macropodianus (misapplied)],Adenanthos sericeus,Proteaceae,WA,Banksia pilostylis,,,23*,
+Adenanthos terminalis,susceptible_but_degree_unknown,Adenanthos terminalis [alternative possible names: Adenanthos drummondii (pro parte misapplied) | Adenanthos drummondii (misapplied)],Adenanthos terminalis,Proteaceae,"SA, Vic",Banksia preamorsa,,,23*,S46
+Banksia ashbyi,susceptible_but_degree_unknown,Banksia ashbyi,Banksia ashbyi,Proteaceae,WA,Banksia prionotes,,,23*,"S46,47,HS23,40"
+Banksia burdettii,susceptible_but_degree_unknown,Banksia burdettii,Banksia burdettii,Proteaceae,WA,Banksia pulchella,,,23*,HS23
+Banksia candolleana,susceptible_but_degree_unknown,Banksia candolleana,Banksia candolleana,Proteaceae,WA,Banksia quercifolia,15,,23*,"S46,51,HS40,59"
+Banksia lindleyana,susceptible_but_degree_unknown,Banksia lindleyana,Banksia lindleyana,Proteaceae,WA,Banksia repens,,,23*,MS40
+Banksia marginata,susceptible_but_degree_unknown,Banksia marginata,Banksia marginata,Proteaceae,"SA, NSW, ACT, Vic, Tas",Banksia saxicola,,44,,HS44
+Banksia media,susceptible_but_degree_unknown,Banksia media,Banksia media,Proteaceae,WA,Banksia scabrella,,,,HS41
+Banksia preamorsa,susceptible_but_degree_unknown,Banksia praemorsa,Banksia praemorsa,Proteaceae,WA,Banksia sceptrum,,,23*,HS23
+Banksia spinulosa var. cunninghamii,susceptible_but_degree_unknown,Banksia spinulosa var. cunninghamii [alternative possible names: Banksia neoanglica (pro parte taxonomic synonym)],Banksia spinulosa var. cunninghamii,Proteaceae,"Qld, NSW, Vic",Banksia seminuda,,,,"S46,HS40"
+Cardwellia sublimis,susceptible_but_degree_unknown,Cardwellia sublimis,Cardwellia sublimis,Proteaceae,Qld,Banksia serrata,"2,17,25, 34",,,"S43,SV42,60"
+Conospermum mitchellii,susceptible_but_degree_unknown,Conospermum mitchellii,Conospermum mitchellii,Proteaceae,Vic,Banksia solandri,58,,,"MS40, HS41,58,59"
+Conospermum spectabile,susceptible_but_degree_unknown,Conospermum spectabile,Conospermum spectabile,Proteaceae,WA,Banksia speciosa,,3,23*,"S46,47,HS23,40"
+Conospermum todii,susceptible_but_degree_unknown,Conospermum toddii,Conospermum toddii,Proteaceae,WA,Banksia sphaerocarpa s.l.,,3,23*,"S46,47 MS59 HS23,40,41,58"
+Conospermum triplinervium,susceptible_but_degree_unknown,Conospermum triplinervium,Conospermum triplinervium,Proteaceae,WA,Banksia spinulosa var. cunninghamii,"13,25",,,S43
+Darlingia darlingiana,susceptible_but_degree_unknown,Darlingia darlingiana,Darlingia darlingiana,Proteaceae,Qld,Banksia telmatiaea,37,,,"S37,46"
+Dryandra bipinnatifida,susceptible_but_degree_unknown,Banksia bipinnatifida,Banksia bipinnatifida,Proteaceae,WA,Banksia tricuspis,,,,"S52,HS41"
+Dryandra serratuloides subsp. perissa,susceptible_but_degree_unknown,Banksia serratuloides subsp. perissa,Banksia serratuloides subsp. perissa,Proteaceae,WA,Banksia verticillata V,,,23*,"S52,HS40,41,58,59"
+Dryandra squarrosa subsp. argillacea,susceptible_but_degree_unknown,Banksia squarrosa subsp. argillacea,Banksia squarrosa subsp. argillacea,Proteaceae,WA,Banksia victoriae,,,23*,HS23
+Dryandra squarrosa s.l.,susceptible_but_degree_unknown,Banksia squarrosa,Banksia squarrosa,Proteaceae,WA,Banksia violacea,,,23*,"HS40,59"
+Grevillea alpina,susceptible_but_degree_unknown,Grevillea alpina,Grevillea alpina,Proteaceae,"NSW, ACT, Vic",Buckinghamia celsissima,,,16,
+Grevillea aquifolium,susceptible_but_degree_unknown,Grevillea aquifolium [alternative possible names: Grevillea monticola (nomenclatural synonym) | Grevillea infecunda (pro parte misapplied)],Grevillea aquifolium,Proteaceae,"SA, Vic",Cardwellia sublimis,,,,S36
+Grevillea cirsiifolia,susceptible_but_degree_unknown,Grevillea cirsiifolia,Grevillea cirsiifolia,Proteaceae,WA,Carnarvonia araliifolia var. montana,16,,,
+Grevillea lavandulacea s.l.,susceptible_but_degree_unknown,Grevillea lavandulacea [alternative possible names: Grevillea muricata (pro parte misapplied)],Grevillea lavandulacea,Proteaceae,"SA, Vic",Cennarrhenes nitida,"17,34",,,HS34
+Grevillea oleioides,susceptible_but_degree_unknown,Grevillea oleoides,Grevillea oleoides,Proteaceae,NSW,Conospermum caeruleum s.l.,,,,MS59
+Grevillea saccata Benth.,susceptible_but_degree_unknown,Grevillea saccata,Grevillea saccata,Proteaceae,WA,Conospermum coerulescens subsp. dorrienii,,,,MS59
+Grevillea steiglitziana,susceptible_but_degree_unknown,Grevillea steiglitziana,Grevillea steiglitziana,Proteaceae,Vic,Conospermum eatoniae,,,,LS41
+Hakea dactyloides,susceptible_but_degree_unknown,Hakea dactyloides,Hakea dactyloides,Proteaceae,"WA (naturalised), NSW, Vic",Conospermum hookeri,34,,,MS60
+Hakea flabellifolia,susceptible_but_degree_unknown,Hakea flabellifolia,Hakea flabellifolia,Proteaceae,WA,Conospermum mitchellii,"25,29",,,S43
+Hakea nodosa,susceptible_but_degree_unknown,Hakea nodosa,Hakea nodosa,Proteaceae,"SA, Vic, Tas",Conospermum scaposum,,,,LS41
+Hakea oleifolia,susceptible_but_degree_unknown,Hakea oleifolia,Hakea oleifolia,Proteaceae,"WA, Vic (doubtfully naturalised)",Conospermum spectabile,,,,S58
+Hakea prostrata,susceptible_but_degree_unknown,Hakea prostrata,Hakea prostrata,Proteaceae,"WA, SA (naturalised), Vic (doubtfully naturalised)",Conospermum stoechadis,,,,"S37,46"
+Hakea ulicina,susceptible_but_degree_unknown,Hakea ulicina [alternative possible names: Hakea carinata (pro parte misapplied) | Hakea repullulans (pro parte misapplied) | Hakea carinata (misapplied)],Hakea ulicina,Proteaceae,"NSW, Vic, Tas",Conospermum todii ,,,,S52
+Isopogon ceratophyllus,susceptible_but_degree_unknown,Isopogon ceratophyllus,Isopogon ceratophyllus,Proteaceae,"SA, Vic, Tas",Conospermum triplinervium,37,,37,S37
+Lambertia echinata subsp. occidentalis,susceptible_but_degree_unknown,Lambertia echinata subsp. occidentalis,Lambertia echinata subsp. occidentalis,Proteaceae,WA,Conospermum undulatum,,,,LS41
+Lambertia multiflora,susceptible_but_degree_unknown,Lambertia multiflora,Lambertia multiflora,Proteaceae,WA,Darlingia darlingiana,16,,,S36
+Lomatia fraxinifolia,susceptible_but_degree_unknown,Lomatia milnerae,Lomatia milnerae,Proteaceae,Qld,Dryandra acanthopoda,,,,HS41
+Lomatia ilicifolia,susceptible_but_degree_unknown,Lomatia ilicifolia,Lomatia ilicifolia,Proteaceae,"NSW, Vic",Dryandra anatona E,58,,,"S49,HS41,58"
+Lomatia tasmanica CE,susceptible_but_degree_unknown,Lomatia tasmanica,Lomatia tasmanica,Proteaceae,Tas,Dryandra arctotidis,,,,"S46,MS40"
+Opisthiolepis heterophylla,susceptible_but_degree_unknown,Opisthiolepis heterophylla,Opisthiolepis heterophylla,Proteaceae,Qld,Dryandra armata s.l.,14,,,"HS59,S46"
+Persoonia silvatica,susceptible_but_degree_unknown,Persoonia silvatica,Persoonia silvatica,Proteaceae,"NSW, Vic",Dryandra baxteri,,,,HS59
+Petrophile biloba,susceptible_but_degree_unknown,Petrophile biloba,Petrophile biloba,Proteaceae,WA,Dryandra bipinnatifida ,,,,S46
+Petrophile drummondii,susceptible_but_degree_unknown,Petrophile drummondii,Petrophile drummondii,Proteaceae,WA,Dryandra calophylla,,,,MS58
+Petrophile stricta,susceptible_but_degree_unknown,Petrophile stricta,Petrophile stricta,Proteaceae,WA,Dryandra carduacea,14,,,
+Stirlingia tenuifolia s.l.,susceptible_but_degree_unknown,Stirlingia tenuifolia,Stirlingia tenuifolia,Proteaceae,WA,Dryandra cirsioides,,,,MS40
+Xylomelum angustifolium,susceptible_but_degree_unknown,Xylomelum angustifolium,Xylomelum angustifolium,Proteaceae,WA,Dryandra comosa,,,,HS41
+Alphitonia petriei,susceptible_but_degree_unknown,Alphitonia petriei,Alphitonia petriei,Rhamnaceae,"Qld, NSW",Dryandra concinna,58,,,"HS58,59"
+Alphitonia whitei,susceptible_but_degree_unknown,Alphitonia whitei,Alphitonia whitei,Rhamnaceae,Qld,Dryandra conferta var. parva,,,,HS58
+Cryptandra tomentosa,susceptible_but_degree_unknown,Cryptandra tomentosa [alternative possible names: Cryptandra myriantha (pro parte misapplied) | Cryptandra nutans (pro parte misapplied) | Cryptandra exilis (misapplied)],Cryptandra tomentosa,Rhamnaceae,"SA, Vic",Dryandra cynaroides,,,,HS41
+Antirhea sp. (Mt Lewis BG 5733),susceptible_but_degree_unknown,Antirhea sp. (Mt Lewis BG 5733),,Rubiaceae,,Dryandra erythrocephala var. inopinata,,,,HS41
+Boronia fastigiata,susceptible_but_degree_unknown,Boronia fastigiata,Boronia fastigiata,Rutaceae,WA,Dryandra falcata,,,,HS40
+Boronia revoluta,susceptible_but_degree_unknown,Boronia revoluta,Boronia revoluta,Rutaceae,WA,Dryandra ferruginea subsp. pumila,,,,HS58
+Correa reflexa,susceptible_but_degree_unknown,Correa reflexa,Correa reflexa,Rutaceae,"SA, Qld, NSW, ACT, Vic, Tas",Dryandra foliolata,58,,,"HS58,59"
+Crowea angustifolia s.l.,susceptible_but_degree_unknown,Crowea angustifolia,Crowea angustifolia,Rutaceae,WA,Dryandra foliosissima,,,,HS41
+Flindersia bourjotiana,susceptible_but_degree_unknown,Flindersia bourjotiana,Flindersia bourjotiana,Rutaceae,"Qld, NSW",Dryandra formosa,"46, 51,58",,,"S46,51,MS-HS40,58,59"
+Pouteria brownlessiana,susceptible_but_degree_unknown,Pleioluma brownlessiana,Pleioluma brownlessiana,Sapotaceae,Qld,Dryandra fraseri var. oxycedra,,,,HS41
+Selaginella uliginosa,susceptible_but_degree_unknown,Selaginella uliginosa,Selaginella uliginosa,Selaginellaceae,"Qld, NSW, Vic, Tas",Dryandra hirsuta,58,,,"MS40,58"
+Franciscodendron laurifolium,susceptible_but_degree_unknown,Franciscodendron laurifolium,Franciscodendron laurifolium,Malvaceae,Qld,Dryandra horrida,,,,HS41
+Thomasia grandiflora,susceptible_but_degree_unknown,Thomasia grandiflora,Thomasia grandiflora,Malvaceae,WA,Dryandra idiogenes,,,,HS41
+Stylidium spathulatum,susceptible_but_degree_unknown,Stylidium spathulatum,Stylidium spathulatum,Stylidiaceae,WA,Dryandra ionthocarpa E,,,,HS41
+Tetratheca ciliata,susceptible_but_degree_unknown,Tetratheca ciliata,Tetratheca ciliata,Elaeocarpaceae,"SA, NSW, Vic, Tas",Dryandra kippistiana var. paenepeccata,,,,HS41
+Tremandra stelligera,susceptible_but_degree_unknown,Tremandra stelligera,Tremandra stelligera,Elaeocarpaceae,WA,Dryandra lepidorhiza,,,,HS41
+Xanthophyllum octandrum,susceptible_but_degree_unknown,Xanthophyllum octandrum,Xanthophyllum octandrum,Polygalaceae,Qld,Dryandra lindleyana s.l.,,,,"S46,SP21"
+Lomandra odora,susceptible_but_degree_unknown,Lomandra odora,Lomandra odora,Asparagaceae,WA,Dryandra mimica E,,,,"S52,HS41"
+Xanthorrhoea drummondii,susceptible_but_degree_unknown,Xanthorrhoea drummondii,Xanthorrhoea drummondii,Xanthorrhoeaceae,WA,Dryandra montana E,58,,,"S49,HS41,58,59"
+Xanthorrhoea nana,susceptible_but_degree_unknown,Xanthorrhoea nana,Xanthorrhoea nana,Xanthorrhoeaceae,WA,Dryandra mucronulata,,,,HS40
+Macrozamia communis,susceptible_but_degree_unknown,Macrozamia communis,Macrozamia communis,Zamiaceae,NSW,Dryandra nivea s.l.,"14,28",,,"S37,46,53MS40,59"
+Andersonia heterophylla,susceptible_but_degree_unknown,Andersonia heterophylla [alternative possible names: Andersonia macranthera (pro parte misapplied)],Andersonia heterophylla,Ericaceae,WA,Dryandra octotriginta,,,,HS41
+Andersonia lehmanniana,susceptible_but_degree_unknown,Andersonia lehmanniana,Andersonia lehmanniana,Ericaceae,WA,Dryandra plumosa subsp. denticulata,,,,"MS-HS40,58,59"
+Leucopogon flavescens,susceptible_but_degree_unknown,Styphelia flavescens,Styphelia flavescens,Ericaceae,WA,Dryandra polycephala,,,,MS41
+Leucopogon polymorphus,susceptible_but_degree_unknown,Leucopogon polymorphus,Leucopogon polymorphus,Ericaceae,WA,Dryandra porrecta,,,,HS41
+Aotus passerinoides,susceptible_but_degree_unknown,Aotus passerinoides,Aotus passerinoides,Fabaceae,WA,Dryandra praemorsa,,3,,
+Bossiaea prostrate,susceptible_but_degree_unknown,Bossiaea prostrata [alternative possible names: Bossiaea nummularia (pro parte misapplied)],Bossiaea prostrata,Fabaceae,"SA, Qld, NSW, ACT, Vic, Tas",Dryandra preissii,,,,HS41
+Daviesia ulicifolia,susceptible_but_degree_unknown,Daviesia ulicifolia,Daviesia ulicifolia,Fabaceae,"WA, Qld, NSW, Vic, Tas",Dryandra pseudoplumosa,,,,"HS58,MS40"
+Darwinia meeboldii,susceptible_but_degree_unknown,Darwinia meeboldii,Darwinia meeboldii,Myrtaceae,WA,Dryandra pteridifolia,,,,"S46,HS40"
+Eucalyptus todtiana,susceptible_but_degree_unknown,Eucalyptus todtiana,Eucalyptus todtiana,Myrtaceae,WA,Dryandra pulchella,,,,HS41
+Melaleuca scabra,susceptible_but_degree_unknown,Melaleuca scabra,Melaleuca scabra,Myrtaceae,WA,Dryandra quercifolia,,,,"HS40,59"
+Pericalymma ellipticum,susceptible_but_degree_unknown,Pericalymma ellipticum,Pericalymma ellipticum,Myrtaceae,WA,Dryandra sclerophylla,,,,HS41
+Verticordia huegelii,susceptible_but_degree_unknown,Verticordia huegelii,Verticordia huegelii,Myrtaceae,WA,Dryandra seneciifolia,,,,"S46,MS-HS41,58"
+Verticordia nitens,susceptible_but_degree_unknown,Verticordia nitens,Verticordia nitens,Myrtaceae,WA,Dryandra serra,,,,"S46,HS41,58"
+Podocarpus druoynianus,susceptible_but_degree_unknown,Podocarpus drouynianus,Podocarpus drouynianus,Podocarpaceae,WA,Dryandra serratuloides subsp. perissa,,,,S49
+Banksia telmatiaea,susceptible_but_degree_unknown,Banksia telmatiaea,Banksia telmatiaea,Proteaceae,WA,Dryandra serratuloides s.l.,,,,"S49,52,HS41"
+Conospermum stoechadis,susceptible_but_degree_unknown,Conospermum stoechadis,Conospermum stoechadis,Proteaceae,WA,Dryandra sessilis,"14,28",,,"SP21,S46,MS40"
+Hakea pendanicarpa subsp. crassifolia,susceptible_but_degree_unknown,Hakea pandanicarpa subsp. crassifolia,Hakea pandanicarpa subsp. crassifolia,Proteaceae,WA,Dryandra shanklandiorum,,,,HS41
+Petrophile linearis,susceptible_but_degree_unknown,Petrophile linearis,Petrophile linearis,Proteaceae,WA,Dryandra speciosa,,,,HS41
+Xylomelum occidentale,susceptible_but_degree_unknown,Xylomelum occidentale,Xylomelum occidentale,Proteaceae,WA,Dryandra squarrosa subsp. argillacea,,,,S49
+Tetratheca pilosa s.l.,susceptible_but_degree_unknown,Tetratheca pilosa,Tetratheca pilosa,Elaeocarpaceae,"SA, NSW, Vic, Tas",Dryandra squarrosa s.l.,,,,S46
+Astroloma xerophyllum,susceptible_but_degree_unknown,Styphelia xerophylla,Styphelia xerophylla,Ericaceae,WA,Dryandra subpinnatifida,,,,HS41
+Jacksonia floribunda,susceptible_but_degree_unknown,Jacksonia floribunda,Jacksonia floribunda,Fabaceae,WA,Dryandra tenuifolia,,,,HS40
+Hypocalymma robustum,susceptible_but_degree_unknown,Hypocalymma robustum,Hypocalymma robustum,Myrtaceae,WA,Dryandra tortifolia,,,,HS41
+Verticordia densiflora,susceptible_but_degree_unknown,Verticordia densiflora,Verticordia densiflora,Myrtaceae,WA,Dryandra trifontinalis,,,,HS41
+Allocasuarina humilis,susceptible_but_degree_unknown field_resistant,Allocasuarina humilis,Allocasuarina humilis,Casuarinaceae,WA,Dryandra wonganensis,,,,HS41
+Aotus ericoides,susceptible_but_degree_unknown highly_susceptible,Aotus ericoides [alternative possible names: Aotus gracillima (pro parte misapplied) | Aotus intermedia (pro parte misapplied) | Aotus subspinescens (misapplied)],Aotus ericoides,Fabaceae,"Qld, NSW, Vic, Tas",Franklandia fucifolia,,,,MS40
+Amperea xiphoclada,susceptible_but_degree_unknown field_resistant,Amperea xiphoclada,Amperea xiphoclada,Euphorbiaceae,"SA, Qld, NSW, Vic, Tas",Franklandia triaristata,,,,LS41
+Hibbertia amplexicaulis,susceptible_but_degree_unknown highly_susceptible,Hibbertia amplexicaulis,Hibbertia amplexicaulis,Dilleniaceae,WA,Grevillea acrobotrya susbp. uniformis,,,,LS41
+Banksia nutans,susceptible_but_degree_unknown highly_susceptible,Banksia nutans,Banksia nutans,Proteaceae,WA,Grevillea alpina,"2,25,29",,,S43
+Leucopogon verticillatus,susceptible_but_degree_unknown highly_susceptible,Leucopogon verticillatus,Leucopogon verticillatus,Ericaceae,WA,Grevillea aneura,,,,LS41
+Adenanthos obovatus,susceptible_but_degree_unknown highly_susceptible,Adenanthos obovatus,Adenanthos obovatus,Proteaceae,WA,Grevillea annulifera,,,,LS41
+Banksia menziesii,susceptible_but_degree_unknown highly_susceptible,Banksia menziesii,Banksia menziesii,Proteaceae,WA,Grevillea aquifolium,"25,29",,,S43
+Banksia occidentalis s.l.,susceptible_but_degree_unknown highly_susceptible,Banksia occidentalis,Banksia occidentalis,Proteaceae,WA,Grevillea asparagoides,,,,LS41
+Lambertia echinata subsp. echinata E,susceptible_but_degree_unknown highly_susceptible,Lambertia echinata subsp. echinata,Lambertia echinata subsp. echinata,Proteaceae,WA,Grevillea astericosa,,,,LS41
+Lasiopetalum floribundum,susceptible_but_degree_unknown moderately_susceptible,Lasiopetalum floribundum,Lasiopetalum floribundum,Malvaceae,WA,Grevillea batrachioides E,,,,LS41
+Hibbertia montana,susceptible_but_degree_unknown highly_susceptible,Hibbertia montana,Hibbertia montana,Dilleniaceae,WA,Grevillea baxteri,,,,LS41
+Hibbertia virgata,susceptible_but_degree_unknown highly_susceptible,Hibbertia virgata,Hibbertia virgata,Dilleniaceae,"SA, NSW, Vic, Tas",Grevillea brachystylis subsp. australis V,,,,LS41
+Adenanthos cygnorum s.l.,susceptible_but_degree_unknown highly_susceptible,Adenanthos cygnorum,Adenanthos cygnorum,Proteaceae,WA,Grevillea brachystylis subsp. brachystylis,,,,LS41
+Banksia brownii E,susceptible_but_degree_unknown highly_susceptible,Banksia brownii,Banksia brownii,Proteaceae,WA,Grevillea bracteosa,,,,LS41
+Banksia littoralis,susceptible_but_degree_unknown highly_susceptible,Banksia littoralis,Banksia littoralis,Proteaceae,WA,Grevillea calliantha E,,,,"S52,LS41"
+Banksia oligantha E,susceptible_but_degree_unknown highly_susceptible,Banksia oligantha,Banksia oligantha,Proteaceae,WA,Grevillea candicans,,,,LS41
+Dryandra serratuloides s.l.,susceptible_but_degree_unknown highly_susceptible,Banksia serratuloides,Banksia serratuloides,Proteaceae,WA,Grevillea christinae E,,,,LS41
+Andersonia caerulea,susceptible_but_degree_unknown highly_susceptible,Andersonia caerulea [alternative possible names: Andersonia hammersleyana (pro parte misapplied)],Andersonia caerulea,Ericaceae,WA,Grevillea chrysophaea,32,,,HS32
+Banksia attenuata,susceptible_but_degree_unknown highly_susceptible,Banksia attenuata,Banksia attenuata,Proteaceae,WA,Grevillea cirsiifolia ,,,,S52
+Banksia baxteri,susceptible_but_degree_unknown highly_susceptible,Banksia baxteri,Banksia baxteri,Proteaceae,WA,Grevillea confertifolia,,44,,MS44
+Banksia ilicifolia,susceptible_but_degree_unknown highly_susceptible,Banksia ilicifolia,Banksia ilicifolia,Proteaceae,WA,Grevillea costata,,,,LS41
+Banksia prionotes,susceptible_but_degree_unknown highly_susceptible,Banksia prionotes,Banksia prionotes,Proteaceae,WA,Grevillea crowleyae,,,,LS41
+Banksia quercifolia,susceptible_but_degree_unknown highly_susceptible,Banksia quercifolia,Banksia quercifolia,Proteaceae,WA,Grevillea curviloba s.l.,,,,LS41
+Banksia speciosa,susceptible_but_degree_unknown highly_susceptible,Banksia speciosa,Banksia speciosa,Proteaceae,WA,Grevillea decora,,3,,
+Isopogon uncinatus E,susceptible_but_degree_unknown highly_susceptible,Isopogon uncinatus,Isopogon uncinatus,Proteaceae,WA,Grevillea depauperata,,,,LS41
+Banksia coccinea,susceptible_but_degree_unknown highly_susceptible,Banksia coccinea,Banksia coccinea,Proteaceae,WA,Grevillea donaldiana,,,,LS41
+Lambertia fairallii E,susceptible_but_degree_unknown highly_susceptible,Lambertia fairallii,Lambertia fairallii,Proteaceae,WA,Grevillea dryandroides s.l.,,,,LS41
+Lambertia orbifolia E,susceptible_but_degree_unknown highly_susceptible,Lambertia orbifolia,Lambertia orbifolia,Proteaceae,WA,Grevillea erectiloba,,,,LS41
+Leucopogon nutans,susceptible_but_degree_unknown highly_susceptible low_susceptibility susceptible_but_persistent,Styphelia nitens,Styphelia nitens,Ericaceae,WA,Grevillea eriobotrya,,,,LS41
+Dasypogon bromeliifolius,susceptible_but_degree_unknown low_susceptibility,Dasypogon bromeliifolius [alternative possible names: Dasypogon obliquifolius (pro parte misapplied)],Dasypogon bromeliifolius,Dasypogonaceae,WA,Grevillea fasciculata,,,,"FR40,MS59"
+Banksia goodii V,susceptible_but_degree_unknown moderately_susceptible,Banksia goodii,Banksia goodii,Proteaceae,WA,Grevillea fistulosa,,,,LS41
+Acacia myrtifolia,susceptible_but_degree_unknown moderately_susceptible,Acacia myrtifolia,Acacia myrtifolia,Fabaceae,"WA, SA, Qld, NSW, Vic, Tas",Grevillea flexuosa V,,,,LS41
+Adenanthos cunninghamii E,susceptible_but_degree_unknown moderately_susceptible,Adenanthos x cunninghamii,Adenanthos x cunninghamii,Proteaceae,WA,Grevillea fulgens,,,,LS41
+Dryandra nivea s.l.,susceptible_but_degree_unknown moderately_susceptible,Banksia nivea [alternative possible names: Banksia dallanneyi (pro parte misapplied) | Banksia dallanneyi (misapplied) | Banksia dallanneyi var. dallanneyi (misapplied) | Banksia dallanneyi var. mellicula (misapplied)],Banksia nivea,Proteaceae,WA,Grevillea fuscolutea,,,,LS41
+Isopogon sphaerocephalus,susceptible_but_degree_unknown moderately_susceptible,Isopogon sphaerocephalus,Isopogon sphaerocephalus,Proteaceae,WA,Grevillea georgeana,,,,LS41
+Banksia sphaerocarpa s.l.,susceptible_but_degree_unknown moderately_susceptible highly_susceptible,Banksia sphaerocarpa,Banksia sphaerocarpa,Proteaceae,WA,Grevillea glabrata subsp. dissectifolia,,,,LS41
+Eucalyptus marginata,susceptible_but_degree_unknown moderately_susceptible low_susceptibility,Eucalyptus marginata,Eucalyptus marginata,Myrtaceae,WA,Grevillea glabrata subsp. ornithopoda,,,,LS41
+Dryandra formosa,susceptible_but_degree_unknown moderately_susceptible highly_susceptible,Banksia formosa,Banksia formosa,Proteaceae,WA,Grevillea globosa,,,,LS41
+Styphelia tenuiflora,susceptible_but_degree_unknown presumed_resistant highly_susceptible,Styphelia tenuiflora,Styphelia tenuiflora,Ericaceae,WA,Grevillea granulosa,,,,LS41
+Persoonia juniperina,susceptible_but_degree_unknown,Persoonia juniperina,Persoonia juniperina,Proteaceae,"SA, NSW, Vic, Tas",Grevillea hookeriana,,,,FR50
+Bossiaea ornata,susceptible_but_degree_unknown susceptible_but_persistent,Bossiaea ornata,Bossiaea ornata,Fabaceae,WA,Grevillea inconspicua,,,,LS41
+Daviesia decurrens,susceptible_but_degree_unknown susceptible_but_persistent,Daviesia decurrens,Daviesia decurrens,Fabaceae,WA,Grevillea infundibularis E,,,,LS41
+Trymalium ledifolium,susceptible_but_degree_unknown susceptible_but_persistent,Trymalium ledifolium,Trymalium ledifolium,Rhamnaceae,WA,Grevillea involucrata E,,,,LS41
+Hibbertia hypericoides,susceptible_but_degree_unknown susceptible_but_persistent moderately_susceptible highly_susceptible,Hibbertia hypericoides,Hibbertia hypericoides,Dilleniaceae,WA,Grevillea irrasa subsp. irrasa,13,,,HS22
+Chamaescilla corymbosa var. corymbosa,susceptible_but_degree_unknown field_resistant,Chamaescilla corymbosa var. corymbosa,Chamaescilla corymbosa var. corymbosa,Asparagaceae,"WA, SA, Vic, Tas",Grevillea juniperina s.l.,,3,,
+Eucalyptus delegatensis,susceptible_but_degree_unknown field_resistant,Eucalyptus delegatensis,Eucalyptus delegatensis,Myrtaceae,"NSW, ACT, Vic, Tas",Grevillea kenneallyi,,,,LS41
+Eucalyptus regnans,susceptible_but_degree_unknown field_resistant,Eucalyptus regnans,Eucalyptus regnans,Myrtaceae,"Vic, Tas",Grevillea lanigera,,3,,
+Melaleuca squarrosa,susceptible_but_degree_unknown field_resistant,Melaleuca squarrosa,Melaleuca squarrosa,Myrtaceae,"SA, NSW, Vic, Tas",Grevillea latifolia,,,,LS41
+Rhodamnia blairiana,susceptible_but_degree_unknown field_resistant,Rhodamnia blairiana,Rhodamnia blairiana,Myrtaceae,Qld,Grevillea lavandulacea s.l.,,,,S20
+Synaphea petiolaris s.l.,susceptible_but_degree_unknown field_resistant,Synaphea petiolaris,Synaphea petiolaris,Proteaceae,WA,Grevillea leptopoda,,,,LS41
+Pimelea linifolia s.l.,susceptible_but_degree_unknown field_resistant,Pimelea linifolia,Pimelea linifolia,Thymelaeaceae,"SA, Qld, NSW, ACT, Vic, Tas",Grevillea lissopleura,,,,LS41
+Acacia suaveolens,susceptible_but_degree_unknown field_resistant low_susceptibility,Acacia suaveolens,Acacia suaveolens,Fabaceae,"SA, Qld, NSW, Vic, Tas",Grevillea longistyla,,3,,
+Astroloma humifusum,susceptible_but_degree_unknown highly_susceptible,Styphelia humifusa,Styphelia humifusa,Ericaceae,"SA, NSW, ACT, Vic, Tas",Grevillea lullfitzii,,,,LS41
+Leucopogon ericoides,susceptible_but_degree_unknown highly_susceptible,Styphelia ericoides,Styphelia ericoides,Ericaceae,"SA, Qld, NSW, Vic, Tas",Grevillea makinsonii,,,,LS41
+Leucopogon obtectus E,susceptible_but_degree_unknown highly_susceptible,Styphelia obtecta,Styphelia obtecta,Ericaceae,WA,Grevillea manglesioides subsp. papillosa,,,,LS41
+Bossiaea cinerea,susceptible_but_degree_unknown highly_susceptible,Bossiaea cinerea,Bossiaea cinerea,Fabaceae,"SA, NSW, Vic, Tas",Grevillea marriottii,,,,LS41
+Daviesia inflata,susceptible_but_degree_unknown highly_susceptible,Daviesia inflata,Daviesia inflata,Fabaceae,WA,Grevillea maxwellii E,,,,LS41
+Dillwynia glaberrima,susceptible_but_degree_unknown highly_susceptible,Dillwynia glaberrima,Dillwynia glaberrima,Fabaceae,"SA, Qld, NSW, Vic, Tas",Grevillea microstegia,,44,,LS44
+Dillwynia sericea,susceptible_but_degree_unknown highly_susceptible,Dillwynia sericea,Dillwynia sericea,Fabaceae,"SA, Qld, NSW, ACT, Vic, Tas",Grevillea miniata,,,,LS41
+Gompholobium confertum,susceptible_but_degree_unknown highly_susceptible,Gompholobium confertum,Gompholobium confertum,Fabaceae,WA,Grevillea minutiflora,,,,LS41
+Platylobium formosum,susceptible_but_degree_unknown highly_susceptible,Platylobium formosum,Platylobium formosum,Fabaceae,"Qld, NSW",Grevillea miqueliana s.l.,,3,,
+Pultenaea gunnii,susceptible_but_degree_unknown highly_susceptible,Pultenaea gunnii,Pultenaea gunnii,Fabaceae,"NSW, Vic, Tas",Grevillea mucronulata,,3,,
+Pultenaea stricta,susceptible_but_degree_unknown highly_susceptible,Pultenaea stricta [alternative possible names: Pultenaea kraehenbuehlii (pro parte misapplied)],Pultenaea stricta,Fabaceae,"SA, Vic, Tas",Grevillea murex E,,,,LS41
+Eucalyptus fastigata,susceptible_but_degree_unknown highly_susceptible,Eucalyptus fastigata,Eucalyptus fastigata,Myrtaceae,"NSW, ACT, Vic",Grevillea nana subsp. abbreviata,,,,LS41
+Adenanthos barbiger,susceptible_but_degree_unknown highly_susceptible,Adenanthos barbiger,Adenanthos barbiger,Proteaceae,WA,Grevillea oleioides,,,,S22
+Adenanthos detmoldii s.l.,susceptible_but_degree_unknown highly_susceptible,Adenanthos detmoldii,Adenanthos detmoldii,Proteaceae,WA,Grevillea olivacea,,,,LS41
+Adenanthos dobagii E,susceptible_but_degree_unknown highly_susceptible,Adenanthos dobagii,Adenanthos dobagii,Proteaceae,WA,Grevillea phanerophlebia,,,,LS41
+Adenanthos ileticos,susceptible_but_degree_unknown highly_susceptible,Adenanthos ileticos,Adenanthos ileticos,Proteaceae,WA,Grevillea phillipsiana,,,,LS41
+Adenanthos pungens subsp. effusus E,susceptible_but_degree_unknown highly_susceptible,Adenanthos pungens subsp. effusus,Adenanthos pungens subsp. effusus,Proteaceae,WA,Grevillea pieroniae,,,,MS58
+Adenanthos pungens subsp. pungens V,susceptible_but_degree_unknown highly_susceptible,Adenanthos pungens subsp. pungens,Adenanthos pungens subsp. pungens,Proteaceae,WA,Grevillea pilosa subsp. dissecta,,,,LS41
+Banksia grandis,susceptible_but_degree_unknown highly_susceptible,Banksia grandis,Banksia grandis,Proteaceae,WA,Grevillea pilulifera,,,,FR21
+Banksia hookeriana,susceptible_but_degree_unknown highly_susceptible,Banksia hookeriana,Banksia hookeriana,Proteaceae,WA,Grevillea pimeleoides,,,,LS41
+Banksia laevigata,susceptible_but_degree_unknown highly_susceptible,Banksia laevigata,Banksia laevigata,Proteaceae,WA,Grevillea polybractea,,3,,
+Banksia seminuda,susceptible_but_degree_unknown highly_susceptible,Banksia seminuda,Banksia seminuda,Proteaceae,WA,Grevillea prostrata,,,,LS41
+Banksia tricuspis,susceptible_but_degree_unknown highly_susceptible,Banksia tricuspis,Banksia tricuspis,Proteaceae,WA,Grevillea psilantha,,,,LS41
+Dryandra mimica E,susceptible_but_degree_unknown highly_susceptible,Banksia mimica,Banksia mimica,Proteaceae,WA,Grevillea quinquenervis,19,,,
+Dryandra pteridifolia,susceptible_but_degree_unknown highly_susceptible,Banksia pteridifolia [alternative possible names: Banksia alliacea (pro parte misapplied)],Banksia pteridifolia,Proteaceae,WA,Grevillea rogersii,19,,,
+Isopogon axillaris,susceptible_but_degree_unknown highly_susceptible,Isopogon axillaris,Isopogon axillaris,Proteaceae,WA,Grevillea rogersoniana,,,,LS41
+Persoonia elliptica,susceptible_but_degree_unknown highly_susceptible,Persoonia elliptica,Persoonia elliptica,Proteaceae,WA,Grevillea rosieri,,,,LS41
+Persoonia longifolia,susceptible_but_degree_unknown highly_susceptible,Persoonia longifolia,Persoonia longifolia,Proteaceae,WA,Grevillea rosmarinifolia s.l.,,3,,
+Petrophile serruriae,susceptible_but_degree_unknown highly_susceptible,Petrophile serruriae,Petrophile serruriae,Proteaceae,WA,Grevillea roycei,,,,LS41
+Petrophile squamata,susceptible_but_degree_unknown highly_susceptible,Petrophile squamata,Petrophile squamata,Proteaceae,WA,Grevillea rudis,,,,LS41
+Hibbertia quadricolor,susceptible_but_degree_unknown highly_susceptible,Hibbertia quadricolor,Hibbertia quadricolor,Dilleniaceae,WA,Grevillea saccata Benth.,,,,S52
+Lysinema ciliatum,susceptible_but_degree_unknown highly_susceptible,Lysinema ciliatum [alternative possible names: Lysinema pentapetalum (pro parte misapplied)],Lysinema ciliatum,Ericaceae,WA,Grevillea scabra,,,,LS41
+Sphenotoma squarrosa,susceptible_but_degree_unknown highly_susceptible,Sphenotoma squarrosa,Sphenotoma squarrosa,Ericaceae,WA,Grevillea scabrida,,,,LS41
+Adenanthos ellipticus V,susceptible_but_degree_unknown highly_susceptible,Adenanthos ellipticus,Adenanthos ellipticus,Proteaceae,WA,Grevillea scapigera E,,,,LS41
+Adenanthos oreophilus,susceptible_but_degree_unknown highly_susceptible,Adenanthos oreophilus,Adenanthos oreophilus,Proteaceae,WA,Grevillea secunda,,,,LS41
+Banksia laricina,susceptible_but_degree_unknown highly_susceptible,Banksia laricina,Banksia laricina,Proteaceae,WA,Grevillea spinosissima,,,,LS41
+Dryandra anatona E,susceptible_but_degree_unknown highly_susceptible,Banksia anatona,Banksia anatona,Proteaceae,WA,Grevillea steiglitziana,25,,,S43
+Dryandra serra,susceptible_but_degree_unknown highly_susceptible,Banksia serra,Banksia serra,Proteaceae,WA,Grevillea stenostachya,,,,LS41
+Lambertia inermis s.l.,susceptible_but_degree_unknown highly_susceptible,Lambertia inermis,Lambertia inermis,Proteaceae,WA,Grevillea subtiliflora,,,,LS41
+Petrophile diversifolia,susceptible_but_degree_unknown highly_susceptible,Petrophile diversifolia,Petrophile diversifolia,Proteaceae,WA,Grevillea synapheae,24,,,FR24
+Xanthorrhoea australis,susceptible_but_degree_unknown highly_susceptible,Xanthorrhoea australis [alternative possible names: Xanthorrhoea glauca subsp. angustifolia (pro parte misapplied)],Xanthorrhoea australis,Xanthorrhoeaceae,"SA, NSW, Vic, Tas",Grevillea tenuiloba,,,,LS41
+Andersonia axilliflora E,susceptible_but_degree_unknown highly_susceptible,Andersonia axilliflora,Andersonia axilliflora,Ericaceae,WA,Grevillea tetrapleura,,,,LS41
+Banksia cuneata E,susceptible_but_degree_unknown highly_susceptible,Banksia cuneata,Banksia cuneata,Proteaceae,WA,Grevillea thelemanniana,,,,LS41
+Dryandra montana E,susceptible_but_degree_unknown highly_susceptible,Banksia montana,Banksia montana,Proteaceae,WA,Grevillea triloba,,,,LS41
+Banksia verticillata V,susceptible_but_degree_unknown highly_susceptible,Banksia verticillata,Banksia verticillata,Proteaceae,WA,Grevillea tripartita,,,,MS40
+Adenanthos cuneatus,susceptible_but_degree_unknown highly_susceptible low_susceptibility,Adenanthos cuneatus,Adenanthos cuneatus,Proteaceae,WA,Grevillea victoriae s.l.,,3,,
+Evandra aristata,susceptible_but_degree_unknown low_susceptibility,Evandra aristata,Evandra aristata,Cyperaceae,WA,Grevillea williamsonii E,,44,,HS44
+Epacris impressa,susceptible_but_degree_unknown low_susceptibility,Epacris impressa,Epacris impressa,Ericaceae,"SA, NSW, Vic, Tas",Grevillea wilsonii,,,,FR21
+Daviesia megacalyx E,susceptible_but_degree_unknown low_susceptibility,Daviesia megacalyx,Daviesia megacalyx,Fabaceae,WA,Grevillea wittweri,,,,LS41
+Jacksonia spinosa,susceptible_but_degree_unknown low_susceptibility,Jacksonia spinosa,Jacksonia spinosa,Fabaceae,WA,Hakea aculeata V,,,,LS41
+Agonis linearifolia,susceptible_but_degree_unknown low_susceptibility,Taxandria linearifolia,Taxandria linearifolia,Myrtaceae,WA,Hakea ambigua,,,,"MS40,59"
+Eucalyptus nitens,susceptible_but_degree_unknown low_susceptibility,Eucalyptus nitens,Eucalyptus nitens,Myrtaceae,"NSW, Vic",Hakea amplexicaulis,24,,,FR24
+Eucalyptus oblique,susceptible_but_degree_unknown low_susceptibility,Eucalyptus obliqua,Eucalyptus obliqua,Myrtaceae,"SA, Qld, NSW, Vic, Tas",Hakea bakeriana,,3,,
+Eucalyptus sieberi,susceptible_but_degree_unknown low_susceptibility,Eucalyptus sieberi,Eucalyptus sieberi,Myrtaceae,"NSW, ACT, Vic, Tas",Hakea baxteri,,,,"S46,MS40,59"
+Grevillea calliantha E,susceptible_but_degree_unknown low_susceptibility,Grevillea calliantha,Grevillea calliantha,Proteaceae,WA,Hakea bicornata,,,,LS41
+Hakea trifurcata,susceptible_but_degree_unknown low_susceptibility,Hakea trifurcata,Hakea trifurcata,Proteaceae,WA,Hakea ceratophylla,,,,"LS40,59"
+Leucopogon conostephioides,susceptible_but_degree_unknown low_susceptibility highly_susceptible,Styphelia conostephioides,Styphelia conostephioides,Ericaceae,WA,Hakea conchifolia,,3,,
+Allocasuarina thuyoides,susceptible_but_degree_unknown moderately_susceptible,Allocasuarina thuyoides,Allocasuarina thuyoides,Casuarinaceae,WA,Hakea corymbosa,,,,FR40
+Andersonia simplex,susceptible_but_degree_unknown moderately_susceptible,Andersonia simplex,Andersonia simplex,Ericaceae,WA,Hakea crassifolia,,,,"MS40,59"
+Daviesia physodes,susceptible_but_degree_unknown moderately_susceptible,Daviesia physodes,Daviesia physodes,Fabaceae,WA,Hakea crassinervia,,,,LS41
+Banksia caleyi,susceptible_but_degree_unknown moderately_susceptible,Banksia caleyi,Banksia caleyi,Proteaceae,WA,Hakea cucullata,,,,"S46,MS40,59"
+Dryandra arctotidis,susceptible_but_degree_unknown moderately_susceptible,Banksia arctotidis,Banksia arctotidis,Proteaceae,WA,Hakea dactyloides,,,,S22
+Hakea undulata,susceptible_but_degree_unknown moderately_susceptible,Hakea undulata,Hakea undulata,Proteaceae,"WA, SA (naturalised), Vic (naturalised)",Hakea elliptica,,,,MS59
+Stirlingia latifolia,susceptible_but_degree_unknown moderately_susceptible,Stirlingia latifolia,Stirlingia latifolia,Proteaceae,WA,Hakea flabellifolia ,,,,S56
+Beaufortia anisandra,susceptible_but_degree_unknown moderately_susceptible,Beaufortia anisandra,Beaufortia anisandra,Myrtaceae,WA,Hakea kippistiana,,3,,
+Hakea baxteri,susceptible_but_degree_unknown moderately_susceptible,Hakea baxteri,Hakea baxteri,Proteaceae,"WA, SA",Hakea lasiantha,,,,MS40
+Hakea cucullata,susceptible_but_degree_unknown moderately_susceptible,Hakea cucullata [alternative possible names: Hakea conchifolia (pro parte misapplied) | Hakea victoria (pro parte misapplied) | Hakea conchifolia (misapplied)],Hakea cucullata,Proteaceae,"WA, SA (naturalised)",Hakea lasiocarpha,,,,MS58
+Synaphea polymorpha,susceptible_but_degree_unknown moderately_susceptible,Synaphea polymorpha,Synaphea polymorpha,Proteaceae,WA,Hakea laurina,,,,LS40
+Lomandra sonderi,susceptible_but_degree_unknown moderately_susceptible highly_susceptible,Lomandra sonderi,Lomandra sonderi,Asparagaceae,WA,Hakea lehmanniana,,,,MS40
+Dryandra seneciifolia,susceptible_but_degree_unknown moderately_susceptible highly_susceptible,Banksia seneciifolia,Banksia seneciifolia,Proteaceae,WA,Hakea lissocarpha,"24,28",,,"FR21,24"
+Adenanthos filifolius,susceptible_but_degree_unknown moderately_susceptible highly_susceptible,Adenanthos filifolius,Adenanthos filifolius,Proteaceae,WA,Hakea longiflora,,,,LS41
+Patersonia rudis,susceptible_but_degree_unknown susceptible_but_persistent,Patersonia rudis,Patersonia rudis,Iridaceae,WA,Hakea marginata,,,,HS40
+Dryandra lindleyana s.l.,susceptible_but_degree_unknown susceptible_but_persistent,Banksia dallanneyi,Banksia dallanneyi,Proteaceae,WA,Hakea megalosperma V,,,,LS41
+Pimelea suaveolens,susceptible_but_degree_unknown susceptible_but_persistent,Pimelea suaveolens,Pimelea suaveolens,Thymelaeaceae,WA,Hakea myrtoides,,,,LS41
+Calytrix tetragona,susceptible_but_degree_unknown variable_susceptibility,Calytrix tetragona,Calytrix tetragona,Myrtaceae,"WA, SA, Qld, NSW, ACT, Vic, Tas",Hakea neurophylla,,,,LS41
+Banksia serrata,susceptible_but_degree_unknown variable_susceptibility,Banksia serrata,Banksia serrata,Proteaceae,"Qld, NSW, Vic, Tas",Hakea nodosa,25,,,S43
+Leucopogon australis s.l.,"susceptible_but_degree_unknown, low_susceptibility",Leucopogon australis,Leucopogon australis,Ericaceae,"WA, Vic, Tas",Hakea oleifolia,,3,,S46
+Leucopogon capitellatus,"susceptible_but_degree_unknown, moderately_susceptible",Leucopogon capitellatus,Leucopogon capitellatus,Ericaceae,WA,Hakea pendanicarpa subsp. crassifolia,,,,"S40,46"
+Hibbertia rhadinopoda,susceptible_but_persistent,Hibbertia diamesogenos,Hibbertia diamesogenos,Dilleniaceae,WA,Hakea pendens,,,,LS41
+Sprengelia incarnata,susceptible_but_persistent,Sprengelia incarnata [alternative possible names: Sprengelia montana (pro parte misapplied) | Sprengelia propinqua (pro parte misapplied)],Sprengelia incarnata,Ericaceae,"SA, Qld, NSW, Vic, Tas",Hakea petiolaris,,,,FR50
+Bossiaea aquifolium,susceptible_but_persistent,Bossiaea aquifolium,Bossiaea aquifolium,Fabaceae,WA,Hakea platysperma,,3,,
+Gompholobium knightianum,susceptible_but_persistent,Gompholobium knightianum,Gompholobium knightianum,Fabaceae,"WA, SA (doubtfully naturalised)",Hakea prostrata ,,,,S46
+Petrophile striata,susceptible_but_persistent,Petrophile striata,Petrophile striata,Proteaceae,WA,Hakea rigida,,,,LS41
+Allocasuarina fraseriana,susceptible_but_persistent highly_susceptible,Allocasuarina fraseriana,Allocasuarina fraseriana,Casuarinaceae,WA,Hakea rubrifolia,,,,LS40
+Leucopogon oxycedrus,susceptible_but_persistent highly_susceptible,Styphelia nitens,Styphelia nitens,Ericaceae,WA,Hakea ruscifolia,14,,,"FR21,LS40"
+Xanthorrhoea gracilis,susceptible_but_persistent susceptible_but_degree_unknown highly_susceptible,Xanthorrhoea gracilis,Xanthorrhoea gracilis,Xanthorrhoeaceae,WA,Hakea salicifolia,,,,
+Xanthorrhoea preissii,susceptible_but_persistent susceptible_but_degree_unknown highly_susceptible,Xanthorrhoea preissii,Xanthorrhoea preissii,Xanthorrhoeaceae,WA,Hakea sericea,"2,17,25",,,
+Dryandra sessilis,susceptible_but_persistent susceptible_but_degree_unknown moderately_susceptible,Banksia sessilis,Banksia sessilis,Proteaceae,WA,Hakea spathulata,,,,LS41
+Macrozamia riedlei,susceptible_but_persistent susceptible_but_degree_unknown highly_susceptible,Macrozamia riedlei,Macrozamia riedlei,Zamiaceae,WA,Hakea stenocarpa,,,,FR21
+Allocasuarina littoralis,variable_susceptibility,Allocasuarina littoralis,Allocasuarina littoralis,Casuarinaceae,"Qld, NSW, ACT, Vic, Tas",Hakea trifurcata,,,,"S46,LS40"
+Lycopodium deuterodensum,variable_susceptibility,Pseudolycopodium densum,Pseudolycopodium densum,Lycopodiaceae,"SA, Qld, NSW, Vic, Tas",Hakea tuberculata,,,,LS58
+Corymbia gummifera,variable_susceptibility,Corymbia gummifera,Corymbia gummifera,Myrtaceae,"Qld, NSW, Vic",Hakea ulicina,"25,34",,9,S43
+Banksia ericifolia,variable_susceptibility,Banksia ericifolia,Banksia ericifolia,Proteaceae,"NSW, Vic (doubtfully naturalised)",Hakea undulata,,3,,"S46,MS40"
+Banksia paludosa subsp. paludosa,variable_susceptibility,Banksia paludosa subsp. paludosa,Banksia paludosa subsp. paludosa,Proteaceae,NSW,Hakea varia,,,,"LS40,59"
+Isopogon anemonifolius,variable_susceptibility,Isopogon anemonifolius,Isopogon anemonifolius,Proteaceae,NSW,Hakea victoria,,3,,"LS40,59"
+Lambertia formosa,variable_susceptibility,Lambertia formosa,Lambertia formosa,Proteaceae,NSW,Isopogon alcicornis,,,,HS41
+,,,,,,Isopogon anemonifolius,,,,SV42
+,,,,,,Isopogon asper,,3,,
+,,,,,,Isopogon attenuatus,15,,54,"LS59,S54"
+,,,,,,Isopogon axillaris,,,,"S46,HS40"
+,,,,,,Isopogon baxteri,,,,"HS58,LS59MS40"
+,,,,,,Isopogon buxifolius var. obovatus,,,,"HS40,59"
+,,,,,,Isopogon ceratophyllus,"18,25,29,34",,,S43
+,,,,,,Isopogon drummondii,,,,HS41
+,,,,,,Isopogon formosus,"15,46",,,"HS59,S46,LS40"
+,,,,,,Isopogon heterophyllus,,,,MS40
+,,,,,,Isopogon latifolius,58,,,"HS58,MS40"
+,,,,,,Isopogon petiolaris,,3,,
+,,,,,,Isopogon polycepahlus,,3,,
+,,,,,,Isopogon scabriusculus,,,,MS40
+,,,,,,Isopogon sphaerocephalus,"14,28",,,"S24,46,48MS40,59"
+,,,,,,Isopogon teretifolius var. petrophiloides,,,,MS40
+,,,,,,Isopogon tridens,,,,HS41
+,,,,,,Isopogon trilobus,,,,HS40
+,,,,,,Isopogon tripartitus,,,,MS40
+,,,,,,Isopogon uncinatus E,58,,,"S49,52,HS41,58"
+,,,,,,Lambertia echinata subsp. echinata E,,,,"S46,49,52,HS41,58"
+,,,,,,Lambertia echinata subsp. occidentalis ,,,,S49
+,,,,,,Lambertia ericifolia,,,,"HS58,MS40"
+,,,,,,Lambertia fairallii E,58,,,"S49,52,HS41,58,59"
+,,,,,,Lambertia formosa,,,,SV42
+,,,,,,Lambertia inermis s.l.,,,,"S56,HS40,59"
+,,,,,,Lambertia multiflora ,,,,S56
+,,,,,,Lambertia orbifolia E,58,,,"S49,52,HS40,41,58"
+,,,,,,Lambertia rariflora s.l.,,,,LS41
+,,,,,,Lambertia uniflora,,,,"HS40,59"
+,,,,,,Lomatia fraseri,13,,,
+,,,,,,Lomatia fraxinifolia,,,,S36
+,,,,,,Lomatia ilicifolia,25,,,S43
+,,,,,,Lomatia tasmanica CE,,,34,S61
+,,,,,,Opisthiolepis heterophylla,,,,S36
+,,,,,,Orites diversifolia,17,,,
+,,,,,,Persoonia baeckeoides,,,,LS41
+,,,,,,Persoonia brachystylis,,,,LS41
+,,,,,,Persoonia brevirhachis,,,,LS41
+,,,,,,Persoonia chapmaniana,,,,LS41
+,,,,,,Persoonia cornifolia,,,,HS22
+,,,,,,Persoonia elliptica,,,,"S46,HS22"
+,,,,,,Persoonia gunnii,17,,,
+,,,,,,Persoonia hakeiformis,,,,LS41
+,,,,,,Persoonia juniperina,"17,25,29",,,"S43, S60"
+,,,,,,Persoonia kararae,,,,LS41
+,,,,,,Persoonia leucopogon,,,,LS41
+,,,,,,Persoonia levis,"3,6",,,FR22
+,,,,,,Persoonia linearis,,,,FR22
+,,,,,,Persoonia longifolia,"14,15,28",,,"S46,53,54, HS21,40,59"
+,,,,,,Persoonia micranthera E,58,,,"HS58,59,LS41"
+,,,,,,Persoonia microcarpa,,,,LS40
+,,,,,,Persoonia muelleri var. densifolia,,,9,HS9
+,,,,,,Persoonia papillosa,,,,LS41
+,,,,,,Persoonia rudis,,,,LS41
+,,,,,,Persoonia scabra,,,,LS41
+,,,,,,Persoonia silvatica,,,,S22
+,,,,,,Persoonia sulcata,,,,LS41
+,,,,,,Persoonia trinervis,,,,MS40
+,,,,,,Petrophile anceps,,,,HS58
+,,,,,,Petrophile biloba ,,53,,S53
+,,,,,,Petrophile biternata,,,,MS41
+,,,,,,Petrophile canescens,,,,
+,,,,,,Petrophile crispata,,,,MS41
+,,,,,,Petrophile divaricata,,,,"HS40,59"
+,,,,,,Petrophile diversifolia,,,,"S46,HS40,59"
+,,,,,,Petrophile drummondii,37,,,S37
+,,,,,,Petrophile ericifolia,,,,HS40
+,,,,,,Petrophile fastigiata,,3,,
+,,,,,,Petrophile incurvata,,,,MS41
+,,,,,,Petrophile linearis,"14,24",,,"S37,46"
+,,,,,,Petrophile longifolia,,,,HS40
+,,,,,,Petrophile media,,,,HS40
+,,,,,,Petrophile multisecta,19,,,
+,,,,,,Petrophile plumosa,,,,MS41
+,,,,,,Petrophile pulchella,1,,,
+,,,,,,Petrophile seminuda,,3,,MS40
+,,,,,,Petrophile serruriae,,,,"S46,HS40"
+,,,,,,Petrophile sessilis,"3,6",,,
+,,,,,,Petrophile squamata,,3,,"S46,HS40"
+,,,,,,Petrophile striata,14,,,SP21
+,,,,,,Petrophile stricta ,,,,S37
+,,,,,,Stenocarpus sinuatus,,,,FR36
+,,,,,,Stirlingia latifolia ,"14,24",,,"S46,MS40"
+,,,,,,Stirlingia tenuifolia s.l.,,,,S40
+,,,,,,Stirlingia tenuifolia var. anethifolia,,,,MS40
+,,,,,,Stirlingia tenuifolia var. tenuifolia,,,,MS40
+,,,,,,Synaphea petiolaris s.l.,24,,,"S46,FR24"
+,,,,,,Synaphea polymorpha,,,,"S40,MS40,59"
+,,,,,,Telopea mongaensis,,"3, 12",,
+,,,,,,Telopea speciosissima,,"3, 12",,
+,,,,,,Telopea truncata,17,,,
+,,,,,,Xylomelum angustifolium,,,,S46
+,,,,,,Xylomelum occidentale,15,,,"S37,46"
+,,,,,,Clematis pubescens,,,,"FR24,Q21"
+,,,,,,Anarthria gracilis,40,,,FR40
+,,,,,,Anarthria prolifera,40,,,FR40
+,,,,,,Anarthria scabra,40,,,FR40
+,,,,,,Calorophus exsulcus,,,,FR21
+,,,,,,Chordifex abortivus E,58,,,FR58
+,,,,,,Chordifex isomorphus,,,,FR58
+,,,,,,Chordifex monocephalus,17,,33,
+,,,,,,Desmocladus fasciculatus,,,,"FR21,LS40MS59"
+,,,,,,Desmocladus flexuosa,,,,"FR21,59"
+,,,,,,Harperia confertospicata,,,,FR58
+,,,,,,Leptocarpus tenax,,,,FR40
+,,,,,,Lepyrodia scariosa,,,,FR42
+,,,,,,Restio confertospicatus,,,,FR40
+,,,,,,Restio laxocarya,14,,,MS21
+,,,,,,Alphitonia petriei,,,,S36
+,,,,,,Alphitonia whitei,,,,S36
+,,,,,,Cryptandra pumila,,,,LS41
+,,,,,,Cryptandra tomentosa,25,,,S43
+,,,,,,Pomaderris intermedia,3,,,
+,,,,,,Trymalium floribundum,,3,,
+,,,,,,Trymalium ledifolium,"14,28",,,"S48,53,SP21"
+,,,,,,Acaena echinata,25,,,
+,,,,,,Antirhea sp. (Mt Lewis BG 5733),,,,S36
+,,,,,,Atractocarpus fitzalanii subsp. tenuipes,,,,FR36
+,,,,,,Opercularia echinocephala,28,,,Q21
+,,,,,,Opercularia vaginata,,,,Q21
+,,,,,,Opercularia varia,25,,,
+,,,,,,Acronychia oblongifolia,16,,,
+,,,,,,Antirhea sp. (Mt Lewis BG 5733),,,,
+,,,,,,Asterolasia phebalioides V,,44,,HS44
+,,,,,,Boronia anemonifolia,,3,,
+,,,,,,Boronia baeckeacea,,3,,
+,,,,,,Boronia citriodora,"17,34",3,,HS34
+,,,,,,Boronia crenulata s.l.,40,,,"FR40,59"
+,,,,,,Boronia crenulata subsp. viminea,,3,,
+,,,,,,Boronia fastigiata,,,21,S21
+,,,,,,Boronia microphylla,,,,
+,,,,,,Boronia nana var. hyssopifolia,25,,,
+,,,,,,Boronia nana var. nana,25,,,
+,,,,,,Boronia parviflora,"17,34",,,"HS34, LS or SV61"
+,,,,,,Boronia pilosa s.l.,"17,34",3,,"HS34, MS61"
+,,,,,,Boronia revoluta,,,,S49
+,,,,,,Boronia spathulata,,,,FR24
+,,,,,,Brombya platynema,,,,FR36
+,,,,,,Correa decumbens,,3,,
+,,,,,,Correa pulchella,20,,,
+,,,,,,Correa reflexa,"17,20,25,29",,,S43
+,,,,,,Crowea angustifolia s.l.,,,,S46
+,,,,,,Crowea angustifolia var. platyphylla,,3,,
+,,,,,,Crowea exalata,,3,,
+,,,,,,Crowea saligna,,3,,
+,,,,,,Flindersia bourjotiana,,,,S36
+,,,,,,Flindersia brayleyana,,,16,
+,,,,,,Flindersia pimenteliana,,,,FR36
+,,,,,,Leionema phylicifolium,,3,,
+,,,,,,Leionema ralstonii V,,22,,MS22
+,,,,,,Melicope elleryana,,,,FR36
+,,,,,,Muiriantha hassellii,,,,FR58
+,,,,,,Nematolepis squamea s.l.,"2,8,17,34",,,HS34
+,,,,,,Phebalium daviesii,,,9,HS9
+,,,,,,Philotheca myoporoides ,,3,,
+,,,,,,Philotheca spicata,24,3,,"FR21,24"
+,,,,,,Philotheca virgata,17,,,
+,,,,,,Zieria laevigata s.l.,,3,,
+,,,,,,Exocarpus cupressiformis,3,,,
+,,,,,,Leptomeria cunninghamii,24,,,"FR24,Q21"
+,,,,,,Leptomeria eriocoides,,,,FR40
+,,,,,,Dodonaea boroniifolia,,3,,
+,,,,,,Dodonaea viscosa s.l.,3,,,FR50
+,,,,,,Jagera pseudorhus,,,16,
+,,,,,,Mischocarpus macrocarpus,,,,FR36
+,,,,,,Pouteria brownlessiana,,,,S36
+,,,,,,Pouteria euphlebia,,,,FR36
+,,,,,,Pouteria papyracea,,,,FR36
+,,,,,,Pouteria pearsoniorum,,,,FR36
+,,,,,,Selaginella uliginosa,25,,,S43
+,,,,,,Anthocercis racemosa,,3,,
+,,,,,,Solanum oldfieldii,,3,,
+,,,,,,Tripterococcus brunonis,,,,FR21
+,,,,,,Argyrodendron actinophyllum,,,16,
+,,,,,,Franciscodendron laurifolium,,,,S36
+,,,,,,Lasiopetalum floribundum,"15,28",,,"S24,48,53,MS21"
+,,,,,,Lasiopetalum glabratum,14,,,
+,,,,,,Lasiopetalum membranifolium,,,,FR58
+,,,,,,Thomasia grandiflora,15,,37,S37
+,,,,,,Thomasia pauciflora,15,,,
+,,,,,,Thomasia sp. Toolbrunup,,,,"FR58,59"
+,,,,,,Levenhookia pusilla,,,,FR21
+,,,,,,Levenhookia stipitata,,,,FR21
+,,,,,,Stylidium amoenum,26,,21,HS21
+,,,,,,Stylidium brunonianum,,,,FR40
+,,,,,,Stylidium calcaratum,,,,FR21
+,,,,,,Stylidium graminifolium s. l.,"17,34",3,33,MS60
+,,,,,,Stylidium imbricatum,,,,"FR40,59"
+,,,,,,Stylidium hispidum,,,,FR21
+,,,,,,Stylidium junceum,,,21,Q21
+,,,,,,Stylidium keigheryi,,,,FR59
+,,,,,,Stylidium piliferum subsp. minor,,,,FR40
+,,,,,,Stylidium repens,,,,FR21
+,,,,,,Stylidium scandens,,,,FR40
+,,,,,,Stylidium schoenoides,,,,Q21
+,,,,,,Stylidium spathulatum ,51,,,S51
+,,,,,,Stylidium spinulosum subsp. montanum,,,,FR59
+,,,,,,Stylidium verticillatum,,,,"FR40,58,59"
+,,,,,,Stylidium sp. Stirling Range,,,,FR59
+,,,,,,Symplocos ampulliformis,,,,FR36
+,,,,,,Symplocos cochinchinenis var. gittonsii,,,,FR36
+,,,,,,Symplocos stawellii,16,,,
+,,,,,,Athrotaxis selaginoides,17,,,FR60
+,,,,,,Pimelea ferruginea,,3,,
+,,,,,,Pimelea hispida,,,,"FR40,59"
+,,,,,,Pimelea humilis,,,,
+,,,,,,Pimelea imbricata var. piligera,,3,,
+,,,,,,Pimelea ligustrina s.l.,25,,,
+,,,,,,Pimelea linifolia s.l. ,"25,29",,,"S43,FR22"
+,,,,,,Pimelea pagophila V,,44,,HS44
+,,,,,,Pimelea rosea,,,,MS40
+,,,,,,Pimelea suaveolens,"14,24",,,"S24,SP21"
+,,,,,,Tetratheca ciliata,"25,29,34",,,S43
+,,,,,,Tetratheca gunnii CE,34,,,MS60
+,,,,,,Tetratheca hirsuta,15,,21,HS21
+,,,,,,Tetratheca labillardierei,17,,,
+,,,,,,Tetratheca pilosa s.l.,"17,18,25",,,"S18,43"
+,,,,,,Tetratheca procumbens,"17,34",,,
+,,,,,,Tetratheca setigera,,,,"HS40,59"
+,,,,,,Tetratheca subaphylla,13,,,HS22
+,,,,,,Tremandra stelligera ,,,,S46
+,,,,,,Hybanthus floribundus,,,21,Q21
+,,,,,,Bubbia semecarpoides,,,,FR36
+,,,,,,Tasmannia lanceolata,"8,17,34",,,
+,,,,,,Tasmannia purpurascens V,35,,,HS35
+,,,,,,Xanthophyllum octandrum,,,,S36
+,,,,,,Lomandra caespitosa,,,21,
+,,,,,,Lomandra confertifolia s.l.,,,,FR42
+,,,,,,Lomandra filiformis,29,,,
+,,,,,,Lomandra hermaphrodita,,,,FR21
+,,,,,,Lomandra integra,,,21,
+,,,,,,Lomandra longifolia,29,,,FR60
+,,,,,,Lomandra nigricans,,,,FR59
+,,,,,,Lomandra obliqua,,,,FR42
+,,,,,,Lomandra odora,14,,,S46
+,,,,,,Lomandra pauciflora,,,,"FR40,59"
+,,,,,,Lomandra preisii,,,,FR40
+,,,,,,Lomandra sonderi ,"14,28,46, 48",,21,"S46,48MS21 HS14"
+,,,,,,Lomandra spartea,,,,FR21
+,,,,,,Xanthorrhoea arenaria V,,,9,"HS9,60"
+,,,,,,Xanthorrhoea australis ,"2,4,13,1722,29,34",44,,"S43,HS22,61"
+,,,,,,Xanthorrhoea bracteata,34,,,
+,,,,,,Xanthorrhoea brevistyla,,,,"HS40,41"
+,,,,,,Xanthorrhoea drummondii ,,,,S46
+,,,,,,Xanthorrhoea glauca subsp. glauca,13,,,HS13
+,,,,,,Xanthorrhoea gracilis ,"14,24,28, 37,46,48, 53 ",,,"SP21 S24,37,46,48,53 HS14,40"
+,,,,,,Xanthorrhoea latifolia,38,,,
+,,,,,,Xanthorrhoea nana ,,,,S46
+,,,,,,Xanthorrhoea platyphylla,58,,,"HS40,58,59"
+,,,,,,Xanthorrhoea preissii ,"2,14,22, 24,28,37,46,48,53",,,"SP21,S37,46,48,53HS14,40,59"
+,,,,,,Xanthorrhoea quadrangulata,?,,,
+,,,,,,Xanthorrhoea resinifera,13,,,
+,,,,,,Xanthorrhoea semiplana var. semiplana,18,,,
+,,,,,,Xanthorrhoea semiplana var. tateana,18,,,
+,,,,,,Xyris exilis V,,,,"FR58,59"
+,,,,,,Macrozamia communis,2,,,S22
+,,,,,,Macrozamia riedlei,"2,14,15, 24",,,"SP21S46,53HS40"
