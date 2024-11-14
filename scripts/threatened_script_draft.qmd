@@ -209,3 +209,6 @@ Begg_with_traits <- Begg %>%
   left_join(categorical %>% rename(accepted_name = taxon_name)) %>%
   left_join(numeric %>% rename(accepted_name = taxon_name)) 
 ```
+
+
+

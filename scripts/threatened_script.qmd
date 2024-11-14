@@ -1,0 +1,61 @@
+---
+title: "Threatened species script"
+format: html
+editor: visual
+---
+
+set up
+
+```{r}
+library(tidyverse)
+library(remake)
+library(austraits)
+library(APCalign)
+resources <- load_taxonomic_resources()
+austraits <- readRDS("data/austraits/austraits-6.0.0.rds")
+
+library(traits.build)
+source("R/custom_R_code.R")
+
+build_setup_pipeline(method = "base", database_name = "threatened_species")
+build_setup_pipeline(method = "remake", database_name = "threatened_species")
+
+threatened_species <- remake::make("threatened_species")
+```
+
+```{r}
+current_study <- "Pegg_2018"
+
+excluded <- threatened_species$excluded_data %>% filter(dataset_id == current_study)
+View(excluded)
+
+traits_for_study <- threatened_species$traits %>% filter(dataset_id == current_study)
+View(traits_for_study)
+```
+
+# myrtle rust
+
+```{r}
+# species in APC that are in Myrtaceae
+Myrtaceae <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(family == "Myrtaceae") %>% 
+  filter(taxon_rank %in% c("species", "subspecies", "variety", "form")) %>%
+  select(canonical_name, family, taxon_distribution, name_type, taxon_ID)
+
+
+
+# species for which myrtle rust status is known
+myrtle_rust_susceptibility_known <- threatened_species$traits %>% 
+  filter(trait_name == "myrtle_rust_susceptibility") %>%
+  group_by(taxon_name) %>%
+  mutate(
+    dataset_id = paste0(dataset_id, collapse = "; "),
+    value = paste0(value, collapse = "; "),
+    value_type = paste0(value_type, collapse = "; ")
+    ) %>%
+  ungroup() %>%
+  distinct(taxon_name, dataset_id, trait_name, value, value_type)
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
