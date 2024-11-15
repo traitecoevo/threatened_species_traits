@@ -1,0 +1,112 @@
+source:
+  primary:
+    key: Fensham_2020
+    bibtype: Article
+    year: '2020'
+    author: R.J. Fensham and B. Laffineur and T.D. Collingwood and E. Beech and S.
+      Bell and S.D. Hopper and G. Phillips and M.C. Rivers and N. Walsh and M. White
+    journal: Biological Conservation
+    title: 'Rarity or decline: Key concepts for the Red List of Australian eucalypts'
+    volume: '243'
+    pages: '108455'
+    doi: 10.1016/j.biocon.2020.108455
+    issn: 0006-3207
+contributors:
+  data_collectors:
+  - last_name: Fensham
+    given_name: Roderick
+    ORCID: 0000-0003-3658-5867
+    affiliation: Queensland Herbarium, Department of Science, Information Technology and Innovation, Brisbane Botanic Gardens, Mt Coot-tha Road, Toowong, Queensland, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: unknown/2020
+  taxon_name: Species
+  location_name: .na
+  description: Assessment of 193 Eucalyptus species qualified as threatened using IUCN Red Listing criteria, focusing on the importance of decline over rarity. 
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: The list assessed here (Appendix 1) includes the 822 described species occurring in Australia accepted by the Australian Plant Census (Australian Plant Name Index, accessed May 2019), excluding clearly erroneous names (n = 24). Infraspecific taxa were not included. ^p Species' geographic ranges were determined by verifying herbarium specimen records in consultation with herbarium curators, other experts and reference to distribution maps (Brooker and Kleinig, 1994, Brooker and Kleinig, 2001, Brooker and Kleinig, 2006; Williams and Potts, 1996; Nicolle, 2006a; French unpublished data, Nicolle, 2013; French, 2012; French and Nicolle, 2019). A 'geographic range' is defined here as the area encompassing the historical distribution of the species. Herbarium specimen data often includes errors associated with misidentified taxa, intergraded/hybrid taxa and erroneous geocoding. Although there are numerous additional data sources (e.g. field surveys), these were not included given the uncertainty when verifying records that are not substantiated by a specimen. Specimen collections are rich for eucalypts, with 215,276 records for 822 species since colonisation in 1788. According to experts, verified specimen records adequately represent historical geographic ranges for most eucalypts. For most species exhibiting decline paddock trees and roadside remnants persist throughout the historical geographic range and the current geographical range is assumed to have not declined substantially. To determine the extent of decline in geographic range would require extensive contemporary survey. Specimen locations were converted to geographic ranges using either a convex polygon or a more-idiosyncratic polygon as guided by geographic features (Appendix 2). For example, the distribution of lowland species often excluded areas that exceeded the highest altitude record. Geographic ranges are smaller than the Extent of occurrence (EOO), which must be a minimum convex polygon, and often larger than the Area of occupancy (AOO), which with adequate data, represents the known area of occupied by the species measured with a 2 x 2 km grid (Red List Technical Working Group, 2018).
+  original_file: data transcribed from manuscript
+  notes: data from Supplementary Table 1 was merged with data from Tables 2, 3, and 4 in the manuscript. The threatened status for E. ornans was mis-types in Table 3 in the manuscript and was manually edited in the raw data files. Threats and habitat have not yet been mapped into the database.
+locations: .na
+contexts: .na
+traits:
+- var_in: Obligate seeder
+  unit_in: .na
+  trait_name: resprouting_capacity
+  entity_type: species
+  value_type: mode
+  basis_of_value: literature
+  replicates: .na
+  methods: Presume literature. Various Nicole citations, but manuscript doesn't explicitly mention source.
+- var_in: AOO (km2)
+  unit_in: km2
+  trait_name: area_of_occupancy
+  entity_type: species
+  value_type: raw
+  basis_of_value: model_derived
+  replicates: .na
+  methods: Area of occupancy (AOO), represents the known area of occupied by the species measured with a 2 x 2 km grid, based on specimen records.
+- var_in: EOO (km2)
+  unit_in: km2
+  trait_name: extent_of_occurrence
+  entity_type: species
+  value_type: raw
+  basis_of_value: model_derived
+  replicates: .na
+  methods: Extent of occurrence (EOO), the minimum convex polygon encompassing specimen records.
+- var_in: Geographic Range (km2)
+  unit_in: km2
+  trait_name: geographic_range
+  entity_type: species
+  value_type: raw
+  basis_of_value: model_derived
+  replicates: .na
+  methods: Species' geographic ranges were determined by verifying herbarium specimen records in consultation with herbarium curators, other experts and reference to distribution maps (Brooker and Kleinig, 1994, Brooker and Kleinig, 2001, Brooker and Kleinig, 2006; Williams and Potts, 1996; Nicolle, 2006a; French unpublished data, Nicolle, 2013; French, 2012; French and Nicolle, 2019). A 'geographic range' is defined here as the area encompassing the historical distribution of the species. Herbarium specimen data often includes errors associated with misidentified taxa, intergraded/hybrid taxa and erroneous geocoding. Although there are numerous additional data sources (e.g. field surveys), these were not included given the uncertainty when verifying records that are not substantiated by a specimen. Specimen collections are rich for eucalypts, with 215,276 records for 822 species since colonisation in 1788. According to experts, verified specimen records adequately represent historical geographic ranges for most eucalypts. For most species exhibiting decline paddock trees and roadside remnants persist throughout the historical geographic range and the current geographical range is assumed to have not declined substantially. To determine the extent of decline in geographic range would require extensive contemporary survey. Specimen locations were converted to geographic ranges using either a convex polygon or a more-idiosyncratic polygon as guided by geographic features (Appendix 2). For example, the distribution of lowland species often excluded areas that exceeded the highest altitude record. 
+- var_in: Habitat
+  unit_in: .na
+  trait_name: .na
+  entity_type: species
+  value_type: mode
+  basis_of_value: literature
+  replicates: .na
+  methods: In Australia, areas with fertile soils and subdued topography are highly suitable for agriculture and have been preferentially cleared relative to areas with infertile soils and challenging topography (Fensham and Fairfax, 2003). Eucalypts are associated with certain habitats characterised by particular substrates or soil types. Therefore, in a given area, a eucalypt that occurs on arable soils will have declined more than a species that inhabits rocky hills. Conversely, urbanisation occurs independently of habitat type. To account for these biases, the habitat (soil/geology/topography) for each eucalypt was categorised as 'productive', 'moderately productive' or 'unproductive' (Table 1, Appendix 4).
+- var_in: Threats
+  unit_in: .na
+  trait_name: .na
+  entity_type: species
+  value_type: mode
+  basis_of_value: literature
+  replicates: .na
+  methods: While the fate of any species is uncertain, some IUCN Red List criteria are concerned with future threats and predicting future decline. Generally, current threatening processes can inform future population trends. To manage this uncertainty in this assessment, the responses of eucalypts to past and present threats were used to inform their response to future threats. More details on threats in the manuscript.
+- var_in: Locations
+  unit_in: '{count}'
+  trait_name: population_count
+  entity_type: species
+  value_type: Locations_value_type
+  basis_of_value: literature
+  replicates: .na
+  methods: Population size was determined using field survey data (Department of Biodiversity, Conservation and Attractions, 2012) or estimates from relevant experts.
+- var_in: Mature individuals
+  unit_in: '{count}'
+  trait_name: individual_count
+  entity_type: species
+  value_type: Mature_individuals_value_type
+  basis_of_value: literature
+  replicates: .na
+  methods: Population size was determined using field survey data (Department of Biodiversity, Conservation and Attractions, 2012) or estimates from relevant experts.
+substitutions:
+- trait_name: resprouting_capacity
+  find: 0
+  replace: resprouts
+- trait_name: resprouting_capacity
+  find: 1
+  replace: fire_killed
+- trait_name: resprouting_capacity
+  find: 0.5
+  replace: resprouts fire_killed
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

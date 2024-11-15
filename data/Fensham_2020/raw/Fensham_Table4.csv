@@ -1,0 +1,33 @@
+﻿Species,EOO (km2),AOO (km2),Accepted threats,Locations,Mature individuals,Putative threats,EPBC listing,State listing
+A. inopina,1886.4,148,Urbanisation,26,">10,000","Weeds, too-frequent fire, urbanisation",VU,VU
+A. robur,1811.1,108,,,">10,000","Roads/ utilities, agriculture, timber harvesting",VU,VU
+C. clandestina,232.2,48,Future mining,9,2000–5000,"Mining, grazing",VU,VU
+C. leptoloma,436.8,32,Historic mining; Future mining,6,">10,000","Mining, agriculture, grazing",VU,VU
+C. petalophylla,1893.3,100,,,">10,000",No documentation available,,VU
+C. rhodops,349.2,104,Active mining,19,">10,000",Mining,VU,VU
+C. xanthope,8106.8,116,Active mining,13,">10,000","Mining, roads/utilities",VU,VU
+E. approximans,47.21,24,,,2500–5000,"Too-frequent fire, agriculture",,VU
+E. argutifolia,9832.4,84,Active mining; urbanisation,13,"19,704","Small population (<1000), mining, roads/ utilities, weeds, agriculture, grazing",VU,VU
+E. beaniana,7995.2,68,,,">10,000","Roads/utilities, timber harvesting",VU,VU
+E. boliviana,2.7,12,,,1000–2000,No documentation available,,VU
+E. broviniensis,36.6,16,,,1020,No documentation available,,EN
+E. burdettiana,106.3,12,,,3500,"Restricted range, roads/utilities, too-frequent fire",EN,EN
+E. ceracea,209.4,36,,,">10,000","Restricted range, mining, too-frequent fire",VU,VU
+E. coronata,675.1,24,,,7510,"Small population (<250), roads/ utilities, too-frequent fire, climate change, phytophthora",VU,EN
+E. corticosa,421.6,52,,,>1000,"Restricted range, roads/ utilities, too-frequent fire, agriculture",,VU
+E. dunnii,"14,127.00",164,,,">82,000",No documentation available,,VU
+E. hallii,743.6,136,,,">10,000","Urbanisation, agriculture, timber harvesting",VU,VU
+E. insularis,1988.4,44,,,1500,"Restricted range, too-frequent fire,",EN,
+E. langleyi,535.4,60,,,">10,000","Roads/utilities, weeds, too-frequent fire",VU,VU
+E. largeana,3616.9,124,,,>2000,"Weeds, agriculture, grazing",EN,EN
+E. mooreana,1997.8,68,,,1000,"Small population (<1000), too-frequent fire, grazing",VU,VU
+E. pachycalyx,"130,886.30",276,,,">10,000","Restricted range, roads/utilities, too-frequent fire",,EN
+E. parvula,1219.9,168,,,>2000,"Roads/utilities, weeds, grazing, seed collection",VU,EN
+E. pulverulenta,"14,162.20",164,,,5400,"Restricted range, mining, roads/utilities, weeds, grazing, seed collection",VU,VU
+E. saxatilis,856.5,80,,,2400,"Restricted range, grazing",,EN
+E. scoparia,177.2,72,,,">10,000","Restricted range, too-frequent fire, agriculture, timber harvesting, grazing",VU,VU/ EN
+E. sicilifolia,113,40,,,>2000,No documentation available,,VU
+E. sturgissiana,312.6,88,,,1198,"Restricted range, roads/utilities, too-frequent fire",,VU
+E. taurina,666.9,60,Active mining,13,">10,000",,,VU
+E. tetrapleura,2329.6,168,,,>2000,"Roads/utilities, weeds, agriculture, timber harvesting, grazing",VU,VU
+E. virens,"66,968.40",96,,,1000–3000,"Agriculture, timber harvesting",VU,VU

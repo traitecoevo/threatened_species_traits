@@ -1,0 +1,62 @@
+source:
+  primary:
+    key: Martino_2024
+    bibtype: Article
+    year: '2024'
+    author: Alyssa M. Martino and Robert F. Park and Peri A. Tobias
+    journal: Australasian Plant Pathology
+    title: Threatened and Priority listed Melaleuca species from Western Australia
+      display high susceptibility to Austropuccinia psidii in controlled inoculations
+    volume: '53'
+    number: '3'
+    pages: 253--260
+    doi: 10.1007/s13313-024-00974-8
+    issn: 1448-6032
+contributors:
+  data_collectors:
+  - last_name: Martino
+    given_name: Alyssa
+    ORCID: 0000-0002-5062-3578
+    affiliation: School of Life and Environmental Sciences, The University of Sydney, Camperdown, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code:  '
+    data %>%
+      mutate(
+        myrtle_rust_susceptibility_proportion_resistant = (`disease_score 1 (% plants)` + `disease_score 2 (% plants)`) / (`disease_score 1 (% plants)` + `disease_score 2 (% plants)` + `disease_score 3 (% plants)` + `disease_score 4 (% plants)` +`disease_score 5 (% plants)`)  
+      )
+    '
+  collection_date: 2024/2024
+  taxon_name: species
+  location_name: .na
+  description: This study established that 13 previously unscreened species of Melaleuca, including Threatened and Priority listed species that were grown from seeds sourced from Western Australian populations, were susceptible four months post-germination to the pandemic strain of the pathogen Austropuccinia psidii.
+  basis_of_record: lab
+  life_stage: saplings
+  sampling_strategy: Species selection for initial myrtle rust screening  ^p To conduct an initial risk assessment of the impact A. psidii may have in WA, the response of endemic Melaleuca species from selected populations was determined. Melaleuca seed was obtained from the Department of Biodiversity, Conservation and Attractions (DBCA) Kings Park and Kensington seed banks. For many species, their natural range spans large geographic distances (Fig. 1A & B), therefore seed collections were conducted by DBCA staff in areas deemed as highest suitability for myrtle rust establishment. For each species, seed was collected from multiple parent trees in a single population following Florabank guidelines (Commander 2021) with co-ordinates obtained and mapped (Fig. 2A-C). ^p Seed was obtained for species listed under the Biodiversity Conservation (BC) Act 2016 (2016) as Threatened, including critically endangered, endangered, or vulnerable species (Biodiversity Conservation Act 2016 (WA) (2016) s 19), and species listed as Priority on DBCA's priority flora list (Department of Biodiversity, Conservation and Attractions 2017). While not designated under the BC Act, Priority listed species may be threatened but lack sufficient survey data to list under the Act. Seed from Priority listed species for this work included M. dempta, M. incana ssp. gingilup, M. penicula, M. similis, and M. sophisma. Seed was also obtained for the Threatened (endangered) listed species M. sp. Wanneroo. Seed was also obtained from species listed as Not Threatened (Biodiversity Conservation Act 2016 (WA) (2016) s 19) and included M. acutifolia, M. argentea, M. cajuputi ssp. cajuputi, M. fulgens ssp. fulgens, M. lanceolata, M. lateralis, and M. viminea ssp. appressa.Seed germination and plant growth  ^p Seeds were sown into perforated trays containing a mix of 2:1:1 peat, coconut coir, and perlite supplemented with Osmocote® Native Controlled Release Fertiliser then covered with a fine coating of vermiculite. Perforated trays were placed into solid trays filled with 1 cm of water every 3-4 days allowing for periods of drying to promote root growth. Seeds were germinated under natural light in a climate-controlled greenhouse at the Plant Breeding Institute at the University of Sydney (Cobbitty, NSW) set at 24 °C/20 °C day-time/night-time temperature on a 12 h cycle. Germinated seedlings were transplanted into 85 mL pots (5 cm diameter and depth) containing a mix of 2:1:1 Osmocote® Native Premium Potting Mix, peat, and perlite supplemented with Osmocote® Native Controlled Release Fertiliser then placed on capillary mats. Seedlings were grown under the same light and temperature conditions as for germination, and fertilised once a month with Osmocote® Native Controlled Release Fertiliser. ^p Plant inoculations  ^p For all species, plants were inoculated at approximately four months post germination alongside four highly susceptible Syzygium jambos plants as positive controls. Owing to space limitations, inoculations were carried out in two batches of equal size, following the method of Sandhu and Park (2013). Approximately 50 mg of A. psidii urediniospores from a greenhouse increased single pustule isolate (accession 622, Pandemic strain) (Sandhu and Park 2013) was added to 50 mL of ASCC Isopar® L for a final concentration of 1 mg spores/mL. Plants were inoculated with the suspension using an aerosol sprayer and relocated to a dark humid incubation chamber for 24 h at 20 °C. After incubation, the plants were transferred to a greenhouse with the temperature set to 24 °C/20 °C day-time/night-time temperature on a 12-hour cycle under natural light.
+  original_file: data transcribed from manuscript
+  notes: none
+locations: .na
+contexts: .na
+traits:
+- var_in: susceptibility_fewer_categories
+  unit_in: .na
+  trait_name: myrtle_rust_susceptibility
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: plants_scored
+  methods: Disease response scoring ^p Host response to A. psidii inoculation was scored visually using a 1-5 scoring system based on Morin et al. (2012) and adapted for disease scoring on Melaleuca species (this study) where 1 indicates completely resistant or no visible response and 5 indicates highly susceptible (Table 1). Syzygium jambos was scored as score 5 for both inoculation batches indicating successful inoculation as it's known to be highly susceptible. As inoculations were carried out in winter under shorter day-length conditions, disease symptoms were slower to develop than in a previous screening study (Martino et al. 2022). Plants were left for 16 days prior to scoring to allow for complete development of plant disease symptoms.
+- var_in: myrtle_rust_susceptibility_proportion_resistant
+  unit_in: '{count}/{count}'
+  trait_name: myrtle_rust_susceptibility_proportion_resistant
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: plants_scored
+  methods: Disease response scoring ^p Host response to A. psidii inoculation was scored visually using a 1-5 scoring system based on Morin et al. (2012) and adapted for disease scoring on Melaleuca species (this study) where 1 indicates completely resistant or no visible response and 5 indicates highly susceptible (Table 1). Syzygium jambos was scored as score 5 for both inoculation batches indicating successful inoculation as it's known to be highly susceptible. As inoculations were carried out in winter under shorter day-length conditions, disease symptoms were slower to develop than in a previous screening study (Martino et al. 2022). Plants were left for 16 days prior to scoring to allow for complete development of plant disease symptoms.
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions:
+  additional_traits: numeric rust susceptibility, including proportion plants in each of 5 categories

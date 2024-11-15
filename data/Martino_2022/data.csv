@@ -1,0 +1,4 @@
+﻿Species,plants_scored,susceptibility_classification,susceptibility_fewer_categories,disease_score_mean,disease_score_mode,disease_score 1 (% plants),disease_score 2 (% plants),disease_score 3 (% plants),disease_score 4 (% plants),disease_score 5 (% plants)
+Melaleuca marginata,26,0.8152,high,5,5,23.1,0,0,0,76.9
+Melaleuca thyoides,57,0.5754,resistant high,3,1,45.6,1.8,7,10.5,35.1
+Melaleuca leucadendra,51,0.7342,resistant high,4,5,29.4,2,3.9,2,62.8

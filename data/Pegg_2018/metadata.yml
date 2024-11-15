@@ -1,0 +1,334 @@
+source:
+  primary:
+    key: Pegg_2018
+    bibtype: Article
+    year: '2018'
+    author: G. S. Pegg and D. J. Lee and A. J. Carnegie
+    journal: Australasian Plant Pathology
+    title: Predicting impact of Austropuccinia psidii on populations of broad leaved
+      Melaleuca species in Australia
+    volume: '47'
+    number: '4'
+    pages: 421--430
+    doi: 10.1007/s13313-018-0574-8
+    issn: 1448-6032
+contributors:
+  data_collectors:
+  - last_name: Pegg
+    given_name: Geoff
+    ORCID: 0000-0002-0957-9755
+    affiliation: Horticulture & Forestry Science, Queensland Department of Agriculture & Fisheries, Ecosciences Precinct, Dutton Park, Brisbane, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(measurement_remarks = paste0("seedlot: ", seedlot))
+    '
+  collection_date: unknown/2018
+  taxon_name: Species
+  location_name: Location
+  measurement_remarks: measurement_remarks
+  description: A study that examined the variability in susceptibility to A. psidii
+    (myrtle rust) within populations of Melaleuca quinquenervia, M. leucadendra and
+    M. viridiflora using in-vitro assessments of seedlings from provenances across
+    the native range of the three species.
+  basis_of_record: lab
+  life_stage: seedlings
+  sampling_strategy: Seed source ^p Bulk seed-lots of the three broad-leaved paperbark
+    species were sourced from the Australian Seed Bank collection. Most of the tested
+    seed-lots were collected prior to 2010 when A. psidii was first detected in Australia
+    (Table 1, Fig. 1), so no selection pressure had been applied by the disease. For
+    M. quinquenervia an additional seed-lot, Boggy Creek, New South Wales, was collected
+    in 2012 from a study site where trees were assessed for rust impact over time
+    and seed collected from trees rated as resistant (Pegg et al. 2012). The provenance
+    bulk seed-lots contained at least five parent trees where possible, so that findings
+    would be representative of the source population. There were however, exceptions
+    and these were included to ensure a good representation from across the species
+    native range. ^p Seedlings ^p Seeds were sown in 40-celled hyco trays with plastic
+    inserts (70 ml) in the glasshouse using a potting medium consisting of 50% pine
+    bark fines (0-10 mm), 25% pine bark peat, 25% coarse perlite, a mix of 12-14 month
+    slow release Osmocote® (N 17.9 to P 0.8 to K 7.3) fertiliser at a rate of 4 kg/m3,
+    gypsum (1 kg/m3), Micromax (1 kg/m3) and a granular wetting agent Hydroflo2 (1
+    kg/m3). Plants were irrigated twice a day for 10 min using an overhead spray.
+    Seedlings were thinned over time to a single plant per cell. Plants were fertilised
+    2 weeks prior to inoculation to ensure new growth flush. Previous studies on species
+    of Eucalyptus and Corymbia have identified that seedlings showing visible evidence
+    of nutrient deficiency, including poor or slow growth and chlorosis, produce false
+    resistant reactions when infected under controlled conditions (Pegg unpublished).
+    ^p Trial design ^p The trial was established as a randomised incomplete block
+    design with 8 replicates of a five-tree line plot from each provenance treatment
+    in each replicate. Under this design, the number of treatments per block (a subset
+    of the replicate, used to account for variation within the replicate) is less
+    than the number of treatments being evaluated. This type of trial design increases
+    precision of the analysis and reduces experimental error. Incomplete block design
+    trials can be thought of as two-factor experiments (block and treatment) with
+    unequal numbers and no interaction between the block and treatment factors. ^p
+    Inoculation ^p Austropuccinia psidii urediniospores were collected from Syzygium
+    jambos plants and sieved to remove extraneous matter before being placed onto
+    an open petri dish in a desiccator. Spores remained in the desiccator for approximately
+    7 days to ensure moisture levels were at a minimum before being transferred into
+    vials and stored at -80 °C. Urediniospores were removed from -80 °C storage and
+    allowed to warm to room temperature before being added to sterile distilled water
+    (SDW). The surfactant Tween 20 was added at a rate of two drops per 100 mL SDW
+    and the spore suspension stirred to reduce clumping. Spores were counted using
+    a haemocytometer and the suspension adjusted to a concentration of 1 x 105 spores/mL.
+    ^p Plants were inoculated using a fine mist spray (29 kPa pressure), generated
+    by a compressor driven spray gun (Iwata Studio series 1/6 hp.; Gravity spray gun
+    RG3). The upper and lower leaf surfaces of the seedlings were sprayed, ensuring
+    all leaves were coated with a fine mist but run-off of the spore suspension was
+    avoided. ^p Once inoculated, seedlings were placed onto a plastic-lined metal
+    bench and covered with another plastic sheet creating a sealed system. Plants
+    were then placed into a Controlled Environment Room (CER) set at 18 °C in the
+    dark for 24 h. Hot tap water (60 °C) was applied to the lower plastic sheet immediately
+    before plants were placed into the CER to ensure high humidity levels and leaf
+    wetness was achieved rapidly. Twenty-four hours after inoculation the plastic
+    coverings were removed, and plants grown on in a shade-house and hand watered
+    as required.
+  original_file: data from tables in manuscript
+  notes: locations are seed provenance locations.
+locations:
+  Boggy Creek:
+    latitude (deg): -29.5731
+    longitude (deg): 153.1426
+    state: New South Wales
+    elevation (m): 3.3
+    seed provenance: Boggy Ck, NSW
+  Bribie Island:
+    latitude (deg): -27.04
+    longitude (deg): 153.11
+    state: Queensland
+    elevation (m): 10.0
+    seed provenance: Bribie Island, QLD
+  Buffalo Creek:
+    latitude (deg): -12.2
+    longitude (deg): 130.54
+    state: Northern Territory
+    elevation (m): 3.0
+    seed provenance: Buffalo Ck, NT
+  Caloundra:
+    latitude (deg): -26.48
+    longitude (deg): 152.59
+    state: Queensland
+    elevation (m): 90.0
+    seed provenance: Caloundra, QLD
+  Cambridge Gulf:
+    latitude (deg): -14.55
+    longitude (deg): 128.34
+    state: Western Australia
+    elevation (m): 20.0
+    seed provenance: Cambridge Gulf, WA
+  Chillagoe:
+    latitude (deg): -16.36
+    longitude (deg): 144.07
+    state: Queensland
+    elevation (m): 265.0
+    seed provenance: Chillagoe, QLD
+  Dohles Rocks:
+    latitude (deg): -27.16
+    longitude (deg): 153.01
+    state: Queensland
+    elevation (m): 20.0
+    seed provenance: Dohles Rocks, QLD
+  East Baines River:
+    latitude (deg): -15.43
+    longitude (deg): 130.06
+    state: Northern Territory
+    elevation (m): 50.0
+    seed provenance: East Baines River, NT
+  Gympie:
+    latitude (deg): -25.47
+    longitude (deg): 152.5
+    state: Queensland
+    elevation (m): 40.0
+    seed provenance: Gympie, QLD
+  Hawks Nest:
+    latitude (deg): -32.4007
+    longitude (deg): 152.1013
+    state: New South Wales
+    elevation (m): 6.0
+    seed provenance: Hawks Nest, NSW
+  Iron Range:
+    latitude (deg): -12.42
+    longitude (deg): 143.2
+    state: Queensland
+    elevation (m): 40.0
+    seed provenance: Iron Range, QLD
+  Julatten:
+    latitude (deg): -16.36
+    longitude (deg): 145.41
+    state: Queensland
+    elevation (m): 400.0
+    seed provenance: Julatten, QLD
+  Kalumburu Mission:
+    latitude (deg): -14.18
+    longitude (deg): 126.38
+    state: Western Australia
+    elevation (m): 20.0
+    seed provenance: Kalumburu Mission, WA
+  Kennedy River:
+    latitude (deg): -15.1607
+    longitude (deg): 143.593
+    state: Queensland
+    elevation (m): 85.0
+    seed provenance: Kennedy River, QLD
+  King River:
+    latitude (deg): -14.37
+    longitude (deg): 132.36
+    state: Northern Territory
+    elevation (m): 180.0
+    seed provenance: King River, NT
+  Kuranda:
+    latitude (deg): -16.44
+    longitude (deg): 145.34
+    state: Queensland
+    elevation (m): 450.0
+    seed provenance: Kuranda, QLD
+  Lakeland:
+    latitude (deg): -15.4602
+    longitude (deg): 144.4137
+    state: Queensland
+    elevation (m): 146.0
+    seed provenance: Lakeland, QLD
+  Laura:
+    latitude (deg): -15.32
+    longitude (deg): 144.22
+    state: Queensland
+    elevation (m): 150.0
+    seed provenance: Laura, QLD
+  Long Jetty:
+    latitude (deg): -33.2146
+    longitude (deg): 151.2896
+    state: New South Wales
+    elevation (m): 2.0
+    seed provenance: Long Jetty, NSW
+  Mareeba:
+    latitude (deg): -17.0
+    longitude (deg): 145.3
+    state: Queensland
+    elevation (m): 500.0
+    seed provenance: Mareeba, QLD
+  Moreton Island:
+    latitude (deg): -27.05
+    longitude (deg): 153.26
+    state: Queensland
+    elevation (m): 5.0
+    seed provenance: Moreton Island, QLD
+  Mt Molloy:
+    latitude (deg): -16.38
+    longitude (deg): 145.23
+    state: Queensland
+    elevation (m): 375.0
+    seed provenance: Mt Molloy, QLD
+  Nimalaica Claypan:
+    latitude (deg): -17.4435
+    longitude (deg): 122.13
+    state: Western Australia
+    elevation (m): 10.0
+    seed provenance: Nimalaica Claypan, WA
+  Ningbing Range:
+    latitude (deg): -15.02
+    longitude (deg): 128.36
+    state: Western Australia
+    elevation (m): 50.0
+    seed provenance: Ningbing Range, WA
+  Port Macquarie:
+    latitude (deg): -31.3
+    longitude (deg): 152.4
+    state: New South Wales
+    elevation (m): 1.0
+    seed provenance: Port Macquarie, NSW
+  Proserpine:
+    latitude (deg): -20.29
+    longitude (deg): 148.36
+    state: Queensland
+    elevation (m): 10.0
+    seed provenance: Proserpine, QLD
+  Rockhampton:
+    latitude (deg): -22.52
+    longitude (deg): 150.17
+    state: Queensland
+    elevation (m): 30.0
+    seed provenance: Rockhampton, QLD
+  Rokeby NP:
+    latitude (deg): -13.44
+    longitude (deg): 143.19
+    state: Queensland
+    elevation (m): 500.0
+    seed provenance: Rokeby NP, QLD
+  Round Hill Head:
+    latitude (deg): -24.13
+    longitude (deg): 151.52
+    state: Queensland
+    elevation (m): 10.0
+    seed provenance: Round Hill Head, QLD
+  St Lawrence:
+    latitude (deg): -22.23
+    longitude (deg): 149.3
+    state: Queensland
+    elevation (m): 25.0
+    seed provenance: St Lawrence, QLD
+  Teddington:
+    latitude (deg): -25.3122
+    longitude (deg): 152.4319
+    state: Queensland
+    elevation (m): 37.0
+    seed provenance: Teddington, QLD
+  Theda Stn Kalumburu:
+    latitude (deg): -14.48
+    longitude (deg): 126.23
+    state: Western Australia
+    elevation (m): 40.0
+    seed provenance: Theda Stn. Kalumburu, WA
+  Tozer’s Gap:
+    latitude (deg): -12.43
+    longitude (deg): 143.11
+    state: Queensland
+    elevation (m): 120.0
+    seed provenance: Tozers Gap, QLD
+  Tuggerah Lake:
+    latitude (deg): -33.21
+    longitude (deg): 151.28
+    state: New South Wales
+    elevation (m): 5.0
+    seed provenance: Tuggerah Lake, NSW
+  Wangi, Litchfield NP:
+    latitude (deg): -13.09
+    longitude (deg): 130.35
+    state: Northern Territory
+    elevation (m): 30.0
+    seed provenance: Wangi, Litchfield NP, NT
+  Weipa:
+    latitude (deg): -12.31
+    longitude (deg): 141.48
+    state: Queensland
+    elevation (m): 10.0
+    seed provenance: Weipa, QLD
+  Worrel Creek:
+    latitude (deg): -30.4555
+    longitude (deg): 152.575
+    state: New South Wales
+    elevation (m): 20.0
+    seed provenance: Worrel Ck, NSW
+contexts: .na
+traits:
+- var_in: Average disease severity (mean)
+  unit_in: '{dimensionless}'
+  trait_name: myrtle_rust_susceptibility_numeric
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: No. parent trees
+  methods: Disease progression was monitored regularly for the presence of symptoms. Disease was assessed on the primary and secondary foliage (youngest two expanding pairs of leaves) to avoid the influence leaf age may have on disease severity levels. As the foliage ages, it becomes less susceptible to infection. The following disease assessment ranking system (Pegg et al. 2014) was modified from that developed by Junghans et al. (2003). The scaling system used is, 1 = no symptoms evident or presence of flecking (chlorotic/clear); 2 = presence of a Hypersensitive Reaction (HR) with fleck or necrosis; 3 = small pustules, <0.8 mm diameter, with one or two uredinia; 4 = medium-sized pustules, 0.8-1.6 mm diameter with about 12 uredinia; 5 = large pustules, >1.6 mm diameter, with 20 or more uredinia on leaves, petioles and/or shoots. Classes 1 and 2 are considered resistant to A. psidii, while classes 3 to 5 susceptible (Fig. 2). Seedlings rated as resistant (rating 1 and 2) were inoculated for a second time to ensure these were not escapes or due to a lack of new growth flush being present at the time of inoculation.
+- var_in: Resistant seedlings (%)
+  unit_in: '%'
+  trait_name: myrtle_rust_susceptibility_proportion_resistant
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: No. parent trees
+  methods: Disease progression was monitored regularly for the presence of symptoms. Disease was assessed on the primary and secondary foliage (youngest two expanding pairs of leaves) to avoid the influence leaf age may have on disease severity levels. As the foliage ages, it becomes less susceptible to infection. The following disease assessment ranking system (Pegg et al. 2014) was modified from that developed by Junghans et al. (2003). The scaling system used is, 1 = no symptoms evident or presence of flecking (chlorotic/clear); 2 = presence of a Hypersensitive Reaction (HR) with fleck or necrosis; 3 = small pustules, <0.8 mm diameter, with one or two uredinia; 4 = medium-sized pustules, 0.8-1.6 mm diameter with about 12 uredinia; 5 = large pustules, >1.6 mm diameter, with 20 or more uredinia on leaves, petioles and/or shoots. Classes 1 and 2 are considered resistant to A. psidii, while classes 3 to 5 susceptible (Fig. 2). Seedlings rated as resistant (rating 1 and 2) were inoculated for a second time to ensure these were not escapes or due to a lack of new growth flush being present at the time of inoculation.
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
