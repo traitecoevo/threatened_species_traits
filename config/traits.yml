@@ -20,7 +20,18 @@ traits:
       allowed_values_levels:
         resistant: Plants are apparently unaffected when Phytophthora cinnamomi is present. Although such species may be susceptible to infection, as discussed above, they are likely to rarely, if ever, experience disease;
         mild: Plant are infected by Phytophthora cinnamomi when present and their symptoms are mild and/or infrequently severe.
-        severe: Plant are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.  
+        severe: Plant are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.   
+    myrtle_rust_susceptibility_infected_tissues:
+      label: susceptibility to myrtle rust
+      description: Susceptibility of species to myrtle rust (Austropuccinia psidii), based on their field response to the pathogen or response observed in glasshouse inoculation trials.
+      comments: Definition based on Berthon 2018 (doi, 10.1016/j.biocon.2017.11.035), referencing previous definitions by Morin 2012 (doi, 10.1371/journal.pone.0035434), Winzer 2017 (doi, 10.1111/aec.12534), Pegg 2014 (doi, 10.1111/ppa.12173), Sandu and Park 2013 (doi, 10.1002/9781118506271.ch1).
+      type: categorical
+      allowed_values_levels:
+        resistant: Plants are apparently unaffected by myrtle rust (Austropuccinia psidii), when the disease is present.  
+        low: Plant are infected by myrtle rust (Austropuccinia psidii) when present but there is no sporulation.
+        medium: Plant are infected by myrtle rust (Austropuccinia psidii) when present and there is minimal sporulation.
+        high: Plant are infected by myrtle rust (Austropuccinia psidii) when present and there is abundant sporulation on leaves, twigs and/or fruits.
+        susceptible: Plant are infected by myrtle rust (Austropuccinia psidii) when present, but the degree of susceptibility and sporulation is unknown.
     myrtle_rust_susceptibility:
       label: susceptibility to myrtle rust
       description: Susceptibility of species to myrtle rust (Austropuccinia psidii), based on their field response to the pathogen or response observed in glasshouse inoculation trials.
@@ -48,6 +59,27 @@ traits:
       units: '{count}/{count}'
       allowed_values_min: 0.0
       allowed_values_max: 1.0
+    myrtle_rust_growth_suppression_height:
+      label: Height growth suppression due to myrtle rust infection
+      description: The proportional decrease in height attributable to myrtle rust infection, measured through inoculation trials.
+      type: numeric
+      unit: m/m      
+      allowed_values_min: -1.0
+      allowed_values_max: 1.0
+    myrtle_rust_growth_suppression_plant_biomass:
+      label: Whole plant biomass suppression due to myrtle rust infection
+      description: The proportional decrease in whole plant biomass attributable to myrtle rust infection, measured through inoculation trials.
+      type: numeric
+      unit: g/g      
+      allowed_values_min: -1.0
+      allowed_values_max: 1.0
+    myrtle_rust_growth_suppression_shoot_biomass:
+      label: Shoot biomass suppression due to myrtle rust infection
+      description: The proportional decrease in a plant's shoot biomass attributable to myrtle rust infection, measured through inoculation trials.
+      type: numeric
+      unit: g/g      
+      allowed_values_min: -1.0
+      allowed_values_max: 1.0
     threatened_species_listing_status:
       label: Australian Environment Protection and Biodiversity Conservation Act status
       description: Conservation status as assessed under Australia's Environment Protection and Biodiversity Conservation Act. Allowed status valies are those used by the IUCN Red List.
@@ -63,6 +95,19 @@ traits:
         conservation_dependent: Taxa whose survival depends upon ongoing conservation measures. Without these measures, a conservation dependent taxon would be classified as Vulnerable or more severely threatened.
         data_deficient: Taxa suspected of being Rare, Vulnerable or Endangered, but whose true status cannot be determined without more information.
         least_concern: Taxa that are not considered Threatened.
+    habitat:
+      label: habitat
+      description: XX
+      type: categorical
+      allowed_values_levels:
+        sclerophyll: XX
+        sclerophyll_wet: XX
+        sclerophyll_dry: XX
+        rainforest: XX
+        rainforest_temperate: XX
+        rainforest_temperate_cool: XX
+        rainforest_temperate_warm: XX
+        rainforest_tropical: XX
     threatened_species_key_threatening_processes:
       label: Key threatening processes
       description: A pressure identified by the EPBC Act to threaten the survival, abundance or evolutionary development of a native species or ecological community.

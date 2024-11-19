@@ -1,4 +1,4 @@
-﻿Species,habitat,Individuals in pots (% change with infection)-height,Mixed-assemblage (% change with infection)-height,Individuals in pots (% change with infection)-leaf number,Mixed-assemblage (% change with infection)-leaf number,Individuals in pots (% change with infection)-total biomass,Individuals in pots (% change with infection)-root biomass,Individuals in pots (% change with infection)-shoot biomass,Mixed-assemblage (% change with infection)-shoot biomass,Individuals in pots (% change with infection)-stem mass fraction
-Melaleuca quinquenervia,coastal swamp woodland,-38,-45,-29,-30,-75,-77,-79,-85,17
-Leptospermum laevigatum,coastal swamp woodland,-24,-15,-20,-13,-69,-75,-68,-54,21
-Baeckea linifolia,coastal swamp woodland,-30,-22,-17,-11,,,,,12
+﻿Species,habitat,location,Individuals in pots (% change with infection)-height,Mixed-assemblage (% change with infection)-height,Individuals in pots (% change with infection)-leaf number,Mixed-assemblage (% change with infection)-leaf number,Individuals in pots (% change with infection)-total biomass,Individuals in pots (% change with infection)-root biomass,Individuals in pots (% change with infection)-shoot biomass,Mixed-assemblage (% change with infection)-shoot biomass,Individuals in pots (% change with infection)-stem mass fraction
+Melaleuca quinquenervia,coastal swamp woodland,Macquarie University Plant Growth Facility,-38,-45,-29,-30,-75,-77,-79,-85,17
+Leptospermum laevigatum,coastal swamp woodland,Macquarie University Plant Growth Facility,-24,-15,-20,-13,-69,-75,-68,-54,21
+Baeckea linifolia,coastal swamp woodland,Macquarie University Plant Growth Facility,-30,-22,-17,-11,,,,,12

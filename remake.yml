@@ -87,6 +87,25 @@ targets:
                   taxon_list
                  )
 
+  FernandezWinzer_2018_config:
+    command: >
+      dataset_configure("data/FernandezWinzer_2018/metadata.yml",
+                 definitions
+                 )
+  FernandezWinzer_2018_raw:
+    command: >
+      dataset_process("data/FernandezWinzer_2018/data.csv",
+                  FernandezWinzer_2018_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  FernandezWinzer_2018:
+    command: >
+      dataset_update_taxonomy(FernandezWinzer_2018_raw,
+                  taxon_list
+                 )
+
   Martino_2022_config:
     command: >
       dataset_configure("data/Martino_2022/metadata.yml",
@@ -208,6 +227,7 @@ targets:
         Berthon_2018,
         DCCEEW_2024,
         Fensham_2020,
+        FernandezWinzer_2018,
         Martino_2022,
         Martino_2024,
         McDougall_2024,

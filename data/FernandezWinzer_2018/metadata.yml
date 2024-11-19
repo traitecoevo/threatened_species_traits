@@ -1,0 +1,146 @@
+source:
+  primary:
+    key: Fernandezwinzer_2018
+    bibtype: Article
+    year: '2017'
+    author: Laura Fernandez Winzer and Angus J. Carnegie and Geoff S. Pegg and Michelle
+      R. Leishman
+    journal: Austral Ecology
+    title: Impacts of the invasive fungus Austropuccinia psidii(myrtle rust) on three
+      Australian Myrtaceae species of coastal swamp woodland
+    volume: '43'
+    number: '1'
+    pages: 56--68
+    doi: 10.1111/aec.12534
+    issn: 1442-9993
+contributors:
+  data_collectors:
+  - last_name: Fernandez Winzer
+    given_name: Laura
+    ORCID: 0000-0003-0675-9117
+    affiliation: Department of Biological Sciences, Macquarie University, Sydney, Australia
+  assistants: none
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: 2014-12/2015-04
+  taxon_name: Species
+  location_name: location
+  description: unknown
+  basis_of_record: lab
+  life_stage: seedlings
+  sampling_strategy: Study species ^p Three species were selected that are common in coastal swamp vegetation, M. quinquenervia, L. laevigatum and B. linifolia. Melaleuca quinquenervia (Cav.) S. T. Blake is a keystone and dominant species in wetlands along the east Australian coast commonly known as 'melaleuca' or 'broad-leaved paperbark' (Keith 2004). Adult individuals can reach 12-20 m height (Myers 1983). Seedlings and saplings are highly susceptible to myrtle rust (Rayachhetry et al. 2001; Carnegie 2012). Defoliation and seedling dieback are observed symptoms in this species as well as reduced flower production and death (Pegg et al. 2014a). Individuals of M. quinquenervia are now recorded as severely affected by A. psidii in Australian eastern native woodlands (Carnegie & Cooper 2011; Carnegie & Lidbetter 2012). Variability exists in the susceptibility within the species, with some individuals presenting resistance (Rayamajhi et al. 2010). Leptospermum laevigatum (Gaertn.) F. Muell is a small tree native to eastern Australia known as 'coastal tea tree' that can reach 8-12 m height (Burrell 1969). Due to its halophilic nature it is usually found on sandy soils. This species has been tested and found to be susceptible to A. psidii, showing high variability within the species ranging from resistant individuals to very susceptible ones (Morin et al. 2012). Shoots can be infected as well as leaves and a reduction in flower production has been observed as a result of repeated infection (Dr G. Pegg 2015, pers. obs.). Baeckea linifolia Rudge is a shrub native to NSW and Victoria (eastern Australia) usually known as 'heath myrtle' or 'weeping Baeckea' that can grow up to 2 m (Hose et al. 2014). No susceptibility tests have been performed on B. linifolia, although infected plants have been observed at Lennox Head in northern NSW (Dr G. Pegg 2015, pers. obs.). Interestingly at this site, B. linifolia only became infected after other species at the site (i.e. M. quinquenervia) presented with severe impacts (Dr G. Pegg 2015, pers. obs.), but the reason for this delay in time to infection remains unknown. ^p Experimental design ^p We conducted two experiments - one to assess species-level responses to A. psidii of the three species grown individually and the other to assess responses for mixed-species assemblages. Both experiments used a fully factorial design with two factors, species (three levels) and treatment (two levels, control and infected) and for some variables a third factor (time, seven levels) was included. Seedlings in pots (Experiment 1) and mesocosms (Experiment 2) were spread evenly between four glasshouses (two controls and two with infection treatment). Seeds were obtained from commercial seed suppliers, Melaleuca quinquenervia and L. laevigatum (AustraHort Pty Ltd (QLD, Australia), B. linifolia (Royston Petrie Seeds Pty Ltd). ^p The experiments were conducted simultaneously at the Macquarie University Plant Growth Facility between December 2014 and April 2015. Relative humidity (RH) ranged from 45% at the beginning of the experiments to 80% RH. Temperature was fixed in 20 ± 2°C and CO2 concentrations were ambient (380-420 ppm). No supplementary lighting was used.
+  original_file: transcribed from manuscript
+  notes: none
+locations:
+  Macquarie University Plant Growth Facility:
+    description: Macquarie University growth facility
+    longitude (deg): 151.12
+    latitude (deg): -33.78
+contexts:
+- context_property: growth assemblage
+  category: method_context
+  var_in: growth_assemblage
+  values:
+  - value: individual plants
+    description: XX
+  - value: mixed species assemblage
+    description: XX
+traits:
+- var_in: habitat
+  unit_in: .na
+  trait_name: habitat
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: unknown
+- var_in: Individuals in pots (% change with infection)-height
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_height
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: individual plants
+  methods: unknown
+- var_in: Mixed-assemblage (% change with infection)-height
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_height
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: mixed species assemblage
+  methods: unknown
+- var_in: Individuals in pots (% change with infection)-leaf number
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_leaf_count
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: individual plants
+  methods: unknown
+- var_in: Mixed-assemblage (% change with infection)-leaf number
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_leaf_count
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: mixed species assemblage
+  methods: unknown
+- var_in: Individuals in pots (% change with infection)-total biomass
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_plant_biomass
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: individual plants
+  methods: unknown
+- var_in: Individuals in pots (% change with infection)-root biomass
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_plant_biomass
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: individual plants
+  methods: unknown
+- var_in: Individuals in pots (% change with infection)-shoot biomass
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_shoot_biomass
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: individual plants
+  methods: unknown
+- var_in: Mixed-assemblage (% change with infection)-shoot biomass
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_shoot_biomass
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: mixed species assemblage
+  methods: unknown
+- var_in: Individuals in pots (% change with infection)-stem mass fraction
+  unit_in: '%'
+  trait_name: myrtle_rust_growth_suppression_stem_mass_fraction
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  growth_assemblage: individual plants
+  methods: unknown
+substitutions: 
+- trait_name: habitat
+  find: coastal swamp woodland
+  replace: sclerophyll_wet
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
