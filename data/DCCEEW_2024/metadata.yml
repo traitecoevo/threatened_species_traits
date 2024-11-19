@@ -45,7 +45,7 @@ dataset:
   notes: none
 locations: .na
 contexts:
-- context_property: unknown
+- context_property: jurisdication
   category: entity_context
   var_in: jurisdication
 traits:
