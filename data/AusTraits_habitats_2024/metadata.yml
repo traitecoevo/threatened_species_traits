@@ -1,0 +1,47 @@
+source:
+  primary:
+    key: AusTraits_habitats_2024
+    bibtype: Article
+    year: unknown
+    author: unknown
+    title: unknown
+    journal: unknown
+    volume: unknown
+    number: unknown
+    pages: unknown
+    doi: unknown
+contributors:
+  data_collectors:
+  - last_name: unknown
+    given_name: unknown
+    ORCID: unknown
+    affiliation: unknown
+  assistants: unknown
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: 1980/2024
+  taxon_name: taxon_name
+  location_name: .na
+  description: unknown
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: unknown
+  original_file: unknown
+  notes: unknown
+locations: .na
+contexts: .na
+traits:
+- var_in: habitat
+  unit_in: .na
+  trait_name: habitat
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: As reported from individual studies
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

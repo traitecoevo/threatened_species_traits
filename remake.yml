@@ -30,6 +30,25 @@ targets:
     command: read_csv_char("config/taxon_list.csv")
 
 # Build each source
+  AusTraits_habitats_2024_config:
+    command: >
+      dataset_configure("data/AusTraits_habitats_2024/metadata.yml",
+                 definitions
+                 )
+  AusTraits_habitats_2024_raw:
+    command: >
+      dataset_process("data/AusTraits_habitats_2024/data.csv",
+                  AusTraits_habitats_2024_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  AusTraits_habitats_2024:
+    command: >
+      dataset_update_taxonomy(AusTraits_habitats_2024_raw,
+                  taxon_list
+                 )
+
   Berthon_2018_config:
     command: >
       dataset_configure("data/Berthon_2018/metadata.yml",
@@ -201,6 +220,25 @@ targets:
                   taxon_list
                  )
 
+  Shearer_1996_config:
+    command: >
+      dataset_configure("data/Shearer_1996/metadata.yml",
+                 definitions
+                 )
+  Shearer_1996_raw:
+    command: >
+      dataset_process("data/Shearer_1996/data.csv",
+                  Shearer_1996_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Shearer_1996:
+    command: >
+      dataset_update_taxonomy(Shearer_1996_raw,
+                  taxon_list
+                 )
+
   Ward_2021_config:
     command: >
       dataset_configure("data/Ward_2021/metadata.yml",
@@ -223,7 +261,8 @@ targets:
 
   threatened_species_raw:
     command: >
-      build_combine(
+      bind_databases(
+        AusTraits_habitats_2024,
         Berthon_2018,
         DCCEEW_2024,
         Fensham_2020,
@@ -233,8 +272,9 @@ targets:
         McDougall_2024,
         Pegg_2018,
         Setterfield_2002,
+        Shearer_1996,
         Ward_2021,
-        NULL)
+        I(NULL))
 
 # Version information
   version_number:

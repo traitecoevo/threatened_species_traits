@@ -21,6 +21,14 @@ traits:
         resistant: Plants are apparently unaffected when Phytophthora cinnamomi is present. Although such species may be susceptible to infection, as discussed above, they are likely to rarely, if ever, experience disease;
         mild: Plant are infected by Phytophthora cinnamomi when present and their symptoms are mild and/or infrequently severe.
         severe: Plant are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.   
+    phytophthora_cinnamomi_isolation_from_plant_tissue:
+      label: frequency of isolation of Phytophthora cinnamomi
+      description: The relative frequency with which Phytophthora cinnamomi is isolated from plant tissues at field locations known to be infected or following glasshouse inoculation trials.
+      type: categorical
+      allowed_values_levels:
+        phytophthora_cinnamomi_not_isolated: Phytophthora cinnamomi is never isolated from plant tissues following exposure to the pathogen.
+        phytophthora_cinnamomi_infrequently_isolated: Phytophthora cinnamomi is infrequently isolated from plant tissues following exposure to the pathogen.
+        phytophthora_cinnamomi_frequently_isolated: Phytophthora cinnamomi is frequently isolated from plant tissues following exposure to the pathogen.
     myrtle_rust_susceptibility_infected_tissues:
       label: susceptibility to myrtle rust
       description: Susceptibility of species to myrtle rust (Austropuccinia psidii), based on their field response to the pathogen or response observed in glasshouse inoculation trials.
@@ -101,13 +109,28 @@ traits:
       type: categorical
       allowed_values_levels:
         sclerophyll: XX
-        sclerophyll_wet: XX
-        sclerophyll_dry: XX
+        wet_sclerophyll: XX
+        dry_sclerophyll: XX
         rainforest: XX
         rainforest_temperate: XX
         rainforest_temperate_cool: XX
         rainforest_temperate_warm: XX
         rainforest_tropical: XX
+        heath: XX
+        wet_heath: XX
+        aquatic: XX
+        alpine: XX
+        wet_forest: XX
+        coastal_swamp_woodland: XX
+        bogs: XX
+        grassland: XX
+        woodland: XX
+        shrubland: XX
+        eucalypt_forest: XX
+        open_forest: XX
+        closed_forest: XX
+        dry_forest: XX
+        semiaquatic: XX
     threatened_species_key_threatening_processes:
       label: Key threatening processes
       description: A pressure identified by the EPBC Act to threaten the survival, abundance or evolutionary development of a native species or ecological community.

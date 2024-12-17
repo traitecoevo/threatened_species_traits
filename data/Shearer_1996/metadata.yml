@@ -1,0 +1,71 @@
+source:
+  primary:
+    key: Shearer_1996
+    bibtype: Article
+    year: '1996'
+    author: B.L. Shearer and M. Dillon
+    journal: Australian Journal of Botany
+    title: Susceptibility of Plant Species in Banksia Woodlands on the Swan Coastal
+      Plain, Western Australia, to Infection by Phytophthora cinnamomi
+    volume: '44'
+    number: '4'
+    pages: '433'
+    doi: 10.1071/bt9960433
+    issn: 0067-1924
+contributors:
+  data_collectors:
+  - last_name: unknown
+    given_name: unknown
+    ORCID: unknown
+    affiliation: unknown
+  assistants: unknown
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: unknown/1996
+  taxon_name: species
+  location_name: unknown
+  description: unknown
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: unknown
+  original_file: transcribed from manuscript
+  notes: unknown
+locations: .na
+contexts: .na
+traits:
+- var_in: phytophthora_cinnamomi_susceptibility
+  unit_in: .na
+  trait_name: phytophthora_cinnamomi_susceptibility
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: unknown
+- var_in: phytophthora_cinnamomi_isolation_from_plant_tissue
+  unit_in: .na
+  trait_name: phytophthora_cinnamomi_isolation_from_plant_tissue
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: unknown
+- var_in: habitat
+  unit_in: .na
+  trait_name: habitat
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: unknown
+substitutions:
+- trait_name: habitat
+  find: Banksia_woodland
+  replace: woodland
+- trait_name: habitat
+  find: Eucalyptus_marginata_forest
+  replace: eucalypt_forest
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

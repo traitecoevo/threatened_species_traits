@@ -135,4 +135,4 @@ new %>% filter(!is.na(text)) %>% select(-original_text) %>%
   filter(stringr::str_detect(taxon_name, " ")) %>% View()
 
 new -> Victoria
-
+write_csv(Victoria, "datasets_from_manuscripts/Victoria_habitats.csv")

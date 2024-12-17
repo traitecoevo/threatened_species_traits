@@ -140,7 +140,7 @@ traits:
 substitutions: 
 - trait_name: habitat
   find: coastal swamp woodland
-  replace: sclerophyll_wet
+  replace: coastal_swamp_woodland
 taxonomic_updates: .na
 exclude_observations: .na
 questions: .na
