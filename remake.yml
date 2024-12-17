@@ -125,6 +125,25 @@ targets:
                   taxon_list
                  )
 
+  Li_1997_config:
+    command: >
+      dataset_configure("data/Li_1997/metadata.yml",
+                 definitions
+                 )
+  Li_1997_raw:
+    command: >
+      dataset_process("data/Li_1997/data.csv",
+                  Li_1997_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Li_1997:
+    command: >
+      dataset_update_taxonomy(Li_1997_raw,
+                  taxon_list
+                 )
+
   Martino_2022_config:
     command: >
       dataset_configure("data/Martino_2022/metadata.yml",
@@ -267,6 +286,7 @@ targets:
         DCCEEW_2024,
         Fensham_2020,
         FernandezWinzer_2018,
+        Li_1997,
         Martino_2022,
         Martino_2024,
         McDougall_2024,

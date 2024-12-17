@@ -120,6 +120,7 @@ traits:
         wet_heath: XX
         aquatic: XX
         alpine: XX
+        subalpine: XX
         wet_forest: XX
         coastal_swamp_woodland: XX
         bogs: XX
@@ -219,6 +220,14 @@ traits:
       units: km2
       allowed_values_min: 0.0
       allowed_values_max: 10000000.0
+    leaf_wax:
+      label: leaf wax content
+      description: XX
+      comments: Documenting methods are essential for this trait, as the leaf wax yield will depend upon the extraction method.
+      type: numeric
+      units: mg/mg
+      allowed_values_min: 0.0
+      allowed_values_max: 1.0
     leaf_Al_per_dry_mass:
       label: Leaf aluminium (Al) content per unit leaf dry mass
       description: The ratio [PATO:0001470] of the mass [PATO:0000125] of aluminium
@@ -2654,6 +2663,8 @@ traits:
         glaucous: Mature (fully expanded) leaves on adult plants have a waxy coating,
           giving them a glaucous appearance. (Synonyms, waxy bloom, pruinose)
         not_glaucous: Mature (fully expanded) leaves on adult plants do not have a
+          glaucous appearance.
+        subglaucous: Mature (fully expanded) leaves on adult plants have a partially
           glaucous appearance.
       entity_URI: https://w3id.org/APD/traits/trait_0011360
     leaf_hairs_adult_leaves:

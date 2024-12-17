@@ -14,11 +14,12 @@ library(tidyverse)
 library(remake)
 library(austraits)
 library(APCalign)
+library(traits.build)
+
 resources <- APCalign::load_taxonomic_resources()
 
 austraits <- readRDS("C:/Users/Lizzy/Documents/GitHub/threatened_species_traits/ignore/austraits/austraits-6.0.0.rds")
 
-library(traits.build)
 source("C:/Users/Lizzy/Documents/GitHub/threatened_species_traits/R/custom_R_code.R")
 source("C:/Users/Lizzy/Documents/GitHub/threatened_species_traits/R/extra_functions.R")
 

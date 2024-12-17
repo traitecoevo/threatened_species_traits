@@ -1,0 +1,227 @@
+source:
+  primary:
+    key: Li_1997
+    bibtype: Article
+    year: '1997'
+    author: H. Li and J.L. Madden and B.M. Potts
+    journal: Biochemical Systematics and Ecology
+    title: Variation in leaf waxes of the Tasmanian Eucalyptus species—I. Subgenus
+      Symphyomyrtus
+    volume: '25'
+    number: '7'
+    pages: 631--657
+    doi: 10.1016/s0305-1978(97)00044-6
+    issn: 0305-1978
+contributors:
+  data_collectors:
+  - last_name: Li
+    given_name: H.
+    ORCID: .na
+    affiliation: Department of Agricultural Science, University of Tasmania, Hobart, Tasmania
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: 1989-05/1989-11
+  taxon_name: species
+  location_name: locality
+  description: Analysis of leaf waxes from juvenile and adult leaves from natural populations of all Eucalyptus species from the informal subgenus Symphyomyrtus native to the island of Tasmania.
+  basis_of_record: field
+  life_stage: leaf age class
+  sampling_strategy: Sample collection. Leaf samples were collected from natural forests throughout the island of Tasmania (40°40' to 43°40'S, and 144°40' to 148°20'E) between May and November, 1989 (Table 2 and Fig. 1), when seasonal variation was minimal (Li, 1993). At each locality, a species collection comprised a pooled sample of morphologically adult leaves collected from 15 to 20 reproductively mature trees and a pooled juvenile leaf sample collected from 15 to 20 juvenile plants from the same area. Fresh leaf samples were sealed in plastic bags and kept cool until returned to the laboratory. The samples were stored at 4'~C and processed within two weeks of collection.
+  original_file: transcribed from manuscript
+  notes: none
+locations:
+  Barnes Bay, location G6:
+    locality: Barnes Bay, location G6
+    latitude (deg): 147.35
+    longitude (deg): -43.1166667
+  Bothwell, location R2:
+    locality: Bothwell, location R2
+    latitude (deg): 147.05
+    longitude (deg): -42.3833333
+  Bradys Lake, location D3:
+    locality: Bradys Lake, location D3
+    latitude (deg): 146.5
+    longitude (deg): -42.2
+  Calverts Hill, location M2:
+    locality: Calverts Hill, location M2
+    latitude (deg): 147.5166667
+    longitude (deg): -42.9333333
+  Cherry Tree Hill, location B2:
+    locality: Cherry Tree Hill, location B2
+    latitude (deg): 148.1333333
+    longitude (deg): -41.9666667
+  Cherry Tree Hill, location O2:
+    locality: Cherry Tree Hill, location O2
+    latitude (deg): 148.1166667
+    longitude (deg): -41.9833333
+  Electrona, location C4:
+    locality: Electrona, location C4
+    latitude (deg): 147.2333333
+    longitude (deg): -43.05
+  Government H ills, location V6:
+    locality: Government H ills, location V6
+    latitude (deg): 147.3166667
+    longitude (deg): -42.8166667
+  Hansans Peak, location S4:
+    locality: Hansans Peak, location S4
+    latitude (deg): 145.95
+    longitude (deg): -41.65
+  Lea-Kingston, location O4:
+    locality: Lea-Kingston, location O4
+    latitude (deg): 147.3
+    longitude (deg): -42.9333333
+  Mr. Arrowsmith, location J3:
+    locality: Mr. Arrowsmith, location J3
+    latitude (deg): 146.0666667
+    longitude (deg): -42.2166667
+  Mr. Arrowsmith, location V3:
+    locality: Mr. Arrowsmith, location V3
+    latitude (deg): 146.0666667
+    longitude (deg): -42.2
+  Poatina Highway, location S5:
+    locality: Poatina Highway, location S5
+    latitude (deg): 146.8333333
+    longitude (deg): -41.8333333
+  Projection Bluff, location A3:
+    locality: Projection Bluff, location A3
+    latitude (deg): 146.7166667
+    longitude (deg): -41.7166667
+  Snug Plains, location D6:
+    locality: Snug Plains, location D6
+    latitude (deg): 147.15
+    longitude (deg): -43.0666667
+  Snug Tier, location U4:
+    locality: Snug Tier, location U4
+    latitude (deg): 147.1666667
+    longitude (deg): -43.0666667
+  Snug Tiers, location J5:
+    locality: Snug Tiers, location J5
+    latitude (deg): 147.1666667
+    longitude (deg): -43.0666667
+  Strahan Road, location B4:
+    locality: Strahan Road, location B4
+    latitude (deg): 146.5666667
+    longitude (deg): -41.8833333
+  Strickland, location P:
+    locality: Strickland, location P
+    latitude (deg): 146.65
+    longitude (deg): -42.2333333
+  Strickland, location R4:
+    locality: Strickland, location R4
+    latitude (deg): 146.65
+    longitude (deg): -43.2333333
+contexts: .na
+traits:
+- var_in: preferred habitat
+  unit_in: .na
+  trait_name: habitat
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: from reference materials
+- var_in: hexane soluble yields (% dry weight, mean)
+  unit_in: '%'
+  trait_name: leaf_wax
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: 15--20
+  methods: Sample preparation and wax extraction. Mature leaves (excluding the previous
+    year's) from each sample were removed from branches and the lamina (petiole was
+    excluded) cut into 2 cm 2 pieces and well mixed. A 25 g sample of leaf pieces
+    was collected for wax extraction, and a separate 100g sample prepared and dried
+    to constant weight at 50°C for moisture content determination. Each 25 g sample
+    of fresh leaf material was placed in a glass flask, 30 ml of pure hexane added
+    and the flask shaken at room temperature for 1 5 rain, a process repeated three
+    times for each sample with the three solutions combined and filtered. The hexane
+    extract of each sample was then concentrated using a rotary evaporator, transferred
+    into a pre-weighed, labelled glass vial, and evaporated at room temperature until
+    dry. The individual vials containing dried waxes were weighed and the weight of
+    dried waxes obtained by subtraction. The wax yield for each sample was calculated
+    on a dry wt basis (gg-1). Qualitative analysis. The crude wax samples were analysed
+    by combined GC-MS using a HP-5890 GC directly coupled to a VG 707F mass spectrometer
+    with a 2035 data system. The GC column was a 12mxO.32mmx0.171~m film thickness
+    Hewlett Packard (HP1), cross linked methyl-silica capillary column (SGE Pty Ltd);
+    a SGE on-column-injector was used. The oven temperature was programmed to go from
+    30 to 240°C at a rate of 30°Cmin -1, 240 to 300°C at 6°Cmin 1 and then to hold
+    at 300°C for 3min. Helium was used as the carrier gas at 70kPa with a flow rate
+    of approximately 2mlmin 1. Individual compounds were tentatively identified using
+    published reference mass spectra (Stenhagen et al., 1974) and an "in-house" library
+    of reference spectra built up from standard compounds and those separated from
+    leaf waxes of selected eucalypt species (E. globulus, E. nitens, E. delegatensis,
+    E. obliqua and E. coccifera) in a previous study (Li, 1993). A pilot study involving
+    the later species indicated no difference in chemical composition between cut
+    and uncut fresh leaves (Li, unpubl, data). Quantitative Analysis. To obtain relative
+    peak areas for individual compounds, the crude wax samples were run under identical
+    GC conditions, using a Flame Ionization Detector (FID) on a HP5890 Gas Chromatograph.
+- var_in: hexane soluble yields (% dry weight, SD)
+  unit_in: '%'
+  trait_name: leaf_wax
+  entity_type: population
+  value_type: standard_deviation
+  basis_of_value: measurement
+  replicates: 15--20
+  methods: Sample preparation and wax extraction. Mature leaves (excluding the previous
+    year's) from each sample were removed from branches and the lamina (petiole was
+    excluded) cut into 2 cm 2 pieces and well mixed. A 25 g sample of leaf pieces
+    was collected for wax extraction, and a separate 100g sample prepared and dried
+    to constant weight at 50°C for moisture content determination. Each 25 g sample
+    of fresh leaf material was placed in a glass flask, 30 ml of pure hexane added
+    and the flask shaken at room temperature for 1 5 rain, a process repeated three
+    times for each sample with the three solutions combined and filtered. The hexane
+    extract of each sample was then concentrated using a rotary evaporator, transferred
+    into a pre-weighed, labelled glass vial, and evaporated at room temperature until
+    dry. The individual vials containing dried waxes were weighed and the weight of
+    dried waxes obtained by subtraction. The wax yield for each sample was calculated
+    on a dry wt basis (gg-1). Qualitative analysis. The crude wax samples were analysed
+    by combined GC-MS using a HP-5890 GC directly coupled to a VG 707F mass spectrometer
+    with a 2035 data system. The GC column was a 12mxO.32mmx0.171~m film thickness
+    Hewlett Packard (HP1), cross linked methyl-silica capillary column (SGE Pty Ltd);
+    a SGE on-column-injector was used. The oven temperature was programmed to go from
+    30 to 240°C at a rate of 30°Cmin -1, 240 to 300°C at 6°Cmin 1 and then to hold
+    at 300°C for 3min. Helium was used as the carrier gas at 70kPa with a flow rate
+    of approximately 2mlmin 1. Individual compounds were tentatively identified using
+    published reference mass spectra (Stenhagen et al., 1974) and an "in-house" library
+    of reference spectra built up from standard compounds and those separated from
+    leaf waxes of selected eucalypt species (E. globulus, E. nitens, E. delegatensis,
+    E. obliqua and E. coccifera) in a previous study (Li, 1993). A pilot study involving
+    the later species indicated no difference in chemical composition between cut
+    and uncut fresh leaves (Li, unpubl, data). Quantitative Analysis. To obtain relative
+    peak areas for individual compounds, the crude wax samples were run under identical
+    GC conditions, using a Flame Ionization Detector (FID) on a HP5890 Gas Chromatograph.
+- var_in: glaucousness type
+  unit_in: .na
+  trait_name: leaf_glaucousness
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Scored by authors.
+substitutions:
+- trait_name: leaf_glaucousness
+  find: green
+  replace: not_glaucous
+- trait_name: leaf_glaucousness
+  find: subglaucous green
+  replace: not_glaucous subglaucous
+- trait_name: habitat
+  find: dry sclerophyll
+  replace: dry_sclerophyll
+- trait_name: habitat
+  find: wet sclerophyll
+  replace: wet_sclerophyll
+- trait_name: habitat
+  find: wet sclerophyll/dry sclerophyll
+  replace: dry_sclerophyll wet_sclerophyll
+- trait_name: habitat
+  find: dry sclerophyll (east coast)
+  replace: dry_sclerophyll
+- trait_name: habitat
+  find: dry sclerophyll (west coast)
+  replace: dry_sclerophyll
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
