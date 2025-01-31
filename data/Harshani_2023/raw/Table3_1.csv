@@ -1,0 +1,51 @@
+﻿Family,Species,Plant height (m),Distribution,Susceptibility to P. cinnamomi,Susceptibility type,Seed treatment,Number seeds per punnet
+Asteraceae,Olearia muelleri,1.5,"Wheatbelt, Geraldton, Esperance",Unknown,,None,15
+Chenopodiaceae,Rhagodia preissii,4,"Jarrah Forest, Wheatbelt, Geraldton",Unknown,,Smoke Water,150--180
+Fabaceae,Acacia acuminata,7,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Unknown,,Hot Water,15
+Fabaceae,Acacia dentifera,3,"Esperance, Jarrah Forest, Swan Coastal Plain",Unknown,,Hot Water,15
+Fabaceae,Acacia drummondii,,"Jarrah Forest, Esperance",Resistant,field,Hot Water,15
+Fabaceae,Acacia neurophylla,5,"Wheatbelt, Geraldton",Unknown,,Hot Water,15
+Fabaceae,Acacia saligna,6,"Jarrah Forest, Wheatbelt, Esperance, Geraldton",Resistant,field,Hot Water,15
+Fabaceae,Acacia pycnantha,8,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Unknown,,Hot Water,15
+Fabaceae,Labichea lanceolata,3,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Unknown,,Hot Water,15
+Fabaceae,Templetonia retusa,4,"Jarrah Forest, Swan Coastal Plain, Geraldton",Unknown,,Hot Water,15
+Lamiaceae,Hemiandra pungens,,"Jarrah Forest, Wheatbelt, Swan Coastal Plain, Geraldton",Resistant,field,Smoke Water,150--180
+Loranthaceae,Nuytsia floribunda,10,"Jarrah Forest, Wheatbelt, Swan Coastal Plain, Geraldton",Resistant,field,None,6
+Myrtaceae,Astartea scoparia,1.8,"Jarrah Forest, Wheatbelt, Swan Coastal plain",Unknown,,Smoke Water,150--180
+Myrtaceae,Callistemon phoeniceus,6,"Jarrah Forest, Wheatbelt, Esperance, Geraldton",Unknown,,None,150--180
+Myrtaceae,Calothamnus gilesii,3,"Wheatbelt, Geraldton",Unknown,,None,150--180
+Myrtaceae,Calothamnus hirsutus,1.5,"Jarrah Forest, Wheatbelt, Swan Coastal Plain, Geraldton",Unknown,,None,150--180
+Myrtaceae,Calothamnus quadrifidus,3,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Resistant,field,None,150--180
+Myrtaceae,Calothamnus sanguineus,2,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Resistant,field,None,150--180
+Myrtaceae,Eremaea pauciflora,4,"Jarrah Forest, Wheatbelt, Esperance, Geraldton",Unknown,,Smoke Water,150--180
+Myrtaceae,Eucalyptus macrocarpa,5,"Wheatbelt, Geraldton",Unknown,,None,15
+Myrtaceae,Hypocalymma angustifolium,1.5,"Jarrah Forest, Wheatbelt, Esperance",Resistant,field,Smoke Water,150--180
+Myrtaceae,Kunzea pulchella,3,"Jarrah Forest, Wheatbelt, Swan Coastal plain",Unknown,,None,150--180
+Myrtaceae,Kunzea recurva,2,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Susceptible,field,None,150--180
+Myrtaceae,Leptospermum erubescens,3,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Resistant,field,Smoke Water,150--180
+Myrtaceae,Melaleuca adnata,5,"Wheatbelt, Geraldton, Esperance",Unknown,,None,150--180
+Myrtaceae,Melaleuca conothamnoides,1.5,"Jarrah Forest, Wheatbelt, Geraldton",Unknown,,None,150--180
+Myrtaceae,Melaleuca preissiana,9,"Jarrah Forest, Wheatbelt, Swan Coastal Plain, Geraldton",Resistant,field,None,150--180
+Myrtaceae,Melaleuca seriata,,"Jarrah Forest, Wheatbelt, Swan Coastal plain",Resistant,field,None,150--180
+Myrtaceae,Regelia ciliata,2,"Jarrah Forest, Wheatbelt, Swan Coastal Plain, Geraldton",Unknown,,Smoke Water,150--180
+Myrtaceae,Regelia inops,2.5,"Jarrah Forest, Wheatbelt, Swan Coastal plain",Susceptible,field,Smoke Water,150--180
+Proteaceae,Banksia caleyi,2,Esperance,Susceptible,glasshouse,None,10
+Proteaceae,Banksia elderiana,4,"Wheatbelt, Esperance",Susceptible,glasshouse,None,10
+Proteaceae,Banksia Iemanniana,5,Esperance,Susceptible,glasshouse,None,10
+Proteaceae,Banksia repens,0.4,"Jarrah Forest, Wheatbelt, Esperance",Susceptible,field,None,10
+Proteaceae,Banksia sessilis,8,"Jarrah Forest, Wheatbelt, Esperance",Susceptible,field,None,15
+Proteaceae,Grevillea endlicheriana,3,"Jarrah Forest, Wheatbelt, Swan Coastal plain",Unknown,,Smoke Water,15
+Proteaceae,Grevillea eriostachya,5,"Jarrah Forest, Wheatbelt, Swan Coastal Plain, Geraldton",Unknown,,Smoke Water,15
+Proteaceae,Grevillea paniculata,3,"Jarrah Forest, Wheatbelt, Geraldton",Unknown,,Smoke Water,15
+Proteaceae,Grevillea pterosperma,4,"Wheatbelt, Geraldton",Unknown,,Smoke Water,15
+Proteaceae,Grevillea vestita,3,"Wheatbelt, Geraldton",Unknown,,Smoke Water,15
+Proteaceae,Hakea anadenia,2,"Jarrah Forest, Swan Coastal Plain, Geraldton",Unknown,,None,15
+Proteaceae,Hakea laurina,6,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Susceptible,field,None,8
+Proteaceae,Hakea petiolaris,9,"Wheatbelt, Jarrah Forest, Swan Coastal plain",Resistant,field,N one,10
+Proteaceae,Hakea ruscifolia,3,"Jarrah Forest, Wheatbelt, Esperance, Swan Coastal plain",Resistant,field,None,10
+Proteaceae,Hakea trifurcata,3,"Jarrah Forest, Wheatbelt, Esperance, Geraldton",Susceptible,field,None,10
+Proteaceae,Isopogon dubius,1.5,"Jarrah Forest, Wheatbelt, Esperance, Geraldton",Unknown,,Smoke Water,15
+Proteaceae,Petrophile biloba,2,"Jarrah Forest, Swan Coastal Plain",Susceptible,glasshouse,Smoke Water,15
+Proteaceae,Xylomelum angustifolium,7,"Jarrah Forest, Wheatbelt, Swan Coastal plain",Susceptible,field,None,4
+Rhamnaceae,Trymalium ledifolium,5,"Jarrah Forest, Wheatbelt, Geraldton",Susceptible,field,Hot Water,15
+Rhamnaceae,Trvmalium odoratissintum,4,"Jarrah Forest, Swan Coastal Plain",Unknown,,Hot Water,15

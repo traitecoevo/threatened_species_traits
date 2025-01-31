@@ -13,63 +13,8 @@ unit_conversions <- get_unit_conversions("config/unit_conversions.csv")
 taxon_list <- read_csv_char("config/taxon_list.csv")
 
 # Build each source
-AusTraits_habitats_2024_config <- dataset_configure("data/AusTraits_habitats_2024/metadata.yml", definitions)
-AusTraits_habitats_2024_raw <- dataset_process("data/AusTraits_habitats_2024/data.csv", AusTraits_habitats_2024_config, schema, resource_metadata, unit_conversions)
-AusTraits_habitats_2024 <- dataset_update_taxonomy(AusTraits_habitats_2024_raw, taxon_list)
 
-Berthon_2018_config <- dataset_configure("data/Berthon_2018/metadata.yml", definitions)
-Berthon_2018_raw <- dataset_process("data/Berthon_2018/data.csv", Berthon_2018_config, schema, resource_metadata, unit_conversions)
-Berthon_2018 <- dataset_update_taxonomy(Berthon_2018_raw, taxon_list)
-
-DCCEEW_2024_config <- dataset_configure("data/DCCEEW_2024/metadata.yml", definitions)
-DCCEEW_2024_raw <- dataset_process("data/DCCEEW_2024/data.csv", DCCEEW_2024_config, schema, resource_metadata, unit_conversions)
-DCCEEW_2024 <- dataset_update_taxonomy(DCCEEW_2024_raw, taxon_list)
-
-Fensham_2020_config <- dataset_configure("data/Fensham_2020/metadata.yml", definitions)
-Fensham_2020_raw <- dataset_process("data/Fensham_2020/data.csv", Fensham_2020_config, schema, resource_metadata, unit_conversions)
-Fensham_2020 <- dataset_update_taxonomy(Fensham_2020_raw, taxon_list)
-
-FernandezWinzer_2018_config <- dataset_configure("data/FernandezWinzer_2018/metadata.yml", definitions)
-FernandezWinzer_2018_raw <- dataset_process("data/FernandezWinzer_2018/data.csv", FernandezWinzer_2018_config, schema, resource_metadata, unit_conversions)
-FernandezWinzer_2018 <- dataset_update_taxonomy(FernandezWinzer_2018_raw, taxon_list)
-
-Martino_2022_config <- dataset_configure("data/Martino_2022/metadata.yml", definitions)
-Martino_2022_raw <- dataset_process("data/Martino_2022/data.csv", Martino_2022_config, schema, resource_metadata, unit_conversions)
-Martino_2022 <- dataset_update_taxonomy(Martino_2022_raw, taxon_list)
-
-Martino_2024_config <- dataset_configure("data/Martino_2024/metadata.yml", definitions)
-Martino_2024_raw <- dataset_process("data/Martino_2024/data.csv", Martino_2024_config, schema, resource_metadata, unit_conversions)
-Martino_2024 <- dataset_update_taxonomy(Martino_2024_raw, taxon_list)
-
-McDougall_2024_config <- dataset_configure("data/McDougall_2024/metadata.yml", definitions)
-McDougall_2024_raw <- dataset_process("data/McDougall_2024/data.csv", McDougall_2024_config, schema, resource_metadata, unit_conversions)
-McDougall_2024 <- dataset_update_taxonomy(McDougall_2024_raw, taxon_list)
-
-Pegg_2018_config <- dataset_configure("data/Pegg_2018/metadata.yml", definitions)
-Pegg_2018_raw <- dataset_process("data/Pegg_2018/data.csv", Pegg_2018_config, schema, resource_metadata, unit_conversions)
-Pegg_2018 <- dataset_update_taxonomy(Pegg_2018_raw, taxon_list)
-
-Setterfield_2002_config <- dataset_configure("data/Setterfield_2002/metadata.yml", definitions)
-Setterfield_2002_raw <- dataset_process("data/Setterfield_2002/data.csv", Setterfield_2002_config, schema, resource_metadata, unit_conversions)
-Setterfield_2002 <- dataset_update_taxonomy(Setterfield_2002_raw, taxon_list)
-
-Ward_2021_config <- dataset_configure("data/Ward_2021/metadata.yml", definitions)
-Ward_2021_raw <- dataset_process("data/Ward_2021/data.csv", Ward_2021_config, schema, resource_metadata, unit_conversions)
-Ward_2021 <- dataset_update_taxonomy(Ward_2021_raw, taxon_list)
-
-
-test_raw <- austraits::bind_databases(
-  AusTraits_habitats_2024,
-  Berthon_2018,
-  DCCEEW_2024,
-  Fensham_2020,
-  FernandezWinzer_2018,
-  Martino_2022,
-  Martino_2024,
-  McDougall_2024,
-  Pegg_2018,
-  Setterfield_2002,
-  Ward_2021,
+database_raw <- austraits::bind_databases(
   NULL)
 
 # Version information
@@ -77,8 +22,8 @@ version_number <- util_get_version("config/metadata.yml")
 git_SHA <- util_get_SHA()
 
 # Combine all the source into one resource
-test <- build_add_version(test_raw, version_number, git_SHA)
+database <- build_add_version(database_raw, version_number, git_SHA)
 
 # Save to file
 dir.create("export/data/curr", FALSE, TRUE)
-saveRDS(test, "export/data/curr/test.rds")
+saveRDS(database, "export/data/curr/database.rds")
