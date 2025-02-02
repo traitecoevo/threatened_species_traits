@@ -49,6 +49,25 @@ targets:
                   taxon_list
                  )
 
+  Beggs_2010_config:
+    command: >
+      dataset_configure("data/Beggs_2010/metadata.yml",
+                 definitions
+                 )
+  Beggs_2010_raw:
+    command: >
+      dataset_process("data/Beggs_2010/data.csv",
+                  Beggs_2010_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Beggs_2010:
+    command: >
+      dataset_update_taxonomy(Beggs_2010_raw,
+                  taxon_list
+                 )
+
   Berthon_2018_config:
     command: >
       dataset_configure("data/Berthon_2018/metadata.yml",
@@ -282,6 +301,7 @@ targets:
     command: >
       bind_databases(
         AusTraits_habitats_2024,
+        Beggs_2010,
         Berthon_2018,
         DCCEEW_2024,
         Fensham_2020,

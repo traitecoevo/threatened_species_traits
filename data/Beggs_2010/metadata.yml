@@ -1,0 +1,102 @@
+source:
+  primary:
+    key: Beggs_2010
+    bibtype: Thesis
+    year: 2010
+    author: Beggs, Elizabeth
+    title: Effects of exotic pasture grasses on biodiversity in the Mary River catchment,
+      Northern Territory
+    type: PhD
+    institution: Charles Darwin University
+    url: https://researchers.cdu.edu.au/en/studentTheses/effects-of-exotic-pasture-grasses-on-biodiversity-in-the-mary-riv
+contributors:
+  data_collectors:
+  - last_name: Beggs
+    given_name: Elizabeth
+    ORCID: .na
+    affiliation: Charles Darwin University
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: unknown/unknown
+  taxon_name: species
+  location_name: unknown
+  description: unknown
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: unknown
+  original_file: unknown
+  notes: unknown
+locations: .na
+contexts:
+- context_property: gamba grass level
+  category: treatment_context
+  var_in: gamba_grass_level
+  values:
+  - value: none
+    description: No gamba grass present
+  - value: low
+    description: xx
+  - value: moderate
+    description: xx
+  - value: high
+    description: xx
+traits:
+- var_in: None
+  unit_in: '{count}'
+  trait_name: population_count
+  entity_type: population
+  value_type: raw
+  basis_of_value: measurement
+  replicates: unknown
+  gamba_grass_level: none
+  methods: unknown
+- var_in: Low
+  unit_in: '{count}'
+  trait_name: population_count
+  entity_type: population
+  value_type: raw
+  basis_of_value: measurement
+  replicates: unknown
+  gamba_grass_level: low
+  methods: unknown
+- var_in: Moderate
+  unit_in: '{count}'
+  trait_name: population_count
+  entity_type: population
+  value_type: raw
+  basis_of_value: measurement
+  replicates: unknown
+  gamba_grass_level: moderate
+  methods: unknown
+- var_in: High
+  unit_in: '{count}'
+  trait_name: population_count
+  entity_type: population
+  value_type: raw
+  basis_of_value: measurement
+  replicates: unknown
+  gamba_grass_level: high
+  methods: unknown
+- var_in: Paddock
+  unit_in: '{count}'
+  trait_name: population_count
+  entity_type: population
+  value_type: raw
+  basis_of_value: measurement
+  replicates: unknown
+  gamba_grass_level: none
+  methods: unknown
+- var_in: woodiness
+  unit_in: .na
+  trait_name: woodiness
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: unknown
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
