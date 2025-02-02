@@ -1,0 +1,95 @@
+source:
+  primary:
+    key: Harshani_2023
+    bibtype: Thesis
+    year: 2023
+    author: Himbutugoda Shanika Harshani
+    title: Rehabilitation of Phytophthora cinnamomi-infested jarrah (Eucalyptus marginata)
+      forest sites using pelletised seeds of resistant species
+    type: PhD
+    institution: Murdoch University
+    url: https://researchportal.murdoch.edu.au/esploro/outputs/doctoral/Rehabilitation-of-Phytophthora-cinnamomi-infested-jarrah-Eucalyptus/991005623666707891
+contributors:
+  data_collectors:
+  - last_name: Harshani_2023
+    given_name: Himbutugoda Shanika
+    ORCID: 0000-0002-8882-0411
+    affiliation: Murdoch University
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: x/2023
+  taxon_name: species
+  location_name: .na
+  description: unknown
+  basis_of_record: lab
+  life_stage: unknown
+  sampling_strategy: unknown
+  original_file: unknown
+  notes: Additional data to add!
+identifiers: .na
+locations: .na
+contexts: .na
+traits:
+- var_in: Deaths of inoculated plants (%)
+  unit_in: '%'
+  trait_name: unknown
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  methods: unknown
+- var_in: seed weight (mg) - mean
+  unit_in: mg
+  trait_name: seed_dry_mass
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  methods: unknown
+- var_in: Susceptibility type
+  unit_in: .na.character
+  trait_name: phytophthora_cinnamomi_susceptibility
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na.character
+  methods: from previous studies
+- var_in: Susceptibility Current Experiment
+  unit_in: .na.character
+  trait_name: phytophthora_cinnamomi_susceptibility
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na.character
+  methods: from current study
+- var_in: germination at 18/7C (%)
+  unit_in: '%'
+  trait_name: seed_germination
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  methods: unknown
+- var_in: germination at 23/12C (%)
+  unit_in: '%'
+  trait_name: seed_germination
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  methods: unknown
+- var_in: germination at 32/17C (%)
+  unit_in: '%'
+  trait_name: seed_germination
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  methods: unknown
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
+identifier: .na

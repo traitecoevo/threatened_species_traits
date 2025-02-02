@@ -144,6 +144,25 @@ targets:
                   taxon_list
                  )
 
+  Harshani_2023_config:
+    command: >
+      dataset_configure("data/Harshani_2023/metadata.yml",
+                 definitions
+                 )
+  Harshani_2023_raw:
+    command: >
+      dataset_process("data/Harshani_2023/data.csv",
+                  Harshani_2023_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Harshani_2023:
+    command: >
+      dataset_update_taxonomy(Harshani_2023_raw,
+                  taxon_list
+                 )
+
   Li_1997_config:
     command: >
       dataset_configure("data/Li_1997/metadata.yml",
@@ -306,6 +325,7 @@ targets:
         DCCEEW_2024,
         Fensham_2020,
         FernandezWinzer_2018,
+        Harshani_2023,
         Li_1997,
         Martino_2022,
         Martino_2024,
