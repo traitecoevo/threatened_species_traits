@@ -1,0 +1,189 @@
+source:
+  primary:
+    key: Ireland_2020
+    bibtype: Article
+    year: '2020'
+    author: K. B. Ireland and G. S. Pegg
+    journal: Australasian Plant Pathology
+    title: Effect of Austropuccinia psidii inoculum concentration on myrtle rust disease
+      incidence and severity
+    volume: '49'
+    number: '3'
+    pages: 239--243
+    doi: 10.1007/s13313-020-00699-4
+    issn: 1448-6032
+contributors:
+  data_collectors:
+  - last_name: Ireland
+    given_name: K.B.
+    ORCID: .na
+    affiliation: Plant Biosecurity Cooperative Research Centre, Bruce, ACT, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: 08-2012/09-2012
+  taxon_name: Species
+  location_name: .na
+  description: Test of whether increased inoculum concentrations of myrtle rust in
+    natural ecosystems may be contributing to observed changes in susceptibility phenotypes.
+  basis_of_record: unknown
+  life_stage: unknown
+  sampling_strategy: A study was undertaken to determine the effect of A. psidii inoculum
+    concentration on myrtle rust disease incidence and severity on five native and
+    one exotic species of Myrtaceae, under controlled conditions. These species have
+    a range of naturally observed susceptibilities, Rhodamnia rubescens (high to extreme
+    susceptibility), Syzygium hemilamprum (syn. Acmena hemilampra; relatively tolerant),
+    S. leuhmanii (syn. A. leuhmanii; moderate susceptibility), S. moorei (relatively
+    tolerant) and S. oleosum (high susceptibility) (Table 1). The extremely susceptible
+    exotic species, Syzygium jambos, was used as a positive control. Plants were inoculated
+    with either a control inoculation of 0.05% Tween in deionised water solution,
+    or with a solution of A. psidii urediniospores at a low (1-2 x 10^2), moderate (1-2 x 10^4) or high (1-2 x 10^6) inoculum concentration (urediniospores ml-1
+    in 0.05% Tween in deionised water). Inoculation methods followed those described
+    by Pegg et al. (2014a), and plants were placed in a controlled environment room
+    with a 12-h/26 °C light and 12- h/20 °C dark photoperiod with relative humidity
+    set to 75%. Plants were assessed two weeks after inoculation for measures of disease
+    incidence and severity, using methods modified from Ireland et al. 2012, 2019.
+    For the leaf with the most severe infection per plant replicate (sensu Morin et
+    al. 2012), disease incidence was recorded as presence or absence of uredinia per
+    leaf, and disease severity was recorded as the percentage surface area of the
+    leaf covered with uredinia.
+  original_file: data transcribed from manuscript
+  notes: none
+locations: .na
+contexts:
+- context_property: inoculum concentration
+  category: treatment_context
+  var_in: inoculum_concentration
+  values:
+  - value: low
+    description: Inoculum concentration of A. psidii was 1-2x 10^2 urediniospores
+      ml-1.
+  - value: medium
+    description: Inoculum concentration of A. psidii was 1-2x 10^4 urediniospores
+      ml-1.
+  - value: high
+    description: Inoculum concentration of A. psidii was 1-2x 10^6 urediniospores
+      ml-1.
+traits:
+- var_in: Field susceptibility - 2014
+  unit_in: .na
+  trait_name: myrtle_rust_susceptibility
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  source_id: Pegg_2014
+  methods: Trait values from Pegg 2014
+- var_in: Field susceptibility - 2019
+  unit_in: .na
+  trait_name: myrtle_rust_susceptibility
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: unknown
+  source_id: Pegg_2019
+  methods: Trait values from Pegg 2019
+- var_in: Laboratory susceptibility - low inoculum concentration
+  unit_in: .na
+  trait_name: myrtle_rust_susceptibility
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: replicates
+  inoculum_concentration: low
+  source_id: Ireland_2020
+  methods: Plants were inoculated with either a control inoculation of 0.05% Tween
+    in deionised water solution, or with a solution of A. psidii urediniospores at
+    a low (1-2 x 10^2), moderate (1-2 x 10^4) or high (1-2 x 10^6) inoculum concentration
+    (urediniospores ml-1 in 0.05% Tween in deionised water). Inoculation methods followed
+    those described by Pegg et al. (2014a), and plants were placed in a controlled
+    environment room with a 12-h/26 °C light and 12- h/20 °C dark photoperiod with
+    relative humidity set to 75%. Plants were assessed two weeks after inoculation
+    for measures of disease incidence and severity, using methods modified from Ireland
+    et al. 2012, 2019. For the leaf with the most severe infection per plant replicate
+    (sensu Morin et al. 2012), disease incidence was recorded as presence or absence
+    of uredinia per leaf, and disease severity was recorded as the percentage surface
+    area of the leaf covered with uredinia.
+- var_in: Laboratory susceptibility - medium inoculum concentration
+  unit_in: .na
+  trait_name: myrtle_rust_susceptibility
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: replicates
+  inoculum_concentration: medium
+  source_id: Ireland_2020
+  methods: Plants were inoculated with either a control inoculation of 0.05% Tween
+    in deionised water solution, or with a solution of A. psidii urediniospores at
+    a low (1-2 x 10^2), moderate (1-2 x 10^4) or high (1-2 x 10^6) inoculum concentration
+    (urediniospores ml-1 in 0.05% Tween in deionised water). Inoculation methods followed
+    those described by Pegg et al. (2014a), and plants were placed in a controlled
+    environment room with a 12-h/26 °C light and 12- h/20 °C dark photoperiod with
+    relative humidity set to 75%. Plants were assessed two weeks after inoculation
+    for measures of disease incidence and severity, using methods modified from Ireland
+    et al. 2012, 2019. For the leaf with the most severe infection per plant replicate
+    (sensu Morin et al. 2012), disease incidence was recorded as presence or absence
+    of uredinia per leaf, and disease severity was recorded as the percentage surface
+    area of the leaf covered with uredinia.
+- var_in: Laboratory susceptibility - high inoculum concentration
+  unit_in: .na
+  trait_name: myrtle_rust_susceptibility
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: replicates
+  inoculum_concentration: high
+  source_id: Ireland_2020
+  methods: Plants were inoculated with either a control inoculation of 0.05% Tween
+    in deionised water solution, or with a solution of A. psidii urediniospores at
+    a low (1-2 x 10^2), moderate (1-2 x 10^4) or high (1-2 x 10^6) inoculum concentration
+    (urediniospores ml-1 in 0.05% Tween in deionised water). Inoculation methods followed
+    those described by Pegg et al. (2014a), and plants were placed in a controlled
+    environment room with a 12-h/26 °C light and 12- h/20 °C dark photoperiod with
+    relative humidity set to 75%. Plants were assessed two weeks after inoculation
+    for measures of disease incidence and severity, using methods modified from Ireland
+    et al. 2012, 2019. For the leaf with the most severe infection per plant replicate
+    (sensu Morin et al. 2012), disease incidence was recorded as presence or absence
+    of uredinia per leaf, and disease severity was recorded as the percentage surface
+    area of the leaf covered with uredinia.
+substitutions:
+- trait_name: myrtle_rust_susceptibility
+  find: es
+  replace: extreme
+- trait_name: myrtle_rust_susceptibility
+  find: h
+  replace: high
+- trait_name: myrtle_rust_susceptibility
+  find: hs
+  replace: high
+- trait_name: myrtle_rust_susceptibility
+  find: ls
+  replace: low
+- trait_name: myrtle_rust_susceptibility
+  find: m
+  replace: medium
+- trait_name: myrtle_rust_susceptibility
+  find: ms
+  replace: medium
+- trait_name: myrtle_rust_susceptibility
+  find: ms / hs
+  replace: medium high
+- trait_name: myrtle_rust_susceptibility
+  find: r-h
+  replace: resistant high
+- trait_name: myrtle_rust_susceptibility
+  find: r-m
+  replace: resistant medium
+- trait_name: myrtle_rust_susceptibility
+  find: rt
+  replace: resistant
+- trait_name: myrtle_rust_susceptibility
+  find: rt / hs
+  replace: resistant high
+- trait_name: myrtle_rust_susceptibility
+  find: rt / ls
+  replace: resistant low
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

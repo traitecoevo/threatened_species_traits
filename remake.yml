@@ -182,6 +182,25 @@ targets:
                   taxon_list
                  )
 
+  Ireland_2020_config:
+    command: >
+      dataset_configure("data/Ireland_2020/metadata.yml",
+                 definitions
+                 )
+  Ireland_2020_raw:
+    command: >
+      dataset_process("data/Ireland_2020/data.csv",
+                  Ireland_2020_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Ireland_2020:
+    command: >
+      dataset_update_taxonomy(Ireland_2020_raw,
+                  taxon_list
+                 )
+
   Li_1997_config:
     command: >
       dataset_configure("data/Li_1997/metadata.yml",
@@ -365,6 +384,7 @@ targets:
         Fensham_2020,
         FernandezWinzer_2018,
         Harshani_2023,
+        Ireland_2020,
         Li_1997,
         Martino_2022,
         Martino_2024,
