@@ -49,6 +49,25 @@ targets:
                   taxon_list
                  )
 
+  Barrett_2008_config:
+    command: >
+      dataset_configure("data/Barrett_2008/metadata.yml",
+                 definitions
+                 )
+  Barrett_2008_raw:
+    command: >
+      dataset_process("data/Barrett_2008/data.csv",
+                  Barrett_2008_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Barrett_2008:
+    command: >
+      dataset_update_taxonomy(Barrett_2008_raw,
+                  taxon_list
+                 )
+
   Beggs_2010_config:
     command: >
       dataset_configure("data/Beggs_2010/metadata.yml",
@@ -320,6 +339,7 @@ targets:
     command: >
       bind_databases(
         AusTraits_habitats_2024,
+        Barrett_2008,
         Beggs_2010,
         Berthon_2018,
         DCCEEW_2024,

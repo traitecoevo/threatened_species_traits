@@ -1,0 +1,19 @@
+trait_name,find,replace
+habitat,mallee-heath,mallee_heath
+habitat,"mallee-heath, thicket",mallee_heath scrub
+habitat,mallee-heath/thicket,mallee_heath scrub
+habitat,"mallee-heath/thicket, thicket",mallee_heath scrub
+habitat,mallee-thicket,mallee_heath scrub
+habitat,mallee-thicket/heath,mallee_heath scrub
+habitat,scrub,shrubland
+habitat,thicket,scrub
+habitat,"thicket, scrub",scrub
+habitat,"woodland, mallee-heath",mallee_heath woodland
+habitat,"woodland, mallee-heath/thicket, thicket",mallee_heath woodland
+habitat,"woodland, thicket",woodland scrub
+reproductive_maturity,<=4,0--4
+reproductive_maturity,>4,4--
+respouting_capacity,fsr,fire_killed resprouts
+respouting_capacity,osc,fire_killed
+respouting_capacity,oss,fire_killed
+respouting_capacity,rs,resprouts

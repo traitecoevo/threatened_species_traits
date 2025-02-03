@@ -1,0 +1,200 @@
+source:
+  primary:
+    key: Barrett_2008
+    bibtype: Article
+    year: '2008'
+    author: S. Barrett and B. L. Shearer and C. E. Crane and A. Cochrane
+    journal: Australian Journal of Botany
+    title: An extinction-risk assessment tool for flora threatened by Phytophthora
+      cinnamomi
+    volume: '56'
+    number: '6'
+    pages: '477'
+    doi: 10.1071/bt07213
+    issn: 0067-1924
+contributors:
+  data_collectors:
+  - last_name: Barrett
+    given_name: Sarah
+    ORCID: .na
+    affiliation: Department of Biodiversity, Conservation and Attractions, Albany,
+      WA, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>% 
+      mutate(
+        location = "Stirling Range National Park",
+        seedbank_location = `Life-history characteristics`
+      )
+  '
+  collection_date: unknown/2008
+  taxon_name: Plant taxon
+  location_name: location
+  description: A risk-assessment tool was used to investigate the risk of extinction from disease caused by Phytophthora cinnamomi to 33 taxa from the Stirling Range National Park, Western Australia.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: Flora investigated Thirty-three plant taxa of conservation significance were assessed (Table 1). Threatened flora were ranked Critically Endangered, Endangered and Vulnerable nationally under the Environmental Protection and Biodiversity Conservation Act (1999) and in Western Australia (WA) by using IUCN criteria (IUCN 2001). Poorly known or Priority flora are data-deficient species (IUCN 2001) and are categorised in WA as Priority 1, 2, 3 or 4 (Atkins 1998, 2006). Twenty-three taxa are endemic tothe SRNP; another three taxa (Lambertia ericifolia R.Br., Kunzea montana (Diels) Domin andEucalyptus ligulata subsp.stirlingicaD.Nicolle) each have a single outlying population in close proximity to the park, and these were included in the study. Seven taxa have significant outlying populations disjunct from the park. These were Banksia browniiR.Br.,Daviesia obovataTurcz.,Banksia pseudoplumosa A.S. George, Adenanthos pungens Meisn. subsp. pungens, Sphenotoma drummondii (Benth.) F.Muell., Andersonia echinocephala (Stschegel.) Druce and Calothamnus affinis Turcz. These taxa were assessed in terms of their extinction risk within the park only. Plant nomenclature follows (Paczkowska and Chapman 2000; Mast and Thiele 2007).
+  original_file: data from extracted from manuscript
+  notes: none
+locations:
+  Stirling Range National Park:
+    longitude (deg): 118.1044
+    latitude (deg): -34.3997
+contexts: .na
+traits:
+- var_in: Life-history characteristics
+  unit_in: .na
+  trait_name: resprouting_capacity
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Data on the number of extant and extinct populations, habitat type and condition, life history characteristics, threatening processes and the condition of threatened and priority flora populations were collated from the DEC threatened flora database and records, interim recovery plans (Holland et al. 2001; Phillimore and Brown 2001a, 2001b, 2001c, 2002; Phillimore et al. 2001; Stack and Brown 2003; Gilfillan and Barrett 2005; Hartley and Barrett 2005a, 2005b; Hartley et al. 2005) and Florabase (Western Australian Herbarium 1998-).
+- var_in: seedbank_location
+  unit_in: .na
+  trait_name: seedbank_location
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Data on the number of extant and extinct populations, habitat type and condition, life history characteristics, threatening processes and the condition of threatened and priority flora populations were collated from the DEC threatened flora database and records, interim recovery plans (Holland et al. 2001; Phillimore and Brown 2001a, 2001b, 2001c, 2002; Phillimore et al. 2001; Stack and Brown 2003; Gilfillan and Barrett 2005; Hartley and Barrett 2005a, 2005b; Hartley et al. 2005) and Florabase (Western Australian Herbarium 1998-).
+- var_in: Juvenile period (years)
+  unit_in: a
+  trait_name: reproductive_maturity
+  entity_type: population
+  value_type: range
+  basis_of_value: measurement
+  replicates: .na
+  methods: Data on the number of extant and extinct populations, habitat type and condition, life history characteristics, threatening processes and the condition of threatened and priority flora populations were collated from the DEC threatened flora database and records, interim recovery plans (Holland et al. 2001; Phillimore and Brown 2001a, 2001b, 2001c, 2002; Phillimore et al. 2001; Stack and Brown 2003; Gilfillan and Barrett 2005; Hartley and Barrett 2005a, 2005b; Hartley et al. 2005) and Florabase (Western Australian Herbarium 1998-).
+- var_in: Habitat
+  unit_in: .na
+  trait_name: habitat
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Data on the number of extant and extinct populations, habitat type and condition, life history characteristics, threatening processes and the condition of threatened and priority flora populations were collated from the DEC threatened flora database and records, interim recovery plans (Holland et al. 2001; Phillimore and Brown 2001a, 2001b, 2001c, 2002; Phillimore et al. 2001; Stack and Brown 2003; Gilfillan and Barrett 2005; Hartley and Barrett 2005a, 2005b; Hartley et al. 2005) and Florabase (Western Australian Herbarium 1998-).
+- var_in: Landform
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Data on the number of extant and extinct populations, habitat type and condition, life history characteristics, threatening processes and the condition of threatened and priority flora populations were collated from the DEC threatened flora database and records, interim recovery plans (Holland et al. 2001; Phillimore and Brown 2001a, 2001b, 2001c, 2002; Phillimore et al. 2001; Stack and Brown 2003; Gilfillan and Barrett 2005; Hartley and Barrett 2005a, 2005b; Hartley et al. 2005) and Florabase (Western Australian Herbarium 1998-).
+- var_in: Threatened ecological community
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Data on the number of extant and extinct populations, habitat type and condition, life history characteristics, threatening processes and the condition of threatened and priority flora populations were collated from the DEC threatened flora database and records, interim recovery plans (Holland et al. 2001; Phillimore and Brown 2001a, 2001b, 2001c, 2002; Phillimore et al. 2001; Stack and Brown 2003; Gilfillan and Barrett 2005; Hartley and Barrett 2005a, 2005b; Hartley et al. 2005) and Florabase (Western Australian Herbarium 1998-).
+- var_in: susceptibility score
+  unit_in: '{dimensionless}'
+  trait_name: phytophthora_cinnamomi_susceptibility_score
+  entity_type: population
+  value_type: raw
+  basis_of_value: model_derived
+  replicates: 1
+  methods: The susceptibility score of each taxon was then calculated as follows, if t1/2K = 0, then susceptibility scoretaxon=0; if t1/2K > 0, then susceptibility scoretaxon=Kmax + (100-t1/2K) + (100xr).
+- var_in: direct impact score
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: raw
+  basis_of_value: model_derived
+  replicates: 1
+  methods: The direct impact score was derived from the susceptibility score as follows, direct impact score = (susceptibility scoretaxon/susceptibility scoremax)x10 (Shearer et al. 2007b).
+- var_in: Number of extant populations (0-5-ordinal)
+  unit_in: '{count}'
+  trait_name: population_count
+  entity_type: population
+  value_type: bin
+  basis_of_value: measurement
+  replicates: 1
+  methods: Data on the number of extant and extinct populations, habitat type and condition, life history characteristics, threatening processes and the condition of threatened and priorityflora populations were collated from the DEC threatened flora database and records, interim recovery plans (Holland et al. 2001; Phillimore and Brown 2001a, 2001b, 2001c, 2002; Phillimore et al. 2001; Stack and Brown 2003; Gilfillan and Barrett 2005; Hartley and Barrett 2005a, 2005b; Hartley et al. 2005) and Florabase (Western Australian Herbarium 1998-).
+substitutions:
+- trait_name: population_count
+  find: 0
+  replace: 20--
+- trait_name: population_count
+  find: 2
+  replace: 11--20
+- trait_name: population_count
+  find: 3
+  replace: 6--10
+- trait_name: population_count
+  find: 5
+  replace: 1--5
+- trait_name: habitat
+  find: mallee-heath
+  replace: mallee_heath
+- trait_name: habitat
+  find: mallee-heath, thicket
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: mallee-heath/thicket
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: mallee-heath/thicket, thicket
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: mallee-thicket
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: mallee-thicket/heath
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: scrub
+  replace: shrubland
+- trait_name: habitat
+  find: thicket
+  replace: scrub
+- trait_name: habitat
+  find: thicket, scrub
+  replace: scrub
+- trait_name: habitat
+  find: woodland, mallee-heath
+  replace: mallee_heath woodland
+- trait_name: habitat
+  find: woodland, mallee-heath/thicket, thicket
+  replace: mallee_heath woodland
+- trait_name: habitat
+  find: woodland, thicket
+  replace: woodland scrub
+- trait_name: reproductive_maturity
+  find: <=4
+  replace: 0--4
+- trait_name: reproductive_maturity
+  find: '>4'
+  replace: 4--
+- trait_name: resprouting_capacity
+  find: fsr
+  replace: fire_killed resprouts
+- trait_name: resprouting_capacity
+  find: osc
+  replace: fire_killed
+- trait_name: resprouting_capacity
+  find: oss
+  replace: fire_killed
+- trait_name: resprouting_capacity
+  find: rs
+  replace: resprouts
+- trait_name: seedbank_location
+  find: fsr
+  replace: .na
+- trait_name: seedbank_location
+  find: osc
+  replace: canopy_seedbank
+- trait_name: seedbank_location
+  find: oss
+  replace: soil_seedbank
+- trait_name: seedbank_location
+  find: rs
+  replace: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
