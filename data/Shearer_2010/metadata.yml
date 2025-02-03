@@ -1,0 +1,269 @@
+source:
+  primary:
+    key: Shearer_2010
+    bibtype: Article
+    year: '2010'
+    author: B. L. Shearer and C. E. Crane and J. A. Cochrane
+    journal: Australian Journal of Botany
+    title: Variation in susceptibility to Phytophthora cinnamomi infection within
+      the genus Lambertia
+    volume: '58'
+    number: '7'
+    pages: '575'
+    doi: 10.1071/bt10154
+    issn: 0067-1924
+contributors:
+  data_collectors:
+  - last_name: Shearer
+    given_name: Bryan L.
+    ORCID: .na
+    affiliation: Department of Environment and Conservation, WA
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: 11-2004/04-2005
+  taxon_name: species
+  location_name: location
+  description: Variation in susceptibility to Phytophthora cinnamomi Rands infection
+    within the genus Lambertia was evaluated by soil and stem inoculation.
+  basis_of_record: lab
+  life_stage: sapling
+  sampling_strategy: Experimental design ^p Dependant variables for soil inoculation
+    were %plants with collar lesion or %mortality. Independent variables were plant
+    taxa (Table 1) in a shadehouse environment. Included for comparison within taxa
+    were two populations of L. echinata subsp. citrina Hnatiuk, L. echinata subsp.
+    occidentalis, L. multiflora Lindl. var. multiflora, L. multiflora var. darlingensis
+    Hnatiuk and L. orbifolia subsp. Scott River Plains (Table 1). Taxa were blocked
+    with three replicates. There were six plants per pot and 1-11 pots per replicate,
+    depending on seed availability. Details of the shadehouse environment were as
+    described in Shearer et al. (2007b). ^p Dependant variables for stem inoculation
+    were visible lesion length and girdling and length of colonisation. Independent
+    variables were plant taxa (Table 1) in a glasshouse environment. Taxa were in
+    randomised blocks with 10 replicates. Each replicate was a single plant per pot.
+    ^p Inoculation ^p Details on the method and testing of soil inoculation were as
+    given in Shearer et al. (2007b). Plants (Table 1) were propagated from seed collected
+    for the present study or for long-term storage in the Department of Environment
+    and Conservation's Threatened Flora Seed Centre (Cochrane et al. 2007). The exception
+    was L. echinata R.Br. subsp. echinata which was propagated from cuttings taken
+    from natural populations because of lack of available seed. Cuttings were propagated
+    as described by Close et al. (2006) and grown in pots and potting mix similar
+    to those for germinated seeds. Soil was inoculated with inoculum plugs colonised
+    with three isolates of P. cinnamomi, one isolate per plug, as described by Shearer
+    et al. (2007b). Sufficient seed was available to inoculate pots containing at
+    least 6-month-old plants of 17 Lambertia taxa in mid-summer (February) of 2004.
+    Seed was available to soil-inoculate at least 6-month-old plants of L. ilicifolia
+    Hook., L. fairallii and L. rariflora Meisn. subsp. rariflora in mid-summer of
+    2006 and cuttings of L. echinata subsp. echinata were available for soil inoculated
+    in mid-summer of 2007. Table 1 gives the number of plants that were soilinoculated
+    per each taxon. Sterile pine plugs were placed in control pots containing plants,
+    similar to inoculated pots. All taxa were stem-inoculated in November 2004. Stems
+    of 18-month-old plants were wound-inoculated with P. cinnamomi isolate WAC12892,
+    by using methods previously described (Shearer et al. 1987a, 1987b, 1988). Isolate
+    WAC12892 was chosen because it was a virulent isolate from the Bell Track infection
+    in the Fitzgerald River National Park, near the main centre of richness of Lambertia
+    taxa (Gibson et al. 1997) and used in previous studies (Shearer and Crane 2003;
+    Shearer et al. 2004, 2007b). An agar disk containing mycelium of WAC12892 was
+    bound to a fresh cut in the phloem. Control stems were inoculated in a similar
+    manner with sterile agar disks. ^p Assessment ^p Air and soil temperatures were
+    measured in the shadehouse with WatchDog weather stations (Spectrum 2006). For
+    stem inoculation, temperature was recorded with two maximum- minimum mercury thermometers
+    in the middle and on each side of the glasshouse. Daily maximum and minimum temperatures
+    were recorded during the inoculation period. Plants with a collar lesion and those
+    dead were recorded thrice weekly for 5 months after inoculation. Plants were scored
+    as dead when terminal buds and leaves were irreversibly flaccid or dried, by which
+    time stem collars were girdled by lesions of the pathogen (Shearer et al. 2007b).
+    Infection was confirmed by plating collar and root pieces onto selective medium
+    (Shearer and Dillon 1995). Fourteen days after stem inoculation, the bark of harvested
+    stems was carefully scraped from the lesion margins above and below and at each
+    side of the inoculation point. Visible lesion length above and below the inoculation
+    point and the circumference of the lesion and the stem diameter at the point of
+    inoculation were measured. Tangential spread at the inoculation point was estimated
+    in degrees. For determination of colonisation, the stems above and below the inoculation
+    point were cut into 0.5-cm-long sections along the lesion, and extending 10 cm
+    into apparently healthy tissue. Healthy tissue was cut and plated first, with
+    utensils sterilised between cuts and plating. Sections were plated onto half-strength
+    potato-dextrose selective medium (Shearer and Dillon 1995). Plated sections were
+    incubated in the dark at 25ºC for 2 days and the number infected with P. cinnamomi
+    was determined. Colonisation was the length of section infected with P. cinnamomi.
+  original_file: transcribed from manuscript
+  notes: Model parameters also have SE that can be extracted; more model outputs that
+    can be extracted from column charts.
+locations:
+  Beach:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Boulder Hill:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Cheyne Beach Cheyne:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Dandaragan Plateau:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Jar-rah Forest:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Le Grand NP:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Margaret River:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Narrikup:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  New South Wales:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  North sandplains:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Range:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Scott River—Beenup:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Scott River—Snake springs:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  South Coast:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Stirling Range NP:
+    longitude (deg): 118.1044
+    latitude (deg): -34.3997
+    description: .na.character
+  Swan Coastal Plain:
+    latitude (deg): .na.character
+    longitude (deg): .na.character
+    description: .na.character
+  Tarin Rock:
+    latitude (deg): -33.0815
+    longitude (deg): 118.2342
+    description: .na.character
+  Walpole:
+    latitude (deg): -34.9762
+    longitude (deg): 116.7313
+    description: .na.character
+  Whicher Range Whicher:
+    latitude (deg): -33.8
+    longitude (deg): 115.3667
+    description: .na.character
+contexts: .na
+traits:
+- var_in: mortality (%)
+  unit_in: '%'
+  trait_name: phytophthora_cinnamomi_mortality
+  entity_type: population
+  value_type: mean
+  basis_of_value: model_derived
+  replicates: number of plants soil inoculated
+  methods: Kmax. Shearer et al. (2007b) detailed the use of the logistic model for
+    analysis of disease-progress curves following soil inoculation with P. cinnamomi.
+    Percentage plants with collar lesion or %mortality was calculated for the assessment
+    times after inoculation. The Kmax, t1/2K and r were calculated from fitting the
+    logistic model to disease-progress curves (Shearer et al. 2007b). [See manuscript
+    for equations].
+- var_in: mortality halflife (days)
+  unit_in: d
+  trait_name: phytophthora_cinnamomi_mortality_half_life
+  entity_type: population
+  value_type: mean
+  basis_of_value: model_derived
+  replicates: number of plants soil inoculated
+  methods: t1/2k. Shearer et al. (2007b) detailed the use of the logistic model for
+    analysis of disease-progress curves following soil inoculation with P. cinnamomi.
+    Percentage plants with collar lesion or %mortality was calculated for the assessment
+    times after inoculation. The Kmax, t1/2K and r were calculated from fitting the
+    logistic model to disease-progress curves (Shearer et al. 2007b). [See manuscript
+    for equations].
+- var_in: mortality score
+  unit_in: '{dimensionless}'
+  trait_name: phytophthora_cinnamomi_susceptibility_score
+  entity_type: population
+  value_type: mean
+  basis_of_value: model_derived
+  replicates: number of plants soil inoculated
+  methods: Shearer et al. (2007b) detailed the use of the logistic model for analysis
+    of disease-progress curves following soil inoculation with P. cinnamomi. Percentage
+    plants with collar lesion or %mortality was calculated for the assessment times
+    after inoculation. The Kmax, t1/2K and r were calculated from fitting the logistic
+    model to disease-progress curves (Shearer et al. 2007b). [See manuscript for equations].
+    The mortality score for each taxon was then calculated as follows, if t1/2K =
+    0, then the mortality scoretaxon=0; if t1/2K > 0, then the mortality scoretaxon
+    = Kmax + (100 - t1/2K) + (100xr).
+substitutions:
+- trait_name: habitat
+  find: mallee-heath
+  replace: mallee_heath
+- trait_name: habitat
+  find: mallee-heath, thicket
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: mallee-heath/thicket
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: mallee-heath/thicket, thicket
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: mallee-thicket
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: mallee-thicket/heath
+  replace: mallee_heath scrub
+- trait_name: habitat
+  find: scrub
+  replace: shrubland
+- trait_name: habitat
+  find: thicket
+  replace: scrub
+- trait_name: habitat
+  find: thicket, scrub
+  replace: scrub
+- trait_name: habitat
+  find: woodland, mallee-heath
+  replace: mallee_heath woodland
+- trait_name: habitat
+  find: woodland, mallee-heath/thicket, thicket
+  replace: mallee_heath woodland
+- trait_name: habitat
+  find: woodland, thicket
+  replace: woodland scrub
+- trait_name: reproductive_maturity
+  find: <=4
+  replace: 0--4
+- trait_name: reproductive_maturity
+  find: '>4'
+  replace: 4--
+- trait_name: respouting_capacity
+  find: fsr
+  replace: fire_killed resprouts
+- trait_name: respouting_capacity
+  find: osc
+  replace: fire_killed
+- trait_name: respouting_capacity
+  find: oss
+  replace: fire_killed
+- trait_name: respouting_capacity
+  find: rs
+  replace: resprouts
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

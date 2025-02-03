@@ -315,6 +315,25 @@ targets:
                   taxon_list
                  )
 
+  Shearer_2010_config:
+    command: >
+      dataset_configure("data/Shearer_2010/metadata.yml",
+                 definitions
+                 )
+  Shearer_2010_raw:
+    command: >
+      dataset_process("data/Shearer_2010/data.csv",
+                  Shearer_2010_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Shearer_2010:
+    command: >
+      dataset_update_taxonomy(Shearer_2010_raw,
+                  taxon_list
+                 )
+
   Ward_2021_config:
     command: >
       dataset_configure("data/Ward_2021/metadata.yml",
@@ -353,6 +372,7 @@ targets:
         Pegg_2018,
         Setterfield_2002,
         Shearer_1996,
+        Shearer_2010,
         Ward_2021,
         I(NULL))
 
