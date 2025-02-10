@@ -19,8 +19,18 @@ traits:
       type: categorical
       allowed_values_levels:
         resistant: Plants are apparently unaffected when Phytophthora cinnamomi is present. Although such species may be susceptible to infection, as discussed above, they are likely to rarely, if ever, experience disease;
-        mild: Plant are infected by Phytophthora cinnamomi when present and their symptoms are mild and/or infrequently severe.
-        severe: Plant are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.   
+        mild: Plants are infected by Phytophthora cinnamomi when present and their symptoms are mild and/or infrequently severe.
+        severe: Plants are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.
+        susceptible: Plants are infected by Phytophthora cinnamomi when present, but their level of symptoms is unknown.
+        susceptible_presumed: Plants are presumed to be susceptible to Phytophthora cinnamomi, but they have not been explicitly tested.
+    phytophthora_cinnamomi_susceptibility_score:
+      label: Phytophthora cinnamomi susceptibility score
+      description: Numeric score indicating the susceptibility of species to Phytophthora cinnamomi.
+      comments: Numeric susceptibility score developed by Shearer et al. 2007 (doi.org/10.1071/AP07074)
+      type: numeric
+      units: '{dimensionless}'
+      allowed_values_min: 0.0
+      allowed_values_max: 300.0
     phytophthora_cinnamomi_isolation_from_plant_tissue:
       label: frequency of isolation of Phytophthora cinnamomi
       description: The relative frequency with which Phytophthora cinnamomi is isolated from plant tissues at field locations known to be infected or following glasshouse inoculation trials.
@@ -29,6 +39,21 @@ traits:
         phytophthora_cinnamomi_not_isolated: Phytophthora cinnamomi is never isolated from plant tissues following exposure to the pathogen.
         phytophthora_cinnamomi_infrequently_isolated: Phytophthora cinnamomi is infrequently isolated from plant tissues following exposure to the pathogen.
         phytophthora_cinnamomi_frequently_isolated: Phytophthora cinnamomi is frequently isolated from plant tissues following exposure to the pathogen.
+    phytophthora_cinnamomi_mortality:
+      label: Mortality from Phytophthora cinnamomi
+      description: Percent of individuals inoculated with Phytophthora cinnamomi that die.
+      type: numeric
+      units: '%'
+      allowed_values_min: 0.0
+      allowed_values_max: 100.0
+    phytophthora_cinnamomi_mortality_half_life:
+      label: Modeled mortality half-life following Phytophthora cinnamomi inoculation
+      description: Time until half the individuals inoculated with Phytophthora cinnamomi die.
+      comments: This trait cannot be applied at the individual level.
+      type: numeric
+      units: d
+      allowed_values_min: 0.0
+      allowed_values_max: 500.0
     myrtle_rust_susceptibility_infected_tissues:
       label: susceptibility to myrtle rust
       description: Susceptibility of species to myrtle rust (Austropuccinia psidii), based on their field response to the pathogen or response observed in glasshouse inoculation trials.
@@ -117,6 +142,11 @@ traits:
         rainforest_temperate_warm: XX
         rainforest_tropical: XX
         heath: XX
+        mallee: XX
+        mallet: XX
+        mallee_heath: XX
+        thicket: XX
+        scrub: Included thickets - need to split
         wet_heath: XX
         aquatic: XX
         alpine: XX
@@ -125,10 +155,14 @@ traits:
         coastal_swamp_woodland: XX
         bogs: XX
         grassland: XX
+        sedgeland: XX
         woodland: XX
+        open_woodland: XX
         shrubland: XX
+        forest: XX
         eucalypt_forest: XX
         open_forest: XX
+        low_forest: XX
         closed_forest: XX
         dry_forest: XX
         semiaquatic: XX
@@ -228,6 +262,33 @@ traits:
       units: mg/mg
       allowed_values_min: 0.0
       allowed_values_max: 1.0
+    inflorescence_length:
+      label: Inflorescence length
+      description: Length [PATO:0000122] of the inflorescence [] from the stalk [] to the first flower [PO:0009046] to the distal [] inflorescence tip [].
+      type: numeric
+      units: mm
+      allowed_values_min: 0.1
+      allowed_values_max: 5000.0
+    inflorescence_width:
+      label: Inflorescence width
+      description: Width [] of the inflorescence [] at its widest [] point.
+      type: numeric
+      units: mm
+      allowed_values_min: 0.1
+      allowed_values_max: 2000.0
+    flowers_per_inflorescence:
+      label: Flowers per inflorescence
+      description: The count [NCIT:C25463] of flowers [PO:0009046] in an inflorescence [].
+      type: numeric
+      units: '{count}/{count}'
+      allowed_values_min: 1
+      allowed_values_max: 10000.0
+    seed_dispersal_ability:
+      label: Seed dispersal ability
+      description: A qualitative trait indicating a seeds relative dispersal ability, merging together information on dispersal appendages and known dispersers.
+      type: categorical
+      allowed_values_levels:
+        restricted: Limited ability to disperse beyond the parent plant.
     leaf_Al_per_dry_mass:
       label: Leaf aluminium (Al) content per unit leaf dry mass
       description: The ratio [PATO:0001470] of the mass [PATO:0000125] of aluminium
@@ -6931,6 +6992,7 @@ traits:
         leaf: A true leaf, including both laminar and needle-shaped leaves.
         non-photosynthetic_plant: A plant that lacks any photosynthetic organs.
         phyllode: A flattened bladelike petiole. (Synonyms, switch plant)
+        bract: XX
       entity_URI: https://w3id.org/APD/traits/trait_0030016
     plant_alternative_energy_and_nutrient_acquisition_strategy:
       label: Plant alternative energy and nutrient acquisition strategies
