@@ -15,14 +15,16 @@ traits:
     phytophthora_cinnamomi_susceptibility:
       label: susceptibility to Phytophthora cinnamomi
       description: Susceptibility of species to Phytophthora cinnamomi, based on their field response to the pathogen or response observed in glasshouse inoculation trials.
-      comments: This is the definition of Phytophthora cinnamomi susceptibility used by McDougall et al. 2024 (doi:10.1071/BT23086). For glasshouse susceptibility trials where susceptibility had not been assigned as a category, we regarded the response of species with no mortality and no re-isolation of the pathogen as None, <25% mortality and re-isolation as Mild and greater than or equal to 25% and re-isolation as Severe.
+      comments: The values `resistant`, `mild` and `severe` are from the definition of Phytophthora cinnamomi susceptibility used by McDougall et al. 2024 (doi:10.1071/BT23086). For glasshouse susceptibility trials where susceptibility had not been assigned as a category, we regarded the response of species with no mortality and no re-isolation of the pathogen as None, <25% mortality and re-isolation as Mild and greater than or equal to 25% and re-isolation as Severe.
       type: categorical
       allowed_values_levels:
         resistant: Plants are apparently unaffected when Phytophthora cinnamomi is present. Although such species may be susceptible to infection, as discussed above, they are likely to rarely, if ever, experience disease;
         mild: Plants are infected by Phytophthora cinnamomi when present and their symptoms are mild and/or infrequently severe.
+        moderate: Plants are infected by Phytophthora cinnamomi when present and their symptoms are moderately severe.
         severe: Plants are infected by Phytophthora cinnamomi when present and their symptoms are severe symptoms, often resulting in mortality.
         susceptible: Plants are infected by Phytophthora cinnamomi when present, but their level of symptoms is unknown.
         susceptible_presumed: Plants are presumed to be susceptible to Phytophthora cinnamomi, but they have not been explicitly tested.
+        resistant_presumed: Plants are presumed to be susceptible to Phytophthora cinnamomi, but they have not been explicitly tested.
     phytophthora_cinnamomi_susceptibility_score:
       label: Phytophthora cinnamomi susceptibility score
       description: Numeric score indicating the susceptibility of species to Phytophthora cinnamomi.
@@ -215,14 +217,14 @@ traits:
       type: numeric
       units: '{count}'
       allowed_values_min: 0.0
-      allowed_values_max: 1000.0
+      allowed_values_max: 10000.0
     subpopulation_count:
       label: Number of wild sub-populations
       description: Number of wild subpopulations known for a species.
       type: numeric
       units: '{count}'
       allowed_values_min: 0.0
-      allowed_values_max: 1000.0      
+      allowed_values_max: 10000.0      
     individual_count:
       label: Number of wild individuals
       description: Number of wild individuals known for a species.
