@@ -1,0 +1,172 @@
+source:
+  primary:
+    key: Bell_1996
+    bibtype: Article
+    year: '1996'
+    author: Tina S. Bell & John S. Pate
+    journal: Annals of Botany
+    title: Nitrogen and Phosphorus Nutrition in Mycorrhizal Epacridaceae of South-west
+      Australia
+    volume: '77'
+    number: '4'
+    pages: 389--398
+    doi: 10.1006/anbo.1996.0047
+    issn: 0305-7364
+contributors:
+  data_collectors:
+  - last_name: Bell
+    given_name: Tina S.
+    ORCID: unknown
+    affiliation: University of Western Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(`Total-N:phosphate-P` = na_if(`Total-N:phosphate-P`,"ND")) %>%
+      group_by(Species) %>% 
+        mutate(across(c(root_structure), replace_duplicates_with_NA)) %>% 
+      ungroup() %>%
+      group_by(Species, `Soil type - context`) %>%
+        mutate(observation_number = row_number()) %>%
+      ungroup()'
+  collection_date: 1993/1994
+  taxon_name: Species
+  location_name: Location
+  description: Xylem transport of nitrogen and phosphorus was examined in mature mycorrhizal
+    plants of 41 species in 15 genera of Epacridaceae in native habitat in south-west
+    Australia.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: Xylem sap was collected from roots of a range of south-west Australian
+    epacrids growing in native habitats ranging from kwongan sandplain, dunal heath,
+    swamp, Banksia wood-land, and jarrah (Eucalyptus marginata Donn ex Smith) and
+    karri (E. diversicolor F. Muell.) forests. For each species at least three adult
+    plants were utilized for sap collection. In certain cases plants of the same species
+    were sampled from two or more widely separated habitats. Sampling was conducted
+    in autumn, winter and spring of 1993 or 1994 and all plants from which sap was
+    collected showed well infected hair roots. Sap collection involved displacement
+    of xylem (tracheal) fluid by mild vacuum from freshly excavated 10±20 cm segments
+    of root using the apparatus and techniques described by Pate et al. (1994). In
+    three cases roots were of insufficient diameter for sap collection so lower regions
+    of the stem were sampled.
+  original_file: data transcribed from manuscript
+  notes: none
+locations:
+  southwest Western Australia:
+    latitude (deg): -31
+    longitude (deg): 115
+    state: WA
+contexts:
+- context_property: soil type
+  category: plot_context
+  var_in: Soil type - context
+- context_property: observation_number
+  category: temporal_context
+  var_in: observation_number
+traits:
+- var_in: soil
+  unit_in: .na
+  trait_name: soil_type
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Expert knowledge and literature.
+- var_in: topographic position
+  unit_in: .na
+  trait_name: topographic_position
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Expert knowledge and literature.
+- var_in: geology
+  unit_in: .na
+  trait_name: geology
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Expert knowledge and literature.
+- var_in: Nitrate-N as % of total-N
+  unit_in: '%'
+  trait_name: .na
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: 3
+  methods: Sap collection involved displacement of xylem (tracheal) fluid by mild
+    vacuum from freshly excavated 10±20 cm segments of root using the apparatus and
+    techniques described by Pate et al. (1994). In three cases roots were of insufficient
+    diameter for sap collection so lower regions of the stem were sampled.
+- var_in: Ammonium-N as % of total-N
+  unit_in: '%'
+  trait_name: .na
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: 3
+  methods: Sap collection involved displacement of xylem (tracheal) fluid by mild
+    vacuum from freshly excavated 10±20 cm segments of root using the apparatus and
+    techniques described by Pate et al. (1994). In three cases roots were of insufficient
+    diameter for sap collection so lower regions of the stem were sampled.
+- var_in: Total-N:phosphate-P
+  unit_in: '%'
+  trait_name: stem_xylem_N_to_P_ratio
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: 3
+  methods: Sap collection involved displacement of xylem (tracheal) fluid by mild
+    vacuum from freshly excavated 10±20 cm segments of root using the apparatus and
+    techniques described by Pate et al. (1994). In three cases roots were of insufficient
+    diameter for sap collection so lower regions of the stem were sampled.
+- var_in: root_structure
+  unit_in: .na
+  trait_name: root_structure
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Expert knowledge.
+substitutions: .na
+taxonomic_updates:
+- find: Andersonia aff. caerulea
+  replace: Andersonia sp. [Andersonia aff. caerulea; Bell_1996]
+  reason: Exact match to APC genus. Taxon name includes 'affinis' or 'aff' indicating
+    an unknown taxon that bears an affinity to a different taxon in the same genus
+    and taxon can only be aligned to genus-rank (2025-02-12)
+  taxonomic_resolution: genus
+- find: Leucopogon aff. cordifolius
+  replace: Leucopogon sp. [Leucopogon aff. cordifolius; Bell_1996]
+  reason: Exact match to APC genus. Taxon name includes 'affinis' or 'aff' indicating
+    an unknown taxon that bears an affinity to a different taxon in the same genus
+    and taxon can only be aligned to genus-rank (2025-02-12)
+  taxonomic_resolution: genus
+- find: Leucopogon aff. crassifolius
+  replace: Leucopogon sp. [Leucopogon aff. crassifolius; Bell_1996]
+  reason: Exact match to APC genus. Taxon name includes 'affinis' or 'aff' indicating
+    an unknown taxon that bears an affinity to a different taxon in the same genus
+    and taxon can only be aligned to genus-rank (2025-02-12)
+  taxonomic_resolution: genus
+- find: Brachyloma sp. nov.1
+  replace: Brachycome sp. [Brachyloma sp. nov.1; Bell_1996]
+  reason: Manual match to genus (E. Wenk, 2025-02-12)
+  taxonomic_resolution: genus
+- find: Brachyloma sp. nov.2
+  replace: Brachycome sp. [Brachyloma sp. nov.2; Bell_1996]
+  reason: Manual match to genus (E. Wenk, 2025-02-12)
+  taxonomic_resolution: genus
+- find: Brachyloma sp. nov.3
+  replace: Brachycome sp. [Brachyloma sp. nov.3; Bell_1996]
+  reason: Manual match to genus (E. Wenk, 2025-02-12)
+  taxonomic_resolution: genus
+- find: Conostephium sp. nov.1
+  replace: Conostephium sp. [Conostephium sp. nov.1; Bell_1996]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-02-12)
+  taxonomic_resolution: genus
+exclude_observations: .na
+questions:
+  additional_traits: proportion xylem sap that is nitrate and ammonium; most common amino acids in xylem sap

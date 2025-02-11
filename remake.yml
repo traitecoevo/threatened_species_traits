@@ -125,6 +125,25 @@ targets:
                   taxon_list
                  )
 
+  Bell_1996_config:
+    command: >
+      dataset_configure("data/Bell_1996/metadata.yml",
+                 definitions
+                 )
+  Bell_1996_raw:
+    command: >
+      dataset_process("data/Bell_1996/data.csv",
+                  Bell_1996_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Bell_1996:
+    command: >
+      dataset_update_taxonomy(Bell_1996_raw,
+                  taxon_list
+                 )
+
   Berthon_2018_config:
     command: >
       dataset_configure("data/Berthon_2018/metadata.yml",
@@ -217,6 +236,25 @@ targets:
   Harshani_2023:
     command: >
       dataset_update_taxonomy(Harshani_2023_raw,
+                  taxon_list
+                 )
+
+  Hutton_1994_config:
+    command: >
+      dataset_configure("data/Hutton_1994/metadata.yml",
+                 definitions
+                 )
+  Hutton_1994_raw:
+    command: >
+      dataset_process("data/Hutton_1994/data.csv",
+                  Hutton_1994_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Hutton_1994:
+    command: >
+      dataset_update_taxonomy(Hutton_1994_raw,
                   taxon_list
                  )
 
@@ -457,11 +495,13 @@ targets:
         Barrett_2009,
         Barrett_2009_2,
         Beggs_2010,
+        Bell_1996,
         Berthon_2018,
         DCCEEW_2024,
         Fensham_2020,
         FernandezWinzer_2018,
         Harshani_2023,
+        Hutton_1994,
         Ireland_2020,
         Li_1997,
         Martino_2022,

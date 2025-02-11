@@ -167,7 +167,45 @@ traits:
         low_forest: XX
         closed_forest: XX
         dry_forest: XX
-        semiaquatic: XX
+        semiaquatic: XX  
+    soil_type:
+      label: Soil type
+      description: XX
+      type: categorical
+      allowed_values_levels:
+        alluvium: XX
+        clay: XX
+        clay_black: XX
+        clay_red: XX
+        laterite: XX
+        loam: XX
+        salt_flat: XX
+        sand: XX
+        silt: XX
+    geology:
+      label: Geologic substrate
+      description: An attribute indicating a taxon's preferred geologic substrate, referencing both the rock type or geologic formation underlying the soil and other core geologic features. 
+      type: categorical
+      allowed_values_levels:
+        alluvium: XX
+        granite: XX
+        kwongan: XX
+        laterite: XX
+        salt_plain: XX
+    topographic_position:
+      label: Topographic position
+      description: An attribute indicating the topographic positions where a species occurs.
+      type: categorical
+      allowed_values_levels:
+        dune: XX
+        plain: XX
+        ridge: XX
+        slope: XX
+        slope_lower: XX
+        slope_steep: XX
+        slope_upper: XX
+        swamp: XX
+        valley: XX
     threatened_species_key_threatening_processes:
       label: Key threatening processes
       description: A pressure identified by the EPBC Act to threaten the survival, abundance or evolutionary development of a native species or ecological community.
@@ -290,7 +328,15 @@ traits:
       description: A qualitative trait indicating a seeds relative dispersal ability, merging together information on dispersal appendages and known dispersers.
       type: categorical
       allowed_values_levels:
-        restricted: Limited ability to disperse beyond the parent plant.
+        restricted: Limited ability to disperse beyond the parent plant.  
+    stem_xylem_N_to_P_ratio:
+      label: The nitrogen to phospate ratio of xylem
+      description: The ratio [PATO:0001470] of the mass [PATO:0000125] of nitrogen []
+        in a stem [PO:0009047] to the mass of phosphate [].
+      type: numeric
+      units: mg/mg
+      allowed_values_min: 0.0010
+      allowed_values_max: 1000.0
     leaf_Al_per_dry_mass:
       label: Leaf aluminium (Al) content per unit leaf dry mass
       description: The ratio [PATO:0001470] of the mass [PATO:0000125] of aluminium
