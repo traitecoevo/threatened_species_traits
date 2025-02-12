@@ -144,6 +144,25 @@ targets:
                   taxon_list
                  )
 
+  Fensham_2021_config:
+    command: >
+      dataset_configure("data/Fensham_2021/metadata.yml",
+                 definitions
+                 )
+  Fensham_2021_raw:
+    command: >
+      dataset_process("data/Fensham_2021/data.csv",
+                  Fensham_2021_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Fensham_2021:
+    command: >
+      dataset_update_taxonomy(Fensham_2021_raw,
+                  taxon_list
+                 )
+
   FernandezWinzer_2018_config:
     command: >
       dataset_configure("data/FernandezWinzer_2018/metadata.yml",
@@ -382,6 +401,7 @@ targets:
         Berthon_2018,
         DCCEEW_2024,
         Fensham_2020,
+        Fensham_2021,
         FernandezWinzer_2018,
         Harshani_2023,
         Ireland_2020,

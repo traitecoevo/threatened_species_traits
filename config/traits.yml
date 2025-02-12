@@ -196,6 +196,17 @@ traits:
       units: '{count}'
       allowed_values_min: 0.0
       allowed_values_max: 10000000.0
+    reproductive_capacity:
+      label: Reproductive capacity
+      description: A categorical trait indicating the relative fecundity of individuals, populations or co-occurring species, emphasising viable seed production but also sometimes inferred from flower or fruit production levels.
+      comments: This attribute will often be measured to indicate an individual or populations likelihood of producing viable seed due to a disease or disturbance, but is applicable to any circumstance whereby the relative abundance of seeds, fruit and flowers is compared across individuals, populations or co-occurring species. 
+      type: categorical
+      allowed_values_levels:
+        very_low: Reproductive capacity is considered to be very low, such as when fruit with viable seed are never observed.
+        low: Reproductive capacity is considered to be low, such as when flowers or fruit are observed, but unlikely to produce viable seed. 
+        moderate: Reproductive capacity is considered to be moderate, such as when flowers or fruit are observed, but no seeds are observed.
+        high: Reproductive capacity is considered to be high.
+        data_deficient: The reproductive capacity of the population or species has been investigated, but insufficient data exist to determine its reproductive capacity.
     extent_of_occurrence:
       label: Extent of occurrence (EOO)
       description: The area contained within the shortest continuous imaginary boundary which can be drawn to encompass all the known, inferred or projected sites of present occurrence of a taxon, excluding cases of vagrancy. The extent of occurrence is generally measured by a minimum convex polygon.
