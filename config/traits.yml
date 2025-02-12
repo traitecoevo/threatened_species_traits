@@ -94,6 +94,14 @@ traits:
       units: '{count}/{count}'
       allowed_values_min: 0.0
       allowed_values_max: 1.0
+    myrtle_rust_damage_score:
+      label: Level of damage inflicted by the myrtle rust fungus
+      description: An ordinal measure, indicating the level of branch death in individuals infected by the myrtle rust fungus. The percentage of minor branches dead is recorded as, 0 0%, 1 0-<10%, 2 10-<50% 3 50-<90%, 4 90-100%. The percentage of major branches dead was recorded as, 0 0%, 1 0-<10%, 2 10-<50% 3 50-<90%, 4 90-100%, 5 100% but epicormic re-shooting from base or root suckering present, 6 100%, without any sign of reshooting. 
+      comments: This trait was developed by Fensham 2021 (doi, 10.1016/j.biocon.2021.109276) to record the level of damage inflicting long-term by myrtle rust infection. When applied across many individuals in a population and across multiple populations it offers a more synthetic measure of the level of damage, allowing comparison across species.
+      type: numeric
+      units: '{dimensionless}'
+      allowed_values_min: 0.0
+      allowed_values_max: 10.0
     myrtle_rust_growth_suppression_height:
       label: Height growth suppression due to myrtle rust infection
       description: The proportional decrease in height attributable to myrtle rust infection, measured through inoculation trials.
@@ -143,6 +151,16 @@ traits:
         rainforest_temperate_cool: XX
         rainforest_temperate_warm: XX
         rainforest_tropical: XX
+        rainforest_tropical_montane: XX
+        rainforest_tropical_upland: XX
+        rainforest_subtropical: XX
+        rainforest_subtropical_cool: XX
+        rainforest_dry: XX
+        rainforest_littoral: XX
+        rainforest_lowland: XX
+        rainforest_upland: XX
+        rainforest_montane: XX
+        rainforest_margin: XX
         heath: XX
         mallee: XX
         mallet: XX
@@ -163,11 +181,14 @@ traits:
         shrubland: XX
         forest: XX
         eucalypt_forest: XX
+        wet_eucalypt_forest: XX
         open_forest: XX
         low_forest: XX
         closed_forest: XX
         dry_forest: XX
-        semiaquatic: XX  
+        semiaquatic: XX
+        swamp_margin: XX
+        swamp_forest: XX
     soil_type:
       label: Soil type
       description: XX

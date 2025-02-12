@@ -21,38 +21,80 @@ dataset:
   data_is_long_format: no
   custom_R_code: '
     data %>%
-      tidyr::separate_wider_delim(`Damage score (populations assessed)`, delim = " (", names_sep = "_") %>%
+      tidyr::separate_wider_delim(`Damage score (populations assessed)`, delim = " (", names_sep = "_", too_few = "align_start") %>%
       rename(
       damage_score = `Damage score (populations assessed)_1`,
       populations_assessed = `Damage score (populations assessed)_2`
       ) %>%
       mutate(
         populations_assessed = stringr::str_replace(populations_assessed, "\\)", ""),        
-        `Original latitudinal range` = stringr::str_replace(`Original latitudinal range`, "\\°", "")
+        `Original latitudinal range` = stringr::str_replace(`Original latitudinal range`, "\\°", ""),
+        Species = str_split_i(`Species (tribe)`, " \\(", 1)
       ) %>%      
-      tidyr::separate_wider_delim(`Original latitudinal range`, delim = " to ", names_sep = "_") %>%
-  '
-  collection_date: x/x
-  taxon_name: Species (tribe)
+      tidyr::separate_wider_delim(`Original latitudinal range`, delim = " to ", names_sep = "_", too_few = "align_start")'
+  collection_date: unknown/2021
+  taxon_name: Species
   location_name: Original latitudinal range
-  description: Extensive survey that predicts the imminent extinction of 16 rainforest tree species in the wild due to myrtle rust within a generation. A further 20 species may be at risk, but further monitoring is required to determine their fate.
+  description: Extensive survey that predicts the imminent extinction of 16 rainforest
+    tree species in the wild due to myrtle rust within a generation. A further 20
+    species may be at risk, but further monitoring is required to determine their
+    fate.
   basis_of_record: field
   life_stage: adult
-  sampling_strategy: The myrtle rust symptoms of total of 1901 populations of 145 Myr taceae tree species at 936 rainforest locations across eastern Australia  were assessed to determine the impact of myrtle rust and assess the  extinction threat of the disease for individual species. A population is  defined as a stand of a tree species at least 500 m from another stand of  that tree species. Populations were located using herbarium specimen  data (CHAH, 2019), but incidental populations were also located by  visiting poorly known rainforest areas.  The disease most typically affects growing shoots but is only inter mittently active and assessment of active symptoms is not always  possible. In order to assess the cumulative patterns of infection, inde pendent scores for minor branchlet death (medium-term, i.e. 1-2 year)  and, major branch and trunk mortality (long term damage) were  recorded. The percentage of minor branches dead was recorded as,   0 0%, 1 0-<10%, 2 10-<50% 3 50-<90%, 4 90-100%. The percentage of  major branches dead was recorded as, 0 0%, 1 0-<10%, 2 10-<50% 3  50-<90%, 4 90-100%, 5 100% but epicormic re-shooting from base or  root suckering present, 6 100%, without any sign of reshooting. These  scores were averaged for a minimum of ten individuals of any particular  species, but in some cases there were less than this number of individuals  present. These 'population scores' for medium- and long-term damage  were averaged across all populations and then added together to provide  a 'damage score' for each species. Our determination of a Category X  species is where this damage score is above five. This corresponds to a  tree where the woody parts are mostly dead. Category Y species have  cumulative damage scores between 3.2 and 5.1. ^p  Reproductive capacity in relation to myrtle rust infection was  recorded and inferred across populations as 1) moderate, flowers and/or  fruit observed without rust; 2) low, flowers and/or fruit observed, but  infected with rust; 3) very low, fruit with viable seed never observed.  Rainforest trees flower and fruit sporadically (Floyd, 1989) and where  observations are limited reproductive capacity was recorded as Data  deficient. Interviews with seed collectors and horticulturalists confirmed  that infection of developing fruit inhibits seed development. 
+  sampling_strategy: The myrtle rust symptoms of total of 1901 populations of 145
+    Myrtaceae tree species at 936 rainforest locations across eastern Australia  were
+    assessed to determine the impact of myrtle rust and assess the  extinction threat
+    of the disease for individual species. A population is  defined as a stand of
+    a tree species at least 500 m from another stand of  that tree species. Populations
+    were located using herbarium specimen  data (CHAH, 2019), but incidental populations
+    were also located by  visiting poorly known rainforest areas.  The disease most
+    typically affects growing shoots but is only intermittently active and assessment
+    of active symptoms is not always  possible. In order to assess the cumulative
+    patterns of infection, inde pendent scores for minor branchlet death (medium-term,
+    i.e. 1-2 year)  and, major branch and trunk mortality (long term damage) were  recorded.
+    The percentage of minor branches dead was recorded as,   0 0%, 1 0-<10%, 2 10-<50%
+    3 50-<90%, 4 90-100%. The percentage of  major branches dead was recorded as,
+    0 0%, 1 0-<10%, 2 10-<50% 3  50-<90%, 4 90-100%, 5 100% but epicormic re-shooting
+    from base or  root suckering present, 6 100%, without any sign of reshooting.
+    These  scores were averaged for a minimum of ten individuals of any particular  species,
+    but in some cases there were less than this number of individuals  present. These
+    'population scores' for medium- and long-term damage  were averaged across all
+    populations and then added together to provide  a 'damage score' for each species.
+    Our determination of a Category X  species is where this damage score is above
+    five. This corresponds to a  tree where the woody parts are mostly dead. Category
+    Y species have  cumulative damage scores between 3.2 and 5.1. ^p  Reproductive
+    capacity in relation to myrtle rust infection was  recorded and inferred across
+    populations as 1) moderate, flowers and/or  fruit observed without rust; 2) low,
+    flowers and/or fruit observed, but  infected with rust; 3) very low, fruit with
+    viable seed never observed. Rainforest trees flower and fruit sporadically (Floyd,
+    1989) and where  observations are limited reproductive capacity was recorded as
+    Data  deficient. Interviews with seed collectors and horticulturalists confirmed  that
+    infection of developing fruit inhibits seed development.
   original_file: transcribed from manuscript
   notes: none
-identifiers: .na
 locations: .na
 contexts: .na
 traits:
-- var_in: Damage score (populations assessed)
-  unit_in: 
-  trait_name: unknown
-  entity_type: unknown
-  value_type: unknown
-  basis_of_value: unknown
-  replicates: populations assessed)
-  methods: unknown
+- var_in: damage_score
+  unit_in: '{dimensionless}'
+  trait_name: myrtle_rust_damage_score
+  entity_type: species
+  value_type: mean
+  basis_of_value: measurement
+  replicates: ppopulations_assessed
+  methods: The disease most typically affects growing shoots but is only intermittently
+    active and assessment of active symptoms is not always possible. In order to assess
+    the cumulative patterns of infection, independent scores for minor branchlet death
+    (medium-term, i.e. 1-2 year) and, major branch and trunk mortality (long term
+    damage) were recorded. The percentage of minor branches dead was recorded as,
+    0 0%, 1 0-<10%, 2 10-<50% 3 50-<90%, 4 90-100%. The percentage of major branches
+    dead was recorded as, 0 0%, 1 0-<10%, 2 10-<50% 3 50-<90%, 4 90-100%, 5 100% but
+    epicormic re-shooting from base or root suckering present, 6 100%, without any
+    sign of reshooting. These scores were averaged for a minimum of ten individuals
+    of any particular species, but in some cases there were less than this number
+    of individuals present. These 'population scores' for medium- and long-term damage
+    were averaged across all populations and then added together to provide a 'damage
+    score' for each species.
 - var_in: Reproductive capacity
   unit_in: .na
   trait_name: reproductive_capacity
@@ -60,8 +102,63 @@ traits:
   value_type: mode
   basis_of_value: expert_score
   replicates: .na
-  methods: Reproductive capacity in relation to myrtle rust infection was recorded and inferred across populations as 1) moderate, flowers and/or fruit observed without rust; 2) low, flowers and/or fruit observed, but infected with rust; 3) very low, fruit with viable seed never observed. Rainforest trees flower and fruit sporadically (Floyd, 1989) and where observations are limited reproductive capacity was recorded as Data deficient. Interviews with seed collectors and horticulturalists confirmed that infection of developing fruit inhibits seed development. 
-substitutions: .na
-taxonomic_updates: .na
+  methods: Reproductive capacity in relation to myrtle rust infection was recorded
+    and inferred across populations as 1) moderate, flowers and/or fruit observed
+    without rust; 2) low, flowers and/or fruit observed, but infected with rust; 3)
+    very low, fruit with viable seed never observed. Rainforest trees flower and fruit
+    sporadically (Floyd, 1989) and where observations are limited reproductive capacity
+    was recorded as Data deficient. Interviews with seed collectors and horticulturalists
+    confirmed that infection of developing fruit inhibits seed development.
+- var_in: habitat
+  unit_in: .na
+  trait_name: habitat
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Expert knowledge.
+substitutions:
+- trait_name: reproductive_capacity
+  find: data deficient
+  replace: .na
+- trait_name: reproductive_capacity
+  find: very low
+  replace: very_low
+taxonomic_updates:
+- find: Rhodomyrtus trineura subsp. Capensis
+  replace: Rhodomyrtus trineura subsp. capensis
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-12)
+  taxonomic_resolution: subspecies
+- find: Syzygium hemilampra
+  replace: Syzygium hemilamprum
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-12)
+  taxonomic_resolution: species
+- find: Tristantiopsis laurina
+  replace: Tristaniopsis laurina
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-12)
+  taxonomic_resolution: species
+- find: Lenwebbia sp. Blackall Range
+  replace: Lenwebbia sp. Blackall Range (P.R.Sharpe 5387)
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-02-12)
+  taxonomic_resolution: species
+- find: Lenwebbia sp. Main Range
+  replace: Lenwebbia sp. Main Range (P.R.Sharpe+ 4877)
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-02-12)
+  taxonomic_resolution: species
+- find: Gossia sp. Green Bark
+  replace: Gossia sp. Green Bark (B.Hyland 25370RFK)
+  reason: Exact match of the first three words of the taxon name to an APNI-listed
+    canonical name (2025-02-12)
+  taxonomic_resolution: species
+- find: Rhodamnia sp. Glastonbury
+  replace: Rhodamnia sp. [Rhodamnia sp. Glastonbury; Fensham_2021]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-02-12)
+  taxonomic_resolution: genus
 exclude_observations: .na
 questions: .na
