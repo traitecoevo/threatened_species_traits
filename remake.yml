@@ -163,6 +163,25 @@ targets:
                   taxon_list
                  )
 
+  Crisp_2003_config:
+    command: >
+      dataset_configure("data/Crisp_2003/metadata.yml",
+                 definitions
+                 )
+  Crisp_2003_raw:
+    command: >
+      dataset_process("data/Crisp_2003/data.csv",
+                  Crisp_2003_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Crisp_2003:
+    command: >
+      dataset_update_taxonomy(Crisp_2003_raw,
+                  taxon_list
+                 )
+
   DCCEEW_2024_config:
     command: >
       dataset_configure("data/DCCEEW_2024/metadata.yml",
@@ -391,6 +410,25 @@ targets:
                   taxon_list
                  )
 
+  Pate_1989_config:
+    command: >
+      dataset_configure("data/Pate_1989/metadata.yml",
+                 definitions
+                 )
+  Pate_1989_raw:
+    command: >
+      dataset_process("data/Pate_1989/data.csv",
+                  Pate_1989_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Pate_1989:
+    command: >
+      dataset_update_taxonomy(Pate_1989_raw,
+                  taxon_list
+                 )
+
   Pegg_2018_config:
     command: >
       dataset_configure("data/Pegg_2018/metadata.yml",
@@ -497,6 +535,7 @@ targets:
         Beggs_2010,
         Bell_1996,
         Berthon_2018,
+        Crisp_2003,
         DCCEEW_2024,
         Fensham_2020,
         FernandezWinzer_2018,
@@ -509,6 +548,7 @@ targets:
         McDougall_2024,
         McDougall_2024_2,
         mixed_2024,
+        Pate_1989,
         Pegg_2018,
         Setterfield_2002,
         Shearer_1996,

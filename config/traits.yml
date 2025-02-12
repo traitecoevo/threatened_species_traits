@@ -7329,6 +7329,7 @@ traits:
         cluster_roots: Non-proteoid taxa with cluster roots.
         coiling_vam: Associations that spread predominantly by intracellular hyphal
           coils within roots.
+        cord_roots: A root morphology found within three genera of Mirbelieae (Daviesia, Euchilopsis, Phyllota) wherein networks of interlinking vascular strands form (Crisp 2003; Pate and Dixon 1996).
         dauciform_root: A type of cluster root found in the family Cyperaceae.
         ectomycorrhizal: Symbiosis in which the mycorrhizal fungi does not penetrate
           the cortex cells of the plant roots.
