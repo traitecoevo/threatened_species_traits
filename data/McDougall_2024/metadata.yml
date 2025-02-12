@@ -18,18 +18,18 @@ contributors:
     given_name: Keith
     ORCID: 0000-0002-8288-6444
     affiliation: La Trobe University
-  assistants: unknown
   dataset_curators: Elizabeth Wenk
 dataset:
   data_is_long_format: no
   custom_R_code: '
     data %>%
       mutate(
-        none = ifelse(is.na(`No response`), "", "none"),
+        none = ifelse(is.na(`No response`), "", "resistant"),
         mild = ifelse(is.na(`Mild response`), "", " mild"),
         severe = ifelse(is.na(`Severe response`), "", " severe"),
         susceptibility = paste0(none, mild, severe) %>% stringr::str_squish(),
-        meausurement_remarks = paste0(
+        susceptibility = ifelse(susceptibility == "", NA, susceptibility),
+        measurement_remarks = paste0(
           "no response: ", `No response`,
           "; mild response: ", `Mild response`,
           "; severe response: ", `Severe response`,
@@ -37,14 +37,13 @@ dataset:
         )
       )  
   '
-  collection_date: unknown/2024
+  collection_date: 1956/2024
   taxon_name: Species
-  location_name: unknown
   description: A database of the susceptibility of Australia's native vegetation to
     Phytophthora cinnamomi, including data for 1773 species.
   basis_of_record: literature
   life_stage: adult
-  meausurement_remarks: meausurement_remarks
+  measurement_remarks: measurement_remarks
   sampling_strategy: The list of O'Gara et al. (2006) was checked and updated with
     recent taxonomic changes and more recently published and unpublished data on species
     responses were added. These data included records from the Western Australian
@@ -76,7 +75,7 @@ traits:
   trait_name: phytophthora_cinnamomi_susceptibility
   entity_type: species
   value_type: mode
-  basis_of_value: field glasshouse
+  basis_of_value: expert_score
   replicates: .na
   methods: The list of O'Gara et al. (2006) was checked and updated with recent taxonomic
     changes and more recently published and unpublished data on species responses
@@ -103,9 +102,9 @@ traits:
   trait_name: phytophthora_cinnamomi_habitat_suitability
   entity_type: species
   value_type: mode
-  basis_of_value: field
+  basis_of_value: expert_score
   replicates: .na
-  methods: XX
+  methods: We used ALA spatial data (accessed between 14 October 2022 and 13 March 2023) and ALA data tools to calculate the extent of occurrence (EOO) and climatic suitability for P. cinnamomi. Disjunct records were first checked in local floras and removed if not supported for their distribution; these were typically records of cultivated plants in capital city botanic gardens or data-entry errors. Accepted point locations for a species were screened for climatic habitat suitability for P. cinnamomi by using the Scatterplot tool; a species was deemed to occur in suitable habitat if >25% of records had an annual rainfall of >400 mm and a mean annual temperature of >10°C (climatic conditions considered to be thresholds for P. cinnamomi activity; O'Gara et al. 2006). For species in the updated list of O'Gara et al. (2006), we recorded conservation status (Vulnerable, Endangered or Critically Endangered) under the EPBC Act (http://www.environment.gov.au/cgi-bin/sprat/public/publicthreatenedlist.pl?wanted=flora, accessed 5 May 2023). For species not listed under the EPBC Act, EOO (as an alpha hull) was calculated using the Calculate AOO and EOO tool in the ALA. Species were identified that could be regarded as threatened under IUCN criteria if other criteria relating to threat or population decline were met (IUCN Standards and Petitions Committee 2022), as follows, Vulnerable (alpha hull between 5000 and 20,000 km2), Endangered (alpha hull between 500 and 5000 km2) or Critically Endangered (alpha hull <500 km2) or as Not Threatened (alpha hull >20,000 km2). Given potential inflation of EOO because of spatial errors of species occurrence data in ALA, we included species as Vulnerable if their EOO was greater than 20,000 km2 and less than 50,000 km2, and all occurrences were in suitable habitat for P. cinnamomi.
 substitutions:
 - trait_name: phytophthora_cinnamomi_susceptibility
   find: none
@@ -122,6 +121,85 @@ substitutions:
 - trait_name: phytophthora_cinnamomi_habitat_suitability
   find: Mostly unsuitable
   replace: mostly_unsuitable_habitat
-taxonomic_updates: .na
+taxonomic_updates:
+- find: Andersonia sp. Mitchell River (B.G. Hammersley 925)
+  replace: Andersonia sp. Mitchell River (B.G.Hammersley 925)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Andersonia sp. Virolens (G.J. Keighery 12000)
+  replace: Andersonia sp. Virolens (G.J.Keighery 12000)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Hakea cygna subsp. needlei
+  replace: Hakea cygnus subsp. needlei
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: subspecies
+- find: Hemiandra sp. Watheroo (S. Hancocks 4)
+  replace: Hemiandra sp. Watheroo (S.Hancocks 4)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Hibbertia circinata
+  replace: Hibbertia carinata
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Lambertia orbifolia subsp. Scott River Plains (L.W. Sage 684)
+  replace: Lambertia orbifolia subsp. Scott River Plains (L.W.Sage 684)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: subspecies
+- find: Lambertia rariflora subsp. rarifolia
+  replace: Lambertia rariflora subsp. rariflora
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: subspecies
+- find: Latrobea colophona
+  replace: Latrobea colophon
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Pittosporum phyllyreoides
+  replace: Pittosporum phillyreoides
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Sphenotoma sp. Stirling Range (P.G. Wilson 4235)
+  replace: Sphenotoma sp. Stirling Range (P.G.Wilson 4235)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Styphelia sp. Nannup (R.D. Royce 3978)
+  replace: Styphelia sp. Nannup (R.D.Royce 3978)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Synaphea sp. Pinjarra (R. Davis 6578)
+  replace: Synaphea sp. Pinjarra (R.Davis 6578)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Tetraria sp. Jarrah Forest (R. Davis 7391)
+  replace: Tetraria sp. Jarrah Forest (R.Davis 7391)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Cyanothamnus anemonifolius
+  replace: Cyanothamnus anethifolius
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Gonocarpus benthamii subsp. Stirling (C.J.Robertson 1080) WA Herbarium
+  replace: Gonocarpus benthamii subsp. Stirling (C.J.Robinson 1080)
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-02-11)
+  taxonomic_resolution: subspecies
+- find: Acacia terminalis Eastern Sydney (G.P.Phillips 126)
+  replace: Acacia terminalis subsp. Eastern Sydney (G.P.Phillips 126)
+  reason: Manual match to an APC-accepted canonical name (E. Wenk, 2025-02-11)
+  taxonomic_resolution: subspecies
 exclude_observations: .na
 questions: .na

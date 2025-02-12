@@ -1,0 +1,52 @@
+﻿Species,Location,Soil type original,Soil type - context,soil,topographic position,geology,Order of abundance of major xylema mino acids (N basis),Nitrate-N as % of total-N,Ammonium-N as % of total-N,Total-N:phosphate-P,root_structure
+Acrotriche cordata,southwest Western Australia,D(Site1),dunal sand,sand,dune,,"GLN>>>ASP,GLU,ARG",0.1,0,18,ericoid_mycorrhizal
+Acrotriche cordata,southwest Western Australia,D(Site2),dunal sand,sand,dune,,"GLN>>>ARG,GLU,ASP",0.2,0,2,ericoid_mycorrhizal
+Andersonia axilliflora,southwest Western Australia,G,granitic,,,granite,"GLN>>ASP,SER,GLU",1,3.2,11,ericoid_mycorrhizal
+Andersonia aff. caerulea,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>>>GLU,ASP>SER,ALA,GABA",0.3,2,25,ericoid_mycorrhizal
+Andersonia echinocephala,southwest Western Australia,G,granitic,,,granite,"GLN>>GLU,ASP,SER,GABA",0.2,0,8,ericoid_mycorrhizal
+Andersonia grandiflora,southwest Western Australia,G,granitic,,,granite,"GLN>GLU,ASP>SER,GLY,ALA,ARG",0.1,7.8,422,ericoid_mycorrhizal
+Andersonia simplex,southwest Western Australia,G,granitic,,,granite,"GLN>>GLU,SER,ASP>GLY,ALA,ARG",0.1,0,17,ericoid_mycorrhizal
+Astroloma macrocalyx,southwest Western Australia,S,kwongan sandplain,sand,plain,kwongan,"GLN>>ARG,GLU,VAL,ASP",1.4,ND, ND ,ericoid_mycorrhizal
+Astroloma pallidum,southwest Western Australia,L,lateritic,laterite,,laterite,"GLN,ARG>>GLU,ASP>SER,ALA",0.2,0.5,3,ericoid_mycorrhizal
+Astroloma serratifolium,southwest Western Australia,A(Site1),arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>>ASP,GLU,ARG",0.2,1.3,81,ericoid_mycorrhizal
+Astroloma serratifolium,southwest Western Australia,S(Site2),kwongan sandplain,sand,plain,kwongan,"GLN>>GLU,ASP,ARG",1.9,8.9,14,ericoid_mycorrhizal
+Astroloma tectum,southwest Western Australia,G,granitic,,,granite,"GLN,GLU>ASP>>ARG>SER,GLY,ALA",0.4,6.9,31,ericoid_mycorrhizal
+Astroloma xerophyllum,southwest Western Australia,S,kwongan sandplain,sand,plain,kwongan,"GLN>>ASP,GLU,GABA",0.6,3.9,260,ericoid_mycorrhizal
+Brachyloma sp. nov.1,southwest Western Australia,Al,alluvial,alluvium,plain,alluvium,"GLN>>ARG>ASP,GLU",0.8,2,39,ericoid_mycorrhizal
+Brachyloma sp. nov.2,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>>ARG>ASP,GLU",0.6,0,73,ericoid_mycorrhizal
+Brachyloma sp. nov.3,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>ASP,GLU>ARG,GABA,ALA,SER",ND,1.8, ND ,ericoid_mycorrhizal
+Coleanthera myrtoides,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>>ASP,GLU>ARG",54.1,0,0.2,ericoid_mycorrhizal
+Conostephium drummondii,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"ASN>GLN,ASP,GLU",0.9,1.5,11,ericoid_mycorrhizal
+Conostephium pendulum,southwest Western Australia,S(Site1),kwongan sandplain,sand,plain,kwongan,"ARG>>ASN,GLU,GLN,ASP",9.2,1,25,ericoid_mycorrhizal
+Conostephium pendulum,southwest Western Australia,S(Site2),kwongan sandplain,sand,plain,kwongan,"ARG>ASN,GLU,ASP",8.5,ND, ND ,ericoid_mycorrhizal
+Conostephium roei,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>ARG,GLU>ASP",0.1,0,17,ericoid_mycorrhizal
+Conostephium sp. nov.1,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>>>GLU,ASP,ARG",0.4,1.3,14,ericoid_mycorrhizal
+Cosmelia rubra,southwest Western Australia,L,lateritic,laterite,,laterite,"GLN>>GLU,ASP>SER,ALA,GABA,ARG",0.1,6.6,16,ericoid_mycorrhizal
+Croninia kingiana,southwest Western Australia,S,kwongan sandplain,sand,plain,kwongan,"GLN>>GLU,ASP>SER,ALA",0.7,3.5,4,ericoid_mycorrhizal
+Leucopogon conostephioides,southwest Western Australia,G,granitic,,,granite,"GLN>>ASP,GLU>GABA,ARG,SER",ND,0, ND ,ericoid_mycorrhizal
+Leucopogon cordifolius,southwest Western Australia,S,kwongan sandplain,sand,plain,kwongan,"GLN>>GLU,ASP>GABA,ARG,SER",1.2,4.8,116,ericoid_mycorrhizal
+Leucopogon aff. cordifolius,southwest Western Australia,S,kwongan sandplain,sand,plain,kwongan,"GLN>>ARG,GLU,ASP",0.6,1.9,495,ericoid_mycorrhizal
+Leucopogon crassiflorus,southwest Western Australia,S,kwongan sandplain,sand,plain,kwongan,"GLN>>ASP,GLU>GABA,SER",1.4,2.3,7,ericoid_mycorrhizal
+Leucopogon aff. crassifolius,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>>GLU,ASP>SER,GABA,ARG",0.3,1.3,23,ericoid_mycorrhizal
+Leucopogon dielsianus,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>ARG,GLU,ASP",0.2,8.4,79,ericoid_mycorrhizal
+Leucopogon insularis,southwest Western Australia,S(Site1),kwongan sandplain,sand,plain,kwongan,"GLN>GLU,ASP>SER,ALA,GABA",0.8,3.4,14,ericoid_mycorrhizal
+Leucopogon insularis,southwest Western Australia,D(Site2),dunal sand,sand,dune,,"GLN>ARG>>GLU,ASP",0.1,0.7,5,ericoid_mycorrhizal
+Leucopogon parviflorus,southwest Western Australia,G(Site1),granitic,,,granite,"ASN>GLN,ASP,GLU",0.4,4.5,19,ericoid_mycorrhizal
+Leucopogon parviflorus,southwest Western Australia,D(Site2),dunal sand,sand,dune,,"GLN>>GLU,ARG,ASP",0.1,0,5,ericoid_mycorrhizal
+Leucopogon planifolius,southwest Western Australia,S,kwongan sandplain,sand,plain,kwongan,"GLN>ASP,GLU>SER,ALA,GABA",0.1,5.7,489,ericoid_mycorrhizal
+Leucopogon strongylophyllus,southwest Western Australia,S,kwongan sandplain,sand,plain,kwongan,"GLN>ASP,GLU>ARG,SER",0.1,4.5,13,ericoid_mycorrhizal
+Leucopogon verticillatus,southwest Western Australia,L,lateritic,laterite,,laterite,"GLN>>ASP,GLU,ARG",56.4,2,0.3,ericoid_mycorrhizal
+Lysinema ciliatum,southwest Western Australia,A(Site1),arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>ARG>ASP,GLU",0.2,1.6,39,ericoid_mycorrhizal
+Lysinema ciliatum,southwest Western Australia,A(Site2),arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>ARG>ASP,GLU",0.1,0,48,ericoid_mycorrhizal
+Lysinema ciliatum,southwest Western Australia,S(Site3),kwongan sandplain,sand,plain,kwongan,"GLN>>ARG,ASP,GLU",0.6,3.5,25,ericoid_mycorrhizal
+Lysinema ciliatum,southwest Western Australia,G(Site4),granitic,,,granite,"GLN,ARG>GLU,ASP>GABA,ALA",0.2,1.8,28,ericoid_mycorrhizal
+Lysinema ciliatum,southwest Western Australia,G(Site5),granitic,,,granite,"GLN,ARG>ASP,GLU>GABA,SER",0.1,4,298,ericoid_mycorrhizal
+Monotoca tamariscina,southwest Western Australia,L,lateritic,laterite,,laterite,"GLN>>>ASP,GLU>GABA,SER",0.2,0,40,ericoid_mycorrhizal
+Needhamiella pumilio,southwest Western Australia,G,granitic,,,granite,"GLN,SER>GLY,ASP,GLU",1.5,8.7,21,ericoid_mycorrhizal
+Oligarrhena micrantha,southwest Western Australia,G,granitic,,,granite,"GLN>>GLU,ASP,ARG,SER",1.5,7.7,116,ericoid_mycorrhizal
+Sphenotoma capitatum,southwest Western Australia,L,lateritic,laterite,,laterite,"GLN>GLU,ASP>SER,GLY,ALA",ND,15, ND ,ericoid_mycorrhizal
+Sphenotoma drummondii,southwest Western Australia,G,granitic,,,granite,"GLN>>ASP,SER,GLU,ARG",0.1,0,12,ericoid_mycorrhizal
+Sphenotoma gracile,southwest Western Australia,Sw(Site1),swamp,,swamp,,"GLN>>ALA,GLU,SER",3.2,11.3,53,ericoid_mycorrhizal
+Sphenotoma gracile,southwest Western Australia,P(Site2),pasture,,,,"GLN>>GLU,SER,ASP",0.3,2.9,1,ericoid_mycorrhizal
+Styphelia intertexta,southwest Western Australia,A,arid salt-laden sandplain ,sand salt_flat,plain,salt_plain,"GLN>>ASP,GLU,ARG>GABA,SER",0.5,1.8,21,ericoid_mycorrhizal
+Styphelia tenuiflora,southwest Western Australia,L,lateritic,laterite,,laterite,"GLN>GLU,ASP>ARG>SER,ALA",0.1,8.4,19,ericoid_mycorrhizal

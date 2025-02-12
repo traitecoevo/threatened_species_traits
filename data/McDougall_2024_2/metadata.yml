@@ -1,0 +1,146 @@
+source:
+  primary:
+    key: Mcdougall_2024
+    bibtype: Article
+    year: '2024'
+    author: Keith L. Mcdougall and Edward C. Y. Liew
+    journal: Australian Journal of Botany
+    title: 'The susceptibility of rare and threatened NSW species to the root-rot
+      pathogen Phytophthora cinnamomi: 2. The identification of species requiring
+      protection or further research'
+    volume: '72'
+    number: '4'
+    doi: 10.1071/bt23106
+    issn: 1444-9862
+    editor: Susanna Venn
+contributors:
+  data_collectors:
+  - last_name: McDougall
+    given_name: Keith
+    ORCID: 0000-0002-8288-6444
+    affiliation: La Trobe University
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(location = "New South Wales")
+  '
+  collection_date: unknown/2024
+  taxon_name: Scientific Name
+  location_name: location
+  description: unknown
+  basis_of_record: unknown
+  life_stage: unknown
+  sampling_strategy: unknown
+  original_file: unknown
+  notes: unknown
+locations:
+  New South Wales:
+    description: Data apply generically to NSW
+    state: NSW
+    latitude (deg): -31.840233
+    longitude (deg): 145.612793
+contexts: .na
+traits:
+- var_in: Response to P cinnamomi
+  unit_in: .na
+  trait_name: phytophthora_cinnamomi_susceptibility
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Between 2019 and 2022, we tested 32 species listed as threatened under the NSW Biodiversity Conservation Act 2016, and occurring predominantly on the coast and tablelands of eastern NSW, for susceptibility to P. cinnamomi infection (Table 1), Dracophyllum macranthum was listed as vulnerable at the time of testing in 2020, but delisted in 2021. Our intention, as stated in Wan et al. (2019), was to give preference to species occurring in one to a few populations, but species selection was largely governed by availability of plant material for propagation. All plants were grown at Australian National Botanic Gardens, Canberra, and the Australian Botanic Gardens, Mount Annan; Banksia conferta, Dillwynia tenuifolia, Dracophyllum macranthum, Isopogon fletcheri and Pultenaea aristata were grown from seed, whereas all other species were grown from cuttings. The plants were grown in propagation stock-tubes (5 cm x 5 cm x 12 cm), except for Grevillea acanthifolia subsp. paludosa and Prostanthera stricta, which were in larger tubes (8 cm x 8 cm x 18 cm) because of their larger size. The potting mix consisted of composted grade pine bark, coconut fibre, and propagation sand (Australian Standard AS3743). It had water-holding capacity of 45-55% and an air-filled porosity of 16-20% (pH 5.6-6.3). Nutrient solution (50 mL of half strength Earth Care Seasol seaweed concentrate) was applied to all plants once, a month prior to inoculation. Plants were delivered to the experimental glasshouse at PlantClinic, Royal Botanic Garden Sydney in early April of each year of testing, and the pots placed into large plastic tubs (2 m x 1 m) where they were acclimatised to the glasshouse conditions for about 3 months prior to inoculation in late June. The experiment was conducted in a temperature-controlled glasshouse. The internal temperature control was set at 23°C, with the temperature ranging from 12 to 26°C. Plants were watered every couple of days, except during flooding. The treatment groups were negative control and P. cinnamomi flood inoculation. Phebalium squamulosum ssp. alpinum was found to be highly susceptible to P. cinnamomi (and clearly symptomatic when infected) in previous tests under similar glasshouse conditions (Rigg et al. 2018; Wan et al. 2019), and so was chosen as a positive control.
+- var_in: Current habitat score (A)
+  unit_in: '{dimensionless}'
+  trait_name: .na
+  entity_type: species
+  value_type: raw
+  basis_of_value: model_derived
+  replicates: 1
+  methods: Spatial data from McDougall and Liew (2020) were plotted onto the open-source geographic information system software QGIS ver. 3.22.0 (https://www.qgis.org/en/site/) and used to obtain P. cinnamomi habitat suitability for each species record. Records in western NSW (not modelled by McDougall and Liew 2020) were assigned a habitat suitability of zero. This is consistent with modelling of broader habitat suitability (Burgess et al. 2019), which has shown that P. cinnamomi is unlikely to survive in arid environments. Mean habitat suitability (Prioritisation category A) was then calculated for each species as a value between 0 (unsuitable) and 1 (highly suitable).
+- var_in: Future habitat score
+  unit_in: '{dimensionless}'
+  trait_name: .na
+  entity_type: species
+  value_type: raw
+  basis_of_value: model_derived
+  replicates: 1
+  methods: Spatial data from McDougall and Liew (2020) were plotted onto the open-source geographic information system software QGIS ver. 3.22.0 (https://www.qgis.org/en/site/) and used to obtain P. cinnamomi habitat suitability for each species record. Records in western NSW (not modelled by McDougall and Liew 2020) were assigned a habitat suitability of zero. This is consistent with modelling of broader habitat suitability (Burgess et al. 2019), which has shown that P. cinnamomi is unlikely to survive in arid environments. Mean habitat suitability (Prioritisation category A) was then calculated for each species as a value between 0 (unsuitable) and 1 (highly suitable). A projected P. cinnamomi habitat suitability value for 2070 (A2070) was obtained for each record of species known to be susceptible using the modelled habitat suitability layer of McDougall and Liew (2020) under the 8.5 rcp climate scenario, and values averaged for each species.
+- var_in: Records (adj.)
+  unit_in: '{count}'
+  trait_name: population_count
+  entity_type: species
+  value_type: raw
+  basis_of_value: measurement
+  replicates: 1
+  methods: Abundance was assessed as the number of records of a species after disaggregation
+    (i.e. the number of records at least 1 km apart); species with fewer than 10 records
+    were assigned a value of 10. An abundance score (B) was then calculated as 1/(log10
+    abundance), giving a value between 0 and 1. This is indicated here as a `species`
+    level value, but only includes NSW observations.
+substitutions:
+- trait_name: phytophthora_cinnamomi_susceptibility
+  find: low
+  replace: mild
+- trait_name: phytophthora_cinnamomi_susceptibility
+  find: unknown
+  replace: .na
+taxonomic_updates:
+- find: Corunastylis sp. Charmhaven (NSW896673)
+  replace: Corunastylis sp. Charmhaven (NSW 896673)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Quassia sp. Moonee Creek (King s.n., Nov 1949)
+  replace: Quassia sp. 'Moonee Creek' (King s.n., Nov 1949)
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2025-02-11)
+  taxonomic_resolution: species
+- find: Typhonium sp. aff. brownii
+  replace: Typhonium sp. [Typhonium sp. aff. brownii; McDougall_2024_2]
+  reason: Exact match to APC genus. Taxon name includes 'affinis' or 'aff' indicating
+    an unknown taxon that bears an affinity to a different taxon in the same genus
+    and taxon can only be aligned to genus-rank (2025-02-11)
+  taxonomic_resolution: genus
+- find: Lenwebbia sp. Main Range
+  replace: Lenwebbia sp. Main Range (P.R.Sharpe+ 4877)
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-02-11)
+  taxonomic_resolution: species
+- find: Muehlenbeckia diclina subsp. Gippsland
+  replace: Muehlenbeckia diclina subsp. Gippsland (R.O.Makinson 1007)
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-02-11)
+  taxonomic_resolution: subspecies
+- find: Muehlenbeckia sp. Mt Norman
+  replace: Muehlenbeckia sp. Mt Norman (J.T.Hunter 3847)
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-02-11)
+  taxonomic_resolution: species
+- find: Acacia terminalis subsp. Eastern Sydney (G.P.Phillips 126) NSW Herbarium
+  replace: Acacia terminalis subsp. Eastern Sydney (G.P.Phillips 126)
+  reason: Manual match to an APC-accepted canonical name (E. Wenk, 2025-02-11)
+  taxonomic_resolution: subspecies
+- find: Corybas dowlingii
+  replace: Corybas x dowlingii
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-02-11)
+  taxonomic_resolution: species
+- find: Diuris sp. Oaklands (D.L.Jones 5380) NSW Herbarium
+  replace: Diuris sp. Oaklands (Jones 5380)
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-02-11)
+  taxonomic_resolution: species
+- find: Pelargonium sp. Striatellum
+  replace: Pelargonium sp. Striatellum (G.W.Carr 10345)
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-02-11)
+  taxonomic_resolution: species
+- find: Fontainea sp. Coffs Harbour (A.S.Benwell 341, NSW1102027) NSW Herbarium
+  replace: Fontainea sp. Coffs Harbour (A.S.Benwell 341, NSW1102027)
+  reason: Exact match of the first three words of the taxon name to an APNI-listed
+    canonical name (2025-02-11)
+  taxonomic_resolution: species
+exclude_observations: .na
+questions: .na
