@@ -277,6 +277,25 @@ targets:
                   taxon_list
                  )
 
+  Hart_2024_config:
+    command: >
+      dataset_configure("data/Hart_2024/metadata.yml",
+                 definitions
+                 )
+  Hart_2024_raw:
+    command: >
+      dataset_process("data/Hart_2024/data.csv",
+                  Hart_2024_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Hart_2024:
+    command: >
+      dataset_update_taxonomy(Hart_2024_raw,
+                  taxon_list
+                 )
+
   Hutton_1994_config:
     command: >
       dataset_configure("data/Hutton_1994/metadata.yml",
@@ -598,6 +617,7 @@ targets:
         Fensham_2021,
         FernandezWinzer_2018,
         Harshani_2023,
+        Hart_2024,
         Hutton_1994,
         Ireland_2020,
         Li_1997,

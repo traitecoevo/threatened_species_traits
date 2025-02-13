@@ -48,6 +48,14 @@ traits:
       units: '%'
       allowed_values_min: 0.0
       allowed_values_max: 100.0
+    phytophthora_cinnamomi_abundance_change:
+      label: Change in abundance due to Phytophthora cinnamomi
+      description: The ratio of the count of individuals in a defined area after versus prior to Phytophthora cinnamomi invasion.
+      comments: To avoid dividing by 0, add 1 to both the numerator and denominator. This metric can either reflect the change in adundance on a single plot across a period of time or the abundance in paired plots infected by and not infected by Phytophthora cinnamomi.
+      type: numeric
+      units: '{count}/{count}'
+      allowed_values_min: 0.0001
+      allowed_values_max: 1000.0
     phytophthora_cinnamomi_mortality_half_life:
       label: Modeled mortality half-life following Phytophthora cinnamomi inoculation
       description: Time until half the individuals inoculated with Phytophthora cinnamomi die.

@@ -1,0 +1,89 @@
+source:
+  primary:
+    key: Hart_2024
+    bibtype: Article
+    year: '2024'
+    author: Ray P. Hart and G. Freebury and S. Barrett
+    journal: Pacific Conservation Biology
+    title: 'Phytophthora cinnamomi: extent and impact in Two Peoples Bay Nature Reserve,
+      Western Australia (1983-2024)'
+    volume: '30'
+    number: '4'
+    doi: 10.1071/pc24028
+    issn: 2204-4604
+    editor: Mike Calver
+contributors:
+  data_collectors:
+  - last_name: Barrett
+    given_name: Sarah
+    ORCID: .na
+    affiliation: Department of Biodiversity, Conservation and Attractions, Albany,
+      WA, Australia
+    additional_role: contact
+  - last_name: Hart
+    given_name: Ray P
+    ORCID: .na
+    affiliation: Department of Biodiversity, Conservation and Attractions, Albany,
+      WA, Australia
+    additional_role: acknowledgements
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>% 
+      mutate(
+        location = "Two Peoples Bay Nature Reserve",
+        vegetation = ifelse(taxonomic_resolution == "species", "heath", NA)
+      )'
+  collection_date: 1983/1995
+  taxon_name: species
+  location_name: location
+  description: unknown
+  basis_of_record: unknown
+  life_stage: unknown
+  sampling_strategy: unknown
+  original_file: unknown
+  notes: unknown
+locations:
+  Two Peoples Bay Nature Reserve:
+    latitude (deg): -34.975078
+    longitude (deg): 118.198643
+    state: WA
+contexts: .na
+traits:
+- var_in: ratio
+  unit_in: '{count}/{count}'
+  trait_name: phytophthora_cinnamomi_abundance_change
+  entity_type: population
+  value_type: raw
+  basis_of_value: measurement
+  replicates: 1
+  methods: Phytophthora dieback infestations in Two Peoples Bay Nature Reserve were
+    mapped by Hart (1983), 1987-1989 (Brittain 1989) and in 1994-1995 (M. Grant, unpubl.
+    data) by the interpretation of patterns of plant death and by the isolation of
+    the pathogen from roots of dead and dying susceptible species (Department of Parks
+    and Wildlife 2015). A large area south and west of Kaiupgidukgidj (Nooongar name
+    for Moates Lake Knapp et al. 2024)/Moates Lake (Fig. 1) was not assessed as much
+    of this area is a sand dune. In January 2024, areas north of Maardjitup Gurlin/Mt
+    Gardner mapped as dieback-free or non-interpretable and areas mapped as infested
+    in the Isthmus were re-assessed (Fig. 1).
+- var_in: vegetation
+  unit_in: .na
+  trait_name: habitat
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Expert knowledge.
+substitutions: .na
+taxonomic_updates:
+- find: Schoenus sp.
+  replace: Schoenus sp. [Hart_2024]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-13)
+  taxonomic_resolution: genus
+- find: Restionaceae sp.
+  replace: Restionaceae sp. [Hart_2024]
+  reason: Exact match of taxon name ending with `sp.` to an APC-accepted family (2025-02-13)
+  taxonomic_resolution: family
+exclude_observations: .na
+questions: .na
