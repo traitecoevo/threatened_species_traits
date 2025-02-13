@@ -165,6 +165,7 @@ traits:
         mallee: XX
         mallet: XX
         mallee_heath: XX
+        scrub_heath: Tall and low shrubs of mixed species, height < 2 m, 30-70% cover.
         thicket: XX
         scrub: Included thickets - need to split
         wet_heath: XX
@@ -175,9 +176,11 @@ traits:
         coastal_swamp_woodland: XX
         bogs: XX
         grassland: XX
+        saltbush: XX
         sedgeland: XX
         woodland: XX
         open_woodland: XX
+        low_woodland: Single stems medium Eucalyptus, Banksia, Acacia or Allocasuarina trees with crowns slightly separated and height < 10m.
         shrubland: XX
         forest: XX
         eucalypt_forest: XX
@@ -189,6 +192,7 @@ traits:
         semiaquatic: XX
         swamp_margin: XX
         swamp_forest: XX
+        rock_outcrops: Mostly bare areas with rock outcrops and sparse vegetation.
     soil_type:
       label: Soil type
       description: XX
