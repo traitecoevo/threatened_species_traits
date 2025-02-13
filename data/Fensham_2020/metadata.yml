@@ -107,6 +107,12 @@ substitutions:
 - trait_name: resprouting_capacity
   find: 0.5
   replace: resprouts fire_killed
+- trait_name: resprouting_capacity
+  find: unknown
+  replace: .na
+- trait_name: population_count
+  find: protected
+  replace: .na
 taxonomic_updates: .na
 exclude_observations: .na
 questions: .na

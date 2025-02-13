@@ -172,6 +172,9 @@ substitutions:
 - trait_name: myrtle_rust_susceptibility
   find: R-M
   replace: resistant medium
+- trait_name: myrtle_rust_susceptibility
+  find: '?'
+  replace: .na
 taxonomic_updates:
 - find: Austromyrtus dulcis x tenuifolia 'copper tops'
   replace: Austromyrtus x [Austromyrtus dulcis x Austromyrtus tenuifolia 'copper tops']

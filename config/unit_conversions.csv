@@ -2,6 +2,7 @@ unit_from,unit_to,function
 %,mg/g,x*10
 %,g/g,x*0.01
 %,mg/mg,x*0.01
+%,m/m,x*0.01
 %,mg/kg,x*10000
 %,{dimensionless},x*.01
 %,{count}/{count},x*.01
