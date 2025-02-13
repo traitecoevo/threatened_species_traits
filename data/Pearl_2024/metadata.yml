@@ -1,0 +1,156 @@
+source:
+  primary:
+    key: Pearl_2024
+    bibtype: Article
+    year: '2024'
+    author: Hilary Pearl and Alison Shapcott
+    journal: Australian Journal of Botany
+    title: 'There must be something in the soil our little plants need: exploring
+      patterns of potential mycorrhizal associations in the flora of the Sunshine
+      Coast heathlands, Queensland, Australia'
+    volume: '72'
+    number: '6'
+    doi: 10.1071/bt23057
+    issn: 1444-9862
+    editor: Sarah Luxton
+contributors:
+  data_collectors:
+  - last_name: Pearl
+    given_name: Hilary
+    ORCID: 0000-0002-1226-8907
+    affiliation: School of Science, Technology and Engineering, and Centre for Bioinnovation,
+      University of the Sunshine Coast, QLD
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>% 
+      mutate(location = "Sunshine Coast heathlands")'
+  collection_date: unknown/2024
+  taxon_name: taxon_name
+  location_name: location
+  description: The first general overview of mycorrhizal functional groups associated
+    with the flora of the Queensland Sunshine Coast heathlands.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: This dataset of plant taxa used for this study was based on the
+    Sunshine Coast heath species list of 366 species derived from 80 sites, and records
+    from other data sources (Pearl et al.2022; Supplementary Table S1). This was compared
+    with a species list of 470 species from a rainforest study over 109 sites in the
+    same geographic area (Fig. 1), and from the same research group (Scanlan et al.2018).
+    Neither of these datasets focussed on a complete orchid inventory. All sites were
+    0.1 ha in size. For the Sunshine Coast heath and rainforest communities, each
+    plant species was allocated a mycorrhizal functional group, using the FungalRoot
+    database (Soudzilovskaia et al. 2020). Species were allocated as AM, EcM-AM, ErM,
+    NM, N-AM (Table S1). Ten species with no clear allocation to one of those groups
+    (e.g. Brachyloma spp., Macarthuria spp.) were allocated 'Other'.
+  original_file: data extracted from SI file.
+  notes: none
+locations:
+  Sunshine Coast heathlands:
+    latitude (deg): -26.4
+    longitude (deg): 153.1
+    description: heath vegetation
+    state: QLD
+contexts: .na
+traits:
+- var_in: mycorrhizal_type
+  unit_in: .na
+  trait_name: root_structure
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: For the Sunshine Coast heath and rainforest communities, each plant species
+    was allocated a mycorrhizal functional group, using the FungalRoot database (Soudzilovskaia
+    et al. 2020). Species were allocated as AM, EcM-AM, ErM, NM, N-AM (Table S1).
+substitutions:
+- trait_name: root_structure
+  find: am
+  replace: arbuscular_mycorrhizal
+- trait_name: root_structure
+  find: ecm
+  replace: ectomycorrhizal
+- trait_name: root_structure
+  find: ecm-am
+  replace: ectomycorrhizal arbuscular_mycorrhizal
+- trait_name: root_structure
+  find: erm
+  replace: ericoid_mycorrhizal
+- trait_name: root_structure
+  find: nm
+  replace: non_mycorrhizal
+- trait_name: root_structure
+  find: nm-am
+  replace: non_mycorrhizal arbuscular_mycorrhizal
+- trait_name: root_structure
+  find: om
+  replace: orchid_mycorrhizal
+- trait_name: root_structure
+  find: thysanotus
+  replace: subepidermal_mycorrhizal
+- trait_name: root_structure
+  find: uncertain
+  replace: .na
+taxonomic_updates:
+- find: Acacia attenuatta
+  replace: Acacia attenuata
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Bertya shapeana
+  replace: Bertya sharpeana
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Dillwynia glabberina
+  replace: Dillwynia glaberrima
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Leptospermum leuhmanii
+  replace: Leptospermum luehmannii
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Mirbelia rubifolia
+  replace: Mirbelia rubiifolia
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Pseudanthus ligulataus
+  replace: Pseudanthus ligulatus
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Spordanthus interruptus
+  replace: Sporadanthus interruptus
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Baumea articulata
+  replace: Bassia articulata
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Baumea mulleri
+  replace: Baumea muelleri
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2025-02-13)
+  taxonomic_resolution: species
+- find: Monotoca sp Fraser Island
+  replace: Monotoca sp. Fraser Island (P.Baxter 777)
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-02-13)
+  taxonomic_resolution: species
+- find: Dianella sp 600400408
+  replace: Dianella sp. [Dianella sp. 600400408; Pearl_2024]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-02-13)
+  taxonomic_resolution: genus
+- find: Eucalyptus robustaXtereticornis
+  replace: Eucalyptus robusta x Eucalyptus tereticornis 
+  reason: Manual match to an accepted hybrid name (E. Wenk, 2025-02-13)
+  taxonomic_resolution: species
+exclude_observations: .na
+questions: .na
