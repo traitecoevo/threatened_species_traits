@@ -131,6 +131,15 @@ traits:
       unit: g/g      
       allowed_values_min: -1.0
       allowed_values_max: 1.0
+    plant_goat_toxicity:
+      label: Plant toxicity to goats
+      description: Indication of whether a plant can cause any upset to the health and productivity of an animal. Toxic does not automatically imply lethal but some toxic plants can be lethal. 
+      type: categorical
+      allowed_values_levels:
+        low_risk: Plant represents a low toxicity risk to goats.
+        moderate_risk: Plant represents a moderate toxicity risk to goats.
+        high_risk: Plant represents a high toxicity risk to goats.
+        no_known_risk: Plant is not known to be toxic to goats.
     threatened_species_listing_status:
       label: Australian Environment Protection and Biodiversity Conservation Act status
       description: Conservation status as assessed under Australia's Environment Protection and Biodiversity Conservation Act. Allowed status valies are those used by the IUCN Red List.

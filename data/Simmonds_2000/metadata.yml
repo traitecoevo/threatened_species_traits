@@ -1,0 +1,427 @@
+source:
+  primary:
+    key: Simmonds_2000
+    bibtype: Book
+    year: 2000
+    author: Helen Simmonds and Peter Holst and Chris Bourke
+    title: The palatability, and potential toxicity of Australian weeds to goats
+    publisher: Rural Industries Research and Development Corporation
+    pages: unknown
+contributors:
+  data_collectors:
+  - last_name: Simmonds
+    given_name: Helen
+    ORCID: unknown
+    affiliation: Rowanpark, at Calga
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: unknown/2000
+  taxon_name: Botanical name
+  description: This book is directed at Australian goat producers, veterinarians and
+    educators so as to increase their awareness of the many potential poisonous weeds
+    that they may encounter.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: This book is directed at Australian goat producers, veterinarians
+    and educators so as to increase their awareness of the many potential poisonous
+    weeds that they may encounter. The weeds are listed by both common and botanical
+    names, their relative palatability is graded and the poisonous compounds that
+    they contain are named, suggestions on control strategies are given and finally
+    the health and production problems that may result from the ingestion of each
+    weed are outlined. For further details about individual weeds, readers are referred
+    to more detailed text book accounts.  Many of the weeds dealt with have been declared
+    noxious* by state authorities and as a consequence are required to be controlled
+    by landholders. Grazing with goats can be a useful part of an integrated weed
+    control strategy but owners should familiarise  themselves with the potential
+    toxicity risk associated with grazing some weeds. Toxic weeds are those that can
+    cause any upset to the health and productivity of an animal. Toxic does not automatically
+    imply lethal but some toxic plants can be lethal.
+  original_file: extracted from publication
+  notes: none
+identifiers: .na
+locations: .na
+contexts: .na
+traits:
+- var_in: rating_words
+  unit_in: .na
+  trait_name: plant_goat_toxicity
+  entity_type: entity_type
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Toxic weeds are those that can cause any upset to the health and productivity
+    of an animal. Toxic does not automatically imply lethal but some toxic plants
+    can be lethal.
+substitutions: .na
+taxonomic_updates:
+- find: Acacia escelsa
+  replace: Acacia excelsa
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Acacia karoo
+  replace: Acacia karroo
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Acaena ovina
+  replace: Acaena x ovina
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-02-21)
+  taxonomic_resolution: species
+- find: Aesculus spp
+  replace: Aesculus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Agapanthus spp
+  replace: Agapanthus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Agave spp
+  replace: Agave
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Ageratum riparia
+  replace: Ageratina riparia
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Allium spp
+  replace: Allium
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Amaranthus spp
+  replace: Amaranthus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Amsinckia spp
+  replace: Amsinckia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Angophora spp
+  replace: Angophora
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Aristida spp
+  replace: Aristida
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Asclepias spp
+  replace: Asclepias
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Atriplex spp
+  replace: Atriplex
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Avena spp
+  replace: Avena
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Bambusa spp
+  replace: Bambusa
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Bidens spp
+  replace: Bidens
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Brassica spp
+  replace: Brassica
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Brugmansia candida
+  replace: Brugmansia x candida
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-02-21)
+  taxonomic_resolution: species
+- find: Bryophyllum spp
+  replace: Bryophyllum
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Buxus spp
+  replace: Buxus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Caesalpinia spp
+  replace: Caesalpinia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Calandrina spp
+  replace: Calandrinia
+  reason: Fuzzy match of taxon name ending with `sp.` to an APC-accepted genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cardiospermum spp
+  replace: Cardiospermum
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Carex spp
+  replace: Carex
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cenchrus spp
+  replace: Cenchrus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cestrum spp
+  replace: Cestrum
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cheilanthes spp
+  replace: Cheilanthes
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Chenopodium spp
+  replace: Chenopodium
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Chloris spp
+  replace: Chloris
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Codonocarpus spp
+  replace: Codonocarpus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cortaderia spp
+  replace: Cortaderia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cotoneaster spp
+  replace: Cotoneaster
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Craspedia spp
+  replace: Craspedia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Crataegus spp
+  replace: Crataegus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Crotolaria spp
+  replace: Crotalaria
+  reason: Fuzzy match of taxon name ending with `sp.` to an APC-accepted genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cuscuta spp
+  replace: Cuscuta
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cycas spp
+  replace: Cycas
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Cynodon spp
+  replace: Cynodon
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Danthonia spp
+  replace: Danthonia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Daphne spp
+  replace: Daphne
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Delphinium spp
+  replace: Delphinium
+  reason: Exact match of taxon name ending with `sp.` to an APNI genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Dieffenbachia spp
+  replace: Dieffenbachia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Duboisia spp
+  replace: Duboisia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Erodium spp
+  replace: Erodium
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Erythrina spp
+  replace: Erythrina
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Erythrophleum spp
+  replace: Erythrophleum
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Euphorbia spp
+  replace: Euphorbia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Ficus rubignosa
+  replace: Ficus rubiginosa
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Gastrolobium spp
+  replace: Gastrolobium
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Gleditisia triacanthos
+  replace: Gleditsia triacanthos
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Gnaphalium spp
+  replace: Gnaphalium
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Gomphocarpus spp
+  replace: Gomphocarpus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Homeria spp
+  replace: Homeria
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Hydrangea spp
+  replace: Hydrangea
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Ilex spp
+  replace: Ilex
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Ipomoea spp
+  replace: Ipomoea
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Juncus spp
+  replace: Juncus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Laburnum spp
+  replace: Laburnum
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Lantana camara spp
+  replace: Lantana camara
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Laurel spp
+  replace: Laurus
+  reason: Fuzzy match of taxon name ending with `sp.` to an APC-accepted genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Lepidium spp
+  replace: Lepidium
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Leucaena spp
+  replace: Leucaena
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Macrozamia spp
+  replace: Macrozamia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Maireana spp
+  replace: Maireana
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Marsilia drummordii
+  replace: Marsilea drummondii
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Muehlenbeckia spp
+  replace: Muehlenbeckia
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Myoporum spp
+  replace: Myoporum
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Orobanche spp
+  replace: Orobanche
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Pennisetum spp
+  replace: Pennisetum
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Persicaria spp
+  replace: Persicaria
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Phalaris spp
+  replace: Phalaris
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Poa labillardieri
+  replace: Poa labillardierei
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Prosopis spp
+  replace: Prosopis
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Pyracantha spp
+  replace: Pyracantha
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Ranunculus spp
+  replace: Ranunculus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Rhododendron spp
+  replace: Rhododendron
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Rubus fruiticosus
+  replace: Rubus fruticosus
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+- find: Schinus spp
+  replace: Schinus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Sonchus spp
+  replace: Sonchus
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Sorghum spp
+  replace: Sorghum
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Stipa spp
+  replace: Stipa
+  reason: Exact match of taxon name ending with `sp.` to an APNI genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Swainsona spp
+  replace: Swainsona
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Trifolium spp
+  replace: Trifolium
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Typha spp
+  replace: Typha
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Urtica spp
+  replace: Urtica
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Verbena spp
+  replace: Verbena
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-02-21)
+  taxonomic_resolution: genus
+- find: Ziziphus mauritania
+  replace: Ziziphus mauritiana
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-02-21)
+  taxonomic_resolution: species
+exclude_observations:
+- variable: taxon_name
+  find: Aconitum napellus, Convallaria majalis, Erythroxylum coca, Taxus baccata
+  reason: non-native, non-naturalised taxa
+questions: .na
