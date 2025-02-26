@@ -45,6 +45,8 @@ ppm,mg/kg,x*1
 mg/g,mg/kg,x*1000
 g/kg,mg/kg,x*1000
 mg/kg,ppm,x*1
+1/g,g,1/x
+1/g,mg,1/(x*1000)
 m/g,cm/mg,x*0.1
 cm/mg,m/g,x*10
 cm/g,m/g,x*1/100

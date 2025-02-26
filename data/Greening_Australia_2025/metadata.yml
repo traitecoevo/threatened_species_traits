@@ -1,27 +1,25 @@
 source:
   primary:
     key: Greening_Australia_2025
-    bibtype: Article
-    year: unknown
-    author: unknown
-    title: unknown
-    journal: unknown
-    volume: unknown
-    number: unknown
-    pages: unknown
-    doi: unknown
+    bibtype: Online
+    author: Greening Australia
+    year: 2025
+    title: Greening Australia dataset from Australian Virtual Seed Bank
+    publisher: Australian Virtual Seed Bank
+    url: https://seedbank.ala.org.au
 contributors:
   data_collectors:
   - last_name: unknown
     given_name: unknown
     ORCID: unknown
-    affiliation: unknown
+    affiliation: Greening Australia
   dataset_curators: Elizabeth Wenk
 dataset:
   data_is_long_format: no
   custom_R_code: '
     data %>%
       mutate(
+        `Collection Date` = lubridate::parse_date_time(`Collection Date`, orders = "dmy"),
         measurement_remarks = paste0("Collector: ", Collector),
         basis_of_record = ifelse(Cultivated %in% c("Z", "cultivated"), "captive_cultivated", "field"),
         basis_of_record = ifelse(is.na(basis_of_record), "field", basis_of_record),
@@ -30,8 +28,7 @@ dataset:
         gm_per_seed = 1/`Seed/gm`,
         gm_per_seed = ifelse(!is.na(seed_weight), NA, gm_per_seed),
       ) %>%
-      filter(!is.na(`Scientific Name`))
-  '
+      filter(!is.na(`Scientific Name`))'
   collection_date: Collection Date
   taxon_name: Scientific Name
   location_name: locality_edited
@@ -39,7 +36,7 @@ dataset:
     including seed mass of collected seeds and data on germination trials.
   life_stage: adult
   measurement_remarks: measurement_remarks
-  sampling_strategy: No information available.
+  sampling_strategy: Greening Australia is a national, not-for-profit committed to restoring Australia's diverse landscapes and protecting biodiversity in ways that benefit communities, economies, and nature. With projects spanning the breadth of the country - from city suburbs to remote rural locations - GA apply a science-led, collaborative approach to deliver nature-based solutions addressing the twin crises of climate change and biodiversity loss. Greening Australia was established in 1982, in response to the serious impacts of tree decline on agriculture and the environment across Australia. Today, they remain dedicated to solving complex environmental problems through on-ground restoration at scale. By restoring Australia's diverse and iconic ecosystems, GA help create healthy, productive landscapes where people and nature can thrive.
   original_file: Data downloaded from https://seedbank.ala.org.au on 19 Feb 2025.
     Data downloaded by Order, for all vascular plants.
   notes: none

@@ -30,6 +30,25 @@ targets:
     command: read_csv_char("config/taxon_list.csv")
 
 # Build each source
+  ANBG_2025_config:
+    command: >
+      dataset_configure("data/ANBG_2025/metadata.yml",
+                 definitions
+                 )
+  ANBG_2025_raw:
+    command: >
+      dataset_process("data/ANBG_2025/data.csv",
+                  ANBG_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  ANBG_2025:
+    command: >
+      dataset_update_taxonomy(ANBG_2025_raw,
+                  taxon_list
+                 )
+
   AusTraits_habitats_2024_config:
     command: >
       dataset_configure("data/AusTraits_habitats_2024/metadata.yml",
@@ -46,6 +65,25 @@ targets:
   AusTraits_habitats_2024:
     command: >
       dataset_update_taxonomy(AusTraits_habitats_2024_raw,
+                  taxon_list
+                 )
+
+  Australian_PlantBank_2025_config:
+    command: >
+      dataset_configure("data/Australian_PlantBank_2025/metadata.yml",
+                 definitions
+                 )
+  Australian_PlantBank_2025_raw:
+    command: >
+      dataset_process("data/Australian_PlantBank_2025/data.csv",
+                  Australian_PlantBank_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Australian_PlantBank_2025:
+    command: >
+      dataset_update_taxonomy(Australian_PlantBank_2025_raw,
                   taxon_list
                  )
 
@@ -160,6 +198,44 @@ targets:
   Berthon_2018:
     command: >
       dataset_update_taxonomy(Berthon_2018_raw,
+                  taxon_list
+                 )
+
+  Brisbane_Botanic_Gardens_2025_config:
+    command: >
+      dataset_configure("data/Brisbane_Botanic_Gardens_2025/metadata.yml",
+                 definitions
+                 )
+  Brisbane_Botanic_Gardens_2025_raw:
+    command: >
+      dataset_process("data/Brisbane_Botanic_Gardens_2025/data.csv",
+                  Brisbane_Botanic_Gardens_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Brisbane_Botanic_Gardens_2025:
+    command: >
+      dataset_update_taxonomy(Brisbane_Botanic_Gardens_2025_raw,
+                  taxon_list
+                 )
+
+  Butler_2004_config:
+    command: >
+      dataset_configure("data/Butler_2004/metadata.yml",
+                 definitions
+                 )
+  Butler_2004_raw:
+    command: >
+      dataset_process("data/Butler_2004/data.csv",
+                  Butler_2004_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Butler_2004:
+    command: >
+      dataset_update_taxonomy(Butler_2004_raw,
                   taxon_list
                  )
 
@@ -448,6 +524,25 @@ targets:
                   taxon_list
                  )
 
+  mixed_2024_config:
+    command: >
+      dataset_configure("data/mixed_2024/metadata.yml",
+                 definitions
+                 )
+  mixed_2024_raw:
+    command: >
+      dataset_process("data/mixed_2024/data.csv",
+                  mixed_2024_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  mixed_2024:
+    command: >
+      dataset_update_taxonomy(mixed_2024_raw,
+                  taxon_list
+                 )
+
   Pate_1989_config:
     command: >
       dataset_configure("data/Pate_1989/metadata.yml",
@@ -619,6 +714,25 @@ targets:
                   taxon_list
                  )
 
+  Tas_Seed_Conservation_Centre_2025_config:
+    command: >
+      dataset_configure("data/Tas_Seed_Conservation_Centre_2025/metadata.yml",
+                 definitions
+                 )
+  Tas_Seed_Conservation_Centre_2025_raw:
+    command: >
+      dataset_process("data/Tas_Seed_Conservation_Centre_2025/data.csv",
+                  Tas_Seed_Conservation_Centre_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Tas_Seed_Conservation_Centre_2025:
+    command: >
+      dataset_update_taxonomy(Tas_Seed_Conservation_Centre_2025_raw,
+                  taxon_list
+                 )
+
   Victorian_Conservation_Seed_Bank_2025_config:
     command: >
       dataset_configure("data/Victorian_Conservation_Seed_Bank_2025/metadata.yml",
@@ -635,6 +749,44 @@ targets:
   Victorian_Conservation_Seed_Bank_2025:
     command: >
       dataset_update_taxonomy(Victorian_Conservation_Seed_Bank_2025_raw,
+                  taxon_list
+                 )
+
+  WA_Seed_Centre_2025_1_config:
+    command: >
+      dataset_configure("data/WA_Seed_Centre_2025_1/metadata.yml",
+                 definitions
+                 )
+  WA_Seed_Centre_2025_1_raw:
+    command: >
+      dataset_process("data/WA_Seed_Centre_2025_1/data.csv",
+                  WA_Seed_Centre_2025_1_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  WA_Seed_Centre_2025_1:
+    command: >
+      dataset_update_taxonomy(WA_Seed_Centre_2025_1_raw,
+                  taxon_list
+                 )
+
+  WA_Seed_Centre_2025_2_config:
+    command: >
+      dataset_configure("data/WA_Seed_Centre_2025_2/metadata.yml",
+                 definitions
+                 )
+  WA_Seed_Centre_2025_2_raw:
+    command: >
+      dataset_process("data/WA_Seed_Centre_2025_2/data.csv",
+                  WA_Seed_Centre_2025_2_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  WA_Seed_Centre_2025_2:
+    command: >
+      dataset_update_taxonomy(WA_Seed_Centre_2025_2_raw,
                   taxon_list
                  )
 
@@ -661,13 +813,17 @@ targets:
   threatened_species_raw:
     command: >
       bind_databases(
+        ANBG_2025,
         AusTraits_habitats_2024,
+        Australian_PlantBank_2025,
         Barrett_2008,
         Barrett_2009,
         Barrett_2009_2,
         Beggs_2010,
         Bell_1996,
         Berthon_2018,
+        Brisbane_Botanic_Gardens_2025,
+        Butler_2004,
         Crisp_2003,
         DCCEEW_2024,
         Fensham_2020,
@@ -683,6 +839,7 @@ targets:
         Martino_2024,
         McDougall_2024,
         McDougall_2024_2,
+        mixed_2024,
         Pate_1989,
         Pearl_2024,
         Pegg_2018,
@@ -692,7 +849,10 @@ targets:
         Shearer_2010,
         Shedley_2007,
         Simmonds_2000,
+        Tas_Seed_Conservation_Centre_2025,
         Victorian_Conservation_Seed_Bank_2025,
+        WA_Seed_Centre_2025_1,
+        WA_Seed_Centre_2025_2,
         Ward_2021,
         I(NULL))
 

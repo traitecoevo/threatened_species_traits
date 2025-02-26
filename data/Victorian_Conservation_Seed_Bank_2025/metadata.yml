@@ -1,15 +1,12 @@
 source:
   primary:
     key: Victorian_Conservation_Seed_Bank_2025
-    bibtype: Article
-    year: unknown
-    author: unknown
-    title: unknown
-    journal: unknown
-    volume: unknown
-    number: unknown
-    pages: unknown
-    doi: unknown
+    bibtype: Online
+    author: Victorian Conservation Seed Bank
+    year: 2025
+    title: Australian Virtual Seed Bank
+    publisher: Australian Virtual Seed Bank
+    url: https://seedbank.ala.org.au
 contributors:
   data_collectors:
   - last_name: unknown
@@ -22,6 +19,7 @@ dataset:
   custom_R_code: '
     data %>%
       mutate(
+        `Collection Date` = lubridate::parse_date_time(`Collection Date`, orders = "mdy"),
         measurement_remarks = paste0("Collector: ", Collector),
         basis_of_record = ifelse(Cultivated %in% c("Z", "cultivated"), "captive_cultivated", "field"),
         basis_of_record = ifelse(is.na(basis_of_record), "field", basis_of_record),
@@ -30,8 +28,7 @@ dataset:
         gm_per_seed = 1/`Seed/gm`,
         gm_per_seed = ifelse(!is.na(seed_weight), NA, gm_per_seed)
       ) %>%
-      filter(!is.na(`Scientific Name`))
-  '
+      filter(!is.na(`Scientific Name`))'
   collection_date: Collection Date
   taxon_name: Scientific Name
   location_name: location_name3
@@ -39,7 +36,7 @@ dataset:
     seed mass of collected seeds and data on germination trials.
   life_stage: adult
   measurement_remarks: measurement_remarks
-  sampling_strategy: No information available.
+  sampling_strategy: The Victorian Conservation Seedbank is Victoria's primary facility for the conservation of the state's most threatened plants. It stores the seeds and spores of native Victorian plants, particularly endemics and at-risk species, forming the basis for our research into effective long-term germplasm storage, germination characteristics, and the propagation of recalcitrant native species. The centre, supported by our associated laboratories and plant propagation nurseries, forms part of Royal Botanic Gardens Victoria's Bushfire Plant Recovery and Care Unit, which aims to support the restoration of fire damaged landscapes and ecosystems.
   original_file: Data downloaded from https://seedbank.ala.org.au on 19 Feb 2025.
     Data downloaded by Order, for all vascular plants.
   notes: none

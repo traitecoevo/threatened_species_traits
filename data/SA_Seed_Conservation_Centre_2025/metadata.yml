@@ -22,6 +22,7 @@ dataset:
   custom_R_code: '
     data %>%
       mutate(
+        `Collection Date` = lubridate::parse_date_time(`Collection Date`, orders = "mdy"),
         measurement_remarks = paste0("Collector: ", Collector),
         basis_of_record = ifelse(Cultivated %in% c("Z", "cultivated"), "captive_cultivated", "field"),
         basis_of_record = ifelse(is.na(basis_of_record), "field", basis_of_record),
@@ -30,8 +31,7 @@ dataset:
         gm_per_seed = 1/`Seed/gm`,
         gm_per_seed = ifelse(!is.na(seed_weight), NA, gm_per_seed),
       ) %>%
-      filter(!is.na(`Scientific Name`))
-  '
+      filter(!is.na(`Scientific Name`))'
   collection_date: Collection Date
   taxon_name: Scientific Name
   location_name: Locality
@@ -39,7 +39,7 @@ dataset:
     including seed mass of collected seeds and data on germination trials.
   life_stage: adult
   measurement_remarks: measurement_remarks
-  sampling_strategy: No information available.
+  sampling_strategy: Established in 2002, the South Australian Seed Conservation Centre helps to protect the state's threatened plant species from extinction, while supporting the restoration of habitats around South Australia. Throughout the Centre's program, wild provenance seeds have been collected from regions across the state and safeguarded in long term storage at sub-zero temperatures. Approximately half the species in the state (about 2,000) and nearly 70 per cent of the state's threatened species are currently stored in the seed bank, forming part of the living collections at the Adelaide Botanic Garden.
   original_file: Data downloaded from https://seedbank.ala.org.au on 19 Feb 2025.
     Data downloaded by Order, for all vascular plants.
   notes: none
