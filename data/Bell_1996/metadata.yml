@@ -52,6 +52,7 @@ dataset:
     of the stem were sampled.
   original_file: data transcribed from manuscript
   notes: none
+identifiers: .na
 locations:
   southwest Western Australia:
     latitude (deg): -31
@@ -169,4 +170,5 @@ taxonomic_updates:
   taxonomic_resolution: genus
 exclude_observations: .na
 questions:
-  additional_traits: proportion xylem sap that is nitrate and ammonium; most common amino acids in xylem sap
+  additional_traits: proportion xylem sap that is nitrate and ammonium; most common amino acids in xylem sap  
+  ready_for_AusTraits: YES, except also soil, geology, topography data

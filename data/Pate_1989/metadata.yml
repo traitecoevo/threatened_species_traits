@@ -37,6 +37,7 @@ dataset:
     were also examined.
   original_file: data transcribed from manuscript
   notes: none
+identifiers: .na
 locations: .na
 contexts: .na
 traits:
@@ -70,4 +71,7 @@ substitutions:
   replace: .na
 taxonomic_updates: .na
 exclude_observations: .na
-questions: .na
+questions:
+  additional_traits: matrix of ~20 traits used for cladistic analysis. Most are detailed flora traits, but some information that might be useful to input.
+  additional_trait_values: whenever we revamp the trait "root_structure", should map in "unistelar_roots" a term.
+  ready_for_AusTraits: YES
