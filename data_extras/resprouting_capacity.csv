@@ -1,0 +1,8 @@
+value,resprouting_capacity
+resprouts,0
+fire_killed,1
+fire_killed resprouts,.5
+fire_killed partial_resprouting,.75
+partial_resprouting,.5
+partial_resprouting resprouts,.25
+fire_killed partial_resprouting resprouts,.5

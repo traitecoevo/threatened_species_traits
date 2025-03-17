@@ -1,5 +1,7 @@
+library(tidyverse)
+
 # prep definitions
-definitions <- read_csv("datasets_from_manuscripts/search_replace.csv") %>%
+definitions <- read_csv("datasets_from_manuscripts/search_replace-v2.csv") %>%
   mutate(regex = str_c("[\\s[:punct:]]", match_term, "[\\s[:punct:]s]")) %>% 
   filter(match_term != "")
 

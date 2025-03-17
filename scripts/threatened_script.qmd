@@ -16,6 +16,9 @@ library(austraits)
 library(APCalign)
 library(traits.build)
 
+ path <- "../traits.build/"
+ devtools::load_all(path)
+
 resources <- APCalign::load_taxonomic_resources()
 
 austraits <- readRDS("C:/Users/Lizzy/Documents/GitHub/threatened_species_traits/ignore/austraits/austraits-6.0.0.rds")
@@ -311,7 +314,14 @@ habitats %>% write_csv("data/AusTraits_habitats_2024/data.csv")
 ```
 
 # tables with key traits
+
 ```{r}
+life_history_scores <- read_csv("~/Github/threatened_species_traits/data_extras/life_history.csv")
+dispersers_scores <- read_csv("~/Github/threatened_species_traits/data_extras/dispersers.csv")
+resprouting_capacity_scores <- read_csv("~/Github/threatened_species_traits/data_extras/resprouting_capacity.csv")
+phytophthora_cinnamomi_susceptibility_scores <- read_csv("~/Github/threatened_species_traits/data_extras/phytophthora_cinnamomi_susceptibility_scores.csv")
+nitrogen_fixing_scores <- read_csv("~/Github/threatened_species_traits/data_extras/nitrogen_fixing_scores.csv")
+
 habitat <- threatened_species$traits %>%
   filter(trait_name == "habitat") %>%
   select(taxon_name, habitat = value) %>%
@@ -327,49 +337,131 @@ myrtle_rust_susceptibility <- threatened_species$traits %>%
   ungroup() %>%
   distinct()
 
-categorical_traits_from_austraits <- austraits$traits %>%
-  filter(trait_name %in% c("nitrogen_fixing", "dispersal_syndrome")) %>%
-  filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
-  select(taxon_name, trait_name, value, dataset_id) %>%
-  tidyr::separate_longer_delim(value, delim = " ") %>%
-  group_by(taxon_name, trait_name, value) %>%
-  mutate(
-    count = n()#,
-    #source_id = paste0(dataset_id, collapse = "; ")
-    ) %>%
+life_history <- austraits$traits %>% filter(trait_name == "life_history")  %>% 
+  left_join(life_history_scores) %>%
+  select(taxon_name, life_history) %>%
+  group_by(taxon_name) %>%
+  mutate(life_history = mean(life_history)) %>%
   ungroup() %>%
-  select(-dataset_id) %>%
-  distinct() %>%
-  mutate(value = paste0(value, " (", count, ")")) %>%
-  select(-count) %>%
-  group_by(taxon_name, trait_name) %>%
-  mutate(value = paste0(value, collapse = "; ")) %>%
+  distinct()
+
+dispersers <- austraits$traits %>% filter(trait_name %in% c("dispersal_syndrome", "dispersers"))  %>% 
+  left_join(dispersers_scores) %>%
+  filter(!is.na(dispersers_score)) %>%
+  select(taxon_name, dispersers_score) %>%
+  group_by(taxon_name) %>%
+  mutate(dispersers_score = mean(as.numeric(dispersers_score))) %>%
   ungroup() %>%
-  distinct() %>%
-  tidyr::pivot_wider(names_from = trait_name, values_from = value)
+  distinct()
+
+resprouting_capacity <- austraits$traits %>% filter(trait_name %in% c("resprouting_capacity"))  %>% 
+  left_join(resprouting_capacity_scores) %>%
+  filter(!is.na(resprouting_capacity)) %>%
+  select(taxon_name, resprouting_capacity) %>%
+  group_by(taxon_name) %>%
+  mutate(resprouting_capacity = mean(as.numeric(resprouting_capacity))) %>%
+  ungroup() %>%
+  distinct()
+
+nitrogen_fixing <- austraits$traits %>% filter(trait_name %in% c("nitrogen_fixing"))  %>% 
+  left_join(nitrogen_fixing_scores) %>%
+  filter(!is.na(nitrogen_fixing)) %>%
+  select(taxon_name, nitrogen_fixing) %>%
+  group_by(taxon_name) %>%
+  mutate(nitrogen_fixing = mean(as.numeric(nitrogen_fixing))) %>%
+  ungroup() %>%
+  distinct()
 
 seed_dry_mass <- austraits %>%
   austraits::extract_trait("seed_dry_mass") %>%
   austraits_weighted_means("seed_dry_mass") %>%
   filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
   select(taxon_name, seed_dry_mass = mean)
+
+leaf_mass_per_area <- austraits %>%
+  austraits::extract_trait("leaf_mass_per_area") %>%
+  austraits_weighted_means("leaf_mass_per_area") %>%
+  filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
+  select(taxon_name, leaf_mass_per_area = mean)
+
+fruit_fleshiness <- (austraits %>%
+  austraits::extract_trait("fruit_fleshiness"))$traits %>%
+  mutate(fruit_fleshiness = case_when(
+    value == "dry" ~ 0,
+    value == "fleshy" ~ 1,
+    value == "dry fleshy" ~ 0.5
+  )) %>%
+  group_by(taxon_name) %>%
+  mutate(fruit_fleshiness = mean(fruit_fleshiness)) %>%
+  ungroup() %>%
+  distinct(taxon_name, fruit_fleshiness)
+
+(austraits %>%
+  austraits::extract_trait("nitrogen_fixing", partial_matches_allowed = F))$traits %>%
+  group_by(taxon_name) %>%
+  distinct(value) %>% mutate(nitrogen_fixing = 1)
 ```
 
-# probability script
+# phytophthora
+
+```{r}
+phytophthora_cinnamomi_susceptibility <- (threatened_species %>%
+                                            extract_trait("phytophthora_cinnamomi_susceptibility") %>%
+                                            join_taxa(vars = "family"))$traits %>%
+  select(taxon_name, family, value) %>%
+  group_by(taxon_name) %>%
+  mutate(value = paste0(value, collapse = " ")) %>% 
+  ungroup() %>%
+  distinct() %>% 
+  left_join(phytophthora_cinnamomi_susceptibility_scores) %>%
+  left_join(nitrogen_fixing) %>% # p = 0.04, R^2 = 0.007
+  left_join(dispersers) %>% #p = 0.06, R^2 = 0.007
+  left_join(life_history) %>% #R^2 = 0.01, p < 0.000001, coeff = 0.003
+  left_join(seed_dry_mass) %>%
+  left_join(leaf_mass_per_area) %>% #R2 = 0.05, higher LMA = more severe effect, coeff = 30.63
+  left_join(fruit_fleshiness) %>% #no effect - p = 0.51
+  left_join(resprouting_capacity) #R^2 = 0.03, p < 0.000001, coef = 0.43; fire-killed more susceptible
+
+phyt_lm <- lm(phytophthora_cinnamomi_susceptibility ~ resprouting_capacity, data = phytophthora_cinnamomi_susceptibility)
+
+summary(phyt_lm)
+
+by_family <- phytophthora_cinnamomi_susceptibility %>%
+  filter(!is.na(phytophthora_cinnamomi_susceptibility)) %>%
+  group_by(family) %>%
+  mutate(
+    phytophthora_cinnamomi_susceptibility = mean(phytophthora_cinnamomi_susceptibility),
+    taxa_scored = n()
+    ) %>%
+  ungroup() %>%
+  distinct(family, taxa_scored, phytophthora_cinnamomi_susceptibility) %>%
+  filter(taxa_scored > 10, !is.na(family)) %>%
+  arrange(-phytophthora_cinnamomi_susceptibility)
+
+family_histograms <- phytophthora_cinnamomi_susceptibility %>%
+  filter(family %in% by_family$family)
+
+ggplot(data = family_histograms) +
+  geom_histogram(aes(x = phytophthora_cinnamomi_susceptibility)) +
+  facet_wrap(~family)
+```
+
+# myrtle rust
 
 # TODO - assign to zero species where the entire range falls in locations with wet season rainfall above threshhold, or temp above threshold, etc.
+
 ```{r}
 probability_0_1 <- resources$APC %>% 
   filter(taxonomic_status == "accepted") %>%
   filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
   select(taxon_name = canonical_name, family, taxon_distribution) %>%
   left_join(habitat, by = "taxon_name") %>%
-  mutate(susceptibility_step_1 = ifelse(family == "Myrtaceae", 1, 0)) %>%
+  mutate(
+    susceptibility_step_1 = ifelse(family == "Myrtaceae", 1, 0)
+    ) %>%
   mutate(susceptibility_step_2 = ifelse(str_detect(habitat, "rainforest") | str_detect(habitat, "wet") | str_detect(habitat, "aquatic")| str_detect(habitat, "bogs"), 1, 0)) %>%
  mutate(susceptibility_binary = ifelse(susceptibility_step_1 == 1 & (susceptibility_step_2 == 1| is.na(susceptibility_step_2)), 1, 0))
-```
 
-```{r}
 probability_0_1 <- probability_0_1 %>%
   filter(susceptibility_binary == 1) %>%
   left_join(myrtle_rust_susceptibility, by = "taxon_name") %>%
@@ -394,46 +486,49 @@ probability_0_1 <- probability_0_1 %>%
       myrtle_rust_susceptibility == "high" ~ 5
     )
   ) %>%
-  left_join(categorical_traits_from_austraits) %>%
-  left_join(seed_dry_mass)
+  left_join(dispersers) %>%
+  left_join(life_history) %>%
+  left_join(seed_dry_mass) %>%
+  left_join(leaf_mass_per_area) %>%
+  left_join(fruit_fleshiness) %>%
+  left_join(resprouting_capacity)
 ```
 
-
-# myrtle rust
+# checking correlations
 
 ```{r}
-# species in APC that are in Myrtaceae
-Myrtaceae <- resources$APC %>% 
-  filter(taxonomic_status == "accepted") %>%
-  filter(family == "Myrtaceae") %>% 
-  filter(taxon_rank %in% c("species", "subspecies", "variety", "form")) %>%
-  select(canonical_name, family, taxon_distribution, name_type, taxon_ID)
+rust_lm <- lm(resprouting_capacity ~ myrtle_rust_susceptibility_numeric , data = probability_0_1)
 
-
-
-# species for which myrtle rust status is known
-myrtle_rust_susceptibility_known <- threatened_species$traits %>% 
-  filter(trait_name == "myrtle_rust_susceptibility") %>%
-  group_by(taxon_name) %>%
-  mutate(
-    dataset_id = paste0(dataset_id, collapse = "; "),
-    value = paste0(value, collapse = "; "),
-    value_type = paste0(value_type, collapse = "; ")
-    ) %>%
-  ungroup() %>%
-  distinct(taxon_name, dataset_id, trait_name, value, value_type)
-
-
-
-# extra N-fixing
-austraits$traits %>% 
-  filter(trait_name == "nitrogen_fixing") %>% 
-  distinct(taxon_name, trait_name, value) %>%
-  group_by(taxon_name, trait_name) %>%
-  
-  ungroup()
+summary(rust_lm)
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+# Do threatened species have worse dispersal, longer lifespans, etc?
+
+```{r}
+all_taxa <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, family, taxon_distribution)
+
+species_that_are_threatened <- (threatened_species %>%
+  extract_trait("threatened_species_listing_status"))$traits %>%
+  select(taxon_name, threatened_status = value)
+
+all_taxa <- all_taxa %>%
+  left_join(species_that_are_threatened) %>%
+  mutate(threatened = ifelse(!is.na(threatened_status), 1, 0)) %>%
+  left_join(dispersers) %>%
+  left_join(life_history) %>%
+  left_join(seed_dry_mass) %>%
+  left_join(leaf_mass_per_area) %>%
+  left_join(fruit_fleshiness) %>%
+  left_join(resprouting_capacity)
+
+# threatened very slightly worse dispersal, but meaningly (r2 = 0.0008)
+dispersers_by_threat_lm <- lm(threatened ~ dispersers_score, data = filter(all_taxa, !is.na(dispersers_score)))
+
+# absolutely no variation in seed mass
+seedmass_by_threat_lm <- lm(threatened ~ seed_dry_mass, data = filter(all_taxa, !is.na(seed_dry_mass)))
 
 
+```
