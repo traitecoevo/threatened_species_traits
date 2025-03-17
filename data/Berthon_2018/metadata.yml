@@ -3,8 +3,8 @@ source:
     key: Berthon_2018
     bibtype: Article
     year: 2018
-    author: K. Berthon and M. Esperon-Rodriguez and L.j. Beaumont and A.j. Carnegie
-      and M.r. Leishman
+    author: K. Berthon and M. Esperon-Rodriguez and L.J. Beaumont and A.J. Carnegie
+      and M.R. Leishman
     journal: Biological Conservation
     title: Assessment and prioritisation of plant species at risk from myrtle rust
       (Austropuccinia psidii) under current and future climates in Australia
@@ -95,8 +95,7 @@ dataset:
           Observation == "NI" ~ "lab field",
           Observation == "N" ~ "field"
         )
-      )
-  '
+      )'
   collection_date: unknown/2018
   taxon_name: accepted_name
   location_name: .na
@@ -105,7 +104,7 @@ dataset:
   life_stage: adult
   sampling_strategy: unknown
   original_file: SI Table 3 from manuscript
-  notes: unknown
+  notes: none
 locations: .na
 contexts:
 - context_property: type of observation

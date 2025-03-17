@@ -39,11 +39,11 @@ dataset:
   taxon_name: species
   location_name: location
   description: unknown
-  basis_of_record: unknown
-  life_stage: unknown
+  basis_of_record: field
+  life_stage: adult
   sampling_strategy: unknown
-  original_file: unknown
-  notes: unknown
+  original_file: transcribed from manuscript
+  notes: none
 locations:
   Two Peoples Bay Nature Reserve:
     latitude (deg): -34.975078

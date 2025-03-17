@@ -14,11 +14,10 @@ source:
     issn: 0067-1924
 contributors:
   data_collectors:
-  - last_name: unknown
-    given_name: unknown
-    ORCID: unknown
-    affiliation: unknown
-  assistants: unknown
+  - last_name: Shearer
+    given_name: Bryan L.
+    ORCID: .na
+    affiliation: Department of Environment and Conservation, WA
   dataset_curators: Elizabeth Wenk
 dataset:
   data_is_long_format: no

@@ -37,11 +37,11 @@ contexts:
   - value: none
     description: No gamba grass present
   - value: low
-    description: xx
+    description: unknown
   - value: moderate
-    description: xx
+    description: unknown
   - value: high
-    description: xx
+    description: unknown
 traits:
 - var_in: None
   unit_in: '{count}'
@@ -95,7 +95,7 @@ traits:
   value_type: mode
   basis_of_value: expert_score
   replicates: .na
-  methods: unknown
+  methods: Expert knowledge.
 substitutions: .na
 taxonomic_updates: .na
 exclude_observations: .na
