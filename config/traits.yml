@@ -155,99 +155,273 @@ traits:
         conservation_dependent: Taxa whose survival depends upon ongoing conservation measures. Without these measures, a conservation dependent taxon would be classified as Vulnerable or more severely threatened.
         data_deficient: Taxa suspected of being Rare, Vulnerable or Endangered, but whose true status cannot be determined without more information.
         least_concern: Taxa that are not considered Threatened.
+    commonness:
+      label: XX
+      description: XX
+      type: categorical      
+      allowed_values_levels:
+        abundant: XX
+        abundant_locally: XX
+        common: XX
+        common_locally: XX
+        rare: XX
+        scattered: XX
+        uncommon: XX
+        very_rare: XX
+        widespread: XX
     habitat:
       label: habitat
       description: XX
       type: categorical
       allowed_values_levels:
-        sclerophyll: XX
-        wet_sclerophyll: XX
+        aquatic: XX
+        semiaquatic: XX
+        alpine: XX
+        bog: XX
+        bog_alpine: XX
+        chenopod_shrubland: XX
+        cliffs_coastal: XX
+        cloud_forests: XX
+        creek_intermittent: XX
+        creeks_intermittent: XX
+        cropland: XX
+        cultivated: XX
+        damp: XX
+        disturbed: XX
         dry_sclerophyll: XX
+        dunes: XX
+        dunes_coastal: XX
+        flats_wet: XX
+        floodplain: XX
+        forest: XX
+        forest_closed: XX
+        forest_dry: XX
+        forest_dry_sclerophyll: XX
+        forest_eucalypt: XX
+        forest_eucalypt_wet: XX
+        forest_gallery: XX
+        forest_lowland: XX
+        forest_monsoon: XX
+        forest_open: XX
+        forest_subalpine: XX
+        forest_wet: XX
+        forest_wet_sclerophyll: XX
+        forest_moist_sclerophyll: XX
+        grassland: XX
+        grassland_tussock: XX
+        grasslands: XX
+        grasslands_alpine: XX
+        heath: XX
+        heath_closed: XX
+        heath_coastal: XX
+        heath_wet: XX
+        herbland: XX
+        inundated_intermittent: XX
+        lagoons: XX
+        lake_margin: XX
+        lakes: XX
+        lakes_salt: XX
+        mallee: XX
+        mallee_heath: XX
+        mangroves: XX
+        montane: XX
+        moors: XX
+        mountain_summits: XX
+        mud: XX
+        open: XX
+        paddock: XX
+        pasture: XX
+        plains: XX
+        plains_coastal: XX
+        plains_stony: XX
         rainforest: XX
-        rainforest_temperate: XX
-        rainforest_temperate_cool: XX
-        rainforest_temperate_warm: XX
-        rainforest_tropical: XX
-        rainforest_tropical_montane: XX
-        rainforest_tropical_upland: XX
-        rainforest_subtropical: XX
-        rainforest_subtropical_cool: XX
+        rainforest_coastal: XX
+        rainforest_cool_temperate: XX
         rainforest_dry: XX
+        rainforest_gallery: XX
         rainforest_littoral: XX
         rainforest_lowland: XX
-        rainforest_upland: XX
-        rainforest_montane: XX
         rainforest_margin: XX
-        heath: XX
-        mallee: XX
-        mallet: XX
-        mallee_heath: XX
+        rainforest_moist: XX
+        rainforest_montane: XX
+        rainforest_notophyll: XX
+        rainforest_subcoastal: XX
+        rainforest_subtropical: XX
+        rainforest_subtropical_cool: XX
+        rainforest_subtropical_warm: XX
+        rainforest_temperate: XX
+        rainforest_tropical: XX
+        rainforest_tropical_lowland: XX
+        rainforest_tropical_upland: XX
+        rainforest_warm_temperate: XX
+        riparian: XX
+        roadside: XX
+        rock_pools_shallow: XX
+        rocky: XX
+        rocky_outcrop: Mostly bare areas with rock outcrops and sparse vegetation.
+        saltmarshes: XX
+        saltpans: XX
+        sampire: XX
+        sanddunes: XX
+        sanddunes_coastal: XX
+        sandhills: XX
+        sandplain: XX
+        sclerophyll: XX
+        scrub: XX
         scrub_heath: Tall and low shrubs of mixed species, height < 2 m, 30-70% cover.
-        thicket: XX
-        scrub: Included thickets - need to split
-        wet_heath: XX
-        aquatic: XX
-        alpine: XX
-        subalpine: XX
-        wet_forest: XX
-        coastal_swamp_woodland: XX
-        bogs: XX
-        grassland: XX
-        saltbush: XX
-        sedgeland: XX
-        woodland: XX
-        open_woodland: XX
-        low_woodland: Single stems medium Eucalyptus, Banksia, Acacia or Allocasuarina trees with crowns slightly separated and height < 10m.
+        scrub_open: XX
+        scrub_riparian: XX
         shrubland: XX
-        forest: XX
-        eucalypt_forest: XX
-        wet_eucalypt_forest: XX
-        open_forest: XX
-        low_forest: XX
-        closed_forest: XX
-        dry_forest: XX
-        semiaquatic: XX
+        shrubland_Eucalypt: XX
+        shrubland_mallee: XX
+        shrubland_open: XX
+        shrubland_tall: XX
+        snowbanks: XX
+        streambanks: XX
+        steppe: XX
+        subalpine: XX
+        swamp: XX
+        swamp_lowland: XX
         swamp_margin: XX
         swamp_forest: XX
-        rock_outcrops: Mostly bare areas with rock outcrops and sparse vegetation.
+        thickets: XX
+        urban: XX
+        various: XX
+        vine_thicket: XX
+        water_shallow: XX
+        waterholes: XX
+        wet_sclerophyll: XX
+        widespread: XX
+        woodland: XX
+        woodland_acacia: XX
+        woodland_dry: XX
+        woodland_eucalypt: XX
+        woodland_grassy: XX
+        woodland_low: Single stems medium Eucalyptus, Banksia, Acacia or Allocasuarina trees with crowns slightly separated and height < 10m.
+        woodland_open: 
+        woodland_montane: XX
+        woodland_paperbark: XX
+        woodland_semiarid: XX
+        woodland_subalpine: XX
+        woodland_wet_sclerophyll: XX
+        woodland_moist_sclerophyll: XX
+        woodland_dry_sclerophyll: XX
     soil_type:
       label: Soil type
       description: XX
       type: categorical
       allowed_values_levels:
-        alluvium: XX
+        acidic: XX
+        alkaline: XX
+        alluvial: XX
         clay: XX
         clay_black: XX
+        clay_brown: XX
+        clay_cracking: XX
+        clay_grey: XX
         clay_red: XX
-        laterite: XX
+        disturbed: XX
+        earths_red: XX
+        earths_red-brown: XX
+        fertile: XX
+        gravel_alluvial: XX
+        gravelly: XX
+        gravelly_coarse: XX
+        hardpan: XX
+        humus: XX
+        lateritic: XX
         loam: XX
-        salt_flat: XX
+        loam_clayey: XX
+        loam_gravelly: XX
+        loam_pink: XX
+        loam_sandy: XX
+        pavement: XX
+        peat: XX
+        rocky: XX
         sand: XX
+        sand_clayey: XX
+        sand_coarse: XX
+        sand_red: XX
+        shaley: XX
+        shallow: XX
+        shallow_soils: XX
         silt: XX
+        silt_grey: XX
+        skeletal: XX
+        soils_shallow: XX
+        various: XX
+        volcanic: XX
     geology:
       label: Geologic substrate
       description: An attribute indicating a taxon's preferred geologic substrate, referencing both the rock type or geologic formation underlying the soil and other core geologic features. 
       type: categorical
       allowed_values_levels:
-        alluvium: XX
+        banded_ironstone_formations: XX
+        basalt: XX
+        basaltic: XX
+        calcareous: XX
+        calcrete: XX
+        conglomerate: XX
+        dolerite: XX
         granite: XX
+        gypseous: XX
+        igneous: XX
+        iron: XX
+        jasperlite: XX
         kwongan: XX
-        laterite: XX
-        salt_plain: XX
+        lateritic: XX
+        limestone: XX
+        metamorphic: XX
+        mudstone: XX
+        quartz_alunite: XX
+        rhyolite: XX
+        saline: XX
+        sandstone: XX
+        shale: XX
+        subsaline: XX
+        volcanic: XX
+        volcanic_acidic: XX
+    habitat_moisture:
+      label: Habitat moisture
+      description: XX
+      type: categorical
+      allowed_values_levels:
+        dry: XX
+        wet: XX
     topographic_position:
       label: Topographic position
       description: An attribute indicating the topographic positions where a species occurs.
       type: categorical
       allowed_values_levels:
-        dune: XX
-        plain: XX
-        ridge: XX
-        slope: XX
-        slope_lower: XX
-        slope_steep: XX
-        slope_upper: XX
-        swamp: XX
+        cliff: XX
+        cliffs_coastal: XX
+        depressions: XX
+        escarpments: XX
+        flats: XX
+        gullies: XX
+        gullies_sheltered: XX
+        gully_heads: XX
+        high_ground: XX
+        hills: XX
+        inundated_intermittent: XX
+        inundated_shallow: XX
+        mountains: XX
+        plains: XX
+        plateaus: XX
+        ridges: XX
+        rocky: XX
+        rocky_outcrop: XX
+        seepages: XX
+        slopes: XX
+        slopes_rocky: XX
+        slopes_steep: XX
+        streambanks: XX
+        streams: XX
+        swales: XX
+        terraces: XX
+        undulating: XX
         valley: XX
+        watercourses: XX
     threatened_species_key_threatening_processes:
       label: Key threatening processes
       description: A pressure identified by the EPBC Act to threaten the survival, abundance or evolutionary development of a native species or ecological community.

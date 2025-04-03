@@ -21,7 +21,7 @@ library(traits.build)
 
 resources <- APCalign::load_taxonomic_resources()
 
-austraits <- readRDS("C:/Users/Lizzy/Documents/GitHub/threatened_species_traits/ignore/austraits/austraits-6.0.0.rds")
+austraits <- readRDS("C:/Users/Lizzy/Documents/GitHub/threatened_species_traits/ignore/austraits/austraits_20250402.rds")
 
 source("C:/Users/Lizzy/Documents/GitHub/threatened_species_traits/R/custom_R_code.R")
 source("C:/Users/Lizzy/Documents/GitHub/threatened_species_traits/R/extra_functions.R")
@@ -94,7 +94,7 @@ wet_sclerophyll <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "wet_sclerophyll")
+  mutate(habitat = "forest_wet_sclerophyll")
 
 dry_sclerophyll <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
@@ -107,7 +107,7 @@ dry_sclerophyll <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "dry_sclerophyll")
+  mutate(habitat = "forest_dry_sclerophyll")
 
 wet_heath <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
@@ -120,7 +120,7 @@ wet_heath <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "wet_heath")
+  mutate(habitat = "heath_wet")
 
 heath <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
@@ -163,7 +163,7 @@ savanna <- (austraits %>%
 
 bogs_fens <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
-  extract_data(table = "locations", col = "value", col_value = c("bog", "fen")))$traits %>%
+  extract_data(table = "locations", col = "value", col_value = c("bog", "fen", "marsh")))$traits %>%
   select(taxon_name, dataset_id) %>% 
   distinct() %>%
   group_by(taxon_name) %>%
@@ -172,7 +172,7 @@ bogs_fens <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "bogs")
+  mutate(habitat = "bog")
 
 shrubland <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
@@ -198,7 +198,7 @@ eucalypt_forest <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "eucalypt_forest")
+  mutate(habitat = "forest_eucalypt")
 
 closed_forest <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
@@ -211,7 +211,7 @@ closed_forest <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "closed_forest")
+  mutate(habitat = "forest_closed")
 
 alpine <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
@@ -237,7 +237,7 @@ open_forest <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "open_forest")
+  mutate(habitat = "forest_open")
 
 dry_forest <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
@@ -250,7 +250,7 @@ dry_forest <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "dry_forest")
+  mutate(habitat = "forest_dry")
 
 wet_forest <- (austraits %>%
   extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
@@ -263,7 +263,7 @@ wet_forest <- (austraits %>%
   ) %>%
   ungroup() %>%
   distinct(taxon_name, source_id) %>%
-  mutate(habitat = "wet_forest")
+  mutate(habitat = "forest_wet")
 
 
 woodland <- (austraits %>%
@@ -328,6 +328,8 @@ habitat <- threatened_species$traits %>%
   group_by(taxon_name) %>%
   mutate(habitat = paste0(habitat, collapse = " ")) %>%
   ungroup()
+
+
 
 myrtle_rust_susceptibility <- threatened_species$traits %>%
   filter(trait_name == "myrtle_rust_susceptibility") %>%
@@ -447,8 +449,6 @@ ggplot(data = family_histograms) +
 ```
 
 # myrtle rust
-
-# TODO - assign to zero species where the entire range falls in locations with wet season rainfall above threshhold, or temp above threshold, etc.
 
 ```{r}
 probability_0_1 <- resources$APC %>% 

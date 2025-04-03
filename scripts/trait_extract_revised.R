@@ -1,7 +1,7 @@
 library(tidyverse)
 
 # prep definitions
-definitions <- read_csv("datasets_from_manuscripts/search_replace-v2.csv") %>%
+definitions <- read_csv("datasets_from_manuscripts/search_replace-v3.csv") %>%
   mutate(regex = str_c("[\\s[:punct:]]", match_term, "[\\s[:punct:]s]")) %>% 
   filter(match_term != "")
 
@@ -10,8 +10,16 @@ data <- read_csv("datasets_from_manuscripts/FoA_download.csv") %>%
   rename(text = Habitat) %>%
   select(taxon_name, text) %>%
   mutate(original_text = text,
-         text = stringr::str_replace_all(text, "[:punct:]", "")
-         ) %>%
+         text = stringr::str_replace_all(text, "watershed[s]", ""),
+         text = stringr::str_replace_all(text, "[:punct:]", ""),
+         text = stringr::str_replace_all(text, "less common", "lesscommon"),
+         text = stringr::str_replace_all(text, "not ", "not"),
+         text = stringr::str_trim(text),
+         text = stringr::str_to_lower(text),
+         text = stringr::str_replace_all(text, "$", " "),
+         text = ifelse(text=="", NA, text)
+  ) %>%
+  mutate(original_text = text) %>%
   filter(stringr::str_detect(taxon_name, " "))
 
 
@@ -26,8 +34,13 @@ data <- read_csv("datasets_from_manuscripts/Vic_download.csv") %>%
     text = stringr::str_replace_all(text, "Also (NI|Tas|ACT|NSW|SA|Qld|WA|NT)\\s\\(doubtfully naturalised\\)[\\.\\,]\\s?", ""),
     text = stringr::str_replace_all(text, "Also (NI|Tas|ACT|NSW|SA|Qld|WA|NT)[\\.\\,]\\s?", ""),
     text = stringr::str_replace_all(text, "(NI|Tas|ACT|NSW|SA|Qld|WA|NT)[\\.\\,]\\s?", ""),
+    text = stringr::str_replace_all(text, "watershed[s]", ""),
     text = stringr::str_replace_all(text, "[:punct:]", ""),
+    text = stringr::str_replace_all(text, "less common", "lesscommon"),
+    text = stringr::str_replace_all(text, "not ", "not"),
     text = stringr::str_trim(text),
+    text = stringr::str_to_lower(text),
+    text = stringr::str_replace_all(text, "$", " "),
     text = ifelse(text=="", NA, text)
   ) %>%
   mutate(original_text = text) %>%
@@ -47,12 +60,13 @@ trait_table_wide = trait_table %>% pivot_wider(names_from = trait_name, values_f
 
 new <- tibble()
 
-
-for (i in 1:length(data$text)){
+# cycle through each row of data
+#for (i in 1:length(data$text)){
+for (i in 1:100){
   
   test_out <- data.frame()
   
-  # for each trait_name category (plant_growth_form, parasitic etc)
+  # cycle through each trait value
   for (j in 1:length(definitions$regex)){
     
     # is there a match to any of the trait_name categories (T or F)?
@@ -98,6 +112,7 @@ for (i in 1:length(data$text)){
   #create a blank dataframe
   out = data.frame()
   
+  # cycle through lists of values for each trait
   for (k in 1:length(out_list)){
     
     trait = out_list[[k]]
@@ -133,8 +148,10 @@ for (i in 1:length(data$text)){
   
 }
 
-new %>% filter(!is.na(text)) %>% select(-original_text) %>%
-  filter(stringr::str_detect(taxon_name, " ")) %>% View()
+# checking output - not needed
+new %>% filter(!is.na(text)) %>% 
+  select(-original_text) %>%
+  filter(stringr::str_detect(taxon_name, " "))
 
-new -> Victoria
-write_csv(Victoria, "datasets_from_manuscripts/Victoria_habitats.csv")
+# write to file
+write_csv(new, "datasets_from_manuscripts/Victoria_habitats_v2.csv")
