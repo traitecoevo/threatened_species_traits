@@ -84,7 +84,7 @@ traits:
   methods: Expert knowledge and literature.
 - var_in: geology
   unit_in: .na
-  trait_name: geology
+  trait_name: geologic_substrate
   entity_type: population
   value_type: mode
   basis_of_value: expert_score

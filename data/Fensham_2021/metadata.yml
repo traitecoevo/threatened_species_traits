@@ -118,6 +118,24 @@ traits:
   replicates: .na
   methods: Expert knowledge.
 substitutions:
+- trait_name: habitat
+  find: wet_eucalypt_forest rainforest
+  replace: rainforest forest_eucalypt_wet
+- trait_name: habitat
+  find: rainforest wet_eucalypt_forest
+  replace: rainforest forest_eucalypt_wet
+- trait_name: habitat
+  find: wet_eucalypt_forest
+  replace: forest_eucalypt_wet
+- trait_name: habitat
+  find: wet_eucalypt_forest
+  replace: forest_eucalypt_wet
+- trait_name: habitat
+  find: rainforest_subtropical_cool
+  replace: rainforest_cool_subtropical
+- trait_name: habitat
+  find: rainforest_littoral wet_eucalypt_forest
+  replace: rainforest_littoral forest_eucalypt_wet
 - trait_name: reproductive_capacity
   find: data deficient
   replace: .na

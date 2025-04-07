@@ -64,7 +64,7 @@ substitutions:
   replace: woodland
 - trait_name: habitat
   find: Eucalyptus_marginata_forest
-  replace: eucalypt_forest
+  replace: forest_eucalypt
 taxonomic_updates: .na
 exclude_observations: .na
 questions: .na

@@ -126,7 +126,7 @@ contexts: .na
 traits:
 - var_in: Granite yes=y
   unit_in: .na
-  trait_name: geology
+  trait_name: geologic_substrate
   entity_type: population
   value_type: mode
   basis_of_value: expert_score
@@ -227,7 +227,7 @@ substitutions:
 - trait_name: resprouting_capacity
   find: seeder
   replace: fire_killed
-- trait_name: geology
+- trait_name: geologic_substrate
   find: 'y'
   replace: granite
 taxonomic_updates:
