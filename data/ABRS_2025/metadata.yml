@@ -1,0 +1,116 @@
+source:
+  primary:
+    key: ABRS_2025
+    bibtype: Online
+    year: 2025
+    author: '{Australian Biological Resources Study}'
+    title: Flora of Australia, Australian Biological Resources Study, Canberra.
+    publisher: Department of Climate Change, Energy, the Environment and Water, Canberra.
+    url: http://www.ausflora.org.au
+    note: accessed on 14 September, 2022.
+contributors:
+  data_collectors:
+  - last_name: Coleman
+    given_name: David
+    ORCID: 0000-0002-1773-6597
+    affiliation: Evolution & Ecology Research Centre, School of Biological, Earth,
+      and Environmental Sciences, UNSW Sydney, Australia
+    notes: Responsible for extracting data from online resource
+    additional_role: contact
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(location_name = "Australia")'
+  collection_date: unknown/2023
+  taxon_name: taxon_name
+  location_name: location_name
+  description: unknown
+  basis_of_record: unknown
+  life_stage: adult
+  sampling_strategy: unknown
+  original_file: unknown
+  notes: unknown
+identifiers: .na
+locations: 
+  Australia:
+    state: NSW, Qld, SA, Tas, Vic, WA, ACT, NT
+contexts: .na
+traits:
+- var_in: 01_plant_growth_substrate_a
+  unit_in: .na
+  trait_name: plant_growth_substrate
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 02_commonness_a
+  unit_in: .na
+  trait_name: commonness
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 03_habitat_moisture_a
+  unit_in: .na
+  trait_name: habitat_moisture
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 04_habitat_topographic_a
+  unit_in: .na
+  trait_name: topographic_position
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 05_habitat_a
+  unit_in: .na
+  trait_name: habitat
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 06_soil_colour_a
+  unit_in: .na
+  trait_name: soil_colour
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 07_substrate_a
+  unit_in: .na
+  trait_name: geologic_substrate
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 08_soil_a
+  unit_in: .na
+  trait_name: soil_type
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 09_soil_moisture_a
+  unit_in: .na
+  trait_name: soil_moisture
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
