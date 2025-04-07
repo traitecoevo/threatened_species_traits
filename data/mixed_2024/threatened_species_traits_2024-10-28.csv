@@ -3,47 +3,46 @@ Typhonium jonesii,pollination_syndrome,insect,,,,SPRAT profile,
 Typhonium jonesii,storage_organ,tuber,,,,SPRAT profile,
 Acacia equisetifolia,resprouting_capacity,fire_killed,,,,NTGov 2021,
 Acacia praetermissa,resprouting_capacity,resprouts,,,,,
-Actinotus schwarzii,reproduction,sexual_reproduction_only,,,,Nano_2008,
-Actinotus schwarzii,fire_response,fire_killed,,,,Nano_2008,
+Actinotus schwarzii,vegetative_reproduction_ability,sexual_reproduction_only,,,,Nano_2008,
+Actinotus schwarzii,resprouting_capacity,fire_killed,,,,Nano_2008,
 Actinotus schwarzii,post_fire_recruitment,weak/no,,,,Nano_2008,
-Actinotus schwarzii,recruitment_cues,,,,,Nano_2008,
 Actinotus schwarzii,leaf_length,4.5,cm,mean,,Nano_2008,
 Actinotus schwarzii,leaf_width,4,cm,mean,,Nano_2008,
-Actinotus schwarzii,leaf_hairiness,dense_tomentum,,,,Nano_2008,
+Actinotus schwarzii,leaf_hairs_adult_leaves,dense_tomentum,,,,Nano_2008,
 Actinotus schwarzii,fruit_length,3.5,mm,mean,,Nano_2008,
 Actinotus schwarzii,fruit_width,1,mm,mean,,Nano_2008,
 Actinotus schwarzii,flowering_time,"July, Oct, Nov, Dec, Jan",,,,Nano_2008,
 Actinotus schwarzii,fruiting_time,Dec,,,,Nano_2008,
-Actinotus schwarzii,leaf_xx,deep narrow segments,,,,Nano_2008,
-Actinotus schwarzii,leaf_surface_colour_upper,dark_grey_green,,,,Nano_2008,
-Actinotus schwarzii,leaf_surface_colour_lower,pale_grey_green,,,,Nano_2008,
+Actinotus schwarzii,leaf_lamina_division,deep narrow segments,,,,Nano_2008,
+Actinotus schwarzii,leaf_surface_colour,dark_grey_green,,,upper_leaf_surface,Nano_2008,
+Actinotus schwarzii,leaf_surface_colour,pale_grey_green,,,lower_leaf_surface,Nano_2008,
 Acacia equisetifolia,leaf_length,10,mm,minimum,,NTGov 2021,
 Acacia equisetifolia,leaf_length,15,mm,maximum,,NTGov 2021,
 Acacia equisetifolia,leaf_shape,needle-like,,,,NTGov 2021,
-Acacia equisetifolia,leaf_hairiness,hairy,,,,NTGov 2021,
+Acacia equisetifolia,leaf_hairs_adult_leaves,hairy,,,,NTGov 2021,
 Acacia equisetifolia,leaf_arrangement,whorl,,,,NTGov 2021,
-Minuria tridens,reproduction,sexual reproduction only,,,,Nano_2008,
-Minuria tridens,dispersal mechanisms,persistent pappus,,,,Nano_2008,
-Minuria tridens,fire_response,resprouts,,,,Nano_2008,
-Olearia macdonnellensis,reproduction,sexual reproduction only,,,,Nano_2008,
-Olearia macdonnellensis,dispersal mechanisms,persistent pappus,,,,Nano_2008,
-Olearia macdonnellensis,fire_response,fire-killed,,,,Nano_2008,
+Minuria tridens,vegetative_reproduction_ability,sexual reproduction only,,,,Nano_2008,
+Minuria tridens,dispersal_appendage,persistent pappus,,,,Nano_2008,
+Minuria tridens,resprouting_capacity,resprouts,,,,Nano_2008,
+Olearia macdonnellensis,vegetative_reproduction_ability,sexual reproduction only,,,,Nano_2008,
+Olearia macdonnellensis,dispersal_appendage,persistent pappus,,,,Nano_2008,
+Olearia macdonnellensis,resprouting_capacity,fire-killed,,,,Nano_2008,
 Olearia macdonnellensis,post_fire_recruitment,weak/no,,,,Nano_2008,
 Eleocharis papillosa,plant_height,10,cm,maximum,,SPRAT profile,
 Eleocharis papillosa,flowering_time,all_year,,,,SPRAT profile,
 Eleocharis papillosa,fruiting_time,all_year,,,,SPRAT profile,
 Eleocharis papillosa,germination_cues,temporary inundation,,,,SPRAT profile,
 Eleocharis papillosa,establishment_cues,temporary inundation,,,,SPRAT profile,
-Eleocharis papillosa,reproduction,sexual_reproduction asexual_reproduction,,,,SPRAT profile,
+Eleocharis papillosa,vegetative_reproduction_ability,sexual_reproduction asexual_reproduction,,,,SPRAT profile,
 Eleocharis papillosa,storage_organ,tuber,,,,SPRAT profile,
 Eleocharis retroflexa,plant_height,10,cm,,,NT_Threatened_species_profile_2021,
-Eleocharis retroflexa,aquatic,stems_submerged,,,,NT_Threatened_species_profile_2021,
+Eleocharis retroflexa,plant_growth_substrate,stems_submerged,,,,NT_Threatened_species_profile_2021,
 Eleocharis retroflexa,stem_shape,four_angled,,,,NT_Threatened_species_profile_2021,
 Eleocharis retroflexa,leaf_type,sheath_only,,,,NT_Threatened_species_profile_2021,
 Eleocharis retroflexa,inflorescence_length,2,mm,minimum,,NT_Threatened_species_profile_2021,
 Eleocharis retroflexa,inflorescence_length,3.5,mm,maximum,,NT_Threatened_species_profile_2021,
-Eleocharis retroflexa,inflorescence_width,1,mm,minimum,,NT_Threatened_species_profile_2021,
-Eleocharis retroflexa,inflorescence_width,2,mm,maximum,,NT_Threatened_species_profile_2021,
+Eleocharis retroflexa,inflorescence_diameter,1,mm,minimum,,NT_Threatened_species_profile_2021,
+Eleocharis retroflexa,inflorescence_diameter,2,mm,maximum,,NT_Threatened_species_profile_2021,
 Eleocharis retroflexa,fruit_type,nut,,,,NT_Threatened_species_profile_2021,
 Eleocharis retroflexa,fruit_colour,white,,,,NT_Threatened_species_profile_2021,
 Eleocharis retroflexa,fruit_length,0.7,mm,maximum,,NT_Threatened_species_profile_2021,
@@ -95,34 +94,34 @@ Typhonium mirabile,fruiting_time,Dec,,,,Liddle_2008,"Liddle, D.T., Gibbons, A. a
 Xylopia monosperma,foliage_time,all_year,,,,Liddle_2008,"Liddle, D.T., Gibbons, A. and Taylor, R. (2008). Recovery plan for the threatened plants of the Tiwi Islands in the Darwin. Northern Territory Department of Natural Resources, Environment and the Arts, Northern Territory of Australia 2008 - 2013."
 Burmannia sp. Bathurst Island (R.Fensham 1021),plant_height,12,cm,maximum,,NT_Threatened_species_profile_2021,
 Burmannia sp. Bathurst Island (R.Fensham 1021),leaf_type,leafless,,,,NT_Threatened_species_profile_2021,
-Burmannia sp. Bathurst Island (R.Fensham 1021),photosynthetic_xx,saprophyte,,,,NT_Threatened_species_profile_2021,
+Burmannia sp. Bathurst Island (R.Fensham 1021),plant_alternative_energy_and_nutrient_acquisition_strategy,saprophyte,,,,NT_Threatened_species_profile_2021,
 Burmannia sp. Bathurst Island (R.Fensham 1021),storage_organ,tuber,,,,NT_Threatened_species_profile_2021,
 Burmannia sp. Bathurst Island (R.Fensham 1021),life_history,perennial,,,,NT_Threatened_species_profile_2021,
-Macrozamia macdonnellii,pollinator_system,thirps,,,,Mound_2001,"Mound, L.A., and Terry, I. 2001. Thrips pollination of the central Australian cycad, Macrozamia macdonnellii (Cycadales). International Journal of Plant Sciences 162, 147-154."
-Macrozamia macdonnellii,dispersal mechanisms,rock wallaby,,,,Mound_2001,"Mound, L.A., and Terry, I. 2001. Thrips pollination of the central Australian cycad, Macrozamia macdonnellii (Cycadales). International Journal of Plant Sciences 162, 147-154."
-Macrozamia macdonnellii,recruitment_cues,flood; exceptional_rain,,,,Mound_2001,"Mound, L.A., and Terry, I. 2001. Thrips pollination of the central Australian cycad, Macrozamia macdonnellii (Cycadales). International Journal of Plant Sciences 162, 147-154."
+Macrozamia macdonnellii,pollination_system,thirps,,,,Mound_2001,"Mound, L.A., and Terry, I. 2001. Thrips pollination of the central Australian cycad, Macrozamia macdonnellii (Cycadales). International Journal of Plant Sciences 162, 147-154."
+Macrozamia macdonnellii,dispersal_appendage,rock wallaby,,,,Mound_2001,"Mound, L.A., and Terry, I. 2001. Thrips pollination of the central Australian cycad, Macrozamia macdonnellii (Cycadales). International Journal of Plant Sciences 162, 147-154."
+Macrozamia macdonnellii,germination_cues,flood; exceptional_rain,,,,Mound_2001,"Mound, L.A., and Terry, I. 2001. Thrips pollination of the central Australian cycad, Macrozamia macdonnellii (Cycadales). International Journal of Plant Sciences 162, 147-154."
 Macrozamia macdonnellii,sex_type,dioecious,,,,NT_Threatened_species_profile_2021,
 Macrozamia macdonnellii,plant_height,2,m,maximum,,NT_Threatened_species_profile_2021,
 Macrozamia macdonnellii,plant_height,4,m,extreme_max,,NT_Threatened_species_profile_2021,
 Macrozamia macdonnellii,seed_colour,red,,,,NT_Threatened_species_profile_2021,
-Macrozamia macdonnellii,growth_habit,erect procumbent,,,,NT_Threatened_species_profile_2021,
+Macrozamia macdonnellii,stem_growth_habit,erect procumbent,,,,NT_Threatened_species_profile_2021,
 Macrozamia macdonnellii,fruiting_time,all_year,,,,NT_Threatened_species_profile_2021,
 Macrozamia macdonnellii,resprouting_capacity,resprouts,,,,NT_Threatened_species_profile_2021,
-Macrozamia macdonnellii,seed_longevity,ephermal (prone to desiccation),,,,NT_Threatened_species_profile_2021,
+Macrozamia macdonnellii,seedbank_longevity_class,ephermal (prone to desiccation),,,,NT_Threatened_species_profile_2021,
 Atalaya brevialata,flower_colour,creamy white,,,,"Cowie and Stuckey, 2012","Cowie, I.D. & Stuckey, B. (2012). Atalaya brevialata (Sapindaceae), a new species from the Northern Territory, Australia. Nuytsia 22(6): 363–370."
-Atalaya brevialata,flower_width,8,mm,maximum,,"Cowie and Stuckey, 2012","Cowie, I.D. & Stuckey, B. (2012). Atalaya brevialata (Sapindaceae), a new species from the Northern Territory, Australia. Nuytsia 22(6): 363–370."
+Atalaya brevialata,flower_diameter,8,mm,maximum,,"Cowie and Stuckey, 2012","Cowie, I.D. & Stuckey, B. (2012). Atalaya brevialata (Sapindaceae), a new species from the Northern Territory, Australia. Nuytsia 22(6): 363–370."
 Atalaya brevialata,inflorescence_type,panicle corymb,,,,"Cowie and Stuckey, 2012","Cowie, I.D. & Stuckey, B. (2012). Atalaya brevialata (Sapindaceae), a new species from the Northern Territory, Australia. Nuytsia 22(6): 363–370."
 Atalaya brevialata,reproductive_maturity,2--3,a,range,,Threatened Species Scientific Committee 2013,Environment Protection and Biodiversity Conservation Act 1999 (EPBC Act) (s266B) Approved Conservation Advice for Atalaya brevialata (a shrub) - 2013
 Atalaya brevialata,seed_dispersal_ability,retricted,,,,Threatened Species Scientific Committee 2013,Environment Protection and Biodiversity Conservation Act 1999 (EPBC Act) (s266B) Approved Conservation Advice for Atalaya brevialata (a shrub) - 2013
 Atalaya brevialata,flowering_time,"Oct, Nov",,,,"Cowie and Stuckey, 2012","Cowie, I.D. & Stuckey, B. (2012). Atalaya brevialata (Sapindaceae), a new species from the Northern Territory, Australia. Nuytsia 22(6): 363–370."
 Atalaya brevialata,fruiting_time,Nov,,,,"Cowie and Stuckey, 2012","Cowie, I.D. & Stuckey, B. (2012). Atalaya brevialata (Sapindaceae), a new species from the Northern Territory, Australia. Nuytsia 22(6): 363–370."
 Toechima sp. East Alligator (J.Russell-Smith 8418),plant_height,5,m,maximum,,NT_Threatened_species_profile_2021,
-Toechima sp. East Alligator (J.Russell-Smith 8418),growth_habit,multi-stemmed erect,,,,NT_Threatened_species_profile_2021,
+Toechima sp. East Alligator (J.Russell-Smith 8418),stem_growth_habit,multi-stemmed erect,,,,NT_Threatened_species_profile_2021,
 Toechima sp. East Alligator (J.Russell-Smith 8418),plant_height,15,m,extreme_max,,NT_Threatened_species_profile_2021,
 Toechima sp. East Alligator (J.Russell-Smith 8418),bark_texture,smooth,,,,NT_Threatened_species_profile_2021,
 Toechima sp. East Alligator (J.Russell-Smith 8418),bark_colour,light grey-brown,,,,NT_Threatened_species_profile_2021,
 Toechima sp. East Alligator (J.Russell-Smith 8418),dispersal_appendage,aril,,,,NT_Threatened_species_profile_2021,
-Toechima sp. East Alligator (J.Russell-Smith 8418),fruit_color,red,,,,NT_Threatened_species_profile_2021,
+Toechima sp. East Alligator (J.Russell-Smith 8418),fruit_colour,red,,,,NT_Threatened_species_profile_2021,
 Toechima sp. East Alligator (J.Russell-Smith 8418),dispersers,birds,,,,NT_Threatened_species_profile_2021,
 Toechima sp. East Alligator (J.Russell-Smith 8418),bud_bank_location,rhizome,,,,NT_Threatened_species_profile_2021,
 Clausena excavata,leaflet_count,10--30,{count}',range,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
@@ -130,7 +129,7 @@ Clausena excavata,leaflet_length,3,cm,minimum,,NT_Threatened_species_profile_202
 Clausena excavata,leaflet_length,6,cm,maximum,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
 Clausena excavata,leaflet_width,1.5,cm,mean,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
 Clausena excavata,leaf_aroma,aniseed sarsaparilla,,,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
-Clausena excavata,leaf_hairiness,finel_hairy,,,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
+Clausena excavata,leaf_hairs_adult_leaves,finel_hairy,,,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
 Clausena excavata,flower_colour,green cream,,,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
 Clausena excavata,inflorescence_type,compound,,,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
 Clausena excavata,fruit_fleshiness,fleshy,,,,NT_Threatened_species_profile_2021,https://nt.gov.au/__data/assets/pdf_file/0004/208426/clausena-excavata.pdf
@@ -140,7 +139,7 @@ Clausena excavata,bud_bank_location,basal_buds bud-bearing_root,,,,NT_Threatened
 Tarennoidea wallichii,bark_texture,smooth,,,,NT_Threatened_species_profile_2021,
 Tarennoidea wallichii,bark_colour,grey,,,,NT_Threatened_species_profile_2021,
 Tarennoidea wallichii,leaf_arrangement,opposite,,,,NT_Threatened_species_profile_2021,
-Tarennoidea wallichii,leaf_lumXX,glossy,,,,NT_Threatened_species_profile_2021,
+Tarennoidea wallichii,seed_surface_reflectivity,shiny,,,,NT_Threatened_species_profile_2021,
 Tarennoidea wallichii,flower_colour,white,,,,NT_Threatened_species_profile_2021,
 Tarennoidea wallichii,fruit_shape,ovoiv subglobose,,,,NT_Threatened_species_profile_2021,
 Tarennoidea wallichii,flowering_time,Oct,,,,NT_Threatened_species_profile_2021,
@@ -152,7 +151,7 @@ Clematis decipiens,awn_length,1.5,cm,minimum,,NT_Threatened_species_profile_2021
 Clematis decipiens,awn_length,3.5,cm,maximum,,NT_Threatened_species_profile_2021,
 Hibiscus cravenii,flowering_time,"Jun, Jul, Oct, Dec",,,,NT_Threatened_species_profile_2021,
 Hibiscus cravenii,fruiting_time,"Jun, Oct, Dec",,,,NT_Threatened_species_profile_2021,
-Hibiscus cravenii,stem_hairiness,dense_hairs,,,,NT_Threatened_species_profile_2021,
+Hibiscus cravenii,stem_hairs,dense_hairs,,,,NT_Threatened_species_profile_2021,
 Hibiscus cravenii,stem_hair_type,stellate,,,,NT_Threatened_species_profile_2021,
 Hibiscus cravenii,post_fire_recruitment,post_fire_recruitment,,,,NT_Threatened_species_profile_2021,
 Hibiscus cravenii,resprouting_capacity,resprouts,,,,NT_Threatened_species_profile_2021,
@@ -161,13 +160,13 @@ Eremophila prostrata,fruiting_time,"Jan-Apr, Aug-Dec",,,,NT_Threatened_species_p
 Eremophila prostrata,flower_colour,purple cream_white,,,,NT_Threatened_species_profile_2021,
 Eremophila prostrata,lifespan,2--10,a,range,,NT_Threatened_species_profile_2021,
 Eremophila prostrata,resprouting_capacity_non_fire_disturbance,resprouts_after_drought,,,,NT_Threatened_species_profile_2021,
-Eremophila prostrata,germination_cue,fire flooding mechanical_effects,,,,NT_Threatened_species_profile_2021,
+Eremophila prostrata,germination_cues,fire flooding mechanical_effects,,,,NT_Threatened_species_profile_2021,
 Eremophila prostrata,seedbank_longevity_class,persistent,,,,NT_Threatened_species_profile_2021,
 Helicteres macrothrix,flowering_time,"Jan, Sep-Nov",,,,NT_Threatened_species_profile_2021,
 Helicteres macrothrix,fruiting_time,"Jan, Mar, Oct-Nov",,,,NT_Threatened_species_profile_2021,
 Helicteres macrothrix,flower_colour,pink purple,,,,NT_Threatened_species_profile_2021,
 Helicteres macrothrix,fruit_colour,green,,,,NT_Threatened_species_profile_2021,
-Helicteres macrothrix,fruit_hairiness,wooly_hairy,,,,NT_Threatened_species_profile_2021,
+Helicteres macrothrix,fruit_surface_hairs,wooly_hairy,,,,NT_Threatened_species_profile_2021,
 Prostanthera schultzii,leaf_width,4,mm,minimum,,NT_Threatened_species_profile_2021,
 Prostanthera schultzii,leaf_width,8,mm,maximum,,NT_Threatened_species_profile_2021,
 Prostanthera schultzii,flower_perianth_symmetry,zygomorphic,,,,NT_Threatened_species_profile_2021,
@@ -185,8 +184,8 @@ Hibiscus brennanii,leaf_length,3,mm,minimum,,NT_Threatened_species_profile_2021,
 Hibiscus brennanii,leaf_length,9,mm,maximum,,NT_Threatened_species_profile_2021,
 Hibiscus brennanii,leaf_width,2,mm,minimum,,NT_Threatened_species_profile_2021,
 Hibiscus brennanii,leaf_width,5,mm,maximum,,NT_Threatened_species_profile_2021,
-Hibiscus brennanii,leaf_surface_hairiness_adaxial,appressed_pubescent,,,,NT_Threatened_species_profile_2021,
-Hibiscus brennanii,leaf_surface_hairiness_abaxial,ciliolate_scaly,,,,NT_Threatened_species_profile_2021,
+Hibiscus brennanii,leaf_hairs_adult_leaves,appressed_pubescent,,,adaxial_surface,NT_Threatened_species_profile_2021,
+Hibiscus brennanii,leaf_hairs_adult_leaves,ciliolate_scaly,,,abaxial_surface,NT_Threatened_species_profile_2021,
 Hibiscus brennanii,flower_colour,yellow,,,,NT_Threatened_species_profile_2021,
 Hibiscus brennanii,flowering_time,Mar-May,,,,NT_Threatened_species_profile_2021,
 Hibiscus brennanii,fruiting_time,Mar-May,,,,NT_Threatened_species_profile_2021,
@@ -195,11 +194,11 @@ Hibiscus brennanii,resprouting_capacity,fire_killed,,,,NT_Threatened_species_pro
 Elaeocarpus miegei,petal_length,5,mm,mean,,NT_Threatened_species_profile_2021,
 Ricinocarpos gloria-medii,flowering_time,May-Oct,,,,NT_Threatened_species_profile_2021,
 Ricinocarpos gloria-medii,fruiting_time,Jul-Oct,,,,NT_Threatened_species_profile_2021,
-Ricinocarpos gloria-medii,leaf_surface_hairiness_adaxial,stellate_hairs,,,,NT_Threatened_species_profile_2021,
-Ricinocarpos gloria-medii,leaf_surface_hairiness_abaxial,stellate_hairs,,,,NT_Threatened_species_profile_2021,
-Ricinocarpos gloria-medii,leaf_colour,grey_green,,,,NT_Threatened_species_profile_2021,
+Ricinocarpos gloria-medii,leaf_hairs_adult_leaves,stellate_hairs,,,adaxial_surface,NT_Threatened_species_profile_2021,
+Ricinocarpos gloria-medii,leaf_hairs_adult_leaves,stellate_hairs,,,abaxial_surface,NT_Threatened_species_profile_2021,
+Ricinocarpos gloria-medii,leaf_surface_colour,grey_green,,,,NT_Threatened_species_profile_2021,
 Ricinocarpos gloria-medii,flower_colour,white_cream,,,,NT_Threatened_species_profile_2021,
-Ricinocarpos gloria-medii,fruit_hairiness,tomentose stellate_hairs,,,,NT_Threatened_species_profile_2021,
+Ricinocarpos gloria-medii,fruit_surface_hairs,tomentose stellate_hairs,,,,NT_Threatened_species_profile_2021,
 Hibiscus brennanii,fire_exposure_level,fire_avoidance_among_rocks,,,,NT_Threatened_species_profile_2021,
 Ricinocarpos gloria-medii,fire_exposure_level,fire_avoidance_among_rocks,,,,NT_Threatened_species_profile_2021,
 Acacia peuce,bark_colour,grey-brown,,,,NT_Threatened_species_profile_2021,
@@ -235,16 +234,16 @@ Typhonium mirabile,leaf_phenology,drought_deciduous,,,,SPRAT profile,
 Typhonium mirabile,plant_growth_form,geophyte,,,,SPRAT profile,
 Typhonium mirabile,fruiting_time,Dec,,,,SPRAT profile,
 Typhonium mirabile,flowering_time,Oct-Nov,,,,SPRAT profile,
-Typhonium mirabile,tuber_width,8,mm,mean,,SPRAT profile,
-Typhonium mirabile,tuber_length,12,mm,mean,,SPRAT profile,
-Typhonium taylorii,tuber_width,1,cm,mean,,SPRAT profile,
-Typhonium taylorii,tuber_length,1,cm,mean,,SPRAT profile,
+Typhonium mirabile,storage_organ_diameter,8,mm,mean,,SPRAT profile,
+Typhonium mirabile,storage_organ_length,12,mm,mean,,SPRAT profile,
+Typhonium taylorii,storage_organ_diameter,1,cm,mean,,SPRAT profile,
+Typhonium taylorii,storage_organ_length,1,cm,mean,,SPRAT profile,
 Typhonium taylorii,leaf_phenology,drought_deciduous,,,,SPRAT profile,
 Typhonium taylorii,plant_growth_form,geophyte,,,,SPRAT profile,
 Typhonium taylorii,pollination_syndrome,insect,,,,SPRAT profile,
 Typhonium taylorii,flowering_time,Jan,,,,SPRAT profile,
 Mitrella tiwiensis,flower_colour,pink orange,,,,SPRAT profile,
-Mitrella tiwiensis,vine_height,10,mm,mean,,SPRAT profile,
+Mitrella tiwiensis,climbing_plant_height,10,mm,mean,,SPRAT profile,
 Mitrella tiwiensis,leaf_glaucousness,glaucous,,,leaf surface: lower leaf surface,SPRAT profile,
 Mitrella tiwiensis,leaf_glaucousness,shiny,,,leaf surface: upper leaf surface,SPRAT profile,
 Mitrella tiwiensis,fruit_type,berry,,,,SPRAT profile,
@@ -262,9 +261,9 @@ Seringia exastia,leaf_width,6,mm,minimum,,WAH_2023,"C. Hollister and K.R. Thiele
 Seringia exastia,leaf_width,10,mm,maximum,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
 Seringia exastia,leaf_margin,entire,,,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
 Seringia exastia,flower_colour,purple,,,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
-Seringia exastia,flower_width,7,mm,minimum,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
-Seringia exastia,flower_width,8,mm,maximum,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
-Seringia exastia,stem_hairiness,hairy,,,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
+Seringia exastia,flower_diameter,7,mm,minimum,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
+Seringia exastia,flower_diameter,8,mm,maximum,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
+Seringia exastia,stem_hairs,hairy,,,,WAH_2023,"C. Hollister and K.R. Thiele, 11 August 2023: https://florabase.dbca.wa.gov.au/browse/profile/46817"
 Tephrosia andrewii ,resprouting_capacity,resprouts,,,,Markey_2018,Targeted Rare and Priority Flora Survey: La Grange Project Area. Progress Report 2017.
 Terminalia kumpaja,resprouting_capacity,resprouts,,,,Markey_2018,Targeted Rare and Priority Flora Survey: La Grange Project Area. Progress Report 2017.
 Croton aridus,resprouting_capacity,resprouts,,,,Markey_2018,Targeted Rare and Priority Flora Survey: La Grange Project Area. Progress Report 2017.
@@ -280,7 +279,7 @@ Boronia viridiflora,plant_height,1.5,mm,minimum,,Liddle_2006,"Liddle, D.T. and G
 Boronia viridiflora,fire_exposure_level,fire_avoidance_among_rocks,,,,Liddle_2006,"Liddle, D.T. and Gibbons, A. (2006). National recovery plan for Boronia quadrilata and Boronia viridiflora in the Northern Territory of Australia. Northern Territory Department of Natural Resources, Environment and the Arts, Darwin"
 Stylidium ensatum,plant_height,14,cm,minimum,,Dept of Env listing advice,
 Stylidium ensatum,plant_height,22,cm,maximum,,Dept of Env listing advice,
-Stylidium ensatum,growth_habit,erect procumbent,,,,Dept of Env listing advice,
+Stylidium ensatum,stem_growth_habit,erect procumbent,,,,Dept of Env listing advice,
 Stylidium ensatum,leaf_shape,obovate orbicular,,,,Dept of Env listing advice,
 Stylidium ensatum,leaf_count,6,{count}',minimum,,Dept of Env listing advice,
 Stylidium ensatum,leaf_count,17,{count}',maximum,,Dept of Env listing advice,
@@ -295,29 +294,29 @@ Stylidium ensatum,inflorescence_length,16,cm,maximum,,Dept of Env listing advice
 Stylidium ensatum,flower_colour,pink mauve,,,,Dept of Env listing advice,
 Stylidium ensatum,flowering_time,"Jun, Jul",,,,Dept of Env listing advice,
 Pandanus spiralis var. flammeus,clonal_spread_mechanism,root_buds,,,,WA Govt 2011,"WA Govt 2011, INTERIM RECOVERY PLAN NO. 313 Edgar Range Pandanus (Pandanus spiralis var. flammeus) INTERIM RECOVERY PLAN 2011-2016"
-Pandanus spiralis var. flammeus,germination_time,5--7,weeks,range,,WA Govt 2011,"WA Govt 2011, INTERIM RECOVERY PLAN NO. 313 Edgar Range Pandanus (Pandanus spiralis var. flammeus) INTERIM RECOVERY PLAN 2011-2016"
+Pandanus spiralis var. flammeus,seed_germination_time,5--7,weeks,range,,WA Govt 2011,"WA Govt 2011, INTERIM RECOVERY PLAN NO. 313 Edgar Range Pandanus (Pandanus spiralis var. flammeus) INTERIM RECOVERY PLAN 2011-2016"
 Pandanus spiralis var. flammeus,seedbank_longevity_class,transient ,,,,WA Govt 2011,"WA Govt 2011, INTERIM RECOVERY PLAN NO. 313 Edgar Range Pandanus (Pandanus spiralis var. flammeus) INTERIM RECOVERY PLAN 2011-2016"
 Pandanus spiralis var. flammeus,seed_dormancy_class,non_dormant,,,,WA Govt 2011,"WA Govt 2011, INTERIM RECOVERY PLAN NO. 313 Edgar Range Pandanus (Pandanus spiralis var. flammeus) INTERIM RECOVERY PLAN 2011-2016"
 Pandanus spiralis var. flammeus,vegetative_reproduction_ability,vegetative,,,,WA Govt 2011,"WA Govt 2011, INTERIM RECOVERY PLAN NO. 313 Edgar Range Pandanus (Pandanus spiralis var. flammeus) INTERIM RECOVERY PLAN 2011-2016"
 Pandanus spiralis var. flammeus,resprouting_capacity,resprouts,,,fire intensity: low to moderate fire intensity,WA Govt 2011,"WA Govt 2011, INTERIM RECOVERY PLAN NO. 313 Edgar Range Pandanus (Pandanus spiralis var. flammeus) INTERIM RECOVERY PLAN 2011-2016"
 Acacia auratiflora,flowering_time,"Jun, Jul, Aug",,,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
-Acacia auratiflora,stem_hairiness,golden_hairs white_hairs,,,stem type: branchlets,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
-Acacia auratiflora,leaf_colour,pale_green,,,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
+Acacia auratiflora,stem_hairs,golden_hairs white_hairs,,,stem type: branchlets,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
+Acacia auratiflora,leaf_surface_colour,pale_green,,,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
 Acacia auratiflora,flower_colour,golden,,,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
-Acacia auratiflora,fruit_hairiness,dense_hairs fine_hairs golden_hairs,,,fruit age: young fruit,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
+Acacia auratiflora,fruit_surface_hairs,dense_hairs fine_hairs golden_hairs,,,fruit age: young fruit,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
 Acacia auratiflora,seed_germination,0.05--0.19,{count}/{count},range,germination treatment: boiling water treatment,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
 Acacia auratiflora,seed_germination,0.94,,,germination treatment: nicking treatment,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
 Acacia auratiflora,seed_germination_treatment,scarify,,,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
 Acacia auratiflora,resprouting_capacity,unknown,,,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
-Acacia auratiflora,flower_width,6,mm,minimum,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
-Acacia auratiflora,flower_width,7,mm,maximum,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
+Acacia auratiflora,flower_diameter,6,mm,minimum,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
+Acacia auratiflora,flower_diameter,7,mm,maximum,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
 Acacia auratiflora,inflorescence_shape,globular_heads,,,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
 Acacia auratiflora,inflorescence_type,raceme,,,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
-Acacia auratiflora,flowers_per_inflorescence,32,{count}',minimum,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
-Acacia auratiflora,flowers_per_inflorescence,42,{count}',maximum,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
-Wurmbea tubulosa,flower_count,1--16,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
-Wurmbea tubulosa,flower_width,6--7 mm,,,plant sex: male plants,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
-Wurmbea tubulosa,flower_width,9--12 mm,,,plant sex: female plants & andromonoecious plants ,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
+Acacia auratiflora,buds_per_inflorescence,32,{count}',minimum,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
+Acacia auratiflora,buds_per_inflorescence,42,{count}',maximum,,WA Govt 1999 (Stack & Brown),"WA Govt 1999, INTERIM RECOVERY PLAN NO. 23 ORANGE-FLOWERED WATTLE (ACACIA AURATIFLORA MS) INTERIM RECOVERY PLAN 1999-2002 by Gillian Stack and Andrew Brown"
+Wurmbea tubulosa,flower_count_maximum,1--16,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
+Wurmbea tubulosa,flower_diameter,6--7 mm,,,plant sex: male plants,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
+Wurmbea tubulosa,flower_diameter,9--12 mm,,,plant sex: female plants & andromonoecious plants ,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
 Wurmbea tubulosa,flower_colour,white,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
 Wurmbea tubulosa,storage_organ,corm,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
 Wurmbea tubulosa,storage_organ_shape,ellipsoid,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
@@ -326,7 +325,7 @@ Wurmbea tubulosa,seed_colour,brown,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVE
 Wurmbea tubulosa,leaf_phenology,geophyte_emerges_winter_rains,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
 Wurmbea tubulosa,plant_growth_form,geophyte,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
 Wurmbea tubulosa,flowering_time,"Jun, Jul",,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
-Wurmbea calcicola,flower_count,2--5,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 216 NATURALISTE NANCY (WURMBEA CALCICOLA) INTERIM RECOVERY PLAN 2004-2009 (Heather Taylor, Val English and Andrew Webb)"
+Wurmbea calcicola,flower_count_maximum,2--5,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 216 NATURALISTE NANCY (WURMBEA CALCICOLA) INTERIM RECOVERY PLAN 2004-2009 (Heather Taylor, Val English and Andrew Webb)"
 Wurmbea calcicola,flower_colour,white,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 216 NATURALISTE NANCY (WURMBEA CALCICOLA) INTERIM RECOVERY PLAN 2004-2009 (Heather Taylor, Val English and Andrew Webb)"
 Wurmbea calcicola,sex_type,hermaphrodite,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 216 NATURALISTE NANCY (WURMBEA CALCICOLA) INTERIM RECOVERY PLAN 2004-2009 (Heather Taylor, Val English and Andrew Webb)"
 Wurmbea calcicola,flower_length,11--15.5,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 216 NATURALISTE NANCY (WURMBEA CALCICOLA) INTERIM RECOVERY PLAN 2004-2009 (Heather Taylor, Val English and Andrew Webb)"
@@ -340,7 +339,7 @@ Wurmbea calcicola,flowering_cues,fire,,,,WA Govt 2005,"WA Govt 2005, INTERIM REC
 Wurmbea tubulosa,fire_exposure_level,seasonal_fire_avoidance,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 190 LONG-FLOWERED NANCY (Wurmbea tubulosa) INTERIM RECOVERY PLAN 2004-2009"
 Wurmbea calcicola,fire_exposure_level,seasonal_fire_avoidance,,,,WA Govt 2005,"WA Govt 2005, INTERIM RECOVERY PLAN NO. 216 NATURALISTE NANCY (WURMBEA CALCICOLA) INTERIM RECOVERY PLAN 2004-2009 (Heather Taylor, Val English and Andrew Webb)"
 Verticordia staminosa subsp. staminosa,seed_viability,0.32--0.72,,,,WA Govt 2001,WA Govt 2001 INTERIM RECOVERY PLAN NO. 90 WONGAN FEATHERFLOWER (VERTICORDIA STAMINOSA SUBSP. STAMINOSA) INTERIM RECOVERY PLAN 2001-2004 Rebecca Evans & Andrew Brown
-Verticordia staminosa subsp. staminosa,stem_hairiness,hairy,,,stem type: branchlets,WA Govt 2001,WA Govt 2001 INTERIM RECOVERY PLAN NO. 90 WONGAN FEATHERFLOWER (VERTICORDIA STAMINOSA SUBSP. STAMINOSA) INTERIM RECOVERY PLAN 2001-2004 Rebecca Evans & Andrew Brown
+Verticordia staminosa subsp. staminosa,stem_hairs,hairy,,,stem type: branchlets,WA Govt 2001,WA Govt 2001 INTERIM RECOVERY PLAN NO. 90 WONGAN FEATHERFLOWER (VERTICORDIA STAMINOSA SUBSP. STAMINOSA) INTERIM RECOVERY PLAN 2001-2004 Rebecca Evans & Andrew Brown
 Verticordia staminosa subsp. staminosa,leaf_length,1.5,cm,maximum,,WA Govt 2001,WA Govt 2001 INTERIM RECOVERY PLAN NO. 90 WONGAN FEATHERFLOWER (VERTICORDIA STAMINOSA SUBSP. STAMINOSA) INTERIM RECOVERY PLAN 2001-2004 Rebecca Evans & Andrew Brown
 Verticordia staminosa subsp. staminosa,flower_length,5 mm,,,,WA Govt 2001,WA Govt 2001 INTERIM RECOVERY PLAN NO. 90 WONGAN FEATHERFLOWER (VERTICORDIA STAMINOSA SUBSP. STAMINOSA) INTERIM RECOVERY PLAN 2001-2004 Rebecca Evans & Andrew Brown
 Verticordia staminosa subsp. staminosa,flower_colour,yellow,,,,WA Govt 2001,WA Govt 2001 INTERIM RECOVERY PLAN NO. 90 WONGAN FEATHERFLOWER (VERTICORDIA STAMINOSA SUBSP. STAMINOSA) INTERIM RECOVERY PLAN 2001-2004 Rebecca Evans & Andrew Brown
@@ -371,13 +370,13 @@ Daviesia cunderdin,lifespan,10,a,maximum,,WA Govt 2008,WA Govt 2008 INTERIM RECO
 Daviesia cunderdin,inflorescence_type,solitary_flowers,,,,WA Govt 2008,WA Govt 2008 INTERIM RECOVERY PLAN NO. 267 CUNDERDIN DAVIESIA (Daviesia cunderdin) INTERIM RECOVERY PLAN 2008-2013 Department of Environment and Conservation Kensington
 Daviesia cunderdin,flower_length,12,mm,minimum,,WA Govt 2008,WA Govt 2008 INTERIM RECOVERY PLAN NO. 267 CUNDERDIN DAVIESIA (Daviesia cunderdin) INTERIM RECOVERY PLAN 2008-2013 Department of Environment and Conservation Kensington
 Daviesia cunderdin,flower_length,15,mm,maximum,,WA Govt 2008,WA Govt 2008 INTERIM RECOVERY PLAN NO. 267 CUNDERDIN DAVIESIA (Daviesia cunderdin) INTERIM RECOVERY PLAN 2008-2013 Department of Environment and Conservation Kensington
-Daviesia cunderdin,flower_width,12,mm,minimum,,WA Govt 2008,WA Govt 2008 INTERIM RECOVERY PLAN NO. 267 CUNDERDIN DAVIESIA (Daviesia cunderdin) INTERIM RECOVERY PLAN 2008-2013 Department of Environment and Conservation Kensington
-Daviesia cunderdin,flower_width,14,mm,maximum,,WA Govt 2008,WA Govt 2008 INTERIM RECOVERY PLAN NO. 267 CUNDERDIN DAVIESIA (Daviesia cunderdin) INTERIM RECOVERY PLAN 2008-2013 Department of Environment and Conservation Kensington
+Daviesia cunderdin,flower_diameter,12,mm,minimum,,WA Govt 2008,WA Govt 2008 INTERIM RECOVERY PLAN NO. 267 CUNDERDIN DAVIESIA (Daviesia cunderdin) INTERIM RECOVERY PLAN 2008-2013 Department of Environment and Conservation Kensington
+Daviesia cunderdin,flower_diameter,14,mm,maximum,,WA Govt 2008,WA Govt 2008 INTERIM RECOVERY PLAN NO. 267 CUNDERDIN DAVIESIA (Daviesia cunderdin) INTERIM RECOVERY PLAN 2008-2013 Department of Environment and Conservation Kensington
 Daviesia bursarioides,flowering_time,Jul-Sep,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,stem_growth_habit,straggling divaricately_branching,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,leaf_arrangement,scattered,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,inflorescence_type,raceme,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
-Daviesia bursarioides,flowerers_per_inflorescence,3--8,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
+Daviesia bursarioides,buds_per_inflorescence,3--8,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,plant_physical_defence_structures,spine,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,flower_colour,yellow maroon,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,germination_cues,mechanical_soil_disturbance high_light,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
@@ -391,11 +390,11 @@ Daviesia bursarioides,seed_germination,0.5--1,,,seed storage period: seed stored
 Daviesia bursarioides,seed_viability,1,,,seed storage period: fresh seed,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,seed_viability,0.65,,,seed storage period: seed stored for 12 months,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,phytophtera_susceptibility,highly_susceptible,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
-Daviesia bursarioides,leaf_colour,grey_green,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
+Daviesia bursarioides,leaf_surface_colour,grey_green,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,lifespan,10,a,maximum,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Daviesia bursarioides,reproductive_maturity,3:00 AM,,,,WA Govt 2004,"WA Govt 2004 INTERIM RECOVERY PLAN NO. 163 THREE SPRINGS DAVIESIA (DAVIESIA BURSARIOIDES) INTERIM RECOVERY PLAN 2004-2009, Gillian Stack, Gina Broun & Val English"
 Dasymalla axillaris,flowering_time,Jul-Dec,,,,WA Govt 2008,"WA Govt 2008 INTERIM RECOVERY PLAN NO. 284 WOOLLY FOXGLOVE (Pityrodia axillaris) INTERIM RECOVERY PLAN 2008-2013, Department of Environment and Conservation Kensington"
-Dasymalla axillaris,stem_hairiness,dense_hairs woolly_hairs white_hairs,,,,WA Govt 2008,
+Dasymalla axillaris,stem_hairs,dense_hairs woolly_hairs white_hairs,,,,WA Govt 2008,
 Dasymalla axillaris,petiole_length,0 mm,,,,WA Govt 2008,
 Dasymalla axillaris,leaf_shape,egg-shaped,,,,WA Govt 2008,
 Dasymalla axillaris,leaf_length,2 cm,,,,WA Govt 2008,
@@ -408,14 +407,14 @@ Graptophyllum ilicifolium,fruiting_time,"Apr, Jul, Dec",,,,SPRAT profile,http://
 Graptophyllum ilicifolium,clonal_spread_mechanism,adventitious_roots,,,,SPRAT profile,
 Graptophyllum ilicifolium,bud_bank_location,bud-bearing_root,,,,SPRAT profile,
 Graptophyllum ilicifolium,plant_physical_defence_structures,prickly_leaves,,,leaf_age: young leaves,https://apps.des.qld.gov.au/species-search/details/?id=15851,
-Graptophyllum ilicifolium,leaf arrangement,opposite,,,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
+Graptophyllum ilicifolium,leaf_arrangement,opposite,,,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,leaf_surface_reflectivity,shiny,,,leaf surface: upper,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,leaf_surface_reflectivity,dull,,,leaf surface: lower,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,leaf_length,5.5,cm,minimum,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,leaf_length,11.5,cm,maximum,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,leaf_width,3,cm,minimum,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,leaf_width,6,cm,maximum,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
-Graptophyllum ilicifolium,flowers_per_inflorescence,4--6,,,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
+Graptophyllum ilicifolium,buds_per_inflorescence,4--6,,,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,inflorescence_type,flower_cluster,,,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,leaf_margin,toothed_serrate,,,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
 Graptophyllum ilicifolium,leaf_margin_posture,flat,,,,https://apps.des.qld.gov.au/species-search/details/?id=15851,
