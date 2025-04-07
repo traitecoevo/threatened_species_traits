@@ -14,11 +14,10 @@ source:
     issn: 0067-1924
 contributors:
   data_collectors:
-  - last_name: unknown
-    given_name: unknown
-    ORCID: unknown
-    affiliation: unknown
-  assistants: unknown
+  - last_name: Shearer
+    given_name: Bryan L.
+    ORCID: .na
+    affiliation: Department of Environment and Conservation, WA
   dataset_curators: Elizabeth Wenk
 dataset:
   data_is_long_format: no
@@ -65,7 +64,7 @@ substitutions:
   replace: woodland
 - trait_name: habitat
   find: Eucalyptus_marginata_forest
-  replace: eucalypt_forest
+  replace: forest_eucalypt
 taxonomic_updates: .na
 exclude_observations: .na
 questions: .na

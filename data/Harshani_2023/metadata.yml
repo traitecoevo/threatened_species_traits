@@ -26,7 +26,7 @@ dataset:
   basis_of_record: lab
   life_stage: unknown
   sampling_strategy: unknown
-  original_file: unknown
+  original_file: transcribed from publication
   notes: Additional data to add!
 identifiers: .na
 locations: .na
@@ -34,7 +34,7 @@ contexts: .na
 traits:
 - var_in: Deaths of inoculated plants (%)
   unit_in: '%'
-  trait_name: unknown
+  trait_name: phytophthora_cinnamomi_mortality
   entity_type: population
   value_type: mean
   basis_of_value: measurement

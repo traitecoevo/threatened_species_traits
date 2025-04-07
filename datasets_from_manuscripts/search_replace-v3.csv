@@ -1,0 +1,566 @@
+﻿flora_term,match_term,austraits_trait_value,trait_name,sort
+coastal districts,coastaldistricts,XX,00_XX,1
+lost to agricultural ,losttoagricultural,XX,00_XX,1
+not common,notcommon,XX,00_XX,1
+not uncommon,notuncommon,XX,00_XX,1
+not widespread  ,notwidespread  ,XX,00_XX,1
+semi-aquatic,semiaquatic,semiaquatic,01_plant_growth_substrate,10
+sometimes epiphytic,sometimesepiphytic,epiphyte_sometimes,01_plant_growth_substrate,20
+shallow fresh water,shallowfreshwater,aquatic,01_plant_growth_substrate,30
+aquatic,aquatic,aquatic,01_plant_growth_substrate,100
+lithophytic,lithophytic,lithophyte,01_plant_growth_substrate,100
+known from a single locality,knownfromasinglelocality,single_location,02_commonness,1
+locally abundant,locallyabundant,abundant_locally,02_commonness,10
+highly localised,highlylocalised,highly_localised,02_commonness,50
+locally common,locallycommon,common_locally,02_commonness,50
+very rare,veryrare,very_rare,02_commonness,50
+widely distributed,widelydistributed,widespread,02_commonness,50
+abundant,abundant,abundant,02_commonness,100
+common,common,common,02_commonness,100
+localised,localised,localised,02_commonness,100
+rare,rare,rare,02_commonness,100
+scattered,scattered,scattered,02_commonness,100
+sparingly,sparingly,scattered,02_commonness,100
+uncommon,uncommon,uncommon,02_commonness,100
+widespread,widespread,widespread,02_commonness,100
+swamp,swamp,wet,03_habitat_moisture,100
+swampy,swampy,wet,03_habitat_moisture,100
+water logged,waterlogged,wet,03_habitat_moisture,100
+waterlogged,waterlogged,wet,03_habitat_moisture,100
+water-logged,waterlogged,wet,03_habitat_moisture,100
+winterdamp ,winterdamp ,damp,03_habitat_moisture,100
+winterwet,winterwet,winterwet,03_habitat_moisture,100
+arid,arid,arid,03_habitat_moisture,500
+boggy,boggy,wet,03_habitat_moisture,500
+damp,damp,damp,03_habitat_moisture,500
+drier,drier,dry,03_habitat_moisture,500
+dry,dry,dry,03_habitat_moisture,500
+moist,moist,moist,03_habitat_moisture,500
+mud,mud,damp,03_habitat_moisture,500
+seepage,seepage,wet,03_habitat_moisture,500
+semiarid,semiarid,semiarid,03_habitat_moisture,500
+water,water,wet,03_habitat_moisture,500
+waterfall,waterfall,wet,03_habitat_moisture,500
+wet,wet,wet,03_habitat_moisture,500
+gently undulating topography,gentlyundulatingtopography,undulating,04_habitat_topographic,5
+high rocky ground,highrockygroundrocky,ridges,04_habitat_topographic,5
+rocky limestone slopes,limestone rockyslopes,slopes_rocky,04_habitat_topographic,5
+steep rocky slope,steeprockyslope,slopes_rocky slopes_steep,04_habitat_topographic,5
+low-lying areas,low-lyingareas,depressions,04_habitat_topographic,10
+high rocky ground,highgroundrocky,high_ground,04_habitat_topographic,15
+coastal cliff,coastalcliff,cliffs_coastal,04_habitat_topographic,50
+flat country,flatcountry,plains,04_habitat_topographic,50
+gully heads,gullyheads,gully_heads,04_habitat_topographic,50
+lowlying area,lowlyingarea,flats,04_habitat_topographic,50
+mountain ledge,mountainledge,rock_ledge,04_habitat_topographic,50
+near streams,nearstreams,streams,04_habitat_topographic,50
+river flat,riverflat,flats,04_habitat_topographic,50
+river valley,rivervalley,valley,04_habitat_topographic,50
+rocky slope,rockyslope,slopes_rocky,04_habitat_topographic,50
+runoff channel,runoffchannel,gullies,04_habitat_topographic,50
+shallowly inundated,shallowlyinundated,inundated_shallow,04_habitat_topographic,50
+sheltered gullies,shelteredgullies,gullies_sheltered,04_habitat_topographic,50
+steep slope,steepslope,slopes_steep,04_habitat_topographic,50
+undulating topography,undulatingtopography,undulating,04_habitat_topographic,50
+winterwet flat,winterwetflat,flats inundated_intermittent,04_habitat_topographic,50
+breakaway,breakaway,breakaways,04_habitat_topographic,100
+cliff,cliff,cliff,04_habitat_topographic,100
+cliff face,cliffface,cliff,04_habitat_topographic,100
+cliffface,cliffface,cliff,04_habitat_topographic,100
+cliffline,cliffline,clifflines,04_habitat_topographic,100
+coastal,coastal,coastal,04_habitat_topographic,100
+depressions,depressions,depressions,04_habitat_topographic,100
+escarpment,escarpment,escarpments,04_habitat_topographic,100
+flat,flat,flats,04_habitat_topographic,100
+gorges,gorges,gorges,04_habitat_topographic,100
+gullies,gullies,gullies,04_habitat_topographic,100
+gully,gully,gullies,04_habitat_topographic,100
+hill,hill,hills,04_habitat_topographic,100
+hillside,hillside,hills,04_habitat_topographic,100
+hilly,hilly,hills,04_habitat_topographic,100
+lowlying ,lowlying ,flats,04_habitat_topographic,100
+mountain,mountain,mountains,04_habitat_topographic,100
+nearcoatal,nearcoatal,coastal,04_habitat_topographic,100
+outcrop,outcrop,rocky_outcrop,04_habitat_topographic,100
+plain,plains,plains,04_habitat_topographic,100
+plateau,plateau,plateaus,04_habitat_topographic,100
+plateaux,plateaux,plateaus,04_habitat_topographic,100
+ridge,ridge,ridges,04_habitat_topographic,100
+rockysite,rockysite,rocky,04_habitat_topographic,100
+scree,scree,rocky,04_habitat_topographic,100
+seepage,seepage,flats,04_habitat_topographic,100
+seepage,seepage,seepages,04_habitat_topographic,100
+slope,slope,slopes,04_habitat_topographic,100
+streambank,streambank,streambanks,04_habitat_topographic,100
+swale,swale,swales,04_habitat_topographic,100
+tableland,tableland,plateaus,04_habitat_topographic,100
+terrace,terrace,terraces,04_habitat_topographic,100
+undulating,undulating,undulating,04_habitat_topographic,100
+valley,valley,valley,04_habitat_topographic,100
+watercourse,watercourse,watercourses,04_habitat_topographic,100
+alongcreek,alongcreek,streambanks,04_habitat_topographic,500
+alongstream,alongstream,streambanks,04_habitat_topographic,500
+creekbank,creekbank,streambanks,04_habitat_topographic,500
+streambank,streambank,streambanks,04_habitat_topographic,500
+cool- and warm-temperate rainforest,cool-andwarm-temperaterainforest,rainforest_cool_temperate rainforest_warm_temperate,05_habitat,1
+moist places in more open forest,moistplacesinmoreopenforest,forest_open,05_habitat,1
+urban\\s[[:alpha:][:space:]]*parkland,urbanparkland,urban,05_habitat,1
+wet or dry sclerophyll forest,wetordrysclerophyllforest,forest_wet_sclerophyll forest_dry_sclerophyll,05_habitat,1
+dry or wet sclerophyll forest,dryorwetsclerophyllforest,forest_wet_sclerophyll forest_dry_sclerophyll,05_habitat,2
+dry or wet sclerophyll woodland,dryorwetsclerophyllwoodland,woodland_wet_sclerophyll woodland_dry_sclerophyll,05_habitat,2
+Eucalyptus wandoo woodland,Eucalyptus_wandoo_woodland,woodland_wandoo,05_habitat,3
+coastal to montane rainforests,coastaltomontanerainforests,rainforest_montane rainforest_coastal,05_habitat,5
+cool temperate and warm temperate rainforest,cooltemperateandwarmtemperaterainforest,rainforest_cool_temperate rainforest_warm_temperate,05_habitat,5
+dry sclerophyll woodland,drysclerophyllwoodland,woodland_dry_sclerophyll,05_habitat,5
+Eucalyptus salmonophloia woodland,Eucalyptussalmonophloiawoodland,woodland_eucalypt,05_habitat,5
+lowland tropical rainforest,lowlandtropicalrainforest,rainforest_tropical_lowland,05_habitat,5
+moist sclerophyll woodland,moistsclerophyllwoodland,woodland_moist_sclerophyll,05_habitat,5
+montane to subalpine woodland,montanetosubalpinewoodland,woodland_montane woodland_subalpine,05_habitat,5
+montane to subalpine woodland,montanetosubalpinewoodland,woodland_subalpine woodland_montane,05_habitat,5
+sclerophyll forest or woodland,sclerophyllforestorwoodland,woodland_sclerophyll forest_sclerophyll,05_habitat,5
+subalpine Eucalyptus pauciflora woodland,subalpineEucalyptuspauciflorawoodland,woodland_subalpine woodland_eucalypt,05_habitat,5
+subtropical and temperate rainforest,subtropicalandtemperaterainforest,rainforest_temperate rainforest_subtropical,05_habitat,5
+tropical to temperate rainforest,tropicaltotemperaterainforest,rainforest_temperate rainforest_tropical,05_habitat,5
+variety of vegetation type,varietyofvegetationtype,various,05_habitat,5
+warm temperate rainforest,warmtemperaterainforest,rainforest_warm_temperate,05_habitat,5
+warm temperate and cool temperate rainforest,warmtemperateandcooltemperaterainforest,rainforest_cool_temperate rainforest_warm_temperate,05_habitat,5
+wide range of habitat,widerangeofhabitat,various,05_habitat,5
+alpine and subalpine grassland,alpineandsubalpinegrassland,grassland_alpine grassland_subalpine,05_habitat,10
+alpine and subalpine herbfield,alpineandsubalpineherbfield,herbfield_alpine herbfield_subalpine,05_habitat,10
+close to the sea,closetothesea,coastal,05_habitat,10
+moist eucalypt forest,moisteucalyptforest,forest_eucalypt_wet,05_habitat,10
+shore of lake,shoreoflake,lake_margin,05_habitat,10
+tall eucalypt shrubland,talleucalyptshrubland,shrubland_tall,05_habitat,10
+tropical rainforest,tropicalrainforest,rainforest_tropical,05_habitat,10
+warm temperate and subtropicalrainforest ,warmtemperateandsubtropicalrainforest,rainforest_subtropical rainforest_warm_temperate,05_habitat,10
+wet eucalypt forest,weteucalyptforest,forest_eucalypt_wet,05_habitat,10
+woodland heath,woodlandheath,heath woodland,05_habitat,10
+cool temperate rainforest,cooltemperaterainforest,rainforest_cool_temperate,05_habitat,15
+cool-temperate rainforest,cooltemperaterainforest,rainforest_cool_temperate,05_habitat,15
+dry sclerophyll forest,drysclerophyllforest,forest_dry_sclerophyll,05_habitat,15
+fringe of rainforest,fringeofrainforest,rainforest_margin,05_habitat,15
+moist sclerophyll forest,moistsclerophyllforest,forest_moist_sclerophyll,05_habitat,15
+wet sclerophyll forest,wetsclerophyllforest,forest_wet_sclerophyll,05_habitat,15
+wet eucalypt forest,weteucalyptforest,forest_eucalypt_wet,05_habitat,15
+close to the sea ,closetothesea ,coastal,05_habitat,20
+cool subtropical rainforest,coolsubtropicalrainforest,rainforest_cool_subtropical,05_habitat,20
+mallee and heath,malleeandheath,mallee heath,05_habitat,20
+margin of rainforest,marginofrainforest,rainforest_margin,05_habitat,20
+margins of rainforest,marginsofrainforest,rainforest_margin,05_habitat,20
+montane subtropical rainforest,montanesubtropicalrainforest,rainforest_subtropical_upland,05_habitat,20
+near intermittent streams,nearintermittentstreams,creek_intermittent,05_habitat,20
+seasonal creek lines,seasonalcreeklines,creek_intermittent,05_habitat,20
+shallow rock pool,shallowrockpool,rock_pools_shallow,05_habitat,20
+stony lateritic plains,stonylateriticplains,plains_stony lateritic,05_habitat,20
+upland subtropical rainforest,uplandsubtropicalrainforest,rainforest_subtropical_upland,05_habitat,20
+variety of habitat,varietyofhabitat,various,05_habitat,20
+warm-temperate rainforest,warmtemperaterainforest,rainforest_warm_temperate,05_habitat,20
+wet sclerophyll woodland,wetsclerophyllwoodland,woodland_wet_sclerophyll,05_habitat,20
+a range of habitat,arangeofhabitat,various,05_habitat,30
+coastal scrub,coastalscrub,scrubland_coastal,05_habitat,30
+coastal sand dune,coastalsanddune,sanddunes_coastal,05_habitat,30
+coastal sanddune,coastalsanddune,sanddunes_coastal,05_habitat,30
+high tide mark,hightidemark,coastal,05_habitat,30
+mallee shrubland,malleeshrubland,shrubland_mallee,05_habitat,30
+pools in winter,poolsinwinter,inundated_intermittent,05_habitat,30
+range of communities,rangeofcommunities,various,05_habitat,30
+shallow fresh water,shallowfreshwater,aquatic,05_habitat,30
+temperate rainforest,temperaterainforest,rainforest_temperate,05_habitat,30
+variety of communities,varietyofcommunities,various,05_habitat,30
+abandoned garden,abandonedgarden,urban,05_habitat,50
+acacia scrubland,acaciascrubland,scrubland_acacia,05_habitat,50
+adjacent to waterway,adjacenttowaterway,streambanks,05_habitat,50
+along creek,alongcreeks,streambanks,05_habitat,50
+along stream,alongstream,streambanks,05_habitat,50
+along watercourse,alongwatercourse,streambanks,05_habitat,50
+alpine bogs,alpinebogs,bog_alpine,05_habitat,50
+alpine feldmark,alpinefeldmark,feldmark_alpine,05_habitat,50
+alpine grassland,alpinegrassland,grassland_alpine,05_habitat,50
+alpine heath,alpineheath,heath_alpine,05_habitat,50
+alpine herbfield,alpineherbfield,herbfield_alpine,05_habitat,50
+barley field,barleyfield,agricultural,05_habitat,50
+boggy flat,boggyflat,flats_wet,05_habitat,50
+bordering residencies,borderingresidencies,urban,05_habitat,50
+cereal crops,cerealcrops,cropland,05_habitat,50
+chenopod shrubland,chenopodshrublands,shrubland_chenopod,05_habitat,50
+cliff top,clifftop,clifftops,05_habitat,50
+cliff faces,clifffaces,cliffs,05_habitat,50
+closed forest,closedforest,forest_closed,05_habitat,50
+closed heath,closedheath,heath_closed,05_habitat,50
+cloud forest,cloudforest,forest_cloud,05_habitat,50
+coastal dune,coastaldune,sanddunes_coastal,05_habitat,50
+coastal heath,coastalheath,heath_coastal,05_habitat,50
+coastal plains,coastalplains,plains_coastal,05_habitat,50
+coastal cliff,coastalcliff,cliffs_coastal,05_habitat,50
+coastal dune,coastaldune,dunes_coastal,05_habitat,50
+coastal headland,coastalheadland,headland_coastal,05_habitat,50
+coastal heath,coastalheath,heath_coastal,05_habitat,50
+coastal rainforest,coastalrainforest,rainforest_coastal,05_habitat,50
+consolidated dune,consolidateddune,dunes_consolidated,05_habitat,50
+cool rainforest,coolrainforest,rainforest_cool,05_habitat,50
+creek bank,creekbank,streambanks,05_habitat,50
+creek bank,creekbank,streambanks,05_habitat,50
+disturbed area,disturbedarea,disturbed,05_habitat,50
+diverse habitat,diversehabitat,various,05_habitat,50
+dry forest,dryforest,forest_dry,05_habitat,50
+dry sclerophyll,drysclerophyll,dry_sclerophyll,05_habitat,50
+dry woodland,drywoodland,woodland_dry,05_habitat,50
+dry rainforest,dryrainforest,rainforest_dry,05_habitat,50
+dry sclerophyll,drysclerophyll,forest_dry_sclerophyll,05_habitat,50
+ephermeral streams,ephermeralstreams,creek_intermittent,05_habitat,50
+eucalypt forest,eucalyptforest,forest_eucalyptus,05_habitat,50
+eucalypt woodland,eucalyptwoodland,woodland_eucalypt,05_habitat,50
+eucalypt savanna,eucalyptsavanna,savanna_eucalyptus,05_habitat,50
+eucalypt savannah,eucalyptsavannah,savanna_eucalyptus,05_habitat,50
+Eucalypt shrubland,Eucalyptshrubland,shrubland_eucalypt,05_habitat,50
+eucalyptdominated forest,eucalyptdominatedforest,forest_eucalypt,05_habitat,50
+Eucalyptus forest,Eucalyptus forest,forest_eucalypt,05_habitat,50
+Euclyptus woodland,Euclyptuswoodland,woodland_eucalypt,05_habitat,50
+flat terrain,flaterrain,flats,05_habitat,50
+gallery forest,galleryforest,forest_gallery,05_habitat,50
+gallery rainforest,galleryrainforest,rainforest_gallery,05_habitat,50
+grassy flats,grassyflats,grassland,05_habitat,50
+grassy places,grassyplaces,grassland,05_habitat,50
+grassy woodland,grassywoodland,woodland_grassy,05_habitat,50
+grassy flats,grassyflats,grassland,05_habitat,50
+heath scrub,heathscrub,scrubland_heath,05_habitat,50
+heathy scrub,heathscrub,scrubland_heath,05_habitat,50
+high alp,highalp,alpine,05_habitat,50
+high altitude,highaltitude,alpine,05_habitat,50
+highalpine,highalpine,alpine,05_habitat,50
+lake margin,lakemargin,lake_margin,05_habitat,50
+lake shore,lakeshore,lake_margin,05_habitat,50
+littoral forest,littoralforest,rainforest_littoral,05_habitat,50
+littoral rainforest,littoralrainforest,rainforest_littoral,05_habitat,50
+low woodland,lowwoodland,woodland_low,05_habitat,50
+lowland swamp,lowlandswamp,swamp_lowland,05_habitat,50
+lowland forests,lowlandforests,forest_lowland,05_habitat,50
+lowland rainforest,lowlandrainforest,rainforest_lowland,05_habitat,50
+mallee heath,malleeheath,mallee_heath,05_habitat,50
+mallee scrub,malleescrub,shrubland_mallee,05_habitat,50
+marginal rainforest,marginalrainforest,rainforest_margin,05_habitat,50
+mist forest,mistforest,forest_cloud,05_habitat,50
+moist rainforest,moistrainforest,rainforest_moist,05_habitat,50
+monsoon forest,monsoonforest,forest_monsoon,05_habitat,50
+monsoon forest,monsoonforest,forest_monsoon,05_habitat,50
+montane woodland,montanewoodland,woodland_montane,05_habitat,50
+montane rainforest,montanerainforest,rainforest_montane,05_habitat,50
+mountain ranges,mountainranges,montane,05_habitat,50
+mountain summits,mountainsummits,mountain_summits,05_habitat,50
+mulga woodland,mulgawoodland,woodland_mulga,05_habitat,50
+near creek,nearcreek,streambanks,05_habitat,50
+near river,nearriver,streambanks,05_habitat,50
+near stream,nearstream,streambanks,05_habitat,50
+near waterfall,nearwaterfall,streambanks,05_habitat,50
+neglected area,neglectedarea,disturbed,05_habitat,50
+notophyll rainforest,notophyllrainforest,rainforest_notophyll,05_habitat,50
+oat crops ,oatcrops ,cropland,05_habitat,50
+open forest,openforest,forest_open,05_habitat,50
+open scrub,openscrub,scrubland_open,05_habitat,50
+open woodland,openwoodland,woodland_open,05_habitat,50
+open shrubland,openshrubland,shrubland_open,05_habitat,50
+open situations,opensituations,open,05_habitat,50
+openforest,openforest,forest_open,05_habitat,50
+open-forest,openforest,forest_open,05_habitat,50
+periodic inundation,periodicinundation,inundated_intermittent,05_habitat,50
+rain forest,rainforest,rainforest,05_habitat,50
+rainforest margin,rainforestmargin,rainforest_margin,05_habitat,50
+rice growing,ricegrowing,cropland,05_habitat,50
+riparian scrub,riparianscrub,scrubland_riparian,05_habitat,50
+river bank,riverbanks,streambanks,05_habitat,50
+riverbank,riverbanks,streambanks,05_habitat,50
+road verge,roadverge,disturbed,05_habitat,50
+rock crag,rockcrag,rocky_outcrop,05_habitat,50
+rock faces,rockfaces,cliffs,05_habitat,50
+rock crevice,rockcrevice,rocky_outcrop,05_habitat,50
+rocky ground,rockyground,rocky,05_habitat,50
+rocky habitat,rockyhabitat,rocky,05_habitat,50
+rocky outcrop,rockyoutcrop,rocky_outcrop,05_habitat,50
+salt lakes,saltlakes,lakes_salt,05_habitat,50
+salt marsh,saline saltmarsh,marsh_salt,05_habitat,50
+salt marshes,saline saltmarshes,marsh_salt,05_habitat,50
+saltpan,saltpan,saltpan,05_habitat,50
+salt-pan,salt-pan,saltpan,05_habitat,50
+sand dune,sanddune,sanddunes,05_habitat,50
+sclerophyll forest,sclerophyllforest,forest_sclerophyll,05_habitat,50
+sclerophyll woodland,sclerophyllwoodland,woodland_sclerophyll,05_habitat,50
+seasonal creeks,seasonalcreeks,creek_intermittent,05_habitat,50
+seasonal streams,seasonalstreams,creek_intermittent,05_habitat,50
+seasonal creek,seasonalcreek,creek_intermittent,05_habitat,50
+seasonally flooded,seasonallyflooded,inundated_intermittent,05_habitat,50
+semi-aquatic,semiaquatic,semiaquatic,05_habitat,50
+semi-arid woodland,semi-aridwoodland,woodland_semiarid,05_habitat,50
+shallow water,shallowwater,water_shallow,05_habitat,50
+shrub associations,shrubassociations,shrubland,05_habitat,50
+stream bank,streambank,streambanks,05_habitat,50
+streambank,streambank,streambanks,05_habitat,50
+subalpine grassland,subalpinegrassland,grassland_subalpine,05_habitat,50
+subalpine heath,subalpineheath,heath_subalpine,05_habitat,50
+subalpine herbfield,subalpineherbfield,herbfield_subalpine,05_habitat,50
+subalpine forest,subalpineforest,forest_subalpine,05_habitat,50
+subalpine woodland,subalpinewoodland,woodland_subalpine,05_habitat,50
+subcoastal rainforests,subcoastalrainforests,rainforest_subcoastal,05_habitat,50
+swamp forest,swampforest,swamp_forest,05_habitat,50
+swamp margin,swampmargin,swamp_margin,05_habitat,50
+tall shrubland,tallshrubland,shrubland_tall,05_habitat,50
+tidal flat,tidalflat,tidal_flats,05_habitat,50
+tussock grassland,tussockgrassland,grassland_tussock,05_habitat,50
+vacant lot,vacantlot,urban,05_habitat,50
+various habitat,varioushabitat,various,05_habitat,50
+vine thicket,vinethicket,vine_thicket,05_habitat,50
+wandoo woodland,wandoowoodland,woodland_wandoo,05_habitat,50
+waste ground,wasteground,disturbed,05_habitat,50
+water course,watercourse,streambanks,05_habitat,50
+water course,water course,streambanks,05_habitat,50
+weedy place,weedyplace,disturbed,05_habitat,50
+wet forest,wetforest,forest_wet,05_habitat,50
+wet heath,wetheath,heath_wet,05_habitat,50
+wet sclerophyll,wetsclerophyll,wet_sclerophyll,05_habitat,50
+wheat field,wheatfield,agricultural,05_habitat,50
+widespread habitat,widespreadhabitat,various,05_habitat,50
+sclerophyll forest,sclerophyllforest,forest_sclerophyll,05_habitat,60
+agricultural,agricultural,agricultural,05_habitat,100
+agriculture,agriculture,agricultural,05_habitat,100
+alp,alp,alpine,05_habitat,100
+alpine,alpine,alpine,05_habitat,100
+aquatic,aquatic,aquatic,05_habitat,100
+bog,bog,bog,05_habitat,100
+chenopod,chenopod,chenopod_shrubland,05_habitat,100
+claypan,claypan,claypan,05_habitat,100
+clifftop,clifftop,clifftops,05_habitat,100
+creek,creek,streams,05_habitat,100
+creekline,creekline,streambanks,05_habitat,100
+crevice,crevice,crevices,05_habitat,100
+cultivated,cultivated,cultivated,05_habitat,100
+disturbed,disturbed,disturbed,05_habitat,100
+dune,dune,sanddunes,05_habitat,100
+estuarine,estuarine,estuarine,05_habitat,100
+floodplain,floodplain,floodplain,05_habitat,100
+garden,garden,urban,05_habitat,100
+grassland,grassland,grassland,05_habitat,100
+heath,heath,heath,05_habitat,100
+heathland,heathland,heath,05_habitat,100
+heathlike ,heathlike ,heath,05_habitat,100
+herbfield,herbfield,herbfield,05_habitat,100
+herbland,herbland,herbfield,05_habitat,100
+inwoodland,inwoodland,woodland,05_habitat,100
+kwongan,kwongan,kwongan,05_habitat,100
+lagoons,lagoons,lagoons,05_habitat,100
+lakes,lakes,lakes,05_habitat,100
+littoral,littoral,littoral,05_habitat,100
+mallee,mallee,mallee,05_habitat,100
+mangrove,mangrove,mangroves,05_habitat,100
+marsh,marsh,bog,05_habitat,100
+marshes,marshes,bog,05_habitat,100
+meadowbog,meadowbog,bog grassland,05_habitat,100
+monsoonforest,monsoonforest,forest_monsoon,05_habitat,100
+montane,montane,montane,05_habitat,100
+moor,moors,moors,05_habitat,100
+mownlawn,mownlawn,urban,05_habitat,100
+mud,mud,mud,05_habitat,100
+openheath,openheath,heath,05_habitat,100
+openwoodland,openwoodland,woodland_open,05_habitat,100
+paddock,paddocks,paddock,05_habitat,100
+paperbark,paperbark,woodland_paperbark,05_habitat,100
+pasture,pasture,pasture,05_habitat,100
+pasture,pasture,pasture,05_habitat,100
+pastureland,pastureland,pasture,05_habitat,100
+plain,plain,plains,05_habitat,100
+rainforest,rainforest,rainforest,05_habitat,100
+ricegrowing,ricegrowing,cropland,05_habitat,100
+riparian,riparian,riparian,05_habitat,100
+river,river,streams,05_habitat,100
+river bank,riverbank,streambanks,05_habitat,100
+roadside,roadsides,roadside,05_habitat,100
+saltbush,saltbush,chenopod_shrubland,05_habitat,100
+saltmarsh,saltmarsh,saltmarshes,05_habitat,100
+saltmarshes,saltmarshes,saltmarshes,05_habitat,100
+sampire,sampire,sampire,05_habitat,100
+sandhill,sandhill,sandhills,05_habitat,100
+sandplain,sandplain,sandplain,05_habitat,100
+savanna,savanna,savanna,05_habitat,100
+savannah,savannah,savanna,05_habitat,100
+scree,scree,rocky,05_habitat,100
+screes,screes,rocky,05_habitat,100
+scrub,scrub,scrubland,05_habitat,100
+scrubland,scrubland,scrubland,05_habitat,100
+semiaquatic,semiaquatic,semiaquatic,05_habitat,100
+shallowfreshwater,shallowfreshwater,aquatic,05_habitat,100
+shrubland,shrubland,shrubland,05_habitat,100
+shrubs,shrubs,shrubland,05_habitat,100
+shrubsteppe ,shrubsteppe ,shrubland steppe,05_habitat,100
+snowbank,snowbank,snowbank,05_habitat,100
+spinifex,spinifex,grassland_tussock,05_habitat,100
+steppe,steppe,steppe,05_habitat,100
+stream,stream,streams,05_habitat,100
+subalp,subalp,subalpine,05_habitat,100
+subalpine,subalpine,subalpine,05_habitat,100
+subtropicalrainforest,subtropicalrainforest,rainforest_subtropical,05_habitat,100
+swamp,swamp,swamp,05_habitat,100
+swampland,swampland,swamp,05_habitat,100
+swampy,swampy,swamp,05_habitat,100
+thicket,thicket,thickets,05_habitat,100
+triodia,triodia,grassland_tussock,05_habitat,100
+tussockgrassland,tussockgrassland,grassland_tussock,05_habitat,100
+vine forest,vineforest,vine_thicket,05_habitat,100
+vineforest,vineforest,vine_thicket,05_habitat,100
+wandoo,wandoo,woodland_wandoo,05_habitat,100
+wasteground,wasteground,disturbed,05_habitat,100
+wasteland ,wasteland ,disturbed,05_habitat,100
+watercourse,watercourse,streams,05_habitat,100
+waterholes,waterholes,waterholes,05_habitat,100
+wooded,wooded,woodland,05_habitat,100
+aneura,aneura,woodland_acacia,05_habitat,500
+beach,beach,beach,05_habitat,500
+beaches,beaches,beach,05_habitat,500
+cliff,cliff,cliffs,05_habitat,500
+cliffs,cliffs,cliffs,05_habitat,500
+forest,forest,forest,05_habitat,500
+forested,forested,forest,05_habitat,500
+lawn,lawns,urban,05_habitat,500
+mulga,mulga,woodland_acacia,05_habitat,500
+rainforested,rainforested,rainforest,05_habitat,500
+sclerophyll,sclerophyll,sclerophyll,05_habitat,500
+streambanks,streambank,streambanks,05_habitat,500
+woodland,woodland,woodland,05_habitat,500
+dark brown,darkbrown,brown_dark,06_soil_colour,50
+light brown,lightbrown,brown_light,06_soil_colour,50
+black,black,black,06_soil_colour,100
+brown,brown,brown,06_soil_colour,100
+grey,grey,grey,06_soil_colour,100
+orange,orange,orange,06_soil_colour,100
+red,red,red,06_soil_colour,100
+white,white,white,06_soil_colour,100
+yellow,yellow,yellow,06_soil_colour,100
+banded ironstone formations,bandedironstoneformations,banded_ironstone_formations,07_substrate,10
+lateriticgravels,lateriticgravels,lateritic,07_substrate,10
+acid volcanic,acidvolcanic,volcanic_acidic,07_substrate,50
+banded iron,bandedironstone,banded_ironstone_formations,07_substrate,50
+banded ironstone,bandedironstoneformations,banded_ironstone_formations,07_substrate,50
+basic rocks,basicrocks,basic,07_substrate,50
+gibber covered,stony gibbercovered,pavement,07_substrate,50
+gibbercovered,stony gibbercovered,pavement,07_substrate,50
+gibber-covered,stony gibbercovered,pavement,07_substrate,50
+quartz alunite,quartzalunite,quartz_alunite,07_substrate,50
+sandstone pavement,sandstonepavement,sandstone,07_substrate,50
+stonylateriticplains,stonylateriticplains,lateritic,07_substrate,50
+basaltderived,basaltderived,basaltic,07_substrate,80
+acid,acid,acidic,07_substrate,100
+acidic,acidic,acidic,07_substrate,100
+alkali,alkaline,alkaline,07_substrate,100
+alkaline,alkaline,alkaline,07_substrate,100
+alluvial,alluvial,alluvial,07_substrate,100
+alluvium,alluvium,alluvial,07_substrate,100
+basalt,basalt,basaltic,07_substrate,100
+basaltic,basaltic,basaltic,07_substrate,100
+basic,basic,basic,07_substrate,100
+brackish,brackish,brackish,07_substrate,100
+calcareous,calcareous,calcareous,07_substrate,100
+calcrete,calcrete,calcrete,07_substrate,100
+conglomerate,conglomerate,conglomerate,07_substrate,100
+dolerite,dolerite,dolerite,07_substrate,100
+granite,granite,granitic,07_substrate,100
+granitederived,granitederived,granitic,07_substrate,100
+granitic,granitic,granitic,07_substrate,100
+greenstone,greenstone,greenstone,07_substrate,100
+gypsaceous,gypsaceous,gypseous,07_substrate,100
+gypseous,gypseous,gypseous,07_substrate,100
+gypsum,gypsum,gypseous,07_substrate,100
+igneous ,igneous,igneous,07_substrate,100
+iron,iron,iron,07_substrate,100
+jasperlite,jasperlite,jasperlite,07_substrate,100
+laterite ,laterite,lateritic,07_substrate,100
+lateritic,lateritic,lateritic,07_substrate,100
+limestone,limestone,limestone,07_substrate,100
+limey,limey,limestone,07_substrate,100
+metamorphic,metamorphic,metamorphic,07_substrate,100
+mudstone,mudstone,mudstone,07_substrate,100
+porphyry ,porphyry ,porphyry ,07_substrate,100
+quartzite,quartzite,quartzite,07_substrate,100
+rhyolite,rhyolite,rhyolite,07_substrate,100
+saline,saline,saline,07_substrate,100
+salt,salt,saline,07_substrate,100
+sandstone,sandstone,sandstone,07_substrate,100
+semisaline,semisaline,semisaline,07_substrate,100
+shale,shale,shale,07_substrate,100
+shaley,shaley,shale,07_substrate,100
+siliceous,siliceous,siliceous,07_substrate,100
+subsaline,subsaline,subsaline,07_substrate,100
+trachyte,trachyte,trachyte,07_substrate,100
+ultrabasic,ultrabasic,ultrabasic,07_substrate,100
+volcanic,volcanic,volcanic,07_substrate,100
+reddish sandy and gravelly soil,reddishsandyandgravellysoil,sand_red gravelly,08_soil,1
+shallow rocky soil,shallowsoilsrockysoil,soil_shallow soil_rocky,08_soil,1
+skeletal or gravelly soil,skeletalorgravellysoil,skeletal gravelly,08_soil,1
+coarse granitic sand,coarsesandgranitic,sand_coarse,08_soil,5
+cracking grey clay,crackinggreyclay,clay_grey clay_cracking,08_soil,5
+disturbed sandy soil,disturbedsandysoil,sand disturbed,08_soil,5
+scarcely any soil,scarcelyanysoil,soil_shallow,08_soil,5
+red-brown earth,red-brownearths,earths_red-brown,08_soil,7
+dark brown clay,darkbrownclay,clay_brown,08_soil,10
+fertile soil,fertilesoils,fertile,08_soil,10
+lateritic gravel,lateriticgravel,gravel,08_soil,10
+pink loam,pinkloam,loam_pink,08_soil,10
+red clay,redclay,clay_red,08_soil,10
+red sand,redsand,sand_red,08_soil,10
+rocky site,rockysite,soil_rocky,08_soil,10
+rocky soil,rockysoil,soil_rocky,08_soil,10
+sandy-loam,sandyloam,loam_sandy,08_soil,10
+shallow soil,shallowsoil,soil_shallow,08_soil,10
+variety of soil,varietyofsoil,various,08_soil,10
+coarse alluvial gravel,coarsealluvialgravel,gravel_alluvial gravel_coarse,08_soil,15
+cracking clay soils,crackingclaysoils,clay_cracking,08_soil,20
+variety of soil type,varietyofsoiltype,various,08_soil,20
+alkaline soils,alkalinesoils,alkaline,08_soil,50
+black clay,blackclay,clay_black,08_soil,50
+clay loam,clayloam,loam_clayey,08_soil,50
+clay pans,claypans,claypan,08_soil,50
+clayey loam,clayeyloam,loam_clayey,08_soil,50
+clayey sand,clayeysand,sand_clayey,08_soil,50
+coarse gravel,coarsegravel,gravel_coarse,08_soil,50
+coarse sand,coarsesand,sand_coarse,08_soil,50
+cracking clay,crackingclay,clay_cracking,08_soil,50
+gravelly loam,gravellyloam,loam_gravelly,08_soil,50
+grey silt,greysilt,silt_grey,08_soil,50
+heavy soil,heavysoil,soil_heavy,08_soil,50
+loamy sand,loamysand,sand_loamy,08_soil,50
+red earth,redearth,earths_red,08_soil,50
+red earths ,redearths ,red_earths,08_soil,50
+rocky loam,rockyloam,loam_rocky,08_soil,50
+sandy podzol,sandypodzol,podzol_sandy,08_soil,50
+sandy loam,sandyloam,loam_sandy,08_soil,50
+stony soil,stonysoil,soil_rocky,08_soil,50
+unconsolidated sand,unconsolidatedsand,sand,08_soil,50
+various soil,varioussoil,various,08_soil,50
+clay,clay,clay,08_soil,100
+clayey,clayey,clay,08_soil,100
+claypan,claypan,claypan,08_soil,100
+earth,earths,earths,08_soil,100
+fertile,fertile,fertile,08_soil,100
+gravel,gravel,gravel,08_soil,100
+gravelly,gravelly,gravel,08_soil,100
+hardpan,hardpan,hardpan,08_soil,100
+humus,humus,humus,08_soil,100
+insandy,insandy,sand,08_soil,100
+loam,loam,loam,08_soil,100
+loamy,loamy,loam,08_soil,100
+pavement,pavement,pavement,08_soil,100
+peat,peat,peat,08_soil,100
+peaty,peaty,peat,08_soil,100
+podzol,podzol,podzol,08_soil,100
+rocky,rocky,soil_rocky,08_soil,100
+sand,sand,sand,08_soil,100
+sandy,sandy,sand,08_soil,100
+sandy clay,sandyclay,clay_sandy,08_soil,100
+sandyclay,sandyclay,clay_sandy,08_soil,100
+shaley,shaley,shaley,08_soil,100
+silt,silt,silt,08_soil,100
+silty,silty,silt,08_soil,100
+skeletal,skeletal,skeletal,08_soil,100
+stony,stony,stony,08_soil,100
+volcanic,volcanic,volcanic,08_soil,100
+freely draining,freelydraining,draining,09_soil_moisture,50
+moisture retentive,moistureretentive,wet,09_soil_moisture,50
+freelydraining,freelydraining,draining,09_soil_moisture,100
+moistureretentive,moistureretentive,wet,09_soil_moisture,100
+welldrained,welldrained,draining,09_soil_moisture,100

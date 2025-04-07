@@ -140,7 +140,7 @@ traits:
 substitutions: 
 - trait_name: habitat
   find: coastal swamp woodland
-  replace: coastal_swamp_woodland
+  replace: swamp_lowland
 taxonomic_updates: .na
 exclude_observations: .na
 questions: .na
