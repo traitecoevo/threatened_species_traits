@@ -460,7 +460,7 @@ traits:
       allowed_values_max: 10000.0    
     seedling_establishment_proportion:
       label: Seedling establishment proportion
-      description: The number of seedlings that successfully establish.
+      description: The proportion of seedlings that successfully establish.
       type: numeric
       units: '{count}/{count}'
       allowed_values_min: 0.0
@@ -547,7 +547,7 @@ traits:
       label: Flowers per inflorescence
       description: The count [NCIT:C25463] of flowers [PO:0009046] in an inflorescence [].
       type: numeric
-      units: '{count}/{count}'
+      units: '{count}'
       allowed_values_min: 1
       allowed_values_max: 10000.0
     seed_dispersal_ability:
