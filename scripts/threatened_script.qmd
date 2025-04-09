@@ -200,8 +200,7 @@ plant_goat_palatability <- all_traits$traits %>%
   group_by(taxon_name) %>%
   mutate(plant_goat_palatability = mean(plant_goat_palatability)) %>%
   ungroup() %>%
-  distinct() %>%
-  plant_goat_palatability
+  distinct()
 
 # sometimes trait value is scored for the entire genus and need to map to species values
 plant_goat_palatability_genera <- plant_goat_palatability %>%

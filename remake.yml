@@ -30,6 +30,25 @@ targets:
     command: read_csv_char("config/taxon_list.csv")
 
 # Build each source
+  ABRS_2025_config:
+    command: >
+      dataset_configure("data/ABRS_2025/metadata.yml",
+                 definitions
+                 )
+  ABRS_2025_raw:
+    command: >
+      dataset_process("data/ABRS_2025/data.csv",
+                  ABRS_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  ABRS_2025:
+    command: >
+      dataset_update_taxonomy(ABRS_2025_raw,
+                  taxon_list
+                 )
+
   ANBG_2025_config:
     command: >
       dataset_configure("data/ANBG_2025/metadata.yml",
@@ -391,6 +410,25 @@ targets:
                   taxon_list
                  )
 
+  Hopper_2024_config:
+    command: >
+      dataset_configure("data/Hopper_2024/metadata.yml",
+                 definitions
+                 )
+  Hopper_2024_raw:
+    command: >
+      dataset_process("data/Hopper_2024/data.csv",
+                  Hopper_2024_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Hopper_2024:
+    command: >
+      dataset_update_taxonomy(Hopper_2024_raw,
+                  taxon_list
+                 )
+
   Hutton_1994_config:
     command: >
       dataset_configure("data/Hutton_1994/metadata.yml",
@@ -543,6 +581,25 @@ targets:
                   taxon_list
                  )
 
+  NHNSW_2025_config:
+    command: >
+      dataset_configure("data/NHNSW_2025/metadata.yml",
+                 definitions
+                 )
+  NHNSW_2025_raw:
+    command: >
+      dataset_process("data/NHNSW_2025/data.csv",
+                  NHNSW_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  NHNSW_2025:
+    command: >
+      dataset_update_taxonomy(NHNSW_2025_raw,
+                  taxon_list
+                 )
+
   Pate_1989_config:
     command: >
       dataset_configure("data/Pate_1989/metadata.yml",
@@ -597,6 +654,25 @@ targets:
   Pegg_2018:
     command: >
       dataset_update_taxonomy(Pegg_2018_raw,
+                  taxon_list
+                 )
+
+  RBGV_2025_config:
+    command: >
+      dataset_configure("data/RBGV_2025/metadata.yml",
+                 definitions
+                 )
+  RBGV_2025_raw:
+    command: >
+      dataset_process("data/RBGV_2025/data.csv",
+                  RBGV_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  RBGV_2025:
+    command: >
+      dataset_update_taxonomy(RBGV_2025_raw,
                   taxon_list
                  )
 
@@ -752,41 +828,41 @@ targets:
                   taxon_list
                  )
 
-  WA_Seed_Centre_2025_1_config:
+  WA_Seed_Centre_2025_config:
     command: >
-      dataset_configure("data/WA_Seed_Centre_2025_1/metadata.yml",
+      dataset_configure("data/WA_Seed_Centre_2025/metadata.yml",
                  definitions
                  )
-  WA_Seed_Centre_2025_1_raw:
+  WA_Seed_Centre_2025_raw:
     command: >
-      dataset_process("data/WA_Seed_Centre_2025_1/data.csv",
-                  WA_Seed_Centre_2025_1_config,
+      dataset_process("data/WA_Seed_Centre_2025/data.csv",
+                  WA_Seed_Centre_2025_config,
                   schema,
                   resource_metadata,
                   unit_conversions
                  )
-  WA_Seed_Centre_2025_1:
+  WA_Seed_Centre_2025:
     command: >
-      dataset_update_taxonomy(WA_Seed_Centre_2025_1_raw,
+      dataset_update_taxonomy(WA_Seed_Centre_2025_raw,
                   taxon_list
                  )
 
-  WA_Seed_Centre_2025_2_config:
+  WAH_2025_config:
     command: >
-      dataset_configure("data/WA_Seed_Centre_2025_2/metadata.yml",
+      dataset_configure("data/WAH_2025/metadata.yml",
                  definitions
                  )
-  WA_Seed_Centre_2025_2_raw:
+  WAH_2025_raw:
     command: >
-      dataset_process("data/WA_Seed_Centre_2025_2/data.csv",
-                  WA_Seed_Centre_2025_2_config,
+      dataset_process("data/WAH_2025/data.csv",
+                  WAH_2025_config,
                   schema,
                   resource_metadata,
                   unit_conversions
                  )
-  WA_Seed_Centre_2025_2:
+  WAH_2025:
     command: >
-      dataset_update_taxonomy(WA_Seed_Centre_2025_2_raw,
+      dataset_update_taxonomy(WAH_2025_raw,
                   taxon_list
                  )
 
@@ -813,6 +889,7 @@ targets:
   threatened_species_raw:
     command: >
       bind_databases(
+        ABRS_2025,
         ANBG_2025,
         AusTraits_habitats_2024,
         Australian_PlantBank_2025,
@@ -832,6 +909,7 @@ targets:
         Greening_Australia_2025,
         Harshani_2023,
         Hart_2024,
+        Hopper_2024,
         Hutton_1994,
         Ireland_2020,
         Li_1997,
@@ -840,9 +918,11 @@ targets:
         McDougall_2024,
         McDougall_2024_2,
         mixed_2024,
+        NHNSW_2025,
         Pate_1989,
         Pearl_2024,
         Pegg_2018,
+        RBGV_2025,
         SA_Seed_Conservation_Centre_2025,
         Setterfield_2002,
         Shearer_1996,
@@ -851,8 +931,8 @@ targets:
         Simmonds_2000,
         Tas_Seed_Conservation_Centre_2025,
         Victorian_Conservation_Seed_Bank_2025,
-        WA_Seed_Centre_2025_1,
-        WA_Seed_Centre_2025_2,
+        WA_Seed_Centre_2025,
+        WAH_2025,
         Ward_2021,
         I(NULL))
 
