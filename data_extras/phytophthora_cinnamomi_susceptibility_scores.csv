@@ -1,4 +1,4 @@
-value,phytophthora_cinnamomi_susceptibility
+value,phytophthora_cinnamomi_susceptibility_score
 resistant resistant,0
 resistant,0
 severe,3
@@ -15,3 +15,6 @@ severe mild severe,2.3
 mild severe mild severe,2
 mild resistant,0.5
 resistant severe,1.5
+susceptible,2
+mild resistant severe,2
+moderate,2

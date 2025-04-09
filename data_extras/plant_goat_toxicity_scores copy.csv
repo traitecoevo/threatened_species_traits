@@ -1,0 +1,5 @@
+trait_name,value,plant_goat_toxicity
+plant_goat_toxicity,low_risk,2
+plant_goat_toxicity,moderate_risk,1
+plant_goat_toxicity,high_risk,0
+plant_goat_toxicity,no_known_risk,3

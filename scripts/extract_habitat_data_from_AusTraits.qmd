@@ -1,0 +1,286 @@
+## Code to extract habitat data from AusTraits
+
+Using a combination of methods
+
+- for large datasets that are entirely rainforest plants, assign all taxa as having habitat "rainforest"
+- for other datasets, search location_properties for terms related to habitat
+
+This forms a dataset that has been input into the threatened species dataset, but should be re-run as AusTraits grows
+
+```{r}
+rainforest <- (austraits %>%
+  extract_dataset(c("ATRP_2020", "Cooper_2013", "Cooper_2004")))$traits %>%
+  distinct(taxon_name, dataset_id) %>%
+  group_by(taxon_name) %>%
+  mutate(source_id = paste0(dataset_id, collapse = "; ")) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "rainforest")
+
+rainforest2 <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("rainforest", "tropical moist forest", "rain forest")))$traits %>%
+  filter(!dataset_id %in% c("ATRP_2020", "Cooper_2013", "Cooper_2004")) %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "rainforest")
+
+aquatic <- (austraits %>%
+  extract_trait("plant_growth_substrate") %>%
+  extract_data(table = "traits", col = "value", col_value = "aquatic"))$traits %>%
+  tidyr::separate_longer_delim(cols = value, delim = " ") %>%
+  distinct(taxon_name, value, dataset_id) %>%
+  filter(str_detect(value, "aquatic")) %>%
+  group_by(taxon_name, value) %>%
+  mutate(source_id = paste0(dataset_id, collapse = "; ")) %>%
+  ungroup() %>%
+  distinct(taxon_name, value, source_id) %>%
+  group_by(taxon_name, source_id) %>%
+  mutate(habitat = paste0(value, collapse = " ")) %>%
+  ungroup() %>%
+  distinct(taxon_name, habitat, source_id)
+
+wet_sclerophyll <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = "wet sclerophyll"))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "forest_wet_sclerophyll")
+
+dry_sclerophyll <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = "dry sclerophyll"))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "forest_dry_sclerophyll")
+
+wet_heath <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = "wet heath"))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "heath_wet")
+
+heath <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = "heath"))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "heath")
+
+grassland <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("grassland", "spinifex")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "grassland")
+
+savanna <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("savanna")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "grassland")
+
+bogs_fens <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("bog", "fen", "marsh")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "bog")
+
+shrubland <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("shrubland", "scrub", "mallee")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "shrubland")
+
+eucalypt_forest <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("eucalypt forest")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "forest_eucalypt")
+
+closed_forest <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("closed forest")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "forest_closed")
+
+alpine <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("alpine")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "alpine")
+
+open_forest <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("open forest")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "forest_open")
+
+dry_forest <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("dry forest")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "forest_dry")
+
+wet_forest <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("wet forest")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "forest_wet")
+
+
+woodland <- (austraits %>%
+  extract_data(table = "locations", col = "location_property", col_value = c("habitat", "description")) %>%
+  extract_data(table = "locations", col = "value", col_value = c("woodland")))$traits %>%
+  select(taxon_name, dataset_id) %>% 
+  distinct() %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(dataset_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct(taxon_name, source_id) %>%
+  mutate(habitat = "woodland")
+
+habitats <- aquatic %>%
+  bind_rows(alpine, bogs_fens, closed_forest, dry_forest, dry_sclerophyll,  eucalypt_forest, grassland, heath, open_forest, rainforest, rainforest2, savanna, shrubland, wet_heath, wet_forest, wet_sclerophyll, woodland) %>%
+  group_by(taxon_name) %>%
+  mutate(
+    source_id = paste0(source_id, collapse = "; ")
+  ) %>%
+  ungroup() %>%
+  distinct() %>%
+  group_by(taxon_name, source_id)  %>%
+  mutate(
+    habitat = paste0(habitat, collapse = " ")
+  )%>%
+  ungroup() %>%
+  distinct()
+
+habitats <- habitats %>%
+  tidyr::separate_longer_delim(cols = source_id, delim = "; ") %>%
+  distinct() %>%
+  arrange(source_id) %>%
+  group_by(taxon_name, habitat) %>%
+  mutate(source_id = paste0(source_id, collapse = "; ")) %>%
+  ungroup() %>%
+  distinct() %>%
+  tidyr::separate_longer_delim(cols = habitat, delim = " ") %>%
+  distinct() %>%
+  arrange(habitat) %>%
+  group_by(taxon_name, source_id) %>%
+  mutate(habitat = paste0(habitat, collapse = " ")) %>%
+  ungroup() %>%
+  distinct()
+
+habitats %>% write_csv("data/AusTraits_habitats_2024/data.csv")
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

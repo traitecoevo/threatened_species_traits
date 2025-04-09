@@ -7,6 +7,7 @@ data <- read_csv("datasets_from_manuscripts/FoA_download.csv") %>%
          text = stringr::str_replace_all(text, "watershed[s]", ""),
          text = stringr::str_replace_all(text, "[:punct:]", ""),
          text = stringr::str_replace_all(text, "less common", "lesscommon"),
+         text = stringr::str_replace_all(text, "Not ", "Not"),         
          text = stringr::str_replace_all(text, "not ", "not"),
          text = stringr::str_replace_all(text, "not in ", "notin"),
          text = stringr::str_replace_all(text, "rarely in ", "rarelyin"),
@@ -27,6 +28,7 @@ data <- read_csv("data/NHNSW_2025/raw/plantNET.csv") %>%
          text = stringr::str_replace_all(text, "watershed[s]", ""),
          text = stringr::str_replace_all(text, "[:punct:]", ""),
          text = stringr::str_replace_all(text, "less common", "lesscommon"),
+         text = stringr::str_replace_all(text, "Not ", "Not"),         
          text = stringr::str_replace_all(text, "not ", "not"),
          text = stringr::str_replace_all(text, "not in ", "notin"),
          text = stringr::str_replace_all(text, "rarely in ", "rarelyin"),
@@ -46,6 +48,7 @@ data <- read_csv("data/WAH_2025/raw/split_sentences_Florabase_short.csv") %>%
          text = stringr::str_replace_all(text, "watershed[s]", ""),
          text = stringr::str_replace_all(text, "[:punct:]", ""),
          text = stringr::str_replace_all(text, "less common", "lesscommon"),
+         text = stringr::str_replace_all(text, "Not ", "Not"),         
          text = stringr::str_replace_all(text, "not ", "not"),
          text = stringr::str_replace_all(text, "not in ", "notin"),
          text = stringr::str_replace_all(text, "rarely in ", "rarelyin"),
@@ -72,6 +75,7 @@ data <- read_csv("datasets_from_manuscripts/Vic_download.csv") %>%
     text = stringr::str_replace_all(text, "watershed[s]", ""),
     text = stringr::str_replace_all(text, "[:punct:]", ""),
     text = stringr::str_replace_all(text, "less common", "lesscommon"),
+    text = stringr::str_replace_all(text, "Not ", "Not"),         
     text = stringr::str_replace_all(text, "not ", "not"),
     text = stringr::str_replace_all(text, "not in ", "notin"),
     text = stringr::str_replace_all(text, "rarely in ", "rarelyin"),
@@ -107,8 +111,8 @@ new <- tibble()
 
 # begin run
 # cycle through each row of data
-#for (i in 1:length(data$text)){
-for (i in 1:100){  # for testing
+for (i in 1:length(data$text)){
+#for (i in 1:100){  # for testing
   
   test_out <- data.frame()
   
@@ -200,7 +204,8 @@ new %>% filter(!is.na(text)) %>%
   filter(stringr::str_detect(taxon_name, " "))
 
 # write to file
-write_csv(new, "datasets_from_manuscripts/Victoria_habitats_v2.csv", na = "")
-write_csv(new, "datasets_from_manuscripts/FofA_habitats_v2.csv", na = "")
-write_csv(new, "datasets_from_manuscripts/NSW_habitats_v2.csv", na = "")
+write_csv(new, "datasets_from_manuscripts/VicFlora_habitats.csv", na = "")
+write_csv(new, "datasets_from_manuscripts/FofA_habitats.csv", na = "")
+write_csv(new, "datasets_from_manuscripts/NSW_habitats.csv", na = "")
 
+write_csv(new, "datasets_from_manuscripts/WA_habitats.csv", na = "")

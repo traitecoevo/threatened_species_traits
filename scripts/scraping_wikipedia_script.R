@@ -1,21 +1,18 @@
 library(rvest)
-library(dplyr)
+library(httr)
+library(tidyverse)
 library(purrr)
+library(APCalign)
+resources <- load_taxonomic_resources()
 
 # Define a list of URLs to scrape
-urls <- c(
-  "https://en.wikipedia.org/wiki/Melaleuca_lazaridis",
-  "https://en.wikipedia.org/wiki/Melaleuca_hemisticta",
-  "https://en.wikipedia.org/wiki/Melaleuca_chisholmii"
-)
-
-
 resources$APC %>% 
   filter(taxonomic_status == "accepted") %>% 
   filter(name_type == "scientific") %>%
   filter(taxon_rank %in% c("species")) %>%
   select(taxon_name = canonical_name, family, taxon_distribution) %>%
-  filter(family == "Myrtaceae") %>%
+  filter(!family == "Myrtaceae") %>%
+  arrange(taxon_name) %>%
   mutate(
     name2 = stringr::str_replace(taxon_name, " ", "_"),
     url = paste0("https://en.wikipedia.org/wiki/",name2)
@@ -24,14 +21,28 @@ resources$APC %>%
 urls <- urls_to_scrape$url %>% as.vector()
 
 process_page <- function(url) {
-  # Try to read the page content, handle errors if page is not found
-  page <- tryCatch({
-    read_html(url)
-  }, error = function(e) {
-    # If an error occurs, print a message and return NULL
-    message("Skipping URL: ", url, " - Page not found or cannot be accessed.")
-    return(NULL)  # Return NULL to indicate failure
-  })
+  # # Try to read the page content, handle errors if page is not found
+  # page <- tryCatch({
+  #   read_html(url)
+  # }, error = function(e) {
+  #   # If an error occurs, print a message and return NULL
+  #   message("Skipping URL: ", url, " - Page not found or cannot be accessed.")
+  #   return(NULL)  # Return NULL to indicate failure
+  # })
+  
+  safe_read_html <- function(url) {
+    res <- GET(url)
+    
+    if (status_code(res) == 200) {
+      # Only read HTML if the page exists
+      return(read_html(url))
+    } else {
+      message("Page not found: ", url)
+      return(NULL)
+    }
+  }
+  
+  page <- safe_read_html(url)
   
   # If page is NULL (meaning the URL failed), skip further processing
   if (is.null(page)) {
@@ -74,7 +85,13 @@ process_page <- function(url) {
     species_data <- rbind(species_data, data.frame(Header = header, Content = content))
   }
   
-  species_data_t <- species_data %>% t() %>% as.data.frame()
+  species_data_t <- species_data %>% 
+    group_by(Header) %>%
+      mutate(Content = paste0(Content, collapse = "; ")) %>%
+    ungroup() %>% 
+    distinct() %>%
+    t() %>% 
+    as.data.frame()
   
   colnames(species_data_t) <- as.character(species_data_t[1,])
   
@@ -96,8 +113,10 @@ species_data_all <-
     species_url = character(0),
   )
 
-same as code below using lapply
-for (i in 1:length(urls)) {
+# same as code below using lapply - 
+# advantage of this is that when script starts part way you get data up to the point of crash
+
+for (i in 8587:12000) {
 
   species_data_t <- process_page(urls[i])
 
@@ -107,8 +126,15 @@ for (i in 1:length(urls)) {
 
 }
 
+# problem with 624, or 625
+
+# same as looping code above - have been trying to move toward using purrr, 
+# but got many 100's in and then crashed and no way to remove what has been scraped
+
 results <- lapply(urls, process_page)
 results <- results[!sapply(results, is.null)]
 
 # Combine the results into a single data
 Wikipedia_all_species_data <- bind_rows(results)
+
+write.csv(species_data_all, "datasets_from_manuscripts/wikipedia_data9.csv", na = "")

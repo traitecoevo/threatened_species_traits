@@ -1,8 +1,8 @@
-value,resprouting_capacity
-resprouts,0
-fire_killed,1
-fire_killed resprouts,.5
-fire_killed partial_resprouting,.75
-partial_resprouting,.5
-partial_resprouting resprouts,.25
-fire_killed partial_resprouting resprouts,.5
+trait_name,value,resprouting_capacity
+resprouting_capacity,resprouts,0
+resprouting_capacity,fire_killed,1
+resprouting_capacity,fire_killed resprouts,.5
+resprouting_capacity,fire_killed partial_resprouting,.75
+resprouting_capacity,partial_resprouting,.5
+resprouting_capacity,partial_resprouting resprouts,.25
+resprouting_capacity,fire_killed partial_resprouting resprouts,.5
