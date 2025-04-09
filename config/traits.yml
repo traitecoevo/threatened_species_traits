@@ -131,6 +131,16 @@ traits:
       unit: g/g      
       allowed_values_min: -1.0
       allowed_values_max: 1.0
+    plant_goat_palatability:
+      label: Plant palatability to goats
+      description: A plant's palatability (forage preference) for goats. 
+      type: categorical
+      allowed_values_levels:
+        low_palatability: Plant has a low palatability to goats.
+        moderate_palatability: Plant has a low palatability to goats.
+        high_palatability: Plant has a low palatability to goats.
+        not_eaten: Plant is not eaten by goats.
+        toxic:
     plant_goat_toxicity:
       label: Plant toxicity to goats
       description: Indication of whether a plant can cause any upset to the health and productivity of an animal. Toxic does not automatically imply lethal but some toxic plants can be lethal. 
@@ -164,8 +174,11 @@ traits:
         abundant_locally: XX
         common: XX
         common_locally: XX
+        highly_localised: XX
+        localised: XX
         rare: XX
         scattered: XX
+        single_location: XX
         uncommon: XX
         very_rare: XX
         widespread: XX
@@ -174,56 +187,79 @@ traits:
       description: XX
       type: categorical
       allowed_values_levels:
-        aquatic: XX
-        semiaquatic: XX
+        agricultural: XX
         alpine: XX
+        aquatic: XX
+        beach: XX
         bog: XX
+        bog grassland: XX
         bog_alpine: XX
         chenopod_shrubland: XX
+        claypan: XX
+        cliffs: XX
         cliffs_coastal: XX
-        cloud_forests: XX
+        clifftops: XX
+        coastal: XX
         creek_intermittent: XX
-        creeks_intermittent: XX
+        crevices: XX
         cropland: XX
         cultivated: XX
-        damp: XX
         disturbed: XX
         dry_sclerophyll: XX
-        dunes: XX
         dunes_coastal: XX
+        dunes_consolidated: XX
+        estuarine: XX
+        feldmark_alpine: XX
+        flats: XX
         flats_wet: XX
         floodplain: XX
         forest: XX
         forest_closed: XX
+        forest_cloud: XX
         forest_dry: XX
         forest_dry_sclerophyll: XX
         forest_eucalypt: XX
         forest_eucalypt_wet: XX
+        forest_eucalyptus: XX
         forest_gallery: XX
         forest_lowland: XX
+        forest_moist_sclerophyll: XX
         forest_monsoon: XX
         forest_open: XX
+        forest_sclerophyll: XX
         forest_subalpine: XX
         forest_wet: XX
         forest_wet_sclerophyll: XX
-        forest_moist_sclerophyll: XX
+        forest_wet_sclerophyll forest_dry_sclerophyll: XX
         grassland: XX
+        grassland_alpine: XX
+        grassland_alpine grassland_subalpine: XX
+        grassland_subalpine: XX
         grassland_tussock: XX
-        grasslands: XX
-        grasslands_alpine: XX
+        headland_coastal: XX
         heath: XX
+        heath woodland: XX
+        heath_alpine: XX
         heath_closed: XX
         heath_coastal: XX
+        heath_subalpine: XX
         heath_wet: XX
-        herbland: XX
+        herbfield: XX
+        herbfield_alpine: XX
+        herbfield_alpine herbfield_subalpine: XX
+        herbfield_subalpine: XX
         inundated_intermittent: XX
+        kwongan: XX
         lagoons: XX
         lake_margin: XX
         lakes: XX
         lakes_salt: XX
+        littoral: XX
         mallee: XX
+        mallee heath: XX
         mallee_heath: XX
         mangroves: XX
+        marsh_salt: XX
         montane: XX
         moors: XX
         mountain_summits: XX
@@ -233,10 +269,13 @@ traits:
         pasture: XX
         plains: XX
         plains_coastal: XX
-        plains_stony: XX
+        plains_stony lateritic: XX
         rainforest: XX
         rainforest_coastal: XX
+        rainforest_cool: XX
+        rainforest_cool_subtropical: XX
         rainforest_cool_temperate: XX
+        rainforest_cool_temperate rainforest_warm_temperate: XX
         rainforest_dry: XX
         rainforest_gallery: XX
         rainforest_littoral: XX
@@ -244,176 +283,245 @@ traits:
         rainforest_margin: XX
         rainforest_moist: XX
         rainforest_montane: XX
+        rainforest_montane rainforest_coastal: XX
         rainforest_notophyll: XX
         rainforest_subcoastal: XX
         rainforest_subtropical: XX
-        rainforest_subtropical_cool: XX
-        rainforest_subtropical_warm: XX
+        rainforest_subtropical rainforest_warm_temperate: XX
+        rainforest_subtropical_upland: XX
         rainforest_temperate: XX
+        rainforest_temperate rainforest_subtropical: XX
+        rainforest_temperate rainforest_tropical: XX
         rainforest_tropical: XX
         rainforest_tropical_lowland: XX
-        rainforest_tropical_upland: XX
         rainforest_warm_temperate: XX
         riparian: XX
         roadside: XX
         rock_pools_shallow: XX
         rocky: XX
-        rocky_outcrop: Mostly bare areas with rock outcrops and sparse vegetation.
+        rocky_outcrop: XX
         saltmarshes: XX
-        saltpans: XX
+        saltpan: XX
         sampire: XX
         sanddunes: XX
         sanddunes_coastal: XX
         sandhills: XX
         sandplain: XX
+        savanna: XX
+        savanna_eucalyptus: XX
         sclerophyll: XX
-        scrub: XX
-        scrub_heath: Tall and low shrubs of mixed species, height < 2 m, 30-70% cover.
-        scrub_open: XX
-        scrub_riparian: XX
+        scrubland: XX
+        scrubland_acacia: XX
+        scrubland_coastal: XX
+        scrubland_heath: XX
+        scrubland_open: XX
+        scrubland_riparian: XX
+        semiaquatic: XX
         shrubland: XX
-        shrubland_Eucalypt: XX
+        shrubland steppe: XX
+        shrubland_chenopod: XX
+        shrubland_eucalypt: XX
         shrubland_mallee: XX
         shrubland_open: XX
         shrubland_tall: XX
-        snowbanks: XX
-        streambanks: XX
+        snowbank: XX
         steppe: XX
+        streambanks: XX
+        streams: XX
         subalpine: XX
         swamp: XX
+        swamp_forest: XX
         swamp_lowland: XX
         swamp_margin: XX
-        swamp_forest: XX
         thickets: XX
+        tidal_flats: XX
         urban: XX
         various: XX
         vine_thicket: XX
         water_shallow: XX
         waterholes: XX
         wet_sclerophyll: XX
-        widespread: XX
         woodland: XX
         woodland_acacia: XX
         woodland_dry: XX
+        woodland_dry_sclerophyll: XX
         woodland_eucalypt: XX
         woodland_grassy: XX
-        woodland_low: Single stems medium Eucalyptus, Banksia, Acacia or Allocasuarina trees with crowns slightly separated and height < 10m.
-        woodland_open: 
+        woodland_low: XX
+        woodland_moist_sclerophyll: XX
         woodland_montane: XX
+        woodland_montane woodland_subalpine: XX
+        woodland_mulga: XX
+        woodland_open: XX
         woodland_paperbark: XX
+        woodland_sclerophyll: XX
+        woodland_sclerophyll forest_sclerophyll: XX
         woodland_semiarid: XX
         woodland_subalpine: XX
+        woodland_subalpine woodland_eucalypt: XX
+        woodland_subalpine woodland_montane: XX
+        woodland_wandoo: XX
         woodland_wet_sclerophyll: XX
-        woodland_moist_sclerophyll: XX
-        woodland_dry_sclerophyll: XX
+        woodland_wet_sclerophyll woodland_dry_sclerophyll: XX
+    habitat_moisture:
+      label: XX
+      description: XX
+      type: categorical
+      allowed_values_levels:
+        arid: XX
+        damp: XX
+        dry: XX
+        moist: XX
+        semiarid: XX
+        wet: XX
+        winterwet: XX
+    soil_moisture:
+      label: XX
+      description: XX
+      type: categorical
+      allowed_values_levels:
+        draining: XX
+        wet: XX
+    soil_colour:
+      label: Soil type
+      description: XX
+      type: categorical
+      allowed_values_levels:
+        black: XX
+        brown: XX
+        brown_dark: XX
+        brown_light: XX
+        grey: XX
+        orange: XX
+        red: XX
+        white: XX
+        yellow: XX
     soil_type:
       label: Soil type
       description: XX
       type: categorical
       allowed_values_levels:
-        acidic: XX
         alkaline: XX
-        alluvial: XX
         clay: XX
         clay_black: XX
         clay_brown: XX
         clay_cracking: XX
-        clay_grey: XX
+        clay_grey clay_cracking: XX
         clay_red: XX
-        disturbed: XX
+        clay_sandy: XX
+        claypan: XX
+        earths: XX
         earths_red: XX
         earths_red-brown: XX
         fertile: XX
-        gravel_alluvial: XX
-        gravelly: XX
-        gravelly_coarse: XX
+        gravel: XX
+        gravel_alluvial gravel_coarse: XX
+        gravel_coarse: XX
         hardpan: XX
         humus: XX
-        lateritic: XX
         loam: XX
         loam_clayey: XX
         loam_gravelly: XX
         loam_pink: XX
+        loam_rocky: XX
         loam_sandy: XX
         pavement: XX
         peat: XX
-        rocky: XX
+        podzol: XX
+        podzol_sandy: XX
+        red_earths: XX
         sand: XX
+        sand disturbed: XX
         sand_clayey: XX
         sand_coarse: XX
+        sand_loamy: XX
         sand_red: XX
+        sand_red gravelly: XX
         shaley: XX
-        shallow: XX
-        shallow_soils: XX
         silt: XX
         silt_grey: XX
         skeletal: XX
-        soils_shallow: XX
+        skeletal gravelly: XX
+        soil_heavy: XX
+        soil_rocky: XX
+        soil_shallow: XX
+        soil_shallow soil_rocky: XX
+        stony: XX
         various: XX
         volcanic: XX
-    geology:
+    geologic_substrate:
       label: Geologic substrate
       description: An attribute indicating a taxon's preferred geologic substrate, referencing both the rock type or geologic formation underlying the soil and other core geologic features. 
       type: categorical
       allowed_values_levels:
+        acidic: XX
+        alkaline: XX
+        alluvial: XX
         banded_ironstone_formations: XX
-        basalt: XX
         basaltic: XX
+        basic: XX
+        brackish: XX
         calcareous: XX
         calcrete: XX
         conglomerate: XX
         dolerite: XX
-        granite: XX
+        granitic: XX
+        greenstone: XX
         gypseous: XX
         igneous: XX
         iron: XX
         jasperlite: XX
-        kwongan: XX
         lateritic: XX
         limestone: XX
         metamorphic: XX
         mudstone: XX
+        pavement: XX
+        porphyry: XX
         quartz_alunite: XX
+        quartzite: XX
         rhyolite: XX
         saline: XX
         sandstone: XX
+        semisaline: XX
         shale: XX
+        siliceous: XX
         subsaline: XX
+        trachyte: XX
+        ultrabasic: XX
         volcanic: XX
         volcanic_acidic: XX
-    habitat_moisture:
-      label: Habitat moisture
-      description: XX
-      type: categorical
-      allowed_values_levels:
-        dry: XX
-        wet: XX
     topographic_position:
       label: Topographic position
       description: An attribute indicating the topographic positions where a species occurs.
       type: categorical
       allowed_values_levels:
+        breakaways: XX
         cliff: XX
+        clifflines: XX
         cliffs_coastal: XX
+        coastal: XX
         depressions: XX
         escarpments: XX
         flats: XX
+        flats inundated_intermittent: XX
+        gorges: XX
         gullies: XX
         gullies_sheltered: XX
         gully_heads: XX
         high_ground: XX
         hills: XX
-        inundated_intermittent: XX
         inundated_shallow: XX
         mountains: XX
         plains: XX
         plateaus: XX
         ridges: XX
+        rock_ledge: XX
         rocky: XX
         rocky_outcrop: XX
         seepages: XX
         slopes: XX
         slopes_rocky: XX
+        slopes_rocky slopes_steep: XX
         slopes_steep: XX
         streambanks: XX
         streams: XX
