@@ -10,11 +10,15 @@ editor_options:
   chunk_output_type: console
 ---
 
+
+
 # Setup and data extraction
 
 ## load libraries, build database
 
 -   open/merge AusTraits and attributes in threatened species database
+
+
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -47,6 +51,8 @@ threatened_species <- remake::make("threatened_species")
 all_traits <- austraits %>% austraits::bind_databases(threatened_species)
 ```
 
+
+
 ## create dataframes for key traits
 
 -   create dataframes from merged database for any trait suspected to be relevant for any threats
@@ -54,6 +60,8 @@ all_traits <- austraits %>% austraits::bind_databases(threatened_species)
 ### for categorical traits, source conversions
 
 -   read in files that indicate conversions between categorical values and a numeric equivalent, to allow linear models to be run to look at trait - susceptibility correlations
+
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # open files with categorical to numeric conversions for categorical traits
@@ -93,11 +101,15 @@ plant_goat_toxicity_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant
 plant_goat_palatability_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_goat_palatability) %>% rename(`categorical value` = value, `numeric score assigned` = plant_goat_palatability)  %>% kable(caption = "plant goat palatability values") %>% kable_classic()
 ```
 
+
+
 ### extract categorical traits from database
 
 -   extract all available values for categorical traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
 -   for each trait, merge in numeric conversions
 -   for each taxon, take the mean of all available values
+
+
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 life_history <- all_traits$traits %>% 
@@ -217,6 +229,8 @@ plant_goat_palatability <- plant_goat_palatability %>%
   bind_rows(plant_goat_palatability_genera)
 ```
 
+
+
 ### extract numeric traits from database
 
 -   extract all available values for numeric traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
@@ -224,6 +238,8 @@ plant_goat_palatability <- plant_goat_palatability %>%
 -   for each taxon, take the mean of all available values using a weighted mean function developed for AusTraits, which first takes the mean of multiple individual values collected at a single site; then the mean of values from all population; and at the end also considers values extracted from floras (and similar publications) that refer to the entire species
 
 -   the function used is called `austraits_weighted_means`
+
+
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 seed_dry_mass <- all_traits %>%
@@ -317,6 +333,8 @@ leaf_tannin_per_dry_mass <- all_traits %>%
 # germination_time
 ```
 
+
+
 ### extract non-trait attributes from database - for susceptibility scoring, not for trait correlations
 
 -   there are attributes of a species that aren't "traits" but are known to affect a species susceptibility to various threats
@@ -328,6 +346,8 @@ leaf_tannin_per_dry_mass <- all_traits %>%
     3.  underlying geologic substrate - under Phytophthora for now
     4.  population size (not merged in yet because too little data)
     5.  population count (not merged in yet because too little data)
+
+
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 habitat <- all_traits$traits %>%
@@ -347,7 +367,11 @@ habitat_moisture <- all_traits$traits %>%
   distinct()
 ```
 
+
+
 ### create tables partially ranking soils, geologic substrates by suscepibility
+
+
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # clay soils assigned risk of 0.5; 
@@ -379,6 +403,8 @@ geologic_substrate <- all_traits$traits %>%
   dplyr::arrange(geologic_substrate_score)
 ```
 
+
+
 # Phytophthora cinnamomi
 
 ### Are any traits good predictors?
@@ -388,6 +414,8 @@ geologic_substrate <- all_traits$traits %>%
 #### - create dataframe
 
 -   create table with susceptibility, trait values for taxa with known *Phytophthora cinnamomi* susceptibility
+
+
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 phytophthora_cinnamomi_susceptibility <- (all_traits %>% join_taxa(vars = "family"))$traits %>%
@@ -416,6 +444,8 @@ phytophthora_cinnamomi_susceptibility <- (all_traits %>% join_taxa(vars = "famil
   left_join(geologic_substrate, by = "taxon_name")
 ```
 
+
+
 #### - check for trait correlations
 
 -   identify strong susceptibility-trait correlations for taxa with known susceptibility
@@ -431,6 +461,8 @@ phytophthora_cinnamomi_susceptibility <- (all_traits %>% join_taxa(vars = "famil
     2.  for numeric traits, the magnitude of the coefficient indicates the change in response variable for a "1 unit" increase in susceptibility, where susceptibility is on a scale of 0--3.
     3.  for numeric traits, the magnitude of the coefficient must be intepreted in conjunction with knowing the scaling for the response variable - different for each trait; the susceptibility is on a scale of 0--3.
     4.  Also in this chart are correlations with soil type/texture and geologic substrate. As also indicated in the literature, it isn't that taxa growing of "resistant substrates/soils" are themselves resistant, but that Phytophthora doesn't survive in these locations. Therefore, this information can be used to asses the **RISK** of a species to Phytophthora, but not its **SUSCEPTIBILITY** to Phytophthora.
+
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 correlations_with_possible_traits <- tibble(
@@ -476,10 +508,14 @@ kableExtra::kable_classic(Phytophthora_kable_table) %>%
   kableExtra::kable_styling(full_width = FALSE)
 ```
 
+
+
 ### How important is taxonomy? (vs traits...)
 
 -   Family matters more than traits
 -   Although some moderate correlations with traits exist, knowing a plant's family is a much better predictor of its susceptibility - at least visually
+
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -523,6 +559,8 @@ ggplot(data = family_histograms) +
   xlab("Phytophthora cinnamomi susceptibility score (higher = more susceptible)")
 ```
 
+
+
 ### Assign risks to all taxa
 
 -   first steps are based on taxonomy and habitat:
@@ -532,6 +570,8 @@ ggplot(data = family_histograms) +
 -   second steps will be to adjust these susceptibilities based on traits
     1.  need to decide on r\^2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
     2.  it would be great to have information on Proteaceae which explicitly do not form cluster roots or Ericaceae that do not form root hairs (or have very transient root hairs); also possible that cord roots increase susceptibility in Daviseia; but that doesn't seem to be available
+
+
 
 ```{r}
 phytophthora_assigned_risk <- resources$APC %>% 
@@ -552,6 +592,8 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
   )
 ```
 
+
+
 # Myrtle rust
 
 ### Are any traits good predictors?
@@ -561,6 +603,8 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
 #### - create dataframe
 
 -   create table with susceptibility, trait values for taxa with known susceptibility
+
+
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 myrtle_rust_susceptibility <- all_traits$traits %>%
@@ -610,6 +654,8 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
   left_join(resources$APC %>% select(taxon_name = canonical_name, genus, family), by = "taxon_name")
 ```
 
+
+
 #### - check trait correlations
 
 -   identify strong susceptibility-trait correlations for taxa with known susceptibility
@@ -624,6 +670,8 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
     1.  a positive coefficient indicates a higher trait value in more susceptible taxa
     2.  for numeric traits, the magnitude of the coefficient indicates the change in response variable for a "1 unit" increase in susceptibility, where susceptibility is on a scale of 0--3.
     3.  for numeric traits, the magnitude of the coefficient must be intepreted in conjunction with knowing the scaling for the response variable - different for each trait; the susceptibility is on a scale of 0--5.
+
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 correlations_with_possible_traits <- tibble(
@@ -667,11 +715,15 @@ kableExtra::kable_classic(myrtlerust_kable_table) %>%
   kableExtra::kable_styling(full_width = FALSE)
 ```
 
+
+
 ### How important is taxonomy? (vs traits...)
 
 considering whether genus matters as much as - or more than traits
 
 -   less clear than correlation between family and phytophthora susceptibility, but certainly there are some genera where all species tested are susceptible and others where there are some resistant species and many partially resistant species
+
+
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 by_genus <- myrtle_rust_susceptibility_data %>%
@@ -714,6 +766,8 @@ ggplot(data = genus_histograms) +
   xlab("myrtle rust susceptibility score (higher = more susceptible)")
 ```
 
+
+
 ### Assign risks to all taxa
 
 -   first steps are based on taxonomy and habitat:
@@ -727,6 +781,8 @@ ggplot(data = genus_histograms) +
 
     1.  need to decide on r2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
     2.  there are additional traits which might well be important, but need to bolster their coverage in database to be certain: **leaf glaucousness**, **leaf wax content**, **leaf hairiness**
+
+
 
 ```{r, warning=FALSE, message=FALSE}
 myrtle_rust_assigned_risk <- resources$APC %>% 
@@ -758,6 +814,8 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
   )
 ```
 
+
+
 # Goats
 
 ### Are any traits good predictors?
@@ -777,6 +835,8 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
 -   Succulence
 
 #### - create dataframe
+
+
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 goat_susceptibility <- plant_goat_palatability %>%
@@ -805,6 +865,8 @@ goat_susceptibility <- plant_goat_palatability %>%
   left_join(leaf_tannin_per_dry_mass, by = "taxon_name")
 ```
 
+
+
 #### - check for trait correlations
 
 -   The three strongest correlations below don't make sense, in part due to low sample sizes:
@@ -816,6 +878,8 @@ goat_susceptibility <- plant_goat_palatability %>%
 -   strongest believable association is for leaf P
 
 -   `plant_spinescence` comes out as a very non-significant correlation. It would be good to manually gap fill this, but there are lots of very well-defended species with moderate to high palatability scores, so not expecting it to come out as significant.
+
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 correlations_with_possible_traits <- tibble(
@@ -861,7 +925,11 @@ kableExtra::kable_classic(goat_kable_table) %>%
   kableExtra::kable_styling(full_width = FALSE)
 ```
 
+
+
 -   Although plant growth form didn't come out as important in the correlations - other data suggest herbs less impacted by goats than graminoids or shrubs and this should be taken into account with risk scores
+
+
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 Lu_1988 <- read_csv("datasets_from_manuscripts/Lu_1988.csv") %>% 
@@ -871,6 +939,8 @@ Lu_1988 <- read_csv("datasets_from_manuscripts/Lu_1988.csv") %>%
   distinct(growth_form, goats_relative_preference)
 ```
 
+
+
 # C4 tropical grasses
 
 # Regeneration of populations
@@ -879,6 +949,8 @@ Lu_1988 <- read_csv("datasets_from_manuscripts/Lu_1988.csv") %>%
 
 -   Simple answer is NO. There is no difference in any of the traits measured between threatened vs other species
 -   It means that for understanding species regeneration potential, each species' trait values need to be considered - no generalisations.
+
+
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 all_taxa <- resources$APC %>% 
@@ -941,3 +1013,4 @@ threatened_kable_table <- correlations_with_possible_traits %>% kableExtra::kabl
 kableExtra::kable_classic(threatened_kable_table) %>%
   kableExtra::kable_styling(full_width = FALSE)
 ```
+

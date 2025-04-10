@@ -467,6 +467,25 @@ targets:
                   taxon_list
                  )
 
+  Jolly_2013_config:
+    command: >
+      dataset_configure("data/Jolly_2013/metadata.yml",
+                 definitions
+                 )
+  Jolly_2013_raw:
+    command: >
+      dataset_process("data/Jolly_2013/data.csv",
+                  Jolly_2013_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Jolly_2013:
+    command: >
+      dataset_update_taxonomy(Jolly_2013_raw,
+                  taxon_list
+                 )
+
   Li_1997_config:
     command: >
       dataset_configure("data/Li_1997/metadata.yml",
@@ -654,6 +673,25 @@ targets:
   Pegg_2018:
     command: >
       dataset_update_taxonomy(Pegg_2018_raw,
+                  taxon_list
+                 )
+
+  Pickup_2021_config:
+    command: >
+      dataset_configure("data/Pickup_2021/metadata.yml",
+                 definitions
+                 )
+  Pickup_2021_raw:
+    command: >
+      dataset_process("data/Pickup_2021/data.csv",
+                  Pickup_2021_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Pickup_2021:
+    command: >
+      dataset_update_taxonomy(Pickup_2021_raw,
                   taxon_list
                  )
 
@@ -912,6 +950,7 @@ targets:
         Hopper_2024,
         Hutton_1994,
         Ireland_2020,
+        Jolly_2013,
         Li_1997,
         Martino_2022,
         Martino_2024,
@@ -922,6 +961,7 @@ targets:
         Pate_1989,
         Pearl_2024,
         Pegg_2018,
+        Pickup_2021,
         RBGV_2025,
         SA_Seed_Conservation_Centre_2025,
         Setterfield_2002,

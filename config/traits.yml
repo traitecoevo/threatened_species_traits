@@ -133,14 +133,15 @@ traits:
       allowed_values_max: 1.0
     plant_goat_palatability:
       label: Plant palatability to goats
-      description: A plant's palatability (forage preference) for goats. 
+      description: A plant's palatability (forage preference) for goats.
       type: categorical
       allowed_values_levels:
         low_palatability: Plant has a low palatability to goats.
         moderate_palatability: Plant has a low palatability to goats.
         high_palatability: Plant has a low palatability to goats.
         not_eaten: Plant is not eaten by goats.
-        toxic:
+        toxic: Plant is toxic to goats
+      entity_URI: XX
     plant_goat_toxicity:
       label: Plant toxicity to goats
       description: Indication of whether a plant can cause any upset to the health and productivity of an animal. Toxic does not automatically imply lethal but some toxic plants can be lethal. 
@@ -150,6 +151,7 @@ traits:
         moderate_risk: Plant represents a moderate toxicity risk to goats.
         high_risk: Plant represents a high toxicity risk to goats.
         no_known_risk: Plant is not known to be toxic to goats.
+      entity_URI: XX
     metabolisable_energy:
       label: Metabolisable energy (ME)
       description: The energy available for herbivore metabolism and growth, expressed as megajoules per kilogram of plant dry matter. This is effectively the energy density of plant material.       
@@ -157,6 +159,7 @@ traits:
       unit: MJ/kg
       allowed_values_min: 1
       allowed_values_max: 50
+      entity_URI: XX
     digestible_mass_per_dry_mass:
       label: Digestible mass per unit dry mass
       description: XX

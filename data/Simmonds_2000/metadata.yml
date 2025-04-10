@@ -7,12 +7,24 @@ source:
     title: The palatability, and potential toxicity of Australian weeds to goats
     publisher: Rural Industries Research and Development Corporation
     pages: unknown
+  secondary:
+    key: Holst_2000
+    bibtype: Article
+    year: 2000
+    author: Peter Holst and Helen Simmonds
+    title: Weed Control Using Goats
+    journal: Goat Notes
+    pages: 253--257
 contributors:
   data_collectors:
   - last_name: Simmonds
     given_name: Helen
     ORCID: unknown
-    affiliation: Rowanpark, at Calga
+    affiliation: Rowanpark, at Calga, NSW
+  - last_name: Holst
+    given_name: Peter
+    ORCID: unknown
+    affiliation: NSW Dept of Agriculture, Cowra, NSW
   dataset_curators: Elizabeth Wenk
 dataset:
   data_is_long_format: no
@@ -54,6 +66,18 @@ traits:
   methods: Toxic weeds are those that can cause any upset to the health and productivity
     of an animal. Toxic does not automatically imply lethal but some toxic plants
     can be lethal.
+  source_id: Simmonds_2000
+- var_in: palatability_expanded
+  unit_in: .na
+  trait_name: plant_goat_palatability
+  entity_type: entity_type
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Toxic weeds are those that can cause any upset to the health and productivity
+    of an animal. Toxic does not automatically imply lethal but some toxic plants
+    can be lethal.
+  source_id: Holst_2000
 substitutions: .na
 taxonomic_updates:
 - find: Acacia escelsa
