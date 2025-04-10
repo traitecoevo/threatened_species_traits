@@ -1,0 +1,75 @@
+source:
+  primary:
+    key: Jolly_2013
+    bibtype: Report
+    year: 2013
+    author: San Jolly
+    title: Goat nutrition in Australia - Literature review 
+    type: Final report
+    institution: Meat & Livestock Australia
+contributors:
+  data_collectors:
+  - last_name: Jolly
+    given_name: San
+    ORCID: unknown
+    affiliation: Productive Nutrition Pty Ltd
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: 1981/2006
+  taxon_name: Botanical name
+  description: A review to thoroughly investigate the gaps in nutritional information to support future investment decisions by Meat & Livestock Australia to underpin the growth of the goat industry. 
+  basis_of_record: literature
+  life_stage: adult
+  sampling_strategy: The purpose of this review was to thoroughly investigate the gaps in nutritional information to support future investment decisions by Meat & Livestock Australia to underpin the growth of the goat industry. The terms of reference were as follows, 1) Clarify the nutritional requirements for goats; 2) Determine how and why publications vary widely in their recommendations; 3) Determine the variation in nutrient requirements between rangeland, Boer, Boer-cross, dairy and fleece-producing goats and their progeny; 4) Investigate the alignment between the recommendations and animals response to a range of feeding regimes and practises This review has provided confirmation that the guidelines for the nutrient requirements of goats vary widely and that there remains a diversity of opinion as to which is the correct source of information. NRC (2007) has published the most comprehensive set of recommendations following an extensive review of published research from 1981 to 2006 however these guidelines require validation under a range of environmental conditions.
+  original_file: data extracted from report
+  notes: none
+identifiers: .na
+locations: .na
+contexts: .na
+traits:
+- var_in: Toxicity
+  unit_in: .na
+  trait_name: plant_tissue_toxin_presence
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: sourced from the literature, with source documented for each species.
+- var_in: Palatability
+  unit_in: .na
+  trait_name: plant_goat_palatability
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: sourced from the literature, with source documented for each species.
+- var_in: Digestible DM %
+  unit_in: '%'
+  trait_name: unknown
+  entity_type: species
+  value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: unknown
+- var_in: ME (MJ/kg DM)
+  unit_in: MJ/kg
+  trait_name: metabolisable_energy 
+  entity_type: species
+  value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: unknown
+- var_in: CP %
+  unit_in: '%'
+  trait_name: leaf_crude_protein_per_dry_mass
+  entity_type: species
+  value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: unknown
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

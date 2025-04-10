@@ -150,6 +150,29 @@ traits:
         moderate_risk: Plant represents a moderate toxicity risk to goats.
         high_risk: Plant represents a high toxicity risk to goats.
         no_known_risk: Plant is not known to be toxic to goats.
+    metabolisable_energy:
+      label: Metabolisable energy (ME)
+      description: The energy available for herbivore metabolism and growth, expressed as megajoules per kilogram of plant dry matter. This is effectively the energy density of plant material.       
+      type: numeric
+      unit: MJ/kg
+      allowed_values_min: 1
+      allowed_values_max: 50
+    digestible_mass_per_dry_mass:
+      label: Digestible mass per unit dry mass
+      description: XX
+      type: numeric
+      units: g/g
+      allowed_values_min: 0.01
+      allowed_values_max: 1.0
+      entity_URI: XX
+    leaf_crude_protein_per_dry_mass:
+      label: Leaf crude protein content per unit leaf dry mass
+      description: XX
+      type: numeric
+      units: g/g
+      allowed_values_min: 0.01
+      allowed_values_max: 1.0
+      entity_URI: XX
     threatened_species_listing_status:
       label: Australian Environment Protection and Biodiversity Conservation Act status
       description: Conservation status as assessed under Australia's Environment Protection and Biodiversity Conservation Act. Allowed status valies are those used by the IUCN Red List.
