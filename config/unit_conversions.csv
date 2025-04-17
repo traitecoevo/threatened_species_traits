@@ -159,6 +159,7 @@ kN/m,N/m,x*1000
 10^1.MN/m2,N/m2,x*100000
 MJ/m2/m,N/m2,x*1000000
 MN/m2,N/m2,x*1000000
+MJ/kg,MJ/kg,x*1
 mg/m/MPa/s,10^4.kg/m/MPa/s,x*1/100
 kg/m/MPa/s,10^4.kg/m/MPa/s,x*10000
 10^4.ml/cm/MPa/s,10^4.kg/m/MPa/s,x*0.1

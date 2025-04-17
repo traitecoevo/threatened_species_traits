@@ -31,7 +31,7 @@ contexts: .na
 traits:
 - var_in: Toxicity
   unit_in: .na
-  trait_name: plant_tissue_toxin_presence
+  trait_name: .na
   entity_type: species
   value_type: mode
   basis_of_value: expert_score
@@ -45,15 +45,31 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: sourced from the literature, with source documented for each species.
-- var_in: Digestible DM %
+- var_in: digestible_mean
   unit_in: '%'
-  trait_name: unknown
+  trait_name: digestible_mass_per_dry_mass
   entity_type: species
   value_type: mean
   basis_of_value: measurement
   replicates: .na
   methods: unknown
-- var_in: ME (MJ/kg DM)
+- var_in: digestible_min_max_1
+  unit_in: '%'
+  trait_name: digestible_mass_per_dry_mass
+  entity_type: species
+  value_type: minimum
+  basis_of_value: measurement
+  replicates: .na
+  methods: unknown
+- var_in: digestible_min_max_2
+  unit_in: '%'
+  trait_name: digestible_mass_per_dry_mass
+  entity_type: species
+  value_type: maximum
+  basis_of_value: measurement
+  replicates: .na
+  methods: unknown
+- var_in: energy_mean
   unit_in: MJ/kg
   trait_name: metabolisable_energy 
   entity_type: species
@@ -61,11 +77,42 @@ traits:
   basis_of_value: measurement
   replicates: .na
   methods: unknown
-- var_in: CP %
+- var_in: energy_min_max_1
+  unit_in: MJ/kg
+  trait_name: metabolisable_energy 
+  entity_type: species
+  value_type: minimum
+  basis_of_value: measurement
+  replicates: .na
+  methods: unknown
+- var_in: energy_min_max_2
+  unit_in: MJ/kg
+  trait_name: metabolisable_energy 
+  entity_type: species
+  value_type: maximum
+  basis_of_value: measurement
+  replicates: .na
+- var_in: protein_mean
   unit_in: '%'
-  trait_name: leaf_crude_protein_per_dry_mass
+  trait_name: leaf_crude_protein_per_dry_mass 
   entity_type: species
   value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: unknown
+- var_in: protein_min_max_1
+  unit_in: '%'
+  trait_name: leaf_crude_protein_per_dry_mass 
+  entity_type: species
+  value_type: minimum
+  basis_of_value: measurement
+  replicates: .na
+  methods: unknown
+- var_in: protein_min_max_2
+  unit_in: '%'
+  trait_name: leaf_crude_protein_per_dry_mass 
+  entity_type: species
+  value_type: maximum
   basis_of_value: measurement
   replicates: .na
   methods: unknown

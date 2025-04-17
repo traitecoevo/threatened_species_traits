@@ -1,0 +1,18 @@
+trait_name,value,myrtle_rust_susceptibility
+myrtle_rust_susceptibility,resistant,0
+myrtle_rust_susceptibility,low resistant,0.5
+myrtle_rust_susceptibility,low,1
+myrtle_rust_susceptibility,medium resistant,1.5
+myrtle_rust_susceptibility,resistant susceptible,1.5
+myrtle_rust_susceptibility,susceptible resistant susceptible,2
+myrtle_rust_susceptibility,low medium,2
+myrtle_rust_susceptibility,high resistant,2.5
+myrtle_rust_susceptibility,medium,3
+myrtle_rust_susceptibility,high low,3
+myrtle_rust_susceptibility,susceptible,3
+myrtle_rust_susceptibility,high medium high resistant,3
+myrtle_rust_susceptibility,low medium high medium resistant high,3
+myrtle_rust_susceptibility,susceptible medium,3
+myrtle_rust_susceptibility,susceptible high resistant,3
+myrtle_rust_susceptibility,high medium,4
+myrtle_rust_susceptibility,high,5

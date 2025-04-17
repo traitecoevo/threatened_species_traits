@@ -229,7 +229,7 @@ substitutions:
   replace: fire_killed
 - trait_name: geologic_substrate
   find: 'y'
-  replace: granite
+  replace: granitic
 taxonomic_updates:
 - find: Schoenus sp.
   replace: Schoenus sp. [Hopper_2024]

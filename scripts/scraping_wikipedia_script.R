@@ -116,7 +116,7 @@ species_data_all <-
 # same as code below using lapply - 
 # advantage of this is that when script starts part way you get data up to the point of crash
 
-for (i in 8587:12000) {
+for (i in 19001:22098) {
 
   species_data_t <- process_page(urls[i])
 
@@ -137,4 +137,4 @@ results <- results[!sapply(results, is.null)]
 # Combine the results into a single data
 Wikipedia_all_species_data <- bind_rows(results)
 
-write.csv(species_data_all, "datasets_from_manuscripts/wikipedia_data9.csv", na = "")
+write.csv(species_data_all, "datasets_from_manuscripts/wikipedia_data13.csv", na = "")

@@ -342,6 +342,7 @@ traits:
         scrubland_heath: XX
         scrubland_open: XX
         scrubland_riparian: XX
+        sedgeland: XX
         semiaquatic: XX
         shrubland: XX
         shrubland steppe: XX
@@ -496,7 +497,8 @@ traits:
         gypseous: XX
         igneous: XX
         iron: XX
-        jasperlite: XX
+        jasperlite: XX        
+        kwongan: Add to csv
         lateritic: XX
         limestone: XX
         metamorphic: XX
@@ -529,13 +531,13 @@ traits:
         depressions: XX
         escarpments: XX
         flats: XX
-        flats inundated_intermittent: XX
         gorges: XX
         gullies: XX
         gullies_sheltered: XX
         gully_heads: XX
         high_ground: XX
         hills: XX
+        inundated_intermittent: add to csv
         inundated_shallow: XX
         mountains: XX
         plains: XX
