@@ -1,0 +1,446 @@
+source:
+  primary:
+    key: McDonald_2019
+    bibtype: Article
+    year: '2019'
+    author: Sarah E. McDonald and Nick Reid and Rhiannon Smith and Cathleen M. Waters
+      and John Hunter and Romina Rader
+    journal: Austral Ecology
+    title: Comparison of biodiversity and ground cover between a commercial rotationally
+      grazed property and an adjacent nature reserve in semi-arid rangeland
+    volume: '45'
+    number: '1'
+    pages: 60--69
+    doi: 10.1111/aec.12829
+    issn: 1442-9993
+contributors:
+  data_collectors:
+  - last_name: McDonald
+    given_name: Sarah
+    ORCID: 0000-0001-8999-5857
+    affiliation: School of Environmental and Rural Science, University of New England,
+      Armidale, New South Wales
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(location_name = "Mulga Lands bioregion of north-western New South Wales")'
+  collection_date: 2016-03/2016-05
+  taxon_name: Species
+  location_name: location_name
+  description: This study compared ground cover, plant species composition and floristic
+    and functional diversity along gradients of grazing intensity between a pastoral
+    property rotationally grazed by goats and an adjacent nature reserve (ungrazed
+    by commercial livestock) in semi-arid south-eastern Australia to understand if
+    alternative grazing management practices, such as rotational grazing, may be a
+    viable option for broad-scale biodiversity conservation and sustainable pastoral
+    management.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: Study area ^p This study was undertaken in mulga (Acacia aneura)
+    woodland in the Mulga Lands bioregion of north-western New South Wales (NSW),
+    Australia (29o51'S, 143o53'E, ~150 m a.s.l.; Appendix S1 Fig. S1). The climate
+    is semi-arid, with a mean annual precipitation of 282 mm recorded at Wanaaring
+    (Bureau of Meteorology 2017). More rainfall is recorded in the summer months on
+    average, but rainfall is generally unpredictable and sporadic throughout the year.
+    Only 186 mm of rain was recorded in the 12 months prior to sampling, and conditions
+    were dry at the time of sampling. Mean maximum temperatures are 36.9°C in January
+    and 18.2°C in July, and mean minimum temperatures are 22.0°C in January and 4.3°C
+    in July at Wanaaring (Bureau of Meteorology 2017). Soils are deep sandy to sandy
+    loam red earths, with relief to 5 m (Walker 1991). Mulga is the dominant tree
+    or tall shrub throughout the landscape, arranged in distinct groves and becoming
+    denser along drainage lines. In addition, scattered ironwood (Acacia excelsa),
+    bimble box (Eucalyptus populnea subsp. bimbil), beefwood (Grevillea striata) and
+    whitewood (Atalaya hemiglauca) are present, and areas of woody shrubs (Eremophila
+    spp., Dodonaea viscosa, Senna spp.) are common. Woollybutt (Eragrostis eriopoda)
+    is the dominant understorey perennial grass. ^p Grazing management ^p The grazed
+    property and nature reserve were surveyed in Autumn 2016 (Table 1). Both areas
+    had historically been continuously grazed by sheep and cattle as per regional
+    practice from the mid-1800s, with minimal fencing and water point development
+    initially (see Appendix S1 for further information on grazing history). The grazed
+    property was rotationally grazed by sheep from 2004 and predominantly by goats
+    and some sheep and cattle since 2006. The highly variable stocking rates were
+    regularly adjusted to match pasture availability and to prevent degradation of
+    pasture and soils. Paddocks were rested for at least 6 months each year, with
+    grazing periods ranging from 3 weeks to 4 months, depending on seasonal conditions.
+    Water points were fenced off when livestock were not in paddocks to reduce grazing
+    pressure from other herbivores. The nature reserve was established in 1979 when
+    commercial livestock grazing was excluded, but native (macropods) and feral (goats,
+    pigs, rabbits) herbivores were present in low numbers, with feral animals controlled
+    as needed. The nature reserve was considered representative of current extensive,
+    publicly funded conservation areas in Australia, where it is not logistically
+    or economically possible or environmentally desirable to exclude all herbivores.
+    Areas surveyed on the grazed property and nature reserve were comparable and experienced
+    the same climate and consisted of the same soil (calcarosols, deep sandy to sandy
+    loam red earths) and vegetation community (mulga woodland) described previously.
+    ^p Study design ^p The design of this study was limited by the inability to find
+    replicate properties with rotationally grazed paddocks and more than one protected
+    area on the same land system. Previous studies have highlighted variation in biodiversity
+    when large study areas have been utilised (Landsberg et al. 2003; McDonald et
+    al. 2019). Hence, this study sampled plots within the same land system to ensure
+    minimal landscape variation between the nature reserve and the spatially separated
+    rotationally grazed paddocks on the adjacent commercial livestock property. Distance
+    from water was used as an index of grazing intensity. Four paddocks (2079-3351
+    ha in size) were sampled on the rotationally grazed property, and a comparable
+    geographical spread of sites was sampled on the adjacent reserve, which lacked
+    paddocks and water points (Table 1). ^p Across the four paddocks and the nature
+    reserve, 70 points were randomly generated, with a minimum distance of 400 m between
+    each point to achieve sample independence. Points were restricted to within 1000
+    m of fence lines and tracks on the rotationally grazed property, and within 2000
+    m of fence lines on the reserve, to allow timely completion of surveys and more
+    time to survey plots, as it was not possible to drive to points. All points were
+    ground-truthed, to ensure they were located on red sandy loam soils in mulga woodland.
+    Areas of rocky hills or drainage lines were avoided as they were not represented
+    on both the grazed property and the nature reserve, and plots were located at
+    least 50 m from fence lines and tracks. Of the 70 points, 51 met these criteria
+    and were sampled. At each point, a 20 x 20-m plot was established and nine 1 x
+    1-m quadrats were located systematically within each plot, with a 2 m buffer from
+    the plot edge, and 6.5 m between adjacent quadrats. Each plot and quadrat was
+    surveyed once during April-May 2016. The proportion of ground cover consisting
+    of live plant material, litter (dead herbaceous material), cryptogam, coarse woody
+    debris (>2 cm diameter), dung, rock and bare ground was estimated in each quadrat.
+    In addition, the number of both fresh and old pellets of goat/sheep (these could
+    not be differentiated), macropod and rabbit dung, and the number of cattle pats,
+    were counted in each quadrat to provide a measure of recent grazing intensity
+    (Appendix S1 Table S1). ^p  Vegetation surveys ^p All understorey plant species
+    (<3 m tall at maturity) were identified in each plot (400 m2). The per cent cover
+    of each understorey plant species was estimated in each quadrat (1 m2). Understorey
+    species richness in each plot and quadrat was calculated. Shannon-Wiener (SW)
+    diversity and Pielou's evenness index were calculated for each plot using understorey
+    species frequency data from quadrats. Understorey species pattern diversity (turnover)
+    for each plot was calculated using the log of the slope of the understorey species
+    accumulation curve generated from the quadrats in each plot. Overstorey woody
+    plant species (>3 m) in each plot were identified, and the numbers of each species
+    ≤0.5 m in height (seedlings) and >0.5 m in height (large) were counted. Density
+    of seedling and large overstorey woody species, species richness and SW diversity
+    of overstorey woody species were calculated for each plot.
+  original_file: data extracted from manuscript SI
+  notes: none
+identifiers: .na
+locations:
+  Mulga Lands bioregion of north-western New South Wales:
+    latitude (deg): -29.85
+    longitude (deg): 143.883
+    description: mulga woodland
+contexts: .na
+traits:
+- var_in: Life form
+  unit_in: .na
+  trait_name: plant_growth_form
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Functional trait information was collected for each understorey species
+    from online databases and published resources. Life history (annual/perennial),
+    life form (graminoid/forb/shrub), functional group (annual grass/perennial grass/annual
+    forb (all annual species except grasses)/perennial forb (all perennial species
+    except grasses)) and palatability (unpalatable (not or rarely eaten)/moderately
+    palatable (eaten but not readily or preferred, or when mature)/palatable (eaten);
+    Cunningham et al. 2011) were analysed as categorical traits.
+- var_in: Life history
+  unit_in: .na
+  trait_name: life_history
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Functional trait information was collected for each understorey species
+    from online databases and published resources. Life history (annual/perennial),
+    life form (graminoid/forb/shrub), functional group (annual grass/perennial grass/annual
+    forb (all annual species except grasses)/perennial forb (all perennial species
+    except grasses)) and palatability (unpalatable (not or rarely eaten)/moderately
+    palatable (eaten but not readily or preferred, or when mature)/palatable (eaten);
+    Cunningham et al. 2011) were analysed as categorical traits.
+- var_in: Palatability
+  unit_in: .na
+  trait_name: plant_goat_palatability
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Functional trait information was collected for each understorey species
+    from online databases and published resources. Life history (annual/perennial),
+    life form (graminoid/forb/shrub), functional group (annual grass/perennial grass/annual
+    forb (all annual species except grasses)/perennial forb (all perennial species
+    except grasses)) and palatability (unpalatable (not or rarely eaten)/moderately
+    palatable (eaten but not readily or preferred, or when mature)/palatable (eaten);
+    Cunningham et al. 2011) were analysed as categorical traits.
+- var_in: Height (cm)
+  unit_in: cm
+  trait_name: plant_height
+  entity_type: species
+  value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: Functional trait information was collected for each understorey species
+    from online databases and published resources.
+- var_in: Seed length (mm)
+  unit_in: mm
+  trait_name: seed_length
+  entity_type: species
+  value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: Functional trait information was collected for each understorey species
+    from online databases and published resources.
+- var_in: LAI (mm2)
+  unit_in: mm2
+  trait_name: .na
+  entity_type: species
+  value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: leaf area index (leaf length x width) ; Functional trait information was
+    collected for each understorey species from online databases and published resources.
+- var_in: Rarity index
+  unit_in: '{dimensionless}'
+  trait_name: .na
+  entity_type: species
+  value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: rarity, based on frequency of species encountered in this study
+substitutions:
+- trait_name: plant_goat_palatability
+  find: h
+  replace: high_palatability
+- trait_name: plant_goat_palatability
+  find: l
+  replace: low_palatability
+- trait_name: plant_goat_palatability
+  find: m
+  replace: moderate_palatability
+- trait_name: life_history
+  find: a
+  replace: annual
+- trait_name: life_history
+  find: p
+  replace: perennial
+- trait_name: plant_growth_form
+  find: f
+  replace: herb
+- trait_name: plant_growth_form
+  find: g
+  replace: graminoid
+- trait_name: plant_growth_form
+  find: s
+  replace: shrub
+taxonomic_updates:
+- find: Abutilon otocarpum F.Muell.
+  replace: Abutilon otocarpum
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Actinobole uliginosum (A.Gray) H.Eichler
+  replace: Actinobole uliginosum
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Aristida behriana F.Muell.
+  replace: Aristida behriana
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Aristida contorta F.Muell.
+  replace: Aristida contorta
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Aristida jerichoensis (Domin) Henrard
+  replace: Aristida jerichoensis
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Austrostipa scabra (Lindl.) S.W.L.Jacobs & J.Everett
+  replace: Austrostipa scabra
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Chenopodium desertorum (J.M.Black) J.M.Black
+  replace: Chenopodium desertorum
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Convolvulus erubescens Sims
+  replace: Convolvulus erubescens
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Dianella porracea (R.J.F.Hend.) P.F.Horsfall & G.W.Carr
+  replace: Dianella porracea
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Einadia nutans (R.Br.) A.J.Scott
+  replace: Einadia nutans
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Enteropogon acicularis (Lindl.) Lazarides
+  replace: Enteropogon acicularis
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Eragrostis eriopoda Benth.
+  replace: Eragrostis eriopoda
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Eragrostis setifolia Nees
+  replace: Eragrostis setifolia
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Eremophila latrobei F.Muell.
+  replace: Eremophila latrobei
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Hibiscus sturtii Hook.
+  replace: Hibiscus sturtii
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Maireana villosa (Lindl.) Paul G.Wilson
+  replace: Maireana villosa
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Monachather paradoxus Steud.
+  replace: Monachather paradoxus
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Podolepis capillaris (Steetz) Diels
+  replace: Podolepis capillaris
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Portulaca oleracea L.
+  replace: Portulaca oleracea
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Ptilotus polystachyus (Gaudich.) F.Muell.
+  replace: Ptilotus polystachyus
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Ptilotus sessilifolius (Lindl.) Benl
+  replace: Ptilotus sessilifolius
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Salsola australis R.Br.
+  replace: Salsola australis
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Sclerolaena bicornis Lindl.
+  replace: Sclerolaena bicornis
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Sclerolaena convexula (R.H.Anderson) A.J.Scott
+  replace: Sclerolaena convexula
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Sida cunninghamii C.T.White
+  replace: Sida cunninghamii
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Solanum esuriale Lindl.
+  replace: Solanum esuriale
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Swainsona microphylla A.Gray
+  replace: Swainsona microphylla
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Themeda triandra Forssk.
+  replace: Themeda triandra
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Thyridolepis mitchelliana (Nees) S.T.Blake
+  replace: Thyridolepis mitchelliana
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Tribulus terrestris L.
+  replace: Tribulus terrestris
+  reason: Exact match of taxon name to an APC-accepted scientific name (including
+    authorship) (2025-04-28)
+  taxonomic_resolution: species
+- find: Tripogon loliiformis (F.Muell.) C.E.Hubb.
+  replace: Tripogon loliiformis
+  reason: Exact match of taxon name to an APC-known scientific name (including authorship)
+    (2025-04-28)
+  taxonomic_resolution: species
+- find: Digitaria sp.
+  replace: Digitaria sp. [McDonald_2019]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Evolvulus alsinoides, subsp. Villosicalyx Ooststr.
+  replace: Evolvulus alsinoides var. villosicalyx
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: variety
+- find: Sclerolaena muricata, subsp. Semiglabra (Ising) A.J.Scott
+  replace: Sclerolaena muricata var. semiglabra
+  reason: Exact match of the first three words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: variety
+- find: Daucus glochidiatus (Labill.) Fisch., C.A.Mey. & Avé-Lall.
+  replace: Daucus glochidiatus
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: species
+- find: Euphorbia drummondii Boiss.
+  replace: Euphorbia drummondii
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: species
+- find: Goodenia fascicularis F.Muell. & Tate
+  replace: Goodenia fascicularis
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: species
+- find: Lepidium oxytrichum Sprague
+  replace: Lepidium oxytrichum
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: species
+- find: Solanum ellipticum R.Br
+  replace: Solanum ellipticum
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: species
+- find: Triraphis mollis R.Br
+  replace: Triraphis mollis
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: species
+- find: Wahlenbergia communis Carolin
+  replace: Wahlenbergia communis
+  reason: Exact match of the first two words of the taxon name to an APC-known canonical
+    name (2025-04-28)
+  taxonomic_resolution: species
+- find: Boerhavia dominie Meikle & Hewson
+  replace: Boerhavia dominii
+  reason: Fuzzy match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: species
+- find: Vittadinia cuneate DC.
+  replace: Vittadinia cuneata
+  reason: Fuzzy match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-04-28)
+  taxonomic_resolution: species
+exclude_observations: .na
+questions: .na

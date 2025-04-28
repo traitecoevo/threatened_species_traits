@@ -1,0 +1,9 @@
+trait_name,find,replace
+goat_palatability,h,high_palatability
+goat_palatability,l,low_palatability
+goat_palatability,m,moderate_palatability
+life_history,a,annual
+life_history,p,perennial
+plant_growth_form,f,herb
+plant_growth_form,g,graminoid
+plant_growth_form,s,shrub

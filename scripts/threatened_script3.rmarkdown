@@ -1,0 +1,995 @@
+---
+title: "Threatened species script"
+format: html
+editor: visual
+embed-resources: true
+knitr:
+  opts_knit:
+    root.dir: "C:/Users/Lizzy/Documents/GitHub/threatened_species_traits"
+editor_options: 
+  chunk_output_type: console
+---
+
+
+
+# Setup and data extraction
+
+## load libraries, build database
+
+-   open/merge AusTraits and attributes in threatened species database
+
+
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+library(tidyverse)
+library(remake)
+library(kableExtra)
+library(austraits)
+library(APCalign)
+library(traits.build)
+
+path <- "../traits.build/"
+devtools::load_all(path)
+
+resources <- APCalign::load_taxonomic_resources()
+
+#setwd("C:/Users/z3524079/Documents/GitHub/threatened_species_traits")
+#C:/Users/z3524079/Documents/GitHub/threatened_species_traits
+
+#austraits <- readRDS("ignore/austraits/austraits-6.0.0.rds")
+
+austraits <- readRDS("ignore/austraits/austraits_20250402.rds")
+
+source("R/custom_R_code.R")
+source("R/extra_functions.R")
+
+traits.build::build_setup_pipeline(method = "remake", database_name = "threatened_species")
+
+threatened_species <- remake::make("threatened_species")
+
+# create combined database with both data sources
+all_traits <- austraits %>% austraits::bind_databases(threatened_species)
+```
+
+
+
+## create dataframes for key traits
+
+-   create dataframes from merged database for any trait suspected to be relevant for any threats
+
+### score conversions for categorical traits and threats
+
+-   read in files that indicate conversions between categorical values and a numeric equivalent, to allow linear models to be run to look at trait - susceptibility correlations
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# open files with categorical to numeric conversions for categorical traits
+life_history_scores <- read_csv("data_extras/life_history.csv")
+dispersers_scores <- read_csv("data_extras/dispersers.csv")
+fruit_fleshiness_scores <- read_csv("data_extras/fruit_fleshiness_scores.csv")
+resprouting_capacity_scores <- read_csv("data_extras/resprouting_capacity.csv")
+nitrogen_fixing_scores <- read_csv("data_extras/nitrogen_fixing_scores.csv")
+leaf_hairs_adult_leaves_scores <- read_csv("data_extras/leaf_hairs_adult_leaves_scores.csv")
+leaf_glaucousness_scores <- read_csv("data_extras/leaf_glaucousness_scores.csv")
+plant_spinescence_scores <- read_csv("data_extras/plant_spinescence_scores.csv")
+plant_goat_toxicity_scores <- read_csv("data_extras/plant_goat_toxicity_scores.csv")
+plant_goat_palatability_scores <- read_csv("data_extras/plant_goat_palatability_scores.csv")
+plant_growth_form_scores <- read_csv("data_extras/plant_growth_form_scores.csv")
+soil_type_scores <- read_csv("data_extras/soil_type_scores.csv")
+geologic_substrate_scores <-  read_csv("data_extras/geologic_substrate_scores.csv")
+phytophthora_cinnamomi_susceptibility_scores <- read_csv("data_extras/phytophthora_cinnamomi_susceptibility_scores.csv")
+myrtle_rust_susceptibility_scores <- read_csv("data_extras/myrtle_rust_susceptibility_scores.csv")
+
+# vegetative_reproduction_ability
+
+life_history_scores %>% filter(!str_detect(value, " ")) %>% arrange(life_history) %>% rename(`categorical value` = value, `numeric score assigned` = life_history)  %>% kable(caption = "life history values") %>% kable_classic()
+
+plant_growth_form_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_growth_form) %>% rename(`categorical value` = value, `numeric score assigned` = plant_growth_form)  %>% kable(caption = "plant growth form values") %>% kable_classic()
+
+resprouting_capacity_scores %>% filter(!str_detect(value, " ")) %>% arrange(resprouting_capacity) %>% rename(`categorical value` = value, `numeric score assigned` = resprouting_capacity)  %>% kable(caption = "resprouting capacity values") %>% kable_classic()
+
+dispersers_scores %>% filter(!str_detect(value, " ")) %>% arrange(dispersers_score) %>% rename(`categorical value` = value, `numeric score assigned` = dispersers_score)  %>% kable(caption = "dispersal trait values") %>% kable_classic()
+
+nitrogen_fixing_scores %>% filter(!str_detect(value, " ")) %>% arrange(nitrogen_fixing) %>% rename(`categorical value` = value, `numeric score assigned` = nitrogen_fixing)  %>% kable(caption = "nitrogen fixing values") %>% kable_classic()
+
+leaf_glaucousness_scores %>% filter(!str_detect(value, " ")) %>% arrange(leaf_glaucousness) %>% rename(`categorical value` = value, `numeric score assigned` = leaf_glaucousness)  %>% kable(caption = "leaf glaucousness values") %>% kable_classic()
+
+leaf_hairs_adult_leaves_scores %>% filter(!str_detect(value, " ")) %>% arrange(leaf_hairs_adult_leaves) %>% rename(`categorical value` = value, `numeric score assigned` = leaf_hairs_adult_leaves)  %>% kable(caption = "leaf hair values") %>% kable_classic()
+
+plant_spinescence_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_spinescence) %>% rename(`categorical value` = value, `numeric score assigned` = plant_spinescence)  %>% kable(caption = "plant spinescence values") %>% kable_classic()
+
+phytophthora_cinnamomi_susceptibility_scores %>% filter(!str_detect(value, " ")) %>% arrange(phytophthora_cinnamomi_susceptibility) %>% rename(`categorical value` = value, `numeric score assigned` = phytophthora_cinnamomi_susceptibility)  %>% kable(caption = "phytophthora cinnamomi susceptibility values") %>% kable_classic()
+
+myrtle_rust_susceptibility_scores %>% filter(!str_detect(value, " ")) %>% arrange(myrtle_rust_susceptibility) %>% rename(`categorical value` = value, `numeric score assigned` = myrtle_rust_susceptibility)  %>% kable(caption = "myrtle rust susceptibility values") %>% kable_classic()
+
+plant_goat_toxicity_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_goat_toxicity) %>% rename(`categorical value` = value, `numeric score assigned` = plant_goat_toxicity)  %>% kable(caption = "plant goat toxicity values") %>% kable_classic()
+
+plant_goat_palatability_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_goat_palatability) %>% rename(`categorical value` = value, `numeric score assigned` = plant_goat_palatability)  %>% kable(caption = "plant goat palatability values") %>% kable_classic()
+```
+
+
+
+### extract categorical traits from database
+
+-   extract all available values for categorical traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
+-   for each trait, merge in numeric conversions
+-   for each taxon, take the mean of all available values
+
+
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+extract_categorical_trait <- function(database = all_traits, categorical_trait, trait_scores, output_name) {
+  
+  extracted_data <- (all_traits %>%
+  austraits::extract_trait(categorical_trait))$traits %>%
+  tidyr::separate_longer_delim(value, delim = " ") %>%
+  left_join(trait_scores %>% rename(output_name = 3), by = join_by(trait_name, value)) %>%
+  filter(!is.na(output_name)) %>%
+  select(dataset_id, observation_id, taxon_name, output_name) %>%
+  group_by(taxon_name, dataset_id, observation_id) %>%
+  mutate(output_name = mean(as.numeric(output_name))) %>%
+  ungroup() %>%
+  distinct() %>%
+  select(taxon_name, output_name) %>%
+  group_by(taxon_name) %>%
+  mutate(output_name = mean(as.numeric(output_name))) %>%
+  ungroup() %>%
+  distinct() %>%
+  rename(!!output_name := output_name)
+  
+  extracted_data
+
+}
+
+life_history <- extract_categorical_trait(all_traits, "life_history", life_history_scores, "life_history")
+dispersers <-  extract_categorical_trait(all_traits, c("dispersal_syndrome", "dispersers"), dispersers_scores, "dispersers")
+resprouting_capacity <- extract_categorical_trait(all_traits, "resprouting_capacity", resprouting_capacity_scores, "resprouting_capacity")
+nitrogen_fixing <- extract_categorical_trait(all_traits, "nitrogen_fixing", nitrogen_fixing_scores, "nitrogen_fixing")
+plant_growth_form <- extract_categorical_trait(all_traits, "plant_growth_form", plant_growth_form_scores, "plant_growth_form")
+leaf_hairs_adult_leaves <- extract_categorical_trait(all_traits, "leaf_hairs_adult_leaves", leaf_hairs_adult_leaves_scores, "leaf_hairs_adult_leaves")
+leaf_glaucousness <- extract_categorical_trait(all_traits, "leaf_glaucousness", leaf_glaucousness_scores, "leaf_glaucousness")
+fruit_fleshiness <- extract_categorical_trait(all_traits, "fruit_fleshiness", fruit_fleshiness_scores, "fruit_fleshiness")
+plant_spinescence <- extract_categorical_trait(all_traits, "plant_spinescence", plant_spinescence_scores, "plant_spinescence")
+myrtle_rust_susceptibility <- extract_categorical_trait(all_traits, "myrtle_rust_susceptibility", myrtle_rust_susceptibility_scores, "myrtle_rust_susceptibility")
+phytophthora_cinnamomi_susceptibility <- extract_categorical_trait(all_traits, "phytophthora_cinnamomi_susceptibility", phytophthora_cinnamomi_susceptibility_scores, "phytophthora_cinnamomi_susceptibility")
+plant_goat_toxicity <- extract_categorical_trait(all_traits, "plant_goat_toxicity", plant_goat_toxicity_scores, "plant_goat_toxicity")
+
+
+plant_goat_palatability <- extract_categorical_trait(all_traits, "plant_goat_palatability", plant_goat_palatability_scores, "plant_goat_palatability")
+
+# sometimes trait value is scored for the entire genus and need to map to species values
+plant_goat_palatability_genera <- plant_goat_palatability %>%
+  filter(!str_detect(taxon_name, " ")) %>%
+  rename(genus = taxon_name) %>%
+  left_join(resources$APC %>% filter(taxonomic_status == "accepted", taxon_rank == "species") %>% select(genus, taxon_name = canonical_name))
+
+plant_goat_palatability <- plant_goat_palatability %>%
+  filter(str_detect(taxon_name, " ")) %>%
+  bind_rows(plant_goat_palatability_genera)
+```
+
+
+
+### extract numeric traits from database
+
+-   extract all available values for numeric traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
+
+-   for each taxon, take the mean of all available values using a weighted mean function developed for AusTraits, which first takes the mean of multiple individual values collected at a single site; then the mean of values from all population; and at the end also considers values extracted from floras (and similar publications) that refer to the entire species
+
+-   the function used is called `austraits_weighted_means`
+
+
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+extract_numeric_trait <- function(numeric_trait) {
+  
+  extracted_data <- all_traits %>%
+  austraits::extract_trait(numeric_trait) %>%
+  austraits::extract_data(table = "traits", col = "basis_of_record", col_value = c("field", "literature", "field literature", "literature field"), partial_matches_allowed = F) %>%
+  austraits_weighted_means(numeric_trait) %>%
+  filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
+  select(taxon_name, mean) %>%
+  rename(!!numeric_trait := mean)
+  
+  extracted_data
+}
+
+numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "metabolisable_energy", "leaf_work_to_shear_adjusted")
+
+traits2 <- c("leaf_soluble_protein_per_area", "leaf_insoluble_protein_per_area")  # interesting traits but only data for 1-2 species - in a lab study
+
+numeric_data <- list()
+
+for (trait in numeric_traits) {
+  
+  numeric_data[[trait]] <- extract_numeric_trait(trait)
+  numeric_data[[trait]] 
+  
+}
+
+list2env(numeric_data, envir = .GlobalEnv)
+
+# flowering_time
+
+# fruiting_time
+
+# germination_time
+```
+
+
+
+### extract non-trait attributes from database - for susceptibility scoring, not for trait correlations
+
+-   there are attributes of a species that aren't "traits" but are known to affect a species susceptibility to various threats
+
+-   these include:
+
+    1.  habitat (vegetation association and moisture)
+    2.  soil type (mainly soil textural terms) - under Phytophthora for now
+    3.  underlying geologic substrate - under Phytophthora for now
+    4.  population size (not merged in yet because too little data)
+    5.  population count (not merged in yet because too little data)
+
+
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+habitat <- all_traits$traits %>%
+  filter(trait_name == "habitat") %>%
+  select(taxon_name, habitat = value) %>%
+  group_by(taxon_name) %>%
+  mutate(habitat = paste0(habitat, collapse = " ")) %>%
+  ungroup() %>%
+  distinct()
+
+habitat_moisture <- all_traits$traits %>%
+  filter(trait_name == "habitat_moisture") %>%
+  select(taxon_name, habitat_moisture = value) %>%
+  group_by(taxon_name) %>%
+  mutate(habitat_moisture = paste0(habitat_moisture, collapse = " ")) %>%
+  ungroup() %>%
+  distinct()
+```
+
+
+
+### create tables partially ranking soils, geologic substrates by suscepibility
+
+
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# clay soils assigned risk of 0.5; 
+# all others 1; not a lot of evidence for this, but a few studies suggesting sandy soils worst effected
+# quite possibly this is actually about soil nutrient content, not actually texture
+soil_type <- all_traits$traits %>%
+  filter(trait_name == "soil_type") %>%
+  select(taxon_name, value) %>%
+  tidyr::separate_longer_delim(value, delim = " ") %>%
+  dplyr::left_join(soil_type_scores, by = join_by(value)) %>%
+  select(-value, -trait_name) %>%
+  group_by(taxon_name) %>%
+  mutate(soil_score = mean(soil_score)) %>%
+  ungroup() %>%
+  distinct(taxon_name, soil_score)
+
+# high pH soils (limestone, other calcareous soils) & and saline soils assigned 0 risk; all others 1
+# take mean for each species based on all terms in database
+geologic_substrate <- all_traits$traits %>%
+  filter(trait_name == "geologic_substrate") %>%
+  select(taxon_name, value) %>%
+  tidyr::separate_longer_delim(value, delim = " ") %>%
+  dplyr::left_join(geologic_substrate_scores, by = join_by(value)) %>%
+  select(-value, -trait_name) %>%
+  group_by(taxon_name) %>%
+  mutate(geologic_substrate_score = mean(geologic_substrate_score)) %>%
+  ungroup() %>%
+  distinct(taxon_name, geologic_substrate_score) %>%
+  dplyr::arrange(geologic_substrate_score)
+```
+
+
+
+# Phytophthora cinnamomi
+
+### Are any traits good predictors?
+
+-   Check if trait correlations exist for taxa where susceptibility is already known.
+
+#### - create dataframe
+
+-   create table with susceptibility, trait values for taxa with known *Phytophthora cinnamomi* susceptibility
+
+
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+phytophthora_cinnamomi_susceptibility_data <- (all_traits %>% join_taxa(vars = "family"))$traits %>%
+  filter(trait_name == "phytophthora_cinnamomi_susceptibility") %>%
+  select(taxon_name, family, value) %>%
+  left_join(phytophthora_cinnamomi_susceptibility_scores, by = join_by(value)) %>%
+  group_by(taxon_name) %>%
+  mutate(
+    phytophthora_cinnamomi_susceptibility = mean(phytophthora_cinnamomi_susceptibility, na.rm = T)) %>% 
+  ungroup() %>%
+  distinct() %>% 
+  left_join(nitrogen_fixing, by = "taxon_name") %>%
+  left_join(dispersers, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(leaf_glaucousness, by = "taxon_name") %>%
+  left_join(leaf_hairs_adult_leaves, by = "taxon_name") %>%
+  left_join(seed_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_mass_per_area, by = "taxon_name") %>%
+  left_join(fruit_fleshiness, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_length, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(soil_type, by = "taxon_name") %>%
+  left_join(geologic_substrate, by = "taxon_name")
+```
+
+
+
+#### - check for trait correlations
+
+-   identify strong susceptibility-trait correlations for taxa with known susceptibility
+
+-   Note:
+
+    1.  Not considering traits that might matter but are entirely linked to taxonomy (i.e. types of roots/root associations)
+    2.  Not considering traits that are known to matter, but are known for so few species to be useless as predictors (constitutive and induced responses to infection; concentration of secondary metabolites in plant)
+
+-   In the output:
+
+    1.  a positive coefficient indicates a higher trait value in more susceptible taxa
+    2.  for numeric traits, the magnitude of the coefficient indicates the change in response variable for a "1 unit" increase in susceptibility, where susceptibility is on a scale of 0--3.
+    3.  for numeric traits, the magnitude of the coefficient must be intepreted in conjunction with knowing the scaling for the response variable - different for each trait; the susceptibility is on a scale of 0--3.
+    4.  Also in this chart are correlations with soil type/texture and geologic substrate. As also indicated in the literature, it isn't that taxa growing of "resistant substrates/soils" are themselves resistant, but that Phytophthora doesn't survive in these locations. Therefore, this information can be used to asses the **RISK** of a species to Phytophthora, but not its **SUSCEPTIBILITY** to Phytophthora.
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+correlations_with_possible_traits <- tibble(
+  trait = character(),
+  coeff = character(),
+  r2 = character(), 
+  p_value = character(),
+  n = character()
+)
+
+for (var in c("life_history", "dispersers", "nitrogen_fixing", "resprouting_capacity", "fruit_fleshiness", "leaf_glaucousness", "leaf_hairs_adult_leaves", "soil_score", "geologic_substrate_score")) {
+  
+  data_tmp <- phytophthora_cinnamomi_susceptibility_data %>% filter(!is.na(phytophthora_cinnamomi_susceptibility_data[[var]]),
+                                         !is.na(phytophthora_cinnamomi_susceptibility))
+  
+  linearmodel_var <- lm(phytophthora_cinnamomi_susceptibility ~ data_tmp[[var]], data = data_tmp)
+  
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
+  
+  new_row <- c(
+    trait = var, 
+    r2= round(summary(linearmodel_var)$r.squared,4), 
+    p_value = round(p[2,1],4),
+    coeff = round(coeff[2,1],3),
+    n = nrow(data_tmp)
+      ) %>% 
+    t() %>%
+    as.data.frame()
+  
+  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+    bind_rows(new_row)
+}
+
+for (var in c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass")) {
+  
+  data_tmp <- phytophthora_cinnamomi_susceptibility_data %>% filter(!is.na(phytophthora_cinnamomi_susceptibility_data[[var]]),
+                                         !is.na(phytophthora_cinnamomi_susceptibility))
+  
+  linearmodel_var <- lm(phytophthora_cinnamomi_susceptibility ~ log10(data_tmp[[var]]), data = data_tmp)
+  
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
+  
+  new_row <- c(
+    trait = var, 
+    r2= round(summary(linearmodel_var)$r.squared,4), 
+    p_value = round(p[2,1],4),
+    coeff = round(coeff[2,1],3),
+    n = nrow(data_tmp)
+      ) %>% 
+    t() %>%
+    as.data.frame()
+  
+  if(new_row[1,]$r2 > 0.03 & new_row[1,]$p_value < 0.05) {
+    
+    plot(
+           ggplot(data_tmp, aes(x = log10(data_tmp[[var]]), y = phytophthora_cinnamomi_susceptibility)) +
+            geom_point() +
+            geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+            theme_classic() +
+             xlab(var)
+    )
+  
+  }
+    
+    
+  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+    bind_rows(new_row)
+}
+
+correlations_with_possible_traits <- correlations_with_possible_traits %>% 
+  arrange(-as.numeric(r2))
+
+Phytophthora_kable_table <- correlations_with_possible_traits %>% kableExtra::kable(caption = "Correlation between Phytophthora susceptibililty and trait value, for species with known susceptibility")
+
+kableExtra::kable_classic(Phytophthora_kable_table) %>%
+  kableExtra::kable_styling(full_width = FALSE)
+
+phytophthora_traits_to_use <- correlations_with_possible_traits %>% filter(p_value < 0.05, r2 > 0.03)
+
+
+```
+
+
+
+### How important is taxonomy? (vs traits...)
+
+-   Family matters more than traits
+-   Although some moderate correlations with traits exist, knowing a plant's family is a much better predictor of its susceptibility - at least visually
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+by_family <- phytophthora_cinnamomi_susceptibility_data %>%
+  filter(!is.na(phytophthora_cinnamomi_susceptibility)) %>%
+  group_by(family) %>%
+  mutate(
+    phytophthora_cinnamomi_susceptibility = mean(phytophthora_cinnamomi_susceptibility),
+    taxa_scored_per_family = n()
+    ) %>%
+  ungroup() %>%
+  distinct(family, taxa_scored_per_family, phytophthora_cinnamomi_susceptibility) %>%
+  filter(taxa_scored_per_family > 5, !is.na(family)) %>%
+  arrange(-phytophthora_cinnamomi_susceptibility)
+
+family_histograms <- phytophthora_cinnamomi_susceptibility_data %>%
+  filter(family %in% by_family$family) %>%
+  filter(!is.na(phytophthora_cinnamomi_susceptibility)) %>%
+  left_join(by_family %>% select(family, taxa_scored_per_family)) %>%
+  group_by(family, phytophthora_cinnamomi_susceptibility) %>%
+  mutate(
+    prop_taxa = n() / taxa_scored_per_family,
+    count_taxa = n()
+    ) %>%
+  ungroup() %>%
+  distinct(family, phytophthora_cinnamomi_susceptibility, prop_taxa, count_taxa, taxa_scored_per_family) %>%
+  arrange(family, phytophthora_cinnamomi_susceptibility) %>%
+  mutate(
+    family2 = paste0(family, " (n=", taxa_scored_per_family,")")
+  )
+
+ggplot(data = family_histograms) +
+  geom_col(aes(x = phytophthora_cinnamomi_susceptibility, y = prop_taxa), width = .9) +
+  facet_wrap(~family2) +
+  theme_minimal() +
+  theme(
+    axis.line.x.bottom = element_line(),
+    axis.line.y.left = element_line()
+  ) +
+  ylab("prop. taxa tested (proportion within taxa tested within each family") +
+  xlab("Phytophthora cinnamomi susceptibility score (higher = more susceptible)")
+
+```
+
+
+
+### Assign risks to all taxa
+
+-   first steps are based on taxonomy and habitat:
+    1.  for taxa from well-sampled families, include a taxonomic adjustment factor *as a starting point, have the average risk within the family, rescaled from 0--1.*
+    2.  taxa that live on calcareous (limestone, basic, alkaline) soils are not susceptible
+    3.  plants that live on clay soils are less susceptible - but this needs to be a down-weighted effect
+-   second steps will be to adjust these susceptibilities based on traits
+    1.  need to decide on r\^2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
+    2.  it would be great to have information on Proteaceae which explicitly do not form cluster roots or Ericaceae that do not form root hairs (or have very transient root hairs); also possible that cord roots increase susceptibility in Daviseia; but that doesn't seem to be available
+
+
+
+```{r}
+phytophthora_assigned_risk <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution)
+
+phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
+  left_join(phytophthora_cinnamomi_susceptibility_data %>% select(taxon_name, phytophthora_cinnamomi_susceptibility)) %>%
+  left_join(by_family %>% rename(family_average_score = phytophthora_cinnamomi_susceptibility), by = "family") %>%
+  left_join(geologic_substrate %>% rename(substrate_risk = geologic_substrate_score), by = "taxon_name") %>%
+  left_join(soil_type %>% rename(soil_texture_risk = soil_score), by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_mass_per_area, by = "taxon_name") %>%
+  mutate(
+    family_raw_risk = family_average_score/3
+  )
+```
+
+
+
+# Myrtle rust
+
+### Are any traits good predictors?
+
+-   Check if trait correlations exist for taxa where susceptibility is already known.
+
+#### - create dataframe
+
+-   create table with susceptibility, trait values for taxa with known susceptibility
+
+
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
+  left_join(dispersers, by = "taxon_name") %>%
+  left_join(seed_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_mass_per_area, by = "taxon_name") %>%
+  left_join(fruit_fleshiness, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name")%>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(leaf_length, by = "taxon_name") %>%
+  left_join(leaf_hairs_adult_leaves, by = "taxon_name") %>%
+  left_join(leaf_glaucousness, by = "taxon_name") %>%
+  left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_phenol_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_tannin_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_lignin_per_dry_mass, by = "taxon_name") %>%
+  left_join(resources$APC %>% select(taxon_name = canonical_name, genus, family), by = "taxon_name")
+```
+
+
+
+#### - check trait correlations
+
+-   identify strong susceptibility-trait correlations for taxa with known susceptibility
+
+-   Note:
+
+    1.  Not considering traits that are known to matter, but are known for so few species to be useless as predictors (constitutive and induced responses to infection; concentration of secondary metabolites in plant); details of surface wax
+    2.  The traits `leaf_glaucousness` and `leaf_hairiness` are very much expected to matter and this information should be available for sufficient taxa to eventually include it, but currently it is scored for very few taxa
+
+-   In the output:
+
+    1.  a positive coefficient indicates a higher trait value in more susceptible taxa
+    2.  for numeric traits, the magnitude of the coefficient indicates the change in response variable for a "1 unit" increase in susceptibility, where susceptibility is on a scale of 0--3.
+    3.  for numeric traits, the magnitude of the coefficient must be intepreted in conjunction with knowing the scaling for the response variable - different for each trait; the susceptibility is on a scale of 0--5.
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+correlations_with_possible_traits <- tibble(
+  trait = character(),
+  coeff = character(),
+  r2 = character(), 
+  p_value = character(),
+  n = character()
+)
+
+for (var in c("resprouting_capacity", "fruit_fleshiness", "leaf_glaucousness", "leaf_hairs_adult_leaves")) {
+  
+  data_tmp <- myrtle_rust_susceptibility_data %>% filter(!is.na(myrtle_rust_susceptibility_data[[var]]),
+                                         !is.na(myrtle_rust_susceptibility))
+  
+  linearmodel_var <- lm(myrtle_rust_susceptibility ~ data_tmp[[var]] , data = data_tmp)
+  
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
+  
+  new_row <- c(
+    trait = var, 
+    r2= round(summary(linearmodel_var)$r.squared,4), 
+    p_value = round(p[2,1],4),
+    coeff = round(coeff[2,1],3),
+    n = nrow(data_tmp)
+      ) %>% 
+    t() %>%
+    as.data.frame()
+  
+  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+    bind_rows(new_row)
+}
+
+
+for (var in c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "leaf_lignin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_tannin_per_dry_mass")) {
+  
+  data_tmp <- myrtle_rust_susceptibility_data %>% filter(!is.na(myrtle_rust_susceptibility_data[[var]]),
+                                         !is.na(myrtle_rust_susceptibility))
+  
+  linearmodel_var <- lm(myrtle_rust_susceptibility ~ log10(data_tmp[[var]]), data = data_tmp)
+  
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
+  
+  new_row <- c(
+    trait = var, 
+    r2= round(summary(linearmodel_var)$r.squared,4), 
+    p_value = round(p[2,1],4),
+    coeff = round(coeff[2,1],3),
+    n = nrow(data_tmp)
+      ) %>% 
+    t() %>%
+    as.data.frame()
+  
+    if(new_row[1,]$r2 > 0.04 & new_row[1,]$p_value < 0.05) {
+    
+      plot(
+             ggplot(data_tmp, aes(x = log10(data_tmp[[var]]), y = myrtle_rust_susceptibility)) +
+              geom_point() +
+              geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+              theme_classic() +
+               xlab(var)
+      )
+    }
+  
+  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+    bind_rows(new_row)
+
+}
+
+myrtlerust_kable_table <- correlations_with_possible_traits %>% 
+  arrange(-as.numeric(r2)) %>% 
+  kableExtra::kable(caption = "Correlation between myrtle rust susceptibililty and trait value, for species with known susceptibility")
+
+kableExtra::kable_classic(myrtlerust_kable_table) %>%
+  kableExtra::kable_styling(full_width = FALSE)
+
+```
+
+
+
+### How important is taxonomy? (vs traits...)
+
+considering whether genus matters as much as - or more than traits
+
+-   less clear than correlation between family and phytophthora susceptibility, but certainly there are some genera where all species tested are susceptible and others where there are some resistant species and many partially resistant species
+
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+by_genus <- myrtle_rust_susceptibility_data %>%
+  filter(!is.na(myrtle_rust_susceptibility)) %>%
+  group_by(genus) %>%
+  mutate(
+    myrtle_rust_susceptibility = mean(myrtle_rust_susceptibility),
+    taxa_scored_per_genus = n()
+    ) %>%
+  ungroup() %>%
+  distinct(genus, taxa_scored_per_genus, myrtle_rust_susceptibility) %>%
+  filter(taxa_scored_per_genus > 3, !is.na(genus)) %>%
+  arrange(-myrtle_rust_susceptibility)
+
+genus_histograms <- myrtle_rust_susceptibility_data %>%
+  filter(genus %in% by_genus$genus) %>%
+  filter(!is.na(myrtle_rust_susceptibility)) %>%
+  left_join(by_genus %>% select(genus, taxa_scored_per_genus)) %>%
+  group_by(genus, myrtle_rust_susceptibility) %>%
+  mutate(
+    prop_taxa = n() / taxa_scored_per_genus,
+    count_taxa = n()
+    ) %>%
+  ungroup() %>%
+  distinct(genus, myrtle_rust_susceptibility, prop_taxa, count_taxa, taxa_scored_per_genus) %>%
+  arrange(genus, myrtle_rust_susceptibility) %>%
+  mutate(
+    genus2 = paste0(genus, " (n=", taxa_scored_per_genus,")")
+  )
+
+ggplot(data = genus_histograms) +
+  geom_col(aes(x = myrtle_rust_susceptibility, y = prop_taxa), width = .9) +
+  facet_wrap(~genus2) +
+  theme_minimal() +
+  theme(
+    axis.line.x.bottom = element_line(),
+    axis.line.y.left = element_line()
+  ) +
+  ylab("prop. of taxa tested") +
+  xlab("myrtle rust susceptibility score (higher = more susceptible)")
+```
+
+
+
+### Assign risks to all taxa
+
+-   first steps are based on taxonomy and habitat:
+
+    1.  only Myrtaceae are susceptible
+    2.  only taxa that live in "wet" environments are susceptible
+
+    *ISSUE*: How to score taxa where habitat information isn't known; currently have data for \~50% of Myrtaceae. Right now we are taking the conservative approach and scoring all those species as being susceptible.
+
+-   second steps will be to adjust these binary susceptibilities based on traits
+
+    1.  need to decide on r2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
+    2.  there are additional traits which might well be important, but need to bolster their coverage in database to be certain: **leaf glaucousness**, **leaf wax content**, **leaf hairiness**
+
+
+
+```{r, warning=FALSE, message=FALSE}
+myrtle_rust_assigned_risk <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(habitat_moisture, by = "taxon_name")
+
+myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
+  mutate(
+    susceptibility_step_1 = ifelse(family == "Myrtaceae", 1, 0),
+    susceptibility_step_2 = ifelse(!is.na(habitat) | !is.na(habitat_moisture), 0, NA), # yes habitat vs. no habitat info available
+    susceptibility_step_2 = ifelse(!is.na(habitat) & 
+                                    (str_detect(habitat, "rainforest") | #switch 0 to 1 for wet site species
+                                     str_detect(habitat, "stream") | 
+                                     str_detect(habitat, "wet") | 
+                                     str_detect(habitat, "aquatic")| 
+                                     str_detect(habitat, "bog") | 
+                                     str_detect(habitat, "swamp")), 
+                                      1, susceptibility_step_2),
+    susceptibility_step_2 = ifelse(!is.na(habitat_moisture) &
+                                    (str_detect(habitat_moisture, "wet") | 
+                                     str_detect(habitat_moisture, "moist") | 
+                                     str_detect(habitat_moisture, "damp")), 
+                                      1, susceptibility_step_2),
+  # merge info for taxonomy & habitat
+  susceptibility_binary = ifelse(susceptibility_step_1 == 1 & (susceptibility_step_2 == 1| is.na(susceptibility_step_2)), 1, 0)
+  ) %>%
+  left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
+  mutate(
+    leaf_P_per_dry_mass_risk = ifelse(!is.na(leaf_P_per_dry_mass), (leaf_P_per_dry_mass)*(-0.11/5), 0)
+  )
+
+
+```
+
+
+
+# Goats
+
+### Are any traits good predictors?
+
+-   Check if trait correlations exist for taxa where palatability/forage preference/toxicity is known.
+
+-   For goats, there are no lists of species that goats avoid -except linked already to specific traits
+
+-   For instance, there is a list of 360 species growing in arid Australia, indicating their toxicity to goats; same species have palatibility values
+
+-   Goats are known to eat "spiny acacias" (multiple references to this), but presumably the most spine-protected plants are less susceptible?
+
+-   Trees are resistant as adults, especially if they have thick bark (little data), but not as seedlings
+
+-   Herbs much less impacted than shrubs, grasses (set of numbers below, but other references)
+
+-   Succulence
+
+#### - create dataframe
+
+
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+goat_susceptibility <- plant_goat_palatability %>%
+  select(-genus) %>%
+  left_join(resources$APC %>% select(family, genus, taxon_name = canonical_name) %>% distinct(), by = "taxon_name") %>%
+  group_by(taxon_name) %>%
+  mutate(
+    plant_goat_palatability  = mean(plant_goat_palatability , na.rm = T)) %>% 
+  ungroup() %>%
+  distinct() %>% 
+  left_join(leaf_water_content_per_area, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(plant_growth_form, by = "taxon_name") %>%
+  left_join(leaf_glaucousness, by = "taxon_name") %>%
+  left_join(leaf_hairs_adult_leaves, by = "taxon_name") %>%
+  left_join(leaf_mass_per_area, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
+  left_join(nitrogen_fixing, by = "taxon_name") %>%
+  left_join(leaf_length, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(plant_spinescence, by = "taxon_name") %>%
+  left_join(leaf_lignin_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_phenol_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_tannin_per_dry_mass, by = "taxon_name") %>%
+  left_join(digestible_mass_per_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_crude_protein_per_dry_mass, by = "taxon_name") %>%
+  left_join(metabolisable_energy, by = "taxon_name") %>%
+  left_join(leaf_work_to_shear_adjusted, by = "taxon_name")
+```
+
+
+
+#### - check for trait correlations
+
+-   The three strongest correlations below don't make sense, in part due to low sample sizes:
+
+    1.  Leaf tannins is coming out with higher tannins having higher palatability - the opposite of what it should be, becaise n = 5 (p-value not significant)
+    2. Nitrogen fixing is coming out as a strong negative correlation because all members of the genus Swainsona mapped in as toxic - and all are N-fixers.
+    2.  Succulence (`leaf_water_content_per_area` ) should be positively correlated with palatability, but only scored for 4 species and happens to come out as a strong negative correlation (p-value not significant)
+
+-   strongest believable association is for leaf P
+
+-   `plant_spinescence` comes out as a very non-significant correlation. It would be good to manually gap fill this, but there are lots of very well-defended species with moderate to high palatability scores, so not expecting it to come out as significant.
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+correlations_with_possible_traits <- tibble(
+  trait = character(),
+  coeff = character(),
+  r2 = character(), 
+  p_value = character(),
+  n = character()
+)
+
+for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "plant_spinescence", "plant_growth_form")) {
+  
+  data_tmp <- goat_susceptibility %>% filter(!is.na(goat_susceptibility[[var]]),
+                                         !is.na(plant_goat_palatability))
+  
+  linearmodel_var <- lm(plant_goat_palatability ~ data_tmp[[var]], data = data_tmp)
+  
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
+  
+  new_row <- c(
+    trait = var, 
+    r2= round(summary(linearmodel_var)$r.squared,4), 
+    p_value = round(p[2,1],4),
+    coeff = round(coeff[2,1],3),
+    n = nrow(data_tmp)
+      ) %>% 
+    t() %>%
+    as.data.frame()
+  
+  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+    bind_rows(new_row)
+}
+
+for (var in c("leaf_mass_per_area", "plant_height", "leaf_length", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "leaf_water_content_per_area", "leaf_lignin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_tannin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "metabolisable_energy", "leaf_work_to_shear_adjusted")) {
+  
+  data_tmp <- goat_susceptibility %>% filter(!is.na(goat_susceptibility[[var]]),
+                                         !is.na(plant_goat_palatability))
+  
+  linearmodel_var <- lm(plant_goat_palatability ~ log10(data_tmp[[var]]), data = data_tmp)
+  
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
+  
+  new_row <- c(
+    trait = var, 
+    r2= round(summary(linearmodel_var)$r.squared,4), 
+    p_value = round(p[2,1],4),
+    coeff = round(coeff[2,1],3),
+    n = nrow(data_tmp)
+      ) %>% 
+    t() %>%
+    as.data.frame()
+  
+      if(new_row[1,]$r2 > 0.02 & new_row[1,]$p_value < 0.05) {
+    
+      plot(
+             ggplot(data_tmp, aes(x = log10(data_tmp[[var]]), y = plant_goat_palatability)) +
+              geom_point() +
+              geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+              theme_classic() +
+               xlab(var)
+      )
+    }
+  
+  
+  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+    bind_rows(new_row)
+}
+
+correlations_with_possible_traits <- correlations_with_possible_traits %>% 
+  arrange(-as.numeric(r2)) %>% 
+  filter(!is.na(trait))
+
+
+goat_kable_table <- correlations_with_possible_traits %>% kableExtra::kable(caption = "Correlation between goat palatability and trait value, for species with known susceptibility")
+
+kableExtra::kable_classic(goat_kable_table) %>%
+  kableExtra::kable_styling(full_width = FALSE)
+```
+
+
+
+-   Although plant growth form didn't come out as important in the correlations - other data suggest herbs less impacted by goats than graminoids or shrubs and this should be taken into account with risk scores
+
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+Lu_1988 <- read_csv("datasets_from_manuscripts/Lu_1988.csv") %>% 
+  group_by(growth_form) %>% 
+  mutate(goats_relative_preference = mean(goats_relative_preference)) %>% 
+  ungroup() %>% 
+  distinct(growth_form, goats_relative_preference)
+```
+
+
+
+# C4 tropical grasses
+
+# Regeneration of populations
+
+### Do threatened species have worse dispersal, longer lifespans, etc?
+
+-   Simple answer is NO. There is no difference in any of the traits measured between threatened vs other species
+-   It means that for understanding species regeneration potential, each species' trait values need to be considered - no generalisations.
+
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+all_taxa <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, family, genus, taxon_distribution)
+
+species_that_are_threatened <- (all_traits %>%
+  extract_trait("threatened_species_listing_status"))$traits %>%
+  select(taxon_name, threatened_status = value)
+
+all_taxa <- all_taxa %>%
+  left_join(species_that_are_threatened, by = "taxon_name") %>%
+  mutate(threatened = ifelse(!is.na(threatened_status), 1, 0)) %>%
+  left_join(dispersers, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(seed_dry_mass, by = "taxon_name") %>%
+  left_join(leaf_mass_per_area, by = "taxon_name") %>%
+  left_join(fruit_fleshiness, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name")
+
+correlations_with_possible_traits <- tibble(
+  trait = NA_character_,
+  coeff = NA_character_,
+  r2 = NA_character_, 
+  p_value = NA_character_,
+  n = NA_character_,
+)
+
+for (var in c("life_history", "dispersers", "resprouting_capacity", "seed_dry_mass", "fruit_fleshiness", "leaf_mass_per_area")) {
+  
+  data_tmp <- all_taxa %>% filter(!is.na(all_taxa[[var]]))
+  
+  linearmodel_var <- lm(data_tmp[[var]] ~ threatened , data = data_tmp)
+  
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
+  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
+  
+  new_row <- c(
+    trait = var, 
+    r2= round(summary(linearmodel_var)$r.squared,4), 
+    p_value = round(p[2,1],4),
+    coeff = round(coeff[2,1],3),
+    n = nrow(data_tmp)
+      ) %>% 
+    t() %>%
+    as.data.frame()
+  
+  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+    bind_rows(new_row)
+}
+
+correlations_with_possible_traits <- correlations_with_possible_traits %>% 
+  arrange(-as.numeric(r2)) %>% 
+  filter(!is.na(trait))
+
+
+threatened_kable_table <- correlations_with_possible_traits %>% kableExtra::kable(caption = "Correlation between threat status and `regeneration` trait value")
+
+kableExtra::kable_classic(threatened_kable_table) %>%
+  kableExtra::kable_styling(full_width = FALSE)
+```
+

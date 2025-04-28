@@ -1,0 +1,45 @@
+﻿Species,Frequency in plots,Mean frequency quadrats,Origin,Functional group,Life form,Life history,Palatability,Height (cm),Seed length (mm),LAI (mm2),Rarity index
+Abutilon otocarpum F.Muell.,0.373,0.052,N,PF,S,P,L,60,3,4800,0.78
+Actinobole uliginosum (A.Gray) H.Eichler,0.706,0.176,N,AF,F,A,L,5,0.7,65,0.41
+Aristida behriana F.Muell.,0.02,0,N,PG,G,P,M,40,8,75,1
+Aristida contorta F.Muell.,0.745,0.159,N,AG,G,A,M,50,4,100,0.41
+Aristida jerichoensis (Domin) Henrard,0.667,0.133,N,PG,G,P,L,90,4.5,3450,0.59
+Austrostipa scabra (Lindl.) S.W.L.Jacobs & J.Everett,0.667,0.153,N,PG,G,P,M,60,2,500,0.53
+Boerhavia dominie Meikle & Hewson,0.078,0.009,N,PF,F,P,H,5,4.5,800,0.94
+Chenopodium desertorum (J.M.Black) J.M.Black,0.235,0.033,N,PF,S,P,M,30,1.5,200,0.86
+Convolvulus erubescens Sims,0.039,0.002,N,PF,F,P,H,5,3.7,2400,0.98
+"Daucus glochidiatus (Labill.) Fisch., C.A.Mey. & Avé-Lall.",0.02,0,N,AF,F,A,H,60,,1500,1
+Dianella porracea (R.J.F.Hend.) P.F.Horsfall & G.W.Carr,0.02,0,N,PF,G,P,,120,3.3,,1
+Digitaria sp.,0.647,0.059,N,PG,G,P,,,,,0.65
+Einadia nutans (R.Br.) A.J.Scott,0.098,0.004,N,PF,F,P,H,20,1,600,0.96
+Enteropogon acicularis (Lindl.) Lazarides,0.078,0.004,N,PG,G,P,M,40,,800,0.96
+Eragrostis eriopoda Benth.,0.961,0.458,N,PG,G,P,M,50,0.8,10,0.08
+Eragrostis setifolia Nees,0.118,0,N,PG,G,P,H,60,0.4,260,1
+Eremophila latrobei F.Muell.,0.137,0.004,N,PF,S,P,H,200,,450,0.98
+Euphorbia drummondii Boiss.,0.02,0.002,N,PF,F,P,L,5,1.5,50,0.98
+"Evolvulus alsinoides, subsp. Villosicalyx Ooststr.",0.02,0.002,N,PF,F,P,M,40,1.5,150,0.98
+Goodenia fascicularis F.Muell. & Tate,0.02,0.002,N,PF,F,P,H,20,5,3500,0.98
+Hibiscus sturtii Hook.,0.02,0,N,PF,S,P,M,600,,1000,1
+Lepidium oxytrichum Sprague,0.02,0.002,N,AF,F,A,M,30,2,300,0.98
+Maireana villosa (Lindl.) Paul G.Wilson,0.569,0.039,N,PF,S,P,L,50,,15,0.78
+Monachather paradoxus Steud.,0.51,0.059,N,PG,G,P,H,60,1,800,0.71
+Podolepis capillaris (Steetz) Diels,0.02,0,N,AF,F,A,H,45,,500,1
+Portulaca oleracea L.,0.255,0.02,N,AF,F,A,H,5,1,375,0.86
+Ptilotus polystachyus (Gaudich.) F.Muell.,0.098,0.004,N,PF,F,P,H,100,2,7560,0.96
+Ptilotus sessilifolius (Lindl.) Benl,0.392,0.004,N,PF,F,P,M,100,,2000,0.96
+Salsola australis R.Br.,0.333,0.063,N,AF,S,A,M,100,,90,0.78
+Sclerolaena bicornis Lindl.,0.059,0.013,N,PF,S,P,M,80,,25,0.96
+Sclerolaena convexula (R.H.Anderson) A.J.Scott,0.941,0.44,N,PF,S,P,L,40,,10,0.04
+"Sclerolaena muricata, subsp. Semiglabra (Ising) A.J.Scott",0.02,0.002,N,PF,S,P,L,150,,60,0.98
+Sida cunninghamii C.T.White,0.529,0.031,N,PF,S,P,H,,,,0.8
+Solanum ellipticum R.Br,0.882,0.041,N,PF,F,P,,100,3,2400,0.69
+Solanum esuriale Lindl.,0.137,0,N,PF,F,P,L,30,3,1200,1
+Swainsona microphylla A.Gray,0.02,0.002,N,PF,F,P,L,60,1.5,1500,0.98
+Themeda triandra Forssk.,0.02,0.002,N,PG,G,P,M,120,10,2400,0.98
+Thyridolepis mitchelliana (Nees) S.T.Blake,0.49,0.063,N,PG,G,P,H,50,4,270,0.73
+Tribulus terrestris L.,0.078,0,E,PF,F,P,L,5,,48,1
+Tripogon loliiformis (F.Muell.) C.E.Hubb.,0.941,0.351,N,PG,G,P,H,40,2.2,19.5,0.08
+Triraphis mollis R.Br,0.039,0.011,N,PG,G,P,L,80,2.5,2000,0.98
+Unidentified ,0.02,0,,,G,,,,,,1
+Vittadinia cuneate DC.,0.118,0.009,N,AF,F,A,L,,,,0.94
+Wahlenbergia communis Carolin,0.02,0,N,AF,F,A,,,,,1
