@@ -1,0 +1,73 @@
+source:
+  primary:
+    key: Harrington_1986
+    bibtype: Article
+    year: '1986'
+    author: Graham N. Harrington
+    journal: Australian Journal of Experimental Agriculture
+    title: Herbivore diet in a semi-arid Eucalyptus populnea woodland. 2. Feral goats
+    volume: '26'
+    number: '4'
+    pages: '423'
+    doi: 10.1071/ea9860423
+    issn: 0816-1089
+contributors:
+  data_collectors:
+  - last_name: Harrington
+    given_name: Graham
+    ORCID: unknown
+    affiliation: Division of Wildlife and Rangelands Research, CSIRO
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(
+        location_name = "Cobar-Byrock pediplain"
+      )'
+  collection_date: 1974/1976
+  taxon_name: species
+  location_name: location_name
+  description: The diet of feral goats was recorded by direct observation in a shrub-dominated Eucalyptus populnea woodland between Nyngan and Bourke, N.S.W., on 7 sampling occasions over 2 years. Different nutritional opportunities were provided by the effects of rainfall on 4 contrasting grazing treatments.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: Four treatments on a grazing trial in densely shrubbed Eucalyptus
+    populnea woodland between Nyngan and Bourke, N.S.W., offered contrasting forage
+    availabilities. The diet and grazing behaviour of 4 local feral goats which had
+    been habituated to the observers and which were permanently resident on the site
+    were recorded according to the schedule in Table 1. The grazing treatments began
+    in March 1974 and are defined as follows, moderately grazed, 8 ha/wether sheep;
+    heavily grazed, 2 ha/doe goat; overgrazed, 0.3 ha/wether goat for 3 months and
+    thereafter 2 ha/doe goat; cleared, 2 ha/doe goat after bulldozing all but large
+    Eucalyptus trees and shrubs that were too young to be caught by the bulldozer
+    blade. The foods selected were recorded by directly observing the goats and the
+    acceptability indices for each plant species (AI, and AIb)were calculated as described
+    in Part 1 (Harrington 1986). The pasture availability on the 4 treatments during
+    the experiment is summarised in Figs 1 and 2, Part 1, where characteristics of
+    the vegetation are also described (Harrington 1986). The cleared treatment lost
+    most of the herbage and browse because of bulldozing in summer 1973-74 and herbage
+    did not regrow until the 1975-76 summer rains. The site chosen for this study was a grazing trial on the Cobar-Byrock pediplain between Nyngan and Bourke, N.S.W. (146"28'E, 30°55'S). Eucalyptus trees >25 m high provided a foliar cover of 17% of the area at a density of 26 trees/ha. There were >6000 small trees and shrubs per hectare. principally A. aneura and species from the genera Cassia, Dodonaea and Eremophila. The shrub and pasture layers contained all the common forage plants found in this region and it may be assumed that the diet chosen by the animals studied was similar to those in the district. The range of forage availability caused by differential stocking rates throughout the district was provided by 3
+  original_file: data transcribed from manuscipt
+  notes: none
+identifiers: .na
+locations:
+  Cobar-Byrock pediplain:
+    latitude (deg): -30.9167
+    longitude (deg): 146.4667
+    description: mulga woodland
+contexts: .na
+traits:
+- var_in: palatability_categorical
+  unit_in: .na
+  trait_name: plant_goat_palatability
+  entity_type: population
+  value_type: mean
+  basis_of_value: measurement
+  replicates: .na
+  methods: The foods selected were recorded by directly observing the goats and the
+    acceptability indices for each plant species (AI, and AIb)were calculated as described
+    in Part 1 (Harrington 1986).
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

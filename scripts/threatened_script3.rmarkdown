@@ -73,9 +73,11 @@ nitrogen_fixing_scores <- read_csv("data_extras/nitrogen_fixing_scores.csv")
 leaf_hairs_adult_leaves_scores <- read_csv("data_extras/leaf_hairs_adult_leaves_scores.csv")
 leaf_glaucousness_scores <- read_csv("data_extras/leaf_glaucousness_scores.csv")
 plant_spinescence_scores <- read_csv("data_extras/plant_spinescence_scores.csv")
+plant_physical_defence_structures_scores <- read_csv("data_extras/plant_physical_defence_structures_scores.csv")
 plant_goat_toxicity_scores <- read_csv("data_extras/plant_goat_toxicity_scores.csv")
 plant_goat_palatability_scores <- read_csv("data_extras/plant_goat_palatability_scores.csv")
 plant_growth_form_scores <- read_csv("data_extras/plant_growth_form_scores.csv")
+plant_growth_form_goats_scores <- read_csv("data_extras/plant_growth_form_goats_scores.csv")
 soil_type_scores <- read_csv("data_extras/soil_type_scores.csv")
 geologic_substrate_scores <-  read_csv("data_extras/geologic_substrate_scores.csv")
 phytophthora_cinnamomi_susceptibility_scores <- read_csv("data_extras/phytophthora_cinnamomi_susceptibility_scores.csv")
@@ -98,6 +100,8 @@ leaf_glaucousness_scores %>% filter(!str_detect(value, " ")) %>% arrange(leaf_gl
 leaf_hairs_adult_leaves_scores %>% filter(!str_detect(value, " ")) %>% arrange(leaf_hairs_adult_leaves) %>% rename(`categorical value` = value, `numeric score assigned` = leaf_hairs_adult_leaves)  %>% kable(caption = "leaf hair values") %>% kable_classic()
 
 plant_spinescence_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_spinescence) %>% rename(`categorical value` = value, `numeric score assigned` = plant_spinescence)  %>% kable(caption = "plant spinescence values") %>% kable_classic()
+
+plant_physical_defence_structures_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_physical_defence_structures) %>% rename(`categorical value` = value, `numeric score assigned` = plant_physical_defence_structures)  %>% kable(caption = "plant physical defence structures") %>% kable_classic()
 
 phytophthora_cinnamomi_susceptibility_scores %>% filter(!str_detect(value, " ")) %>% arrange(phytophthora_cinnamomi_susceptibility) %>% rename(`categorical value` = value, `numeric score assigned` = phytophthora_cinnamomi_susceptibility)  %>% kable(caption = "phytophthora cinnamomi susceptibility values") %>% kable_classic()
 
@@ -147,10 +151,12 @@ dispersers <-  extract_categorical_trait(all_traits, c("dispersal_syndrome", "di
 resprouting_capacity <- extract_categorical_trait(all_traits, "resprouting_capacity", resprouting_capacity_scores, "resprouting_capacity")
 nitrogen_fixing <- extract_categorical_trait(all_traits, "nitrogen_fixing", nitrogen_fixing_scores, "nitrogen_fixing")
 plant_growth_form <- extract_categorical_trait(all_traits, "plant_growth_form", plant_growth_form_scores, "plant_growth_form")
+plant_growth_form_goats <- extract_categorical_trait(all_traits, "plant_growth_form", plant_growth_form_goats_scores, "plant_growth_form") %>% rename(plant_growth_form_goats = plant_growth_form)
 leaf_hairs_adult_leaves <- extract_categorical_trait(all_traits, "leaf_hairs_adult_leaves", leaf_hairs_adult_leaves_scores, "leaf_hairs_adult_leaves")
 leaf_glaucousness <- extract_categorical_trait(all_traits, "leaf_glaucousness", leaf_glaucousness_scores, "leaf_glaucousness")
 fruit_fleshiness <- extract_categorical_trait(all_traits, "fruit_fleshiness", fruit_fleshiness_scores, "fruit_fleshiness")
 plant_spinescence <- extract_categorical_trait(all_traits, "plant_spinescence", plant_spinescence_scores, "plant_spinescence")
+plant_physical_defence_structures <- extract_categorical_trait(all_traits, "plant_physical_defence_structures", plant_physical_defence_structures_scores, "plant_physical_defence_structures")
 myrtle_rust_susceptibility <- extract_categorical_trait(all_traits, "myrtle_rust_susceptibility", myrtle_rust_susceptibility_scores, "myrtle_rust_susceptibility")
 phytophthora_cinnamomi_susceptibility <- extract_categorical_trait(all_traits, "phytophthora_cinnamomi_susceptibility", phytophthora_cinnamomi_susceptibility_scores, "phytophthora_cinnamomi_susceptibility")
 plant_goat_toxicity <- extract_categorical_trait(all_traits, "plant_goat_toxicity", plant_goat_toxicity_scores, "plant_goat_toxicity")
@@ -789,6 +795,7 @@ goat_susceptibility <- plant_goat_palatability %>%
   left_join(leaf_water_content_per_area, by = "taxon_name") %>%
   left_join(life_history, by = "taxon_name") %>%
   left_join(plant_growth_form, by = "taxon_name") %>%
+  left_join(plant_growth_form_goats, by = "taxon_name") %>%
   left_join(leaf_glaucousness, by = "taxon_name") %>%
   left_join(leaf_hairs_adult_leaves, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
@@ -799,6 +806,7 @@ goat_susceptibility <- plant_goat_palatability %>%
   left_join(leaf_length, by = "taxon_name") %>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(plant_spinescence, by = "taxon_name") %>%
+  left_join(plant_physical_defence_structures, by = "taxon_name") %>%
   left_join(leaf_lignin_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_phenol_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_tannin_per_dry_mass, by = "taxon_name") %>%
@@ -833,7 +841,7 @@ correlations_with_possible_traits <- tibble(
   n = character()
 )
 
-for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "plant_spinescence", "plant_growth_form")) {
+for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "plant_spinescence", "plant_physical_defence_structures", "plant_growth_form", "plant_growth_form_goats")) {
   
   data_tmp <- goat_susceptibility %>% filter(!is.na(goat_susceptibility[[var]]),
                                          !is.na(plant_goat_palatability))
@@ -852,6 +860,17 @@ for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "leaf_g
       ) %>% 
     t() %>%
     as.data.frame()
+  
+        if(new_row[1,]$r2 > 0.02 & new_row[1,]$p_value < 0.05) {
+    
+      plot(
+             ggplot(data_tmp, aes(x = data_tmp[[var]], y = plant_goat_palatability)) +
+              geom_point() +
+              geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+              theme_classic() +
+               xlab(var)
+      )
+    }
   
   correlations_with_possible_traits <- correlations_with_possible_traits %>%
     bind_rows(new_row)

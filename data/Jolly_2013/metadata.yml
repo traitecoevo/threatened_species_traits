@@ -4,7 +4,7 @@ source:
     bibtype: Report
     year: 2013
     author: San Jolly
-    title: Goat nutrition in Australia - Literature review 
+    title: Goat nutrition in Australia - Literature review
     type: Final report
     institution: Meat & Livestock Australia
 contributors:
@@ -19,15 +19,36 @@ dataset:
   custom_R_code: .na
   collection_date: 1981/2006
   taxon_name: Botanical name
-  description: A review to thoroughly investigate the gaps in nutritional information to support future investment decisions by Meat & Livestock Australia to underpin the growth of the goat industry. 
+  description: A review to thoroughly investigate the gaps in nutritional information
+    to support future investment decisions by Meat & Livestock Australia to underpin
+    the growth of the goat industry.
   basis_of_record: literature
   life_stage: adult
-  sampling_strategy: The purpose of this review was to thoroughly investigate the gaps in nutritional information to support future investment decisions by Meat & Livestock Australia to underpin the growth of the goat industry. The terms of reference were as follows, 1) Clarify the nutritional requirements for goats; 2) Determine how and why publications vary widely in their recommendations; 3) Determine the variation in nutrient requirements between rangeland, Boer, Boer-cross, dairy and fleece-producing goats and their progeny; 4) Investigate the alignment between the recommendations and animals response to a range of feeding regimes and practises This review has provided confirmation that the guidelines for the nutrient requirements of goats vary widely and that there remains a diversity of opinion as to which is the correct source of information. NRC (2007) has published the most comprehensive set of recommendations following an extensive review of published research from 1981 to 2006 however these guidelines require validation under a range of environmental conditions.
+  sampling_strategy: The purpose of this review was to thoroughly investigate the
+    gaps in nutritional information to support future investment decisions by Meat
+    & Livestock Australia to underpin the growth of the goat industry. The terms of
+    reference were as follows, 1) Clarify the nutritional requirements for goats;
+    2) Determine how and why publications vary widely in their recommendations; 3)
+    Determine the variation in nutrient requirements between rangeland, Boer, Boer-cross,
+    dairy and fleece-producing goats and their progeny; 4) Investigate the alignment
+    between the recommendations and animals response to a range of feeding regimes
+    and practises This review has provided confirmation that the guidelines for the
+    nutrient requirements of goats vary widely and that there remains a diversity
+    of opinion as to which is the correct source of information. NRC (2007) has published
+    the most comprehensive set of recommendations following an extensive review of
+    published research from 1981 to 2006 however these guidelines require validation
+    under a range of environmental conditions.
   original_file: data extracted from report
   notes: none
 identifiers: .na
 locations: .na
-contexts: .na
+contexts:
+- context_property: palatable parts
+  category: entity_context
+  var_in: palatable_parts
+- context_property: palatability timing
+  category: entity_context
+  var_in: palatability_timing
 traits:
 - var_in: Toxicity
   unit_in: .na
@@ -37,7 +58,7 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: sourced from the literature, with source documented for each species.
-- var_in: Palatability
+- var_in: palatability_encoded
   unit_in: .na
   trait_name: plant_goat_palatability
   entity_type: species
@@ -71,7 +92,7 @@ traits:
   methods: unknown
 - var_in: energy_mean
   unit_in: MJ/kg
-  trait_name: metabolisable_energy 
+  trait_name: metabolisable_energy
   entity_type: species
   value_type: mean
   basis_of_value: measurement
@@ -79,7 +100,7 @@ traits:
   methods: unknown
 - var_in: energy_min_max_1
   unit_in: MJ/kg
-  trait_name: metabolisable_energy 
+  trait_name: metabolisable_energy
   entity_type: species
   value_type: minimum
   basis_of_value: measurement
@@ -87,14 +108,14 @@ traits:
   methods: unknown
 - var_in: energy_min_max_2
   unit_in: MJ/kg
-  trait_name: metabolisable_energy 
+  trait_name: metabolisable_energy
   entity_type: species
   value_type: maximum
   basis_of_value: measurement
   replicates: .na
 - var_in: protein_mean
   unit_in: '%'
-  trait_name: leaf_crude_protein_per_dry_mass 
+  trait_name: leaf_crude_protein_per_dry_mass
   entity_type: species
   value_type: mean
   basis_of_value: measurement
@@ -102,7 +123,7 @@ traits:
   methods: unknown
 - var_in: protein_min_max_1
   unit_in: '%'
-  trait_name: leaf_crude_protein_per_dry_mass 
+  trait_name: leaf_crude_protein_per_dry_mass
   entity_type: species
   value_type: minimum
   basis_of_value: measurement
@@ -110,13 +131,138 @@ traits:
   methods: unknown
 - var_in: protein_min_max_2
   unit_in: '%'
-  trait_name: leaf_crude_protein_per_dry_mass 
+  trait_name: leaf_crude_protein_per_dry_mass
   entity_type: species
   value_type: maximum
   basis_of_value: measurement
   replicates: .na
   methods: unknown
-substitutions: .na
-taxonomic_updates: .na
+substitutions:
+- trait_name: digestible_mass_per_dry_mass
+  find: low
+  replace: .na.character
+- trait_name: leaf_crude_protein_per_dry_mass
+  find: good
+  replace: .na.character
+- trait_name: leaf_crude_protein_per_dry_mass
+  find: jul
+  replace: .na.character
+- trait_name: leaf_crude_protein_per_dry_mass
+  find: may
+  replace: .na.character
+- trait_name: metabolisable_energy
+  find: poor
+  replace: .na.character
+taxonomic_updates:
+- find: Aristida spp
+  replace: Aristida sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Atriplex spp
+  replace: Atriplex sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Austrodanthonia spp
+  replace: Austrodanthonia sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Austrostipa spp
+  replace: Austrostipa sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Cassinia spp
+  replace: Cassinia sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Cenchrus spp
+  replace: Cenchrus sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Craspedia spp
+  replace: Craspedia sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Crataegus spp
+  replace: Crataegus sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Erodium spp
+  replace: Erodium sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Eucalyptus spp
+  replace: Eucalyptus sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Lepidium spp
+  replace: Lepidium sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Onopordum spp
+  replace: Onopordum sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Plantago spp
+  replace: Plantago sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Sisymbrium spp
+  replace: Sisymbrium sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Trifolium spp
+  replace: Trifolium sp. [Jolly_2013]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Meuhlenbeckia spp
+  replace: Muehlenbeckia sp. [Jolly_2013]
+  reason: Fuzzy match of taxon name ending with `sp.` to an APC-accepted genus (2025-04-28)
+  taxonomic_resolution: genus
+- find: Enteropogon acicularis/rasmosus
+  replace: Enteropogon sp. [Enteropogon acicularis / rasmosus; Jolly_2013]
+  reason: Exact match to APC genus. Taxon name includes '/' (slash) indicating an
+    uncertain species identification but an accepted genus and taxon can only be aligned
+    to genus-rank (2025-04-28)
+  taxonomic_resolution: genus
+- find: Acacia escelsa
+  replace: Acacia excelsa
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-04-28)
+  taxonomic_resolution: species
+- find: Dodoneae viscosa
+  replace: Dodonaea viscosa
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-04-28)
+  taxonomic_resolution: species
+- find: Echium plantagenium
+  replace: Echium plantagineum
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-04-28)
+  taxonomic_resolution: species
+- find: Gomphocarpus fruticose
+  replace: Gomphocarpus fruticosus
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-04-28)
+  taxonomic_resolution: species
+- find: Lyceum ferocissimum
+  replace: Lycium ferocissimum
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-04-28)
+  taxonomic_resolution: species
+- find: Poa labillardieri
+  replace: Poa labillardierei
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-04-28)
+  taxonomic_resolution: species
+- find: Dodoneae attenuata
+  replace: Dodonaea attenuata
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2025-04-28)
+  taxonomic_resolution: species
+- find: Rubus fruiticosus
+  replace: Rubus fruticosus
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2025-04-28)
+  taxonomic_resolution: species
 exclude_observations: .na
 questions: .na

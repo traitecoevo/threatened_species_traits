@@ -1,0 +1,25 @@
+trait_name,find,replace
+digestible_mass_per_dry_mass,low,NA
+leaf_crude_protein_per_dry_mass,good,NA
+leaf_crude_protein_per_dry_mass,jul,NA
+leaf_crude_protein_per_dry_mass,may,NA
+metabolisable_energy,poor,NA
+plant_goat_palatability,all stages,high_palatability
+plant_goat_palatability,dry,NA
+plant_goat_palatability,flowering,NA
+plant_goat_palatability,flowering/leaves,high_palatability
+plant_goat_palatability,isolated plants,low_palatability
+plant_goat_palatability,leaves,high_palatability
+plant_goat_palatability,leaves /trunk,high_palatability
+plant_goat_palatability,mature,NA
+plant_goat_palatability,new growth,high_palatability
+plant_goat_palatability,occasionally,moderate_palatability
+plant_goat_palatability,old stems,NA
+plant_goat_palatability,rarely,low_palatability
+plant_goat_palatability,seldom eaten,low_palatability
+plant_goat_palatability,stems,high_palatability
+plant_goat_palatability,sucker leaves,high_palatability
+plant_goat_palatability,sucker regrowth,high_palatability
+plant_goat_palatability,vegetative,high_palatability
+plant_goat_palatability,young growth,high_palatability
+plant_goat_palatability,young stems,high_palatability
