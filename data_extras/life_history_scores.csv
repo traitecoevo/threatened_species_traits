@@ -1,4 +1,4 @@
-trait_name,value,life_history
+trait_name,trait_value,life_history
 life_history,annual,1
 life_history,annual biennial,1.5
 life_history,annual biennial perennial,2.3

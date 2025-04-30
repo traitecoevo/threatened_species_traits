@@ -1,0 +1,14 @@
+trait_name,trait_value,storage_organ
+storage_organ,bulb,1
+storage_organ,caudex,0.5
+storage_organ,corm,1
+storage_organ,lignotuber,0.5
+storage_organ,no_storage_organ,0
+storage_organ,pseudobulb,1
+storage_organ,rhizome,1
+storage_organ,rhizome_fleshy,1
+storage_organ,rhizome_woody,0.5
+storage_organ,root_tuber,1
+storage_organ,stem_tuber,1
+storage_organ,storage_organ,1
+storage_organ,tuber,1

@@ -1,4 +1,4 @@
-trait_name,value,plant_growth_form
+trait_name,trait_value,plant_growth_form
 plant_growth_form,basal_large,NA
 plant_growth_form,climber,NA
 plant_growth_form,climber_herbaceous,NA

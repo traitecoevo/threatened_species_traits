@@ -1,4 +1,4 @@
-trait_name,value,leaf_hairs_adult_leaves
+trait_name,trait_value,leaf_hairs_adult_leaves
 leaf_hairs_adult_leaves,hairy,1
 leaf_hairs_adult_leaves,glabrous,0
 leaf_hairs_adult_leaves,glabrous hairy,0.5

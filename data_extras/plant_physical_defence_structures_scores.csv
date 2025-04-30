@@ -1,4 +1,4 @@
-trait_name,value,plant_physical_defence_structures
+trait_name,trait_value,plant_physical_defence_structures
 plant_physical_defence_structures,absent,0
 plant_physical_defence_structures,prickle,1
 plant_physical_defence_structures,pungent_leaf_apex,1

@@ -1,0 +1,16 @@
+trait_name,trait_value,bud_bank_location
+bud_bank_location,apical_buds,5
+bud_bank_location,basal_buds,2
+bud_bank_location,basal_stem_buds,2
+bud_bank_location,bud-bearing_root,1
+bud_bank_location,epicormic_buds,5
+bud_bank_location,fleshy_underground_organ,1
+bud_bank_location,none,NA
+bud_bank_location,rhizome,1
+bud_bank_location,rhizome_non_woody,1
+bud_bank_location,rhizome_woody,1
+bud_bank_location,root_crown,2
+bud_bank_location,stem_buds,3
+bud_bank_location,stem_tuber,1
+bud_bank_location,stolon,1
+bud_bank_location,underground_buds,1

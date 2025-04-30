@@ -1,4 +1,4 @@
-trait_name,value,plant_goat_palatability
+trait_name,trait_value,plant_goat_palatability
 plant_goat_palatability,low_palatability,2
 plant_goat_palatability,moderate_palatability,3
 plant_goat_palatability,high_palatability,4

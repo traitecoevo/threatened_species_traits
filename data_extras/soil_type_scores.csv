@@ -1,4 +1,4 @@
-trait_name,value,soil_score
+trait_name,trait_value,soil_score
 soil_type,clay,.5
 soil_type,clay_black,.5
 soil_type,clay_cracking,.5

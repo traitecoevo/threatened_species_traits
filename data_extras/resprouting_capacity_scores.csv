@@ -1,0 +1,4 @@
+trait_name,trait_value,resprouting_capacity
+resprouting_capacity,resprouts,1
+resprouting_capacity,partial_resprouting,.5
+resprouting_capacity,fire_killed,0

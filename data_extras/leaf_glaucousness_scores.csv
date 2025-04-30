@@ -1,4 +1,4 @@
-trait_name,value,leaf_glaucousness
+trait_name,trait_value,leaf_glaucousness
 leaf_glaucousness,glaucous not_glaucous,0.5
 leaf_glaucousness,glaucous,0
 leaf_glaucousness,not_glaucous,1

@@ -1,4 +1,4 @@
-trait_name,value,myrtle_rust_susceptibility
+trait_name,trait_value,myrtle_rust_susceptibility
 myrtle_rust_susceptibility,resistant,0
 myrtle_rust_susceptibility,low resistant,0.5
 myrtle_rust_susceptibility,low,1

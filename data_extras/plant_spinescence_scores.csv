@@ -1,4 +1,4 @@
-trait_name,value,plant_spinescence
+trait_name,trait_value,plant_spinescence
 plant_spinescence,high_density_hard_spines_to_100mm,0
 plant_spinescence,high_density_hard_spines_to_20mm,1
 plant_spinescence,high_density_hard_spines_to_5mm,2

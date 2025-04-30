@@ -1,4 +1,4 @@
-trait_name,value,geologic_substrate_score
+trait_name,trait_value,geologic_substrate_score
 geologic_substrate,acidic,1
 geologic_substrate,alkaline,0
 geologic_substrate,alluvial,1

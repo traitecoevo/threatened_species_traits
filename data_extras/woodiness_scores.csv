@@ -1,0 +1,8 @@
+trait_name,trait_value,woodiness_detailed
+woodiness_detailed,herbaceous,0
+woodiness_detailed,semi_woody,.5
+woodiness_detailed,woody,1
+woodiness_detailed,woody_base,.5
+woodiness_detailed,woody_like_inflorescence,0
+woodiness_detailed,woody_like_stem,1
+woodiness_detailed,woody_root,0
