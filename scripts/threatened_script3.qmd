@@ -34,7 +34,7 @@ resources <- APCalign::load_taxonomic_resources()
 
 #austraits <- readRDS("ignore/austraits/austraits-6.0.0.rds")
 
-austraits <- readRDS("ignore/austraits/austraits_20250402.rds")
+austraits <- readRDS("ignore/austraits/austraits_20250429.rds")
 
 source("R/custom_R_code.R")
 source("R/extra_functions.R")
@@ -57,17 +57,23 @@ all_traits <- austraits %>% austraits::bind_databases(threatened_species)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # open files with categorical to numeric conversions for categorical traits
-life_history_scores <- read_csv("data_extras/life_history.csv")
-dispersers_scores <- read_csv("data_extras/dispersers.csv")
+life_history_scores <- read_csv("data_extras/life_history_scores.csv")
+woodiness_scores <- read_csv("data_extras/woodiness_scores.csv")
+dispersers_scores <- read_csv("data_extras/dispersers_scores.csv")
 fruit_fleshiness_scores <- read_csv("data_extras/fruit_fleshiness_scores.csv")
-resprouting_capacity_scores <- read_csv("data_extras/resprouting_capacity.csv")
+bud_bank_location_scores <- read_csv("data_extras/bud_bank_location_scores.csv")
+storage_organ_scores <- read_csv("data_extras/storage_organ_scores.csv")
+leaf_glaucousness_scores <- read_csv("data_extras/leaf_glaucousness_scores.csv")
+resprouting_capacity_scores <- read_csv("data_extras/resprouting_capacity_scores.csv")
 nitrogen_fixing_scores <- read_csv("data_extras/nitrogen_fixing_scores.csv")
 leaf_hairs_adult_leaves_scores <- read_csv("data_extras/leaf_hairs_adult_leaves_scores.csv")
 leaf_glaucousness_scores <- read_csv("data_extras/leaf_glaucousness_scores.csv")
 plant_spinescence_scores <- read_csv("data_extras/plant_spinescence_scores.csv")
+plant_physical_defence_structures_scores <- read_csv("data_extras/plant_physical_defence_structures_scores.csv")
 plant_goat_toxicity_scores <- read_csv("data_extras/plant_goat_toxicity_scores.csv")
 plant_goat_palatability_scores <- read_csv("data_extras/plant_goat_palatability_scores.csv")
-plant_growth_form_scores <- read_csv("data_extras/plant_growth_form_scores.csv")
+plant_growth_form_scores <- read_csv("data_extras/plant_growth_form_scores.csv") %>% tidyr::pivot_longer(cols = 3:5) %>% select(trait_name, trait_value, value, name)
+plant_growth_form_goats_scores <- read_csv("data_extras/plant_growth_form_goats_scores.csv")
 soil_type_scores <- read_csv("data_extras/soil_type_scores.csv")
 geologic_substrate_scores <-  read_csv("data_extras/geologic_substrate_scores.csv")
 phytophthora_cinnamomi_susceptibility_scores <- read_csv("data_extras/phytophthora_cinnamomi_susceptibility_scores.csv")
@@ -75,29 +81,33 @@ myrtle_rust_susceptibility_scores <- read_csv("data_extras/myrtle_rust_susceptib
 
 # vegetative_reproduction_ability
 
-life_history_scores %>% filter(!str_detect(value, " ")) %>% arrange(life_history) %>% rename(`categorical value` = value, `numeric score assigned` = life_history)  %>% kable(caption = "life history values") %>% kable_classic()
+life_history_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(life_history) %>% rename(`categorical value` = trait_value, `numeric score assigned` = life_history)  %>% kable(caption = "life history values") %>% kable_classic()
 
-plant_growth_form_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_growth_form) %>% rename(`categorical value` = value, `numeric score assigned` = plant_growth_form)  %>% kable(caption = "plant growth form values") %>% kable_classic()
+#plant_growth_form_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(plant_growth_form) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_growth_form)  %>% kable(caption = "plant growth form values") %>% kable_classic()
 
-resprouting_capacity_scores %>% filter(!str_detect(value, " ")) %>% arrange(resprouting_capacity) %>% rename(`categorical value` = value, `numeric score assigned` = resprouting_capacity)  %>% kable(caption = "resprouting capacity values") %>% kable_classic()
+woodiness_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(woodiness_detailed) %>% rename(`categorical value` = trait_value, `numeric score assigned` = woodiness_detailed)  %>% kable(caption = "plant woodiness values") %>% kable_classic()
 
-dispersers_scores %>% filter(!str_detect(value, " ")) %>% arrange(dispersers_score) %>% rename(`categorical value` = value, `numeric score assigned` = dispersers_score)  %>% kable(caption = "dispersal trait values") %>% kable_classic()
+resprouting_capacity_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(resprouting_capacity) %>% rename(`categorical value` = trait_value, `numeric score assigned` = resprouting_capacity)  %>% kable(caption = "resprouting capacity values") %>% kable_classic()
 
-nitrogen_fixing_scores %>% filter(!str_detect(value, " ")) %>% arrange(nitrogen_fixing) %>% rename(`categorical value` = value, `numeric score assigned` = nitrogen_fixing)  %>% kable(caption = "nitrogen fixing values") %>% kable_classic()
+dispersers_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(dispersers_score) %>% rename(`categorical value` = trait_value, `numeric score assigned` = dispersers_score)  %>% kable(caption = "dispersal trait values") %>% kable_classic()
 
-leaf_glaucousness_scores %>% filter(!str_detect(value, " ")) %>% arrange(leaf_glaucousness) %>% rename(`categorical value` = value, `numeric score assigned` = leaf_glaucousness)  %>% kable(caption = "leaf glaucousness values") %>% kable_classic()
+nitrogen_fixing_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(nitrogen_fixing) %>% rename(`categorical value` = trait_value, `numeric score assigned` = nitrogen_fixing)  %>% kable(caption = "nitrogen fixing values") %>% kable_classic()
 
-leaf_hairs_adult_leaves_scores %>% filter(!str_detect(value, " ")) %>% arrange(leaf_hairs_adult_leaves) %>% rename(`categorical value` = value, `numeric score assigned` = leaf_hairs_adult_leaves)  %>% kable(caption = "leaf hair values") %>% kable_classic()
+leaf_glaucousness_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(leaf_glaucousness) %>% rename(`categorical value` = trait_value, `numeric score assigned` = leaf_glaucousness)  %>% kable(caption = "leaf glaucousness values") %>% kable_classic()
 
-plant_spinescence_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_spinescence) %>% rename(`categorical value` = value, `numeric score assigned` = plant_spinescence)  %>% kable(caption = "plant spinescence values") %>% kable_classic()
+leaf_hairs_adult_leaves_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(leaf_hairs_adult_leaves) %>% rename(`categorical value` = trait_value, `numeric score assigned` = leaf_hairs_adult_leaves)  %>% kable(caption = "leaf hair values") %>% kable_classic()
 
-phytophthora_cinnamomi_susceptibility_scores %>% filter(!str_detect(value, " ")) %>% arrange(phytophthora_cinnamomi_susceptibility) %>% rename(`categorical value` = value, `numeric score assigned` = phytophthora_cinnamomi_susceptibility)  %>% kable(caption = "phytophthora cinnamomi susceptibility values") %>% kable_classic()
+plant_spinescence_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(plant_spinescence) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_spinescence)  %>% kable(caption = "plant spinescence values") %>% kable_classic()
 
-myrtle_rust_susceptibility_scores %>% filter(!str_detect(value, " ")) %>% arrange(myrtle_rust_susceptibility) %>% rename(`categorical value` = value, `numeric score assigned` = myrtle_rust_susceptibility)  %>% kable(caption = "myrtle rust susceptibility values") %>% kable_classic()
+plant_physical_defence_structures_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(plant_physical_defence_structures) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_physical_defence_structures)  %>% kable(caption = "plant physical defence structures") %>% kable_classic()
 
-plant_goat_toxicity_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_goat_toxicity) %>% rename(`categorical value` = value, `numeric score assigned` = plant_goat_toxicity)  %>% kable(caption = "plant goat toxicity values") %>% kable_classic()
+phytophthora_cinnamomi_susceptibility_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(phytophthora_cinnamomi_susceptibility) %>% rename(`categorical value` = trait_value, `numeric score assigned` = phytophthora_cinnamomi_susceptibility)  %>% kable(caption = "phytophthora cinnamomi susceptibility values") %>% kable_classic()
 
-plant_goat_palatability_scores %>% filter(!str_detect(value, " ")) %>% arrange(plant_goat_palatability) %>% rename(`categorical value` = value, `numeric score assigned` = plant_goat_palatability)  %>% kable(caption = "plant goat palatability values") %>% kable_classic()
+myrtle_rust_susceptibility_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(myrtle_rust_susceptibility) %>% rename(`categorical value` = trait_value, `numeric score assigned` = myrtle_rust_susceptibility)  %>% kable(caption = "myrtle rust susceptibility values") %>% kable_classic()
+
+plant_goat_toxicity_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(plant_goat_toxicity) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_goat_toxicity)  %>% kable(caption = "plant goat toxicity values") %>% kable_classic()
+
+plant_goat_palatability_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(plant_goat_palatability) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_goat_palatability)  %>% kable(caption = "plant goat palatability values") %>% kable_classic()
 ```
 
 ### extract categorical traits from database
@@ -107,42 +117,48 @@ plant_goat_palatability_scores %>% filter(!str_detect(value, " ")) %>% arrange(p
 -   for each taxon, take the mean of all available values
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-extract_categorical_trait <- function(database = all_traits, categorical_trait, trait_scores, output_name) {
+extract_categorical_trait <- function(database = database, categorical_trait, trait_scores, output_name) {
   
-  extracted_data <- (all_traits %>%
+  extracted_data <- (database %>%
   austraits::extract_trait(categorical_trait))$traits %>%
   tidyr::separate_longer_delim(value, delim = " ") %>%
-  left_join(trait_scores %>% rename(output_name = 3), by = join_by(trait_name, value)) %>%
-  filter(!is.na(output_name)) %>%
-  select(dataset_id, observation_id, taxon_name, output_name) %>%
-  group_by(taxon_name, dataset_id, observation_id) %>%
-  mutate(output_name = mean(as.numeric(output_name))) %>%
-  ungroup() %>%
-  distinct() %>%
-  select(taxon_name, output_name) %>%
+  dplyr::rename(trait_value = value) %>%
+  dplyr::left_join(trait_scores %>% rename(output_name = 3), by = join_by(trait_name, trait_value)) %>%
+  dplyr::filter(!is.na(output_name)) %>%
+  dplyr::select(dataset_id, observation_id, taxon_name, output_name) %>%
+  dplyr::group_by(taxon_name, dataset_id, observation_id) %>%
+  dplyr::mutate(output_name = mean(as.numeric(output_name))) %>%
+  dplyr::ungroup() %>%
+  dplyr::distinct() %>%
+  dplyr::select(taxon_name, output_name) %>%
   group_by(taxon_name) %>%
-  mutate(output_name = mean(as.numeric(output_name))) %>%
-  ungroup() %>%
-  distinct() %>%
+  dplyr::mutate(output_name = mean(as.numeric(output_name))) %>%
+  dplyr::ungroup() %>%
+  dplyr::distinct() %>%
   rename(!!output_name := output_name)
   
   extracted_data
 
 }
 
-life_history <- extract_categorical_trait(all_traits, "life_history", life_history_scores, "life_history")
 dispersers <-  extract_categorical_trait(all_traits, c("dispersal_syndrome", "dispersers"), dispersers_scores, "dispersers")
 resprouting_capacity <- extract_categorical_trait(all_traits, "resprouting_capacity", resprouting_capacity_scores, "resprouting_capacity")
 nitrogen_fixing <- extract_categorical_trait(all_traits, "nitrogen_fixing", nitrogen_fixing_scores, "nitrogen_fixing")
-plant_growth_form <- extract_categorical_trait(all_traits, "plant_growth_form", plant_growth_form_scores, "plant_growth_form")
+life_history <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2023"), "life_history", life_history_scores %>% filter(name == "life_history"), "life_history")
+plant_growth_form <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "plant_growth_form"), "plant_growth_form")
+forb_graminoid <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "forb_graminoid"), "forb_graminoid")
+herb_shrub_tree <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "herb_shrub_tree"), "herb_shrub_tree")
+woodiness <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "woodiness_detailed", woodiness_scores, "woodiness")
 leaf_hairs_adult_leaves <- extract_categorical_trait(all_traits, "leaf_hairs_adult_leaves", leaf_hairs_adult_leaves_scores, "leaf_hairs_adult_leaves")
 leaf_glaucousness <- extract_categorical_trait(all_traits, "leaf_glaucousness", leaf_glaucousness_scores, "leaf_glaucousness")
+bud_bank_location <- extract_categorical_trait(all_traits, "bud_bank_location", bud_bank_location_scores, "bud_bank_location")
+storage_organ <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores, "storage_organ")
 fruit_fleshiness <- extract_categorical_trait(all_traits, "fruit_fleshiness", fruit_fleshiness_scores, "fruit_fleshiness")
 plant_spinescence <- extract_categorical_trait(all_traits, "plant_spinescence", plant_spinescence_scores, "plant_spinescence")
+plant_physical_defence_structures <- extract_categorical_trait(all_traits, "plant_physical_defence_structures", plant_physical_defence_structures_scores, "plant_physical_defence_structures")
 myrtle_rust_susceptibility <- extract_categorical_trait(all_traits, "myrtle_rust_susceptibility", myrtle_rust_susceptibility_scores, "myrtle_rust_susceptibility")
 phytophthora_cinnamomi_susceptibility <- extract_categorical_trait(all_traits, "phytophthora_cinnamomi_susceptibility", phytophthora_cinnamomi_susceptibility_scores, "phytophthora_cinnamomi_susceptibility")
 plant_goat_toxicity <- extract_categorical_trait(all_traits, "plant_goat_toxicity", plant_goat_toxicity_scores, "plant_goat_toxicity")
-
 
 plant_goat_palatability <- extract_categorical_trait(all_traits, "plant_goat_palatability", plant_goat_palatability_scores, "plant_goat_palatability")
 
@@ -170,7 +186,7 @@ extract_numeric_trait <- function(numeric_trait) {
   
   extracted_data <- all_traits %>%
   austraits::extract_trait(numeric_trait) %>%
-  austraits::extract_data(table = "traits", col = "basis_of_record", col_value = c("field", "literature", "field literature", "literature field"), partial_matches_allowed = F) %>%
+  austraits::extract_data(table = "traits", col = "basis_of_record", col_value = c("field", "literature", "field literature", "literature field", "preserved_specimen"), partial_matches_allowed = F) %>%
   austraits_weighted_means(numeric_trait) %>%
   filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
   select(taxon_name, mean) %>%
@@ -179,9 +195,9 @@ extract_numeric_trait <- function(numeric_trait) {
   extracted_data
 }
 
-numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass")
+numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "metabolisable_energy", "leaf_work_to_shear_adjusted")
 
-traits2 <- c("metabolisable_energy", "leaf_soluble_protein_per_area", "leaf_insoluble_protein_per_area")
+traits2 <- c("leaf_soluble_protein_per_area", "leaf_insoluble_protein_per_area")  # interesting traits but only data for 1-2 species - in a lab study
 
 numeric_data <- list()
 
@@ -276,28 +292,25 @@ geologic_substrate <- all_traits$traits %>%
 ```{r, results='hide', message=FALSE, warning=FALSE}
 phytophthora_cinnamomi_susceptibility_data <- (all_traits %>% join_taxa(vars = "family"))$traits %>%
   filter(trait_name == "phytophthora_cinnamomi_susceptibility") %>%
-  select(taxon_name, family, value) %>%
-  left_join(phytophthora_cinnamomi_susceptibility_scores, by = join_by(value)) %>%
+  select(taxon_name, family, trait_value = value) %>%
+  left_join(phytophthora_cinnamomi_susceptibility_scores, by = join_by(trait_value)) %>%
   group_by(taxon_name) %>%
   mutate(
     phytophthora_cinnamomi_susceptibility = mean(phytophthora_cinnamomi_susceptibility, na.rm = T)) %>% 
   ungroup() %>%
   distinct() %>% 
   left_join(nitrogen_fixing, by = "taxon_name") %>%
-  left_join(dispersers, by = "taxon_name") %>%
   left_join(life_history, by = "taxon_name") %>%
-  left_join(leaf_glaucousness, by = "taxon_name") %>%
-  left_join(leaf_hairs_adult_leaves, by = "taxon_name") %>%
   left_join(seed_dry_mass, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
-  left_join(fruit_fleshiness, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_length, by = "taxon_name") %>%
   left_join(plant_height, by = "taxon_name") %>%
-  left_join(soil_type, by = "taxon_name") %>%
-  left_join(geologic_substrate, by = "taxon_name")
+  left_join(bud_bank_location, by = "taxon_name") %>%
+  left_join(storage_organ, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name")
 ```
 
 #### - check for trait correlations
@@ -325,7 +338,8 @@ correlations_with_possible_traits <- tibble(
   n = character()
 )
 
-for (var in c("life_history", "dispersers", "nitrogen_fixing", "resprouting_capacity", "fruit_fleshiness", "leaf_glaucousness", "leaf_hairs_adult_leaves", "soil_score", "geologic_substrate_score")) {
+for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "woodiness", "bud_bank_location", 
+            "storage_organ")) {
   
   data_tmp <- phytophthora_cinnamomi_susceptibility_data %>% filter(!is.na(phytophthora_cinnamomi_susceptibility_data[[var]]),
                                          !is.na(phytophthora_cinnamomi_susceptibility))
@@ -464,6 +478,7 @@ phytophthora_assigned_risk <- resources$APC %>%
   select(taxon_name = canonical_name, genus, family, taxon_distribution)
 
 phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
+  left_join(phytophthora_cinnamomi_susceptibility_data %>% select(taxon_name, phytophthora_cinnamomi_susceptibility)) %>%
   left_join(by_family %>% rename(family_average_score = phytophthora_cinnamomi_susceptibility), by = "family") %>%
   left_join(geologic_substrate %>% rename(substrate_risk = geologic_substrate_score), by = "taxon_name") %>%
   left_join(soil_type %>% rename(soil_texture_risk = soil_score), by = "taxon_name") %>%
@@ -491,7 +506,6 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
   left_join(dispersers, by = "taxon_name") %>%
   left_join(seed_dry_mass, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
-  left_join(fruit_fleshiness, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name")%>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(leaf_length, by = "taxon_name") %>%
@@ -502,6 +516,8 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
   left_join(leaf_phenol_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_tannin_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_lignin_per_dry_mass, by = "taxon_name") %>%
+  left_join(bud_bank_location, by = "taxon_name") %>%
+  left_join(storage_organ, by = "taxon_name") %>%
   left_join(resources$APC %>% select(taxon_name = canonical_name, genus, family), by = "taxon_name")
 ```
 
@@ -529,7 +545,7 @@ correlations_with_possible_traits <- tibble(
   n = character()
 )
 
-for (var in c("resprouting_capacity", "fruit_fleshiness", "leaf_glaucousness", "leaf_hairs_adult_leaves")) {
+for (var in c("resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "bud_bank_location", "storage_organ")) {
   
   data_tmp <- myrtle_rust_susceptibility_data %>% filter(!is.na(myrtle_rust_susceptibility_data[[var]]),
                                          !is.na(myrtle_rust_susceptibility))
@@ -692,8 +708,6 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
   mutate(
     leaf_P_per_dry_mass_risk = ifelse(!is.na(leaf_P_per_dry_mass), (leaf_P_per_dry_mass)*(-0.11/5), 0)
   )
-
-
 ```
 
 # Goats
@@ -727,22 +741,24 @@ goat_susceptibility <- plant_goat_palatability %>%
   distinct() %>% 
   left_join(leaf_water_content_per_area, by = "taxon_name") %>%
   left_join(life_history, by = "taxon_name") %>%
-  left_join(plant_growth_form, by = "taxon_name") %>%
-  left_join(leaf_glaucousness, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name") %>%
+  left_join(forb_graminoid, by = "taxon_name") %>%
+  left_join(herb_shrub_tree, by = "taxon_name") %>%
   left_join(leaf_hairs_adult_leaves, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
-  left_join(nitrogen_fixing, by = "taxon_name") %>%
-  left_join(leaf_length, by = "taxon_name") %>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(plant_spinescence, by = "taxon_name") %>%
+  left_join(plant_physical_defence_structures, by = "taxon_name") %>%
   left_join(leaf_lignin_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_phenol_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_tannin_per_dry_mass, by = "taxon_name") %>%
   left_join(digestible_mass_per_dry_mass, by = "taxon_name") %>%
-  left_join(leaf_crude_protein_per_dry_mass, by = "taxon_name")
+  left_join(leaf_crude_protein_per_dry_mass, by = "taxon_name") %>%
+  left_join(metabolisable_energy, by = "taxon_name") %>%
+  left_join(leaf_work_to_shear_adjusted, by = "taxon_name")
 ```
 
 #### - check for trait correlations
@@ -766,7 +782,7 @@ correlations_with_possible_traits <- tibble(
   n = character()
 )
 
-for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "plant_spinescence", "plant_growth_form")) {
+for (var in c("life_history", "resprouting_capacity", "leaf_hairs_adult_leaves", "plant_spinescence", "plant_physical_defence_structures", "herb_shrub_tree", "forb_graminoid", "woodiness")) {
   
   data_tmp <- goat_susceptibility %>% filter(!is.na(goat_susceptibility[[var]]),
                                          !is.na(plant_goat_palatability))
@@ -786,11 +802,22 @@ for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "leaf_g
     t() %>%
     as.data.frame()
   
+        if(new_row[1,]$r2 > 0.01 & new_row[1,]$p_value < 0.05) {
+    
+      plot(
+             ggplot(data_tmp, aes(x = data_tmp[[var]], y = plant_goat_palatability)) +
+              geom_point() +
+              geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+              theme_classic() +
+               xlab(var)
+      )
+    }
+  
   correlations_with_possible_traits <- correlations_with_possible_traits %>%
     bind_rows(new_row)
 }
 
-for (var in c("leaf_mass_per_area", "plant_height", "leaf_length", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "leaf_water_content_per_area", "leaf_lignin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_tannin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass")) {
+for (var in c("leaf_mass_per_area", "plant_height", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "leaf_lignin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_tannin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "metabolisable_energy", "leaf_work_to_shear_adjusted")) {
   
   data_tmp <- goat_susceptibility %>% filter(!is.na(goat_susceptibility[[var]]),
                                          !is.na(plant_goat_palatability))
@@ -826,12 +853,12 @@ for (var in c("leaf_mass_per_area", "plant_height", "leaf_length", "leaf_N_per_d
     bind_rows(new_row)
 }
 
-correlations_with_possible_traits <- correlations_with_possible_traits %>% 
-  arrange(-as.numeric(r2)) %>% 
+correlations_with_possible_traits_goats <- correlations_with_possible_traits %>%
+  mutate(r2 = as.numeric(r2), coeff = as.numeric(coeff)) %>%
+  arrange(-r2) %>% 
   filter(!is.na(trait))
 
-
-goat_kable_table <- correlations_with_possible_traits %>% kableExtra::kable(caption = "Correlation between goat palatability and trait value, for species with known susceptibility")
+goat_kable_table <- correlations_with_possible_traits_goats %>% kableExtra::kable(caption = "Correlation between goat palatability and trait value, for species with known susceptibility")
 
 kableExtra::kable_classic(goat_kable_table) %>%
   kableExtra::kable_styling(full_width = FALSE)
@@ -845,6 +872,105 @@ Lu_1988 <- read_csv("datasets_from_manuscripts/Lu_1988.csv") %>%
   mutate(goats_relative_preference = mean(goats_relative_preference)) %>% 
   ungroup() %>% 
   distinct(growth_form, goats_relative_preference)
+```
+
+### Assign risks to all taxa
+
+- take habitat into account: downrate rainforest species; uprate rock platform species, woodland species
+- take taxonomy into account: downrate Chenopodiaceae; uprate Graminoids
+
+```{r, warning=FALSE, message=FALSE}
+correlations_with_possible_traits_goats_2 <- correlations_with_possible_traits_goats %>%
+  filter(trait %in% c("plant_growth_form", "plant_height", "resprouting_capacity"))
+
+goats_assigned_risk <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(habitat_moisture, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name") %>%
+  left_join(plant_goat_palatability %>% select(-genus), by = "taxon_name") 
+
+# add a column with "habitat risk" - NOT A TRAIT, but an important parameter
+goats_assigned_risk <- goats_assigned_risk %>%
+  mutate(
+    habitat_risk = .8, # default is 0.8 (XX - something else?)
+    
+    # switch `habitat_risk` to 1 for species that occur on cliffs, rock platforms
+    habitat_risk = ifelse(!is.na(habitat) &
+                                    (str_detect(habitat, "rock") | 
+                                     str_detect(habitat, "cliff")| 
+                                     str_detect(habitat, "crevice")), 
+                                      1, habitat_risk),
+    
+    # switch `habitat_risk` to 0.9 for species that occur in woodland, mulga,
+    habitat_risk = ifelse(!is.na(habitat) & habitat_risk != 1 &
+                                    (str_detect(habitat, "shrubland") | 
+                                     str_detect(habitat, "scrubland") | 
+                                     str_detect(habitat, "woodland") | 
+                                     str_detect(habitat, "heath") | 
+                                     str_detect(habitat, "sclerophyll")| 
+                                     str_detect(habitat, "acacia")), 
+                                      0.9, habitat_risk),
+    
+    # decrease `habitat_risk` for wet site species; goat don't like wet sites, possibly because increased disease; also alpine, savanna, coastal, montane sites downgraded
+    habitat_risk_tmp = ifelse(!is.na(habitat) & 
+                                    (str_detect(habitat, "rainforest") | 
+                                     str_detect(habitat, "stream") | 
+                                     str_detect(habitat, "wet") | 
+                                     str_detect(habitat, "aquatic")| 
+                                     str_detect(habitat, "bog") | 
+                                     str_detect(habitat, "swamp") |
+                                     str_detect(habitat, "stream") | 
+                                     str_detect(habitat, "estuarine") | 
+                                     str_detect(habitat, "mangrove") | 
+                                     str_detect(habitat, "coastal") |
+                                     str_detect(habitat, "savanna") | 
+                                     str_detect(habitat, "alpine")| 
+                                     str_detect(habitat, "montane")), 
+                                      habitat_risk/3, habitat_risk),
+    
+    # to avoid scoring the same species twice based on "wetness", only divide those habitat risk scores that aren't already lower
+    habitat_risk = ifelse(!is.na(habitat_moisture) & !(habitat_risk_tmp != habitat_risk) &
+                                    (str_detect(habitat_moisture, "wet") | 
+                                     str_detect(habitat_moisture, "moist") | 
+                                     str_detect(habitat_moisture, "damp")), 
+                                      habitat_risk/3, habitat_risk_tmp)
+    ) %>%
+  select(-habitat_risk_tmp)
+    
+  # add trait and taxonomy adjustment nudges
+  goats_assigned_risk <- goats_assigned_risk %>%
+    mutate(
+      # add risk adjuster based on height; maximum height among species in training dataset is 32.5 m, so setting that as the cut-off; all taller species assigned same risk adjustment as a 30 m tall species
+      # have chosen a risk adjustment of 0 - 0.3, because being tall (a tree) versus short (an herb/grass) would represent a shift of one unit of the threat scale
+      height_risk_adjustment = 0.3*(1 - (plant_height/correlations_with_possible_traits_goats_2$max[match("plant_height", correlations_with_possible_traits_goats_2$trait)])),
+      height_risk_adjustment = ifelse(!is.na(height_risk_adjustment) & height_risk_adjustment < 0, 0, -height_risk_adjustment),
+      # non-resprouting species are more palatable than resprouting species, such that being a non-resprouting shrub/tree is worse than being a resprouting tree
+      # have chosen a risk adjustment of 0 - 0.03, because being being a resprouter vs non resprouter is a quite shallow effect and a low R2
+      resprouting_risk_adjustment = -0.03*(1 - (resprouting_capacity/1)),
+      Chenopodiaceae_risk_adjustment = ifelse(family == "Chenopodiaceae", -0.1, 0),
+      graminoid_risk_adjustment = ifelse(family %in% c("Restionaceae", "Poaceae", "Cyperaceae", "Juncaginaceae", "Juncaceae"), 0.2, 0),
+      herb_risk_adjustment = ifelse(woodiness == 0 & graminoid_risk_adjustment == 0, -0.2, 0),
+      total_trait_adjustment = rowSums(across(c(height_risk_adjustment, resprouting_risk_adjustment, Chenopodiaceae_risk_adjustment, graminoid_risk_adjustment, herb_risk_adjustment)), na.rm = TRUE)/2
+      )
+  
+  goats_assigned_risk <- goats_assigned_risk %>%
+    mutate(
+      total_risk = rowSums(across(c(habitat_risk, total_trait_adjustment)), na.rm = TRUE),
+      goat_susceptibility = case_when(
+        total_risk >= 0.67 ~ "high",
+        0.67 > total_risk >= 0.33 ~ "medium",
+        0.33 > total_risk ~ "low"
+      ),
+      goat_susceptibility = ifelse(!is.na)
+    ))
+  
+  # from here, sum habitat risk and trait risk (probably habitat + 1/2 trait) and then assign susceptibility by bins (0-.33 = low; 0.33-0.67 = moderate; 0.67-1 = high)
 ```
 
 # C4 tropical grasses
