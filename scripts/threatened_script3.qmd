@@ -5,7 +5,7 @@ editor: visual
 embed-resources: true
 knitr:
   opts_knit:
-    root.dir: "C:/Users/Lizzy/Documents/GitHub/threatened_species_traits"
+    root.dir: "C:/Users/z3524079/Documents/GitHub/threatened_species_traits"
 editor_options: 
   chunk_output_type: console
 ---
@@ -31,6 +31,7 @@ resources <- APCalign::load_taxonomic_resources()
 
 #setwd("C:/Users/z3524079/Documents/GitHub/threatened_species_traits")
 #C:/Users/z3524079/Documents/GitHub/threatened_species_traits
+#C:/Users/Lizzy/Documents/GitHub/threatened_species_traits
 
 #austraits <- readRDS("ignore/austraits/austraits-6.0.0.rds")
 
@@ -144,7 +145,7 @@ extract_categorical_trait <- function(database = database, categorical_trait, tr
 dispersers <-  extract_categorical_trait(all_traits, c("dispersal_syndrome", "dispersers"), dispersers_scores, "dispersers")
 resprouting_capacity <- extract_categorical_trait(all_traits, "resprouting_capacity", resprouting_capacity_scores, "resprouting_capacity")
 nitrogen_fixing <- extract_categorical_trait(all_traits, "nitrogen_fixing", nitrogen_fixing_scores, "nitrogen_fixing")
-life_history <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2023"), "life_history", life_history_scores %>% filter(name == "life_history"), "life_history")
+life_history <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2023"), "life_history", life_history_scores, "life_history")
 plant_growth_form <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "plant_growth_form"), "plant_growth_form")
 forb_graminoid <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "forb_graminoid"), "forb_graminoid")
 herb_shrub_tree <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "herb_shrub_tree"), "herb_shrub_tree")
@@ -766,8 +767,8 @@ goat_susceptibility <- plant_goat_palatability %>%
 -   The three strongest correlations below don't make sense, in part due to low sample sizes:
 
     1.  Leaf tannins is coming out with higher tannins having higher palatability - the opposite of what it should be, becaise n = 5 (p-value not significant)
-    2. Nitrogen fixing is coming out as a strong negative correlation because all members of the genus Swainsona mapped in as toxic - and all are N-fixers.
-    2.  Succulence (`leaf_water_content_per_area` ) should be positively correlated with palatability, but only scored for 4 species and happens to come out as a strong negative correlation (p-value not significant)
+    2.  Nitrogen fixing is coming out as a strong negative correlation because all members of the genus Swainsona mapped in as toxic - and all are N-fixers.
+    3.  Succulence (`leaf_water_content_per_area` ) should be positively correlated with palatability, but only scored for 4 species and happens to come out as a strong negative correlation (p-value not significant)
 
 -   strongest believable association is for leaf P
 
@@ -876,8 +877,8 @@ Lu_1988 <- read_csv("datasets_from_manuscripts/Lu_1988.csv") %>%
 
 ### Assign risks to all taxa
 
-- take habitat into account: downrate rainforest species; uprate rock platform species, woodland species
-- take taxonomy into account: downrate Chenopodiaceae; uprate Graminoids
+-   take habitat into account: downrate rainforest species; uprate rock platform species, woodland species
+-   take taxonomy into account: downrate Chenopodiaceae; uprate Graminoids
 
 ```{r, warning=FALSE, message=FALSE}
 correlations_with_possible_traits_goats_2 <- correlations_with_possible_traits_goats %>%

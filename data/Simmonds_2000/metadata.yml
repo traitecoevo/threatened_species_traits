@@ -67,17 +67,6 @@ traits:
     of an animal. Toxic does not automatically imply lethal but some toxic plants
     can be lethal.
   source_id: Simmonds_2000
-- var_in: palatability_expanded
-  unit_in: .na
-  trait_name: plant_goat_palatability
-  entity_type: entity_type
-  value_type: mode
-  basis_of_value: expert_score
-  replicates: .na
-  methods: Toxic weeds are those that can cause any upset to the health and productivity
-    of an animal. Toxic does not automatically imply lethal but some toxic plants
-    can be lethal.
-  source_id: Holst_2000
 substitutions: .na
 taxonomic_updates:
 - find: Acacia escelsa
