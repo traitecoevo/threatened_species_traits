@@ -538,7 +538,7 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
     3.  for numeric traits, the magnitude of the coefficient must be intepreted in conjunction with knowing the scaling for the response variable - different for each trait; the susceptibility is on a scale of 0--5.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-correlations_with_possible_traits <- tibble(
+correlations_with_possible_traits_myrtle_rust <- tibble(
   trait = character(),
   coeff = character(),
   r2 = character(), 
@@ -566,7 +566,7 @@ for (var in c("resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_lea
     t() %>%
     as.data.frame()
   
-  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+  correlations_with_possible_traits_myrtle_rust <- correlations_with_possible_traits_myrtle_rust %>%
     bind_rows(new_row)
 }
 
@@ -602,12 +602,12 @@ for (var in c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_lengt
       )
     }
   
-  correlations_with_possible_traits <- correlations_with_possible_traits %>%
+  correlations_with_possible_traits_myrtle_rust <- correlations_with_possible_traits_myrtle_rust %>%
     bind_rows(new_row)
 
 }
 
-myrtlerust_kable_table <- correlations_with_possible_traits %>% 
+myrtlerust_kable_table <- correlations_with_possible_traits_myrtle_rust %>% 
   arrange(-as.numeric(r2)) %>% 
   kableExtra::kable(caption = "Correlation between myrtle rust susceptibililty and trait value, for species with known susceptibility")
 
@@ -683,31 +683,63 @@ myrtle_rust_assigned_risk <- resources$APC %>%
   filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
   select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
   left_join(habitat, by = "taxon_name") %>%
-  left_join(habitat_moisture, by = "taxon_name")
+  left_join(habitat_moisture, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(bud_bank_location, by = "taxon_name")
+
+Myrtaceae_subset <- myrtle_rust_assigned_risk %>%
+  filter(family == "Myrtaceae")
+
+max_height <- max(Myrtaceae_subset$plant_height, na.rm = T)
+min_height <- min(Myrtaceae_subset$plant_height, na.rm = T)
+
 
 myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
   mutate(
-    susceptibility_step_1 = ifelse(family == "Myrtaceae", 1, 0),
-    susceptibility_step_2 = ifelse(!is.na(habitat) | !is.na(habitat_moisture), 0, NA), # yes habitat vs. no habitat info available
-    susceptibility_step_2 = ifelse(!is.na(habitat) & 
-                                    (str_detect(habitat, "rainforest") | #switch 0 to 1 for wet site species
-                                     str_detect(habitat, "stream") | 
-                                     str_detect(habitat, "wet") | 
-                                     str_detect(habitat, "aquatic")| 
-                                     str_detect(habitat, "bog") | 
-                                     str_detect(habitat, "swamp")), 
-                                      1, susceptibility_step_2),
-    susceptibility_step_2 = ifelse(!is.na(habitat_moisture) &
-                                    (str_detect(habitat_moisture, "wet") | 
-                                     str_detect(habitat_moisture, "moist") | 
-                                     str_detect(habitat_moisture, "damp")), 
-                                      1, susceptibility_step_2),
-  # merge info for taxonomy & habitat
-  susceptibility_binary = ifelse(susceptibility_step_1 == 1 & (susceptibility_step_2 == 1| is.na(susceptibility_step_2)), 1, 0)
-  ) %>%
-  left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
-  mutate(
-    leaf_P_per_dry_mass_risk = ifelse(!is.na(leaf_P_per_dry_mass), (leaf_P_per_dry_mass)*(-0.11/5), 0)
+    taxonomic_risk = ifelse(family == "Myrtaceae", 1, 0),
+    ## XX - TODO - need to merge in list of epiphytic orchids that depend on Myrtaceae
+    # habitat risk = 1 if no information available
+    habitat_risk = ifelse(!is.na(habitat) | !is.na(habitat_moisture), 1, NA), 
+    # modify habitat risk, setting to 0 if no wet site words detected 
+    habitat_risk = ifelse(!is.na(habitat) & 
+                                    (!str_detect(habitat, "rainforest") & 
+                                     !str_detect(habitat, "stream") & 
+                                     !str_detect(habitat, "wet") & 
+                                     !str_detect(habitat, "aquatic") & 
+                                     !str_detect(habitat, "bog") & 
+                                     !str_detect(habitat, "swamp")), 
+                                      0, habitat_risk),
+    habitat_risk = ifelse(!is.na(habitat_moisture) &
+                                    (!str_detect(habitat_moisture, "wet") & 
+                                     !str_detect(habitat_moisture, "moist") &
+                                     !str_detect(habitat_moisture, "damp")), 
+                                      0, habitat_risk),
+    # assign trait risk nudges
+    plant_height_risk_nudge = ifelse(!is.na(plant_height),
+                               -0.05*((log10(plant_height)/log10(max_height))-(log10(min_height)/log10(max_height))), 0),
+    resprouting_capacity_risk_nudge = ifelse(!is.na(resprouting_capacity),
+                               -0.05*resprouting_capacity, 0),
+    bud_bank_location_risk_nudge = ifelse(!is.na(bud_bank_location),
+                               -0.03*bud_bank_location, 0),
+    ) %>% View()
+                                    
+                                    correlations_with_possible_traits_myrtle_rust$coeff[match("plant_height", correlations_with_possible_traits_myrtle_rust$trait)]))) %>% View()
+    
+    
+    ,
+      height_risk_nudge = ifelse(!is.na(height_risk_nudge) & height_risk_nudge < 0, 0, -height_risk_nudge),
+    resprouting_capacity_risk_nudge = 0,
+    bud_bank_location_risk_nudge = 0,
+    # combine trait risk nudges
+    trait_risk_nudge =  rowSums(across(c(plant_height_risk_nudge, resprouting_capacity_risk_nudge, bud_bank_location_risk_nudge)), na.rm = TRUE),
+    # merge risks
+    myrtle_rust_risk_total = ifelse(taxonomic_risk = 0, 0, habitat_risk),
+    myrtle_rust_risk_total = myrtle_rust_risk_total - trait_risk_nudge,       goat_susceptibility = case_when(
+        myrtle_rust_risk_total >= 0.67 ~ "high",
+        0.67 > myrtle_rust_risk_total >= 0.33 ~ "medium",
+        0.33 > myrtle_rust_risk_total ~ "low"
+      )
   )
 ```
 
@@ -949,26 +981,25 @@ goats_assigned_risk <- goats_assigned_risk %>%
     mutate(
       # add risk adjuster based on height; maximum height among species in training dataset is 32.5 m, so setting that as the cut-off; all taller species assigned same risk adjustment as a 30 m tall species
       # have chosen a risk adjustment of 0 - 0.3, because being tall (a tree) versus short (an herb/grass) would represent a shift of one unit of the threat scale
-      height_risk_adjustment = 0.3*(1 - (plant_height/correlations_with_possible_traits_goats_2$max[match("plant_height", correlations_with_possible_traits_goats_2$trait)])),
-      height_risk_adjustment = ifelse(!is.na(height_risk_adjustment) & height_risk_adjustment < 0, 0, -height_risk_adjustment),
+      height_risk_nudge = 0.3*(1 - (plant_height/correlations_with_possible_traits_goats_2$max[match("plant_height", correlations_with_possible_traits_goats_2$trait)])),
+      height_risk_nudge = ifelse(!is.na(height_risk_nudge) & height_risk_nudge < 0, 0, -height_risk_nudge),
       # non-resprouting species are more palatable than resprouting species, such that being a non-resprouting shrub/tree is worse than being a resprouting tree
       # have chosen a risk adjustment of 0 - 0.03, because being being a resprouter vs non resprouter is a quite shallow effect and a low R2
-      resprouting_risk_adjustment = -0.03*(1 - (resprouting_capacity/1)),
-      Chenopodiaceae_risk_adjustment = ifelse(family == "Chenopodiaceae", -0.1, 0),
-      graminoid_risk_adjustment = ifelse(family %in% c("Restionaceae", "Poaceae", "Cyperaceae", "Juncaginaceae", "Juncaceae"), 0.2, 0),
-      herb_risk_adjustment = ifelse(woodiness == 0 & graminoid_risk_adjustment == 0, -0.2, 0),
-      total_trait_adjustment = rowSums(across(c(height_risk_adjustment, resprouting_risk_adjustment, Chenopodiaceae_risk_adjustment, graminoid_risk_adjustment, herb_risk_adjustment)), na.rm = TRUE)/2
+      resprouting_risk_nudge = -0.03*(1 - (resprouting_capacity/1)),
+      Chenopodiaceae_risk_nudge = ifelse(family == "Chenopodiaceae", -0.1, 0),
+      graminoid_risk_nudge = ifelse(family %in% c("Restionaceae", "Poaceae", "Cyperaceae", "Juncaginaceae", "Juncaceae"), 0.2, 0),
+      herb_risk_nudge = ifelse(woodiness == 0 & graminoid_risk_nudge == 0, -0.2, 0),
+      total_trait_nudge = rowSums(across(c(height_risk_nudge, resprouting_risk_nudge, Chenopodiaceae_risk_nudge, graminoid_risk_nudge, herb_risk_nudge)), na.rm = TRUE)/2
       )
   
   goats_assigned_risk <- goats_assigned_risk %>%
     mutate(
-      total_risk = rowSums(across(c(habitat_risk, total_trait_adjustment)), na.rm = TRUE),
+      total_risk = rowSums(across(c(habitat_risk, total_trait_nudge)), na.rm = TRUE),
       goat_susceptibility = case_when(
         total_risk >= 0.67 ~ "high",
         0.67 > total_risk >= 0.33 ~ "medium",
         0.33 > total_risk ~ "low"
-      ),
-      goat_susceptibility = ifelse(!is.na)
+      )
     ))
   
   # from here, sum habitat risk and trait risk (probably habitat + 1/2 trait) and then assign susceptibility by bins (0-.33 = low; 0.33-0.67 = moderate; 0.67-1 = high)
