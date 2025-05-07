@@ -5,7 +5,7 @@ editor: visual
 embed-resources: true
 knitr:
   opts_knit:
-    root.dir: "C:/Users/z3524079/Documents/GitHub/threatened_species_traits"
+    root.dir: "C:/Users/Lizzy/Documents/GitHub/threatened_species_traits"
 editor_options: 
   chunk_output_type: console
 ---
@@ -149,6 +149,7 @@ life_history <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2
 plant_growth_form <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "plant_growth_form"), "plant_growth_form")
 forb_graminoid <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "forb_graminoid"), "forb_graminoid")
 herb_shrub_tree <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "herb_shrub_tree"), "herb_shrub_tree")
+geophyte <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "geophyte"), "geophyte")
 woodiness <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "woodiness_detailed", woodiness_scores, "woodiness")
 leaf_hairs_adult_leaves <- extract_categorical_trait(all_traits, "leaf_hairs_adult_leaves", leaf_hairs_adult_leaves_scores, "leaf_hairs_adult_leaves")
 leaf_glaucousness <- extract_categorical_trait(all_traits, "leaf_glaucousness", leaf_glaucousness_scores, "leaf_glaucousness")
@@ -172,6 +173,28 @@ plant_goat_palatability_genera <- plant_goat_palatability %>%
 plant_goat_palatability <- plant_goat_palatability %>%
   filter(str_detect(taxon_name, " ")) %>%
   bind_rows(plant_goat_palatability_genera)
+
+# flowering & fruiting season more difficult, because ordinal
+tropical_grass_flowering_times <- all_traits$traits %>%
+  filter(trait_name == "flowering_time") %>%
+  select(taxon_name, value) %>%
+  mutate(
+    value = stringr::str_replace_all(value, "y", "1"),
+    value = stringr::str_replace_all(value, "n", "0")
+    ) %>%
+  tidyr::separate(value, into = paste0("month", 01:12), sep = 1:11) %>%
+  mutate(
+    across(month1:month12, as.numeric),
+    all_months = rowSums(across(c(month1:month12))),
+    wet_season_flowering = rowSums(across(c(month9:month11))) / all_months,
+    dry_season_flowering = rowSums(across(c(month12, month1:month4))) / all_months,
+    shoulder_flowering = rowSums(across(c(month5:month8))) / all_months
+  ) %>%
+  select(taxon_name, wet_season_flowering, dry_season_flowering, shoulder_flowering) %>%
+  group_by(taxon_name) %>%
+    mutate(across(c(1:3), ~mean(.x))) %>%
+  ungroup() %>%
+  distinct()
 ```
 
 ### extract numeric traits from database
@@ -246,6 +269,10 @@ habitat_moisture <- all_traits$traits %>%
   mutate(habitat_moisture = paste0(habitat_moisture, collapse = " ")) %>%
   ungroup() %>%
   distinct()
+
+threatened <- all_traits$traits %>%
+  filter(dataset_id == "DCCEEW_2024") %>%
+  select(taxon_name, threatened_status = value)
 ```
 
 ### create tables partially ranking soils, geologic substrates by suscepibility
@@ -678,15 +705,29 @@ ggplot(data = genus_histograms) +
     2.  there are additional traits which might well be important, but need to bolster their coverage in database to be certain: **leaf glaucousness**, **leaf wax content**, **leaf hairiness**
 
 ```{r, warning=FALSE, message=FALSE}
+orchids_at_risk <- read_csv("data/Zimmer_2023/data.csv") %>%
+  mutate(
+    taxon_name = stringr::str_extract(`Orchid species`, "[^\\(]+"),
+    taxon_name = stringr::str_replace(taxon_name, "\\*",""),
+    taxon_name = stringr::str_trim(taxon_name)) %>%
+  select(taxon_name, score) %>%
+  mutate(orcid_risk = case_when(
+    score == "high" ~ 1,
+    score == "moderate" ~ 0.6,
+    score == "low" ~0.3
+  ))
+
 myrtle_rust_assigned_risk <- resources$APC %>% 
   filter(taxonomic_status == "accepted") %>%
   filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
   select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(threatened, by = "taxon_name") %>%
   left_join(habitat, by = "taxon_name") %>%
   left_join(habitat_moisture, by = "taxon_name") %>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
-  left_join(bud_bank_location, by = "taxon_name")
+  left_join(bud_bank_location, by = "taxon_name") %>%
+  left_join(orchids_at_risk)
 
 Myrtaceae_subset <- myrtle_rust_assigned_risk %>%
   filter(family == "Myrtaceae")
@@ -697,8 +738,10 @@ min_height <- min(Myrtaceae_subset$plant_height, na.rm = T)
 
 myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
   mutate(
-    taxonomic_risk = ifelse(family == "Myrtaceae", 1, 0),
-    ## XX - TODO - need to merge in list of epiphytic orchids that depend on Myrtaceae
+    # starting rsk for Myrtaceae is 1; for all other taxa = 0.2 - since rainforest plants might be impacted by changes in community structure
+    taxonomic_risk = ifelse(family == "Myrtaceae", 1, .2),
+    # list of epiphytic orchids known to be at risk
+    taxonomic_risk = ifelse(taxon_name %in% orchids_at_risk$taxon_name, orcid_risk, taxonomic_risk),
     # habitat risk = 1 if no information available
     habitat_risk = ifelse(!is.na(habitat) | !is.na(habitat_moisture), 1, NA), 
     # modify habitat risk, setting to 0 if no wet site words detected 
@@ -710,37 +753,39 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
                                      !str_detect(habitat, "bog") & 
                                      !str_detect(habitat, "swamp")), 
                                       0, habitat_risk),
-    habitat_risk = ifelse(!is.na(habitat_moisture) &
+    habitat_risk = ifelse(!is.na(habitat_moisture) & 
+                            (is.na(habitat) | habitat_risk == 0) &
                                     (!str_detect(habitat_moisture, "wet") & 
                                      !str_detect(habitat_moisture, "moist") &
                                      !str_detect(habitat_moisture, "damp")), 
                                       0, habitat_risk),
-    # assign trait risk nudges
-    plant_height_risk_nudge = ifelse(!is.na(plant_height),
+    # assign trait risk nudges; trait nudges only apply to Myrtaceae, not other rainforest plants
+    plant_height_risk_nudge = ifelse(!is.na(plant_height) & family == "Myrtaceae",
                                -0.05*((log10(plant_height)/log10(max_height))-(log10(min_height)/log10(max_height))), 0),
-    resprouting_capacity_risk_nudge = ifelse(!is.na(resprouting_capacity),
+    resprouting_capacity_risk_nudge = ifelse(!is.na(resprouting_capacity) & family == "Myrtaceae",
                                -0.05*resprouting_capacity, 0),
-    bud_bank_location_risk_nudge = ifelse(!is.na(bud_bank_location),
+    bud_bank_location_risk_nudge = ifelse(!is.na(bud_bank_location) & family == "Myrtaceae",
                                -0.03*bud_bank_location, 0),
-    ) %>% View()
-                                    
-                                    correlations_with_possible_traits_myrtle_rust$coeff[match("plant_height", correlations_with_possible_traits_myrtle_rust$trait)]))) %>% View()
-    
-    
-    ,
-      height_risk_nudge = ifelse(!is.na(height_risk_nudge) & height_risk_nudge < 0, 0, -height_risk_nudge),
-    resprouting_capacity_risk_nudge = 0,
-    bud_bank_location_risk_nudge = 0,
     # combine trait risk nudges
     trait_risk_nudge =  rowSums(across(c(plant_height_risk_nudge, resprouting_capacity_risk_nudge, bud_bank_location_risk_nudge)), na.rm = TRUE),
     # merge risks
-    myrtle_rust_risk_total = ifelse(taxonomic_risk = 0, 0, habitat_risk),
-    myrtle_rust_risk_total = myrtle_rust_risk_total - trait_risk_nudge,       goat_susceptibility = case_when(
-        myrtle_rust_risk_total >= 0.67 ~ "high",
-        0.67 > myrtle_rust_risk_total >= 0.33 ~ "medium",
-        0.33 > myrtle_rust_risk_total ~ "low"
+    myrtle_rust_risk_total = ifelse(is.na(habitat_risk) & (family == "Myrtaceae" | taxon_name %in% orchids_at_risk$taxon_name), taxonomic_risk, taxonomic_risk*habitat_risk),
+    myrtle_rust_risk_total = myrtle_rust_risk_total + trait_risk_nudge, 
+    # assign risk by category
+    myrtle_rust_final_susceptibility_score = case_when(
+        myrtle_rust_risk_total >= 0.8 ~ "extremely_high",
+        myrtle_rust_risk_total >= 0.6 & myrtle_rust_risk_total < 0.8 ~ "high",
+        myrtle_rust_risk_total >= 0.4 & myrtle_rust_risk_total < 0.6 ~ "medium",
+        myrtle_rust_risk_total >= 0.2 & myrtle_rust_risk_total < 0.4 ~ "low",
+        myrtle_rust_risk_total < 0.2 ~ "insignficant"
       )
-  )
+  ) %>%
+    filter(!is.na(threatened_status))
+
+# TO DISCUSS:
+# 1. Should one overwrite risk for taxa with known risk?
+# 2. Should genera with known lower risk (Eucalyptus and relatives) get a downward nudge?
+# 3. Certainty of score? All non-Myrtaceae scores by habitat = high uncertainty; beyond that only certainty scoring would be that species with known risk = certain; others = moderate uncertainty
 ```
 
 # Goats
@@ -1000,12 +1045,126 @@ goats_assigned_risk <- goats_assigned_risk %>%
         0.67 > total_risk >= 0.33 ~ "medium",
         0.33 > total_risk ~ "low"
       )
-    ))
+    )
   
   # from here, sum habitat risk and trait risk (probably habitat + 1/2 trait) and then assign susceptibility by bins (0-.33 = low; 0.33-0.67 = moderate; 0.67-1 = high)
 ```
 
 # C4 tropical grasses
+
+```{r, warning=FALSE, message=FALSE}
+tropical_grasses_assigned_risk <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(threatened, by = "taxon_name") %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(tropical_grass_flowering_times, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(reproductive_maturity, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(geophyte, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(bud_bank_location, by = "taxon_name") %>%
+  left_join(storage_organ, by = "taxon_name")
+
+max_height <- max(tropical_grasses_assigned_risk$plant_height, na.rm = T)
+min_height <- min(tropical_grasses_assigned_risk$plant_height, na.rm = T)
+
+max_reproductive_maturity <- max(tropical_grasses_assigned_risk$reproductive_maturity, na.rm = T)
+min_reproductive_maturity <- min(tropical_grasses_assigned_risk$reproductive_maturity, na.rm = T)
+
+tropical_grasses_assigned_risk <- tropical_grasses_assigned_risk %>%
+  mutate(
+    # default habitat = 0.3
+    habitat_risk = 0.3, 
+    # modify habitat risk, setting to 0 if no savanna, grassland, woodland words detected 
+    habitat_risk = ifelse(!is.na(habitat) & 
+                                    (str_detect(habitat, "savanna") | 
+                                     str_detect(habitat, "grassland") | 
+                                     str_detect(habitat, "steppe") | 
+                                     str_detect(habitat, "woodland") | 
+                                     str_detect(habitat, "shrubland") | 
+                                     str_detect(habitat, "sclerophyll") | 
+                                     str_detect(habitat, "disturbed") | 
+                                     str_detect(habitat, "agricult") | 
+                                     str_detect(habitat, "pasture") | 
+                                     str_detect(habitat, "paddock") | 
+                                     str_detect(habitat, "open") | 
+                                     str_detect(habitat, "plains") | 
+                                     str_detect(habitat, "roadside")), 
+                                      1, habitat_risk),
+    habitat_risk = ifelse(!is.na(habitat) & 
+                                    (str_detect(habitat, "alpine") | 
+                                     str_detect(habitat, "chenopod") | 
+                                     str_detect(habitat, "dunes") | 
+                                     str_detect(habitat, "rainforest") |
+                                     str_detect(habitat, "snowbank") |
+                                     str_detect(habitat, "aquatic") |
+                                     str_detect(habitat, "swamp") |
+                                     str_detect(habitat, "bog") |
+                                     str_detect(habitat, "water") |
+                                     str_detect(habitat, "tidal") |
+                                     str_detect(habitat, "sand") |
+                                     str_detect(habitat, "mountain") |
+                                     str_detect(habitat, "montane") | 
+                                     str_detect(habitat, "cliff") | 
+                                     str_detect(habitat, "crevice")), 
+                                      habitat_risk/5, habitat_risk),
+    # assign trait risk nudges
+    # each risk varies - as in, each risk will add a bit to background habitat risk
+    # taller plants initially do better
+    plant_height_risk_nudge = ifelse(!is.na(plant_height),
+                               -0.3*((log10(plant_height)/log10(max_height))-(log10(min_height)/log10(max_height))) + 0.35, 0),
+    # plants with a shorter juvenile period more likely to set seed before next fire -- but really only those with a very short life cycle benefit
+    reproductive_maturity_risk_nudge = ifelse(!is.na(reproductive_maturity),
+                               -0.3*((log10(reproductive_maturity)/log10(max_reproductive_maturity))-(log10(min_reproductive_maturity)/log10(max_reproductive_maturity))), 0),
+    storage_organ_risk_nudge = ifelse(geophyte > 0 | storage_organ > 0, -0.3, 0),
+    life_history_risk_nudge = ifelse(!is.na(life_history), 0.075*life_history, 0),
+    life_history_risk_nudge2 = ifelse(!is.na(life_history), 0.125*life_history, 0),
+    woodiness_risk_nudge = ifelse(!is.na(woodiness), 0.4*woodiness, 0),
+    resprouting_capacity_risk_nudge = ifelse(!is.na(resprouting_capacity), -0.2*resprouting_capacity, 0),
+    bud_bank_location_nudge = ifelse(!is.na(bud_bank_location), 0.05*bud_bank_location, 0),
+    # combine trait risk nudges
+    # less direct competition if 1) you are tall or 2) you are an annual that grows outside the C4 grass growing season
+    direct_competition_risk = ifelse(!is.na(plant_height) | (!is.na(dry_season_flowering) & life_history < 1.5), -0.3*dry_season_flowering + plant_height_risk_nudge, .2),
+    # less impacted by fire season if you are an annual that flowers and fruits in the late dry season, likely post-fire
+    fire_season_risk = ifelse(!is.na(life_history) & !is.na(dry_season_flowering) & life_history < 1.5, -0.2*dry_season_flowering, .2),
+    fire_intensity_risk = 0.5*rowSums(across(c(woodiness_risk_nudge, storage_organ_risk_nudge, resprouting_capacity_risk_nudge, bud_bank_location_nudge)), na.rm = TRUE),
+    fire_frequency_risk = 0.5*rowSums(across(c(life_history_risk_nudge2, reproductive_maturity_risk_nudge, resprouting_capacity_risk_nudge)), na.rm = TRUE),
+    #replace na's with 0
+    across(c(direct_competition_risk, habitat_risk, fire_season_risk, fire_intensity_risk,fire_frequency_risk), ~tidyr::replace_na(.x, 0)),
+    # determine total risk, giving equal weight to above 4 categories
+    tropical_grasses_persistance_risk_total_tmp = rowSums(across(c(direct_competition_risk, fire_season_risk, fire_intensity_risk, fire_frequency_risk)), na.rm = TRUE)
+  )
+
+min_trait_risk <- min(tropical_grasses_assigned_risk$tropical_grasses_persistance_risk_total_tmp)
+range_trait_risk <- max(tropical_grasses_assigned_risk$tropical_grasses_persistance_risk_total_tmp) - min(tropical_grasses_assigned_risk$tropical_grasses_persistance_risk_total_tmp)
+   
+tropical_grasses_assigned_risk <- tropical_grasses_assigned_risk %>%
+  mutate(
+    # scale risks to 0 -- 1.25
+    tropical_grasses_persistance_risk_total = (tropical_grasses_persistance_risk_total_tmp - (3*min_trait_risk/2)) / (range_trait_risk),
+    # multiply by habitat risk
+    tropical_grasses_persistance_risk_total = tropical_grasses_persistance_risk_total*habitat_risk,
+    # assign risk by category
+    tropical_grasses_final_susceptibility_score = case_when(
+        tropical_grasses_persistance_risk_total >= 0.8 ~ "extremely_high",
+        tropical_grasses_persistance_risk_total >= 0.6 & tropical_grasses_persistance_risk_total < 0.8 ~ "high",
+        tropical_grasses_persistance_risk_total >= 0.4 & tropical_grasses_persistance_risk_total < 0.6 ~ "medium",
+        tropical_grasses_persistance_risk_total >= 0.2 & tropical_grasses_persistance_risk_total < 0.4 ~ "low",
+        tropical_grasses_persistance_risk_total < 0.2 ~ "insignficant"
+      )
+  ) %>%
+    filter(!is.na(threatened_status))
+
+
+# TO DISCUSS:
+# 1. Should one overwrite risk for taxa with known risk?
+# 2. Should genera with known lower risk (Eucalyptus and relatives) get a downward nudge?
+# 3. Certainty of score? All non-Myrtaceae scores by habitat = high uncertainty; beyond that only certainty scoring would be that species with known risk = certain; others = moderate uncertainty
+```
 
 # Regeneration of populations
 
