@@ -246,7 +246,7 @@ traits:
         forest_dry_sclerophyll: XX
         forest_eucalypt: XX
         forest_eucalypt_wet: XX
-        forest_eucalyptus: XX
+        forest_eucalyptus: XX NEED TO REMOVE and replace with forest_eucalypt
         forest_gallery: XX
         forest_lowland: XX
         forest_moist_sclerophyll: XX
@@ -256,15 +256,12 @@ traits:
         forest_subalpine: XX
         forest_wet: XX
         forest_wet_sclerophyll: XX
-        forest_wet_sclerophyll forest_dry_sclerophyll: XX
         grassland: XX
         grassland_alpine: XX
-        grassland_alpine grassland_subalpine: XX
         grassland_subalpine: XX
         grassland_tussock: XX
         headland_coastal: XX
         heath: XX
-        heath woodland: XX
         heath_alpine: XX
         heath_closed: XX
         heath_coastal: XX
@@ -272,7 +269,6 @@ traits:
         heath_wet: XX
         herbfield: XX
         herbfield_alpine: XX
-        herbfield_alpine herbfield_subalpine: XX
         herbfield_subalpine: XX
         inundated_intermittent: XX
         kwongan: XX
@@ -282,7 +278,6 @@ traits:
         lakes_salt: XX
         littoral: XX
         mallee: XX
-        mallee heath: XX
         mallee_heath: XX
         mangroves: XX
         marsh_salt: XX
@@ -295,13 +290,12 @@ traits:
         pasture: XX
         plains: XX
         plains_coastal: XX
-        plains_stony lateritic: XX
+        plains_stony: XX
         rainforest: XX
         rainforest_coastal: XX
         rainforest_cool: XX
         rainforest_cool_subtropical: XX
         rainforest_cool_temperate: XX
-        rainforest_cool_temperate rainforest_warm_temperate: XX
         rainforest_dry: XX
         rainforest_gallery: XX
         rainforest_littoral: XX
@@ -309,15 +303,11 @@ traits:
         rainforest_margin: XX
         rainforest_moist: XX
         rainforest_montane: XX
-        rainforest_montane rainforest_coastal: XX
         rainforest_notophyll: XX
         rainforest_subcoastal: XX
         rainforest_subtropical: XX
-        rainforest_subtropical rainforest_warm_temperate: XX
         rainforest_subtropical_upland: XX
         rainforest_temperate: XX
-        rainforest_temperate rainforest_subtropical: XX
-        rainforest_temperate rainforest_tropical: XX
         rainforest_tropical: XX
         rainforest_tropical_lowland: XX
         rainforest_warm_temperate: XX
@@ -346,7 +336,7 @@ traits:
         semiaquatic: XX
         shrubland: XX
         shrubland steppe: XX
-        shrubland_chenopod: XX
+        shrubland_chenopod: XX NEED TO REMOVE
         shrubland_eucalypt: XX
         shrubland_mallee: XX
         shrubland_open: XX
@@ -377,19 +367,14 @@ traits:
         woodland_low: XX
         woodland_moist_sclerophyll: XX
         woodland_montane: XX
-        woodland_montane woodland_subalpine: XX
         woodland_mulga: XX
         woodland_open: XX
         woodland_paperbark: XX
         woodland_sclerophyll: XX
-        woodland_sclerophyll forest_sclerophyll: XX
         woodland_semiarid: XX
         woodland_subalpine: XX
-        woodland_subalpine woodland_eucalypt: XX
-        woodland_subalpine woodland_montane: XX
         woodland_wandoo: XX
         woodland_wet_sclerophyll: XX
-        woodland_wet_sclerophyll woodland_dry_sclerophyll: XX
     habitat_moisture:
       label: XX
       description: XX
