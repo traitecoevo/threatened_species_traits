@@ -156,7 +156,7 @@ traits:
       label: Metabolisable energy (ME)
       description: The energy available for herbivore metabolism and growth, expressed as megajoules per kilogram of plant dry matter. This is effectively the energy density of plant material.       
       type: numeric
-      unit: MJ/kg
+      units: MJ/kg
       allowed_values_min: 1
       allowed_values_max: 50
       entity_URI: XX
