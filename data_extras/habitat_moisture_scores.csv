@@ -1,0 +1,8 @@
+﻿trait_name,trait_value,habitat_moisture
+habitat_moisture,arid,0
+habitat_moisture,damp,1
+habitat_moisture,dry,1
+habitat_moisture,moist,1
+habitat_moisture,semiarid,0
+habitat_moisture,wet,1
+habitat_moisture,winterwet,1

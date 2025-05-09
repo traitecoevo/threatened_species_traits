@@ -1,0 +1,368 @@
+---
+title: "Threatened species script"
+format: html
+editor: visual
+embed-resources: true
+knitr:
+  opts_knit:
+    root.dir: "C:/Users/Lizzy/Documents/GitHub/threatened_species_traits"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Setup and data extraction
+
+## load libraries, build database
+
+-   open/merge AusTraits and attributes in threatened species database
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+library(tidyverse)
+library(remake)
+library(kableExtra)
+library(austraits)
+library(APCalign)
+library(traits.build)
+
+path <- "../traits.build/"
+devtools::load_all(path)
+
+resources <- APCalign::load_taxonomic_resources()
+
+#setwd("C:/Users/z3524079/Documents/GitHub/threatened_species_traits")
+#C:/Users/z3524079/Documents/GitHub/threatened_species_traits
+#C:/Users/Lizzy/Documents/GitHub/threatened_species_traits
+
+#austraits <- readRDS("ignore/austraits/austraits-6.0.0.rds")
+
+austraits <- readRDS("ignore/austraits/austraits_20250429.rds")
+
+source("R/custom_R_code.R")
+source("R/extra_functions.R")
+
+traits.build::build_setup_pipeline(method = "remake", database_name = "threatened_species")
+
+threatened_species <- remake::make("threatened_species")
+
+# create combined database with both data sources
+all_traits <- austraits %>% austraits::bind_databases(threatened_species)
+```
+
+## create dataframes for key traits
+
+-   create dataframes from merged database for any trait suspected to be relevant for any threats
+
+### score conversions for categorical traits and threats
+
+-   read in files that indicate conversions between categorical values and a numeric equivalent, to allow linear models to be run to look at trait - susceptibility correlations
+-   outputs are the ordinal values assigned to each categorical trait value, relevant for determining if trait-susceptibility correlations exist within training datasets (for myrtle rust, Phytophthora cinnamomi, and goats) and assigning susceptibility risks based on a species' trait values
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# files with categorical --> ordinal conversions for traits
+life_history_scores <- read_csv("data_extras/life_history_scores.csv")
+plant_growth_form_scores <- read_csv("data_extras/plant_growth_form_scores.csv") %>% tidyr::pivot_longer(cols = 3:5) %>% select(trait_name, trait_value, value, name)
+woodiness_scores <- read_csv("data_extras/woodiness_scores.csv")
+dispersers_scores <- read_csv("data_extras/dispersers_scores.csv")
+fruit_fleshiness_scores <- read_csv("data_extras/fruit_fleshiness_scores.csv")
+bud_bank_location_scores <- read_csv("data_extras/bud_bank_location_scores.csv")
+storage_organ_scores <- read_csv("data_extras/storage_organ_scores.csv")
+leaf_glaucousness_scores <- read_csv("data_extras/leaf_glaucousness_scores.csv")
+resprouting_capacity_scores <- read_csv("data_extras/resprouting_capacity_scores.csv")
+nitrogen_fixing_scores <- read_csv("data_extras/nitrogen_fixing_scores.csv")
+leaf_hairs_adult_leaves_scores <- read_csv("data_extras/leaf_hairs_adult_leaves_scores.csv")
+leaf_glaucousness_scores <- read_csv("data_extras/leaf_glaucousness_scores.csv")
+plant_spinescence_scores <- read_csv("data_extras/plant_spinescence_scores.csv")
+plant_physical_defence_structures_scores <- read_csv("data_extras/plant_physical_defence_structures_scores.csv")
+
+# files with categorical --> ordinal conversions for susceptibility attributes
+plant_goat_toxicity_scores <- read_csv("data_extras/plant_goat_toxicity_scores.csv")
+plant_goat_palatability_scores <- read_csv("data_extras/plant_goat_palatability_scores.csv")
+phytophthora_cinnamomi_susceptibility_scores <- read_csv("data_extras/phytophthora_cinnamomi_susceptibility_scores.csv")
+myrtle_rust_susceptibility_scores <- read_csv("data_extras/myrtle_rust_susceptibility_scores.csv")
+
+# habitat, soil attributes - scores for different threats
+soil_type_scores <- read_csv("data_extras/soil_type_scores.csv")
+geologic_substrate_scores <-  read_csv("data_extras/geologic_substrate_scores.csv")
+habitat_scores <-  read_csv("data_extras/habitat_scores.csv")
+
+#print out tables for different categorical traits, showing ordinal scores
+life_history_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(life_history) %>% rename(`categorical value` = trait_value, `numeric score assigned` = life_history)  %>% kable(caption = "life history values") %>% kable_classic()
+
+plant_growth_form_scores %>% filter(!str_detect(trait_value, " ")) %>% 
+  pivot_wider(names_from = name, values_from = value) %>% arrange(trait_value) %>% kable(caption = "plant growth form values") %>% kable_classic()
+
+woodiness_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(woodiness_detailed) %>% rename(`categorical value` = trait_value, `numeric score assigned` = woodiness_detailed)  %>% kable(caption = "plant woodiness values") %>% kable_classic()
+
+resprouting_capacity_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(resprouting_capacity) %>% rename(`categorical value` = trait_value, `numeric score assigned` = resprouting_capacity)  %>% kable(caption = "resprouting capacity values") %>% kable_classic()
+
+storage_organ_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(storage_organ) %>% rename(`categorical value` = trait_value, `numeric score assigned` = storage_organ)  %>% kable(caption = "storage organ") %>% kable_classic()
+
+bud_bank_location_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(bud_bank_location) %>% rename(`categorical value` = trait_value, `numeric score assigned` = bud_bank_location)  %>% kable(caption = "bud bank location") %>% kable_classic()
+```
+
+### extract categorical traits from database
+
+-   extract all available values for categorical traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
+-   for each trait, merge in numeric conversions
+-   for each taxon, take the mean of all available values
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+extract_categorical_trait <- function(database = database, categorical_trait, trait_scores, output_name) {
+  
+  extracted_data <- (database %>%
+  austraits::extract_trait(categorical_trait))$traits %>%
+  tidyr::separate_longer_delim(value, delim = " ") %>%
+  dplyr::rename(trait_value = value) %>%
+  dplyr::left_join(trait_scores %>% rename(output_name = 3), by = join_by(trait_name, trait_value)) %>%
+  dplyr::filter(!is.na(output_name)) %>%
+  dplyr::select(dataset_id, observation_id, taxon_name, output_name) %>%
+  dplyr::group_by(taxon_name, dataset_id, observation_id) %>%
+  dplyr::mutate(output_name = mean(as.numeric(output_name))) %>%
+  dplyr::ungroup() %>%
+  dplyr::distinct() %>%
+  dplyr::select(taxon_name, output_name) %>%
+  group_by(taxon_name) %>%
+  dplyr::mutate(output_name = mean(as.numeric(output_name))) %>%
+  dplyr::ungroup() %>%
+  dplyr::distinct() %>%
+  rename(!!output_name := output_name)
+  
+  extracted_data
+}
+
+dispersers <-  extract_categorical_trait(all_traits, c("dispersal_syndrome", "dispersers"), dispersers_scores, "dispersers")
+resprouting_capacity <- extract_categorical_trait(all_traits, "resprouting_capacity", resprouting_capacity_scores, "resprouting_capacity")
+life_history <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2023"), "life_history", life_history_scores, "life_history")
+
+# various ways to group growth forms based on threat
+plant_growth_form <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "plant_growth_form"), "plant_growth_form")
+forb_graminoid <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "forb_graminoid"), "forb_graminoid")
+herb_shrub_tree <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "herb_shrub_tree"), "herb_shrub_tree")
+
+# extract habitat scores for each treat
+C4_grasses_habitat_scores <- extract_categorical_trait(all_traits, "habitat", habitat_scores %>% select(trait_name, trait_value, habitat = C4_grasses), "habitat_C4_grasses")
+
+geophyte <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "geophyte"), "geophyte")
+woodiness <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "woodiness_detailed", woodiness_scores, "woodiness")
+bud_bank_location <- extract_categorical_trait(all_traits, "bud_bank_location", bud_bank_location_scores, "bud_bank_location")
+storage_organ <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores, "storage_organ")
+
+# flowering & fruiting season more difficult, because ordinal
+tropical_grass_flowering_times <- all_traits$traits %>%
+  filter(trait_name == "flowering_time") %>%
+  select(taxon_name, value) %>%
+  mutate(
+    value = stringr::str_replace_all(value, "y", "1"),
+    value = stringr::str_replace_all(value, "n", "0")
+    ) %>%
+  tidyr::separate(value, into = paste0("month", 01:12), sep = 1:11) %>%
+  mutate(
+    across(month1:month12, as.numeric),
+    all_months = rowSums(across(c(month1:month12))),
+    wet_season_flowering = rowSums(across(c(month9:month11))) / all_months,
+    dry_season_flowering = rowSums(across(c(month12, month1:month4))) / all_months,
+    shoulder_flowering = rowSums(across(c(month5:month8))) / all_months
+  ) %>%
+  select(taxon_name, wet_season_flowering, dry_season_flowering, shoulder_flowering) %>%
+  group_by(taxon_name) %>%
+    mutate(across(c(1:3), ~mean(.x))) %>%
+  ungroup() %>%
+  distinct()
+```
+
+### extract numeric traits from database
+
+-   extract all available values for numeric traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
+
+-   for each taxon, take the mean of all available values using a weighted mean function developed for AusTraits, which first takes the mean of multiple individual values collected at a single site; then the mean of values from all population; and at the end also considers values extracted from floras (and similar publications) that refer to the entire species
+
+-   the function used is called `austraits_weighted_means`
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+extract_numeric_trait <- function(numeric_trait) {
+  
+  extracted_data <- all_traits %>%
+  austraits::extract_trait(numeric_trait) %>%
+  austraits::extract_data(table = "traits", col = "basis_of_record", col_value = c("field", "literature", "field literature", "literature field", "preserved_specimen"), partial_matches_allowed = F) %>%
+  austraits_weighted_means(numeric_trait) %>%
+  filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
+  select(taxon_name, mean) %>%
+  rename(!!numeric_trait := mean)
+  
+  extracted_data
+}
+
+numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "reproductive_maturity", "seedbank_longevity")
+
+numeric_data <- list()
+
+for (trait in numeric_traits) {
+  
+  numeric_data[[trait]] <- extract_numeric_trait(trait)
+  numeric_data[[trait]] 
+  
+}
+
+list2env(numeric_data, envir = .GlobalEnv)
+```
+
+### extract non-trait attributes from database - for susceptibility scoring, not for trait correlations
+
+-   there are attributes of a species that aren't "traits" but are known to affect a species susceptibility to various threats
+
+-   these include:
+
+    1.  habitat (vegetation association and moisture)
+    2.  soil type (mainly soil textural terms) - under Phytophthora for now
+    3.  underlying geologic substrate - under Phytophthora for now
+    4.  population size (not merged in yet because too little data)
+    5.  population count (not merged in yet because too little data)
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+habitat <- all_traits$traits %>%
+  filter(trait_name == "habitat") %>%
+  select(taxon_name, habitat = value) %>%
+  group_by(taxon_name) %>%
+  mutate(habitat = paste0(habitat, collapse = " ")) %>%
+  ungroup() %>%
+  distinct()
+
+habitat_moisture <- all_traits$traits %>%
+  filter(trait_name == "habitat_moisture") %>%
+  select(taxon_name, habitat_moisture = value) %>%
+  group_by(taxon_name) %>%
+  mutate(habitat_moisture = paste0(habitat_moisture, collapse = " ")) %>%
+  ungroup() %>%
+  distinct()
+
+threatened <- all_traits$traits %>%
+  filter(dataset_id == "DCCEEW_2024") %>%
+  select(taxon_name, threatened_status = value)
+
+soil_type <- extract_categorical_trait(all_traits, "soil_type", soil_type_scores, "soil_type")
+
+# high pH soils (limestone, other calcareous soils) & and saline soils assigned 0 risk; all others 1
+# take mean for each species based on all terms in database
+geologic_substrate <- extract_categorical_trait(all_traits, "geologic_substrate", geologic_substrate_scores, "geologic_substrate")
+```
+
+# C4 tropical grasses
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+habitat_scores %>%
+  select(habitat = trait_value, score = C4_grasses) %>%
+  group_by(score) %>%
+  mutate(habitat = paste0(habitat, collapse = "; ")) %>%
+  ungroup() %>%
+  distinct() %>% 
+  select(score, habitat) %>%
+  arrange(score) %>%
+  kable(caption = "habitat scores for C4 perennial grasses") %>% 
+  kable_classic()
+```
+
+```{r, warning=FALSE, message=FALSE}
+# create dataframe, merging in traits relevant for this threat
+tropical_grasses_assigned_risk <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(threatened, by = "taxon_name") %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(C4_grasses_habitat_scores, by = "taxon_name") %>%
+  left_join(tropical_grass_flowering_times, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(reproductive_maturity, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(geophyte, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(bud_bank_location, by = "taxon_name") %>%
+  left_join(storage_organ, by = "taxon_name")
+
+# for continuous traits need to know min/max for scaling
+max_height <- max(tropical_grasses_assigned_risk$plant_height, na.rm = T)
+min_height <- min(tropical_grasses_assigned_risk$plant_height, na.rm = T)
+
+max_reproductive_maturity <- max(tropical_grasses_assigned_risk$reproductive_maturity, na.rm = T)
+min_reproductive_maturity <- min(tropical_grasses_assigned_risk$reproductive_maturity, na.rm = T)
+
+# calculate "risk nudges" for habitat, traits, taxonomy if relevant
+tropical_grasses_assigned_risk <- tropical_grasses_assigned_risk %>%
+  mutate(
+    # when available use habitat risk based on species habitat; default habitat = 0.3
+    habitat_risk = ifelse(is.na(habitat_C4_grasses),0.3, habitat_C4_grasses),
+    
+    # assign trait risk nudges
+    
+    # taller plants = lower impact
+    plant_height_risk_nudge = ifelse(!is.na(plant_height),
+                               -0.3*((log10(plant_height)/log10(max_height))-(log10(min_height)/log10(max_height))) + 0.35, 0),
+    # plants with a shorter juvenile period more likely to set seed before next fire
+    reproductive_maturity_risk_nudge = ifelse(!is.na(reproductive_maturity),
+                               -0.3*((log10(reproductive_maturity)/log10(max_reproductive_maturity))-(log10(min_reproductive_maturity)/log10(max_reproductive_maturity))), 0),
+    # geophytes, other plants with belowground storage organ = negative, less impact; this nudge ranges from 0 to -0.4
+    storage_organ_risk_nudge = ifelse(geophyte > 0 | storage_organ > 0, -0.4, 0),
+    # annuals = 0, perennials = positive, more impact; life history is on a 0.5 (ephemeral) to 4 (perennial) scale, so this nudge ranges from 0 to 0.4
+    life_history_risk_nudge = ifelse(!is.na(life_history), 0.1*life_history, 0),
+    # woody taxa = positive, more impact; resprouting capacity is on a 0--1 scale, so this nudge ranges from 0 to 0.4
+    woodiness_risk_nudge = ifelse(!is.na(woodiness), 0.4*woodiness, 0),
+    # resprouters = negative, less impact; resprouting capacity is on a 0--1 scale, so this nudge ranges from 0 to -0.2
+    resprouting_capacity_risk_nudge = ifelse(!is.na(resprouting_capacity), -0.2*resprouting_capacity, 0),
+    # aboveground budbank location = positive, more impact (for use with fire intensity); 
+    # bud bank location varies 1-5, so this maxes out at 0.1, which offsets half of resprouting capacity benefit
+    bud_bank_location_nudge = ifelse(!is.na(bud_bank_location), -0.04*bud_bank_location, 0),
+    # belowground budbank location = positive, more impact (for use with fire frequency); 
+    # bud bank location varies 1-5, so this maxes out at 0.1, which offsets half of resprouting capacity benefit
+    bud_bank_location_nudge2 = ifelse(!is.na(bud_bank_location), 0.04*bud_bank_location, 0),
+    
+    # taxonomy nudge
+    
+    # perennial grasses are the most impacted herbaceous species
+    taxonomy_nudge = ifelse(!is.na(life_history) & life_history > 1.8 & family == "Poaceae", 0.5, 0),
+    
+    # combine trait risk nudges
+    
+    # less direct competition if 1) you are tall or 2) you are an annual, especially ones that grows outside the C4 grass growing season
+    direct_competition_risk = ifelse(
+      !is.na(plant_height) | (!is.na(dry_season_flowering) & life_history < 1.5), 
+      -0.3*dry_season_flowering + plant_height_risk_nudge + plant_height_risk_nudge, NA),
+    direct_competition_risk = ifelse(!is.na(plant_height) & is.na(direct_competition_risk), plant_height_risk_nudge + plant_height_risk_nudge, 0.3),
+    # most impacted by increased fire intensity if you are perennial, woody and with high bud bank location; having a storage organ offers a bit of reprieve
+    fire_intensity_risk = rowSums(across(c(woodiness_risk_nudge, storage_organ_risk_nudge, bud_bank_location_nudge, life_history_risk_nudge)), na.rm = TRUE),
+    # most impacted by increased fire frequency if you are an obligate seeder or with basal buds; and being perennial, especially with long time to maturity
+    fire_frequency_risk = rowSums(across(c(life_history_risk_nudge, reproductive_maturity_risk_nudge, resprouting_capacity_risk_nudge, bud_bank_location_nudge2)), na.rm = TRUE),
+    # less impacted by fire season if you are an annual that flowers and fruits in the late dry season, likely post-fire
+    fire_season_risk = ifelse(!is.na(life_history) & !is.na(dry_season_flowering) & life_history < 1.5, -0.1*dry_season_flowering, .1),
+    
+    #replace na's with 0
+    across(c(direct_competition_risk, habitat_risk, fire_season_risk, fire_intensity_risk,fire_frequency_risk, taxonomy_nudge), ~tidyr::replace_na(.x, 0)),
+    
+    # determine total risk, fire season "worth less", because smaller effect, direct competition largest
+    tropical_grasses_persistance_risk_total = rowSums(across(c(direct_competition_risk, fire_season_risk, fire_intensity_risk, fire_frequency_risk, taxonomy_nudge)), na.rm = TRUE)
+  )
+
+min_trait_risk <- min(tropical_grasses_assigned_risk$tropical_grasses_persistance_risk_total)
+range_trait_risk <- max(tropical_grasses_assigned_risk$tropical_grasses_persistance_risk_total) - min(tropical_grasses_assigned_risk$tropical_grasses_persistance_risk_total)
+   
+tropical_grasses_assigned_risk_final <- tropical_grasses_assigned_risk %>%
+  mutate(
+    # scale risks
+    tropical_grasses_persistance_risk_total_scaled = ((tropical_grasses_persistance_risk_total - min_trait_risk) / (range_trait_risk)),
+    
+    # multiply by habitat risk
+    tropical_grasses_persistance_risk_total_scaled = tropical_grasses_persistance_risk_total_scaled*habitat_risk,
+    
+    # assign risk by category
+    tropical_grasses_final_susceptibility_score = case_when(
+        tropical_grasses_persistance_risk_total_scaled >= 0.7 ~ "5_extremely_high",
+        tropical_grasses_persistance_risk_total_scaled >= 0.4 & tropical_grasses_persistance_risk_total_scaled < 0.7 ~ "4_high",
+        tropical_grasses_persistance_risk_total_scaled >= 0.3 & tropical_grasses_persistance_risk_total_scaled < 0.4 ~ "3_moderate",
+        tropical_grasses_persistance_risk_total_scaled >= 0.15 & tropical_grasses_persistance_risk_total_scaled < 0.3 ~ "2_low",
+        tropical_grasses_persistance_risk_total_scaled < 0.15 ~ "1_no_susceptibility"
+      )
+  ) %>%
+    filter(!is.na(threatened_status))
+
+tropical_grasses_assigned_risk_final %>% write_csv("export/tropical_grasses_assigned_risk_final.csv")
+```
