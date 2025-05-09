@@ -99,7 +99,7 @@ woodiness_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(woodiness
 
 resprouting_capacity_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(resprouting_capacity) %>% rename(`categorical value` = trait_value, `numeric score assigned` = resprouting_capacity)  %>% kable(caption = "resprouting capacity values") %>% kable_classic()
 
-storage_organ_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(storage_organ) %>% rename(`categorical value` = trait_value, `numeric score assigned` = storage_organ)  %>% kable(caption = "storage organ") %>% kable_classic()
+storage_organ_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(storage_organ)  %>% kable(caption = "storage organ values") %>% kable_classic()
 
 bud_bank_location_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(bud_bank_location) %>% rename(`categorical value` = trait_value, `numeric score assigned` = bud_bank_location)  %>% kable(caption = "bud bank location") %>% kable_classic()
 
@@ -165,7 +165,10 @@ woodiness <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022
 leaf_hairs_adult_leaves <- extract_categorical_trait(all_traits, "leaf_hairs_adult_leaves", leaf_hairs_adult_leaves_scores, "leaf_hairs_adult_leaves")
 leaf_glaucousness <- extract_categorical_trait(all_traits, "leaf_glaucousness", leaf_glaucousness_scores, "leaf_glaucousness")
 bud_bank_location <- extract_categorical_trait(all_traits, "bud_bank_location", bud_bank_location_scores, "bud_bank_location")
+
 storage_organ <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores, "storage_organ")
+storage_organ_pigs <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores %>% select(trait_name, trait_value, storage_organ = storage_organ_pigs), "storage_organ_pigs")
+
 fruit_fleshiness <- extract_categorical_trait(all_traits, "fruit_fleshiness", fruit_fleshiness_scores, "fruit_fleshiness")
 plant_spinescence <- extract_categorical_trait(all_traits, "plant_spinescence", plant_spinescence_scores, "plant_spinescence")
 plant_physical_defence_structures <- extract_categorical_trait(all_traits, "plant_physical_defence_structures", plant_physical_defence_structures_scores, "plant_physical_defence_structures")
@@ -215,7 +218,7 @@ extract_numeric_trait <- function(numeric_trait) {
   extracted_data
 }
 
-numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "leaf_work_to_shear_adjusted")
+numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "leaf_work_to_shear_adjusted", "fruit_length")
 
 traits2 <- c("leaf_soluble_protein_per_area", "leaf_insoluble_protein_per_area")  # interesting traits but only data for 1-2 species - in a lab study
 
@@ -502,7 +505,7 @@ phytophthora_assigned_risk <- resources$APC %>%
 phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
   left_join(phytophthora_cinnamomi_susceptibility_data %>% select(taxon_name, phytophthora_cinnamomi_susceptibility)) %>%
   left_join(by_family %>% rename(family_average_score = phytophthora_cinnamomi_susceptibility), by = "family") %>%
-  left_join(geologic_substrate %>% rename(substrate_risk = geologic_substrate_score), by = "taxon_name") %>%
+  left_join(geologic_substrate %>% rename(substrate_risk = geologic_substrate), by = "taxon_name") %>%
   left_join(soil_type %>% rename(soil_texture_risk = soil_score), by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
@@ -1030,11 +1033,13 @@ goats_assigned_risk <- goats_assigned_risk %>%
       # default habitat_risk is set to is 0.5
       habitat_risk = ifelse(is.na(habitat_goats), .5, habitat_goats),
       
-      # add risk adjuster based on height; maximum height among species in training dataset is 32.5 m, so setting that as the cut-off; all taller species assigned same risk adjustment as a 30 m tall species
-      # have chosen a risk adjustment of 0 - 0.3, because being tall (a tree) versus short (an herb/grass) would represent a shift of one unit of the threat scale
+      # add plant height nudge; 
+      # maximum height among species in training dataset is 32.5 m, so setting that as the cut-off; all taller species assigned same risk adjustment as a 30 m tall species
+      # have chosen a nudge of 0 - 0.3, because being tall (a tree) versus short (an herb/grass) would represent a shift of one unit of the threat scale
       height_risk_nudge = 0.1*(1 - (log10(plant_height)/log10(32.5))),
       height_risk_nudge = ifelse(!is.na(height_risk_nudge) & height_risk_nudge < 0, 0, -height_risk_nudge),
       
+      # add resprouting capacity nudge
       # non-resprouting species are more palatable than resprouting species, such that being a non-resprouting shrub/tree is worse than being a resprouting tree
       # have chosen a risk adjustment of 0 - 0.05, because being being a resprouter vs non resprouter is a quite shallow effect and a low R2
       resprouting_risk_nudge = -0.05*(1 - (resprouting_capacity/1)),
@@ -1074,6 +1079,202 @@ goats_assigned_risk <- goats_assigned_risk %>%
 ```
 # TO DISCUSS:
 # 1. There are currently too many species rated as `extremely_high` - especially tall trees; but I don't have a good solution to avoid this.
+# 2. Certainty of score? Only certainty scoring would be that species with known risk = certain; others = moderate uncertainty; not knowning habitat gives low level of certainty
+```
+
+# Deer
+
+### Assign risks to all taxa
+
+-   take taxonomy into account: downrate Chenopodiaceae; uprate Graminoids
+
+```{r, warning=FALSE, message=FALSE}
+deer_assigned_risk <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(threatened, by = "taxon_name") %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(deer_habitat_scores, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(leaf_mass_per_area, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name") %>%
+  left_join(plant_physical_defence_structures, by = "taxon_name")
+
+deer_LMA <- deer_assigned_risk %>% filter(!is.na(leaf_mass_per_area)) %>% 
+  summarise(max_leaf_mass_per_area = max(leaf_mass_per_area), min_leaf_mass_per_area = min(leaf_mass_per_area))
+
+deer_height <- deer_assigned_risk %>% filter(!is.na(plant_height)) %>% 
+  summarise(max_plant_height = max(plant_height), min_plant_height = min(plant_height))
+
+# add a column with "habitat risk" - NOT A TRAIT, but an important parameter
+deer_assigned_risk <- deer_assigned_risk %>%
+  mutate(
+      # default habitat_risk is set to is 0.5
+      habitat_risk = ifelse(is.na(habitat_deer), .5, habitat_deer),
+      
+      # add plant height nudge
+      # XXX - wondering if we make max risk at an intermediate height??? - XXX
+      # have chosen a risk adjustment of 0 - 0.3, because being tall (a tree) versus short (an herb/grass) would represent a shift of one unit of the threat scale
+      height_risk_nudge = -0.1*(1 - (log10(plant_height)/log10(deer_height$max_plant_height[1]))),
+      height_risk_nudge = ifelse(!is.na(height_risk_nudge) & height_risk_nudge > 0, 0, height_risk_nudge),
+
+      # add LMA nudge
+      # XXX - wondering if we make max risk at an intermediate height??? - XXX
+      # have chosen a risk adjustment of 0 - 0.3, because being tall (a tree) versus short (an herb/grass) would represent a shift of one unit of the threat scale
+      LMA_risk_nudge = -0.1*(1 - (log10(leaf_mass_per_area)/log10(deer_LMA$max_leaf_mass_per_area[1]))),
+      LMA_risk_nudge = ifelse(!is.na(LMA_risk_nudge) & LMA_risk_nudge > 0, 0, LMA_risk_nudge),
+            
+      # resprouting species are more likely to regenerate, persist; 0--0.1 nudge
+      resprouting_risk_nudge = -0.1*resprouting_capacity,
+      
+      # add taxonomic nudges
+      # NONE FOR DEER
+
+      # well defended species less impacted
+      woodiness_risk_nudge = -0.2*woodiness,
+      
+      # woody species less impacted
+      defense_nudge = -0.2*plant_physical_defence_structures,
+      
+      # sum together trait and taxonomic nudges
+      total_trait_nudge = rowSums(across(c(height_risk_nudge, resprouting_risk_nudge, woodiness_risk_nudge, LMA_risk_nudge, defense_nudge)), na.rm = TRUE),
+      
+      # sum together habitat risk and trait/taxonomic nudge
+      # rescale trait risk to be between 0.4-1.3; this value then to be multiplied by habitat risk
+      # decided on mean and range by looking at distribution of values  
+      total_trait_nudge_scaled = scales::rescale(total_trait_nudge, to = c(0.3, 1.2)),
+      total_trait_nudge_final = total_trait_nudge_scaled - mean(total_trait_nudge_scaled) + 0.75,
+
+      # multiple scaled trait nudge risk by habitat risk
+      deer_risk_total = habitat_risk*total_trait_nudge_final
+      
+      # sum together habitat risk and trait/taxonomic nudge
+      #deer_risk_total = rowSums(across(c(habitat_risk, total_trait_nudge)), na.rm = TRUE)
+      
+  )
+  
+  deer_assigned_risk <- deer_assigned_risk %>%
+    mutate(
+      
+      # assign risk by category
+      deer_risk_total_score = case_when(
+        deer_risk_total >= 0.8 ~ "5_extremely_high",
+        deer_risk_total >= 0.6 & deer_risk_total < 0.8 ~ "4_high",
+        deer_risk_total >= 0.4 & deer_risk_total < 0.6 ~ "3_moderate",
+        deer_risk_total >= 0.2 & deer_risk_total < 0.4 ~ "2_low",
+        deer_risk_total < 0.2 ~ "1_no_risk"
+      )
+    ) %>%
+    filter(!is.na(threatened_status)) %>%
+    write_csv("export/deer_assigned_risk_final.csv")
+```
+
+```
+# TO DISCUSS:
+# 1. There are currently too few species with moderate to high risk, because trait nudges here just reduce susceptibility
+# 2. There is also the problem that lack of data is a "0" which for each trait nudge is "maximum trait risk". Should I turn all blanks into the mean nudge for that trait; also an issue for other threats
+# 3. Certainty of score? Only certainty scoring would be that species with known risk = certain; others = moderate uncertainty; not knowning habitat gives low level of certainty
+```
+# Pigs
+
+### Assign risks to all taxa
+
+```{r, warning=FALSE, message=FALSE}
+pigs_assigned_risk <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(threatened, by = "taxon_name") %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(pigs_habitat_scores, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(storage_organ_pigs, by = "taxon_name") %>%
+  left_join(fruit_fleshiness, by = "taxon_name") %>%
+  left_join(fruit_length, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name")
+
+pig_fruit_length <- pigs_assigned_risk %>% filter(!is.na(fruit_length)) %>% 
+  summarise(max_fruit_length = max(fruit_length), min_fruit_length = min(fruit_length))
+
+pig_height <- pigs_assigned_risk %>% filter(!is.na(plant_height)) %>% 
+  summarise(max_plant_height = max(plant_height), min_plant_height = min(plant_height))
+
+# add a column with "habitat risk" - NOT A TRAIT, but an important parameter
+pigs_assigned_risk <- pigs_assigned_risk %>%
+  mutate(
+      # default habitat_risk is set to is 0.5
+      habitat_risk = ifelse(is.na(habitat_pigs), .5, habitat_pigs),
+      
+      # add plant height nudge
+      # shorter plants more impacted by pigs; risk adjustment of 0 - 0.3
+      height_risk_nudge = 0.1*(1 - (log10(plant_height)/log10(pig_height$max_plant_height[1]))),
+      height_risk_nudge = ifelse(!is.na(height_risk_nudge) & height_risk_nudge > 0, 0, height_risk_nudge),
+      
+      # add fruit length nudge
+      # plants with bigger fruits more impacted by pigs (if fleshy); risk adjustment of 0 - 1, to be multiplied by a fleshiness value
+      fruit_length_risk_nudge = (log10(fruit_length)/log10(pig_fruit_length$max_fruit_length[1])),
+      fruit_length_risk_nudge = ifelse(!is.na(fruit_length_risk_nudge) & fruit_length_risk_nudge < 0, 0, fruit_length_risk_nudge),
+      
+      # species with fleshy fruits more impacted; total nudge is 0--0.2
+      fruit_fleshiness_risk_nudge = 0.4*fruit_fleshiness,
+      
+      # overall fruit nudge, combining length and fleshiness, with special conditions if only a value for one of the two traits
+      fruit_risk_nudge = ifelse(!is.na(fruit_length_risk_nudge) & !is.na(fruit_fleshiness_risk_nudge), fruit_length_risk_nudge*fruit_fleshiness_risk_nudge, 0),
+      fruit_risk_nudge = ifelse(is.na(fruit_length_risk_nudge) & !is.na(fruit_fleshiness_risk_nudge), 0.2, fruit_risk_nudge),
+      fruit_risk_nudge = ifelse(!is.na(fruit_length_risk_nudge) & is.na(fruit_fleshiness_risk_nudge), 0.2*fruit_length_risk_nudge, fruit_risk_nudge),
+      
+      # resprouting species are more likely to regenerate, persist; 0--0.1 nudge
+      resprouting_risk_nudge = (-0.1*resprouting_capacity),
+      
+      # add storage organ nudge; big effect; having a storage organ increases your risk by 0.4
+      storage_organ_pigs_nudge = (0.4*storage_organ_pigs),
+      
+      # add taxonomic nudges
+      taxonomic_risk_nudge = ifelse(family %in% c("Orchidaceae", "Cyperaceae", "Dioscoreaceae", "Iridaceae", "Hydrocharitaceae", "Marsileaceae", 
+                                                  "Nymphaeaceae", "Pontederiaceae", "Restionceae") | 
+                                    genus %in% c("Utricularia", "Ipomoea", "Ampelocissus", "Bulbine"), 
+                                    0.2, 0),
+
+      # woody species less impacted
+      woodiness_risk_nudge = -0.2*woodiness,
+      
+      # sum together trait and taxonomic nudges
+      total_trait_nudge = rowSums(across(c(height_risk_nudge, resprouting_risk_nudge, storage_organ_pigs_nudge, woodiness_risk_nudge, fruit_risk_nudge, taxonomic_risk_nudge)), na.rm = TRUE),
+      
+      # rescale trait risk to be between 0.4-1.3; this value then to be multiplied by habitat risk
+      # decided on mean and range by looking at distribution of values  
+      total_trait_nudge_scaled = scales::rescale(total_trait_nudge, to = c(0.3, 1.2)),
+      total_trait_nudge_final = total_trait_nudge_scaled - mean(total_trait_nudge_scaled) + 0.75,
+
+      # sum together habitat risk and trait/taxonomic nudge
+      pig_risk_total = habitat_risk*total_trait_nudge_final
+  )
+  
+  pigs_assigned_risk <- pigs_assigned_risk %>%
+    mutate(
+      
+      # assign risk by category
+      pig_risk_total_score = case_when(
+        pig_risk_total >= 0.8 ~ "5_extremely_high",
+        pig_risk_total >= 0.6 & pig_risk_total < 0.8 ~ "4_high",
+        pig_risk_total >= 0.4 & pig_risk_total < 0.6 ~ "3_moderate",
+        pig_risk_total >= 0.2 & pig_risk_total < 0.4 ~ "2_low",
+        pig_risk_total < 0.2 ~ "1_no_risk"
+      )
+    ) %>%
+    filter(!is.na(threatened_status)) %>%
+    write_csv("export/pig_assigned_risk_final.csv")
+```
+
+```
+# TO DISCUSS:
+# 1. 
+# 2. 
 # 3. Certainty of score? Only certainty scoring would be that species with known risk = certain; others = moderate uncertainty; not knowning habitat gives low level of certainty
 ```
 
