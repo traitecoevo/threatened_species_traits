@@ -218,7 +218,7 @@ extract_numeric_trait <- function(numeric_trait) {
   extracted_data
 }
 
-numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "leaf_work_to_shear_adjusted", "fruit_length")
+numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "leaf_work_to_shear_adjusted", "fruit_length", "metabolisable_energy")
 
 traits2 <- c("leaf_soluble_protein_per_area", "leaf_insoluble_protein_per_area")  # interesting traits but only data for 1-2 species - in a lab study
 
@@ -296,10 +296,10 @@ deer_habitat_scores <- extract_categorical_trait(all_traits, "habitat", habitat_
 habitat_moisture <- extract_categorical_trait(all_traits, "habitat_moisture", habitat_moisture_scores, "habitat_moisture")
 
 # not really being used at this point
-soil_type <- extract_categorical_trait(all_traits, "soil_type", soil_type_scores, "soil_type")
+soil_type_scored <- extract_categorical_trait(all_traits, "soil_type", soil_type_scores, "soil_type")
 
 # high pH soils (limestone, other calcareous soils) & and saline soils assigned 0 risk; all others 1
-geologic_substrate <- extract_categorical_trait(all_traits, "geologic_substrate", geologic_substrate_scores, "geologic_substrate")
+geologic_substrate_scored <- extract_categorical_trait(all_traits, "geologic_substrate", geologic_substrate_scores, "geologic_substrate")
 
 # list of threatened species
 threatened <- all_traits$traits %>%
@@ -457,6 +457,20 @@ by_family <- phytophthora_cinnamomi_susceptibility_data %>%
   filter(taxa_scored_per_family > 5, !is.na(family)) %>%
   arrange(-phytophthora_cinnamomi_susceptibility)
 
+by_genus <- phytophthora_cinnamomi_susceptibility_data %>%
+  mutate(genus = stringr::word(taxon_name, start = 1, end = 1)) %>%
+  filter(!is.na(phytophthora_cinnamomi_susceptibility)) %>%
+  filter(family %in% c("Fabaceae", "Myrtaceae")) %>%
+  group_by(genus) %>%
+  mutate(
+    phytophthora_cinnamomi_susceptibility = mean(phytophthora_cinnamomi_susceptibility),
+    taxa_scored_per_genus = n()
+    ) %>%
+  ungroup() %>%
+  distinct(genus, taxa_scored_per_genus, phytophthora_cinnamomi_susceptibility) %>%
+  filter(taxa_scored_per_genus > 5, !is.na(genus)) %>%
+  arrange(-phytophthora_cinnamomi_susceptibility)
+
 family_histograms <- phytophthora_cinnamomi_susceptibility_data %>%
   filter(family %in% by_family$family) %>%
   filter(!is.na(phytophthora_cinnamomi_susceptibility)) %>%
@@ -484,6 +498,13 @@ ggplot(data = family_histograms) +
   ylab("prop. taxa tested (proportion within taxa tested within each family") +
   xlab("Phytophthora cinnamomi susceptibility score (higher = more susceptible)")
 
+families_for_taxonomic_nudges <- by_family %>%
+  filter(phytophthora_cinnamomi_susceptibility < 0.7 | phytophthora_cinnamomi_susceptibility >= 1.7) %>%
+  select(family, phytophthora_cinnamomi_susceptibility)
+
+genera_for_taxonomic_nudges <- by_genus %>%
+  filter(phytophthora_cinnamomi_susceptibility < 0.8 | phytophthora_cinnamomi_susceptibility >= 1.5) %>%
+  select(genus, phytophthora_cinnamomi_susceptibility)
 ```
 
 ### Assign risks to all taxa
@@ -497,23 +518,93 @@ ggplot(data = family_histograms) +
     2.  it would be great to have information on Proteaceae which explicitly do not form cluster roots or Ericaceae that do not form root hairs (or have very transient root hairs); also possible that cord roots increase susceptibility in Daviseia; but that doesn't seem to be available
 
 ```{r}
+# download dataset that explicitly lists species considered to be at risk of extinction
+# when assigning risks, need to ensure these are all flagged as "extremely_susceptible"
+
+phytophthora_extinction_risk <- read_csv("data_extras/Phytophthora_risk_of_extinction.csv")
+
+# for continuous traits need to know min/max value for scaling
+max_height <- max(plant_height$plant_height, na.rm = T)
+max_leaf_mass_per_area <- max(leaf_mass_per_area$leaf_mass_per_area, na.rm = T)
+max_leaf_P_per_dry_mass <- max(leaf_P_per_dry_mass$leaf_P_per_dry_mass, na.rm = T)
+max_leaf_N_per_dry_mass <- max(leaf_N_per_dry_mass$leaf_N_per_dry_mass, na.rm = T)
+
+min_height <- min(plant_height$plant_height, na.rm = T)
+min_leaf_mass_per_area <- min(leaf_mass_per_area$leaf_mass_per_area, na.rm = T)
+min_leaf_P_per_dry_mass <- min(leaf_P_per_dry_mass$leaf_P_per_dry_mass, na.rm = T)
+min_leaf_N_per_dry_mass <- min(leaf_N_per_dry_mass$leaf_N_per_dry_mass, na.rm = T)
+
 phytophthora_assigned_risk <- resources$APC %>% 
   filter(taxonomic_status == "accepted") %>%
   filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
-  select(taxon_name = canonical_name, genus, family, taxon_distribution)
-
-phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
-  left_join(phytophthora_cinnamomi_susceptibility_data %>% select(taxon_name, phytophthora_cinnamomi_susceptibility)) %>%
-  left_join(by_family %>% rename(family_average_score = phytophthora_cinnamomi_susceptibility), by = "family") %>%
-  left_join(geologic_substrate %>% rename(substrate_risk = geologic_substrate), by = "taxon_name") %>%
-  left_join(soil_type %>% rename(soil_texture_risk = soil_score), by = "taxon_name") %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(threatened, by = "taxon_name") %>%
+  left_join(phytophthora_cinnamomi_susceptibility %>% select(taxon_name, phytophthora_cinnamomi_susceptibility), by = "taxon_name") %>%
+  left_join(families_for_taxonomic_nudges %>% rename(taxon_average_score = phytophthora_cinnamomi_susceptibility), by = "family") %>%
+  left_join(genera_for_taxonomic_nudges %>% rename(genus_average_score = phytophthora_cinnamomi_susceptibility), by = "genus") %>%
+  left_join(geologic_substrate_scored %>% rename(substrate_risk = geologic_substrate), by = "taxon_name") %>%
+  left_join(soil_type_scored %>% rename(soil_texture_risk = soil_type), by = "taxon_name") %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(phytophthora_habitat_scores, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
+  left_join(phytophthora_extinction_risk %>% select(taxon_name = Species) %>% mutate(high_extinction_risk = "high_extinction_risk"), by = "taxon_name")
+
+phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
   mutate(
-    family_raw_risk = family_average_score/3
+    # default habitat_risk is set to is 0.5
+      habitat_risk = ifelse(is.na(habitat_phytophthora), .5, habitat_phytophthora),
+    
+    # high leaf P lowers susceptibility
+      leaf_P_risk_nudge = (log10(leaf_P_per_dry_mass)/log10(max_leaf_P_per_dry_mass))-
+        (log10(min_leaf_P_per_dry_mass)/log10(max_leaf_P_per_dry_mass)),
+      leaf_P_risk_nudge = ifelse(!is.na(leaf_P_risk_nudge) & leaf_P_risk_nudge < 0, 0, -0.1*leaf_P_risk_nudge),
+    
+    # high leaf N lowers susceptibility
+      leaf_N_risk_nudge = (log10(leaf_N_per_dry_mass)/log10(max_leaf_N_per_dry_mass))-
+        (log10(min_leaf_N_per_dry_mass)/log10(max_leaf_N_per_dry_mass)),
+      leaf_N_risk_nudge = ifelse(!is.na(leaf_N_risk_nudge) & leaf_N_risk_nudge < 0, 0, -0.1*leaf_N_risk_nudge),
+    
+    # resprouting species are more likely to regenerate, persist; 0--0.1 nudge
+      resprouting_risk_nudge = -0.1*resprouting_capacity,
+    
+    # familes and genera with particularly high or low susceptibilities get a taxonomic nudge
+      taxon_average_score = ifelse(is.na(taxon_average_score) & !is.na(genus_average_score), genus_average_score, taxon_average_score),
+      taxonomic_risk_nudge = ifelse((family %in% families_for_taxonomic_nudges$family | genus %in% genera_for_taxonomic_nudges$genus) &
+        taxon_average_score < 1, -0.5, 0),
+      taxonomic_risk_nudge = ifelse((family %in% families_for_taxonomic_nudges$family | genus %in% genera_for_taxonomic_nudges$genus) &
+        taxon_average_score > 1, 0.8, taxonomic_risk_nudge),
+    
+    # sum together trait and taxonomic nudges
+      total_trait_nudge = rowSums(across(c(taxonomic_risk_nudge, leaf_P_risk_nudge, leaf_N_risk_nudge, resprouting_risk_nudge)), na.rm = TRUE),
+      
+    # sum together habitat risk and trait/taxonomic nudge
+    # rescale trait risk to be between 0.4-1.3; this value then to be multiplied by habitat risk
+    # decided on mean and range by looking at distribution of values  
+      total_trait_nudge_scaled = scales::rescale(total_trait_nudge, to = c(0.3, 1.2)),
+      #total_trait_nudge_final = total_trait_nudge_scaled - mean(total_trait_nudge_scaled) + 0.5,
+
+    # multiple scaled trait nudge risk by habitat risk
+      phytophthora_risk_total = habitat_risk*total_trait_nudge_scaled
   )
+
+  phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
+    mutate(
+      #phytophthora_risk_total = ifelse(high_extinction_risk == "high_extinction_risk", 1, phytophthora_risk_total),
+       
+      # assign risk by category
+      phytophthora_risk_total_score = case_when(
+      phytophthora_risk_total >= 0.8 ~ "5_extremely_high",
+      phytophthora_risk_total >= 0.6 & phytophthora_risk_total < 0.8 ~ "4_high",
+      phytophthora_risk_total >= 0.4 & phytophthora_risk_total < 0.6 ~ "3_moderate",
+      phytophthora_risk_total >= 0.2 & phytophthora_risk_total < 0.4 ~ "2_low",
+      phytophthora_risk_total < 0.2 ~ "1_no_risk"
+      )
+    ) %>%
+    filter(!is.na(threatened_status)) %>%
+    write_csv("export/phytophthora_risk_total_assigned_risk_final.csv")
 ```
 
 # Myrtle rust
@@ -1103,11 +1194,9 @@ deer_assigned_risk <- resources$APC %>%
   left_join(woodiness, by = "taxon_name") %>%
   left_join(plant_physical_defence_structures, by = "taxon_name")
 
-deer_LMA <- deer_assigned_risk %>% filter(!is.na(leaf_mass_per_area)) %>% 
-  summarise(max_leaf_mass_per_area = max(leaf_mass_per_area), min_leaf_mass_per_area = min(leaf_mass_per_area))
-
-deer_height <- deer_assigned_risk %>% filter(!is.na(plant_height)) %>% 
-  summarise(max_plant_height = max(plant_height), min_plant_height = min(plant_height))
+# for continuous traits need to know max value for scaling
+max_height <- max(plant_height$plant_height, na.rm = T)
+max_leaf_mass_per_area <- max(leaf_mass_per_area$leaf_mass_per_area, na.rm = T)
 
 # add a column with "habitat risk" - NOT A TRAIT, but an important parameter
 deer_assigned_risk <- deer_assigned_risk %>%
@@ -1118,13 +1207,13 @@ deer_assigned_risk <- deer_assigned_risk %>%
       # add plant height nudge
       # XXX - wondering if we make max risk at an intermediate height??? - XXX
       # have chosen a risk adjustment of 0 - 0.3, because being tall (a tree) versus short (an herb/grass) would represent a shift of one unit of the threat scale
-      height_risk_nudge = -0.1*(1 - (log10(plant_height)/log10(deer_height$max_plant_height[1]))),
+      height_risk_nudge = -0.1*(1 - (log10(plant_height)/log10(max_height))),
       height_risk_nudge = ifelse(!is.na(height_risk_nudge) & height_risk_nudge > 0, 0, height_risk_nudge),
 
       # add LMA nudge
       # XXX - wondering if we make max risk at an intermediate height??? - XXX
       # have chosen a risk adjustment of 0 - 0.3, because being tall (a tree) versus short (an herb/grass) would represent a shift of one unit of the threat scale
-      LMA_risk_nudge = -0.1*(1 - (log10(leaf_mass_per_area)/log10(deer_LMA$max_leaf_mass_per_area[1]))),
+      LMA_risk_nudge = -0.1*(1 - (log10(leaf_mass_per_area)/log10(max_leaf_mass_per_area))),
       LMA_risk_nudge = ifelse(!is.na(LMA_risk_nudge) & LMA_risk_nudge > 0, 0, LMA_risk_nudge),
             
       # resprouting species are more likely to regenerate, persist; 0--0.1 nudge
@@ -1198,11 +1287,12 @@ pigs_assigned_risk <- resources$APC %>%
   left_join(fruit_length, by = "taxon_name") %>%
   left_join(woodiness, by = "taxon_name")
 
-pig_fruit_length <- pigs_assigned_risk %>% filter(!is.na(fruit_length)) %>% 
-  summarise(max_fruit_length = max(fruit_length), min_fruit_length = min(fruit_length))
+# for continuous traits need to know min/max for scaling
+max_height <- max(plant_height$plant_height, na.rm = T)
+min_height <- min(plant_height$plant_height, na.rm = T)
 
-pig_height <- pigs_assigned_risk %>% filter(!is.na(plant_height)) %>% 
-  summarise(max_plant_height = max(plant_height), min_plant_height = min(plant_height))
+max_fruit_length <- max(fruit_length$fruit_length, na.rm = T)
+min_fruit_length <- min(fruit_length$fruit_length, na.rm = T)
 
 # add a column with "habitat risk" - NOT A TRAIT, but an important parameter
 pigs_assigned_risk <- pigs_assigned_risk %>%
@@ -1212,12 +1302,12 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
       
       # add plant height nudge
       # shorter plants more impacted by pigs; risk adjustment of 0 - 0.3
-      height_risk_nudge = 0.1*(1 - (log10(plant_height)/log10(pig_height$max_plant_height[1]))),
+      height_risk_nudge = 0.1*(1 - (log10(plant_height)/log10(max_height))),
       height_risk_nudge = ifelse(!is.na(height_risk_nudge) & height_risk_nudge > 0, 0, height_risk_nudge),
       
       # add fruit length nudge
       # plants with bigger fruits more impacted by pigs (if fleshy); risk adjustment of 0 - 1, to be multiplied by a fleshiness value
-      fruit_length_risk_nudge = (log10(fruit_length)/log10(pig_fruit_length$max_fruit_length[1])),
+      fruit_length_risk_nudge = (log10(fruit_length)/log10(pig_fruit_length$max_fruit_length)),
       fruit_length_risk_nudge = ifelse(!is.na(fruit_length_risk_nudge) & fruit_length_risk_nudge < 0, 0, fruit_length_risk_nudge),
       
       # species with fleshy fruits more impacted; total nudge is 0--0.2
@@ -1313,11 +1403,11 @@ tropical_grasses_assigned_risk <- resources$APC %>%
   left_join(storage_organ, by = "taxon_name")
 
 # for continuous traits need to know min/max for scaling
-max_height <- max(tropical_grasses_assigned_risk$plant_height, na.rm = T)
-min_height <- min(tropical_grasses_assigned_risk$plant_height, na.rm = T)
+max_height <- max(plant_height$plant_height, na.rm = T)
+min_height <- min(plant_height$plant_height, na.rm = T)
 
-max_reproductive_maturity <- max(tropical_grasses_assigned_risk$reproductive_maturity, na.rm = T)
-min_reproductive_maturity <- min(tropical_grasses_assigned_risk$reproductive_maturity, na.rm = T)
+max_reproductive_maturity <- max(reproductive_maturity$reproductive_maturity, na.rm = T)
+min_reproductive_maturity <- min(reproductive_maturity$reproductive_maturity, na.rm = T)
 
 # calculate "risk nudges" for habitat, traits, taxonomy if relevant
 tropical_grasses_assigned_risk <- tropical_grasses_assigned_risk %>%
