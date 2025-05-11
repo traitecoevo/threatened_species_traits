@@ -1,0 +1,128 @@
+source:
+  primary:
+    key: Crone_2012
+    bibtype: Article
+    year: '2012'
+    author: M. Crone and J. A. Mccomb and P. A. O'Brien and G. E. St J. Hardy
+    journal: Plant Pathology
+    title: Annual and herbaceous perennial native Australian plant species are symptomless
+      hosts of Phytophthora cinnamomi in the Eucalyptus marginata (jarrah) forest
+      of Western Australia
+    volume: '62'
+    number: '5'
+    pages: 1057--1062
+    doi: 10.1111/ppa.12016
+    issn: 1365-3059
+contributors:
+  data_collectors:
+  - last_name: Crone
+    given_name: M
+    ORCID: unknown
+    affiliation: School of Biological Sciences and Biotechnology, Murdoch University,
+      WA, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(location_name = "Western Australia black gravel sites")'
+  collection_date: 2011-06-28/2011-11-01
+  taxon_name: Species
+  location_name: location_name
+  description: Resistant annual and herbaceous perennial plant species were identified
+    as key hosts which allow Phytophthora cinnamomi to persist on severely impacted
+    black gravel sites within the Eucalyptus marginata (jarrah) forest of southwest
+    Western Australia.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: Selection of study sites, plant species and sampling time ^p
+    Fifty-two sites were chosen in areas of the jarrah forest in southwest Western
+    Australia known as black gravel sites (32°50'24.50"S; 116°03'50.65"E) where P.
+    cinnamomi persists despite a substantial reduction or total disappearance of susceptible
+    plant species. Characteristic for these landscapes is the presence of 60-80% gravel
+    (McArthur et al., 1991) of black colour above a lateritic cemented layer with
+    depressions prone to waterlogging and therefore increased chances of root infection
+    (Shea et al., 1984). Previous seasonal soil sampling over a period of 2.5 years
+    using the leaf baiting technique (Erwin & Ribeiro, 1996) as a detection method
+    had confirmed the presence of P. cinnamomi adjacent to these sites (M. Crone,
+    unpublished data). Annual and herbaceous perennial plant species in the majority
+    of cases appeared to be unaffected by the presence of the pathogen and were collected
+    from sites prone to temporary waterlogging following rainfall events, and from
+    some free-draining sites. From these 52 sites, 19 plant species (13 annual species
+    and six herbaceous perennial species) from 18 genera and 10 families were collected
+    to determine whether they were hosts of P. cinnamomi. ^p Sampling was undertaken
+    weekly from 28 June (winter) to 1 November 2011 (spring). To determine whether
+    the pathogen remains viable within roots of infected species from the beginning
+    of winter to spring, an emphasis was placed on Stylidium diuroides (herbaceous
+    perennial), Chamaescilla corymbosa (herbaceous perennial) and Trachymene pilosa
+    (annual) which were frequently found to be infected and were present across the
+    study sites in sufficient numbers to enable repeated harvests. Not all species
+    were present at each site to allow sequential weekly harvesting from a site. ^p
+    During the period from 28 June to 1 November, the monthly rainfall combined (November
+    excluded) was 98.7 mm below the long-term average for these months based on the
+    nearest weather station in Dwellingup (Station 009538, 32.7103°S; 116.0594°E)
+    (Bureau of Meteorology 2011, data not presented). ^p Sampling procedure and isolation
+    method ^p Root systems were carefully removed from the soil with as many roots
+    intact as possible. Each plant was shaken to remove soil particles and immediately
+    transferred into a 50 mL round tub containing distilled water to remove the remaining
+    soil. The majority of plants were plated in the field by drying each root system
+    on a paper towel and immediately placing the whole root system onto plates of
+    a Phytophthora selective medium NARPH (Hüberli et al., 2000) but without PCNB
+    (1,2,3,4,5-pentachloro-6-nitrobenzene), which has been removed from the market.
+    These were sealed with Parafilm and placed in an insulated box for transport to
+    the laboratory.
+  original_file: none, data transcribed from manuscript
+  notes: completed
+identifiers: .na
+locations:
+  Western Australia black gravel sites:
+    latitude (deg): -32.8401
+    longitude (deg): 116.0641
+    description: jarrah forest
+    soil texture: 60-80% gravel
+    geologic substrate: lateritic cement
+    notes: prone to waterlogging
+contexts:
+- context_property: Phytophthora symptom location
+  category: entity_context
+  var_in: Symptom location
+traits:
+- var_in: life history
+  unit_in: .na
+  trait_name: life_history
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Expert knowledge
+- var_in: Susceptibility
+  unit_in: .na
+  trait_name: phytophthora_cinnamomi_susceptibility
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: On average, 170 individuals were collected at each sampling time until
+    23 August; thereafter between 30 August to 1 November c. 56 individuals were collected
+    each week. Plated roots were incubated at 21°C (±1°C) in the dark and examined
+    daily for 3 days, then after 6 days, and intermittently up to 14 days. Outgrowing
+    colonies were examined microscopically for morphological features typical for
+    P. cinnamomi (Erwin & Ribeiro, 1996). Sites from which P. cinnamomi was recovered
+    were revisited periodically and additional plants collected. A set of eight representative
+    isolates from annuals and herbaceous perennials was prepared for identification
+    by DNA sequencing, using the methods summarized in Aghighi et al. (2012), to confirm
+    they were P. cinnamomi. Briefly, mycelium on half-strength PDA agar was harvested
+    and genomic DNA extracted according to the method of Andjic et al. (2007). The
+    region spanning the internal transcribed spacer (ITS1-5.8S-ITS2) region of the
+    ribosomal DNA was amplified using the primers DC6 (Cooke et al., 2000) and ITS4
+    (White et al., 1990). The PCR reaction mixture and PCR conditions were as described
+    previously (Andjic et al., 2007). The clean-up of products and sequencing were
+    performed as described by Sakalidis et al. (2011) using the ITS4 primer.
+substitutions: .na
+taxonomic_updates:
+- find: Centrolepis sp.
+  replace: Centrolepis sp. [Crone_2012]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-05-11)
+  taxonomic_resolution: genus
+exclude_observations: .na
+questions: .na

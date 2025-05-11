@@ -16,7 +16,7 @@ geologic_substrate,gypseous,1
 geologic_substrate,igneous,1
 geologic_substrate,iron,1
 geologic_substrate,jasperlite,1
-geologic_substrate,lateritic,1
+geologic_substrate,lateritic,2
 geologic_substrate,limestone,0
 geologic_substrate,metamorphic,1
 geologic_substrate,mudstone,1
@@ -32,5 +32,5 @@ geologic_substrate,siliceous,1
 geologic_substrate,subsaline,1
 geologic_substrate,trachyte,1
 geologic_substrate,ultrabasic,0
-geologic_substrate,volcanic,1
-geologic_substrate,volcanic_acidic,1
+geologic_substrate,volcanic,0.5
+geologic_substrate,volcanic_acidic,0.5

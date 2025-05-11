@@ -1,13 +1,13 @@
-trait_name,trait_value,storage_organ,storage_organ_pigs
+trait_name,trait_value,storage_organ_present,storage_organ_fleshy
 storage_organ,bulb,1,1
-storage_organ,caudex,0.5,0
+storage_organ,caudex,1,0
 storage_organ,corm,1,1
-storage_organ,lignotuber,0.5,0
+storage_organ,lignotuber,1,0
 storage_organ,no_storage_organ,0,0
 storage_organ,pseudobulb,1,1
 storage_organ,rhizome,1,1
 storage_organ,rhizome_fleshy,1,1
-storage_organ,rhizome_woody,0.5,0
+storage_organ,rhizome_woody,1,0
 storage_organ,root_tuber,1,1
 storage_organ,stem_tuber,1,1
 storage_organ,storage_organ,1,1

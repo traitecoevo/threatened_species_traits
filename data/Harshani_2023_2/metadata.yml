@@ -1,0 +1,231 @@
+source:
+  primary:
+    key: Harshani_2023
+    bibtype: Article
+    year: '2023'
+    author: Himbutugoda S. Harshani and James L. Tsakalos and Thomas M. Mansfield
+      and Jen Mccomb and Treena I. Burgess and Giles E. St. J. Hardy
+    journal: Journal of Vegetation Science
+    title: Impact of Phytophthora cinnamomi on the taxonomic and functional diversity
+      of forest plants in a mediterranean-type biodiversity hotspot
+    volume: '34'
+    number: '6'
+    doi: 10.1111/jvs.13218
+    issn: 1654-1103
+contributors:
+  data_collectors:
+  - last_name: Harshani
+    given_name: Himbutugoda Shanika
+    ORCID: 0000-0002-8882-0411
+    affiliation: Murdoch University
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(
+        cim = stringr::word(cim, start = 1, end = 1),
+        nm = ifelse(nm == TRUE, "non_mycorrhizal", ""),
+        om = ifelse(om == TRUE, "orchid_mycorrhizal", ""),
+        em = ifelse(em == TRUE, "ectomycorrhizal", ""),
+        am = ifelse(am == TRUE, "arbuscular_mycorrhizal", ""),
+        root_structure = paste(nm, om, em, am, sep = " ") %>% stringr::str_trim(),
+        location_name = "Mundaring Shire",
+        habitat = "forest_eucalypt",
+        geologic_substrate = "lateritic"
+      )'
+  collection_date: 2020-10/2020-11
+  taxon_name: Species
+  location_name: location_name
+  description: This study investigated the influence of P. cinnamomi infestation on the structure, taxonomic and functional diversity, and species composition of the forest.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: 2.1 Study area and design ^p The study areas were Eucalyptus marginata forest reserves in the Mundaring Shire 35 km east of Perth, Western Australia. The soil in the area features coarse-textured laterites, which provide favourable conditions for P. cinnamomi because of their ability to hold water infiltrating from winter rains (Shearer & Tippett, 1989). The climate is a typical mediterranean type featuring hot, dry summers followed by cold, wet winters (Bradshaw, 2015). The mean annual rainfall is 1063.5 mm, with most falling between winter and spring. The mean minimum and maximum temperatures are 22.6°C and 11.3°C respectively (Australian Bureau of Meteorology, 2023). ^p On each of the five reserves (Alps Street, Black Cockatoo, Falls Road, Quail Street and Super Block), four or five transects were set up at right angles across the dieback front (Table 1). A 45 m transect was marked from the active disease edge in both infested and non-infested zones. The first 15 m of the transect in both directions was excluded as it was considered a transitional area. Therefore, the data were collected along 30 m long transects from both infested and non-infested zones. The 30 m transect was further divided into four equal sections (7.5 m) to improve the statistical power of the analyses. The positioning of each transect was assisted by an accredited Phytophthora dieback interpreter, and informed by existing Phytophthora dieback infestation mapping, which had included targeted sampling of soil and plant tissues for Phytophthora (Terratree Pty Ltd, 2020) (Appendix S1). The dieback occurrence maps of each reserve are provided in the Supporting Information. ^p 2.2 Taxonomic and structural data and calculation of taxonomic diversity ^p In 2020, during the peak flowering period for jarrah forest species (October and November), the abundance and cover (as cm long) of each species not taller than 2 m height occurring in the understorey was recorded along four 7.5 m sections of each 30 m transect. The projected percentage cover of the canopy trees at each 7.5 m section along the transect was averaged from four readings using a spherical densitometer oriented North, South, East, and West. These observations were collated into three matrices. For the first matrix, the counts of each understorey species were aggregated (Abundance data). For the second matrix, the cover of each understorey species (Understorey Cover data) was aggregated. For the third matrix, the tree canopy cover was aggregated (Tree Canopy data). Species nomenclature followed the Western Australian Herbarium (Western Australian Herbarium, 1998) and 93% of the 137 plant taxa (85 genera and 35 families) were identified as species level. All the recorded species were native to Western Australia except two weeds recorded in both infested and non-infested zones. ^p Four measures were selected to index taxonomic diversity (TD), firstly, species abundance, the total number of individuals recorded in each 7.5 m transect section, and secondly, species richness (alpha; Whittaker, 1960), the number of unique individuals recorded in each transect section. Species abundance and alpha were derived from the Abundance data using base R coding (R Core Team, 2023). Thirdly, Shannon diversity (which considers the abundance and relative frequency distribution of species in each transect section (H''; Magurran, 1988) and fourthly, Pielou evenness, which considers Shannon diversity, and maximum possible diversity value (EV; Pielou, 1966) were estimated. The values for H' and EV were calculated using the Abundance data combined with the 'diversity' function from the vegan R package (Oksanen et al., 2022). ^p 2.3 Trait data and calculation of functional diversity ^p Plant functional trait data (Trait data) were collected for ten categorical and three qualitative traits, grouped according to nutrient acquisition, carbon acquisition, disturbance tolerance and reproduction (Table 2). Traits were selected based on three criteria. Firstly, they should be related to plant responses to resource availability and environmental constraints (i.e., low nutrients and water availability, and carbon storage). Next, they should reflect a species' capacity to colonize new areas and to re-establish following disturbance (i.e., regular low-intensity fires). Lastly, they should be easy to measure in the field or derive from herbarium specimens (Western Australian Herbarium, 1998). Full details of the sources used are given in Appendix S2.
+  original_file: none, data from SI from manuscript
+  notes: Ready to add to AusTraits.
+identifiers: .na
+locations:
+  Mundaring Shire:
+    description: eucalypt forest
+    latitude (deg): -31.9484
+    longitude (deg): 116.2777
+    soil texture: coarse-textured
+    soil type: coarse-textured laterites
+    geologic substrate: laterites
+    notes: strong ability to hold water infiltrating from winter rains
+contexts: .na
+traits:
+- var_in: habitat
+  unit_in: .na
+  trait_name: habitat
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: The study areas were Eucalyptus marginata forest reserves in the Mundaring Shire 35 km east of Perth, Western Australia. The soil in the area features coarse-textured laterites, which provide favourable conditions for P. cinnamomi because of their ability to hold water infiltrating from winter rains (Shearer & Tippett, 1989). 
+- var_in: geologic_substrate
+  unit_in: .na
+  trait_name: geologic_substrate
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: The study areas were Eucalyptus marginata forest reserves in the Mundaring Shire 35 km east of Perth, Western Australia. The soil in the area features coarse-textured laterites, which provide favourable conditions for P. cinnamomi because of their ability to hold water infiltrating from winter rains (Shearer & Tippett, 1989). 
+- var_in: life.span
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: life_history; Lifespan	Persistence of an individual, based on herbarium8 and field observation	cat	annual = 1; perennial = 2; Data from Western Australian Herbarium (1998-) and not mapped in, as all species already in AusTraits, from the same source.
+- var_in: cs
+  unit_in: .na
+  trait_name: storage_organ
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Capacity to store carbohydrate that can be broken down and allocated to new growth (thickened roots and stems, bulbs, rhizomes) based on floras5; Dta from new Jstor plant digital herbaria catalogue (reported in detail in our new dryad database).
+- var_in: cim
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: woodiness_detailed and plant_growth_form; Capacity to invest C in support tissue (xylem and bark), in compounds that cannot be broken down to be used in further biosynthesis, based on herbarium scans2 and trait database; Data from Western Australian Herbarium (1998-) and not mapped in, as all species already in AusTraits, from the same source.
+- var_in: vs
+  unit_in: .na
+  trait_name: vegetative_reproduction_ability
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Capacity to produce expanding clones, based on herbarium scans and trait database	cat	no evident clonal expansion = 0; evident clonal patches = 1; data from Jstor plant digital herbaria catalogue (reported in detail in our new dryad database), Tsakalos et al. (2022), AusTraits
+- var_in: n2
+  unit_in: .na
+  trait_name: nitrogen_fixing
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: N2 fixation	Bacterially mediated (rhizobia), nitrogen fixation, based on literature and trait database	cat	no root rhizobia = 0; root rhizobia = 1; Data from Tedersoo et al. (2018), Brundrett (2021), Tsakalos et al. (2019, 2020) and AusTraits.
+- var_in: n_mine
+  unit_in: .na
+  trait_name: plant_alternative_energy_and_nutrient_acquisition_strategy
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Capacity to release exudates which assist in the mobilization and acquisition of nutrients, based on literature and trait database; Data from Tsakalos et al. (2019, 2020) and Brundrett (2021).
+- var_in: root_structure
+  unit_in: .na
+  trait_name: root_structure
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Capacity to symbiotically exchange carbon for nutrients through mycelia based on literature and trait database; Data from Tsakalos et al. (2019, 2020) and Brundrett (2008).
+- var_in: rp
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: flowering_time; Seasonality of maximum production of photosynthetic tissue, based on herbarium; Data from Western Australian Herbarium (1998-) and not mapped in, as all species already in AusTraits, from the same source.
+- var_in: la
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: leaf_area; Leaf area (cm2), based on herbarium scans and trait database; data from Jstor plant digital herbaria catalogue (reported in detail in our new dryad database), AusTraits; aphyllous = 0; > 0-0.1 cm2 = 1; > 0.1-1 = 2; > 1- = 3; > 9 = 4
+- var_in: ls
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Leaf sclerophylly, based on field observation; aphyllous = 0; herbaceous = 1; semi-sclerophylous = 2; sclerophlyous = 3
+- var_in: size
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: plant_height; Adult size (cm), based on herbarium and field observation; Plant size	Adult size (cm), based on herbarium8 and field observation	cont	≤20 cm = 1; 20-60 = 2; > 60- < 100 = 3;100 -< 300 = 4; > 300 -< 600 = 5, ≥ 600 = 6
+substitutions:
+- trait_name: nitrogen_fixing
+  find: 'no'
+  replace: non_nitrogen_fixer
+- trait_name: nitrogen_fixing
+  find: 'yes'
+  replace: nitrogen_fixer
+- trait_name: plant_alternative_energy_and_nutrient_acquisition_strategy
+  find: 'no'
+  replace: .na
+- trait_name: plant_alternative_energy_and_nutrient_acquisition_strategy
+  find: 'yes'
+  replace: nutrient_mining
+- trait_name: storage_organ
+  find: no_organs
+  replace: no_storage_organ
+- trait_name: storage_organ
+  find: organs
+  replace: storage_organ
+- trait_name: vegetative_reproduction_ability
+  find: '0'
+  replace: not_vegetative
+- trait_name: vegetative_reproduction_ability
+  find: '1'
+  replace: vegetative
+- trait_name: vegetative_reproduction_ability
+  find: '2'
+  replace: vegetative
+taxonomic_updates:
+- find: Microlaena sp.
+  replace: Microlaena sp. [Harshani_2023_2]
+  reason: Exact match of taxon name ending with `sp.` to an APC genus (2025-05-11)
+  taxonomic_resolution: genus
+- find: Austrostipa sp. 1
+  replace: Austrostipa sp. [Austrostipa sp. 1; Harshani_2023_2]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-05-11)
+  taxonomic_resolution: genus
+- find: Austrostipa sp. 2
+  replace: Austrostipa sp. [Austrostipa sp. 2; Harshani_2023_2]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-05-11)
+  taxonomic_resolution: genus
+- find: Cyathochaeta sp. 2
+  replace: Cyathochaeta sp. [Cyathochaeta sp. 2; Harshani_2023_2]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-05-11)
+  taxonomic_resolution: genus
+- find: Lepidosperma sp. 6
+  replace: Lepidosperma sp. [Lepidosperma sp. 6; Harshani_2023_2]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-05-11)
+  taxonomic_resolution: genus
+- find: Lepidosperma sp.5
+  replace: Lepidosperma sp. [Lepidosperma sp.5; Harshani_2023_2]
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-05-11)
+  taxonomic_resolution: genus
+- find: Poaceae sp. 2
+  replace: Poaceae sp. [Poaceae sp. 2; Harshani_2023_2]
+  reason: Exact match of the first word of the taxon name to an APC-accepted family
+    (2025-05-11)
+  taxonomic_resolution: family
+- find: Poaceae spp 1
+  replace: Poaceae sp. [Poaceae sp. 1; Harshani_2023_2]
+  reason: Exact match of the first word of the taxon name to an APC-accepted family
+    (2025-05-11)
+  taxonomic_resolution: family
+exclude_observations: .na
+questions: .na

@@ -1,20 +1,20 @@
 ﻿Species,Family,life history,New genera,New family,Total harvested,Total positives,Symptoms,Susceptibility,Symptom location
 Centrolepis sp.,Centrolepidaceae,annual,n.a.,n.a.,13,0,n.a.,Resistant,
-Crassula closiana,Crassulaeae,annual,+,+,62,3,−,Resistant,
-Hydrocotyle callicarpa,Araliaceae,annual,−,−,68,6,−,Resistant,
-Hypochaeris glabra,Asteraceae,annual perennial,+,−,26,1,−,Resistant,
-Levenhookia pusilla,Stylidiaceae,annual,+,−,91,5,+(a),Susceptible,aboveground
+Crassula closiana,Crassulaeae,annual,+,+,62,3,-,Resistant,
+Hydrocotyle callicarpa,Araliaceae,annual,-,-,68,6,-,Resistant,
+Hypochaeris glabra,Asteraceae,annual perennial,+,-,26,1,-,Resistant,
+Levenhookia pusilla,Stylidiaceae,annual,+,-,91,5,+(a),Susceptible,aboveground
 Levenhookia stipitata,Stylidiaceae,annual,n.a.,n.a.,8,0,n.a.,Resistant,
-Lysimachia arvensis,Primulaceae,annual,+,+,20,2,−,Resistant,
-Pentameris airoides,Poaceae,annual,+,−,22,1,−,Resistant,
-Podotheca angustifolia,Asteraceae,annual,+,−,58,1,−,Resistant,
-Pterochaeta paniculata,Asteraceae,annual,+,−,102,2,−,Resistant,
+Lysimachia arvensis,Primulaceae,annual,+,+,20,2,-,Resistant,
+Pentameris airoides,Poaceae,annual,+,-,22,1,-,Resistant,
+Podotheca angustifolia,Asteraceae,annual,+,-,58,1,-,Resistant,
+Pterochaeta paniculata,Asteraceae,annual,+,-,102,2,-,Resistant,
 Rhodanthe citrina,Asteraceae,annual,n.a.,n.a.,3,0,n.a.,Resistant,
-Siloxerus multiflorus,Asteraceae,annual,+,−,17,1,−,Resistant,
-Trachymene pilosa,Araliaceae,annual,+,−,447,74,−,Resistant,
-Chamaescilla corymbosa,Asparagaceae,perennial,−,−,123,51,+(r),Susceptible,belowground
+Siloxerus multiflorus,Asteraceae,annual,+,-,17,1,-,Resistant,
+Trachymene pilosa,Araliaceae,annual,+,-,447,74,-,Resistant,
+Chamaescilla corymbosa,Asparagaceae,perennial,-,-,123,51,+(r),Susceptible,belowground
 Drosera erythrorhiza,Droseraceae,perennial,+,+,9,3,+(r+a),Susceptible,aboveground belowground
 Lagenophora huegelii,Asteraceae,perennial,n.a.,n.a.,6,0,n.a.,Resistant,
-Paracaleana nigrita,Orchidaceae,perennial,+,−,4,2,+(r+a),Susceptible,aboveground belowground
-Rytidosperma caespitosum,Poaceae,perennial,+,−,18,2,−,Resistant,
-Stylidium diuroides,Stylidiaceae,perennial,−,−,117,65,+(a),Susceptible,aboveground
+Paracaleana nigrita,Orchidaceae,perennial,+,-,4,2,+(r+a),Susceptible,aboveground belowground
+Rytidosperma caespitosum,Poaceae,perennial,+,-,18,2,-,Resistant,
+Stylidium diuroides,Stylidiaceae,perennial,-,-,117,65,+(a),Susceptible,aboveground

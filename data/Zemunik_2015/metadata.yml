@@ -1,0 +1,182 @@
+source:
+  primary:
+    key: Zemunik_2015
+    bibtype: Article
+    year: '2015'
+    author: Graham Zemunik and Benjamin L. Turner and Hans Lambers and Etienne Laliberté
+    journal: Nature Plants
+    title: Diversity of plant nutrient-acquisition strategies increases during long-term
+      ecosystem development
+    volume: '1'
+    number: '5'
+    doi: 10.1038/nplants.2015.50
+    issn: 2055-0278
+contributors:
+  data_collectors:
+  - last_name: Zemunik
+    given_name: Graham
+    ORCID: 0000-0002-6064-345X
+    affiliation: The University of Western Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(
+        location_name = "Jurien Bay dune chronosequence",
+        Str = ifelse(is.na(Str), "", "hyphal stand-forming endophyte"),
+        Mtl = ifelse(is.na(Mtl), "", "mantle-forming endophyte"),
+        Hn = ifelse(is.na(Hn), "", "Hartig net-like colonisation"),
+        FE = ifelse(is.na(FE), "", "fine endophyte"),
+        endophytic_colonisation_structures = paste(Str, Mtl, Hn, FE, sep = " ") %>% stringr::str_trim(),
+      )'
+  collection_date: 2011-06/2012-09
+  taxon_name: Species
+  location_name: location_name
+  description: A study in Western Australia's phosphorus-impoverished soils that shows
+    marked increase in the richness and diversity of plant nutrient-acquisition strategies
+    with declining soil phosphorus availability during long-term ecosystem development.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: The study was conducted on the Jurien Bay dune chronosequence16,
+    which harbours exceptional floral diversity and where soil development extends
+    from the Early Pleistocene through to the present16. The region experiences a
+    Mediterranean climate, with a pronounced winter wet season (June-August) and an
+    extended seasonal summer drought. The six chronosequence stages spanned ~45 km
+    north to south and ~15 km west to east, and were delineated using a randomized
+    stratified design. Each stage contained ten plots (10 x 10 m), each of which contained
+    seven randomly positioned 2 x 2 m subplots. All vascular plant species within
+    the subplots were identified, individuals per species counted, and canopy cover
+    estimated visually. Relative cover was subsequently calculated by normalizing
+    the absolute cover against the total cover. Nutrient-acquisition strategies were
+    initially assigned based on the literature and online resources11; species that
+    had substantial relative cover within a plot (>4%), but whose strategies were
+    unknown, were subsequently analysed for mycorrhizal colonization using root samples
+    taken in the field during the rainy season. In total, 62 plant species (out of
+    349 species in total), representing 27 families, were examined for their nutrient-acquisition
+    strategies (Supplementary Table 3). Seven soil samples per 10 x 10 m plot (that
+    is one in the middle of each of the seven 2 x 2 m subplots) were taken from the
+    top 20 cm and were analysed for a range of total and available nutrients, and
+    properties. ^p Flora surveys. Surveys of all vascular plants in the plots were
+    done in August, September,October and November of 2011, and January, February,
+    March and September of 2012. Plots that were initially surveyed outside the peak-flowering
+    season (approximately August to November) were resurveyed in September 2012 to
+    ensure that seasonal (annual or geophytic) species would be observed. All vascular
+    plants were recorded and identified in the field to the species (or subspecies)
+    level when identification was certain. Field names were given and specimens taken
+    for later reference for those for which identity was uncertain. The identity of
+    undetermined species was resolved, whenever possible, at the Western Australian
+    Herbarium. Species names and family associations followed the APG III classification.
+  original_file: Data from Supplementary Material
+  notes: none
+identifiers: .na
+locations:
+  Jurien Bay dune chronosequence:
+    latitude (deg): -30.2
+    longitude (deg): 115.1
+    description: dunes
+contexts:
+- context_property: arbuscular mycorrhizae colonisation structures
+  category: entity_context
+  var_in: AM hyphae and arbuscule morphology
+- context_property: arbuscular mycorrhizae colonisation intensity
+  category: entity_context
+  var_in: AM colonisation intensity
+- context_property: ectomycorrhizae mycorrhizae colonisation intensity
+  category: entity_context
+  var_in: EM colonisation intensity
+- context_property: dark septae mycorrhizae colonisation intensity
+  category: entity_context
+  var_in: DS colonisation
+- context_property: endophytic mycorrhizae colonisation structures
+  category: entity_context
+  var_in: endophytic_colonisation_structures
+traits:
+- var_in: Strategy
+  unit_in: .na
+  trait_name: root_structure
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: no
+  methods: Clearing and staining of root segments were done using KOH and trypan blue
+    using an adjusted standard procedure40,41 . Specifically, after washing off all
+    excess soil, roots were immersed in tubes containing either 2.5% or 10% (w/v)
+    KOH, depending on root toughness and thickness. The tubes were then placed in
+    a boiling water bath for up to 1 h, depending on the darkness of the roots. After
+    removal from the KOH solution, if the roots were not sufficiently clear, they
+    were rinsed and bleached in 10 vol (3%, v/v) H2 O2 for 10 min. All root segments
+    were then rinsed thoroughly and returned to their tubes with 2% (v/v) HCl, and
+    left to acidify for at least 1 h. The roots were then rinsed in tap water and
+    stained with 0.05% (w/v) trypan blue in an acidified glycerol solution by heating
+    in a boiling water bath for 10 min. After thoroughly rinsing the roots in tap
+    water, excess staining was removed by immersing and storing the stained roots
+    in acidified glycerol Colonisation was assessed using light microscopy (x200-400
+    magnification) of slide-mounted sections of fine roots. For eight of the species,
+    which had at least nine separate samples, colonisation was quantitatively assessed
+    using the magnified intersects method 42; the other species had their mycorrhizal
+    status qualitatively assessed, based on repeated presence of structures consistent
+    with each specific type of mycorrhiza. For arbuscular mycorrhizas (AM) these diagnostic
+    features were arbuscules, Paris coils, or vesicles combined with morphology of
+    hyphae consistent with AM. For ectomycorrhizas, the diagnostic features were the
+    presence of both Hartig nets and mantle hyphae
+substitutions:
+- trait_name: root_structure
+  find: am
+  replace: arbuscular_mycorrhizal
+- trait_name: root_structure
+  find: am (fine)
+  replace: arbuscular_mycorrhizal
+- trait_name: root_structure
+  find: am (fine); cluster roots
+  replace: arbuscular_mycorrhizal cluster_roots
+- trait_name: root_structure
+  find: am (intermediate)
+  replace: arbuscular_mycorrhizal
+- trait_name: root_structure
+  find: am (intermediate, fine)
+  replace: arbuscular_mycorrhizal
+- trait_name: root_structure
+  find: am; cluster roots
+  replace: arbuscular_mycorrhizal cluster_roots
+- trait_name: root_structure
+  find: am; em
+  replace: arbuscular_mycorrhizal ectomycorrhizal
+- trait_name: root_structure
+  find: am; sand-binding
+  replace: arbuscular_mycorrhizal sand-binding
+- trait_name: root_structure
+  find: cluster roots
+  replace: cluster_roots
+- trait_name: root_structure
+  find: dauciform
+  replace: dauciform_root
+- trait_name: root_structure
+  find: em
+  replace: ectomycorrhizal
+- trait_name: root_structure
+  find: ericoid mycorrhizal
+  replace: ericoid_mycorrhizal
+- trait_name: root_structure
+  find: non-mycorrhizal
+  replace: non_mycorrhizal
+- trait_name: root_structure
+  find: sand-binding, thysanotus mycorrhizal
+  replace: sand-binding subepidermal_mycorrhizal
+- trait_name: root_structure
+  find: sand-binding, capillaroid
+  replace: sand-binding
+taxonomic_updates:
+- find: Conostylis crassinervia subsp. absens
+  replace: Conostylis crassinerva subsp. absens
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-05-11)
+  taxonomic_resolution: subspecies
+- find: Lepidosperma aff. squamatum
+  replace: Lepidosperma sp. [Lepidosperma aff. squamatum; Zemunik_2015]
+  reason: Exact match to APC genus. Taxon name includes 'affinis' or 'aff' indicating
+    an unknown taxon that bears an affinity to a different taxon in the same genus
+    and taxon can only be aligned to genus-rank (2025-05-11)
+  taxonomic_resolution: genus
+exclude_observations: .na
+questions: .na

@@ -99,7 +99,7 @@ woodiness_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(woodiness
 
 resprouting_capacity_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(resprouting_capacity) %>% rename(`categorical value` = trait_value, `numeric score assigned` = resprouting_capacity)  %>% kable(caption = "resprouting capacity values") %>% kable_classic()
 
-storage_organ_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(storage_organ)  %>% kable(caption = "storage organ values") %>% kable_classic()
+storage_organ_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(storage_organ_present) %>% kable(caption = "storage organ values") %>% kable_classic()
 
 bud_bank_location_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(bud_bank_location) %>% rename(`categorical value` = trait_value, `numeric score assigned` = bud_bank_location)  %>% kable(caption = "bud bank location") %>% kable_classic()
 
@@ -166,8 +166,8 @@ leaf_hairs_adult_leaves <- extract_categorical_trait(all_traits, "leaf_hairs_adu
 leaf_glaucousness <- extract_categorical_trait(all_traits, "leaf_glaucousness", leaf_glaucousness_scores, "leaf_glaucousness")
 bud_bank_location <- extract_categorical_trait(all_traits, "bud_bank_location", bud_bank_location_scores, "bud_bank_location")
 
-storage_organ <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores, "storage_organ")
-storage_organ_pigs <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores %>% select(trait_name, trait_value, storage_organ = storage_organ_pigs), "storage_organ_pigs")
+storage_organ_present <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores, "storage_organ_present")
+storage_organ_fleshy <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores %>% select(trait_name, trait_value, storage_organ = storage_organ_fleshy), "storage_organ_fleshy")
 
 fruit_fleshiness <- extract_categorical_trait(all_traits, "fruit_fleshiness", fruit_fleshiness_scores, "fruit_fleshiness")
 plant_spinescence <- extract_categorical_trait(all_traits, "plant_spinescence", plant_spinescence_scores, "plant_spinescence")
@@ -327,18 +327,16 @@ phytophthora_cinnamomi_susceptibility_data <- (all_traits %>% join_taxa(vars = "
     phytophthora_cinnamomi_susceptibility = mean(phytophthora_cinnamomi_susceptibility, na.rm = T)) %>% 
   ungroup() %>%
   distinct() %>% 
-  left_join(nitrogen_fixing, by = "taxon_name") %>%
   left_join(life_history, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name") %>%
   left_join(seed_dry_mass, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
-  left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
-  left_join(leaf_length, by = "taxon_name") %>%
-  left_join(plant_height, by = "taxon_name") %>%
-  left_join(bud_bank_location, by = "taxon_name") %>%
-  left_join(storage_organ, by = "taxon_name") %>%
-  left_join(woodiness, by = "taxon_name")
+  left_join(nitrogen_fixing, by = "taxon_name")%>%
+  left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(storage_organ_fleshy, by = "taxon_name") %>%
+  left_join(bud_bank_location, by = "taxon_name") 
 ```
 
 #### - check for trait correlations
@@ -367,7 +365,7 @@ correlations_with_possible_traits <- tibble(
 )
 
 for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "woodiness", "bud_bank_location", 
-            "storage_organ")) {
+            "storage_organ_fleshy")) {
   
   data_tmp <- phytophthora_cinnamomi_susceptibility_data %>% filter(!is.na(phytophthora_cinnamomi_susceptibility_data[[var]]),
                                          !is.na(phytophthora_cinnamomi_susceptibility))
@@ -387,11 +385,24 @@ for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "woodin
     t() %>%
     as.data.frame()
   
+    if(new_row[1,]$r2 > 0.03 & new_row[1,]$p_value < 0.05) {
+    
+    plot(
+           ggplot(data_tmp, aes(x = data_tmp[[var]], y = phytophthora_cinnamomi_susceptibility)) +
+            geom_point() +
+            geom_jitter() +
+            geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+            theme_classic() +
+             xlab(var)
+    )
+  
+    }
+  
   correlations_with_possible_traits <- correlations_with_possible_traits %>%
     bind_rows(new_row)
 }
 
-for (var in c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass")) {
+for (var in c("seed_dry_mass", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass")) {
   
   data_tmp <- phytophthora_cinnamomi_susceptibility_data %>% filter(!is.na(phytophthora_cinnamomi_susceptibility_data[[var]]),
                                          !is.na(phytophthora_cinnamomi_susceptibility))
@@ -416,6 +427,7 @@ for (var in c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_lengt
     plot(
            ggplot(data_tmp, aes(x = log10(data_tmp[[var]]), y = phytophthora_cinnamomi_susceptibility)) +
             geom_point() +
+            geom_jitter() +
             geom_smooth(method = "lm", se = FALSE, color = "grey20") +
             theme_classic() +
              xlab(var)
@@ -516,6 +528,10 @@ genera_for_taxonomic_nudges <- by_genus %>%
 -   second steps will be to adjust these susceptibilities based on traits
     1.  need to decide on r\^2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
     2.  it would be great to have information on Proteaceae which explicitly do not form cluster roots or Ericaceae that do not form root hairs (or have very transient root hairs); also possible that cord roots increase susceptibility in Daviseia; but that doesn't seem to be available
+    
+NOTE:     
+ LMA emerges as having a significant correlation, but not including LMA nudge, because the effect is that very low LMA (thin leaved) taxa have lower susceptibility whereas no effect among higher LMA taxa. This is presumably about woodiness/life history, and doesn't make sense to also include effect of LMA
+    
 
 ```{r}
 # download dataset that explicitly lists species considered to be at risk of extinction
@@ -550,6 +566,8 @@ phytophthora_assigned_risk <- resources$APC %>%
   left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name") %>%
+  left_join(storage_organ_fleshy, by = "taxon_name") %>%
   left_join(phytophthora_extinction_risk %>% select(taxon_name = Species) %>% mutate(high_extinction_risk = "high_extinction_risk"), by = "taxon_name")
 
 phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
@@ -567,23 +585,34 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
         (log10(min_leaf_N_per_dry_mass)/log10(max_leaf_N_per_dry_mass)),
       leaf_N_risk_nudge = ifelse(!is.na(leaf_N_risk_nudge) & leaf_N_risk_nudge < 0, 0, -0.1*leaf_N_risk_nudge),
     
-    # resprouting species are more likely to regenerate, persist; 0--0.1 nudge
-      resprouting_risk_nudge = -0.1*resprouting_capacity,
+    # herbaceous species at very low risk; woody species at variable risk
+      woodiness_risk_nudge = 0.2*woodiness,
     
+    # resprouting species are more likely to regenerate, persist; 0--0.1 nudge
+      resprouting_risk_nudge = -0.15*resprouting_capacity,
+    
+    # species with a fleshy storage organ rarely susceptible
+    # plants with woody storage organ or no storage organ quite variable in susceptibility
+      storage_organ_fleshy_risk_nudge = -0.2*storage_organ_fleshy,
+
     # familes and genera with particularly high or low susceptibilities get a taxonomic nudge
       taxon_average_score = ifelse(is.na(taxon_average_score) & !is.na(genus_average_score), genus_average_score, taxon_average_score),
       taxonomic_risk_nudge = ifelse((family %in% families_for_taxonomic_nudges$family | genus %in% genera_for_taxonomic_nudges$genus) &
-        taxon_average_score < 1, -0.5, 0),
+        taxon_average_score < 1, -0.5*(1-taxon_average_score), 0),
       taxonomic_risk_nudge = ifelse((family %in% families_for_taxonomic_nudges$family | genus %in% genera_for_taxonomic_nudges$genus) &
-        taxon_average_score > 1, 0.8, taxonomic_risk_nudge),
+        taxon_average_score > 1, 0.8*(taxon_average_score/3), taxonomic_risk_nudge),
+    
+    # add in factor if susceptibility known - no longer about traits
+      phytophthora_cinnamomi_susceptibility_scaled = scales::rescale(phytophthora_cinnamomi_susceptibility, to = c(-1, 3)),
     
     # sum together trait and taxonomic nudges
-      total_trait_nudge = rowSums(across(c(taxonomic_risk_nudge, leaf_P_risk_nudge, leaf_N_risk_nudge, resprouting_risk_nudge)), na.rm = TRUE),
+      total_trait_nudge = rowSums(across(c(taxonomic_risk_nudge, leaf_P_risk_nudge, leaf_N_risk_nudge, resprouting_risk_nudge, woodiness_risk_nudge, storage_organ_fleshy_risk_nudge, phytophthora_cinnamomi_susceptibility_scaled)), na.rm = TRUE),
+    
       
     # sum together habitat risk and trait/taxonomic nudge
     # rescale trait risk to be between 0.4-1.3; this value then to be multiplied by habitat risk
     # decided on mean and range by looking at distribution of values  
-      total_trait_nudge_scaled = scales::rescale(total_trait_nudge, to = c(0.3, 1.2)),
+      total_trait_nudge_scaled = scales::rescale(total_trait_nudge, to = c(0.3, 1.4)),
       #total_trait_nudge_final = total_trait_nudge_scaled - mean(total_trait_nudge_scaled) + 0.5,
 
     # multiple scaled trait nudge risk by habitat risk
@@ -667,7 +696,7 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
   left_join(leaf_tannin_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_lignin_per_dry_mass, by = "taxon_name") %>%
   left_join(bud_bank_location, by = "taxon_name") %>%
-  left_join(storage_organ, by = "taxon_name") %>%
+  left_join(storage_organ_present, by = "taxon_name") %>%
   left_join(resources$APC %>% select(taxon_name = canonical_name, genus, family), by = "taxon_name")
 ```
 
@@ -698,7 +727,7 @@ correlations_with_possible_traits_myrtle_rust <- tibble(
   n = character()
 )
 
-for (var in c("resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "bud_bank_location", "storage_organ")) {
+for (var in c("resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "bud_bank_location", "storage_organ_present")) {
   
   data_tmp <- myrtle_rust_susceptibility_data %>% filter(!is.na(myrtle_rust_susceptibility_data[[var]]),
                                          !is.na(myrtle_rust_susceptibility))
@@ -1282,7 +1311,7 @@ pigs_assigned_risk <- resources$APC %>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(life_history, by = "taxon_name") %>%
-  left_join(storage_organ_pigs, by = "taxon_name") %>%
+  left_join(storage_organ_fleshy, by = "taxon_name") %>%
   left_join(fruit_fleshiness, by = "taxon_name") %>%
   left_join(fruit_length, by = "taxon_name") %>%
   left_join(woodiness, by = "taxon_name")
@@ -1322,7 +1351,7 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
       resprouting_risk_nudge = (-0.1*resprouting_capacity),
       
       # add storage organ nudge; big effect; having a storage organ increases your risk by 0.4
-      storage_organ_pigs_nudge = (0.4*storage_organ_pigs),
+      storage_organ_fleshy_nudge = (0.4*storage_organ_fleshy),
       
       # add taxonomic nudges
       taxonomic_risk_nudge = ifelse(family %in% c("Orchidaceae", "Cyperaceae", "Dioscoreaceae", "Iridaceae", "Hydrocharitaceae", "Marsileaceae", 
@@ -1334,7 +1363,7 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
       woodiness_risk_nudge = -0.2*woodiness,
       
       # sum together trait and taxonomic nudges
-      total_trait_nudge = rowSums(across(c(height_risk_nudge, resprouting_risk_nudge, storage_organ_pigs_nudge, woodiness_risk_nudge, fruit_risk_nudge, taxonomic_risk_nudge)), na.rm = TRUE),
+      total_trait_nudge = rowSums(across(c(height_risk_nudge, resprouting_risk_nudge, storage_organ_fleshy_nudge, woodiness_risk_nudge, fruit_risk_nudge, taxonomic_risk_nudge)), na.rm = TRUE),
       
       # rescale trait risk to be between 0.4-1.3; this value then to be multiplied by habitat risk
       # decided on mean and range by looking at distribution of values  

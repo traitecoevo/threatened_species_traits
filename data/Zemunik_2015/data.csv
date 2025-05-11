@@ -1,95 +1,63 @@
-﻿Family,Species,Strategy,DS colonisation,Other endophytic colonisation Intensity,Str,Mtl,Hn,FE,n
-Aizoaceae,Carpobrotus virescens,Non-mycorrhizal,low,moderate,,,,,4
-Araliaceae,Trachymene pilosa,"AM (moderate; Paris,
-Arum)",moderate,low,,,,,4
-Asparagaceae,Acanthocarpus preissii,AM (low; Paris),low,-,,,,,4
-Asparagaceae,Lomandra maritima,"AM (low; Arum, Paris)",moderate,low,,,+,+,3
-Asparagaceae,Sowerbaea laxiflora,"AM (high; Intermediate,
-fine Arum)",moderate,-,,,,,1
-Asparagaceae,Thysanotus patersonii,"Sand-binding,
-Thysanotus mycorrhizal",moderate-high,low,,,,,4
-Asteraceae,Angianthus cunninghamii,"AM (moderate-high;
-Paris)",low,-,,,,,2
-Asteraceae,Brachyscome iberidifolia,AM (low-moderate; Paris),low,low,,,,,2
-Asteraceae,Olearia axillaris,"AM (moderate; Paris,
-Arum)",low-moderate,low,,,,,4
-Asteraceae,Senecio pinnatifolius var. latilobus,"AM (moderate-high; Paris, Arum)",low,low,,,,,4
-Brassicaceae,Lepidium rotundum,Non-mycorrhizal,low,low,,,,,1
-Chenopodiaceae,Rhagodia baccata,AM (low; Arum),moderate,low,+,,+,,4
-Chenopodiaceae,Threlkeldia diffusa,Non-mycorrhizal,low,moderate,,,,,4
-Colchicaceae,Burchardia congesta,AM (moderate; Paris),moderate,-,,,,,2
-Cyperaceae,Ficinia nodosa,Sand-binding,low,low,+,,,,4
-Cyperaceae,Gahnia lanigera,Dauciform,low-moderate,low,,,,,3
-Cyperaceae,"Lepidosperma aff.
-squamatum",Dauciform,low-moderate,low,+,,+,,4
-Cyperaceae,"Mesomelaena
-pseudostygia",Non-mycorrhizal,low-moderate,"low (by AM
-fungus)",+,,,,5
-Cyperaceae,Schoenus brevisetis,Non-mycorrhizal,low-moderate,low,,,,,3
-Dasyponaceae,Dasypogon obliquifolius,Sand-binding,low,low,,,,,9
-Dilleniaceae,Hibbertia hypericoides,"AM (moderate-high;
-Paris, Arum)",low-moderate,low,+,,,,4
-Ecdeiocoleaceae,Ecdeiocolea monostachya,AM (low-moderate; Paris); Sand-binding,low-moderate,-,,,,,5
-Ericaceae,Astroloma xerophyllum,Ericoid mycorrhizal,low,low,,,,,9
-Euphorbiaceae,Beyeria cinerea,"AM (moderate; Arum, fine
-Arum)",moderate,low,,+,+,,3
-Fabaceae,Acacia lasiocarpa,"AM (low-moderate;
-Arum); N-fixing",low-moderate,low,,+,,,4
-Fabaceae,Acacia spathulifolia,"AM (low-moderate;
-Paris); N-fixing",low-moderate,low,+,,,,3
-Fabaceae,Bossiaea eriocarpa,"AM (moderate; Paris, fine
-Arum); N-fixing; Cluster
-roots",moderate,-,,,,,3
-Fabaceae,"Gompholobium
-tomentosum","AM (low-moderate;
-Paris); N-fixing",moderate,low-moderate,+,+,,,4
-Fabaceae,Jacksonia floribunda,AM (low; Paris); EM (low-moderate); N-fixing,moderate-high,low,,,,,9
-Fabaceae,Jacksonia hakeoides,"AM (low; Paris, Arum); N-fixing; Cluster roots",moderate,low,+,+,,,4
-Fabaceae,Labichea cassioides,AM (moderate; Paris),moderate,-,,,,,4
-Goodeniaceae,Scaevola crassifolia,"AM (low-moderate; Arum,
-Paris); EM (moderate)",moderate,-,,,,,4
-Goodeniaceae,Scaevola thesioides subsp. thesioides,"AM (moderate; Paris, Arum); EM (low)",low,low,,,+,,4
-Haemodoraceae,Blancoa canescens,Sand-binding,moderate-high,low,,,,,9
-Haemodoraceae,"Conostylis candicans
-subsp. calcicola",Sand-binding,low,low,+,,+,,4
-Haemodoraceae,"Conostylis crassinervia
-subsp. absens",Non-mycorrhizal,low,-,,,,,9
-Loganiaceae,Logania spermacocea,"AM (low; Arum, Paris)",low-moderate,-,,,,,2
-Myrtaceae,"Calothamnus quadrifidus
-subsp. quadrifidus",EM (moderate),low-moderate,low,,,,,4
-Myrtaceae,Calytrix strigosa,AM (low-moderate; Paris),low-moderate,low,+,,,,4
-Myrtaceae,Darwinia sanguinea,AM (low-moderate; Paris),low-moderate,low,+,,,,9
-Myrtaceae,"Eremaea asterocarpa
-subsp. asterocarpa",AM (low; Paris); EM (low),low-moderate,low,,,,,9
-Myrtaceae,Melaleuca leuropoma,"AM (low-moderate; Paris,
-fine Arum); EM (low)",moderate,low,,,,,1
-Myrtaceae,Melaleuca systena,"AM (low; Paris, Arum);
-EM (low)",low-moderate,low,,,,,5
-Myrtaceae,Pileanthus filifolius,"AM (moderate; Paris);
-EM (low)",moderate,-,,,,,1
-Myrtaceae,Scholtzia umbellifera,AM (low; Paris),low,low-moderate,,,,+,3
-Phyllanthaceae,Phyllanthus calycinus,"AM (moderate-high;
-Arum, Paris)",low,-,,,,,3
-Poaceae,Austrostipa compressa,"AM (low; Arum, Paris);
-Sand-binding",low,low,+,,,,4
-Poaceae,Austrostipa elegantissima,AM (low; Paris); Sand-binding,low-moderate,low,+,,,,4
-Poaceae,Poa porphyroclados,AM (low; Paris); Sand-binding,moderate,low,,,,,4
-Proteaceae,Stirlingia latifolia,Cluster roots,low,low,,,,,9
-Proteaceae,Strangea cynanchicarpa,Cluster roots,low,low,,,,,1
-Ranunculaceae,Clematis linearifolia,"AM (moderate-high;
-Arum)",moderate,-,,,,,2
-Restionaceae,Desmocladus asper,Sand-binding,low-moderate,"low-moderate;
-low (Str)",+,+,,,4
-Restionaceae,Lepidobolus preissianus,"Sand-binding, Capillaroid",low-moderate,"low; low
-(Str)",+,,,,3
-Rhamnaceae,Spyridium globulosum,"AM (moderate; Arum,
-Paris); EM (moderate)",moderate,-,,,,,4
-Rhamnaceae,Stenanthemum notiale subsp. notiale,"AM (low; Arum, Paris); EM (moderate)",low,-,,,,,4
-Rubiaceae,Opercularia spermacocea,"AM (low; Arum, Paris)",moderate-high,low,+,,,,4
-Rubiaceae,Opercularia vaginata,AM (low-moderate; Arum),low-moderate,low,,,,,4
-Rutaceae,Diplolaena obovata,"AM (moderate; Paris,
-Intermediate)",low-moderate,-,,,,,2
-Scrophulariaceae,Myoporum insulare,"AM (low-moderate; Arum,
-Paris)",low-moderate,low,+,,+,,3
-Solanaceae,Anthocercis littorea,Non-mycorrhizal,low,low,,,,,4
-Stylidiaceae,Stylidium crossocephalum,AM (moderate; Paris); EM (low),moderate,-,,,,,2
+﻿Family,Species,Strategy,AM hyphae and arbuscule morphology,AM colonisation intensity,EM colonisation intensity,nitrogen_fixing,DS colonisation,Other endophytic colonisation Intensity,Str,Mtl,Hn,FE,n
+Aizoaceae,Carpobrotus virescens,Non-mycorrhizal,,,,,low,moderate,,,,,4
+Araliaceae,Trachymene pilosa,AM,"Arum, Paris",moderate,,,moderate,low,,,,,4
+Asparagaceae,Acanthocarpus preissii,AM,Paris,low,,,low,-,,,,,4
+Asparagaceae,Lomandra maritima,AM,"Arum, Paris",low,,,moderate,low,,,+,+,3
+Asparagaceae,Sowerbaea laxiflora,"AM (Intermediate, fine)",Arum,high,,,moderate,-,,,,,1
+Asparagaceae,Thysanotus patersonii,"Sand-binding, Thysanotus mycorrhizal",,,,,moderate-high,low,,,,,4
+Asteraceae,Angianthus cunninghamii,AM,Paris,moderate-high,,,low,-,,,,,2
+Asteraceae,Brachyscome iberidifolia,AM,Paris,low-moderate,,,low,low,,,,,2
+Asteraceae,Olearia axillaris,AM,"Arum, Paris",moderate,,,low-moderate,low,,,,,4
+Asteraceae,Senecio pinnatifolius var. latilobus,AM,"Arum, Paris",moderate-high,,,low,low,,,,,4
+Brassicaceae,Lepidium rotundum,Non-mycorrhizal,,,,,low,low,,,,,1
+Chenopodiaceae,Rhagodia baccata,AM,Arum,low,,,moderate,low,+,,+,,4
+Chenopodiaceae,Threlkeldia diffusa,Non-mycorrhizal,,,,,low,moderate,,,,,4
+Colchicaceae,Burchardia congesta,AM,Paris,moderate,,,moderate,-,,,,,2
+Cyperaceae,Ficinia nodosa,Sand-binding,,,,,low,low,+,,,,4
+Cyperaceae,Gahnia lanigera,Dauciform,,,,,low-moderate,low,,,,,3
+Cyperaceae,Lepidosperma aff. squamatum,Dauciform,,,,,low-moderate,low,+,,+,,4
+Cyperaceae,Mesomelaena pseudostygia,Non-mycorrhizal,,,,,low-moderate,"low (by AM fungus)",+,,,,5
+Cyperaceae,Schoenus brevisetis,Non-mycorrhizal,,,,,low-moderate,low,,,,,3
+Dasyponaceae,Dasypogon obliquifolius,Sand-binding,,,,,low,low,,,,,9
+Dilleniaceae,Hibbertia hypericoides,AM,"Arum, Paris",moderate-high,,,low-moderate,low,+,,,,4
+Ecdeiocoleaceae,Ecdeiocolea monostachya,AM; Sand-binding,Paris,low-moderate,,,low-moderate,-,,,,,5
+Ericaceae,Astroloma xerophyllum,Ericoid mycorrhizal,,,,,low,low,,,,,9
+Euphorbiaceae,Beyeria cinerea,AM (fine),Arum,moderate,,,moderate,low,,+,+,,3
+Fabaceae,Acacia lasiocarpa,AM,Arum,low-moderate,,nitrogen_fixing,low-moderate,low,,+,,,4
+Fabaceae,Acacia spathulifolia,AM,Paris,low-moderate,,nitrogen_fixing,low-moderate,low,+,,,,3
+Fabaceae,Bossiaea eriocarpa,AM (fine); Cluster roots,"Arum, Paris",moderate,,nitrogen_fixing,moderate,-,,,,,3
+Fabaceae,Gompholobium tomentosum,AM,Paris,low-moderate,,nitrogen_fixing,moderate,low-moderate,+,+,,,4
+Fabaceae,Jacksonia floribunda,AM; EM,Paris,low,low-moderate,nitrogen_fixing,moderate-high,low,,,,,9
+Fabaceae,Jacksonia hakeoides,AM; Cluster roots,"Arum, Paris",low,,nitrogen_fixing,moderate,low,+,+,,,4
+Fabaceae,Labichea cassioides,AM,Paris,moderate,,,moderate,-,,,,,4
+Goodeniaceae,Scaevola crassifolia,AM; EM,"Arum, Paris",low-moderate,moderate,,moderate,-,,,,,4
+Goodeniaceae,Scaevola thesioides subsp. thesioides,AM; EM,"Arum, Paris",moderate,low-moderate,,low,low,,,+,,4
+Haemodoraceae,Blancoa canescens,Sand-binding,,,,,moderate-high,low,,,,,9
+Haemodoraceae,"Conostylis candicans subsp. calcicola",Sand-binding,,,,,low,low,+,,+,,4
+Haemodoraceae,"Conostylis crassinervia subsp. absens",Non-mycorrhizal,,,,,low,-,,,,,9
+Loganiaceae,Logania spermacocea,AM,"Arum, Paris",low,,,low-moderate,-,,,,,2
+Myrtaceae,Calothamnus quadrifidus subsp. quadrifidus,EM,,,moderate,,low-moderate,low,,,,,4
+Myrtaceae,Calytrix strigosa,AM,Paris,low-moderate,,,low-moderate,low,+,,,,4
+Myrtaceae,Darwinia sanguinea,AM,Paris,low-moderate,,,low-moderate,low,+,,,,9
+Myrtaceae,"Eremaea asterocarpa subsp. asterocarpa",AM; EM,Paris,low,low,,low-moderate,low,,,,,9
+Myrtaceae,Melaleuca leuropoma,AM; EM,"Arum, Paris",low-moderate,low,,moderate,low,,,,,1
+Myrtaceae,Melaleuca systena,AM; EM,"Arum, Paris",low,low,,low-moderate,low,,,,,5
+Myrtaceae,Pileanthus filifolius,AM; EM,Paris,moderate,low,,moderate,-,,,,,1
+Myrtaceae,Scholtzia umbellifera,AM,Paris,low,,,low,low-moderate,,,,+,3
+Phyllanthaceae,Phyllanthus calycinus,AM,"Arum, Paris",moderate-high,,,low,-,,,,,3
+Poaceae,Austrostipa compressa,AM; Sand-binding,"Arum, Paris",low,,,low,low,+,,,,4
+Poaceae,Austrostipa elegantissima,AM; Sand-binding,Paris,low,,,low-moderate,low,+,,,,4
+Poaceae,Poa porphyroclados,AM; Sand-binding,Paris,low,,,moderate,low,,,,,4
+Proteaceae,Stirlingia latifolia,Cluster roots,,,,,low,low,,,,,9
+Proteaceae,Strangea cynanchicarpa,Cluster roots,,,,,low,low,,,,,1
+Ranunculaceae,Clematis linearifolia,AM,Arum,moderate-high,,,moderate,-,,,,,2
+Restionaceae,Desmocladus asper,Sand-binding,,,,,low-moderate,"low-moderate; low (Str)",+,+,,,4
+Restionaceae,Lepidobolus preissianus,"Sand-binding, Capillaroid",,,,,low-moderate,"low; low (Str)",+,,,,3
+Rhamnaceae,Spyridium globulosum,AM; EM,"Arum, Paris",moderate,moderate,,moderate,-,,,,,4
+Rhamnaceae,Stenanthemum notiale subsp. notiale,AM; EM,"Arum, Paris",low,moderate,,low,-,,,,,4
+Rubiaceae,Opercularia spermacocea,AM,"Arum, Paris",low,,,moderate-high,low,+,,,,4
+Rubiaceae,Opercularia vaginata,AM,Arum,low-moderate,,,low-moderate,low,,,,,4
+Rutaceae,Diplolaena obovata,AM (Intermediate),Paris,moderate,,,low-moderate,-,,,,,2
+Scrophulariaceae,Myoporum insulare,AM,"Arum, Paris",low-moderate,,,low-moderate,low,+,,+,,3
+Solanaceae,Anthocercis littorea,Non-mycorrhizal,,,,,low,low,,,,,4
+Stylidiaceae,Stylidium crossocephalum,AM; EM,Paris,moderate,low,,moderate,-,,,,,2
