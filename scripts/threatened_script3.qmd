@@ -270,6 +270,7 @@ plant_height <- plant_height %>%
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # extract known susceptibility data
 myrtle_rust_susceptibility <- extract_categorical_trait(all_traits, "myrtle_rust_susceptibility", myrtle_rust_susceptibility_scores, "myrtle_rust_susceptibility")
+
 phytophthora_cinnamomi_susceptibility <- extract_categorical_trait(all_traits, "phytophthora_cinnamomi_susceptibility", phytophthora_cinnamomi_susceptibility_scores, "phytophthora_cinnamomi_susceptibility")
 
 # extract known toxicity/palatability data

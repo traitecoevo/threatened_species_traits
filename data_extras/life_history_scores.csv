@@ -1,23 +1,6 @@
 trait_name,trait_value,life_history
-life_history,annual,1
-life_history,annual biennial,1.5
-life_history,annual biennial perennial,2.3
-life_history,annual biennial perennial short_lived_perennial,2.5
-life_history,annual biennial short_lived_perennial,2
-life_history,annual ephemeral,.75
-life_history,annual ephemeral perennial,1.8
-life_history,annual ephemeral perennial short_lived_perennial,2.1
-life_history,annual ephemeral short_lived_perennial,1.5
-life_history,annual perennial,2.5
-life_history,annual perennial short_lived_perennial,2.7
-life_history,annual short_lived_perennial,2
-life_history,biennial,2
-life_history,biennial perennial,3
-life_history,biennial perennial short_lived_perennial,1
-life_history,biennial short_lived_perennial,1
 life_history,ephemeral,.5
-life_history,ephemeral perennial,2.25
-life_history,ephemeral short_lived_perennial,1.75
-life_history,perennial,4
-life_history,perennial short_lived_perennial,3.5
+life_history,annual,1
+life_history,biennial,2
 life_history,short_lived_perennial,3
+life_history,perennial,4
