@@ -772,6 +772,17 @@ for (var in c("resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_lea
     t() %>%
     as.data.frame()
   
+    if(new_row[1,]$r2 > 0.03 & new_row[1,]$p_value < 0.05) {
+      plot(
+         ggplot(data_tmp, aes(x = data_tmp[[var]], y = myrtle_rust_susceptibility)) +
+          geom_point() +
+          geom_jitter() +
+          geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+          theme_classic() +
+          xlab(var)
+      )
+  }
+  
   correlations_with_possible_traits_myrtle_rust <- correlations_with_possible_traits_myrtle_rust %>%
     bind_rows(new_row)
 }
@@ -801,6 +812,7 @@ for (var in c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_lengt
       plot(
              ggplot(data_tmp, aes(x = log10(data_tmp[[var]]), y = myrtle_rust_susceptibility)) +
               geom_point() +
+              geom_jitter() +
               geom_smooth(method = "lm", se = FALSE, color = "grey20") +
               theme_classic() +
                xlab(var)
@@ -934,8 +946,8 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
                             habitat_moisture,
                             
                             # if habitat moisture value higher, use it over habitat value
-                            ifelse(!is.na(habitat_myrtle_rust) & !is.na(habitat_moisture) & habitat_moisture > habitat_myrtle_rust),
-                              habitat_moisture, habitat_myrtle_rust), 
+                            ifelse(!is.na(habitat_myrtle_rust) & !is.na(habitat_moisture) & habitat_moisture > habitat_myrtle_rust,
+                              habitat_moisture, habitat_myrtle_rust)), 
 
     # merge habitat and taxonomy risks; a "0" in either means no risk 
       habitat_taxonomy_risk = ifelse(is.na(habitat_risk), taxonomic_risk, taxonomic_risk*habitat_risk),
@@ -970,7 +982,7 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
       myrtle_rust_risk_total = ifelse(!is.na(myrtle_rust_susceptibility) & myrtle_rust_susceptibility < 3, 0.3*myrtle_rust_risk_total, myrtle_rust_risk_total),
     
     # assign risk by category
-    myrtle_rust_final_susceptibility_score = case_when(
+      myrtle_rust_final_susceptibility_score = case_when(
         myrtle_rust_risk_total >= 0.8 ~ "5_extremely_high",
         myrtle_rust_risk_total >= 0.6 & myrtle_rust_risk_total < 0.8 ~ "4_high",
         myrtle_rust_risk_total >= 0.4 & myrtle_rust_risk_total < 0.6 ~ "3_moderate",
@@ -1071,16 +1083,11 @@ goat_susceptibility <- plant_goat_palatability %>%
 
 #### - check for trait correlations
 
--   The three strongest correlations below don't make sense, in part due to low sample sizes:
-
     1.  Leaf tannins is coming out with higher tannins having higher palatability - the opposite of what it should be, becaise n = 5 (p-value not significant)
-    2.  Nitrogen fixing is coming out as a strong negative correlation because all members of the genus Swainsona mapped in as toxic - and all are N-fixers.
+    2.  Nitrogen fixing comes out as a strong negative correlation because all members of the genus Swainsona mapped in as toxic - and all are N-fixers. (This trait has been removed)
     3.  Succulence (`leaf_water_content_per_area` ) should be positively correlated with palatability, but only scored for 4 species and happens to come out as a strong negative correlation (p-value not significant)
-
--   strongest believable association is for leaf P
-
--   `plant_spinescence` comes out as a very non-significant correlation. It would be good to manually gap fill this, but there are lots of very well-defended species with moderate to high palatability scores, so not expecting it to come out as significant.
-
+    4.  `plant_spinescence` has the opposite correlation to what you would expect.
+    
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 correlations_with_possible_traits <- tibble(
   trait = character(),
@@ -1115,6 +1122,7 @@ for (var in c("life_history", "resprouting_capacity", "leaf_hairs_adult_leaves",
       plot(
              ggplot(data_tmp, aes(x = data_tmp[[var]], y = plant_goat_palatability)) +
               geom_point() +
+              geom_jitter() +
               geom_smooth(method = "lm", se = FALSE, color = "grey20") +
               theme_classic() +
                xlab(var)
@@ -1152,6 +1160,7 @@ for (var in c("leaf_mass_per_area", "plant_height", "leaf_N_per_dry_mass", "leaf
       plot(
              ggplot(data_tmp, aes(x = log10(data_tmp[[var]]), y = plant_goat_palatability)) +
               geom_point() +
+              geom_jitter() +
               geom_smooth(method = "lm", se = FALSE, color = "grey20") +
               theme_classic() +
                xlab(var)
@@ -1210,26 +1219,26 @@ goats_assigned_risk <- goats_assigned_risk %>%
       # have chosen a risk adjustment of 0 - 0.05, because being being a resprouter vs non resprouter is a quite shallow effect and a low R2
         resprouting_capacity_risk_nudge = calculate_nudge("resprouting_capacity", -0.05, .),
       
-      # forbs less impacted
-        herb_risk_nudge = ifelse(woodiness == 0 & graminoid_risk_nudge == 0, -0.1, 0.1),
-      
       # add taxonomic nudges
       # taxonomic nudges are a proxy for suites of traits that are strongly linked to taxonomy
         Chenopodiaceae_risk_nudge = ifelse(family == "Chenopodiaceae", -0.1, 0.1),
         graminoid_risk_nudge = ifelse(family %in% c("Restionaceae", "Poaceae", "Cyperaceae", "Juncaginaceae", "Juncaceae"), 0.1, -0.1),
+      
+      # forbs less impacted
+        herb_risk_nudge = ifelse(woodiness == 0 & graminoid_risk_nudge == 0, -0.1, 0.1),
 
       # replace na's with 0; for trait nudges that weren't calculated using `calculate_nudge` function. 
         across(c(herb_risk_nudge), ~tidyr::replace_na(.x, 0)),
       
       # sum together trait and taxonomic nudges
-        total_trait_nudge = rowSums(across(c(height_risk_nudge, resprouting_risk_nudge, Chenopodiaceae_risk_nudge, graminoid_risk_nudge, herb_risk_nudge)), na.rm = TRUE),
+        total_trait_nudge = rowSums(across(c(height_risk_nudge, resprouting_capacity_risk_nudge, Chenopodiaceae_risk_nudge, graminoid_risk_nudge, herb_risk_nudge)), na.rm = TRUE),
       
       # rescale trait risk; this value then to be multiplied by habitat risk
       # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
         total_trait_nudge_scaled = scales::rescale(total_trait_nudge, to = c(0.3, 1.1)),
 
       # multiple scaled trait nudge risk by habitat risk
-        goat_risk_total = habitat_risk*total_trait_nudge_final,
+        goat_risk_total = habitat_risk*total_trait_nudge_scaled,
       
       # if a species is known to be specifically palatable/not palatable to goats, add an adjustment factor
         goat_risk_total = ifelse(!is.na(plant_goat_palatability) & plant_goat_palatability < 3, 0.5*goat_risk_total, 1.5*goat_risk_total),
@@ -1319,14 +1328,14 @@ deer_assigned_risk <- deer_assigned_risk %>%
       # NONE FOR DEER
       
       # sum trait risk nudges
-        total_trait_nudge = rowSums(across(c(height_risk_nudge, LMA_risk_nudge, resprouting_risk_nudge, woodiness_risk_nudge, physical_defence_nudge)), na.rm = TRUE),
+        total_trait_nudge = rowSums(across(c(height_risk_nudge, LMA_risk_nudge, resprouting_capacity_risk_nudge, woodiness_risk_nudge, physical_defence_nudge)), na.rm = TRUE),
       
       # rescale trait risk; this value then to be multiplied by habitat risk
       # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
         total_trait_nudge_scaled = scales::rescale(total_trait_nudge, to = c(0.3, 1.1)),
 
       # multiple scaled trait nudge risk by habitat risk
-        deer_risk_total = habitat_risk*total_trait_nudge_final
+        deer_risk_total = habitat_risk*total_trait_nudge_scaled
   )
   
   deer_assigned_risk <- deer_assigned_risk %>%
@@ -1493,7 +1502,7 @@ tropical_grasses_assigned_risk <- resources$APC %>%
   left_join(woodiness, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(bud_bank_location, by = "taxon_name") %>%
-  left_join(storage_organ, by = "taxon_name")
+  left_join(storage_organ_present, by = "taxon_name")
 
 # calculate "risk nudges" for habitat, traits, taxonomy
 tropical_grasses_assigned_risk <- tropical_grasses_assigned_risk %>%
@@ -1509,7 +1518,7 @@ tropical_grasses_assigned_risk <- tropical_grasses_assigned_risk %>%
       reproductive_maturity_risk_nudge = calculate_nudge("reproductive_maturity_scaled", -0.3, .),
     
     # geophytes, other plants with belowground storage organ = negative, less impact; this nudge ranges from 0 to -0.4
-      storage_organ_risk_nudge = ifelse(geophyte > 0 | storage_organ > 0, -0.2, 0.2),
+      storage_organ_risk_nudge = ifelse(geophyte > 0 | storage_organ_present > 0, -0.2, 0.2),
     
     # annuals = 0, perennials = positive, more impact; life history is on a 0.5 (ephemeral) to 4 (perennial) scale, so this nudge ranges from 0 to 0.4
       life_history_risk_nudge = calculate_nudge("life_history", 0.1, .),
@@ -1579,12 +1588,16 @@ tropical_grasses_assigned_risk <- tropical_grasses_assigned_risk %>%
           tropical_grasses_risk_total < 0.15 ~ "1_no_risk"
         )
     ) %>%
-      filter(!is.na(threatened_status))
-
-tropical_grasses_assigned_risk_final %>% write_csv("export/tropical_grasses_assigned_risk_final.csv")
+      filter(!is.na(threatened_status)) %>%
+    write_csv("export/tropical_grasses_assigned_risk_final.csv")
 ```
 
 # Regeneration of populations
+
+INCOMPLETE FROM HERE DOWN
+
+THIS SECTION WILL CALCULATE TRAIT-INDEPENDENT RISK PREDICTIONS BASED ON A SPECIES ABILITY TO PERSIST
+INCORPORATES POPULATION SIZE, DISPERSAL SYNDROME, ETC.
 
 ### Do threatened species have worse dispersal, longer lifespans, etc?
 
