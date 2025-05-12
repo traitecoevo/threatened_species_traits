@@ -752,6 +752,25 @@ targets:
                   taxon_list
                  )
 
+  National_Seed_Bank_2025_config:
+    command: >
+      dataset_configure("data/National_Seed_Bank_2025/metadata.yml",
+                 definitions
+                 )
+  National_Seed_Bank_2025_raw:
+    command: >
+      dataset_process("data/National_Seed_Bank_2025/data.csv",
+                  National_Seed_Bank_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  National_Seed_Bank_2025:
+    command: >
+      dataset_update_taxonomy(National_Seed_Bank_2025_raw,
+                  taxon_list
+                 )
+
   NHNSW_2025_config:
     command: >
       dataset_configure("data/NHNSW_2025/metadata.yml",
@@ -1113,6 +1132,25 @@ targets:
                   taxon_list
                  )
 
+  Wilson_2024_config:
+    command: >
+      dataset_configure("data/Wilson_2024/metadata.yml",
+                 definitions
+                 )
+  Wilson_2024_raw:
+    command: >
+      dataset_process("data/Wilson_2024/data.csv",
+                  Wilson_2024_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Wilson_2024:
+    command: >
+      dataset_update_taxonomy(Wilson_2024_raw,
+                  taxon_list
+                 )
+
   Zemunik_2015_config:
     command: >
       dataset_configure("data/Zemunik_2015/metadata.yml",
@@ -1174,6 +1212,7 @@ targets:
         McDougall_2024_2,
         McQuillan_2020,
         mixed_2024,
+        National_Seed_Bank_2025,
         NHNSW_2025,
         Pate_1989,
         Pearl_2024,
@@ -1193,6 +1232,7 @@ targets:
         WA_Seed_Centre_2025,
         WAH_2025,
         Ward_2021,
+        Wilson_2024,
         Zemunik_2015,
         I(NULL))
 

@@ -1,0 +1,131 @@
+source:
+  primary:
+    key: Greening_Australia_2025
+    bibtype: Article
+    year: unknown
+    author: unknown
+    title: unknown
+    journal: unknown
+    volume: unknown
+    number: unknown
+    pages: unknown
+    doi: unknown
+contributors:
+  data_collectors:
+  - last_name: unknown
+    given_name: unknown
+    ORCID: unknown
+    affiliation: unknown
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(
+        measurement_remarks = paste0("Collector: ", Collector),
+        basis_of_record = ifelse(Cultivated == "Z" | Cultivated == "cultivated", "captive_cultivated", "field")
+      )
+  '
+  collection_date: Collection Date
+  taxon_name: Scientific Name
+  location_name: Locality
+  description: Seed trait data from the South Australia Seed Conservation Centre,
+    including seed mass of collected seeds and data on germination trials.
+  basis_of_record: basis_of_record
+  life_stage: adult
+  measurement_remarks: measurement_remarks
+  sampling_strategy: No information available.
+  original_file: Data downloaded from https://seedbank.ala.org.au on 19 Feb 2025.
+    Data downloaded by Order, for all vascular plants.
+  notes: none
+identifiers:
+- var_in: Accession Number
+  identifier_type: catalogNumber
+locations: .na
+contexts:
+- context_property: storage relative humidity (%)
+  category: treatment_context
+  var_in: Storage Relative Humidity
+- context_property: seed purity (%)
+  category: entity_context
+  var_in: Purity
+- context_property: storage temperature (C)
+  category: treatment_context
+  var_in: Storage Temperature
+- context_property: storage seed bank
+  category: treatment_context
+  var_in: Storage Seed Bank
+- context_property: pre-storage treatment
+  category: treatment_context
+  var_in: Pre-Storage Treatment/History
+- context_property: form in storage
+  category: entity_context
+  var_in: Form in Storage
+- context_property: cultivated vs wild grown seed
+  category: entity_context
+  var_in: Cultivated
+- context_property: seed collection fill rate
+  category: treatment_context
+  var_in: Collection Fill Rate / X-Ray
+- context_property: seed germination test length
+  category: treatment_context
+  var_in: Test Length
+- context_property: seed germination media/substrate
+  category: treatment_context
+  var_in: Treatment Media/Substrate
+- context_property: seed germination day temperature
+  category: treatment_context
+  var_in: Treatment Day Temp
+- context_property: seed germination night temperature
+  category: treatment_context
+  var_in: Treatment Night Temp
+- context_property: seed germination light hours
+  category: treatment_context
+  var_in: Treatment Light Hours
+- context_property: seed germination dark hours
+  category: treatment_context
+  var_in: Treatment Dark Hours
+- context_property: seed germination pretreatment
+  category: treatment_context
+  var_in: Treatment Pretreatment
+traits:
+- var_in: Seed/gm
+  unit_in: 1/g
+  trait_name: seed_dry_mass
+  entity_type: individual
+  value_type: mean
+  basis_of_value: measurement
+  replicates: Quantity (count)
+  methods: The average number of seeds or fruits per gram of the accession. This may
+    be an estimate.
+- var_in: Thousand Seed Weight
+  unit_in: kg
+  trait_name: seed_dry_mass
+  entity_type: individual
+  value_type: mean
+  basis_of_value: measurement
+  replicates: Quantity (count)
+  methods: The mass of 1000 pure seeds or fruits.
+- var_in: Adjusted Germination
+  unit_in: '%'
+  trait_name: seed_germination
+  entity_type: individual
+  value_type: mean
+  basis_of_value: measurement
+  replicates: Number Tested
+  methods: The proportion of seeds germinated, expressed as a percentage of the total
+    viable seeds tested.
+- var_in: Viability
+  unit_in: '%'
+  trait_name: seed_viability
+  entity_type: individual
+  value_type: mean
+  basis_of_value: measurement
+  replicates: Number Tested
+  methods: The proportion of viable seeds in a germination test, determined by the
+    number of germinated seeds and those that appear viable from a post-germination
+    cut test.
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
