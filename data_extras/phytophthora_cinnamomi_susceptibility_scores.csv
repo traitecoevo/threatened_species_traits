@@ -1,20 +1,8 @@
 trait_name,trait_value,phytophthora_cinnamomi_susceptibility
-phytophthora_cinnamomi_susceptibility,resistant resistant,0
+phytophthora_cinnamomi_susceptibility,resistant_presumed,0
 phytophthora_cinnamomi_susceptibility,resistant,0
 phytophthora_cinnamomi_susceptibility,severe,3
 phytophthora_cinnamomi_susceptibility,mild,1
-phytophthora_cinnamomi_susceptibility,mild severe,2
-phytophthora_cinnamomi_susceptibility,resistant mild,0.5
-phytophthora_cinnamomi_susceptibility,mild severe mild,1.7
-phytophthora_cinnamomi_susceptibility,mild severe severe,2.3
-phytophthora_cinnamomi_susceptibility,severe severe,3
-phytophthora_cinnamomi_susceptibility,resistant resistant mild,0.3
-phytophthora_cinnamomi_susceptibility,mild mild,1
-phytophthora_cinnamomi_susceptibility,mild severe severe mild,2
-phytophthora_cinnamomi_susceptibility,severe mild severe,2.3
-phytophthora_cinnamomi_susceptibility,mild severe mild severe,2
-phytophthora_cinnamomi_susceptibility,mild resistant,0.5
-phytophthora_cinnamomi_susceptibility,resistant severe,1.5
 phytophthora_cinnamomi_susceptibility,susceptible,2
-phytophthora_cinnamomi_susceptibility,mild resistant severe,2
+phytophthora_cinnamomi_susceptibility,susceptible_presumed,2
 phytophthora_cinnamomi_susceptibility,moderate,2

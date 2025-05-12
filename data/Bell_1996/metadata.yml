@@ -131,7 +131,16 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: Expert knowledge.
-substitutions: .na
+substitutions:
+- trait_name: geologic_substrate
+  find: granite
+  replace: granitic
+- trait_name: geologic_substrate
+  find: laterite
+  replace: lateritic
+- trait_name: geologic_substrate
+  find: salt_plain
+  replace: saline
 taxonomic_updates:
 - find: Andersonia aff. caerulea
   replace: Andersonia sp. [Andersonia aff. caerulea; Bell_1996]
