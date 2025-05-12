@@ -1,0 +1,175 @@
+source:
+  primary:
+    key: Wilson_2024
+    bibtype: Article
+    year: '2024'
+    author: B. A. Wilson and S. P. Casey and M. J. Garkaklis and C. Learmonth and
+      T. Wevill
+    journal: Australian Journal of Botany
+    title: Impact of Phytophthora dieback on a key heathland species Xanthorrhoea
+      australis (Asphodelaceae) (austral grasstree) and floristic composition in the
+      eastern Otways, Victoria
+    volume: '72'
+    number: '2'
+    doi: 10.1071/bt23076
+    issn: 1444-9862
+    editor: Steve Sinclair
+contributors:
+  data_collectors:
+  - last_name: Wilson
+    given_name: Barbara
+    ORCID: 0000-0002-1821-1274
+    affiliation: Deakin University, Burwood, Australia
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: '
+    data %>%
+      mutate(
+        location_name = "Anglesea Heathlands",
+        SusceptibilityRating = ifelse(is.na(SusceptibilityRating), "resistant_presumed", SusceptibilityRating)
+      )'
+  collection_date: 2022/2023
+  taxon_name: Species
+  location_name: location_name
+  description: A study in the Otway Ranges to assess how Phytophthora cinnamomi has
+    caused a loss of plant species, vegetation structure and fauna abundance, with
+    an emphasis on Grasstrees (Xanthorrhoea spp.), keystone species.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: The study was conducted in the Anglesea Heathlands, an area of
+    more than 7000 hectares within the Great Otway National Park, Victoria, Australia
+    (Fig. 1). The underlying geology is associated with nutrient-poor soils, which
+    include aeolian or outwash sands and tertiary sand/clay (Land Conservation Council
+    1985). The region has a mean annual rainfall of 620.4 mm and mean temperature
+    of 18.4°C (Bureau of Meteorology 2021). The heathlands are a biodiversity hotspot
+    comprising over 700 plant species, equivalent to one quarter of Victoria's total
+    floral diversity (Carr 2017; Wilson et al. 2020). All study sites were located
+    within Ecological Vegetation Class (EVC) 48, Heathy Woodland (Victorian Government
+    Department of Sustainability and Environment 2004). Heathy woodlands are typified
+    by low woodland tree species, predominantly Eucalyptus obliqua (messmate stringybark)
+    with a canopy to 10 m in height and average 15% cover. The understorey supports
+    a diverse array of sclerophyllous shrubs and graminoids, as well as many endemic
+    species, and 31% of Victoria's native orchid species. (Forster and McDonald 2009;
+    Carr 2017). ^p The three sites selected for this study (Fig. 1) represent locations
+    previously unsampled where there was a known infestation front, as well as uninfested
+    and post-infested vegetation were, Site 1 (Edwards Creek Track); approximately
+    25 metres north of Bald Hills Rd (38°22'37.6″S 144°06'41.8″E). The site occurs
+    on a northern facing slope, providing favourable conditions for X. australis growth,
+    and a warm and wet environment for the potential spread of P. cinnamomi. Phytophthora
+    cinnamomi infestation appears closely linked with the nearby management vehicle
+    track and illegal mountain biking trails.; Site 2 (Hurst Rd 1) retains a high
+    density of X. australis. It is located 50 metres north-west of Hurst Rd (38°23'04.6″S
+    144°13'35.4″E) on a north-west facing slope, with P. cinnamomi infestation closely
+    linked with the nearby management vehicle track and mountain biking trails, developed
+    by management within the Great Otway National Park. ; Site 3 (Hurst Rd 2) is situated
+    200 metres east of Hurst Rd (38°23'19.7″S 144°13'31.8″E), on a southern facing
+    slope. ^p Study design ^p At each of the three sites, three treatment classes
+    were identified. (1) Uninfested - sites free from any symptoms of Phytophthora
+    'dieback' disease, (2) Infested - sites which exhibited active 'dieback' symptoms,
+    chlorotic and dead plants, (3) Post-infested - sites where there were no symptoms
+    of active 'dieback', an absence of living indicator species such as X. australis
+    and Isopogon ceratophyllus (horny cone-bush), and dead stumps of X. australis
+    present (indicating the prior presence of X. australis on these sites). Stratified
+    random sampling was implemented to independently sample within each treatment
+    class and provide an accurate representation of vegetation floristics at each
+    site. To align with strict hygiene protocols, all vegetation surveys were conducted
+    within uninfested treatments prior to moving into infested and post-infested areas.
+  original_file: none, data transcribed from manuscript
+  notes: Need to contact the author about "resistant_presumed" scorings
+identifiers: .na
+locations:
+  Anglesea Heathlands:
+    latitude (deg): -38.336
+    longitude (deg): 144.16
+    coordinates notes: three sites and coordinates represent the general area ( Edwards
+      Creek Track, 38°22'37.6″S 144°06'41.8″E; 50 metres north-west of Hurst Rd (38°23'04.6″S
+      144°13'35.4″E); 200 metres east of Hurst Rd (38°23'19.7″S 144°13'31.8″E), on
+      a southern facing slope.)
+    locality: Great Otway National Park, Victoria
+    geologic substrate: aeolian or outwash sands and tertiary sand/clay
+    soil type: nutrient-poor soils
+contexts: .na
+traits:
+- var_in: LifeFormCode
+  unit_in: .na
+  trait_name: .na
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Life form codes sourced from EVC/Bioregion Benchmarks (Victorian Government
+    Department of Sustainability and Environment 2004
+- var_in: SusceptibilityRating
+  unit_in: .na
+  trait_name: phytophthora_cinnamomi_susceptibility
+  entity_type: population
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: Due to the nature of Phytophthora spread, small quadrats (10 m x 2 m) were
+    used so as to ensure each replicate quadrat fell into a single treatment category
+    (no quadrats had a mix of active disease with non-diseased status, nor of active
+    disease with post-diseased status). All vascular plant species present were recorded
+    and identified to species level and percent cover recorded. At uninfested sites
+    four 10 m x 10 m quadrats were also established and species presence recorded,
+    to validate whether the 10 m x 2 m quadrats were sufficient to detect representative
+    species diversity (total sample size = 105 quadrats). Susceptibility has been
+    scored based on changes in species abundance/cover between sites. Species not
+    scored by the author as "susceptible" have been scored as "resistant_presumed".
+substitutions:
+- trait_name: phytophthora_cinnamomi_susceptibility
+  find: s
+  replace: moderate
+- trait_name: phytophthora_cinnamomi_susceptibility
+  find: s, fr
+  replace: moderate resistant
+- trait_name: phytophthora_cinnamomi_susceptibility
+  find: s, hs
+  replace: moderate severe
+- trait_name: phytophthora_cinnamomi_susceptibility
+  find: s, ls
+  replace: moderate mild
+taxonomic_updates:
+- find: Caledenia venusta
+  replace: Caladenia venusta
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-05-13)
+  taxonomic_resolution: species
+- find: Drosera abberans
+  replace: Drosera aberrans
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-05-13)
+  taxonomic_resolution: species
+- find: Lindsae linearis
+  replace: Lindsaea linearis
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-05-13)
+  taxonomic_resolution: species
+- find: Pimelia humilis
+  replace: Pimelea humilis
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-05-13)
+  taxonomic_resolution: species
+- find: Pimelia linifolia subsp. linifolia
+  replace: Pimelea linifolia subsp. linifolia
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2025-05-13)
+  taxonomic_resolution: subspecies
+- find: Cassytha pubescens subsp.
+  replace: Cassytha pubescens
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-05-13)
+  taxonomic_resolution: species
+- find: Xanthorrhoea minor subp. lutea
+  replace: Xanthorrhoea minor
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2025-05-13)
+  taxonomic_resolution: species
+- find: Argentipallium (Styphelia) humifusa
+  replace: Styphelia humifusa
+  reason: Exact match of the first word of the taxon name to an APC-accepted genus
+    (2025-05-13)
+  taxonomic_resolution: species
+exclude_observations: .na
+questions: .na

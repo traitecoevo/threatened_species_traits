@@ -1,6 +1,4 @@
-﻿Species,Family,"Life Form
-Code","Susceptibility
-Rating"
+﻿Species,Family,LifeFormCode,SusceptibilityRating
 Acacia longifolia,Mimosaceae,T,
 Acacia paradoxa,Mimosaceae,MS,
 Acacia pycnantha,Mimosaceae,T,

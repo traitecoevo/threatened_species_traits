@@ -277,6 +277,25 @@ targets:
                   taxon_list
                  )
 
+  Crone_2012_config:
+    command: >
+      dataset_configure("data/Crone_2012/metadata.yml",
+                 definitions
+                 )
+  Crone_2012_raw:
+    command: >
+      dataset_process("data/Crone_2012/data.csv",
+                  Crone_2012_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Crone_2012:
+    command: >
+      dataset_update_taxonomy(Crone_2012_raw,
+                  taxon_list
+                 )
+
   DCCEEW_2024_config:
     command: >
       dataset_configure("data/DCCEEW_2024/metadata.yml",
@@ -293,6 +312,25 @@ targets:
   DCCEEW_2024:
     command: >
       dataset_update_taxonomy(DCCEEW_2024_raw,
+                  taxon_list
+                 )
+
+  Detombeur_2025_config:
+    command: >
+      dataset_configure("data/Detombeur_2025/metadata.yml",
+                 definitions
+                 )
+  Detombeur_2025_raw:
+    command: >
+      dataset_process("data/Detombeur_2025/data.csv",
+                  Detombeur_2025_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Detombeur_2025:
+    command: >
+      dataset_update_taxonomy(Detombeur_2025_raw,
                   taxon_list
                  )
 
@@ -372,6 +410,63 @@ targets:
                   taxon_list
                  )
 
+  Hanley_2001_config:
+    command: >
+      dataset_configure("data/Hanley_2001/metadata.yml",
+                 definitions
+                 )
+  Hanley_2001_raw:
+    command: >
+      dataset_process("data/Hanley_2001/data.csv",
+                  Hanley_2001_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Hanley_2001:
+    command: >
+      dataset_update_taxonomy(Hanley_2001_raw,
+                  taxon_list
+                 )
+
+  Hanley_2002_config:
+    command: >
+      dataset_configure("data/Hanley_2002/metadata.yml",
+                 definitions
+                 )
+  Hanley_2002_raw:
+    command: >
+      dataset_process("data/Hanley_2002/data.csv",
+                  Hanley_2002_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Hanley_2002:
+    command: >
+      dataset_update_taxonomy(Hanley_2002_raw,
+                  taxon_list
+                 )
+
+  Harrington_1986_config:
+    command: >
+      dataset_configure("data/Harrington_1986/metadata.yml",
+                 definitions
+                 )
+  Harrington_1986_raw:
+    command: >
+      dataset_process("data/Harrington_1986/data.csv",
+                  Harrington_1986_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Harrington_1986:
+    command: >
+      dataset_update_taxonomy(Harrington_1986_raw,
+                  taxon_list
+                 )
+
   Harshani_2023_config:
     command: >
       dataset_configure("data/Harshani_2023/metadata.yml",
@@ -388,6 +483,25 @@ targets:
   Harshani_2023:
     command: >
       dataset_update_taxonomy(Harshani_2023_raw,
+                  taxon_list
+                 )
+
+  Harshani_2023_2_config:
+    command: >
+      dataset_configure("data/Harshani_2023_2/metadata.yml",
+                 definitions
+                 )
+  Harshani_2023_2_raw:
+    command: >
+      dataset_process("data/Harshani_2023_2/data.csv",
+                  Harshani_2023_2_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Harshani_2023_2:
+    command: >
+      dataset_update_taxonomy(Harshani_2023_2_raw,
                   taxon_list
                  )
 
@@ -543,6 +657,25 @@ targets:
                   taxon_list
                  )
 
+  McDonald_2019_config:
+    command: >
+      dataset_configure("data/McDonald_2019/metadata.yml",
+                 definitions
+                 )
+  McDonald_2019_raw:
+    command: >
+      dataset_process("data/McDonald_2019/data.csv",
+                  McDonald_2019_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  McDonald_2019:
+    command: >
+      dataset_update_taxonomy(McDonald_2019_raw,
+                  taxon_list
+                 )
+
   McDougall_2024_config:
     command: >
       dataset_configure("data/McDougall_2024/metadata.yml",
@@ -578,6 +711,25 @@ targets:
   McDougall_2024_2:
     command: >
       dataset_update_taxonomy(McDougall_2024_2_raw,
+                  taxon_list
+                 )
+
+  McQuillan_2020_config:
+    command: >
+      dataset_configure("data/McQuillan_2020/metadata.yml",
+                 definitions
+                 )
+  McQuillan_2020_raw:
+    command: >
+      dataset_process("data/McQuillan_2020/data.csv",
+                  McQuillan_2020_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  McQuillan_2020:
+    command: >
+      dataset_update_taxonomy(McQuillan_2020_raw,
                   taxon_list
                  )
 
@@ -752,6 +904,25 @@ targets:
                   taxon_list
                  )
 
+  Shaw_2024_config:
+    command: >
+      dataset_configure("data/Shaw_2024/metadata.yml",
+                 definitions
+                 )
+  Shaw_2024_raw:
+    command: >
+      dataset_process("data/Shaw_2024/data.csv",
+                  Shaw_2024_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Shaw_2024:
+    command: >
+      dataset_update_taxonomy(Shaw_2024_raw,
+                  taxon_list
+                 )
+
   Shearer_1996_config:
     command: >
       dataset_configure("data/Shearer_1996/metadata.yml",
@@ -847,6 +1018,25 @@ targets:
                   taxon_list
                  )
 
+  Tsujii_2023_config:
+    command: >
+      dataset_configure("data/Tsujii_2023/metadata.yml",
+                 definitions
+                 )
+  Tsujii_2023_raw:
+    command: >
+      dataset_process("data/Tsujii_2023/data.csv",
+                  Tsujii_2023_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Tsujii_2023:
+    command: >
+      dataset_update_taxonomy(Tsujii_2023_raw,
+                  taxon_list
+                 )
+
   Victorian_Conservation_Seed_Bank_2025_config:
     command: >
       dataset_configure("data/Victorian_Conservation_Seed_Bank_2025/metadata.yml",
@@ -923,6 +1113,25 @@ targets:
                   taxon_list
                  )
 
+  Zemunik_2015_config:
+    command: >
+      dataset_configure("data/Zemunik_2015/metadata.yml",
+                 definitions
+                 )
+  Zemunik_2015_raw:
+    command: >
+      dataset_process("data/Zemunik_2015/data.csv",
+                  Zemunik_2015_config,
+                  schema,
+                  resource_metadata,
+                  unit_conversions
+                 )
+  Zemunik_2015:
+    command: >
+      dataset_update_taxonomy(Zemunik_2015_raw,
+                  taxon_list
+                 )
+
 
   threatened_species_raw:
     command: >
@@ -940,12 +1149,18 @@ targets:
         Brisbane_Botanic_Gardens_2025,
         Butler_2004,
         Crisp_2003,
+        Crone_2012,
         DCCEEW_2024,
+        Detombeur_2025,
         Fensham_2020,
         Fensham_2021,
         FernandezWinzer_2018,
         Greening_Australia_2025,
+        Hanley_2001,
+        Hanley_2002,
+        Harrington_1986,
         Harshani_2023,
+        Harshani_2023_2,
         Hart_2024,
         Hopper_2024,
         Hutton_1994,
@@ -954,8 +1169,10 @@ targets:
         Li_1997,
         Martino_2022,
         Martino_2024,
+        McDonald_2019,
         McDougall_2024,
         McDougall_2024_2,
+        McQuillan_2020,
         mixed_2024,
         NHNSW_2025,
         Pate_1989,
@@ -965,15 +1182,18 @@ targets:
         RBGV_2025,
         SA_Seed_Conservation_Centre_2025,
         Setterfield_2002,
+        Shaw_2024,
         Shearer_1996,
         Shearer_2010,
         Shedley_2007,
         Simmonds_2000,
         Tas_Seed_Conservation_Centre_2025,
+        Tsujii_2023,
         Victorian_Conservation_Seed_Bank_2025,
         WA_Seed_Centre_2025,
         WAH_2025,
         Ward_2021,
+        Zemunik_2015,
         I(NULL))
 
 # Version information
