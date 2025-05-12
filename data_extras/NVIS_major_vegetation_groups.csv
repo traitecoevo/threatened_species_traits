@@ -1,0 +1,64 @@
+﻿vegetation_group,group_number,vegetation_group_type
+Rainforests and Vine Thickets,1,NVIS Major Vegetation Group
+Eucalypt Tall Open Forests,2,NVIS Major Vegetation Group
+Eucalypt Open Forests,3,NVIS Major Vegetation Group
+4 Eucalypt Low Open Forests,4,NVIS Major Vegetation Group
+5 Eucalypt Woodlands,5,NVIS Major Vegetation Group
+6 Acacia Forests and Woodlands,6,NVIS Major Vegetation Group
+7 Callitris Forests and Woodlands,7,NVIS Major Vegetation Group
+8 Casuarina Forests and Woodlands,8,NVIS Major Vegetation Group
+9 Melaleuca Forests and Woodlands,9,NVIS Major Vegetation Group
+10 Other Forests and Woodlands,10,NVIS Major Vegetation Group
+11 Eucalypt Open Woodlands,11,NVIS Major Vegetation Group
+12 Tropical Eucalypt Woodlands/Grasslands,12,NVIS Major Vegetation Group
+13 Acacia Open Woodlands,13,NVIS Major Vegetation Group
+14 Mallee Woodlands and Shrublands,14,NVIS Major Vegetation Group
+15 Low Closed Forests and Tall Closed Shrublands,15,NVIS Major Vegetation Group
+16 Acacia Shrublands,16,NVIS Major Vegetation Group
+17 Other Shrublands,17,NVIS Major Vegetation Group
+18 Heathlands,18,NVIS Major Vegetation Group
+19 Tussock Grasslands,19,NVIS Major Vegetation Group
+20 Hummock Grasslands,20,NVIS Major Vegetation Group
+"21 Other Grasslands, Herblands, Sedgelands and Rushlands",21,NVIS Major Vegetation Group
+"22 Chenopod Shrublands, Samphire Shrublands and Forblands",22,NVIS Major Vegetation Group
+23 Mangroves,23,NVIS Major Vegetation Group
+"24 Inland Aquatic - freshwater, salt lakes, lagoons",24,NVIS Major Vegetation Group
+"25 Cleared, Non-Native Vegetation, Buildings",25,NVIS Major Vegetation Group
+26 Unclassified Native Vegetation,26,NVIS Major Vegetation Group
+"27 Naturally Bare - sand, rock, claypan, mudflat",27,NVIS Major Vegetation Group
+28 Sea and Estuaries,28,NVIS Major Vegetation Group
+"29 Regrowth, Modified Native Vegetation",29,NVIS Major Vegetation Group
+30 Unclassified Forest,30,NVIS Major Vegetation Group
+31 Other Open Woodlands,31,NVIS Major Vegetation Group
+32 Mallee Open Woodlands and Sparse Mallee Shrublands,32,NVIS Major Vegetation Group
+1 Cool temperate rainforest,,NVIS Major Vegetation Subgroup
+2 Tropical or sub-tropical rainforest,,NVIS Major Vegetation Subgroup
+6 Warm temperate rainforest,,NVIS Major Vegetation Subgroup
+62 Dry rainforest or vine thickets,,NVIS Major Vegetation Subgroup
+40 Mangroves,,NVIS Major Vegetation Subgroup
+3 Eucalyptus (+/- tall) open forest with a dense broad-leaved and/or tree-fern,,NVIS Major Vegetation Subgroup
+understorey (wet sclerophyll),,NVIS Major Vegetation Subgroup
+54 Eucalyptus tall open forest with a fine-leaved shrubby understorey,,NVIS Major Vegetation Subgroup
+"60 Eucalyptus tall open forests and open forests with ferns, herbs, sedges, rushes or",,NVIS Major Vegetation Subgroup
+wet tussock grasses,,NVIS Major Vegetation Subgroup
+4 Eucalyptus open forests with a shrubby understorey,,NVIS Major Vegetation Subgroup
+5 Eucalyptus open forests with a grassy understorey,,NVIS Major Vegetation Subgroup
+8 Eucalyptus woodlands with a shrubby understorey,,NVIS Major Vegetation Subgroup
+65 Eucalyptus woodlands with a chenopod or samphire understorey,,NVIS Major Vegetation Subgroup
+9 Eucalyptus woodlands with a tussock grass understorey,,NVIS Major Vegetation Subgroup
+10 Eucalyptus woodlands with a hummock grass understorey,,NVIS Major Vegetation Subgroup
+"59 Eucalyptus woodlands with ferns, herbs, sedges, rushes or wet tussock grassland",,NVIS Major Vegetation Subgroup
+13 Brigalow (Acacia harpophylla) forests and woodlands,,NVIS Major Vegetation Subgroup
+20 Mulga (Acacia aneura) woodlands +/- tussock grass +/- forbs,,NVIS Major Vegetation Subgroup
+51 Mulga (Acacia aneura) woodlands and shrublands with hummock grass,,NVIS Major Vegetation Subgroup
+14 Other Acacia forests and woodlands,,NVIS Major Vegetation Subgroup
+12 Callitris forests and woodlands,,NVIS Major Vegetation Subgroup
+26 Casuarina and Allocasuarina forests and woodlands,,NVIS Major Vegetation Subgroup
+15 Melaleuca open forests and woodlands,,NVIS Major Vegetation Subgroup
+7 Tropical Eucalyptus open forests and woodlands with a tall annual grassy,,NVIS Major Vegetation Subgroup
+understorey,,NVIS Major Vegetation Subgroup
+11 Tropical mixed spp forests and woodlands,,NVIS Major Vegetation Subgroup
+50 Banksia woodlands,,NVIS Major Vegetation Subgroup
+58 Leptospermum forests and woodlands,,NVIS Major Vegetation Subgroup
+16 Other forests and woodlands,,NVIS Major Vegetation Subgroup
+29 Mallee with a dense shrubby understorey,,NVIS Major Vegetation Subgroup
