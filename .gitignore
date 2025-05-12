@@ -2,6 +2,10 @@
 .Rhistory
 .Rapp.history
 
+# Folders for output
+export/
+ignore/
+
 # Session Data files
 .RData
 
@@ -52,3 +56,6 @@ ignore/
 #
 *.pdf
 *.svg
+*.png
+*.html
+
