@@ -59,6 +59,7 @@ all_traits <- austraits %>% austraits::bind_databases(threatened_species)
 # categorical trait scores
 life_history_scores <- read_csv("data_extras/life_history_scores.csv")
 plant_growth_form_scores <- read_csv("data_extras/plant_growth_form_scores.csv") %>% tidyr::pivot_longer(cols = 3:5) %>% select(trait_name, trait_value, value, name)
+plant_growth_substrate_scores <- read_csv("data_extras/plant_growth_substrate.csv")
 woodiness_scores <- read_csv("data_extras/woodiness_scores.csv")
 dispersers_scores <- read_csv("data_extras/dispersers_scores.csv")
 fruit_fleshiness_scores <- read_csv("data_extras/fruit_fleshiness_scores.csv")
@@ -90,34 +91,35 @@ habitat_moisture_scores <-  read_csv("data_extras/habitat_moisture_scores.csv")
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #print out tables for different categorical traits, showing ordinal scores
 
-life_history_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(life_history) %>% rename(`categorical value` = trait_value, `numeric score assigned` = life_history)  %>% kable(caption = "life history values") %>% kable_classic()
+life_history_scores %>% arrange(life_history) %>% rename(`categorical value` = trait_value, `numeric score assigned` = life_history)  %>% kable(caption = "life history values") %>% kable_classic()
 
-plant_growth_form_scores %>% filter(!str_detect(trait_value, " ")) %>% 
-  pivot_wider(names_from = name, values_from = value) %>% arrange(trait_value) %>% kable(caption = "plant growth form values") %>% kable_classic()
+plant_growth_form_scores %>% pivot_wider(names_from = name, values_from = value) %>% arrange(trait_value) %>% kable(caption = "plant growth form values") %>% kable_classic()
 
-woodiness_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(woodiness_detailed) %>% rename(`categorical value` = trait_value, `numeric score assigned` = woodiness_detailed)  %>% kable(caption = "plant woodiness values") %>% kable_classic()
+plant_growth_substrate_scores %>% arrange(plant_growth_substrate) %>% kable(caption = "plant growth substrate values") %>% kable_classic()
 
-resprouting_capacity_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(resprouting_capacity) %>% rename(`categorical value` = trait_value, `numeric score assigned` = resprouting_capacity)  %>% kable(caption = "resprouting capacity values") %>% kable_classic()
+woodiness_scores %>% arrange(woodiness_detailed) %>% rename(`categorical value` = trait_value, `numeric score assigned` = woodiness_detailed)  %>% kable(caption = "plant woodiness values") %>% kable_classic()
 
-storage_organ_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(storage_organ_present) %>% kable(caption = "storage organ values") %>% kable_classic()
+resprouting_capacity_scores %>% arrange(resprouting_capacity) %>% rename(`categorical value` = trait_value, `numeric score assigned` = resprouting_capacity)  %>% kable(caption = "resprouting capacity values") %>% kable_classic()
 
-bud_bank_location_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(bud_bank_location) %>% rename(`categorical value` = trait_value, `numeric score assigned` = bud_bank_location)  %>% kable(caption = "bud bank location") %>% kable_classic()
+storage_organ_scores %>% arrange(storage_organ_present) %>% kable(caption = "storage organ values") %>% kable_classic()
 
-plant_physical_defence_structures_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(plant_physical_defence_structures) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_physical_defence_structures)  %>% kable(caption = "plant physical defence structures") %>% kable_classic()
+bud_bank_location_scores %>% arrange(bud_bank_location) %>% rename(`categorical value` = trait_value, `numeric score assigned` = bud_bank_location)  %>% kable(caption = "bud bank location") %>% kable_classic()
 
-dispersers_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(dispersers_score) %>% rename(`categorical value` = trait_value, `numeric score assigned` = dispersers_score)  %>% kable(caption = "dispersal trait values") %>% kable_classic()
+plant_physical_defence_structures_scores %>% arrange(plant_physical_defence_structures) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_physical_defence_structures)  %>% kable(caption = "plant physical defence structures") %>% kable_classic()
 
-nitrogen_fixing_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(nitrogen_fixing) %>% rename(`categorical value` = trait_value, `numeric score assigned` = nitrogen_fixing)  %>% kable(caption = "nitrogen fixing values") %>% kable_classic()
+dispersers_scores %>% arrange(dispersers_score) %>% rename(`categorical value` = trait_value, `numeric score assigned` = dispersers_score)  %>% kable(caption = "dispersal trait values") %>% kable_classic()
 
-leaf_glaucousness_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(leaf_glaucousness) %>% rename(`categorical value` = trait_value, `numeric score assigned` = leaf_glaucousness)  %>% kable(caption = "leaf glaucousness values") %>% kable_classic()
+nitrogen_fixing_scores %>% arrange(nitrogen_fixing) %>% rename(`categorical value` = trait_value, `numeric score assigned` = nitrogen_fixing)  %>% kable(caption = "nitrogen fixing values") %>% kable_classic()
 
-leaf_hairs_adult_leaves_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(leaf_hairs_adult_leaves) %>% rename(`categorical value` = trait_value, `numeric score assigned` = leaf_hairs_adult_leaves)  %>% kable(caption = "leaf hair values") %>% kable_classic()
+leaf_glaucousness_scores %>% arrange(leaf_glaucousness) %>% rename(`categorical value` = trait_value, `numeric score assigned` = leaf_glaucousness)  %>% kable(caption = "leaf glaucousness values") %>% kable_classic()
 
-plant_spinescence_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(plant_spinescence) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_spinescence)  %>% kable(caption = "plant spinescence values") %>% kable_classic()
+leaf_hairs_adult_leaves_scores %>% arrange(leaf_hairs_adult_leaves) %>% rename(`categorical value` = trait_value, `numeric score assigned` = leaf_hairs_adult_leaves)  %>% kable(caption = "leaf hair values") %>% kable_classic()
 
-plant_physical_defence_structures_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(plant_physical_defence_structures) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_physical_defence_structures)  %>% kable(caption = "plant physical defence structures") %>% kable_classic()
+plant_spinescence_scores %>% arrange(plant_spinescence) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_spinescence)  %>% kable(caption = "plant spinescence values") %>% kable_classic()
 
-phytophthora_cinnamomi_susceptibility_scores %>% filter(!str_detect(trait_value, " ")) %>% arrange(phytophthora_cinnamomi_susceptibility) %>% rename(`categorical value` = trait_value, `numeric score assigned` = phytophthora_cinnamomi_susceptibility)  %>% kable(caption = "phytophthora cinnamomi susceptibility values") %>% kable_classic()
+plant_physical_defence_structures_scores %>% arrange(plant_physical_defence_structures) %>% rename(`categorical value` = trait_value, `numeric score assigned` = plant_physical_defence_structures)  %>% kable(caption = "plant physical defence structures") %>% kable_classic()
+
+phytophthora_cinnamomi_susceptibility_scores %>% arrange(phytophthora_cinnamomi_susceptibility) %>% rename(`categorical value` = trait_value, `numeric score assigned` = phytophthora_cinnamomi_susceptibility)  %>% kable(caption = "phytophthora cinnamomi susceptibility values") %>% kable_classic()
 ```
 
 ### extract categorical traits from database
@@ -154,6 +156,7 @@ dispersers <-  extract_categorical_trait(all_traits, c("dispersal_syndrome", "di
 resprouting_capacity <- extract_categorical_trait(all_traits, "resprouting_capacity", resprouting_capacity_scores, "resprouting_capacity")
 nitrogen_fixing <- extract_categorical_trait(all_traits, "nitrogen_fixing", nitrogen_fixing_scores, "nitrogen_fixing")
 life_history <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2023"), "life_history", life_history_scores, "life_history")
+plant_growth_substrate <- extract_categorical_trait(all_traits, "plant_growth_substrate", plant_growth_substrate_scores, "plant_growth_substrate")
 
 # various ways to group growth forms based on threat
 plant_growth_form <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% filter(name == "plant_growth_form"), "plant_growth_form")
@@ -317,6 +320,7 @@ myrtle_rust_habitat_scores <- extract_categorical_trait(all_traits, "habitat", h
 phytophthora_habitat_scores <- extract_categorical_trait(all_traits, "habitat", habitat_scores %>% select(trait_name, trait_value, habitat = phytophthora), "habitat_phytophthora")
 pigs_habitat_scores <- extract_categorical_trait(all_traits, "habitat", habitat_scores %>% select(trait_name, trait_value, habitat = pigs), "habitat_pigs")
 deer_habitat_scores <- extract_categorical_trait(all_traits, "habitat", habitat_scores %>% select(trait_name, trait_value, habitat = deer), "habitat_deer")
+hymenachne_habitat_scores <- extract_categorical_trait(all_traits, "habitat", habitat_scores %>% select(trait_name, trait_value, habitat = hymenachne), "habitat_hymenachne")
 
 habitat_moisture <- extract_categorical_trait(all_traits, "habitat_moisture", habitat_moisture_scores, "habitat_moisture")
 
@@ -1592,6 +1596,101 @@ tropical_grasses_assigned_risk <- tropical_grasses_assigned_risk %>%
       filter(!is.na(threatened_status)) %>%
     write_csv("export/tropical_grasses_assigned_risk_final.csv")
 ```
+
+# Hymenachne
+
+### Habitat scorings for Hymenachne
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+habitat_scores %>%
+  select(habitat = trait_value, score = hymenachne) %>%
+  group_by(score) %>%
+  mutate(habitat = paste0(habitat, collapse = "; ")) %>%
+  ungroup() %>%
+  distinct() %>% 
+  select(score, habitat) %>%
+  arrange(score) %>%
+  kable(caption = "habitat scores for Hymenachne") %>% 
+  kable_classic()
+```
+
+### Assign risks to all taxa
+
+```{r, warning=FALSE, message=FALSE}
+# create dataframe with relevant traits, attributes
+hymenachne_assigned_risk <- resources$APC %>% 
+  filter(taxonomic_status == "accepted") %>%
+  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>%
+  left_join(threatened, by = "taxon_name") %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(plant_growth_substrate, by = "taxon_name") %>%
+  left_join(hymenachne_habitat_scores, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name")
+
+# calculate "risk nudges" for habitat, traits, taxonomy
+hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
+  mutate(
+    # woody taxa = lower impact
+      plant_growth_substrate_nudge = calculate_nudge("plant_growth_substrate", 1, .),
+    
+    # when available use habitat risk based on species habitat; default habitat = 0.3
+      habitat_risk = ifelse(is.na(habitat_hymenachne),0.3, habitat_hymenachne),
+    
+    # increase habitat_risk if plant_growth_substrate indicates aquatic or semi-aquatic species
+    
+    # if no value for habitat, use habitat moisture value
+      habitat_risk = ifelse(!is.na(plant_growth_substrate_nudge), 
+                            plant_growth_substrate_nudge,
+                            habitat_risk),
+      
+    # assign trait risk nudges
+    # taller plants = lower impact
+      height_risk_nudge = calculate_nudge("plant_height_scaled", -0.3, .),
+    
+    # woody taxa = lower impact
+      woodiness_risk_nudge = calculate_nudge("woodiness", -0.4, .),
+    
+    # annuals, ephemerals have highest impact
+      life_history_risk_nudge = calculate_nudge("life_history", -0.3, .),
+
+    # taxonomy nudge
+    # add taxonomic nudges
+
+      taxonomic_risk_nudge = ifelse(family %in% c("Arecaceae", "Cyperaceae", "Haloragaceae", "Hydrocharitaceae", "Iridaceae", 
+                                                  "Juncaceae", "Marsileaceae", "Myrtaceae", "Nymphaeaceae", "Orchidaceae", 
+                                                  "Poaceae", "Pontederiaceae", "Restionaceae", "Typhaceae"),
+                                    0.3, -0.3),
+    
+    # sum trait risk nudges
+      total_trait_nudge = rowSums(across(c(height_risk_nudge, life_history_risk_nudge, woodiness_risk_nudge, taxonomic_risk_nudge)), na.rm = TRUE),
+    
+
+    # rescale trait risk; this value then to be multiplied by habitat risk
+    # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
+      total_trait_nudge_scaled = scales::rescale(total_trait_nudge, to = c(0.6, 1.2)),
+
+    # multiple scaled trait nudge risk by habitat risk
+      hymenachne_risk_total = habitat_risk*total_trait_nudge_scaled
+  )
+
+# assign risk by category
+  hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
+    mutate(
+      hymenachne_final_susceptibility_score = case_when(
+          hymenachne_risk_total >= 0.8 ~ "5_extremely_high",
+          hymenachne_risk_total >= 0.6 & hymenachne_risk_total < 0.8 ~ "4_high",
+          hymenachne_risk_total >= 0.4 & hymenachne_risk_total < 0.6 ~ "3_moderate",
+          hymenachne_risk_total >= 0.2 & hymenachne_risk_total < 0.4 ~ "2_low",
+          hymenachne_risk_total < 0.2 ~ "1_no_risk"
+        )
+    ) %>%
+      filter(!is.na(threatened_status)) %>%
+    write_csv("export/hymenachne_assigned_risk_final.csv")
+```
+
 
 # Regeneration of populations
 
