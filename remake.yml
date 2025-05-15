@@ -752,25 +752,6 @@ targets:
                   taxon_list
                  )
 
-  National_Seed_Bank_2025_config:
-    command: >
-      dataset_configure("data/National_Seed_Bank_2025/metadata.yml",
-                 definitions
-                 )
-  National_Seed_Bank_2025_raw:
-    command: >
-      dataset_process("data/National_Seed_Bank_2025/data.csv",
-                  National_Seed_Bank_2025_config,
-                  schema,
-                  resource_metadata,
-                  unit_conversions
-                 )
-  National_Seed_Bank_2025:
-    command: >
-      dataset_update_taxonomy(National_Seed_Bank_2025_raw,
-                  taxon_list
-                 )
-
   NHNSW_2025_config:
     command: >
       dataset_configure("data/NHNSW_2025/metadata.yml",
@@ -1212,7 +1193,6 @@ targets:
         McDougall_2024_2,
         McQuillan_2020,
         mixed_2024,
-        National_Seed_Bank_2025,
         NHNSW_2025,
         Pate_1989,
         Pearl_2024,
