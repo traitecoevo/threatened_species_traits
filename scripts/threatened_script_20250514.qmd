@@ -2065,12 +2065,12 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
   
   mutate(
       # confidence drops to 0.2*prop_traits_scored (LOW) if no habitat data
-        risk_confidence = ifelse(is.na(habitat_tropical_C4_grasses), 
+        risk_confidence = ifelse(is.na(C4_grasses), 
                                  0.2*prop_traits_scored, 1*prop_traits_scored),
         
       # when available use habitat risk based on species habitat; default habitat = 0.5
-        habitat_risk = ifelse(is.na(habitat_tropical_C4_grasses),0.5,
-                              habitat_tropical_C4_grasses),
+        habitat_risk = ifelse(is.na(C4_grasses),0.5,
+                              C4_grasses),
     
     # assign trait risk effect scores
     # taller plants = lower impact
