@@ -1,6 +1,8 @@
 ---
 title: "Threatened species script"
 format: html
+toc: true
+toc-depth: 4
 editor: visual
 embed-resources: true
 knitr:
@@ -900,7 +902,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
            total_risk_overwrite, habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored, 
            contains(c("risk_effect_score")), everything()) %>%
-    write_csv("export/phytophthora_assigned_risk_final.csv", na = "")
+    write_csv("export/phytophthora_assigned_risk_scores.csv", na = "")
   
 ```
 
