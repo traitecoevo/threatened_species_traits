@@ -524,7 +524,7 @@ threatened <- all_traits$traits %>%
 native_species <- resources$APC %>% 
   filter(taxonomic_status == "accepted") %>%
   filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
-  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>% 
+  select(taxon_name = canonical_name, genus, family, taxon_distribution, taxon_rank) %>% 
   filter(str_detect(taxon_distribution, "[:alpha:]$") | 
            str_detect(taxon_distribution, "[:alpha:]\\,") |
            str_detect(taxon_distribution, "native and naturalised"))
