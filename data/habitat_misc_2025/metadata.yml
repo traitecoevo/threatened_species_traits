@@ -1,0 +1,106 @@
+source:
+  primary:
+    key: habitat_misc_2025
+    bibtype: Unpublished
+    year: 2025
+    author: Wenk, Elizabeth
+    title: 'Unpublished: habitat from various sources'
+contributors:
+  data_collectors:
+  - last_name: Wenk
+    given_name: Elizabeth
+    ORCID: .na.character
+    affiliation: UNSW
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: unknown/2025
+  taxon_name: taxon_name
+  location_name: .na
+  description: unknown
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: unknown
+  original_file: unknown
+  notes: unknown
+identifiers: .na
+locations: .na
+contexts: .na
+traits:
+- var_in: 01_plant_growth_substrate_a
+  unit_in: .na
+  trait_name: plant_growth_substrate
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 02_commonness_a
+  unit_in: .na
+  trait_name: commonness
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 03_habitat_moisture_a
+  unit_in: .na
+  trait_name: habitat_moisture
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 04_habitat_topographic_a
+  unit_in: .na
+  trait_name: topographic_position
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 05_habitat_a
+  unit_in: .na
+  trait_name: habitat
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 06_soil_colour_a
+  unit_in: .na
+  trait_name: soil_colour
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 07_substrate_a
+  unit_in: .na
+  trait_name: geologic_substrate
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 08_soil_a
+  unit_in: .na
+  trait_name: soil_type
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+- var_in: 09_soil_moisture_a
+  unit_in: .na
+  trait_name: soil_moisture
+  entity_type: species
+  value_type: mode
+  basis_of_value: expert_score
+  replicates: .na
+  methods: extracted from profile using Natural Language Processing (text scraping).
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na
