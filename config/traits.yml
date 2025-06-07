@@ -231,17 +231,22 @@ traits:
         cropland: XX
         cultivated: XX
         disturbed: XX
+        drainages: XX
         dry_sclerophyll: XX
         dunes_coastal: XX
         dunes_consolidated: XX
+        escarpment: XX
         estuarine: XX
+        feldmark: XX
         feldmark_alpine: XX
         flats: XX
         flats_wet: XX
+        floating_vegetation: XX
         floodplain: XX
         forest: XX
         forest_closed: XX
         forest_cloud: XX
+        forest_coastal_floodplain: XX
         forest_dry: XX
         forest_dry_sclerophyll: XX
         forest_eucalypt: XX
@@ -256,13 +261,16 @@ traits:
         forest_subalpine: XX
         forest_wet: XX
         forest_wet_sclerophyll: XX
+        gilgais: XX
         grassland: XX
         grassland_alpine: XX
         grassland_subalpine: XX
         grassland_tussock: XX
+        ground_base: XX
         headland_coastal: XX
         heath: XX
         heath_alpine: XX
+        heath_bolster: XX
         heath_closed: XX
         heath_coastal: XX
         heath_subalpine: XX
@@ -283,14 +291,17 @@ traits:
         marsh_salt: XX
         montane: XX
         moors: XX
-        mountain_summits: XX
+        mountain_ranges: XX
+        mountain_summit: XX
         mud: XX
         open: XX
         paddock: XX
         pasture: XX
+        peatland: XX
         plains: XX
         plains_coastal: XX
         plains_stony: XX
+        plateaus: XX
         rainforest: XX
         rainforest_coastal: XX
         rainforest_cool: XX
@@ -310,11 +321,15 @@ traits:
         rainforest_temperate: XX
         rainforest_tropical: XX
         rainforest_tropical_lowland: XX
+        rainforest_tropical_upland: XX
+        rainforest_tropical_montane: XX
         rainforest_warm_temperate: XX
         riparian: XX
         roadside: XX
+        rock_platforms: XX
         rock_pools_shallow: XX
         rocky: XX
+        rocks_among: XX
         rocky_outcrop: XX
         saltmarshes: XX
         saltpan: XX
@@ -340,16 +355,20 @@ traits:
         shrubland_eucalypt: XX
         shrubland_mallee: XX
         shrubland_open: XX
+        shrubland_low: XX
         shrubland_tall: XX
+        slope: XX
         snowbank: XX
         steppe: XX
         streambanks: XX
         streams: XX
         subalpine: XX
+        summit: XX
         swamp: XX
         swamp_forest: XX
         swamp_lowland: XX
         swamp_margin: XX
+        swamp_headwater: XX
         thickets: XX
         tidal_flats: XX
         urban: XX
@@ -357,6 +376,7 @@ traits:
         vine_thicket: XX
         water_shallow: XX
         waterholes: XX
+        wetlands: XX
         wet_sclerophyll: XX
         woodland: XX
         woodland_acacia: XX

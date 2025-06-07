@@ -1,15 +1,11 @@
 source:
   primary:
     key: ANBG_2025
-    bibtype: Article
-    year: unknown
-    author: unknown
-    title: unknown
-    journal: unknown
-    volume: unknown
-    number: unknown
-    pages: unknown
-    doi: unknown
+    bibtype: Online
+    author: '{Australian National Botanic Gardens}'
+    year: 2018
+    title: The National Seed Bank
+    url: xxx
 contributors:
   data_collectors:
   - last_name: unknown
@@ -46,6 +42,7 @@ dataset:
 identifiers:
 - var_in: Accession Number
   identifier_type: catalogNumber
+  institution_code: Australian National Botanic Gardens
 locations: .na
 contexts:
 - context_property: seed purity (%)

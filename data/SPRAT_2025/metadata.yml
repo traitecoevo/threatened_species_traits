@@ -103,7 +103,10 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: extracted from profile using Natural Language Processing (text scraping).
-substitutions: .na
+substitutions:
+- trait_name: habitat
+  find: outcrop
+  replace: rocky_outcrop
 taxonomic_updates: .na
 exclude_observations: .na
 questions: .na
