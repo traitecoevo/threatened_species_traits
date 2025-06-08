@@ -6,7 +6,7 @@ SPRAT_data <- read_csv("datasets_from_manuscripts/SPRAT_habitats_needed.csv", gu
 habitats_misc <- read_csv("datasets_from_manuscripts/habitats_needed_final.csv", guess_max = 100000) %>%
   select(contains(c("taxon_name", "habitat")))
 
-data <- remaining_habitats %>%
+data <- habitats_misc %>%
   rename(text = habitat) %>%
   select(taxon_name, text) %>%
   mutate(original_text = text,
@@ -18,7 +18,7 @@ data <- remaining_habitats %>%
          text = stringr::str_replace_all(text, "not in ", "notin"),
          text = stringr::str_replace_all(text, "rarely in ", "rarelyin"),
          text = stringr::str_trim(text),
-         #text = stringr::str_to_lower(text),
+         text = stringr::str_to_lower(text),
          text = stringr::str_replace_all(text, "$", " "),
          text = stringr::str_replace_all(text, "^", " "),
          text = ifelse(text=="", NA, text)
@@ -142,4 +142,4 @@ new <- new %>% filter(!is.na(text)) %>%
   filter(stringr::str_detect(taxon_name, " "))
 
 # write to file
-write_csv(new, "datasets_from_manuscripts/habitats_misc.csv", na = "")
+write_csv(new, "data/habitats_misc/data.csv", na = "")

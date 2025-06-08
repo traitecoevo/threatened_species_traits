@@ -1,0 +1,43 @@
+﻿family,species,taxonomic_resolution,health,infested,chisquared,signficance,ratio
+Asparagaceae,Thysanotus glaucifolius,species,0,2,,,3
+Dasypogonaceae,Dasypogon bromeliifolius,species,20,12,2,n.s.,0.619047619
+Hemerocallidaceae,Johnsonia lupulina,species,9,17,2.4,n.s.,1.8
+Apiaceae,Actinotus glomeratus,species,31,78,20.3,***,2.46875
+Apiaceae,Platysace compressa,species,6,18,6,*,2.714285714
+Apiaceae,Xanthosia rotundifolia,species,13,22,2.3,n.s.,1.642857143
+Apiaceae,Apiaceae,family,50,118,27.5,***,2.333333333
+Casuarinaceae,Allocasuarina fraseriana,species,4,5,,,1.2
+Dilleniaceae,Hibbertia pulchra var acutibractea,species,226,1,223,***,0.008810573
+Ericaceae,Andersonia caerulea,species,302,25,235,***,0.085808581
+Ericaceae,Andersonia simplex,species,254,6,237,***,0.02745098
+Ericaceae,Leucopogon elegans,species,3239,16,3191,***,0.005246914
+Ericaceae,Styphelia flavescens,species,560,19,505,***,0.035650624
+Ericaceae,Leucopogon glabellus,species,456,30,373,***,0.067833698
+Ericaceae,Lysinema ciliatum,species,601,30,517,***,0.051495017
+Ericaceae,Ericaceae,family,5412,126,5045,***,0.023462036
+Fabaceae,Daviesia incrassata,species,6,0,,,0.142857143
+Fabaceae,Daviesia flexuosa,species,2,0,,,0.333333333
+Fabaceae,Jacksonia spinosa,species,3,0,,,0.25
+Fabaceae,Phyllota barbata,species,109,0,109,***,0.009090909
+Fabaceae,Latrobea brunonis,species,117,1,114,***,0.016949153
+Fabaceae,Fabaceae,family,237,1,234,***,0.008403361
+Goodeniaceae,Dampiera pedunculata,species,1,15,12.2,***,8
+Myrtaceae,Agonis theiformis,species,0,7,,,8
+Myrtaceae,Taxandria linearifolia,species,12,3,5.4,*,0.307692308
+Myrtaceae,Beaufortia anisandra,species,111,31,45.1,***,0.285714286
+Myrtaceae,Calytrix asperula,species,9,29,10.5,**,3
+Myrtaceae,Darwinia vestita,species,5,7,0.3,n.s.,1.333333333
+Myrtaceae,Melaleuca thymoides,species,50,35,265,n.s.,0.705882353
+Proteaceae,Adenanthos cuneatus,species,24,7,9.3,**,0.32
+Proteaceae,Adenanthos obovatus,species,10,3,3.7,n.s.,0.363636364
+Proteaceae,Banksia attenuata,species,6,1,,,0.285714286
+Proteaceae,Banksia coccinea,species,8,1,,,0.222222222
+Proteaceae,Banksia grandis,species,1,0,,,0.5
+Proteaceae,Banksia nutans,species,31,1,28.1,***,0.0625
+Proteaceae,Petrophile acicularis,species,13,0,13,***,0.071428571
+Proteaceae,Petrophile rigida,species,12,7,1.32,n.s.,0.615384615
+Proteaceae,Proteaceae,family,105,20,57.8,***,0.198113208
+Stylidiaceae,Stylidium scandens,species,68,219,79.4,***,3.188405797
+Stylidiaceae,Stylidium spathulatum,species,78,44,9.5,***,0.569620253
+Stylidiaceae,Restionaceae sp.,species,17,0,17,***,0.055555556
+Stylidiaceae,Schoenus sp.,species,37,0,37,***,0.026315789
