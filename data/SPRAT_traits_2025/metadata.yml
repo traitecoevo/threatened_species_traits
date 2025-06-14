@@ -1,0 +1,522 @@
+source:
+  primary:
+    key: SPRAT_traits_2025
+    bibtype: Article
+    year: unknown
+    author: unknown
+    title: unknown
+    journal: unknown
+    volume: unknown
+    number: unknown
+    pages: unknown
+    doi: unknown
+contributors:
+  data_collectors:
+  - last_name: unknown
+    given_name: unknown
+    ORCID: unknown
+    affiliation: unknown
+  assistants: unknown
+  dataset_curators: unknown
+dataset:
+  data_is_long_format: yes
+  custom_R_code: .na
+  collection_date: unknown/2025
+  taxon_name: taxon_name
+  trait_name: plant_trait
+  value: value
+  location_name: unknown
+  description: unknown
+  basis_of_record: preserved_specimen
+  life_stage: adult
+  sampling_strategy: unknown
+  original_file: unknown
+  notes: unknown
+identifiers: .na
+locations: .na
+contexts: .na
+traits:
+- var_in: plant_height
+  unit_in: units
+  trait_name: plant_height
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: leaf_length
+  unit_in: units
+  trait_name: leaf_length
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: fruit_length
+  unit_in: units
+  trait_name: fruit_length
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: fruit_width
+  unit_in: units
+  trait_name: fruit_width
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: post_fire_recruitment
+  unit_in: units
+  trait_name: post_fire_recruitment
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: leaf_width
+  unit_in: units
+  trait_name: leaf_width
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: bud_bank_location
+  unit_in: units
+  trait_name: bud_bank_location
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: storage_organ
+  unit_in: units
+  trait_name: storage_organ
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: inflorescence_stalk
+  unit_in: units
+  trait_name: plant_height
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: plant_growth_substrate
+  unit_in: units
+  trait_name: plant_growth_substrate
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: storage_organ_length
+  unit_in: units
+  trait_name: storage_organ_length
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: storage_organ_diameter
+  unit_in: units
+  trait_name: storage_organ_diameter
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: flowering_time
+  unit_in: units
+  trait_name: flowering_time
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: parasitic
+  unit_in: units
+  trait_name: parasitic
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: resprouting_capacity
+  unit_in: units
+  trait_name: resprouting_capacity
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: vegetative_reproduction_ability
+  unit_in: units
+  trait_name: vegetative_reproduction_ability
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: stem_length
+  unit_in: units
+  trait_name: stem_length
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: stem_growth_habit
+  unit_in: units
+  trait_name: stem_growth_habit
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seedbank_location
+  unit_in: units
+  trait_name: seedbank_location
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: reproductive maturity
+  unit_in: units
+  trait_name: reproductive_maturity
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seed_length
+  unit_in: units
+  trait_name: seed_length
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seed_width
+  unit_in: units
+  trait_name: seed_width
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: sex_type
+  unit_in: units
+  trait_name: sex_type
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: plant_width
+  unit_in: units
+  trait_name: plant_width
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: fruiting_time
+  unit_in: units
+  trait_name: fruiting_time
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: resprouting_capacity_non_fire_disturbance
+  unit_in: units
+  trait_name: resprouting_capacity_non_fire_disturbance
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: pollination_syndrome
+  unit_in: units
+  trait_name: pollination_syndrome
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: leaf_phenology
+  unit_in: units
+  trait_name: leaf_phenology
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: life_history
+  unit_in: units
+  trait_name: life_history
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: plant_alternative_energy_and_nutrient_acquisition_strategy
+  unit_in: units
+  trait_name: plant_alternative_energy_and_nutrient_acquisition_strategy
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: foliage_time
+  unit_in: units
+  trait_name: foliage_time
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: fruit_fleshiness
+  unit_in: units
+  trait_name: fruit_fleshiness
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: flowering_cues
+  unit_in: units
+  trait_name: flowering_cues
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: leaf_shape
+  unit_in: units
+  trait_name: leaf_shape
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: fire_time_fire_to_flowering
+  unit_in: units
+  trait_name: fire_time_fire_to_flowering
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: lifespan
+  unit_in: units
+  trait_name: lifespan
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: germination_cues
+  unit_in: units
+  trait_name: germination_cues
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seed_height
+  unit_in: units
+  trait_name: seed_height
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seed_shape
+  unit_in: units
+  trait_name: seed_shape
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: dispersal_system
+  unit_in: units
+  trait_name: dispersal_system
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: climbing_height
+  unit_in: units
+  trait_name: plant_height
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: germination
+  unit_in: units
+  trait_name: germination
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seed_longevity
+  unit_in: units
+  trait_name: seed_longevity
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: fire_exposure_level
+  unit_in: units
+  trait_name: fire_exposure_level
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: dispersal_syndrome
+  unit_in: units
+  trait_name: dispersal_syndrome
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: inflorescence_length
+  unit_in: units
+  trait_name: plant_height
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: plant_growth_form
+  unit_in: units
+  trait_name: plant_growth_form
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: woodiness
+  unit_in: units
+  trait_name: woodiness
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seed_viability
+  unit_in: units
+  trait_name: seed_viability
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seed_germination_time
+  unit_in: units
+  trait_name: seed_germination_time
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: stipe_length
+  unit_in: units
+  trait_name: plant_height
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: leaf_surface_texture
+  unit_in: units
+  trait_name: leaf_surface_texture
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: leaf_pendulousness
+  unit_in: units
+  trait_name: leaf_pendulousness
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: storage_organ_width
+  unit_in: units
+  trait_name: storage_organ_width
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: petiole_length
+  unit_in: units
+  trait_name: petiole_length
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: extra_traits
+  unit_in: units
+  trait_name: unknown
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: fruit_height
+  unit_in: units
+  trait_name: fruit_height
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: dispersers
+  unit_in: units
+  trait_name: dispersers
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: stem_diameter
+  unit_in: units
+  trait_name: stem_diameter
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: leaf_thickness
+  unit_in: units
+  trait_name: leaf_thickness
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+substitutions: .na
+taxonomic_updates: .na
+exclude_observations: .na
+questions: .na

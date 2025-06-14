@@ -163,9 +163,9 @@ calculate_prop_traits_scored <- function(data, traits) {
 
 #### get_effect_score and calculate_risk
 
-- `get_effect_score` gets effect scores from the table for each threat; for some threat x trait combinations need to manually input value because of additional conditions
+-   `get_effect_score` gets effect scores from the table for each threat; for some threat x trait combinations need to manually input value because of additional conditions
 
-- `calculate_risk` scales all ordinal or scaled numeric values for a trait or taxonomic risk, based on effect score and ordinal value
+-   `calculate_risk` scales all ordinal or scaled numeric values for a trait or taxonomic risk, based on effect score and ordinal value
 
 ```{r, message=FALSE, warning=FALSE}
 get_effect_score <- function(data, trait_name) {
@@ -520,15 +520,17 @@ threatened <- all_traits$traits %>%
 ```
 
 ### generate list of native plant species, per APC
+
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 native_species <- resources$APC %>% 
   filter(taxonomic_status == "accepted") %>%
   filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
-  select(taxon_name = canonical_name, genus, family, taxon_distribution, taxon_rank) %>% 
+  select(taxon_name = canonical_name, genus, family, taxon_distribution) %>% 
   filter(str_detect(taxon_distribution, "[:alpha:]$") | 
            str_detect(taxon_distribution, "[:alpha:]\\,") |
            str_detect(taxon_distribution, "native and naturalised"))
 ```
+
 # Phytophthora cinnamomi
 
 ### Are any traits good predictors?
@@ -761,11 +763,12 @@ LMA emerges as having a significant correlation, but not including LMA effect sc
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 phytophthora_trait_effects <- tribble(
   ~trait,                  ~effect_score, ~notes,
-  "woodiness",     0.4,         "herbaceous species at very low risk; woody species at variable risk",
-  "resprouting_capacity",   -0.15,          "ability to resprout slows detrimental effects, especially if phytophthora  controlled at a site or site not always hospitable to phytophthora",
+  "woodiness",     0.3,         "herbaceous species at very low risk; woody species at variable risk",
+  "resprouting_capacity",   -0.25,          "ability to resprout slows detrimental effects, especially if phytophthora  controlled at a site or site not always hospitable to phytophthora",
   "storage_organ_fleshy",  -0.2,          "species with a fleshy storage organ rarely susceptible; plants with woody storage organ or no storage organ quite variable in susceptibility",
-  "leaf_P_per_dry_mass_scaled", -0.25,   "high leaf P = lower susceptibility, either because it is correlated with high soil P or high secondary metabolite content, but of which lower susceptibility",
-  "leaf_N_per_dry_mass_scaled", -0.2,   "high leaf N = lower susceptibility, either because it is correlated with high soil N or high secondary metabolite content, but of which lower susceptibility"
+  "leaf_P_per_dry_mass_scaled", -0.15,   "high leaf P = lower susceptibility, either because it is correlated with high soil P or high secondary metabolite content, but of which lower susceptibility",
+  "leaf_N_per_dry_mass_scaled", -0.15,   "high leaf N = lower susceptibility, either because it is correlated with high soil N or high secondary metabolite content, but of which lower susceptibility",
+  "reproductive_maturity_scaled",-0.3, "plants with shorter life cycles less impacted"
 )
 
 # download dataset that explicitly lists species considered to be at risk of extinction
@@ -803,6 +806,7 @@ phytophthora_assigned_risk <- native_species %>%
   left_join(habitat, by = "taxon_name") %>%
   left_join(phytophthora_habitat, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(reproductive_maturity, by = "taxon_name") %>%
   left_join(leaf_P_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_N_per_dry_mass, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
@@ -982,6 +986,7 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
   left_join(seed_dry_mass, by = "taxon_name") %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name")%>%
+  left_join(reproductive_maturity, by = "taxon_name") %>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(leaf_length, by = "taxon_name") %>%
   left_join(leaf_hairs_adult_leaves, by = "taxon_name") %>%
@@ -1172,11 +1177,11 @@ ggplot(data = genus_histograms) +
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 myrtle_rust_trait_effects <- tribble(
   ~trait,                  ~effect_score, ~notes,
-  "leaf_length_scaled",     -0.2,         "there are no ",
-  "plant_height_scaled",   -0.3,          "taller plants = lower impact, because taller plant canopies further from moist ground",
-  "resprouting_capacity",  -0.2,          "resprouters = slower impact",
-  "bud_bank_location_scaled", -0.2,   "bud bank above the ground surface improves chance of resprouting vegetation surviving",
-  "leaf_lignin_per_dry_mass", -0.3, "higher leaf lignin = lower impact"
+  "leaf_length_scaled",     -0.2,         "not in literature, but no small leaf resistant species",
+  "plant_height_scaled",   -0.4,          "taller plants = lower impact, because taller plant canopies further from moist ground",
+  "resprouting_capacity",  -0.3,          "resprouters = slower impact",
+  "bud_bank_location_scaled", -0.3,   "bud bank above the ground surface improves chance of resprouting vegetation surviving",
+  "leaf_lignin_per_dry_mass", -0.2, "higher leaf lignin = lower impact"
 )
 
 # read in data indicating epiphytic orchids with known preference for Myrtaceae species as hosts
@@ -1226,6 +1231,7 @@ myrtle_rust_assigned_risk <- native_species %>%
   left_join(habitat_moisture, by = "taxon_name") %>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(leaf_length, by = "taxon_name") %>%
+  left_join(reproductive_maturity, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(bud_bank_location_scaled, by = "taxon_name") %>%
   left_join(leaf_lignin_per_dry_mass, by = "taxon_name") %>%
@@ -1559,13 +1565,14 @@ correlations_with_possible_traits_goats %>%
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 goat_trait_effects <- tribble(
   ~trait, ~effect_score,       ~notes,
-  "woodiness",0.2,             "woody species more impacted",
-  "life_history",0.2,             "perennial species more impacted",
+  "woodiness",0.3,             "woody species more impacted",
+  "life_history",0.4,             "perennial species more impacted",
   "forb",-0.15, "forbs are less impacted than graminoids",
-  "resprouting_capacity", -0.1, "resprouting species are more likely to regenerate, persist; however, slight effect of palatable species more likely to be fire-killed",
-  "plant_height_4m_peak_scaled", -0.2,  "worst height is 4 m, with decreasing impact above and below that",
+  "resprouting_capacity", -0.25, "resprouting species are more likely to regenerate, persist; however, slight effect of palatable species more likely to be fire-killed",
+  "plant_height_4m_peak_scaled", -0.15,  "worst height is 4 m, with decreasing impact above and below that",
   "bud_bank_location_scaled",-0.2,    "having a higher bud bank means new shoots more likely to persist",
-  "bark_thickness_scaled",-0.1,   "higher bark thickness = lower impact"
+  "bark_thickness_scaled",-0.2,   "higher bark thickness = lower impact",
+  "reproductive_maturity_scaled",-0.3, "plants with shorter life cycles less impacted"
 )
 
 goat_taxonomic_effects <- tribble(
@@ -1587,6 +1594,7 @@ goats_assigned_risk <- native_species %>%
   left_join(goats_habitat, by = "taxon_name") %>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
+  left_join(reproductive_maturity, by = "taxon_name") %>%
   left_join(bud_bank_location_scaled, by = "taxon_name") %>%
   left_join(life_history, by = "taxon_name") %>%
   left_join(bark_thickness, by = "taxon_name") %>%
@@ -1601,11 +1609,11 @@ goats_assigned_risk <- native_species %>%
 
 #### - calculate risk scores
 
-1. calculate "risk effect scores" for habitat, traits, taxonomy
-2. sum traits, taxonomy risks
-3. scale total traits, taxonomy risk
-4. combine with habitat risk (product of two)
-5. assign risk susceptibility bins, confidence bins to each taxon
+1.  calculate "risk effect scores" for habitat, traits, taxonomy
+2.  sum traits, taxonomy risks
+3.  scale total traits, taxonomy risk
+4.  combine with habitat risk (product of two)
+5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -1725,14 +1733,14 @@ make_risk_density_plot(df_long, "goats")
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 deer_trait_effects <- tribble(
   ~trait, ~effect_score,       ~notes,
-  "woodiness",-0.2,             "woody species less impacted",
+  "woodiness",-0.1,             "woody species moderately less impacted",
   "life_history",-0.2,             "plants with shorter life cycles less impacted",
   "reproductive_maturity_scaled",-0.2, "plants with shorter life cycles less impacted",
   "plant_physical_defence_structures",-0.2, "plants with physical defence less impacted",
-  "resprouting_capacity", -0.1, "resprouting species are more likely to regenerate, persist",
+  "resprouting_capacity", -0.2, "resprouting species are more likely to regenerate, persist",
   "plant_height_4m_peak_scaled", -0.1,  "worst height is 4 m, with decreasing impact above and below that",
-  "leaf_mass_per_area_scaled",-0.1,    "species with tougher leaves (thicker, more sclerophyllous) less impacted",
-  "bark_thickness_scaled",-0.1,   "higher bark thickness = lower impact"
+  "leaf_mass_per_area_scaled",-0.2,    "species with tougher leaves (thicker, more sclerophyllous) less impacted",
+  "bark_thickness_scaled",-0.1,   "higher bark thickness = lower impact, but also evidence of deer preferring to rub against rough-barked species"
 )
 
 # create dataframe with relevant traits, attributes
@@ -1755,11 +1763,11 @@ deer_assigned_risk <- resources$APC %>%
 
 #### - calculate risk scores
 
-1. calculate "risk effect scores" for habitat, traits, taxonomy
-2. sum traits, taxonomy risks
-3. scale total traits, taxonomy risk
-4. combine with habitat risk (product of two)
-5. assign risk susceptibility bins, confidence bins to each taxon
+1.  calculate "risk effect scores" for habitat, traits, taxonomy
+2.  sum traits, taxonomy risks
+3.  scale total traits, taxonomy risk
+4.  combine with habitat risk (product of two)
+5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -1807,7 +1815,7 @@ deer_assigned_risk <- deer_assigned_risk %>%
       
       # rescale trait risk; this value then to be multiplied by habitat risk
       # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
-        trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.2, 1.3)),
+        trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.2, 1.5)),
 
       # multiple scaled trait effect score risk by habitat risk
         total_risk = habitat_risk*trait_effect_score_scaled
@@ -1880,11 +1888,11 @@ make_risk_density_plot(df_long, "deer")
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 pigs_trait_effects <- tribble(
   ~trait, ~effect_score,       ~notes,
-  "woodiness",-0.2,             "woody species less impacted",
+  "woodiness",-0.4,             "woody species less impacted",
   "resprouting_capacity", -0.2, "resprouting species are more likely to regenerate, persist",
   "plant_height_scaled", -0.2,  "shorter plants more impacted by pigs",
   "fruit_fleshiness",NA,       "fleshy fruit = higher impact, because preferred food source; merged with fruit_length for scoring",
-  "fruit_length_scaled",0.4,    "large fruit = higher impact, because preferred food source; incorporates fruit_fleshiness for scoring, because length doesn't matter if not fleshy",
+  "fruit_length_scaled",0.25,    "large fruit = higher impact, because preferred food source; incorporates fruit_fleshiness for scoring, because length doesn't matter if not fleshy",
   "storage_organ_fleshy",0.4,   "fleshy underground storage organ = much higher impact, because single most preferred food source"
 )
 
@@ -1918,11 +1926,11 @@ pigs_assigned_risk <- native_species %>%
 
 #### - calculate risk scores
 
-1. calculate "risk effect scores" for habitat, traits, taxonomy
-2. sum traits, taxonomy risks
-3. scale total traits, taxonomy risk
-4. combine with habitat risk (product of two)
-5. assign risk susceptibility bins, confidence bins to each taxon
+1.  calculate "risk effect scores" for habitat, traits, taxonomy
+2.  sum traits, taxonomy risks
+3.  scale total traits, taxonomy risk
+4.  combine with habitat risk (product of two)
+5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -2075,11 +2083,11 @@ tropical_C4_grasses_assigned_risk <- native_species %>%
 
 #### - calculate risk scores
 
-1. calculate "risk effect scores" for habitat, traits, taxonomy
-2. sum traits, taxonomy risks
-3. scale total traits, taxonomy risk
-4. combine with habitat risk (product of two)
-5. assign risk susceptibility bins, confidence bins to each taxon
+1.  calculate "risk effect scores" for habitat, traits, taxonomy
+2.  sum traits, taxonomy risks
+3.  scale total traits, taxonomy risk
+4.  combine with habitat risk (product of two)
+5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -2259,11 +2267,11 @@ hymenachne_assigned_risk <- native_species %>%
 
 #### - calculate risk scores
 
-1. calculate "risk effect scores" for habitat, traits, taxonomy
-2. sum traits, taxonomy risks
-3. scale total traits, taxonomy risk
-4. combine with habitat risk (product of two)
-5. assign risk susceptibility bins, confidence bins to each taxon
+1.  calculate "risk effect scores" for habitat, traits, taxonomy
+2.  sum traits, taxonomy risks
+3.  scale total traits, taxonomy risk
+4.  combine with habitat risk (product of two)
+5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
