@@ -3,8 +3,8 @@ library(dplyr)
 # open v6.0.0. from Zenodo
 
 # extract data for key traits
-trait_data_raw <- (austraits %>%
-  austraits::extract_trait(c("plant_growth_form", "plant_growth_substrate", "plant_height", "succulence", "life_history", "woodiness_detailed")) %>%
+trait_data_raw <- (all_traits %>%
+  austraits::extract_trait(c("plant_growth_form", "plant_growth_substrate", "plant_height", "succulence", "life_history", "woodiness_detailed", "leaf_length", "stem_length")) %>%
   austraits::join_taxa(vars = c("genus", "family", "taxonomic_status")) %>%
   austraits::join_location_coordinates())$traits %>%
   dplyr::filter(taxonomic_status == "accepted")

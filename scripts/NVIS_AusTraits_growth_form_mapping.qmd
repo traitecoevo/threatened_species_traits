@@ -1,0 +1,747 @@
+---
+title: "NVIS growth form script"
+author: "Elizabeth Wenk"
+format: html
+toc: true
+toc-depth: 4
+editor: visual
+embed-resources: true
+knitr:
+  opts_knit:
+    root.dir: "C:/Users/Lizzy/Documents/GitHub/threatened_species_traits"
+editor_options: 
+  chunk_output_type: console
+---
+
+## load libraries
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+library(APCalign)
+library(kableExtra)
+library(austraits)
+
+all_traits <- readRDS("~/Github/threatened_species_traits/ignore/alltraits_20250615.rds")
+```
+
+## functions
+
+### extract_genus
+
+function to extract genera from APCalign output
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+extract_genus <- function(taxon_name) {
+  
+  taxon_name <- APCalign::standardise_names(taxon_name)
+  
+  genus <- stringr::str_split_i(taxon_name, " |\\/", 1) %>% stringr::str_to_sentence()
+  
+  # Deal with names that being with x, 
+  # e.g."x Taurodium x toveyanum" or "x Glossadenia tutelata"
+  i <- !is.na(genus) & genus =="X"
+  
+  genus[i] <- 
+    stringr::str_split_i(taxon_name[i], " |\\/", 2) %>% stringr::str_to_sentence() %>%  paste("x", .)
+  
+  genus
+}
+```
+
+### extract_categorical_data
+
+function to extract categorical traits
+
+```{r, message=FALSE, warning=FALSE}
+extract_categorical_data <- function(database = database, categorical_trait, dataset_id = NULL) {
+  
+  if(is.null(dataset_id)) {
+    extracted_data <- (database %>%
+                         austraits::extract_trait(categorical_trait, partial_matches_allowed = FALSE))$traits 
+  } else {
+    extracted_data <- (database %>%
+                         austraits::extract_trait(categorical_trait, partial_matches_allowed = FALSE) %>%
+                         austraits::extract_dataset(dataset_id))$traits
+  }
+  
+  extracted_data <- extracted_data %>%
+    tidyr::separate_longer_delim(value, delim = " ") %>%
+    dplyr::rename(trait_value = value) %>%
+    dplyr::select(taxon_name, trait_name, trait_value) %>% 
+    dplyr::group_by(taxon_name, trait_name, trait_value) %>%
+      dplyr::mutate(value_count = n()) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(trait_value_summary = paste0(trait_value, " (", value_count, ")")) %>%
+    dplyr::distinct(taxon_name, trait_name, trait_value, trait_value_summary, value_count) %>%
+    dplyr::arrange(taxon_name, -value_count) %>%
+    dplyr::select(-value_count) %>%
+    dplyr::group_by(taxon_name, trait_name) %>%
+      dplyr::mutate(
+        trait_value = paste0(trait_value, collapse = " "),
+        trait_value_summary = paste0(trait_value_summary, collapse = " ")
+      ) %>%
+    dplyr::ungroup() %>%
+    dplyr::distinct() %>%
+    dplyr::select(-trait_name) %>%
+    dplyr::rename(
+      !!categorical_trait := trait_value,
+      !!paste0(categorical_trait, "_summary") := trait_value_summary
+      )
+  
+  extracted_data
+}
+```
+
+### austraits_weighted_means
+
+```{r, message=FALSE, warning=FALSE}
+austraits_weighted_means <- function(austraits, traits) {
+  
+  library(austraits)
+  
+  # any data that is a mean, median or raw, create a site mean
+  data_means <- 
+    (austraits %>% austraits::join_location_coordinates())$traits %>% 
+    dplyr::filter(trait_name %in% traits) %>%
+    dplyr::filter(value_type %in% c("mean", "raw", "median")) %>%
+    dplyr::mutate(
+      replicates = 1,
+      log_value = ifelse(!is.na(value) & value > 0, log10(as.numeric(value)), NA)
+      ) %>%
+    dplyr::group_by(taxon_name, trait_name, dataset_id, location_id) %>% 
+    dplyr::summarise(
+      mean = mean(as.numeric(value)),
+      min = min(as.numeric(value)),
+      max = max(as.numeric(value)),
+      median = median(as.numeric(value)),
+      `latitude (deg)` = first(`latitude (deg)`),
+      `longitude (deg)` = first(`longitude (deg)`),
+      location_name = first(location_name),
+      all_replicates = sum(replicates),
+      geom_mean = mean(log_value)
+    ) %>%
+    dplyr::ungroup() %>%
+    dplyr::distinct(taxon_name, trait_name, dataset_id, location_id, mean, min, max, median, geom_mean, all_replicates, location_name, `latitude (deg)`, `longitude (deg)`) %>%
+    dplyr::mutate(
+      location_replicates = 1,
+      flora_replicates = 0,
+      geom_mean = 10^(geom_mean)
+    )
+  
+  # any data that is a max or a min (range) and basically from a flora, create a mean value
+  flora_means <-
+    austraits$traits %>%
+    dplyr::filter(trait_name %in% traits) %>%
+    dplyr::filter(value_type %in% c("minimum", "maximum"), basis_of_record %in% c("preserved_specimen", "literature"))
+  
+  if (nrow(flora_means > 0)) {
+    flora_means <- 
+      flora_means %>%
+        dplyr::group_by(taxon_name, trait_name, dataset_id, observation_id, original_name) %>% 
+        dplyr::summarise(
+          mean = mean(as.numeric(value)),
+          min = min(as.numeric(value)),
+          max = max(as.numeric(value))
+        ) %>%
+        dplyr::ungroup() %>%
+        dplyr::distinct(taxon_name, trait_name, dataset_id, observation_id, original_name, mean, min, max) %>%
+        dplyr::mutate(
+          location_replicates = 0,
+          flora_replicates = 1,
+          all_replicates = 1,
+          meadian = NA
+        )
+      }
+  
+  means <-
+    if (nrow(flora_means > 0)) {
+      dplyr::bind_rows(
+        data_means %>% dplyr::mutate(across(dplyr::any_of(c("mean", "min", "max")), ~as.numeric(.x))),
+        flora_means %>% dplyr::mutate(across(dplyr::any_of(c("mean", "min", "max")), ~as.numeric(.x)))
+      )
+    } else {
+      data_means %>% dplyr::mutate(across(dplyr::any_of(c("mean", "min", "max")), ~as.numeric(.x)))
+    }
+  
+  means <- means %>%
+    dplyr::mutate(
+      log_value = ifelse(!is.na(mean) & mean > 0, log10(as.numeric(mean)), NA)
+    ) %>%
+    dplyr::group_by(taxon_name, trait_name) %>%
+    dplyr::summarise(
+      mean = mean(mean),
+      min = min(min),
+      max = max(max),
+      median = median(median),
+      geom_mean = mean(log_value),
+      all_replicates = sum(all_replicates),
+      location_replicates = sum(location_replicates),
+      flora_replicates = sum(flora_replicates)
+    ) %>%
+    dplyr::ungroup() %>%
+    dplyr::distinct()  %>%
+    dplyr::mutate(
+      geom_mean = 10^(geom_mean)
+    )
+  
+  means
+}
+```
+
+### extract_numeric_data
+```{r, message=FALSE, warning=FALSE}
+extract_numeric_trait <- function(database, numeric_trait) {
+  
+  extracted_data <- database %>%
+  austraits::extract_trait(numeric_trait) %>%
+  austraits::extract_data(table = "traits", col = "basis_of_record", col_value = c("field", "literature", "field literature", "literature field", "preserved_specimen"), partial_matches_allowed = F) %>%
+  austraits_weighted_means(numeric_trait) %>%
+  dplyr::filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
+  dplyr::select(taxon_name, mean) %>%
+    dplyr::rename(!!numeric_trait := mean)
+    
+  extracted_data
+}
+```
+
+
+## load data
+
+### load APC
+
+```{r, message=FALSE, warning=FALSE}
+resources <- APCalign::load_taxonomic_resources()
+
+accepted_taxa <- resources$APC %>% 
+  dplyr::filter(taxonomic_status == "accepted") %>%
+  dplyr::filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  dplyr::select(taxon_name = canonical_name, family, taxon_distribution, higher_classification, class) %>% 
+  filter(str_detect(taxon_distribution, "[:alpha:]$") | 
+           str_detect(taxon_distribution, "[:alpha:]\\,") |
+           str_detect(taxon_distribution, "native and naturalised")) %>%
+  mutate(genus = extract_genus(taxon_name = taxon_name))
+```
+
+### create vectors of genera specified in NVIS rules
+```{r, message=FALSE, warning=FALSE}
+chenopod_shrub_genera <- c("Atriplex", "Chenopodium", "Rhagodia", "Maireana", "Enchylaena", 
+                          "Sclerolaena", "Salsola", "Einadia", "Threlkeldia", "Nitraria", 
+                          "Frankenia", "Lawrencia", "Wilsonia", "Trianthema")
+
+# includes genera from NVIS list and others in subfamily Salicornioideae with
+# observations on iNaturalist for Australia
+samphire_shrub_genera <- c("Salicornia", "Tecticornia", "Allenrolfea", "Arthrocaulon",
+                           "Arthroceras", "Halosarcia", "Pachycornia", "Sarcocornia",
+                           "Sclerostegia", "Tegicornia", "Sueda")
+
+
+# List from input 3520, which includes genera that will mostly be considered heath, 
+# but double check
+# 1) they are < 2 m ; 2) they occur in "heath" [maybe?]
+heath_genera_1 <- c("Epacris", "Leucopogon", "Borya", "Acrotriche", "Beaufortia", 
+                    "Lasiopetalum", "Beyeria", "Diplolaena", 
+                    "Andersonia", "Baeckea", "Boronia", "Calytrix", "Darwinia", "Dryandra",
+                    "Hibbertia", "Homoranthus", "Isopogon", "Jacksonia", 
+                    "Kunzea", "Lambertia", "Micromyrtus", "Neofabricia", "Ozothamnus", "Phebalium", 
+                    "Thryptomene", "Verticordia", "Westringia", "Xanthorrhoea", "Agonis", 
+                    "Eremaea", "Styphelia")
+
+# Genera where stunted trees and shrubs may be heath; 
+# height and leaf length/shape tests essential
+heath_genera_2 <- c("Actinostrobus", "Agastachys", "Agonis", "Angophora", "Asteromyrtus", "Banksia",
+                    "Melaleuca", "Allocasuarina", "Casuarina", "Bursaria", "Grevillea", 
+                    "Hakea", "Leucopogon", "Leptospermum",  "Monotoca")
+
+# Genera that are mostly non-heath, but particular species are heathy
+heath_genera_3 <- c("Alyxia", "Bossiaea", "Olearia")
+  
+# XX - QUESTION - XX  
+# genera from input 3420 that ARE NOT in input 3520. 
+# Unclear why it isn't? Wondering if mistake or name change
+heath_genera_3 <-  c("Adenanthos")
+
+poales_families <- accepted_taxa %>%
+  filter(str_detect(higher_classification, "Poales")) %>%
+  distinct(family) %>% 
+  filter(!is.na(family))
+
+polypodiopsida_families <- accepted_taxa %>%
+  filter(str_detect(higher_classification, "Polypodiidae")) %>%
+  distinct(family) %>% 
+  filter(!is.na(family))
+```
+
+### extract trait data
+
+Use functions to extract data for relevant traits from AusTraits & threatened species attributes database (currently given as merged rds)
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+habitat <- extract_categorical_data(database = all_traits, categorical_trait = "habitat")
+life_history <- extract_categorical_data(database = all_traits, categorical_trait = "life_history", dataset_id = c("Wenk_2023", "SPRAT_traits_2025"))
+plant_growth_form <- extract_categorical_data(database = all_traits, categorical_trait = "plant_growth_form", dataset_id = c("Wenk_2022", "SPRAT_traits_2025"))
+woodiness_detailed <- extract_categorical_data(database = all_traits, categorical_trait = "woodiness_detailed", dataset_id = c("Wenk_2022", "SPRAT_traits_2025"))
+plant_growth_substrate <- extract_categorical_data(database = all_traits, categorical_trait = "plant_growth_substrate")
+stem_growth_habit <- extract_categorical_data(database = all_traits, categorical_trait = "stem_growth_habit")
+plant_height <- extract_numeric_trait(database = all_traits, numeric_trait = "plant_height")
+leaf_length <- extract_numeric_trait(database = all_traits, numeric_trait = "leaf_length")
+```
+
+### create dataframe
+
+Merge data into a single dataframe, only retained data for APC-accepted taxa
+ERROR: AusTraits is in the middle of updating to the current APC, and information for taxa with name changes in the past 18 months will currently get thrown out - to be solved by 20 June 2025
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+AusTraits_growth_form_data_full <- accepted_taxa %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(plant_growth_form, by = "taxon_name") %>%
+  left_join(woodiness_detailed, by = "taxon_name") %>%
+  left_join(plant_growth_substrate, by = "taxon_name") %>%
+  left_join(stem_growth_habit, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
+  left_join(leaf_length, by = "taxon_name")
+
+AusTraits_growth_form_data <- AusTraits_growth_form_data_full %>%
+  select(-contains("summary"))
+```
+
+conversion_table <- read_csv("ignore/NVIS_GrowthForm_AusTraits/NVIS-AusTraits conversion.csv")
+
+## allocate taxa to growth forms
+
+### set up dataframe
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa <- list()
+
+taxa[["to_allocate"]] <- accepted_taxa %>%
+  left_join(AusTraits_growth_form_data) %>%
+  mutate(checked = FALSE,
+         NVIS_growthform = NA_character_)
+
+taxa[["allocated"]] <- 
+  dplyr::tibble(
+    taxon_name = NA_character_,
+    genus = NA_character_,
+    family = NA_character_,
+    class = NA_character_,
+    higher_classification = NA_character_,
+    habitat = NA_character_,
+    plant_growth_substrate= NA_character_,
+    plant_growth_form = NA_character_,
+    woodiness_detailed = NA_character_,
+    life_history = NA_character_,       
+    stem_growth_habit = NA_character_,       
+    plant_height = NA_real_,         
+    leaf_length = NA_real_,     
+    checked = NA,
+    NVIS_growthform = NA_character_
+  )
+
+redistribute <- function(taxa) {
+  taxa[["allocated"]] <- dplyr::bind_rows(taxa[["allocated"]],
+                                          taxa[["to_allocate"]] %>% 
+                                          dplyr::filter(checked))
+  
+  taxa[["to_allocate"]] <-
+    taxa[["to_allocate"]] %>% dplyr::filter(!checked)
+  taxa
+}
+```
+
+
+### 01. map aquatic (Q)
+
+Plant growing in an inland waterway or wetland with the majority of its biomass under water for most of the year. Fresh, saline or brackish water.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_substrate, "aquatic"), "aquatic", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 02. map epiphytic (K)
+
+Epiphytes, mistletoes and parasites. Plant with roots attached to the aerial portions of other plants. Can often be another growth form, such as fern or forb.
+
+#### XX - QUESTION - XX
+
+* What about lithophytes? Some ferns, orchids that are lithophytes
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_substrate, "epiphyte"), "epiphyte", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 03. map tree-fern (D)
+
+Characterised by large and usually branched leaves (fronds), arborescent and terrestrial; spores in sporangia on the leaves.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_form, "palmoid") & family %in% polypodiopsida_families$family, "tree-fern", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 04. map fern (E)
+
+Ferns and fern allies, except tree-fern, above. Characterised by large and usually branched leaves (fronds), herbaceous and terrestrial to aquatic; spores in sporangia on the leaves.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(family %in% c(polypodiopsida_families$family, "Lycopodiaceae", "Marattiaceae", "Ophioglossaceae", "Selaginellaceae", "Equisetaceae"), 
+                             "fern", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 05. map cycad (A)
+
+Members of the families Cycadaceae and Zamiaceae.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(family %in% c("Cycadaceae", "Zamiaceae"), "cycad", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 06. map grass-tree (X)
+
+Australian grass trees. Members of the Xanthorrhoeaceae family.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(genus %in% c("Xanthorrhoea"), "grass-tree", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 07. map palm (P)
+
+Palms and other arborescent monocotyledons. Members of the Arecaceae family or the genus Pandanus. (Pandanus is often multi-stemmed).
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(family %in% c("Arecaceae")|genus %in% c("Pandanus")| stringr::str_detect(plant_growth_form, "palmoid"), "palm", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 08. map rush (R)
+
+Herbaceous, usually perennial erect monocot that is neither a grass nor a sedge. For the purposes of NVIS, rushes include the monocotyledon families Juncaceae, Typhaceae, Liliaceae, Iridaceae, Xyridaceae and the genus Lomandra. (i.e. "graminoid" or grass-like genera).
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(family %in% c("Juncaceae", "Typhaceae", "Liliaceae", "Iridaceae", "Xyridaceae") |
+                               genus %in% c("Lomandra"), 
+                             "rush", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 09. map sedge (V)
+
+Herbaceous, usually perennial erect plant generally with a tufted habit and of the families Cyperaceae (true sedges) or Restionaceae (node sedges).
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(family %in% c("Cyperaceae", "Restionaceae"), 
+                             "sedge", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 10. map hummock grass (H)
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(genus %in% c("Triodia", "Plectrachne"), 
+                             "hummock grass", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 11. map tussock grass (G)
+
+Grass forming discrete but open tussocks usually with distinct individual shoots, or if not, then forming a hummock. These are the common agricultural grasses.
+
+#### XX - TODO - XX
+
+* Search again for the word tussock in newly downloaded taxon profiles (SPRAT, Wikipedia), to confirm I have everything.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(plant_growth_form == "tussock" & family %in% poales_families$family, "tussock grass", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 12. map other grass (W)
+
+Member of the family Poaceae, but having neither a distinctive tussock nor hummock appearance. Examples include stoloniferous species such as Cynodon dactylon.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(family %in% poales_families$family, "other grass", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 13. map vine (L)
+
+Climbing, twining, winding or sprawling plants usually with a woody stem.
+
+#### XX - TODO - XX: 
+
+* We have the word sprawling as a `stem_growth_habit` but this does not always map to `climber` in AusTraits
+* Sprawling plants are included below if they are the first term under `stem_growth_habit`, but I should do and additional check through floras to see if these are any we've missed
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_form, "^climber"), "vine", NVIS_growthform),
+    NVIS_growthform = ifelse(!is.na(stem_growth_habit) & str_detect(stem_growth_habit, "^sprawling"), "vine", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 14. map forb (F)
+
+Herbaceous or slightly woody, annual or sometimes perennial plant. (Usually a dicotyledon).
+
+#### XX - NOTES - XX
+
+* Including geophytes here, which include lots of Orchidaceae (monocots)
+* Including all perennial herbaceous dicots, because no other category they fit in
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_form, "herb")|str_detect(plant_growth_form, "geophyte"), "forb", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 15. map mallee shrub (Y)
+
+Commonly less than 8 m tall, usually with five or more trunks, of which at least three of the largest do not exceed 100 mm diameter at breast height (1.3 m).
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_form, "mallee") & plant_height <8, "mallee shrub", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 16. map tree mallee (M)
+
+Woody perennial plant usually of the genus Eucalyptus. Multi-stemmed with fewer than five trunks of which at least three exceed 100 mm diameter at breast height (1.3 m). Usually 8 m or more.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_form, "mallee"), "tree mallee", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 17. map tree (T)
+
+Woody plants, more than 2 m tall with a single stem or branches well above the base.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_form, "tree"), "tree", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 18. map samphire shrub (U)
+
+Genera (of Tribe Salicornioideae, viz.: Halosarcia, Pachycornia, Sarcocornia, Sclerostegia, Tecticornia and Tegicornia) with articulate branches, fleshy stems and reduced flowers within the Chenopodiaceae family, succulent chenopods (Wilson 1980). Also the genus Suaeda
+
+Included: samphire_shrub_genera <- c("Salicornia", "Tecticornia", "Allenrolfea", "Arthrocaulon", "Arthroceras", "Halosarcia", "Pachycornia", "Sarcocornia", "Sclerostegia", "Tegicornia", "Sueda")
+
+#### NOTES
+
+* This above list includes genera from NVIS list and others in subfamily Salicornioideae with observations on iNaturalist for Australia, assuming they may represent recently created genera.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(genus %in% samphire_shrub_genera, "samphire shrub", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 19. map chenopod shrub (C)
+
+Single or multi-stemmed, semi-succulent shrub of the family Chenopodiaceae exhibiting drought and salt tolerance.
+
+Included: chenopod_shrub_genera <- c("Atriplex", "Chenopodium", "Rhagodia", "Maireana", "Enchylaena", "Sclerolaena", "Salsola", "Einadia", "Threlkeldia", "Nitraria", "Frankenia", "Lawrencia", "Wilsonia", "Trianthema")
+
+#### NOTES
+
+* There are some Chenopodiaceae genera that are not in the genera specified for either samphire shrub (U) or chenopod shrub (C)
+* Confirming they really don't belong, not that they are new genera:
+* c("Eremophea", "Dysphania", "Malacocera", "Osteocarpum",  "Scleroblitum", "Roycea", "Dissocarpus", "Didymanthus", "Eriochiton", "Neobassia")
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(genus %in% chenopod_shrub_genera, "chenopod shrub", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 20. map heath shrub (Z)
+
+Woody plants multi-stemmed at the base (or within 200mm from ground level) or if single stemmed, less than 2 m.
+
+There are three lists:
+
+* List from input 3520, which includes genera that will mostly be considered heath,but double check
+  1) they are < 2 m
+  2) they occur in "heath" [maybe?]
+heath_genera_1 <- c("Epacris", "Leucopogon", "Borya", "Acrotriche", "Beaufortia", "Lasiopetalum", "Beyeria", "Diplolaena", "Andersonia", "Baeckea", "Boronia", "Calytrix", "Darwinia", "Dryandra", "Hibbertia", "Homoranthus", "Isopogon", "Jacksonia", "Kunzea", "Lambertia", "Micromyrtus", "Neofabricia", "Ozothamnus", "Phebalium","Thryptomene", "Verticordia", "Westringia", "Xanthorrhoea", "Agonis", "Eremaea", "Styphelia")
+
+* Genera where stunted trees and shrubs may be heath; height and leaf length/shape tests essential
+
+heath_genera_2 <- c("Actinostrobus", "Agastachys", "Agonis", "Angophora", "Asteromyrtus", "Banksia", "Melaleuca", "Allocasuarina", "Casuarina", "Bursaria", "Grevillea", "Hakea", "Leucopogon", "Leptospermum",  "Monotoca")
+
+* Genera that are mostly non-heath, but particular species are heathy
+
+heath_genera_3 <- c("Alyxia", "Bossiaea", "Olearia")
+  
+#### QUESTION
+* There is one genus from input 3420 that IS NOT in input 3520. Unclear why it isn't? Wondering if mistake or name change:
+
+#### NOTES
+* Species from list 1 genera make it through if < 2m (or, currently, no height data)
+* Species from list 2 genera make it through if < 2m, habitat includes "heath" (no taxa with missing data get through)
+* Species from list 3 genera make it through if < 2m, habitat included "heath", leaf length < 10 mm (no taxa with missing data get through)
+
+Currently some species that should be "heath shrub" from genera in list 2/3 won't get through; as height and habitat data are gap filled this will resolve itself.
+
+heath_genera_3 <- c("Adenanthos")
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(genus %in% heath_genera_1 & 
+                               (is.na(plant_height) | plant_height < 2), 
+                             "heath shrub", NVIS_growthform),
+    NVIS_growthform = ifelse(genus %in% heath_genera_2 & 
+                               (!is.na(plant_height) & plant_height < 2) & 
+                               (!is.na(habitat) & stringr::str_detect(habitat, "heath")) , 
+                             "heath shrub", NVIS_growthform),
+    NVIS_growthform = ifelse(genus %in% heath_genera_3 & 
+                               (!is.na(plant_height) & plant_height < 2) & 
+                               (!is.na(habitat) & stringr::str_detect(habitat, "heath"))  & 
+                               (!is.na(leaf_length) & leaf_length < 10), 
+                             "heath shrub", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 21. map shrub (S)
+
+Woody plants multi-stemmed at the base (or within 200mm from ground level) or if single stemmed, less than 2 m.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
+  mutate(
+    NVIS_growthform = ifelse(str_detect(plant_growth_form, "shrub"), "shrub", NVIS_growthform),
+    checked = ifelse(!is.na(NVIS_growthform), TRUE, checked)
+  )
+
+taxa <- redistribute(taxa)
+```
+
+### 22. map bryophyte (B)
+
+Mosses and Liverworts. Mosses are small plants usually with a slender leaf-bearing stem with no true vascular tissue. Liverworts are often moss-like in appearance or consisting of a flat, ribbon-like green thallus.
+
+NOT INCLUDED - no data in AusTraits, would be based on the available NSL taxon list
+
+### 23. map lichen (N)
+
+Composite plant consisting of a fungus living symbiotically with algae; without true roots, stems or leaves.
+
+NOT INCLUDED - no data in AusTraits, would be based on the available NSL taxon list
+
+### 24. map seagrass (J)
+
+Flowering angiosperms forming sparse to dense mats of material at the subtidal and down to 30 m below MSL. Occasionally exposed
+
+NOT INCLUDED - no data in AusTraits, would be based on the available NSL taxon list
+
+### 25. map lower plant (O)
+Algae, fungus.
+
+NOT INCLUDED - no data in AusTraits, would be based on the available NSL taxon list
+
+### Create final output
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+taxa <- bind_rows(taxa$to_allocate, taxa$allocated)
+
+taxa %>% write_csv("ignore/NVIS_GrowthForm_AusTraits/scoring_NVIS_growthform.csv", na = "")
+```

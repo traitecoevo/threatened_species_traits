@@ -1,7 +1,9 @@
 library(tidyverse)
+library(APCalign)
+
 extract_genus <- function(taxon_name) {
   
-  taxon_name <- standardise_names(taxon_name)
+  taxon_name <- APCalign::standardise_names(taxon_name)
   
   genus <- stringr::str_split_i(taxon_name, " |\\/", 1) %>% stringr::str_to_sentence()
   
@@ -15,16 +17,51 @@ extract_genus <- function(taxon_name) {
   genus
 }
 
+#### extract_categorical_trait
+
+function to extract categorical traits
+
+```{r, message=FALSE, warning=FALSE}
+extract_categorical_trait <- function(database = database, categorical_trait, trait_scores, output_name) {
+  
+  extracted_data <- (database %>%
+                       austraits::extract_trait(categorical_trait))$traits %>%
+    tidyr::separate_longer_delim(value, delim = " ") %>%
+    dplyr::rename(trait_value = value) %>%
+    dplyr::left_join(trait_scores %>% rename(output_name = 3), by = join_by(trait_name, trait_value)) %>%
+    dplyr::filter(!is.na(output_name)) %>%
+    dplyr::select(dataset_id, observation_id, taxon_name, output_name) %>%
+    dplyr::group_by(taxon_name, dataset_id, observation_id) %>%
+    dplyr::mutate(output_name = mean(as.numeric(output_name))) %>%
+    dplyr::ungroup() %>%
+    dplyr::distinct() %>%
+    dplyr::select(taxon_name, output_name) %>%
+    group_by(taxon_name) %>%
+    dplyr::mutate(output_name = mean(as.numeric(output_name))) %>%
+    dplyr::ungroup() %>%
+    dplyr::distinct() %>%
+    rename(!!output_name := output_name)
+  
+  extracted_data
+}
+```
+
 resources <- APCalign::load_taxonomic_resources()
 
-
 accepted_taxa <- resources$APC %>% 
-  filter(taxonomic_status == "accepted") %>%
-  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
-  select(taxon_name = canonical_name, genus, family, taxon_distribution, higherClassification) %>% 
+  dplyr::filter(taxonomic_status == "accepted") %>%
+  dplyr::filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
+  dplyr::select(taxon_name = canonical_name, family, taxon_distribution, higher_classification, class) %>% 
   filter(str_detect(taxon_distribution, "[:alpha:]$") | 
            str_detect(taxon_distribution, "[:alpha:]\\,") |
-           str_detect(taxon_distribution, "native and naturalised"))
+           str_detect(taxon_distribution, "native and naturalised")) %>%
+  mutate(genus = extract_genus(taxon_name = taxon_name))
+
+
+chenopod_shrub_genera <- c("Atriplex", "Chenopodium", "Rhagodia", "Maireana", "Enchylaena", "Sclerostegia", 
+                          "Tecticornia", "Sclerolaena", "Salsola", "Einadia", "Threlkeldia", "Nitraria", 
+                          "Sarcocornia", "Halosarcia", "Sueda", "Frankenia", "Lawrencia", "Wilsonia", "Trianthema")
+
 
 #polypodiopsida_families <- read_csv("ignore/NVIS_GrowthForm_AusTraits/australian_polypodiopsida_families.csv")
 
