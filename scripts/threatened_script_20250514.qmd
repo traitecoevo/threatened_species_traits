@@ -16,7 +16,8 @@ editor_options:
 
 ## load libraries, build database
 
--   open/merge AusTraits and attributes in threatened species database
+- the repo with project-specific data is at https://github.com/traitecoevo/threatened_species
+- you can source the most recent austraits.build (AusTraits) release from Zenodo (soon to be 6.1) or use a data file provided
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -24,33 +25,23 @@ library(remake)
 library(kableExtra)
 library(austraits)
 library(APCalign)
-library(traits.build)
-
-path <- "../traits.build/"
-devtools::load_all(path)
-
-path <- "../austraits/"
-devtools::load_all(path)
+library(traits.build) # not required if you read in complete RDS file
 
 resources <- APCalign::load_taxonomic_resources()
 
-#setwd("C:/Users/z3524079/Documents/GitHub/threatened_species_traits")
-#C:/Users/z3524079/Documents/GitHub/threatened_species_traits
-#C:/Users/Lizzy/Documents/GitHub/threatened_species_traits
-
-#austraits <- readRDS("ignore/austraits/austraits-6.0.0.rds")
-
-austraits <- readRDS("ignore/austraits/austraits_20250429.rds")
-
-source("R/custom_R_code.R")
+source("R/custom_R_code.R") # not required if you read in complete RDS file
 source("R/extra_functions.R")
 
-traits.build::build_setup_pipeline(method = "remake", database_name = "threatened_species")
+#austraits <- readRDS("ignore/austraits/austraits_20250616.rds") # not required if you read in complete RDS file
 
-threatened_species <- remake::make("threatened_species")
+#traits.build::build_setup_pipeline(method = "remake", database_name = "threatened_species") # not required if you read in complete RDS file
+
+#threatened_species <- remake::make("threatened_species") # not required if you read in complete RDS file
 
 # create combined database with both data sources
-all_traits <- austraits %>% austraits::bind_databases(threatened_species)
+#all_traits <- austraits %>% austraits::bind_databases(threatened_species) # not required if you read in complete RDS file
+
+all_traits <-readRDS("~/github/threatened_species_traits/ignore/austraits/all_traits.20250616.rds") # static file with all data 2025-06-16
 ```
 
 ## create dataframes for key traits
@@ -67,6 +58,8 @@ plant_growth_form_scores <- read_csv("data_extras/plant_growth_form_scores.csv")
 plant_growth_substrate_scores <- read_csv("data_extras/plant_growth_substrate.csv")
 woodiness_scores <- read_csv("data_extras/woodiness_scores.csv")
 dispersers_scores <- read_csv("data_extras/dispersers_scores.csv")
+vegetative_reproduction_ability_scores <- read_csv("data_extras/vegetative_reproduction_ability_scores.csv")
+seedbank_location_scores <- read_csv("data_extras/seedbank_location_scores.csv")
 fruit_fleshiness_scores <- read_csv("data_extras/fruit_fleshiness_scores.csv")
 bud_bank_location_scores <- read_csv("data_extras/bud_bank_location_scores.csv") %>%
   mutate(bud_bank_location_scaled = bud_bank_location/5)
@@ -78,6 +71,7 @@ leaf_hairs_adult_leaves_scores <- read_csv("data_extras/leaf_hairs_adult_leaves_
 leaf_glaucousness_scores <- read_csv("data_extras/leaf_glaucousness_scores.csv")
 plant_spinescence_scores <- read_csv("data_extras/plant_spinescence_scores.csv")
 plant_physical_defence_structures_scores <- read_csv("data_extras/plant_physical_defence_structures_scores.csv")
+pollination_syndrome_scores <- read_csv("data_extras/pollination_syndrome_scores.csv")
 
 # susceptibility attribute scores
 plant_goat_toxicity_scores <- read_csv("data_extras/plant_goat_toxicity_scores.csv")
@@ -99,23 +93,32 @@ habitat_moisture_scores <-  read_csv("data_extras/habitat_moisture_scores.csv")
 function to extract numeric traits
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-extract_numeric_trait <- function(numeric_trait) {
+extract_numeric_trait <- function(database, numeric_trait) {
   
-  extracted_data <- all_traits %>%
-  austraits::extract_trait(numeric_trait) %>%
-  austraits::extract_data(table = "traits", col = "basis_of_record", col_value = c("field", "literature", "field literature", "literature field", "preserved_specimen"), partial_matches_allowed = F) %>%
-  austraits_weighted_means(numeric_trait) %>%
-  filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
-  select(taxon_name, mean) %>%
-  mutate(
-    log10 = log10(mean),
-    scaled = (log10 - min(log10, na.rm = TRUE)) /
-              (max(log10, na.rm = TRUE) - min(log10, na.rm = TRUE))) %>%
-  rename(
-    !!numeric_trait := mean, 
-    !!paste0(numeric_trait, "_log10") := log10, 
-    !!paste0(numeric_trait, "_scaled") := scaled
-    )
+  extracted_data <- database %>%
+    austraits::extract_trait(numeric_trait) %>%
+    austraits::extract_data(table = "traits", col = "basis_of_record", col_value = c("field", "literature", "field literature", "literature field", "preserved_specimen"), partial_matches_allowed = F) 
+    
+  extracted_data$traits <- extracted_data$traits %>%
+    dplyr::mutate(
+      value = ifelse(str_detect(value, "<"), str_replace(value, "<", "0--"), value),
+      value_type = ifelse(value_type == "bin", "minimum--maximum", value_type)
+      ) %>%
+    separate_longer_delim(cols = c(value_type, value), delim = "--")
+  
+  extracted_data <- extracted_data %>%
+    austraits_weighted_means(numeric_trait) %>%
+    filter(taxon_name %in% resources$`APC list (accepted)`$canonical_name) %>%
+    select(taxon_name, mean) %>%
+    mutate(
+      log10 = log10(mean),
+      scaled = (log10 - min(log10, na.rm = TRUE)) /
+                (max(log10, na.rm = TRUE) - min(log10, na.rm = TRUE))) %>%
+    rename(
+      !!numeric_trait := mean, 
+      !!paste0(numeric_trait, "_log10") := log10, 
+      !!paste0(numeric_trait, "_scaled") := scaled
+      )
     
   extracted_data
 }
@@ -153,10 +156,35 @@ extract_categorical_trait <- function(database = database, categorical_trait, tr
 #### calculate_prop_traits_scored
 
 ```{r, message=FALSE, warning=FALSE}
-calculate_prop_traits_scored <- function(data, traits) {
+calculate_prop_traits_scored <- function(data, trait_table) {
+  
+  traits <- trait_table %>% pull(trait)
+  
   data %>%
     rowwise() %>%
-    mutate(prop_traits_scored = sum(!is.na(pick(all_of(traits)))) / length(traits)) %>%
+      mutate(prop_traits_scored = sum(!is.na(pick(all_of(traits)))) / length(traits)) %>%
+    ungroup()
+}
+
+calculate_prop_traits_scored_scaled <- function(data, trait_table) {
+  
+  traits <- trait_table %>% pull(trait)
+  trait_weights <- trait_table %>%
+    dplyr::mutate(effect_score = abs(effect_score)) %>%
+    dplyr::select(-notes) %>%
+    deframe() # Converts to named vector: names = traits, values = weights
+  
+  total_effect_scores <- sum(trait_weights)
+  
+  data %>%
+    rowwise() %>%
+    mutate(
+      weighted_traits_scored = sum(
+        sapply(traits, function(trait) {
+          if (!is.na(cur_data()[[trait]])) trait_weights[[trait]] else 0
+        })
+      ) / total_effect_scores
+    ) %>%
     ungroup()
 }
 ```
@@ -307,12 +335,9 @@ make_risk_density_plot <- function(data, threat) {
   
   combined_with_legend <- gridExtra::arrangeGrob(combined, legend, nrow = 2, heights = c(0.9, 0.1))
                    
-  grid::grid.draw(combined_with_legend)                              
-    #patchwork::plot_layout(guides = "collect") + 
-    #patchwork::plot_annotation(title = paste0("Distribution of Threat-dependent Risk Scores for ", threat)) & 
-#    theme(legend.position = "bottom")
+  grid::grid.draw(combined_with_legend)  
   
-    return(combined_with_legend)
+  return(combined_with_legend)
   
 }
 ```
@@ -336,8 +361,6 @@ storage_organ_scores %>% arrange(storage_organ_present) %>% kable(caption = "sto
 
 bud_bank_location_scores %>% arrange(bud_bank_location) %>% kable(caption = "bud bank location scaled") %>% kable_classic()
 
-dispersers_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value) %>% kable(caption = "dispersal trait values") %>% kable_classic()
-
 nitrogen_fixing_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value) %>% kable(caption = "nitrogen fixing values") %>% kable_classic()
 
 leaf_glaucousness_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value)  %>% kable(caption = "leaf glaucousness values") %>% kable_classic()
@@ -347,6 +370,14 @@ leaf_hairs_adult_leaves_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arr
 plant_spinescence_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value)  %>% kable(caption = "plant spinescence values") %>% kable_classic()
 
 plant_physical_defence_structures_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value)  %>% kable(caption = "plant physical defence structures") %>% kable_classic()
+
+dispersers_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value) %>% kable(caption = "dispersal trait values") %>% kable_classic()
+
+pollination_syndrome_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value) %>% kable(caption = "pollination syndrome values") %>% kable_classic()
+
+vegetative_reproduction_ability_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value) %>% kable(caption = "vegetative reproduction ability values") %>% kable_classic()
+
+seedbank_location_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(ordinal_value) %>% kable(caption = "seedbank location values") %>% kable_classic()
 ```
 
 ### extract numeric traits from database
@@ -358,7 +389,7 @@ plant_physical_defence_structures_scores %>% rename(ordinal_value = !!names(.)[3
 -   the function used is called `austraits_weighted_means`
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "leaf_work_to_shear_adjusted", "fruit_length", "metabolisable_energy", "bark_thickness")
+numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "leaf_work_to_shear_adjusted", "fruit_length", "metabolisable_energy", "bark_thickness", "lifespan")
 
 traits2 <- c("leaf_soluble_protein_per_area", "leaf_insoluble_protein_per_area")  # interesting traits but only data for 1-2 species - in a lab study
 
@@ -366,7 +397,7 @@ numeric_data <- list()
 
 for (trait in numeric_traits) {
   
-  numeric_data[[trait]] <- extract_numeric_trait(trait)
+  numeric_data[[trait]] <- extract_numeric_trait(all_traits, trait)
   numeric_data[[trait]] 
   
 }
@@ -392,6 +423,21 @@ plant_height <- plant_height %>%
     )
 ```
 
+#### special lifespan calculations because mostly bin data
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+lifespan_data <- all_traits %>% extract_trait("lifespan", partial_matches_allowed = F)
+
+lifespan_data$traits <- lifespan_data$traits %>%
+  mutate(
+    value = ifelse(str_detect(value, "<"), str_replace(value, "<", "0--"), value),
+    value_type = ifelse(value_type == "bin", "minimum--maximum", value_type)
+    ) %>%
+  separate_longer_delim(cols = c(value_type, value), delim = "--")
+
+lifespan <- extract_numeric_trait(lifespan_data, numeric_trait = "lifespan")
+```
+
 ### extract categorical traits from database
 
 -   extract all available values for categorical traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
@@ -411,6 +457,9 @@ bud_bank_location_scaled <- extract_categorical_trait(all_traits, "bud_bank_loca
 fruit_fleshiness <- extract_categorical_trait(all_traits, "fruit_fleshiness", fruit_fleshiness_scores, "fruit_fleshiness")
 plant_spinescence <- extract_categorical_trait(all_traits, "plant_spinescence", plant_spinescence_scores, "plant_spinescence")
 plant_physical_defence_structures <- extract_categorical_trait(all_traits, "plant_physical_defence_structures", plant_physical_defence_structures_scores, "plant_physical_defence_structures")
+vegetative_reproduction_ability <- extract_categorical_trait(all_traits, "vegetative_reproduction_ability", vegetative_reproduction_ability_scores, "vegetative_reproduction_ability")
+seedbank_location <- extract_categorical_trait(all_traits, "seedbank_location", seedbank_location_scores, "seedbank_location")
+pollination_syndrome <-  extract_categorical_trait(all_traits, c("pollination_system", "pollination_syndrome"), pollination_syndrome_scores, "pollination_syndrome")
 
 # various ways to score growth forms based on threat
 plant_growth_form <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form), "plant_growth_form")
@@ -822,11 +871,13 @@ phytophthora_assigned_risk <- native_species %>%
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # calculate "risk effect scores" for habitat, traits, taxonomy
-phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
+phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
   
     # calculate confidence in risk score, based on how much data available
     # proportion_relevant traits scored
-      calculate_prop_traits_scored(traits = phytophthora_trait_effects$trait) %>%
+      calculate_prop_traits_scored(trait_table = phytophthora_trait_effects) %>%
+    # alternative confidence calculation that scales scores; very slow!
+    # calculate_prop_traits_scored_scaled(trait_table = phytophthora_trait_effects) %>%
   
   mutate(
     # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
@@ -874,7 +925,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
     # decide on range by looking at distribution of values and deciding, for a given risk, 
     # how much traits are "allowed" to offset habitat risk
     # to ensure actual trait effect scores aren't too clumped, need a broader distribution than 0--1
-      trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.1, 1.2)),
+      trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.15, 1.2)),
 
     # now add in known susceptibility - showing 
     # multiple scaled trait effect score risk by habitat risk
@@ -888,6 +939,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
       total_risk_overwrite =
         ifelse(!is.na(phytophthora_cinnamomi_susceptibility) & total_risk < 1,
                phytophthora_cinnamomi_susceptibility/3, total_risk),
+      risk_confidence = ifelse(!is.na(phytophthora_cinnamomi_susceptibility), 0.8, risk_confidence),
       
     # assign risk by category
       total_risk_score = case_when(
@@ -1177,7 +1229,7 @@ ggplot(data = genus_histograms) +
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 myrtle_rust_trait_effects <- tribble(
   ~trait,                  ~effect_score, ~notes,
-  "leaf_length_scaled",     -0.2,         "not in literature, but no small leaf resistant species",
+  "leaf_length_scaled",     -0.2,         "not in literature, but no small leaf resistant species; this is a trait that is mostly age-independent, so if a good predictor, particularly useful",
   "plant_height_scaled",   -0.4,          "taller plants = lower impact, because taller plant canopies further from moist ground",
   "resprouting_capacity",  -0.3,          "resprouters = slower impact",
   "bud_bank_location_scaled", -0.3,   "bud bank above the ground surface improves chance of resprouting vegetation surviving",
@@ -1245,8 +1297,9 @@ myrtle_rust_assigned_risk <- native_species %>%
 myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     # calculate confidence in risk score, based on how much data available
     # proportion_relevant traits scored
-      calculate_prop_traits_scored(traits = myrtle_rust_trait_effects$trait) %>%
-  
+      calculate_prop_traits_scored(trait_table = myrtle_rust_trait_effects) %>%
+    # alternative confidence calculation that scales scores; very slow!
+      #calculate_prop_traits_scored_scaled(trait_table = myrtle_rust_trait_effects) %>%
   mutate(
     # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
       risk_confidence = ifelse(is.na(myrtle_rust_habitat_effect_score), 
@@ -1305,7 +1358,7 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     
     # rescale trait risk; this value then to be multiplied by habitat risk
     # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk 
-      trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.25, 1.35)),
+      trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.4, 1.35)),
 
     # total risk is the product of scaled trait risk and habitat/taxonomy risk
       total_risk = habitat_taxonomy_risk * trait_effect_score_scaled,
@@ -1313,6 +1366,7 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     # account for known susceptibility, which is different to risk; a moderately susceptible species can still be at high risk; 
     # however a low susceptibility species cannot be at high/extreme risk, so if known susceptibility < 3, need to downgrade risk
       total_risk_overwrite = ifelse(!is.na(myrtle_rust_susceptibility) & total_risk < 1, myrtle_rust_susceptibility/3, total_risk),
+      risk_confidence = ifelse(!is.na(myrtle_rust_susceptibility), 0.8, risk_confidence),
     
     # assign risk by category
       total_risk_score = case_when(
@@ -1569,7 +1623,7 @@ goat_trait_effects <- tribble(
   "life_history",0.4,             "perennial species more impacted",
   "forb",-0.15, "forbs are less impacted than graminoids",
   "resprouting_capacity", -0.25, "resprouting species are more likely to regenerate, persist; however, slight effect of palatable species more likely to be fire-killed",
-  "plant_height_4m_peak_scaled", -0.15,  "worst height is 4 m, with decreasing impact above and below that",
+  "plant_height_4m_peak_scaled", -0.1,  "worst height is 4 m, with decreasing impact above and below that",
   "bud_bank_location_scaled",-0.2,    "having a higher bud bank means new shoots more likely to persist",
   "bark_thickness_scaled",-0.2,   "higher bark thickness = lower impact",
   "reproductive_maturity_scaled",-0.3, "plants with shorter life cycles less impacted"
@@ -1621,7 +1675,10 @@ goats_assigned_risk <- native_species %>%
 goats_assigned_risk <- goats_assigned_risk %>%
    # calculate confidence in risk score, based on how much data available
     # proportion_relevant traits scored
-      calculate_prop_traits_scored(traits = goat_trait_effects$trait) %>%
+      calculate_prop_traits_scored(trait_table = goat_trait_effects) %>%
+     
+    # alternative confidence calculation that scales scores; very slow! 
+      #calculate_prop_traits_scored_scaled(trait_table = goat_trait_effects) %>%
   
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
@@ -1644,16 +1701,18 @@ goats_assigned_risk <- goats_assigned_risk %>%
       
         forb_risk = calculate_risk("forb", get_effect_score(goat_trait_effects, "forb")$effect_score, .),
       
+        reproductive_maturity_scaled_risk = calculate_risk("reproductive_maturity_scaled", get_effect_score(goat_trait_effects, "reproductive_maturity_scaled")$effect_score, .),
+      
       # add taxonomic effect scores
       # taxonomic effect scores are a proxy for suites of traits that are strongly linked to taxonomy
         taxonomic_risk = calculate_risk("taxonomic_risk", taxonomic_risk, .),   
       
       # sum together trait and taxonomic effect scores
-        total_trait_effect_score = rowSums(across(c(plant_height_4m_peak_scaled_risk, resprouting_capacity_risk, bud_bank_location_scaled_risk, forb_risk, life_history_risk, bark_thickness_scaled_risk, taxonomic_risk)), na.rm = TRUE),
+        total_trait_effect_score = rowSums(across(c(plant_height_4m_peak_scaled_risk, resprouting_capacity_risk, bud_bank_location_scaled_risk, forb_risk, life_history_risk, bark_thickness_scaled_risk, taxonomic_risk, reproductive_maturity_scaled_risk)), na.rm = TRUE),
       
       # rescale trait risk; this value then to be multiplied by habitat risk
       # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
-        trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.1, 1)),
+        trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(-1.5, 1.25)),
 
       # multiple scaled trait effect score risk by habitat risk
         total_risk = habitat_risk*trait_effect_score_scaled,
@@ -1776,7 +1835,10 @@ deer_assigned_risk <- deer_assigned_risk %>%
 
    # calculate confidence in risk score, based on how much data available
     # proportion_relevant traits scored
-      calculate_prop_traits_scored(traits = deer_trait_effects$trait) %>%
+      calculate_prop_traits_scored(trait_table = deer_trait_effects) %>%
+  
+    # alternative confidence calculation that scales scores; very slow!
+     # calculate_prop_traits_scored_scaled(trait_table = deer_trait_effects) %>%
   
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
@@ -1815,7 +1877,7 @@ deer_assigned_risk <- deer_assigned_risk %>%
       
       # rescale trait risk; this value then to be multiplied by habitat risk
       # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
-        trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.2, 1.5)),
+        trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.0, 1.7)),
 
       # multiple scaled trait effect score risk by habitat risk
         total_risk = habitat_risk*trait_effect_score_scaled
@@ -1896,7 +1958,7 @@ pigs_trait_effects <- tribble(
   "storage_organ_fleshy",0.4,   "fleshy underground storage organ = much higher impact, because single most preferred food source"
 )
 
-pigs_taxonomic_vector <- c("Orchidaceae", "Cyperaceae", "Dioscoreaceae", "Iridaceae", "Hydrocharitaceae", "Marsileaceae", "Nymphaeaceae", "Pontederiaceae", "Restionaceae", "Eriocaulaceae", "Thismiaceae", "Amaryllidaceae", "Alismataceae", "Apiaceae", "Apocynaceae", "Aponogetonaceae", "Araliaceae", "Arecaceae", "Aspleniaceae", "Athyriaceae", "Convolvulaceae", "Cyatheaceae", "Musaceae", "Zingiberaceae", "Utricularia", "Ipomoea", "Ampelocissus", "Bulbine", "Microseris", "Sonchus")
+pigs_taxonomic_vector <- c("Goodeniaceae", "Orchidaceae", "Cyperaceae", "Dioscoreaceae", "Iridaceae", "Hydrocharitaceae", "Marsileaceae", "Nymphaeaceae", "Pontederiaceae", "Restionaceae", "Eriocaulaceae", "Thismiaceae", "Amaryllidaceae", "Alismataceae", "Apiaceae", "Apocynaceae", "Aponogetonaceae", "Araliaceae", "Arecaceae", "Aspleniaceae", "Athyriaceae", "Convolvulaceae", "Cyatheaceae", "Musaceae", "Zingiberaceae", "Utricularia", "Ipomoea", "Ampelocissus", "Bulbine", "Microseris", "Sonchus")
 
 pigs_taxonomic_effects <- as.data.frame(pigs_taxonomic_vector) %>%
   rename(taxon = pigs_taxonomic_vector) %>%
@@ -1938,7 +2000,10 @@ pigs_assigned_risk <- native_species %>%
 pigs_assigned_risk <- pigs_assigned_risk %>%
    # calculate confidence in risk score, based on how much data available
     # proportion_relevant traits scored
-      calculate_prop_traits_scored(traits = pigs_trait_effects$trait) %>%
+      calculate_prop_traits_scored(trait_table = pigs_trait_effects) %>%
+  
+    # alternative confidence calculation that scales scores; very slow!
+      #calculate_prop_traits_scored_scaled(trait_table = pigs_trait_effects) %>%
   
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
@@ -2048,9 +2113,9 @@ tropical_C4_grasses_trait_effects <- tribble(
   ~trait,                  ~effect_score, ~notes,
   "woodiness",              0.3,          "woody taxa = higher impact",
   "life_history",           0.2,          "annuals, ephemerals = lower impact",
-  "plant_height_scaled",   -0.3,          "taller plants = lower impact, because plants are taller than invasives",
+  "plant_height_scaled",   -0.1,          "taller plants = lower impact, because plants are taller than invasives",
   "resprouting_capacity",  -0.2,          "resprouters = slower impact, with respect to increased fire frequency",
-  "storage_organ_present", -0.2,          "includes geophytes",
+  "storage_organ_present", -0.3,          "includes geophytes",
   "bud_bank_location_scaled",     -0.1,         "used twice, high bud banks a negative for increased fire intensity, a positive for high fire frequency; offsets half the benefit of being a resprouter",
   "dry_season_flowering",  -0.3,          "esp. low risk if an annual",
   "reproductive_maturity_scaled", -0.3,          "plants with a shorter juvenile period more likely to set seed before next fire"
@@ -2095,7 +2160,10 @@ tropical_C4_grasses_assigned_risk <- native_species %>%
 tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
    # calculate confidence in risk score, based on how much data available
     # proportion_relevant traits scored
-      calculate_prop_traits_scored(traits = tropical_C4_grasses_trait_effects$trait) %>%
+      calculate_prop_traits_scored(trait_table = tropical_C4_grasses_trait_effects) %>%
+  
+    # alternative confidence calculation that scales scores; very slow!
+    #calculate_prop_traits_scored_scaled(trait_table = tropical_C4_grasses_trait_effects) %>%
   
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
@@ -2240,7 +2308,8 @@ hymenachne_trait_effects <- tribble(
   "woodiness", -0.4, "woody taxa = lower impact",
   "life_history", -0.3, "annuals, ephemerals = higher impact",
   "plant_height_scaled", -0.3, "taller plants = lower impact",
-  "plant_growth_substrate_hymenanche", 1, NA
+  "plant_growth_substrate_hymenanche", 1, "aquatic plant at high risk",
+  "pollination_syndrome", -0.3, "wind pollinated species more persistent"
 )
 
 hymenachne_taxonomic_vector <- c("Arecaceae", "Cyperaceae", "Haloragaceae", "Hydrocharitaceae", "Iridaceae", "Juncaceae", "Marsileaceae", "Myrtaceae", "Nymphaeaceae", "Orchidaceae", "Poaceae", "Pontederiaceae", "Restionaceae", "Typhaceae")
@@ -2260,6 +2329,7 @@ hymenachne_assigned_risk <- native_species %>%
   left_join(plant_height, by = "taxon_name") %>%
   left_join(life_history, by = "taxon_name") %>%
   left_join(woodiness, by = "taxon_name") %>%
+  left_join(pollination_syndrome, by = "taxon_name") %>%
   mutate(
     taxonomic_risk = ifelse(family %in% hymenachne_taxonomic_effects$taxon,
                             0.4, 0))
@@ -2280,7 +2350,10 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
   
    # calculate confidence in risk score, based on how much data available
     # proportion_relevant traits scored
-      calculate_prop_traits_scored(traits = hymenachne_trait_effects$trait) %>%
+      calculate_prop_traits_scored(trait_table = hymenachne_trait_effects) %>%
+  
+    # alternative confidence calculation that scales scores; very slow!
+    #calculate_prop_traits_scored_scaled(trait_table = hymenachne_trait_effects) %>%
   
   mutate(
     # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
@@ -2310,16 +2383,18 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
     
     # annuals, ephemerals have highest impact
       life_history_risk = calculate_risk("life_history", get_effect_score(hymenachne_trait_effects, "life_history")$effect_score, .),
+    
+      pollination_syndrome_risk = calculate_risk("pollination_syndrome", get_effect_score(hymenachne_trait_effects, "pollination_syndrome")$effect_score, .),
 
     # add taxonomic effect scores
       taxonomic_risk = calculate_risk("taxonomic_risk", taxonomic_risk, .),
     
     # sum trait risk effect scores
-      total_trait_effect_score = rowSums(across(c(plant_height_scaled_risk, life_history_risk, woodiness_risk, taxonomic_risk)), na.rm = TRUE),
+      total_trait_effect_score = rowSums(across(c(plant_height_scaled_risk, life_history_risk, woodiness_risk, pollination_syndrome_risk, taxonomic_risk)), na.rm = TRUE),
 
     # rescale trait risk; this value then to be multiplied by habitat risk
     # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
-      trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.6, 1.2)),
+      trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(0.2, 1.2)),
 
     # multiple scaled trait effect score risk by habitat risk
       total_risk = habitat_risk*trait_effect_score_scaled
@@ -2387,59 +2462,183 @@ df_long <- hymenachne_assigned_risk %>%
 make_risk_density_plot(df_long, "hymenachne")
 ```
 
-# Regeneration of populations
+# Threat independent effects
 
-INCOMPLETE FROM HERE DOWN
+- this section includes species' ability to regenerate
 
-THIS SECTION WILL CALCULATE TRAIT-INDEPENDENT RISK PREDICTIONS BASED ON A SPECIES ABILITY TO PERSIST INCORPORATES POPULATION SIZE, DISPERSAL SYNDROME, ETC.
+### Assign risks to all taxa
 
-### Do threatened species have worse dispersal, longer lifespans, etc?
+#### - amalgamate data sources
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+threat_independent_effects <- tribble(
+  ~trait,                  ~effect_score, ~notes,
+  "life_history",            0.3,          "annuals, ephemerals = faster regeneration",
+  "seed_dry_mass_scaled",   -0.3,          "small seeds disperse further",
+  "dispersers",  -0.3,          "species with more effective dispersal syndromes more likely to have seed for regeneration",
+  "seedbank_location",  -0.2,          "species with local seedbanks more likely to have seed for regeneration",
+  "vegetative_reproduction_ability",  -0.2,          "species that can reproduce vegetatively more likely to persist in a location from belowground organs",
+  "reproductive_maturity_scaled", -0.6, "shorter time to maturity, regenerates faster",
+  "lifespan_scaled", -0.6, "shorter lived, regenerates faster"
+)
 
--   Simple answer is NO. There is no difference in any of the traits measured between threatened vs other species
+# create dataframe with relevant traits, attributes
+threat_independent_risk_tmp <- native_species %>%
+  left_join(threatened, by = "taxon_name") %>%
+  left_join(habitat, by = "taxon_name") %>%
+  left_join(life_history, by = "taxon_name") %>%
+  left_join(dispersers, by = "taxon_name") %>%
+  left_join(seedbank_location, by = "taxon_name") %>%
+  left_join(vegetative_reproduction_ability, by = "taxon_name") %>%
+  left_join(seed_dry_mass, by = "taxon_name") %>%
+  left_join(reproductive_maturity, by = "taxon_name") %>%
+  left_join(lifespan, by = "taxon_name")
+```
+
+#### - calculate risk scores
+
+1.  calculate "risk effect scores" for traits - taxonomy, habitat don't come in here
+2.  sum traits risks
+3.  scale total traits risk
+4.  assign risk susceptibility bins, confidence bins to each taxon
+5.  this is not currently merged in with threat-specific risk scores
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# calculate "risk effect scores" for habitat, traits, taxonomy
+threat_independent_risk <- threat_independent_risk_tmp %>%
+  
+   # calculate confidence in risk score, based on how much data available
+    # proportion_relevant traits scored
+      calculate_prop_traits_scored(trait_table = threat_independent_effects) %>%
+  
+    # alternative confidence calculation that scales scores; very slow!
+    #calculate_prop_traits_scored_scaled(trait_table = threat_independent_effects) %>%
+  
+  mutate(
+    # assign trait risk effect scores
+    # perennials have highest impact
+      #life_history_risk = calculate_risk("life_history", get_effect_score(threat_independent_effects, "life_history")$effect_score, .),
+    
+    # smaller seeds = lower impact
+      seed_dry_mass_scaled_risk = calculate_risk("seed_dry_mass_scaled", get_effect_score(threat_independent_effects, "seed_dry_mass_scaled")$effect_score, .),
+    
+    # better dispersal = lower risk
+      dispersers_risk = calculate_risk("dispersers", get_effect_score(threat_independent_effects, "dispersers")$effect_score, .),
+    
+    # seedbank present = lower risk
+      seedbank_location_risk = calculate_risk("seedbank_location", get_effect_score(threat_independent_effects, "seedbank_location")$effect_score, .),
+    
+    # faster reproductive maturity = lower risk
+      reproductive_maturity_scaled_risk = calculate_risk("reproductive_maturity_scaled", get_effect_score(threat_independent_effects, "reproductive_maturity_scaled")$effect_score, .),   
+    
+    # shorter lifespan = lower risk
+      lifespan_scaled_risk = calculate_risk("lifespan_scaled", get_effect_score(threat_independent_effects, "lifespan_scaled")$effect_score, .),  
+    
+    # vegetative reproduction ability = lower risk
+      vegetative_reproduction_ability_risk = calculate_risk("vegetative_reproduction_ability", get_effect_score(threat_independent_effects, "vegetative_reproduction_ability")$effect_score, .),
+    
+
+    # sum trait risk effect scores
+      total_trait_effect_score = rowSums(across(c(seed_dry_mass_scaled_risk, seedbank_location_risk, vegetative_reproduction_ability_risk, dispersers_risk, lifespan_scaled_risk, vegetative_reproduction_ability_risk, reproductive_maturity_scaled_risk)), na.rm = TRUE)
+  ) %>%
+  
+  # REQUIRED BECAUSE SO MANY TAXA HAVE NO DATA FOR ANY TRAITS EXCEPT LIFE HISTORY
+  filter(total_trait_effect_score != 0) %>%
+  
+  mutate(
+    # rescale trait risk; this value then to be multiplied by habitat risk
+    # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
+      trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(-0.2, 1.4)),
+
+    # multiple scaled trait effect score risk by habitat risk
+      total_risk = trait_effect_score_scaled
+  )
+
+# assign risk by category
+  threat_independent_risk %>%
+    filter(!is.na(threatened_status)) %>%
+    mutate(taxonomic_risk = 0) %>%
+    select(taxon_name, genus, family, threatened_status, total_risk, 
+           habitat, trait_effect_score_scaled,
+           prop_traits_scored, 
+           contains(c("risk_effect_score")), everything()) %>%
+    write_csv("export/threat_independent_risk_scores.csv", na = "")
+```
+
+#### - summary table of scorings
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+threat_independent_effects %>%
+  arrange(effect_score, trait) %>% 
+  kable(caption = "Trait effect scores independent of threat.") %>% 
+  kable_classic()
+```
+
+#### - risk scores density plot
+
+Note, that this information is not being merged into the rest of the workflow at this point.
+
+We had to pull out the trait with the best coverage, life history, because the pattern is dominated by the fact that only 42 listed taxa are annuals (always or sometimes). Effectively, listed taxa are perennials - and possibly in part because they are not as good/fast at regenerating as co-occurring annuals.
+
+This left us with only 853 listed taxa with ANY of the other regeneration traits scored.
+
+Note that the distribution of traits is virtually identical for listed taxa and all taxa - the number of populations, area of extent will disadvantage threatened taxa, but it is not inherently because of their traits.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+df_long <- threat_independent_risk %>%
+  mutate(habitat_risk = 0) %>%
+  select(`habitat risk` = habitat_risk, 
+         `trait and taxonomy risk` = trait_effect_score_scaled, 
+         `combined risk` = total_risk,
+         threatened_status) %>%
+  pivot_longer(cols = c(1:3),
+               names_to = "category", values_to = "risk")
+
+make_risk_density_plot(df_long, "threat-independent (IGNORE HABITAT IN THIS PLOT - SET TO 0)")
+```
+
+### Comparisons with non-threatened species
+
+Do threatened species have worse dispersal, longer lifespans, etc?
+
+-   Simple answer is NO. There is minimal difference in any of the traits measured between threatened vs other species, except that reproductive maturity is higher for threatened taxa
 -   It means that for understanding species regeneration potential, each species' trait values need to be considered - no generalisations.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-all_taxa <- resources$APC %>% 
-  filter(taxonomic_status == "accepted") %>%
-  filter(taxon_rank %in% c("species", "subspecies", "variety")) %>%
-  select(taxon_name = canonical_name, family, genus, taxon_distribution)
-
-species_that_are_threatened <- (all_traits %>%
-  extract_trait("threatened_species_listing_status"))$traits %>%
-  select(taxon_name, threatened_status = value)
-
-all_taxa <- all_taxa %>%
-  left_join(species_that_are_threatened, by = "taxon_name") %>%
-  mutate(threatened = ifelse(!is.na(threatened_status), 1, 0)) %>%
-  left_join(dispersers, by = "taxon_name") %>%
-  left_join(life_history, by = "taxon_name") %>%
-  left_join(seed_dry_mass, by = "taxon_name") %>%
-  left_join(leaf_mass_per_area, by = "taxon_name") %>%
-  left_join(fruit_fleshiness, by = "taxon_name") %>%
-  left_join(resprouting_capacity, by = "taxon_name")
+threat_independent_risk_tmp <- threat_independent_risk_tmp %>%
+  mutate(threatened = ifelse(!is.na(threatened_status), "threatened", "other"))
 
 correlations_with_possible_traits <- tibble(
   trait = NA_character_,
-  coeff = NA_character_,
+  other_mean = NA_character_,
+  other_SE = NA_character_,
+  threatened_mean = NA_character_,
+  threatened_SE = NA_character_,
   r2 = NA_character_, 
   p_value = NA_character_,
   n = NA_character_,
 )
 
-for (var in c("life_history", "dispersers", "resprouting_capacity", "seed_dry_mass", "fruit_fleshiness", "leaf_mass_per_area")) {
+for (var in c("seed_dry_mass_log10", "reproductive_maturity_log10", "seedbank_location", "life_history", "dispersers", "vegetative_reproduction_ability", "lifespan_log10")) {
   
-  data_tmp <- all_taxa %>% filter(!is.na(all_taxa[[var]]))
+  data_tmp <- threat_independent_risk_tmp %>% filter(!is.na(threat_independent_risk_tmp[[var]]))
   
   linearmodel_var <- lm(data_tmp[[var]] ~ threatened , data = data_tmp)
   
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
+  
+  linearmodel_coeff <- summary(linearmodel_var)$coefficients %>% as.data.frame() %>% slice(2)
+  
+  estimate_means_output <- modelbased::estimate_means(linearmodel_var)  %>% as.data.frame()
+  estimate_means_output[1,2]
   
   new_row <- c(
     trait = var, 
     r2= round(summary(linearmodel_var)$r.squared,4), 
-    p_value = round(p[2,1],4),
-    coeff = round(coeff[2,1],3),
+    p_value = round(linearmodel_coeff[1,4],4),
+    other_mean = round(estimate_means_output[1,2],3),
+    threatened_mean = round(estimate_means_output[2,2],3),
+    other_SE = round(estimate_means_output[1,3],3),
+    threatened_SE = round(estimate_means_output[2,3],3),
     n = nrow(data_tmp)
       ) %>% 
     t() %>%
@@ -2447,12 +2646,21 @@ for (var in c("life_history", "dispersers", "resprouting_capacity", "seed_dry_ma
   
   correlations_with_possible_traits <- correlations_with_possible_traits %>%
     bind_rows(new_row)
+  
+  plot(
+    ggplot(data = data_tmp, aes(x = threatened, y = data_tmp[[var]])) +
+    geom_boxplot(fill ="coral1") +
+    geom_point() +
+    geom_jitter(height=0.1) +
+    theme_classic() +
+    ylab(var)
+  )
+  
 }
 
 correlations_with_possible_traits <- correlations_with_possible_traits %>% 
   arrange(-as.numeric(r2)) %>% 
   filter(!is.na(trait))
-
 
 threatened_kable_table <- correlations_with_possible_traits %>% kableExtra::kable(caption = "Correlation between threat status and `regeneration` trait value")
 

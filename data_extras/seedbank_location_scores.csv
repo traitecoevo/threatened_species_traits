@@ -1,0 +1,6 @@
+trait_name,trait_value,seedbank_location
+seedbank_location,canopy_seedbank,1
+seedbank_location,soil_seedbank,1
+seedbank_location,seedbank,1
+seedbank_location,canopy_seedbank_absent,0
+seedbank_location,soil_seedbank_absent,0

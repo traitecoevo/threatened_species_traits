@@ -1,0 +1,4 @@
+trait_name,trait_value,vegetative_reproduction_ability
+vegetative_reproduction_ability,not_vegetative,0
+vegetative_reproduction_ability,vegetative,1
+vegetative_reproduction_ability,vegetative_obligate,0.7

@@ -35,7 +35,8 @@ austraits_weighted_means <- function(austraits, traits) {
   flora_means <-
     austraits$traits %>%
     dplyr::filter(trait_name %in% traits) %>%
-    dplyr::filter(value_type %in% c("minimum", "maximum"), basis_of_record %in% c("preserved_specimen", "literature"))
+    dplyr::filter(value_type %in% c("minimum", "maximum")) %>%
+    dplyr::filter(!stringr::str_detect(basis_of_record, "experiment"))
   
   if (nrow(flora_means > 0)) {
     flora_means <- 
