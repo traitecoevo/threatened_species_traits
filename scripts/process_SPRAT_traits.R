@@ -25,13 +25,16 @@ SPRAT_traits_longer %>%
   rename(reference = value_2, value = value_1) %>%
   mutate(
     reference = str_replace(reference, "\\}", ""),
-    reference = ifelse(is.na(reference), "SPRAT", reference)
+    reference = ifelse(is.na(reference), "SPRAT_2025_2", reference)
     ) %>%
   separate_wider_delim(cols = value, delim = "(", names_sep = "_", too_few = "align_start") %>%
   rename(notes = value_2, value = value_1) %>%
   mutate(
+    value = str_trim(value),
     units = ifelse(str_detect(value, "^[:digit:]"), str_extract(value, "[:alpha:]+"), NA),
-    value = ifelse(str_detect(value, "^[:digit:]"), str_replace(value, " [:alpha:]+", ""), value)
+    value = ifelse(str_detect(value, "^[:digit:]"), str_replace(value, " [:alpha:]+", ""), value),
+    units = ifelse(str_detect(value, "^[:digit:]") & str_detect(value, "\\%"), str_extract(value, "\\%"), units),
+    value = ifelse(str_detect(value, "^[:digit:]"), str_replace(value, " \\%", ""), value)
     ) %>%
   separate_wider_delim(cols = value, delim = "--", names_sep = "_", too_few = "align_start") %>%
   mutate(
@@ -47,4 +50,4 @@ SPRAT_traits_longer %>%
   rename(value_type = value_2, value = value_1) %>%
   mutate(value = str_trim(value)) %>%
   mutate(notes = str_replace(notes, "\\)", "")) %>%
-  write_csv("data/SPRAT_traits_2025/data.csv")
+  write_csv("data/SPRAT_2025_2/data.csv")

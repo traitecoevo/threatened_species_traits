@@ -1,40 +1,46 @@
 source:
   primary:
-    key: SPRAT_traits_2025
-    bibtype: Article
-    year: unknown
-    author: unknown
-    title: unknown
-    journal: unknown
-    volume: unknown
-    number: unknown
-    pages: unknown
-    doi: unknown
+    key: SPRAT_2025_2
+    bibtype: Online
+    year: 2025
+    author: Federal Department of Climate Change, Energy, the Environment and Water
+    title: Species Profile and Threats Database
+    url: https://www.environment.gov.au/cgi-bin/sprat/public/sprat.pl
 contributors:
   data_collectors:
-  - last_name: unknown
-    given_name: unknown
-    ORCID: unknown
-    affiliation: unknown
-  assistants: unknown
-  dataset_curators: unknown
+  - last_name: Wenk
+    given_name: Elizabeth
+    ORCID: 0000-0001-5640-5910
+    affiliation: Evolution & Ecology Research Centre, School of Biological, Earth,
+      and Environmental Sciences, UNSW Sydney, Australia
+  dataset_curators: Elizabeth Wenk
 dataset:
   data_is_long_format: yes
-  custom_R_code: .na
+  custom_R_code: '
+    data %>%
+      mutate(
+        value = ifelse(plant_trait == "flowering_time", convert_month_range_vec_to_binary(value), value),
+        value = ifelse(plant_trait == "fruiting_time", convert_month_range_vec_to_binary(value), value),
+        measurement_remarks = notes
+      )'
   collection_date: unknown/2025
   taxon_name: taxon_name
   trait_name: plant_trait
+  source_id: reference
+  measurement_remarks: measurement_remarks
   value: value
-  location_name: unknown
-  description: unknown
+  description: Collation of manually extracted trait data, predominantly from DCEEW SPRAT profiles for threatened species, but also information drawn from other sources as required to fully gap-fill plant height for threatened species. 
   basis_of_record: preserved_specimen
   life_stage: adult
-  sampling_strategy: unknown
-  original_file: unknown
-  notes: unknown
+  sampling_strategy: Collation of manually extracted trait data, predominantly from DCEEW SPRAT profiles for threatened species, but also information drawn from other sources as required to fully gap-fill plant height for threatened species.
+  original_file: threatened_species_traits_to_fill3.csv, then processed with the script process_SPRAT_traits.R
+  notes: none
 identifiers: .na
 locations: .na
-contexts: .na
+contexts:
+- context_property: entity context notes
+  category: entity_context
+  var_in: notes
 traits:
 - var_in: plant_height
   unit_in: units
@@ -102,7 +108,7 @@ traits:
   methods: data from SPRAT profiles, taxon descriptions, and similar
 - var_in: inflorescence_stalk
   unit_in: units
-  trait_name: plant_height
+  trait_name: plant_height_reproductive
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -188,7 +194,7 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
-- var_in: reproductive maturity
+- var_in: reproductive_maturity
   unit_in: units
   trait_name: reproductive_maturity
   entity_type: species
@@ -252,9 +258,25 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: pollination_system
+  unit_in: units
+  trait_name: pollination_system
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
 - var_in: leaf_phenology
   unit_in: units
   trait_name: leaf_phenology
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: leaf_type
+  unit_in: units
+  trait_name: leaf_type
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -308,9 +330,9 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
-- var_in: fire_time_fire_to_flowering
+- var_in: fire_time_from_fire_to_flowering
   unit_in: units
-  trait_name: fire_time_fire_to_flowering
+  trait_name: fire_time_from_fire_to_flowering
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -348,33 +370,33 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
-- var_in: dispersal_system
-  unit_in: units
-  trait_name: dispersal_system
-  entity_type: species
-  value_type: value_type
-  basis_of_value: expert_score
-  replicates: .na
-  methods: data from SPRAT profiles, taxon descriptions, and similar
 - var_in: climbing_height
   unit_in: units
-  trait_name: plant_height
+  trait_name: plant_height_climbing_plant
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
-- var_in: germination
+- var_in: plant_climbing_mechanism
   unit_in: units
-  trait_name: germination
+  trait_name: plant_climbing_mechanism
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
-- var_in: seed_longevity
+- var_in: seed_germination
   unit_in: units
-  trait_name: seed_longevity
+  trait_name: seed_germination
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: seedbank_longevity
+  unit_in: units
+  trait_name: seedbank_longevity
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -398,7 +420,7 @@ traits:
   methods: data from SPRAT profiles, taxon descriptions, and similar
 - var_in: inflorescence_length
   unit_in: units
-  trait_name: plant_height
+  trait_name: plant_height_reproductive
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -412,9 +434,17 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: plant_photosynthetic_organ
+  unit_in: units
+  trait_name: plant_photosynthetic_organ
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
 - var_in: woodiness
   unit_in: units
-  trait_name: woodiness
+  trait_name: woodiness_detailed
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -446,7 +476,7 @@ traits:
   methods: data from SPRAT profiles, taxon descriptions, and similar
 - var_in: leaf_surface_texture
   unit_in: units
-  trait_name: leaf_surface_texture
+  trait_name: .na
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -460,25 +490,9 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
-- var_in: storage_organ_width
-  unit_in: units
-  trait_name: storage_organ_width
-  entity_type: species
-  value_type: value_type
-  basis_of_value: expert_score
-  replicates: .na
-  methods: data from SPRAT profiles, taxon descriptions, and similar
 - var_in: petiole_length
   unit_in: units
   trait_name: petiole_length
-  entity_type: species
-  value_type: value_type
-  basis_of_value: expert_score
-  replicates: .na
-  methods: data from SPRAT profiles, taxon descriptions, and similar
-- var_in: extra_traits
-  unit_in: units
-  trait_name: unknown
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -492,6 +506,14 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
+- var_in: fruit_type
+  unit_in: units
+  trait_name: fruit_type
+  entity_type: species
+  value_type: value_type
+  basis_of_value: expert_score
+  replicates: .na
+  methods: data from SPRAT profiles, taxon descriptions, and similar
 - var_in: dispersers
   unit_in: units
   trait_name: dispersers
@@ -500,9 +522,9 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
-- var_in: stem_diameter
+- var_in: plant_diameter_breast_height
   unit_in: units
-  trait_name: stem_diameter
+  trait_name: plant_diameter_breast_height
   entity_type: species
   value_type: value_type
   basis_of_value: expert_score
@@ -516,7 +538,287 @@ traits:
   basis_of_value: expert_score
   replicates: .na
   methods: data from SPRAT profiles, taxon descriptions, and similar
-substitutions: .na
+substitutions:
+- trait_name: bud_bank_location
+  find: aboveground_organ
+  replace: aboveground_buds
+- trait_name: bud_bank_location
+  find: adventitious_roots
+  replace: bud-bearing_root
+- trait_name: bud_bank_location
+  find: lignotuber
+  replace: basal_stem_buds
+- trait_name: bud_bank_location
+  find: n/a_annual
+  replace: none
+- trait_name: bud_bank_location
+  find: none_mentioned
+  replace: none
+- trait_name: bud_bank_location
+  find: pseudobulb
+  replace: stem_buds
+- trait_name: bud_bank_location
+  find: root_buds
+  replace: bud-bearing_root
+- trait_name: bud_bank_location
+  find: root_crown stem_base
+  replace: .na
+- trait_name: bud_bank_location
+  find: root_sucker
+  replace: bud-bearing_root
+- trait_name: bud_bank_location
+  find: rooting at stem nodes
+  replace: stem_buds
+- trait_name: bud_bank_location
+  find: roots
+  replace: bud-bearing_root
+- trait_name: bud_bank_location
+  find: roots at stem nodes
+  replace: stem_buds
+- trait_name: bud_bank_location
+  find: rootstock
+  replace: bud-bearing_root
+- trait_name: bud_bank_location
+  find: stem_base
+  replace: basal_stem_buds
+- trait_name: bud_bank_location
+  find: stem_underground
+  replace: underground_buds
+- trait_name: bud_bank_location
+  find: stolon rooting at notes
+  replace: stolon
+- trait_name: bud_bank_location
+  find: suckering_stems
+  replace: stem_buds
+- trait_name: bud_bank_location
+  find: tuber
+  replace: stem_tuber
+- trait_name: bud_bank_location
+  find: tuber_annual
+  replace: stem_tuber
+- trait_name: bud_bank_location
+  find: woody rootstock
+  replace: bud-bearing_root
+- trait_name: fire_exposure_level
+  find: fire_avoidance_wet_habitat
+  replace: fire_avoidance_near_water
+- trait_name: fruit_fleshiness
+  find: not_applicable
+  replace: .na
+- trait_name: leaf_shape
+  find: narrow
+  replace: linear
+- trait_name: life_history
+  find: perennial_presumed
+  replace: perennial
+- trait_name: pollination_syndrome
+  find: beetles
+  replace: beetle
+- trait_name: pollination_syndrome
+  find: birds
+  replace: bird
+- trait_name: pollination_syndrome
+  find: cycadothrips thrips
+  replace: thrip
+- trait_name: pollination_syndrome
+  find: flower_wasp
+  replace: wasp
+- trait_name: pollination_syndrome
+  find: neozeleboria male sp. 33
+  replace: wasp
+- trait_name: pollination_syndrome
+  find: 'generalist pollinators: a species of native bee, syrphid fly, and different
+    bee fly species were observed pollinating plants'
+  replace: bee fly
+- trait_name: pollination_syndrome
+  find: honeyeaters moths
+  replace: bird moth
+- trait_name: pollination_syndrome
+  find: male thynnid wasps
+  replace: wasp
+- trait_name: pollination_syndrome
+  find: native bees
+  replace: bee
+- trait_name: pollination_syndrome
+  find: self-pollinated
+  replace: self
+- trait_name: pollination_syndrome
+  find: small flies
+  replace: fly
+- trait_name: pollination_syndrome
+  find: sunbirds
+  replace: bird
+- trait_name: pollination_syndrome
+  find: thynnid wasp
+  replace: wasp
+- trait_name: pollination_syndrome
+  find: thynnine wasps
+  replace: wasp
+- trait_name: pollination_syndrome
+  find: tranes weevil
+  replace: insect
+- trait_name: resprouting_capacity
+  find: fire_killed_annual
+  replace: fire_killed
+- trait_name: resprouting_capacity
+  find: fire_killed_presumed
+  replace: fire_killed
+- trait_name: resprouting_capacity
+  find: n/a-aquatic
+  replace: .na
+- trait_name: resprouting_capacity
+  find: not_given
+  replace: .na
+- trait_name: resprouting_capacity
+  find: resprouts_partial
+  replace: partial_resprouting
+- trait_name: resprouting_capacity
+  find: resprouts_presumed
+  replace: resprouts
+- trait_name: resprouting_capacity
+  find: unknown
+  replace: .na
+- trait_name: seed_shape
+  find: globular
+  replace: globoid
+- trait_name: sex_type
+  find: subdioecious
+  replace: dioecious
+- trait_name: stem_growth_habit
+  find: cushion
+  replace: cushion-forming
+- trait_name: stem_growth_habit
+  find: cushion-forming trailing
+  replace: cushion-forming prostrate
+- trait_name: stem_growth_habit
+  find: erect clumped
+  replace: erect tufted
+- trait_name: stem_growth_habit
+  find: prostrate procumbant
+  replace: prostrate
+- trait_name: stem_growth_habit
+  find: prostrate scandent
+  replace: prostrate sprawling
+- trait_name: stem_growth_habit
+  find: prostrate underground stems
+  replace: prostrate rhizomatous
+- trait_name: stem_growth_habit
+  find: short-creeping
+  replace: creeping
+- trait_name: stem_growth_habit
+  find: short_creeping
+  replace: creeping
+- trait_name: stem_growth_habit
+  find: spreading upright
+  replace: spreading erect
+- trait_name: stem_growth_habit
+  find: straggling upright
+  replace: sprawling erect
+- trait_name: stem_growth_habit
+  find: trailing
+  replace: prostrate
+- trait_name: stem_growth_habit
+  find: upright straggling
+  replace: sprawling erect
+- trait_name: storage_organ
+  find: lacking_pseudobulb
+  replace: no_storage_organ
+- trait_name: storage_organ
+  find: adventitious_roots
+  replace: .na
+- trait_name: storage_organ
+  find: basal_buds
+  replace: lignotuber
+- trait_name: storage_organ
+  find: basal_stem_buds
+  replace: lignotuber
+- trait_name: storage_organ
+  find: lacking_pseudobulbs
+  replace: no_storage_organ
+- trait_name: storage_organ
+  find: n/a_annual
+  replace: no_storage_organ
+- trait_name: storage_organ
+  find: no_storage_organ_annual
+  replace: no_storage_organ
+- trait_name: storage_organ
+  find: no_storage_organ_mentioned
+  replace: no_storage_organ
+- trait_name: storage_organ
+  find: none
+  replace: no_storage_organ
+- trait_name: storage_organ
+  find: root_buds
+  replace: roots_woody
+- trait_name: storage_organ
+  find: root_sucker
+  replace: .na
+- trait_name: storage_organ
+  find: rootstock
+  replace: roots_woody
+- trait_name: storage_organ
+  find: rootstock basal_stem_buds
+  replace: roots_woody
+- trait_name: storage_organ
+  find: stem_base
+  replace: .na
+- trait_name: storage_organ
+  find: stem_buds
+  replace: .na
+- trait_name: storage_organ
+  find: stolon
+  replace: .na
+- trait_name: storage_organ
+  find: tuber_annual
+  replace: tuber
+- trait_name: storage_organ
+  find: woody roots
+  replace: roots_woody
+- trait_name: storage_organ
+  find: woody rootstock
+  replace: roots_woody
+- trait_name: foliage_time
+  find: summer_dormant
+  replace: NNYYYYYYYYYN
+- trait_name: foliage_time
+  find: autumn_dormant
+  replace: YYNNNYYYYYYY
+- trait_name: foliage_time
+  find: summer_dormant autumn_dormant
+  replace: NNNNNYYYYYYN
+- trait_name: foliage_time
+  find: autumn_dormant summer_dormant
+  replace: NNNNNYYYYYYN
+- trait_name: foliage_time
+  find: autumn_dormant winter_dormant
+  replace: YYNNNNNNYYYY
+- trait_name: foliage_time
+  find: summer_dormant early_autumn_dormant
+  replace: NNNNYYYYYYYN
+- trait_name: fruit_length
+  find: not_applicable
+  replace: .na
+- trait_name: fruit_width
+  find: not_applicable
+  replace: .na
+- trait_name: fruit_length
+  find: not_given_in_taxon_description
+  replace: .na
+- trait_name: fruit_width
+  find: not_given_in_taxon_description
+  replace: .na
+- trait_name: plant_height
+  find: not_given
+  replace: .na
+- trait_name: plant_height
+  find: not_given_in_taxon_description
+  replace: .na
+- trait_name: leaf_length
+  find: not_given_in_taxon_description
+  replace: .na
+- trait_name: plant_height
+  find: not_applicable
+  replace: .na
 taxonomic_updates: .na
 exclude_observations: .na
 questions: .na
