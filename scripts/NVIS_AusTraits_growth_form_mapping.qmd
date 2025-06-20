@@ -14,13 +14,14 @@ editor_options:
 ---
 
 ## load libraries
+
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 library(tidyverse)
 library(APCalign)
 library(kableExtra)
 library(austraits)
 
-all_traits <- readRDS("~/Github/threatened_species_traits/ignore/alltraits_20250615.rds")
+all_traits <- readRDS("~/Github/threatened_species_traits/ignore/austraits/all_traits_20250620.rds")
 ```
 
 ## functions
@@ -188,6 +189,7 @@ austraits_weighted_means <- function(austraits, traits) {
 ```
 
 ### extract_numeric_data
+
 ```{r, message=FALSE, warning=FALSE}
 extract_numeric_trait <- function(database, numeric_trait) {
   
@@ -202,7 +204,6 @@ extract_numeric_trait <- function(database, numeric_trait) {
   extracted_data
 }
 ```
-
 
 ## load data
 
@@ -222,6 +223,7 @@ accepted_taxa <- resources$APC %>%
 ```
 
 ### create vectors of genera specified in NVIS rules
+
 ```{r, message=FALSE, warning=FALSE}
 chenopod_shrub_genera <- c("Atriplex", "Chenopodium", "Rhagodia", "Maireana", "Enchylaena", 
                           "Sclerolaena", "Salsola", "Einadia", "Threlkeldia", "Nitraria", 
@@ -287,8 +289,7 @@ leaf_length <- extract_numeric_trait(database = all_traits, numeric_trait = "lea
 
 ### create dataframe
 
-Merge data into a single dataframe, only retained data for APC-accepted taxa
-ERROR: AusTraits is in the middle of updating to the current APC, and information for taxa with name changes in the past 18 months will currently get thrown out - to be solved by 20 June 2025
+Merge data into a single dataframe, only retained data for APC-accepted taxa ERROR: AusTraits is in the middle of updating to the current APC, and information for taxa with name changes in the past 18 months will currently get thrown out - to be solved by 20 June 2025
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 AusTraits_growth_form_data_full <- accepted_taxa %>%
@@ -305,11 +306,12 @@ AusTraits_growth_form_data <- AusTraits_growth_form_data_full %>%
   select(-contains("summary"))
 ```
 
-conversion_table <- read_csv("ignore/NVIS_GrowthForm_AusTraits/NVIS-AusTraits conversion.csv")
+conversion_table \<- read_csv("ignore/NVIS_GrowthForm_AusTraits/NVIS-AusTraits conversion.csv")
 
 ## allocate taxa to growth forms
 
 ### set up dataframe
+
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa <- list()
 
@@ -348,7 +350,6 @@ redistribute <- function(taxa) {
 }
 ```
 
-
 ### 01. map aquatic (Q)
 
 Plant growing in an inland waterway or wetland with the majority of its biomass under water for most of the year. Fresh, saline or brackish water.
@@ -369,7 +370,7 @@ Epiphytes, mistletoes and parasites. Plant with roots attached to the aerial por
 
 #### XX - QUESTION - XX
 
-* What about lithophytes? Some ferns, orchids that are lithophytes
+-   What about lithophytes? Some ferns, orchids that are lithophytes
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
@@ -484,6 +485,7 @@ taxa <- redistribute(taxa)
 ```
 
 ### 10. map hummock grass (H)
+
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
   mutate(
@@ -501,7 +503,7 @@ Grass forming discrete but open tussocks usually with distinct individual shoots
 
 #### XX - TODO - XX
 
-* Search again for the word tussock in newly downloaded taxon profiles (SPRAT, Wikipedia), to confirm I have everything.
+-   Search again for the word tussock in newly downloaded taxon profiles (SPRAT, Wikipedia), to confirm I have everything.
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
@@ -531,10 +533,10 @@ taxa <- redistribute(taxa)
 
 Climbing, twining, winding or sprawling plants usually with a woody stem.
 
-#### XX - TODO - XX: 
+#### XX - TODO - XX:
 
-* We have the word sprawling as a `stem_growth_habit` but this does not always map to `climber` in AusTraits
-* Sprawling plants are included below if they are the first term under `stem_growth_habit`, but I should do and additional check through floras to see if these are any we've missed
+-   We have the word sprawling as a `stem_growth_habit` but this does not always map to `climber` in AusTraits
+-   Sprawling plants are included below if they are the first term under `stem_growth_habit`, but I should do and additional check through floras to see if these are any we've missed
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
@@ -553,8 +555,8 @@ Herbaceous or slightly woody, annual or sometimes perennial plant. (Usually a di
 
 #### XX - NOTES - XX
 
-* Including geophytes here, which include lots of Orchidaceae (monocots)
-* Including all perennial herbaceous dicots, because no other category they fit in
+-   Including geophytes here, which include lots of Orchidaceae (monocots)
+-   Including all perennial herbaceous dicots, because no other category they fit in
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
@@ -612,11 +614,11 @@ taxa <- redistribute(taxa)
 
 Genera (of Tribe Salicornioideae, viz.: Halosarcia, Pachycornia, Sarcocornia, Sclerostegia, Tecticornia and Tegicornia) with articulate branches, fleshy stems and reduced flowers within the Chenopodiaceae family, succulent chenopods (Wilson 1980). Also the genus Suaeda
 
-Included: samphire_shrub_genera <- c("Salicornia", "Tecticornia", "Allenrolfea", "Arthrocaulon", "Arthroceras", "Halosarcia", "Pachycornia", "Sarcocornia", "Sclerostegia", "Tegicornia", "Sueda")
+Included: samphire_shrub_genera \<- c("Salicornia", "Tecticornia", "Allenrolfea", "Arthrocaulon", "Arthroceras", "Halosarcia", "Pachycornia", "Sarcocornia", "Sclerostegia", "Tegicornia", "Sueda")
 
 #### NOTES
 
-* This above list includes genera from NVIS list and others in subfamily Salicornioideae with observations on iNaturalist for Australia, assuming they may represent recently created genera.
+-   This above list includes genera from NVIS list and others in subfamily Salicornioideae with observations on iNaturalist for Australia, assuming they may represent recently created genera.
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
@@ -632,13 +634,13 @@ taxa <- redistribute(taxa)
 
 Single or multi-stemmed, semi-succulent shrub of the family Chenopodiaceae exhibiting drought and salt tolerance.
 
-Included: chenopod_shrub_genera <- c("Atriplex", "Chenopodium", "Rhagodia", "Maireana", "Enchylaena", "Sclerolaena", "Salsola", "Einadia", "Threlkeldia", "Nitraria", "Frankenia", "Lawrencia", "Wilsonia", "Trianthema")
+Included: chenopod_shrub_genera \<- c("Atriplex", "Chenopodium", "Rhagodia", "Maireana", "Enchylaena", "Sclerolaena", "Salsola", "Einadia", "Threlkeldia", "Nitraria", "Frankenia", "Lawrencia", "Wilsonia", "Trianthema")
 
 #### NOTES
 
-* There are some Chenopodiaceae genera that are not in the genera specified for either samphire shrub (U) or chenopod shrub (C)
-* Confirming they really don't belong, not that they are new genera:
-* c("Eremophea", "Dysphania", "Malacocera", "Osteocarpum",  "Scleroblitum", "Roycea", "Dissocarpus", "Didymanthus", "Eriochiton", "Neobassia")
+-   There are some Chenopodiaceae genera that are not in the genera specified for either samphire shrub (U) or chenopod shrub (C)
+-   Confirming they really don't belong, not that they are new genera:
+-   c("Eremophea", "Dysphania", "Malacocera", "Osteocarpum", "Scleroblitum", "Roycea", "Dissocarpus", "Didymanthus", "Eriochiton", "Neobassia")
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
@@ -656,30 +658,30 @@ Woody plants multi-stemmed at the base (or within 200mm from ground level) or if
 
 There are three lists:
 
-* List from input 3520, which includes genera that will mostly be considered heath,but double check
-  1) they are < 2 m
-  2) they occur in "heath" [maybe?]
-heath_genera_1 <- c("Epacris", "Leucopogon", "Borya", "Acrotriche", "Beaufortia", "Lasiopetalum", "Beyeria", "Diplolaena", "Andersonia", "Baeckea", "Boronia", "Calytrix", "Darwinia", "Dryandra", "Hibbertia", "Homoranthus", "Isopogon", "Jacksonia", "Kunzea", "Lambertia", "Micromyrtus", "Neofabricia", "Ozothamnus", "Phebalium","Thryptomene", "Verticordia", "Westringia", "Xanthorrhoea", "Agonis", "Eremaea", "Styphelia")
+-   List from input 3520, which includes genera that will mostly be considered heath,but double check
+    1)  they are \< 2 m
+    2)  they occur in "heath" \[maybe?\] heath_genera_1 \<- c("Epacris", "Leucopogon", "Borya", "Acrotriche", "Beaufortia", "Lasiopetalum", "Beyeria", "Diplolaena", "Andersonia", "Baeckea", "Boronia", "Calytrix", "Darwinia", "Dryandra", "Hibbertia", "Homoranthus", "Isopogon", "Jacksonia", "Kunzea", "Lambertia", "Micromyrtus", "Neofabricia", "Ozothamnus", "Phebalium","Thryptomene", "Verticordia", "Westringia", "Xanthorrhoea", "Agonis", "Eremaea", "Styphelia")
+-   Genera where stunted trees and shrubs may be heath; height and leaf length/shape tests essential
 
-* Genera where stunted trees and shrubs may be heath; height and leaf length/shape tests essential
+heath_genera_2 \<- c("Actinostrobus", "Agastachys", "Agonis", "Angophora", "Asteromyrtus", "Banksia", "Melaleuca", "Allocasuarina", "Casuarina", "Bursaria", "Grevillea", "Hakea", "Leucopogon", "Leptospermum", "Monotoca")
 
-heath_genera_2 <- c("Actinostrobus", "Agastachys", "Agonis", "Angophora", "Asteromyrtus", "Banksia", "Melaleuca", "Allocasuarina", "Casuarina", "Bursaria", "Grevillea", "Hakea", "Leucopogon", "Leptospermum",  "Monotoca")
+-   Genera that are mostly non-heath, but particular species are heathy
 
-* Genera that are mostly non-heath, but particular species are heathy
+heath_genera_3 \<- c("Alyxia", "Bossiaea", "Olearia")
 
-heath_genera_3 <- c("Alyxia", "Bossiaea", "Olearia")
-  
 #### QUESTION
-* There is one genus from input 3420 that IS NOT in input 3520. Unclear why it isn't? Wondering if mistake or name change:
+
+-   There is one genus from input 3420 that IS NOT in input 3520. Unclear why it isn't? Wondering if mistake or name change:
 
 #### NOTES
-* Species from list 1 genera make it through if < 2m (or, currently, no height data)
-* Species from list 2 genera make it through if < 2m, habitat includes "heath" (no taxa with missing data get through)
-* Species from list 3 genera make it through if < 2m, habitat included "heath", leaf length < 10 mm (no taxa with missing data get through)
+
+-   Species from list 1 genera make it through if \< 2m (or, currently, no height data)
+-   Species from list 2 genera make it through if \< 2m, habitat includes "heath" (no taxa with missing data get through)
+-   Species from list 3 genera make it through if \< 2m, habitat included "heath", leaf length \< 10 mm (no taxa with missing data get through)
 
 Currently some species that should be "heath shrub" from genera in list 2/3 won't get through; as height and habitat data are gap filled this will resolve itself.
 
-heath_genera_3 <- c("Adenanthos")
+heath_genera_3 \<- c("Adenanthos")
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa[["to_allocate"]] <- taxa[["to_allocate"]] %>%
@@ -735,11 +737,13 @@ Flowering angiosperms forming sparse to dense mats of material at the subtidal a
 NOT INCLUDED - no data in AusTraits, would be based on the available NSL taxon list
 
 ### 25. map lower plant (O)
+
 Algae, fungus.
 
 NOT INCLUDED - no data in AusTraits, would be based on the available NSL taxon list
 
 ### Create final output
+
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 taxa <- bind_rows(taxa$to_allocate, taxa$allocated)
 

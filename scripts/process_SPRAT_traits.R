@@ -12,7 +12,7 @@ SPRAT_traits_longer <- SPRAT_traits %>%
 SPRAT_traits_longer %>%
   rename(plant_trait = name) %>%
   separate_wider_delim(cols = value, delim = ";", names_sep = "_", too_few = "align_start") %>%
-  tidyr::pivot_longer(cols = 7:10, values_drop_na = TRUE) %>%
+  tidyr::pivot_longer(cols = contains("value_"), values_drop_na = TRUE) %>%
   select(-name) %>%
   mutate(
     value = str_trim(value),

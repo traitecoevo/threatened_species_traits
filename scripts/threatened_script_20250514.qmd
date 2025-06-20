@@ -32,7 +32,7 @@ resources <- APCalign::load_taxonomic_resources()
 source("R/custom_R_code.R") # not required if you read in complete RDS file
 source("R/extra_functions.R")
 
-#austraits <- readRDS("ignore/austraits/austraits_20250616.rds") # not required if you read in complete RDS file
+#austraits <- readRDS("ignore/austraits/austraits-7.0.0.rds") # not required if you read in complete RDS file
 
 #traits.build::build_setup_pipeline(method = "remake", database_name = "threatened_species") # not required if you read in complete RDS file
 
@@ -41,7 +41,7 @@ source("R/extra_functions.R")
 # create combined database with both data sources
 #all_traits <- austraits %>% austraits::bind_databases(threatened_species) # not required if you read in complete RDS file
 
-all_traits <-readRDS("~/github/threatened_species_traits/ignore/austraits/all_traits.20250616.rds") # static file with all data 2025-06-16
+all_traits <-readRDS("~/github/threatened_species_traits/ignore/austraits/all_traits_20250620.rds") # static file with all data 2025-06-16
 ```
 
 ## create dataframes for key traits
