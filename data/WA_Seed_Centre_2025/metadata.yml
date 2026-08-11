@@ -47,7 +47,8 @@ dataset:
   notes: none
 identifiers:
 - var_in: Accession Number
-  identifier_type: catalogNumber
+  identifier_type: catalogNumberVictorian Conservation Seed Bank
+  institution_code: WA Seed Centre Kings Park
 locations:
   seeds_collected_at_-14.123889_lat_and_126.708333_long:
     latitude (deg): -14.123889

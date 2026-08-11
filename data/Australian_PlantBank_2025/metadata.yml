@@ -42,6 +42,7 @@ dataset:
 identifiers:
 - var_in: Accession Number
   identifier_type: catalogNumber
+  institution_code: Australian PlantBank
 locations:
   seeds_collected_at_-12.416667_lat_and_132.966667_long:
     latitude (deg): -12.416667
