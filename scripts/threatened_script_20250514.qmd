@@ -1156,7 +1156,7 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
   left_join(leaf_lignin_per_dry_mass, by = "taxon_name") %>%
   left_join(bud_bank_location_scaled, by = "taxon_name") %>%
   left_join(storage_organ_present, by = "taxon_name") %>%
-  left_join(resources$APC %>% select(taxon_name = canonical_name, genus, family) |> distinct, by = "taxon_name")
+  left_join(resources$APC %>% select(taxon_name = canonical_name, genus, family) |> distinct(taxon_name, .keep_all = T))
 ```
 
 #### - check trait correlations
@@ -2599,15 +2599,7 @@ threat_independent_risk_tmp <- native_species %>%
   left_join(life_history, by = "taxon_name") %>%
   left_join(woodiness, by = "taxon_name") %>%
   left_join(herb_shrub_tree, by = "taxon_name") %>%
-  left_join(lifplant_height_scaled, by = "taxon_name")
-  #left_join(dispersers, by = "taxon_name") %>%
-  #left_join(seedbank_location, by = "taxon_name") %>%
-  #left_join(vegetative_reproduction_ability, by = "taxon_name") %>%
-  #left_join(seed_dry_mass, by = "taxon_name") %>%
-  #left_join(reproductive_maturity, by = "taxon_name") %>%
-  #left_join(lifespan, by = "taxon_name") %>%
-  #left_join(extent_of_occurrence, by = "taxon_name") %>%
-  #left_join(area_of_occupancy, by = "taxon_name")
+  left_join(plant_height, by = "taxon_name")
 ```
 
 #### - calculate risk scores
@@ -2666,7 +2658,7 @@ threat_independent_risk <- threat_independent_risk_tmp %>%
     
 
     # sum trait risk effect scores
-      total_trait_effect_score = rowSums(across(c(seed_dry_mass_scaled_risk, seedbank_location_risk, vegetative_reproduction_ability_risk, dispersers_risk, lifespan_scaled_risk, reproductive_maturity_scaled_risk, EOO_scaled_risk)), na.rm = TRUE)
+      total_trait_effect_score = rowSums(across(c(life_history_risk, woodiness_risk, herb_shrub_tree_risk, plant_height_scaled_risk)), na.rm = TRUE)
   ) %>%
   
   mutate(
@@ -2823,75 +2815,4 @@ df_long <- precariousness_risk %>%
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "species precariousness (IGNORE HABITAT IN THIS PLOT - SET TO 0)")
-```
-
-### Comparisons with non-threatened species
-
-Do threatened species have worse dispersal, longer lifespans, etc?
-
-- Simple answer is NO. There is minimal difference in any of the traits measured between threatened vs other species, except that reproductive maturity is higher for threatened taxa
-- It means that for understanding species regeneration potential, each species' trait values need to be considered - no generalisations.
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-threat_independent_risk_tmp <- threat_independent_risk_tmp %>%
-  mutate(threatened = ifelse(!is.na(threatened_status), "threatened", "other"))
-
-correlations_with_possible_traits <- tibble(
-  trait = NA_character_,
-  other_mean = NA_character_,
-  other_SE = NA_character_,
-  threatened_mean = NA_character_,
-  threatened_SE = NA_character_,
-  r2 = NA_character_, 
-  p_value = NA_character_,
-  n = NA_character_,
-)
-
-for (var in c("seed_dry_mass_log10", "reproductive_maturity_log10", "seedbank_location", "life_history", "dispersers", "vegetative_reproduction_ability", "lifespan_log10")) {
-  
-  data_tmp <- threat_independent_risk_tmp %>% filter(!is.na(threat_independent_risk_tmp[[var]]))
-  
-  linearmodel_var <- lm(data_tmp[[var]] ~ threatened , data = data_tmp)
-  
-  
-  linearmodel_coeff <- summary(linearmodel_var)$coefficients %>% as.data.frame() %>% slice(2)
-  
-  estimate_means_output <- modelbased::estimate_means(linearmodel_var)  %>% as.data.frame()
-  estimate_means_output[1,2]
-  
-  new_row <- c(
-    trait = var, 
-    r2= round(summary(linearmodel_var)$r.squared,4), 
-    p_value = round(linearmodel_coeff[1,4],4),
-    other_mean = round(estimate_means_output[1,2],3),
-    threatened_mean = round(estimate_means_output[2,2],3),
-    other_SE = round(estimate_means_output[1,3],3),
-    threatened_SE = round(estimate_means_output[2,3],3),
-    n = nrow(data_tmp)
-      ) %>% 
-    t() %>%
-    as.data.frame()
-  
-  correlations_with_possible_traits <- correlations_with_possible_traits %>%
-    bind_rows(new_row)
-  
-  plot(
-    ggplot(data = data_tmp, aes(x = threatened, y = data_tmp[[var]])) +
-    geom_boxplot(fill ="coral1") +
-    geom_point() +
-    geom_jitter(height=0.1) +
-    theme_classic() +
-    ylab(var)
-  )
-  
-}
-
-correlations_with_possible_traits <- correlations_with_possible_traits %>% 
-  arrange(-as.numeric(r2)) %>% 
-  filter(!is.na(trait))
-
-threatened_kable_table <- correlations_with_possible_traits %>% kableExtra::kable(caption = "Correlation between threat status and `regeneration` trait value")
-
-kableExtra::kable_classic(threatened_kable_table) %>%
-  kableExtra::kable_styling(full_width = FALSE)
 ```
