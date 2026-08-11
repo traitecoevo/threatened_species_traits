@@ -48,8 +48,8 @@ all_traits <-readRDS("~/github/threatened_species_traits/ignore/austraits/all_tr
 
 ### read in categorical to ordinal score conversions for categorical traits and threats
 
--   read in files that indicate conversions between categorical values and an ordinal equivalent
--   these ordinal values are used both to determine if trait-susceptibility correlations exist within training datasets (for myrtle rust, Phytophthora cinnamomi, and goats) and also to assign susceptibility risks based on a species' trait values
+- read in files that indicate conversions between categorical values and an ordinal equivalent
+- these ordinal values are used both to determine if trait-susceptibility correlations exist within training datasets (for myrtle rust, Phytophthora cinnamomi, and goats) and also to assign susceptibility risks based on a species' trait values
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # categorical trait scores
@@ -191,9 +191,9 @@ calculate_prop_traits_scored_scaled <- function(data, trait_table) {
 
 #### get_effect_score and calculate_risk
 
--   `get_effect_score` gets effect scores from the table for each threat; for some threat x trait combinations need to manually input value because of additional conditions
+- `get_effect_score` gets effect scores from the table for each threat; for some threat x trait combinations need to manually input value because of additional conditions
 
--   `calculate_risk` scales all ordinal or scaled numeric values for a trait or taxonomic risk, based on effect score and ordinal value
+- `calculate_risk` scales all ordinal or scaled numeric values for a trait or taxonomic risk, based on effect score and ordinal value
 
 ```{r, message=FALSE, warning=FALSE}
 get_effect_score <- function(data, trait_name) {
@@ -382,11 +382,11 @@ seedbank_location_scores %>% rename(ordinal_value = !!names(.)[3]) %>% arrange(o
 
 ### extract numeric traits from database
 
--   extract all available values for numeric traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
+- extract all available values for numeric traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
 
--   for each taxon, take the mean of all available values using a weighted mean function developed for AusTraits, which first takes the mean of multiple individual values collected at a single site; then the mean of values from all population; and at the end also considers values extracted from floras (and similar publications) that refer to the entire species
+- for each taxon, take the mean of all available values using a weighted mean function developed for AusTraits, which first takes the mean of multiple individual values collected at a single site; then the mean of values from all population; and at the end also considers values extracted from floras (and similar publications) that refer to the entire species
 
--   the function used is called `austraits_weighted_means`
+- the function used is called `austraits_weighted_means`
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 numeric_traits <- c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "reproductive_maturity", "seedbank_longevity", "leaf_water_content_per_area", "leaf_tannin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_lignin_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "leaf_work_to_shear_adjusted", "fruit_length", "metabolisable_energy", "bark_thickness", "lifespan")
@@ -440,9 +440,9 @@ lifespan <- extract_numeric_trait(lifespan_data, numeric_trait = "lifespan")
 
 ### extract categorical traits from database
 
--   extract all available values for categorical traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
--   for each trait, merge in numeric conversions
--   for each taxon, take the mean of all available values
+- extract all available values for categorical traits identified as 1) having sufficient coverage **AND** 2) being plausible relevant to predict the susceptibility of one of the threats
+- for each trait, merge in numeric conversions
+- for each taxon, take the mean of all available values
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 dispersers <-  extract_categorical_trait(all_traits, c("dispersal_syndrome", "dispersers"), dispersers_scores, "dispersers")
@@ -497,10 +497,10 @@ tropical_grass_flowering_times <- all_traits$traits %>%
 
 ### extract known susceptibility scores
 
--   these include:
+- these include:
 
-    1.  taxa explicitly known to be susceptible / not susceptible to a specific disease
-    2.  taxa explicitly know to be palatable, toxic, etc. to a specific herbivore
+  1.  taxa explicitly known to be susceptible / not susceptible to a specific disease
+  2.  taxa explicitly know to be palatable, toxic, etc. to a specific herbivore
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # extract known susceptibility data
@@ -525,15 +525,15 @@ plant_goat_palatability <- plant_goat_palatability %>%
 
 ### extract non-trait attributes from database
 
--   there are attributes of a species that aren't "traits" but are known to affect a species susceptibility to various threats
+- there are attributes of a species that aren't "traits" but are known to affect a species susceptibility to various threats
 
--   these include:
+- these include:
 
-    1.  habitat (vegetation association and moisture)
-    2.  soil type (mainly soil textural terms) - under Phytophthora for now
-    3.  underlying geologic substrate - under Phytophthora for now
-    4.  population size (not merged in yet because too little data)
-    5.  population count (not merged in yet because too little data)
+  1.  habitat (vegetation association and moisture)
+  2.  soil type (mainly soil textural terms) - under Phytophthora for now
+  3.  underlying geologic substrate - under Phytophthora for now
+  4.  population size (not merged in yet because too little data)
+  5.  population count (not merged in yet because too little data)
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # list of actual habitat terms for each species, from all sources
@@ -584,15 +584,15 @@ native_species <- resources$APC %>%
 
 ### Are any traits good predictors?
 
--   Check if trait correlations exist for taxa where susceptibility is already known.
+- Check if trait correlations exist for taxa where susceptibility is already known.
 
 #### - create dataframe
 
--   create table with susceptibility, trait values for taxa with known *Phytophthora cinnamomi* susceptibility
+- create table with susceptibility, trait values for taxa with known *Phytophthora cinnamomi* susceptibility
 
 #### - Phytophthora cinnamomi specific attrbitutes, scoring values
 
--   Certain species are known to have higher or lower susceptibility to Phytophthora cinnamomi.
+- Certain species are known to have higher or lower susceptibility to Phytophthora cinnamomi.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 phytophthora_cinnamomi_susceptibility_scores %>% 
@@ -627,19 +627,19 @@ phytophthora_cinnamomi_susceptibility_data <- (all_traits %>% join_taxa(vars = "
 
 #### - check for trait correlations
 
--   identify strong susceptibility-trait correlations for taxa with known susceptibility
+- identify strong susceptibility-trait correlations for taxa with known susceptibility
 
--   Note:
+- Note:
 
-    1.  Not considering traits that might matter but are entirely linked to taxonomy (i.e. types of roots/root associations)
-    2.  Not considering traits that are known to matter, but are known for so few species to be useless as predictors (constitutive and induced responses to infection; concentration of secondary metabolites in plant)
+  1.  Not considering traits that might matter but are entirely linked to taxonomy (i.e. types of roots/root associations)
+  2.  Not considering traits that are known to matter, but are known for so few species to be useless as predictors (constitutive and induced responses to infection; concentration of secondary metabolites in plant)
 
--   In the output:
+- In the output:
 
-    1.  a positive coefficient indicates a higher trait value in more susceptible taxa
-    2.  for numeric traits, the magnitude of the coefficient indicates the change in response variable for a "1 unit" increase in susceptibility, where susceptibility is on a scale of 0--3.
-    3.  for numeric traits, the magnitude of the coefficient must be intepreted in conjunction with knowing the scaling for the response variable - different for each trait; the susceptibility is on a scale of 0--3.
-    4.  Also in this chart are correlations with soil type/texture and geologic substrate. As also indicated in the literature, it isn't that taxa growing of "resistant substrates/soils" are themselves resistant, but that Phytophthora doesn't survive in these locations. Therefore, this information can be used to asses the **RISK** of a species to Phytophthora, but not its **SUSCEPTIBILITY** to Phytophthora.
+  1.  a positive coefficient indicates a higher trait value in more susceptible taxa
+  2.  for numeric traits, the magnitude of the coefficient indicates the change in response variable for a "1 unit" increase in susceptibility, where susceptibility is on a scale of 0--3.
+  3.  for numeric traits, the magnitude of the coefficient must be intepreted in conjunction with knowing the scaling for the response variable - different for each trait; the susceptibility is on a scale of 0--3.
+  4.  Also in this chart are correlations with soil type/texture and geologic substrate. As also indicated in the literature, it isn't that taxa growing of "resistant substrates/soils" are themselves resistant, but that Phytophthora doesn't survive in these locations. Therefore, this information can be used to asses the **RISK** of a species to Phytophthora, but not its **SUSCEPTIBILITY** to Phytophthora.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 correlations_with_possible_traits <- tibble(
@@ -736,8 +736,8 @@ phytophthora_traits_to_use <- correlations_with_possible_traits %>% filter(p_val
 
 ### How important is taxonomy? (vs traits...)
 
--   Family matters more than traits
--   Although some moderate correlations with traits exist, knowing a plant's family is a much better predictor of its susceptibility - at least visually
+- Family matters more than traits
+- Although some moderate correlations with traits exist, knowing a plant's family is a much better predictor of its susceptibility - at least visually
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -796,13 +796,13 @@ ggplot(data = family_histograms) +
 
 ### Assign risks to all taxa
 
--   first steps are based on taxonomy and habitat:
-    1.  for taxa from well-sampled families, include a taxonomic adjustment factor *as a starting point, have the average risk within the family, rescaled from 0--1.*
-    2.  taxa that live on calcareous (limestone, basic, alkaline) soils are not susceptible
-    3.  plants that live on clay soils are less susceptible - but this needs to be a down-weighted effect
--   second steps will be to adjust these susceptibilities based on traits
-    1.  need to decide on r\^2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
-    2.  it would be great to have information on Proteaceae which explicitly do not form cluster roots or Ericaceae that do not form root hairs (or have very transient root hairs); also possible that cord roots increase susceptibility in Daviseia; but that doesn't seem to be available
+- first steps are based on taxonomy and habitat:
+  1.  for taxa from well-sampled families, include a taxonomic adjustment factor *as a starting point, have the average risk within the family, rescaled from 0--1.*
+  2.  taxa that live on calcareous (limestone, basic, alkaline) soils are not susceptible
+  3.  plants that live on clay soils are less susceptible - but this needs to be a down-weighted effect
+- second steps will be to adjust these susceptibilities based on traits
+  1.  need to decide on r\^2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
+  2.  it would be great to have information on Proteaceae which explicitly do not form cluster roots or Ericaceae that do not form root hairs (or have very transient root hairs); also possible that cord roots increase susceptibility in Daviseia; but that doesn't seem to be available
 
 NOTE:\
 LMA emerges as having a significant correlation, but not including LMA effect score, because the effect is that very low LMA (thin leaved) taxa have lower susceptibility whereas no effect among higher LMA taxa. This is presumably about woodiness/life history, and doesn't make sense to also include effect of LMA
@@ -1010,14 +1010,16 @@ df_long <- phytophthora_assigned_risk %>%
 make_risk_density_plot(df_long, "Phytophthora cinnamomi")
 ```
 
-# Myrtle rust
+# Threat-based susceptibility scoring
+
+## Myrtle rust
 
 ### Are any traits good predictors?
 
 #### - myrtle rust specific attrbitutes, scoring values
 
--   Certain species are known to have higher or lower susceptibility to myrtle rust.
--   Myrtle rust only impacts species growing in wet habitats.
+- Certain species are known to have higher or lower susceptibility to myrtle rust.
+- Myrtle rust only impacts species growing in wet habitats.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 myrtle_rust_susceptibility_scores %>% 
@@ -1030,7 +1032,7 @@ myrtle_rust_susceptibility_scores %>%
 
 #### - create dataframe
 
--   Create table with susceptibility, trait values for taxa with known susceptibility.
+- Create table with susceptibility, trait values for taxa with known susceptibility.
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
@@ -1055,21 +1057,21 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
 
 #### - check trait correlations
 
--   For traits identified in the literature as being plausibly relevant, check if trait correlations exist for taxa with known susceptibility ("training data").
+- For traits identified in the literature as being plausibly relevant, check if trait correlations exist for taxa with known susceptibility ("training data").
 
--   Identify those traits for which there is evidence that they do affect susceptibility.
+- Identify those traits for which there is evidence that they do affect susceptibility.
 
--   Note:
+- Note:
 
-    1.  Not considering traits that are known to matter, but are known for so few species to be useless as predictors (constitutive and induced responses to infection; concentration of secondary metabolites in plant); most of the data on plant metabolite content cannot be compared across studies because of different methodologies and therefore have not been included.
-    2.  The traits `stomatal_distribution`, `leaf_glaucousness` and `leaf_hairiness` are very much expected to matter and this information should be available for sufficient taxa to asses whether there is a significant correlation with susceptibility, but currently these traits are scored for very few taxa.
-    3.  There are traits including `leaf_wax_content`, `leaf_wax_structure` that might matter, but data exist for quite few taxa.
+  1.  Not considering traits that are known to matter, but are known for so few species to be useless as predictors (constitutive and induced responses to infection; concentration of secondary metabolites in plant); most of the data on plant metabolite content cannot be compared across studies because of different methodologies and therefore have not been included.
+  2.  The traits `stomatal_distribution`, `leaf_glaucousness` and `leaf_hairiness` are very much expected to matter and this information should be available for sufficient taxa to asses whether there is a significant correlation with susceptibility, but currently these traits are scored for very few taxa.
+  3.  There are traits including `leaf_wax_content`, `leaf_wax_structure` that might matter, but data exist for quite few taxa.
 
--   In the output:
+- In the output:
 
-    1.  For myrtle rust susceptibility, a positive coefficient indicates a higher trait value in more susceptible taxa.
-    2.  For numeric traits, the magnitude of the coefficient must be interpreted in conjunction with knowing the scaling for the response variable - different for each trait.
-    3.  For categorical traits, each trait has different ordinal scores, sometimes on a scale of 0--1, but up to 0--5; see tables above.
+  1.  For myrtle rust susceptibility, a positive coefficient indicates a higher trait value in more susceptible taxa.
+  2.  For numeric traits, the magnitude of the coefficient must be interpreted in conjunction with knowing the scaling for the response variable - different for each trait.
+  3.  For categorical traits, each trait has different ordinal scores, sometimes on a scale of 0--1, but up to 0--5; see tables above.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 correlations_with_possible_traits_myrtle_rust <- tibble(
@@ -1165,7 +1167,7 @@ kableExtra::kable_classic(myrtlerust_kable_table) %>%
 
 considering whether genus matters as much as - or more than traits
 
--   not sufficiently clear to use this, although there are some genera where all species tested are susceptible and others where there are some resistant species and many partially resistant species
+- not sufficiently clear to use this, although there are some genera where all species tested are susceptible and others where there are some resistant species and many partially resistant species
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 by_genus <- myrtle_rust_susceptibility_data %>%
@@ -1210,19 +1212,19 @@ ggplot(data = genus_histograms) +
 
 ### Assign risks to all taxa
 
--   first steps are based on taxonomy and habitat:
+- first steps are based on taxonomy and habitat:
 
-    1.  only Myrtaceae are susceptible
-    2.  only taxa that live in "wet" environments are susceptible
+  1.  only Myrtaceae are susceptible
+  2.  only taxa that live in "wet" environments are susceptible
 
 ```         
 *ISSUE*: How to score taxa where habitat information isn't known; currently have data for \~50% of Myrtaceae. Right now we are taking the conservative approach and scoring all those species as being susceptible. Habitat is the first trait we plan to gap fill, but we might not end up with data for all taxa.
 ```
 
--   second steps will be to adjust these binary susceptibilities based on traits
+- second steps will be to adjust these binary susceptibilities based on traits
 
-    1.  need to decide on r2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
-    2.  there are additional traits which might well be important, but need to bolster their coverage in database to be certain: **leaf glaucousness**, **leaf wax content**, **leaf hairiness**
+  1.  need to decide on r2 threshold, below which the uncertainty is too great to include (possibly true for all traits where we have data!)
+  2.  there are additional traits which might well be important, but need to bolster their coverage in database to be certain: **leaf glaucousness**, **leaf wax content**, **leaf hairiness**
 
 #### - amalgamate data sources
 
@@ -1440,23 +1442,23 @@ df_long <- myrtle_rust_assigned_risk %>%
 make_risk_density_plot(df_long, "myrtle rust (Myrtaceae species only)")
 ```
 
-# Goats
+## Goats
 
 ### Are any traits good predictors?
 
--   Check if trait correlations exist for taxa where palatability/forage preference/toxicity is known.
--   For goats, there are no lists of species that goats avoid -except linked already to specific traits.
--   For instance, there is a list of 360 species growing in arid Australia, indicating their toxicity to goats; same species have palatibility values.
--   Goats are known to eat "spiny acacias" (multiple references to this), but presumably the most spine-protected plants are less susceptible?
--   Trees are resistant as adults, especially if they have thick bark (little data), but not as seedlings.
--   Herbs much less impacted than shrubs, grasses.
--   Succulence
+- Check if trait correlations exist for taxa where palatability/forage preference/toxicity is known.
+- For goats, there are no lists of species that goats avoid -except linked already to specific traits.
+- For instance, there is a list of 360 species growing in arid Australia, indicating their toxicity to goats; same species have palatibility values.
+- Goats are known to eat "spiny acacias" (multiple references to this), but presumably the most spine-protected plants are less susceptible?
+- Trees are resistant as adults, especially if they have thick bark (little data), but not as seedlings.
+- Herbs much less impacted than shrubs, grasses.
+- Succulence
 
 #### - goat specific attributes, scoring values
 
--   Certain species are known to be toxic to goats
--   Certain species are known to be the most palatable to goats
--   Goats prefer arid environments, especially rocky areas
+- Certain species are known to be toxic to goats
+- Certain species are known to be the most palatable to goats
+- Goats prefer arid environments, especially rocky areas
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # print score tables
@@ -1783,7 +1785,7 @@ df_long <- goats_assigned_risk %>%
 make_risk_density_plot(df_long, "goats")
 ```
 
-# Deer
+## Deer
 
 ### Assign risks to all taxa
 
@@ -1941,7 +1943,7 @@ df_long <- deer_assigned_risk %>%
 make_risk_density_plot(df_long, "deer")
 ```
 
-# Pigs
+## Pigs
 
 ### Assign risks to all taxa
 
@@ -2102,7 +2104,7 @@ df_long <- pigs_assigned_risk %>%
 make_risk_density_plot(df_long, "pigs")
 ```
 
-# C4 tropical grasses
+## C4 tropical grasses
 
 ### Assign risks to all taxa
 
@@ -2296,7 +2298,7 @@ df_long <- tropical_C4_grasses_assigned_risk %>%
 make_risk_density_plot(df_long, "C4 grasses")
 ```
 
-# Hymenachne
+## Hymenachne
 
 ### Assign risks to all taxa
 
@@ -2462,36 +2464,45 @@ df_long <- hymenachne_assigned_risk %>%
 make_risk_density_plot(df_long, "hymenachne")
 ```
 
-# Threat independent effects
+# Threat-independent scoring component
+
+## Ability of population to compensate
 
 - this section includes species' ability to regenerate
 
 ### Assign risks to all taxa
 
 #### - amalgamate data sources
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 threat_independent_effects <- tribble(
   ~trait,                  ~effect_score, ~notes,
-  "life_history",            0.3,          "annuals, ephemerals = faster regeneration",
-  "seed_dry_mass_scaled",   -0.3,          "small seeds disperse further",
-  "dispersers",  -0.3,          "species with more effective dispersal syndromes more likely to have seed for regeneration",
-  "seedbank_location",  -0.2,          "species with local seedbanks more likely to have seed for regeneration",
-  "vegetative_reproduction_ability",  -0.2,          "species that can reproduce vegetatively more likely to persist in a location from belowground organs",
-  "reproductive_maturity_scaled", -0.6, "shorter time to maturity, regenerates faster",
-  "lifespan_scaled", -0.6, "shorter lived, regenerates faster"
+  "life_history",            0.5,          "annuals, ephemerals = faster regeneration",
+  "herb_shrub_tree",            0.5,          "herbs = faster regeneration",
+  "woodiness",            0.5,          "herbaceous = faster regeneration",
+  "plant_height_scaled",            0.5,          "short plants = less height growth required before reproducing",
+  #"seed_dry_mass_scaled",   -0.3,          "small seeds disperse further",
+  #"dispersers",  -0.3,          "species with more effective dispersal syndromes more likely to have seed for regeneration",
+  #"seedbank_location",  -0.2,          "species with local seedbanks more likely to have seed for regeneration",
+  #"vegetative_reproduction_ability",  -0.2,          "species that can reproduce vegetatively more likely to persist in a location from belowground organs",
+  #"reproductive_maturity_scaled", -0.6, "shorter time to maturity, regenerates faster",
+  #"lifespan_scaled", -0.6, "shorter lived, regenerates faster"
 )
 
 # create dataframe with relevant traits, attributes
 threat_independent_risk_tmp <- native_species %>%
   left_join(threatened, by = "taxon_name") %>%
   left_join(habitat, by = "taxon_name") %>%
+  left_join(herb_shrub_tree, by = "taxon_name") %>%
+  left_join(woodiness, by = "taxon_name") %>%
+  left_join(plant_height, by = "taxon_name") %>%
   left_join(life_history, by = "taxon_name") %>%
-  left_join(dispersers, by = "taxon_name") %>%
-  left_join(seedbank_location, by = "taxon_name") %>%
-  left_join(vegetative_reproduction_ability, by = "taxon_name") %>%
-  left_join(seed_dry_mass, by = "taxon_name") %>%
-  left_join(reproductive_maturity, by = "taxon_name") %>%
-  left_join(lifespan, by = "taxon_name")
+  #left_join(dispersers, by = "taxon_name") %>%
+  #left_join(seedbank_location, by = "taxon_name") %>%
+  #left_join(vegetative_reproduction_ability, by = "taxon_name") %>%
+  #left_join(seed_dry_mass, by = "taxon_name") %>%
+  #left_join(reproductive_maturity, by = "taxon_name") %>%
+  #left_join(lifespan, by = "taxon_name")
 ```
 
 #### - calculate risk scores
@@ -2517,29 +2528,36 @@ threat_independent_risk <- threat_independent_risk_tmp %>%
   mutate(
     # assign trait risk effect scores
     # perennials have highest impact
-      #life_history_risk = calculate_risk("life_history", get_effect_score(threat_independent_effects, "life_history")$effect_score, .),
+    life_history_risk = calculate_risk("life_history", get_effect_score(threat_independent_effects, "life_history")$effect_score, .),
+    
+    # woody taxa have highest impact
+    woodiness_risk = calculate_risk("woodiness", get_effect_score(threat_independent_effects, "woodiness")$effect_score, .),
+    
+    # perennials have highest impact
+    herb_shrub_tree_risk = calculate_risk("herb_shrub_tree", get_effect_score(threat_independent_effects, "herb_shrub_tree")$effect_score, .),
+    
+    # perennials have highest impact
+    plant_height_scaled_risk = calculate_risk("plant_height_scaled", get_effect_score(threat_independent_effects, "plant_height_scaled")$effect_score, .),
     
     # smaller seeds = lower impact
-      seed_dry_mass_scaled_risk = calculate_risk("seed_dry_mass_scaled", get_effect_score(threat_independent_effects, "seed_dry_mass_scaled")$effect_score, .),
+    #  seed_dry_mass_scaled_risk = calculate_risk("seed_dry_mass_scaled", get_effect_score(threat_independent_effects, "seed_dry_mass_scaled")$effect_score, .),
     
     # better dispersal = lower risk
-      dispersers_risk = calculate_risk("dispersers", get_effect_score(threat_independent_effects, "dispersers")$effect_score, .),
+    #  dispersers_risk = calculate_risk("dispersers", get_effect_score(threat_independent_effects, "dispersers")$effect_score, .),
     
     # seedbank present = lower risk
-      seedbank_location_risk = calculate_risk("seedbank_location", get_effect_score(threat_independent_effects, "seedbank_location")$effect_score, .),
+    # seedbank_location_risk = calculate_risk("seedbank_location", get_effect_score(threat_independent_effects, "seedbank_location")$effect_score, .),
     
     # faster reproductive maturity = lower risk
-      reproductive_maturity_scaled_risk = calculate_risk("reproductive_maturity_scaled", get_effect_score(threat_independent_effects, "reproductive_maturity_scaled")$effect_score, .),   
-    
+    #  reproductive_maturity_scaled_risk = calculate_risk("reproductive_maturity_scaled", get_effect_score(threat_independent_effects, "reproductive_maturity_scaled")$effect_score, .),   
     # shorter lifespan = lower risk
-      lifespan_scaled_risk = calculate_risk("lifespan_scaled", get_effect_score(threat_independent_effects, "lifespan_scaled")$effect_score, .),  
+    #  lifespan_scaled_risk = calculate_risk("lifespan_scaled", get_effect_score(threat_independent_effects, "lifespan_scaled")$effect_score, .),  
     
     # vegetative reproduction ability = lower risk
-      vegetative_reproduction_ability_risk = calculate_risk("vegetative_reproduction_ability", get_effect_score(threat_independent_effects, "vegetative_reproduction_ability")$effect_score, .),
+    #  vegetative_reproduction_ability_risk = calculate_risk("vegetative_reproduction_ability", get_effect_score(threat_independent_effects, "vegetative_reproduction_ability")$effect_score, .),
     
-
     # sum trait risk effect scores
-      total_trait_effect_score = rowSums(across(c(seed_dry_mass_scaled_risk, seedbank_location_risk, vegetative_reproduction_ability_risk, dispersers_risk, lifespan_scaled_risk, vegetative_reproduction_ability_risk, reproductive_maturity_scaled_risk)), na.rm = TRUE)
+      total_trait_effect_score = rowSums(across(c(life_history_risk, woodiness_risk, herb_shrub_tree_risk, plant_height_scaled_risk)), na.rm = TRUE)
   ) %>%
   
   # REQUIRED BECAUSE SO MANY TAXA HAVE NO DATA FOR ANY TRAITS EXCEPT LIFE HISTORY
@@ -2597,12 +2615,17 @@ df_long <- threat_independent_risk %>%
 make_risk_density_plot(df_long, "threat-independent (IGNORE HABITAT IN THIS PLOT - SET TO 0)")
 ```
 
+## Species precariousness
+
+
+
+# Extras
 ### Comparisons with non-threatened species
 
 Do threatened species have worse dispersal, longer lifespans, etc?
 
--   Simple answer is NO. There is minimal difference in any of the traits measured between threatened vs other species, except that reproductive maturity is higher for threatened taxa
--   It means that for understanding species regeneration potential, each species' trait values need to be considered - no generalisations.
+- Simple answer is NO. There is minimal difference in any of the traits measured between threatened vs other species, except that reproductive maturity is higher for threatened taxa
+- It means that for understanding species regeneration potential, each species' trait values need to be considered - no generalisations.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 threat_independent_risk_tmp <- threat_independent_risk_tmp %>%
