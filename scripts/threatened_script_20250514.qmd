@@ -2358,8 +2358,9 @@ tropical_C4_grasses_trait_effects <- tribble(
   "resprouting_capacity",  -0.2,          "resprouters = slower impact, with respect to increased fire frequency",
   "storage_organ_present", -0.3,          "includes geophytes",
   "bud_bank_location_scaled",     -0.1,         "used twice, high bud banks a negative for increased fire intensity, a positive for high fire frequency; offsets half the benefit of being a resprouter",
-  "dry_season_flowering",  -0.3,          "esp. low risk if an annual",
-  "reproductive_maturity_scaled", -0.3,          "plants with a shorter juvenile period more likely to set seed before next fire"
+  "reproductive_maturity_scaled", -0.3,          "plants with a shorter juvenile period more likely to set seed before next fire",
+  "dry_season_flowering", NA, "scored directly with two separate coefficients: -0.3 in direct_competition_risk (competition benefit), -0.1 in fire_season_risk (fire cost)"
+
 )
 
 # taxonomic vector - note this is just for the kable printout; actually scoring is done below
@@ -2421,11 +2422,9 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
 
     # add {trait}_risk for every trait in tropical_C4_grasses_trait_effects (plant
     # height, storage organ, reproductive maturity, life history, woodiness,
-    # resprouting capacity, bud bank location, dry season flowering). NB
-    # 24-SPECIAL CASE dry_season_flowering_risk is computed here but not used below - the
-    # raw dry_season_flowering trait value is instead used directly, with two different
-    # hardcoded coefficients (-0.3 and -0.1) in direct_competition_risk/fire_season_risk;
-    # flagging that inconsistency rather than resolving it here.
+    # resprouting capacity, bud bank location). dry_season_flowering is deliberately
+    # NOT in this tribble - see 27/28 below, where it's scored with two different,
+    # expert-elicited coefficients instead of a single trait-effects entry
     add_trait_risks(tropical_C4_grasses_trait_effects) %>%
 
     mutate(
@@ -2441,9 +2440,8 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
 
     # combine trait risk effect scores
 
-    # 27-SPECIAL CASE direct_competition_risk: hardcoded -0.3 coefficient applied directly
-    # to the raw dry_season_flowering value (rather than via a trait_effects tribble entry) -
-    # less direct competition if 1) you are tall or 2) you are an annual, especially ones that grows outside the C4 grass growing season
+    # dry_season_flowering: less direct competition if 1) you are tall or 2) you are an annual, e
+    # specially ones that grows outside the C4 grass growing season
       direct_competition_risk = ifelse(!is.na(plant_height) | (!is.na(dry_season_flowering) & life_history < 1.5),
                                        -0.3*dry_season_flowering + plant_height_scaled_risk + life_history_risk,
                                        0.3),
@@ -2455,10 +2453,7 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
     # reproductive_maturity_risk, should be in here, but so little data it will skew results
       fire_frequency_risk = rowSums(across(c(life_history_risk, resprouting_capacity_risk, bud_bank_location_scaled_risk2)), na.rm = TRUE),
     
-    # 28-SPECIAL CASE fire_season_risk: hardcoded -0.1 coefficient applied directly to the
-    # raw dry_season_flowering value (same pattern/inconsistency as direct_competition_risk
-    # above, but with a different hardcoded coefficient: -0.1 vs -0.3) - less impacted by
-    # fire season if you are an annual that flowers and fruits in the late dry season, likely post-fire
+    # fire_season_risk: less impacted by fire season if you are an annual that flowers and fruits in the late dry season
       fire_season_risk = ifelse(!is.na(life_history) & !is.na(dry_season_flowering) & life_history < 1.5, -0.1*dry_season_flowering, .1),
     
     # replace na's with 0
@@ -2565,10 +2560,10 @@ hymenachne_trait_effects <- tribble(
   "pollination_syndrome", -0.3, "wind pollinated species more persistent"
 )
 
-# 29-SPECIAL CASE hymenachne_taxonomic_vector: 14 hand-picked families assumed more
-# at-risk from hymenachne invasion (largely aquatic/wetland-associated families),
-# all flatly assigned effect_score = 0.4 regardless of species
-hymenachne_taxonomic_vector <- c("Arecaceae", "Cyperaceae", "Haloragaceae", "Hydrocharitaceae", "Iridaceae", "Juncaceae", "Marsileaceae", "Myrtaceae", "Nymphaeaceae", "Orchidaceae", "Poaceae", "Pontederiaceae", "Restionaceae", "Typhaceae")
+# 14 families that are associated with aquatic and wetland environments are identified
+# as having a higher risk from hymenachne
+# All species in these families are assigned a taxonomic effect score
+hymenachne_taxonomic_vector <- c("Arecaceae", "Cyperaceae", "Haloragaceae", "Hydrocharitaceae", "Iridaceae", "Juncaceae", "Marsileaceae", "Nymphaeaceae", "Orchidaceae", "Poaceae", "Pontederiaceae", "Restionaceae", "Typhaceae")
 
 hymenachne_taxonomic_effects <- as.data.frame(hymenachne_taxonomic_vector) %>%
   rename(taxon = hymenachne_taxonomic_vector) %>%
@@ -2617,9 +2612,8 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
         risk_confidence = ifelse(is.na(hymenachne_habitat_effect_score),
                                  0.15*prop_traits_scored, .6*prop_traits_scored),
 
-    # 30-SPECIAL CASE plant_growth_substrate_hymenanche_risk: a manual 0/1 flag (not the
-    # usual effect_score * (value - mean(value)) formula) - aquatic taxa have
-    # plant_growth_substrate_risk = 1
+    # plant_growth_substrate (aquatic vs not-aquatic in this case), is a core compoment of "habitat"
+    # with respect to hymenanche risk
       plant_growth_substrate_hymenanche_risk = ifelse(plant_growth_substrate_hymenanche == 1, 1, NA),
 
     # when available use habitat risk based on species habitat; default habitat = 0.3
@@ -2880,10 +2874,7 @@ precariousness_risk <- precariousness_risk_tmp %>%
   ) %>%
 
   # add {trait}_risk for every trait in precariousness_effects (extent of occurrence,
-  # area of occupancy) - renamed from the old "EOO_scaled_risk"/"AOO_scaled_risk" to
-  # extent_of_occurrence_sigmoid_scaled_risk/area_of_occupancy_sigmoid_scaled_risk to
-  # match every other threat's naming convention; NB this changes the column names in
-  # the exported CSV
+  # area of occupancy)
   add_trait_risks(precariousness_effects) %>%
 
   mutate(
@@ -2891,7 +2882,7 @@ precariousness_risk <- precariousness_risk_tmp %>%
       total_trait_effect_score = rowSums(across(c(extent_of_occurrence_sigmoid_scaled_risk, area_of_occupancy_sigmoid_scaled_risk)), na.rm = TRUE)
   ) %>%
 
-  # 32-SPECIAL CASE REQUIRED filter - taxa with neither EOO nor AOO data would otherwise show a risk of 0 (= minimum risk, rather than "unknown")
+ # taxa with neither EOO nor AOO data need to be removed, so their risk is `unknown` not 0 (= minimum risk)
   filter(total_trait_effect_score != 0) %>%
 
   mutate(
