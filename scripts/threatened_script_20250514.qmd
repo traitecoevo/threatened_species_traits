@@ -14,7 +14,7 @@ editor_options:
 ## load libraries, build database
 
 - the repo with project-specific data is at https://github.com/traitecoevo/threatened_species
-- you can source the most recent austraits.build (AusTraits) release from Zenodo (soon to be 6.1) or use a data file provided
+- you can source the most recent austraits.build (AusTraits) release from Zenodo (7.0.0, uploaded 2025-06) or use a data file provided
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -24,7 +24,7 @@ library(austraits)
 library(APCalign)
 library(traits.build) # not required if you read in complete RDS file
 
-resources <- APCalign::load_taxonomic_resources()
+resources <- APCalign::load_taxonomic_resources(version = "2026-01-14")
 
 source("~/GitHub/threatened_species_traits/R/custom_R_code.R") # not required if you read in complete RDS file
 source("~/GitHub/threatened_species_traits/R/extra_functions.R")
@@ -620,7 +620,7 @@ Extra step of creating a special plant height columns, which maxes out at 4 m. T
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
-plant_height <- plant_height %>% 
+plant_height <- plant_height %>%
   mutate(
     plant_height_above_4m_log10 = ifelse(plant_height > 4, plant_height_log10, NA),
     plant_height_below_4m_log10 = ifelse(plant_height <= 4, plant_height_log10, NA),
@@ -633,6 +633,8 @@ plant_height <- plant_height %>%
 ```
 
 #### special lifespan calculations because mostly bin data
+
+lifespan cannot directly be extracted using `extract_numeric_trait()` because most lifespan records are bin/range values (e.g. "<5"), which need to be converted to minimum and/or maximum values
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 lifespan_data <- all_traits %>% extract_trait("lifespan", partial_matches_allowed = FALSE)
@@ -653,13 +655,18 @@ lifespan <- extract_numeric_trait(lifespan_data, numeric_trait = "lifespan")
 - for each trait, merge in numeric conversions
 - for each taxon, take the mean of all available values
 
+special cases to note:
+- `life_history` comes exclusively from two specific compilations, `Wenk_2023` and `Wenk_2025` which together provide near-complete coverage for the Australian flora
+- `woodiness_detailed` comes exclusively from two specific compilations, `Wenk_2022` and `Wenk_2025` which together provide near-complete coverage for the Australian flora
+- `plant_growth_form` comes exclusively from two specific compilations, `Wenk_2022` and `Wenk_2025` which together provide near-complete coverage for the Australian flora
+
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 dispersers <-  extract_categorical_trait(all_traits, c("dispersal_syndrome", "dispersers"), dispersers_scores, "dispersers")
 resprouting_capacity <- extract_categorical_trait(all_traits, "resprouting_capacity", resprouting_capacity_scores, "resprouting_capacity")
 nitrogen_fixing <- extract_categorical_trait(all_traits, "nitrogen_fixing", nitrogen_fixing_scores, "nitrogen_fixing")
-life_history <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2023"), "life_history", life_history_scores, "life_history")
+life_history <- extract_categorical_trait(all_traits %>% extract_dataset(c("Wenk_2023", "Wenk_2025")), "life_history", life_history_scores, "life_history")
 plant_growth_substrate_hymenanche <- extract_categorical_trait(all_traits, "plant_growth_substrate", plant_growth_substrate_scores %>% select(trait_name, trait_value, plant_growth_substrate = plant_growth_substrate_hymenanche), "plant_growth_substrate_hymenanche")
-woodiness <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "woodiness_detailed", woodiness_scores, "woodiness")
+woodiness <- extract_categorical_trait(all_traits %>% extract_dataset(c("Wenk_2022", "Wenk_2025")), "woodiness_detailed", woodiness_scores, "woodiness")
 leaf_hairs_adult_leaves <- extract_categorical_trait(all_traits, "leaf_hairs_adult_leaves", leaf_hairs_adult_leaves_scores, "leaf_hairs_adult_leaves")
 leaf_glaucousness <- extract_categorical_trait(all_traits, "leaf_glaucousness", leaf_glaucousness_scores, "leaf_glaucousness")
 bud_bank_location_scaled <- extract_categorical_trait(all_traits, "bud_bank_location", bud_bank_location_scores %>% select(trait_name, trait_value, bud_bank_location = bud_bank_location_scaled), "bud_bank_location_scaled")
@@ -671,10 +678,10 @@ seedbank_location <- extract_categorical_trait(all_traits, "seedbank_location", 
 pollination_syndrome <-  extract_categorical_trait(all_traits, c("pollination_system", "pollination_syndrome"), pollination_syndrome_scores, "pollination_syndrome")
 
 # various ways to score growth forms based on threat
-plant_growth_form <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form), "plant_growth_form")
-forb_graminoid <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form = forb_graminoid), "forb_graminoid")
-herb_shrub_tree <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form = herb_shrub_tree), "herb_shrub_tree")
-geophyte <- extract_categorical_trait(all_traits %>% extract_dataset("Wenk_2022"), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form = geophyte), "geophyte")
+plant_growth_form <- extract_categorical_trait(all_traits %>% extract_dataset(c("Wenk_2022", "Wenk_2025")), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form), "plant_growth_form")
+forb_graminoid <- extract_categorical_trait(all_traits %>% extract_dataset(c("Wenk_2022", "Wenk_2025")), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form = forb_graminoid), "forb_graminoid")
+herb_shrub_tree <- extract_categorical_trait(all_traits %>% extract_dataset(c("Wenk_2022", "Wenk_2025")), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form = herb_shrub_tree), "herb_shrub_tree")
+geophyte <- extract_categorical_trait(all_traits %>% extract_dataset(c("Wenk_2022", "Wenk_2025")), "plant_growth_form", plant_growth_form_scores %>% select(trait_name, trait_value, plant_growth_form = geophyte), "geophyte")
 
 # various ways to score storage organs based on threat
 storage_organ_present <- extract_categorical_trait(all_traits, "storage_organ", storage_organ_scores %>% select(trait_name, trait_value, storage_organ = storage_organ_present), "storage_organ_present")
@@ -710,6 +717,9 @@ tropical_grass_flowering_times <- all_traits$traits %>%
 
   1.  taxa explicitly known to be susceptible / not susceptible to a specific disease
   2.  taxa explicitly know to be palatable, toxic, etc. to a specific herbivore
+  
+special goat palatability notes:
+- sometimes `plant_goat_palatability` is scored for the entire genus and the value is mapped to all members of the genus
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # extract known susceptibility data
@@ -721,7 +731,7 @@ phytophthora_cinnamomi_susceptibility <- extract_categorical_trait(all_traits, "
 plant_goat_toxicity <- extract_categorical_trait(all_traits, "plant_goat_toxicity", plant_goat_toxicity_scores, "plant_goat_toxicity")
 plant_goat_palatability <- extract_categorical_trait(all_traits, "plant_goat_palatability", plant_goat_palatability_scores, "plant_goat_palatability")
 
-# sometimes trait value is scored for the entire genus and need to map to species values
+# map genus-level values to individual species
 plant_goat_palatability_genera <- plant_goat_palatability %>%
   filter(!str_detect(taxon_name, " ")) %>%
   rename(genus = taxon_name) %>%
@@ -768,7 +778,7 @@ habitat_moisture <- extract_categorical_trait(all_traits, "habitat_moisture", ha
 # not yet being used, but should be for Phytophthora scoring - TODO
 soil_type_scored <- extract_categorical_trait(all_traits, "soil_type", soil_type_scores, "soil_type")
 
-# high pH soils (limestone, other calcareous soils) & and saline soils assigned 0 risk; all others 1
+# high pH soils (limestone, other calcareous soils) & saline soils are inhospitable to phytophthora. These are assigned a risk = 0, all other soils risk = 1
 geologic_substrate_scored <- extract_categorical_trait(all_traits, "geologic_substrate", geologic_substrate_scores, "geologic_substrate")
 
 # list of threatened species
@@ -961,6 +971,10 @@ by_family <- phytophthora_cinnamomi_susceptibility_data %>%
   distinct(family, taxa_scored_per_family, phytophthora_cinnamomi_susceptibility) %>%
   arrange(-phytophthora_cinnamomi_susceptibility)
 
+# For families Fabaceae and Myrtaceae there is enough within-family training-data
+# to compare susceptibility differences at the genus-level
+# And indeed there is enough genus-level variation to assign different susceptibility scores
+# for certain genera - see below
 by_genus <- phytophthora_cinnamomi_susceptibility_data %>%
   mutate(genus = stringr::word(taxon_name, start = 1, end = 1)) %>%
   filter(!is.na(phytophthora_cinnamomi_susceptibility)) %>%
@@ -1029,11 +1043,19 @@ phytophthora_trait_effects <- tribble(
   "reproductive_maturity_scaled",-0.3, "plants with shorter life cycles less impacted"
 )
 
-# download dataset that explicitly lists species considered to be at risk of extinction
-# when assigning risks, need to ensure these are all flagged as "extremely_susceptible"
-phytophthora_extinction_risk <- read_csv("~/GitHub/threatened_species_traits/data_extras/phytophthora_cinnamomi_extinction_risk_McDougall_2024.csv")
+# McDougall (2024) explicitly lists species considered at risk of extinction from Phytophthora cinnamomi; species listed here are explicitly assigned a susceptibility risk = 1 (the highest value), over-writing the trait/habitat modelled value and the known-susceptibility score.
+phytophthora_extinction_risk <- read_csv("~/GitHub/threatened_species_traits/data_extras/phytophthora_cinnamomi_extinction_risk_McDougall_2024.csv") |>
+  filter(`Current priority score` >= 80)
 
-# select specific families, genera as having consistently low/high susceptibility and apply taxon-level scores
+phytophthora_extinction_risk <- APCalign::create_taxonomic_update_lookup(phytophthora_extinction_risk$`Scientific Name`, resources = resources) |> 
+  select(taxon_name = suggested_name) |>
+  mutate(
+    taxon_name = str_replace(taxon_name, " \\[.*", ""))
+
+
+# for families and genera where species with known phytophthora susceptibility
+# have consistently low or high susceptibilities, all species in the
+# family/genus are assigned a low/high `taxonomic_effect_score`
 taxonomic_effect_scores_by_family <- by_family %>%
   filter(phytophthora_cinnamomi_susceptibility < 0.7 | phytophthora_cinnamomi_susceptibility >= 1.7) %>%
   select(family, phytophthora_cinnamomi_susceptibility) %>%
@@ -1046,11 +1068,16 @@ taxonomic_effect_scores_by_genus <- by_genus %>%
   left_join(native_species %>% select(taxon_name, genus, family), by = "genus") %>%
   mutate(taxonomic_effect_score_notes = "genus-level score applied")
 
+# score each taxon using the same thresholds as the filter it passed through above
+# (family: 0.7/1.7, genus: 0.8/1.5) rather than one uniform pair for both, so every
+# row that qualified for a taxon-level score above actually receives a non-zero one
 taxonomic_effect_scores <- taxonomic_effect_scores_by_family %>%
   bind_rows(taxonomic_effect_scores_by_genus) %>%
   mutate(taxonomic_effect_score = case_when(
-    phytophthora_cinnamomi_susceptibility < 0.8 ~ -0.5*(1-phytophthora_cinnamomi_susceptibility),
-    phytophthora_cinnamomi_susceptibility > 1.5 ~ 0.8*(phytophthora_cinnamomi_susceptibility/3),
+    taxonomic_effect_score_notes == "family-level score applied" & phytophthora_cinnamomi_susceptibility < 0.7 ~ -0.5*(1-phytophthora_cinnamomi_susceptibility),
+    taxonomic_effect_score_notes == "family-level score applied" & phytophthora_cinnamomi_susceptibility >= 1.7 ~ 0.8*(phytophthora_cinnamomi_susceptibility/3),
+    taxonomic_effect_score_notes == "genus-level score applied" & phytophthora_cinnamomi_susceptibility < 0.8 ~ -0.5*(1-phytophthora_cinnamomi_susceptibility),
+    taxonomic_effect_score_notes == "genus-level score applied" & phytophthora_cinnamomi_susceptibility >= 1.5 ~ 0.8*(phytophthora_cinnamomi_susceptibility/3),
     TRUE ~ 0
   ))
 
@@ -1070,9 +1097,7 @@ phytophthora_assigned_risk <- native_species %>%
   left_join(leaf_mass_per_area, by = "taxon_name") %>%
   left_join(woodiness, by = "taxon_name") %>%
   left_join(storage_organ_fleshy, by = "taxon_name") %>%
-  left_join(phytophthora_extinction_risk %>% 
-              select(taxon_name = `Scientific Name`, 
-                     conservation_priority_score = `Current priority score`),
+  left_join(phytophthora_extinction_risk %>% mutate(phytophthora_extinction_risk_flag = TRUE),
             by = "taxon_name")
 ```
 
@@ -1100,19 +1125,21 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
       risk_confidence_overwrite = ifelse(!is.na(phytophthora_cinnamomi_susceptibility),
                                0.8, risk_confidence),
     
-    # if geologic substrate inhospitable to phytophthora, habitat_risk = 0,
-      habitat_risk =ifelse(!is.na(substrate_effect_score) & substrate_effect_score < 0.35, 0.1, NA),
-    
     # default habitat_risk is set to is 0.5
-      habitat_risk = ifelse(!is.na(phytophthora_habitat_effect_score) & !is.na(habitat_risk),
-                            phytophthora_habitat_effect_score*habitat_risk,
-                            ifelse(!is.na(phytophthora_habitat_effect_score) & is.na(habitat_risk),
-                                   phytophthora_habitat_effect_score, .5)),
+      habitat_risk = ifelse(!is.na(phytophthora_habitat_effect_score), phytophthora_habitat_effect_score, .5),
+
+    # species growing on calcareous/inhospitable geologic substrate scales habitat_risk
+    # down by 10x, regardless of the species' own habitat term or trait scores because the
+    # pathogen can't survive there
+    # this only applies when the substrate_effect_score is low, 
+    # to avoid overrides when the plant grows on many substrates, only one of them inhospitable
+      habitat_risk = ifelse(!is.na(substrate_effect_score) & substrate_effect_score < 0.35,
+                            habitat_risk * 0.1, habitat_risk),
     
-    # TODO - add in soils
-    # while calcareous substrates an automatic "0",
-    # also need to add in a smaller effect score for soils high in organic matter, loam
-    # which are also inhospitable to phytophthora
+    # Future addition:
+    # while calcareous substrates are currently scored as reducing phytophtora habitat risk,
+    # soils high in organic matter or loam which are also inhospitable to phytophthora
+    # should also have a smaller effect score; these data do not currently exist
 
         taxonomic_risk = calculate_risk("taxonomic_effect_score", taxonomic_effect_score, .)
   ) %>%
@@ -1143,12 +1170,27 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
   phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
     mutate(
 
-    # overwrite prediction if susceptibility known - no longer about traits
-      total_risk_overwrite =
-        ifelse(!is.na(phytophthora_cinnamomi_susceptibility) & total_risk < 1,
-               phytophthora_cinnamomi_susceptibility/3, total_risk),
+    # There are two circumstances where a species modeled `phytophthora_assigned_risk`
+    # (from traits/habitat/taxonomy) is overwritten based on other data streams.
+    # Modelled susceptibilities are only overwritten if the second data stream raises the modeled risk, never the reverse
+    # The susceptibility is increased if:
+    # 1. The species has a high known susceptibility from lab studies
+    # 2. The species has a high extinction risk based on modeling done by McDougall (2024); 
+    #    species with a `Current priority score` > 80 were included
+    # The risk_confidence is also increased to 0.8 rather than being based on the
+    # trait-completeness-based value, as the susceptibility score is no longer trait-based.
+
+      total_risk_overwrite = case_when(
+        !is.na(phytophthora_extinction_risk_flag) ~ 1,
+        !is.na(phytophthora_cinnamomi_susceptibility) & total_risk < 1 ~ phytophthora_cinnamomi_susceptibility/3,
+        TRUE ~ total_risk
+      ),
     # risk_confidence_trait_count = ifelse(!is.na(phytophthora_cinnamomi_susceptibility), 0.8, risk_confidence_trait_count),
-      risk_confidence = ifelse(!is.na(phytophthora_cinnamomi_susceptibility), 0.8, risk_confidence),
+      risk_confidence = case_when(
+        !is.na(phytophthora_extinction_risk_flag) ~ 1,
+        !is.na(phytophthora_cinnamomi_susceptibility) ~ 0.8,
+        TRUE ~ risk_confidence
+      ),
 
     # assign risk by category
       total_risk_score = create_risk_bins(total_risk_overwrite)
@@ -1164,7 +1206,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
   phytophthora_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     select(taxon_name, genus, family, threatened_status, total_risk_score,
-           phytophthora_cinnamomi_susceptibility, risk_confidence,
+           phytophthora_cinnamomi_susceptibility, phytophthora_extinction_risk_flag, risk_confidence,
            total_risk, total_risk_min, total_risk_max,
            total_risk_score_min, total_risk_score_max,
            total_risk_overwrite, habitat, habitat_risk, trait_effect_score_scaled,
@@ -1448,7 +1490,9 @@ myrtle_rust_trait_effects <- tribble(
   "leaf_lignin_per_dry_mass_scaled", -0.2, "higher leaf lignin = lower impact" # was "leaf_lignin_per_dry_mass" (missing _scaled) - that pointed at the raw, character-typed column and never actually matched an effect score lookup either, so this trait has silently never contributed to myrtle rust risk until now; fixed at the user's request
 )
 
-# read in data indicating epiphytic orchids with known preference for Myrtaceae species as hosts
+# read in species list of epiphytic orchids with known preference for Myrtaceae species as hosts (Zimmer 2023)
+# these orchids have a `taxonomic_risk` applied to them, as they will
+# be impacted if their host dies from myrtle rust
 orchids_at_risk <- read_csv("~/GitHub/threatened_species_traits/data/Zimmer_2023/data.csv") %>%
   mutate(
     taxon_name = stringr::str_extract(`Orchid species`, "[^\\(]+"),
@@ -1458,7 +1502,7 @@ orchids_at_risk <- read_csv("~/GitHub/threatened_species_traits/data/Zimmer_2023
   mutate(orchid_risk = case_when(
     score == "high" ~ 1,
     score == "moderate" ~ 0.6,
-    score == "low" ~0.3
+    score == "low" ~ 0.3
   ))
 
 orchids_summary <- orchids_at_risk %>%
@@ -1524,36 +1568,38 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
                                0.8, risk_confidence),
         
     # starting risk for Myrtaceae is 1; for all other taxa = 0.2,
-    # since rainforest plants might be impacted by changes in community structure
+    # since other rainforest plants might be impacted by changes in community structure
     # also incorporate list of epiphytic orchids known to be at risk
+    # because they sometimes or always grow on Myrtaceae species
       taxonomic_risk = case_when(
           family == "Myrtaceae" ~ 1,
           !is.na(orchid_risk) ~ orchid_risk,
           TRUE ~ 0.2),
-    
-    # habitat risk = 0.5 if no information available
-      habitat_risk = ifelse(!is.na(myrtle_rust_habitat_effect_score), myrtle_rust_habitat_effect_score, 0.5),   
-    
-    # increase habitat_risk if `habitat_moisture_effect_score` value is high
-    
-    # if no value for habitat, use habitat moisture value
+
+    # there are taxa where we have a `habitat_moisture` score, 
+    # as well as, or instead of, a `habitat` score
+    # If both exist, the "higher" score takes precedence
+    # If only `habitat_moisture` exists, it is used over having a black `habitat_risk`
       habitat_risk = ifelse(
-        is.na(myrtle_rust_habitat_effect_score) & !is.na(habitat_moisture_effect_score), 
+        is.na(myrtle_rust_habitat_effect_score) & !is.na(habitat_moisture_effect_score),
         habitat_moisture_effect_score,
         # if habitat moisture value higher, use it over habitat value
           ifelse(
-            !is.na(myrtle_rust_habitat_effect_score) & !is.na(habitat_moisture_effect_score) & 
+            !is.na(myrtle_rust_habitat_effect_score) & !is.na(habitat_moisture_effect_score) &
               habitat_moisture_effect_score > myrtle_rust_habitat_effect_score,
-            habitat_moisture_effect_score, myrtle_rust_habitat_effect_score)), 
+            habitat_moisture_effect_score, myrtle_rust_habitat_effect_score)),
 
     # merge habitat and taxonomy risks; a "0" in either means no risk
       habitat_taxonomy_risk = ifelse(is.na(habitat_risk),
                                      taxonomic_risk, taxonomic_risk*habitat_risk)
   ) %>%
 
-    # add {trait}_risk for every trait in myrtle_rust_trait_effects (plant height, leaf
-    # length, resprouting capacity, leaf lignin, bud bank location); trait effect scores
-    # only apply to Myrtaceae, not other rainforest plants, hence the condition
+    # the calculated trait effect scores only apply to Myrtaceae, not other rainforest plants
+    # these plants are affected by myrtle rust through undefined the changes in community structure
+    # (for instance, decrease in shade, increasing temperature)
+    # not as a result of their traits
+    # therefore, non-Myrtaceae taxa (including the at-risk orchids) get their
+    # risk via `habitat_taxonomy_risk`  only
     add_trait_risks(myrtle_rust_trait_effects, condition = .$family == "Myrtaceae") %>%
 
     mutate(
@@ -1567,8 +1613,8 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     # total risk is the product of scaled trait risk and habitat/taxonomy risk
       total_risk = habitat_taxonomy_risk * trait_effect_score_scaled,
 
-    # account for known susceptibility, which is different to risk; a moderately susceptible species can still be at high risk;
-    # however a low susceptibility species cannot be at high/extreme risk, so if known susceptibility < 3, need to downgrade risk
+    # for species with known low susceptibility to myrtle rust from inoculation experiments,
+    # have their susceptibility score decreased, regardless of their trait-modeled score
       total_risk_overwrite = ifelse(!is.na(myrtle_rust_susceptibility) & total_risk < 1, myrtle_rust_susceptibility/3, total_risk),
     # risk_confidence_trait_count = ifelse(!is.na(myrtle_rust_susceptibility), 0.8, risk_confidence_trait_count),
       risk_confidence = ifelse(!is.na(myrtle_rust_susceptibility), 0.8, risk_confidence),
@@ -1834,6 +1880,7 @@ goat_trait_effects <- tribble(
   "reproductive_maturity_scaled",-0.3, "plants with shorter life cycles less impacted"
 )
 
+# taxonomic effect scores assigned for families with known high or low palatibility
 goat_taxonomic_effects <- tribble(
   ~family, ~effect_score,
   "Chenopodiaceae",-0.1,
@@ -1859,6 +1906,7 @@ goats_assigned_risk <- native_species %>%
   left_join(bark_thickness, by = "taxon_name") %>%
   left_join(woodiness, by = "taxon_name") %>%
   left_join(plant_goat_palatability %>% select(-genus), by = "taxon_name") %>%
+# graminoids (herbs within one of the graminoid families) are more impacted by goats than forbs (non-graminoid herbs)
   mutate(
     forb = ifelse(woodiness == 0 & family %in% graminoids, 0, NA),
     forb = ifelse(woodiness == 0 & !family %in% graminoids, 1, forb),
@@ -1916,7 +1964,11 @@ goats_assigned_risk <- goats_assigned_risk %>%
       # multiple scaled trait effect score risk by habitat risk
         total_risk = habitat_risk*trait_effect_score_scaled,
 
-      # if a species is known to be specifically palatable/not palatable to goats, add an adjustment factor
+      # For species where independent data streams identify a species as having high or low
+      # goat palatability, the trait-modeled susceptibility risk is adjusted: 
+      # - Plants that are unpalatable (plant_goat_palatability < 3), their risk is *0.5
+      # - Plants that are palatable (plant_goat_palatability > 3), their risk is *1.5
+      # - Plants that don't have independent palatability data, their risk is *1
         total_risk = case_when(
           is.na(plant_goat_palatability) ~ 1*total_risk,
           plant_goat_palatability < 3 ~ 0.5*total_risk,
@@ -1995,7 +2047,7 @@ deer_trait_effects <- tribble(
   ~trait, ~effect_score,       ~notes,
   "woodiness",-0.1,             "woody species moderately less impacted",
   "life_history",-0.2,             "plants with shorter life cycles less impacted",
-  #"reproductive_maturity_scaled",-0.2, "plants with shorter life cycles less impacted",
+  #"reproductive_maturity_scaled",-0.2, "plants with shorter life cycles less impacted", # not enough data to include
   "plant_physical_defence_structures",-0.2, "plants with physical defence less impacted",
   "resprouting_capacity", -0.2, "resprouting species are more likely to regenerate, persist",
   "plant_height_4m_peak_scaled", -0.1,  "worst height is 4 m, with decreasing impact above and below that",
@@ -2050,14 +2102,6 @@ deer_assigned_risk <- deer_assigned_risk %>%
       # default habitat_risk is set to is 0.5
         habitat_risk = ifelse(is.na(deer_habitat_effect_score), .5, deer_habitat_effect_score),
 
-      # NB reproductive_maturity_scaled is commented out of deer_trait_effects below, so
-      # it can't go through add_trait_risks (which only loops over active tribble rows) -
-      # kept as its own manual line, unchanged from before, borrowing life_history's
-      # effect score (both were -0.2, so this matches what a live reproductive_maturity_scaled
-      # row would have given anyway - see the commented-out line in the tribble)
-        reproductive_maturity_scaled_risk = calculate_risk("reproductive_maturity_scaled", get_effect_score(deer_trait_effects, "life_history")$effect_score, .),
-
-      # bud bank location
       # add taxonomic effect scores
       # NONE FOR DEER
   ) %>%
@@ -2069,7 +2113,7 @@ deer_assigned_risk <- deer_assigned_risk %>%
 
     mutate(
       # sum trait risk effect scores
-        total_trait_effect_score = rowSums(across(c(reproductive_maturity_scaled_risk, plant_height_4m_peak_scaled_risk, leaf_mass_per_area_scaled_risk, resprouting_capacity_risk, woodiness_risk, plant_physical_defence_structures_risk, bark_thickness_scaled_risk, life_history_risk
+        total_trait_effect_score = rowSums(across(c(plant_height_4m_peak_scaled_risk, leaf_mass_per_area_scaled_risk, resprouting_capacity_risk, woodiness_risk, plant_physical_defence_structures_risk, bark_thickness_scaled_risk, life_history_risk
                                                     )), na.rm = TRUE),
 
       # rescale trait risk; this value then to be multiplied by habitat risk
@@ -2153,6 +2197,8 @@ pigs_trait_effects <- tribble(
   "storage_organ_fleshy",0.4,   "fleshy underground storage organ = much higher impact, because single most preferred food source"
 )
 
+# For families & genera known to have fleshy underground storage organs or
+# other pig-preferred traits, all species are assigned a taxonomic_effect_score = 0.4
 pigs_taxonomic_vector <- c("Goodeniaceae", "Orchidaceae", "Cyperaceae", "Dioscoreaceae", "Iridaceae", "Hydrocharitaceae", "Marsileaceae", "Nymphaeaceae", "Pontederiaceae", "Restionaceae", "Eriocaulaceae", "Thismiaceae", "Amaryllidaceae", "Alismataceae", "Apiaceae", "Apocynaceae", "Aponogetonaceae", "Araliaceae", "Arecaceae", "Aspleniaceae", "Athyriaceae", "Convolvulaceae", "Cyatheaceae", "Musaceae", "Zingiberaceae", "Utricularia", "Ipomoea", "Ampelocissus", "Bulbine", "Microseris", "Sonchus")
 
 pigs_taxonomic_effects <- as.data.frame(pigs_taxonomic_vector) %>%
@@ -2178,6 +2224,8 @@ pigs_assigned_risk <- native_species %>%
   left_join(pigs_taxonomic_effects %>% filter(taxon_rank == "genus") %>% rename(genus = taxon) %>% select(-taxon_rank) %>% rename(taxonomic_effect2 = effect_score), by = "genus") %>%
   mutate(taxonomic_effect = ifelse(!is.na(taxonomic_effect2), taxonomic_effect2, taxonomic_effect)) %>%
   select(-taxonomic_effect2) %>%
+  # fruit_length_scaled is multiplied by fruit_fleshiness (when known), because fruit
+  # dimensions only matter to pigs if the fruit is fleshy
   mutate(fruit_length_scaled = ifelse(!is.na(fruit_fleshiness), fruit_length_scaled*fruit_fleshiness, fruit_length_scaled)) # b/c fruit dimensions only matter for fleshy fruits
 ```
 
@@ -2314,6 +2362,7 @@ tropical_C4_grasses_trait_effects <- tribble(
   "reproductive_maturity_scaled", -0.3,          "plants with a shorter juvenile period more likely to set seed before next fire"
 )
 
+# taxonomic vector - note this is just for the kable printout; actually scoring is done below
 tropical_C4_grasses_taxonomic_vector <- c("perennial Poaceae")
 
 tropical_C4_grasses_taxonomic_effects <- as.data.frame(tropical_C4_grasses_taxonomic_vector) %>%
@@ -2336,6 +2385,7 @@ tropical_C4_grasses_assigned_risk <- native_species %>%
   left_join(resprouting_capacity, by = "taxon_name") %>%
   left_join(bud_bank_location_scaled, by = "taxon_name") %>%
   left_join(storage_organ_present, by = "taxon_name") %>%
+  # geophyte status is folded into `storage_organ_present`, retaining whichever value is higher, i.e. more "at risk"
   mutate(storage_organ_present = ifelse(is.na(storage_organ_present)|storage_organ_present < geophyte, geophyte, storage_organ_present))
 ```
 
@@ -2372,25 +2422,30 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
     # add {trait}_risk for every trait in tropical_C4_grasses_trait_effects (plant
     # height, storage organ, reproductive maturity, life history, woodiness,
     # resprouting capacity, bud bank location, dry season flowering). NB
-    # dry_season_flowering_risk is computed here but not used below - the raw
-    # dry_season_flowering trait value is instead used directly, with two different
+    # 24-SPECIAL CASE dry_season_flowering_risk is computed here but not used below - the
+    # raw dry_season_flowering trait value is instead used directly, with two different
     # hardcoded coefficients (-0.3 and -0.1) in direct_competition_risk/fire_season_risk;
     # flagging that inconsistency rather than resolving it here.
     add_trait_risks(tropical_C4_grasses_trait_effects) %>%
 
     mutate(
+      # sign-flipped reuse of the same trait risk: a high bud bank is protective against fire intensity,
+      # but is treated as a slight liability for fire frequency
       bud_bank_location_scaled_risk2 = -bud_bank_location_scaled_risk,
 
     # taxonomy effect score
-    
-    # perennial grasses are the most impacted herbaceous species
+
+    # for this threat, the taxonomy_effect_score only applies to perennial grasses:
+    # life_history > 1.8 & family == "Poaceae"
       taxonomy_effect_score = ifelse(!is.na(life_history) & life_history > 1.8 & family == "Poaceae", 0.4, 0),
-    
+
     # combine trait risk effect scores
-    
+
+    # 27-SPECIAL CASE direct_competition_risk: hardcoded -0.3 coefficient applied directly
+    # to the raw dry_season_flowering value (rather than via a trait_effects tribble entry) -
     # less direct competition if 1) you are tall or 2) you are an annual, especially ones that grows outside the C4 grass growing season
       direct_competition_risk = ifelse(!is.na(plant_height) | (!is.na(dry_season_flowering) & life_history < 1.5),
-                                       -0.3*dry_season_flowering + plant_height_scaled_risk + life_history_risk, 
+                                       -0.3*dry_season_flowering + plant_height_scaled_risk + life_history_risk,
                                        0.3),
     
     # most impacted by increased fire intensity if you are perennial, woody and with high bud bank location; having a storage organ offers a bit of reprieve
@@ -2400,7 +2455,10 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
     # reproductive_maturity_risk, should be in here, but so little data it will skew results
       fire_frequency_risk = rowSums(across(c(life_history_risk, resprouting_capacity_risk, bud_bank_location_scaled_risk2)), na.rm = TRUE),
     
-    # less impacted by fire season if you are an annual that flowers and fruits in the late dry season, likely post-fire
+    # 28-SPECIAL CASE fire_season_risk: hardcoded -0.1 coefficient applied directly to the
+    # raw dry_season_flowering value (same pattern/inconsistency as direct_competition_risk
+    # above, but with a different hardcoded coefficient: -0.1 vs -0.3) - less impacted by
+    # fire season if you are an annual that flowers and fruits in the late dry season, likely post-fire
       fire_season_risk = ifelse(!is.na(life_history) & !is.na(dry_season_flowering) & life_history < 1.5, -0.1*dry_season_flowering, .1),
     
     # replace na's with 0
@@ -2507,6 +2565,9 @@ hymenachne_trait_effects <- tribble(
   "pollination_syndrome", -0.3, "wind pollinated species more persistent"
 )
 
+# 29-SPECIAL CASE hymenachne_taxonomic_vector: 14 hand-picked families assumed more
+# at-risk from hymenachne invasion (largely aquatic/wetland-associated families),
+# all flatly assigned effect_score = 0.4 regardless of species
 hymenachne_taxonomic_vector <- c("Arecaceae", "Cyperaceae", "Haloragaceae", "Hydrocharitaceae", "Iridaceae", "Juncaceae", "Marsileaceae", "Myrtaceae", "Nymphaeaceae", "Orchidaceae", "Poaceae", "Pontederiaceae", "Restionaceae", "Typhaceae")
 
 hymenachne_taxonomic_effects <- as.data.frame(hymenachne_taxonomic_vector) %>%
@@ -2556,16 +2617,17 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
         risk_confidence = ifelse(is.na(hymenachne_habitat_effect_score),
                                  0.15*prop_traits_scored, .6*prop_traits_scored),
 
-    # aquatic taxa have plant_growth_substrate_risk = 1
+    # 30-SPECIAL CASE plant_growth_substrate_hymenanche_risk: a manual 0/1 flag (not the
+    # usual effect_score * (value - mean(value)) formula) - aquatic taxa have
+    # plant_growth_substrate_risk = 1
       plant_growth_substrate_hymenanche_risk = ifelse(plant_growth_substrate_hymenanche == 1, 1, NA),
 
     # when available use habitat risk based on species habitat; default habitat = 0.3
       habitat_risk = ifelse(is.na(hymenachne_habitat_effect_score),
                             0.3, hymenachne_habitat_effect_score),
 
-    # increase habitat_risk if plant_growth_substrate indicates aquatic or semi-aquatic species
-
-    # if no value for habitat, use habitat moisture value
+    # increase habitat_risk if plant_growth_substrate indicates aquatic or semi-aquatic species,
+    # overriding whatever habitat_risk was just derived above
       habitat_risk = ifelse(!is.na(plant_growth_substrate_hymenanche_risk),
                             plant_growth_substrate_hymenanche_risk,
                             habitat_risk),
@@ -2574,8 +2636,8 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
       taxonomic_risk = calculate_risk("taxonomic_risk", taxonomic_risk, .)
   ) %>%
 
-    # add {trait}_risk for every remaining trait in hymenachne_trait_effects (plant
-    # height, woodiness, life history, pollination syndrome). plant_growth_substrate_hymenanche
+    # 31-SPECIAL CASE add {trait}_risk for every remaining trait in hymenachne_trait_effects
+    # (plant height, woodiness, life history, pollination syndrome). plant_growth_substrate_hymenanche
     # is excluded here - it's already handled above by the manual aquatic-taxa rule
     # (a straight 0/1 flag, not the usual effect_score * (value - mean(value)) formula),
     # so running it through add_trait_risks too would silently overwrite that with a
@@ -2829,7 +2891,7 @@ precariousness_risk <- precariousness_risk_tmp %>%
       total_trait_effect_score = rowSums(across(c(extent_of_occurrence_sigmoid_scaled_risk, area_of_occupancy_sigmoid_scaled_risk)), na.rm = TRUE)
   ) %>%
 
-  # REQUIRED - taxa with neither EOO nor AOO data would otherwise show a risk of 0 (= minimum risk, rather than "unknown")
+  # 32-SPECIAL CASE REQUIRED filter - taxa with neither EOO nor AOO data would otherwise show a risk of 0 (= minimum risk, rather than "unknown")
   filter(total_trait_effect_score != 0) %>%
 
   mutate(
