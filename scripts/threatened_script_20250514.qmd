@@ -407,84 +407,14 @@ make_risk_density_plot <- function(data, threat) {
 }
 ```
 
-#### calculate_threat_risk
+#### create_risk_bins
 
-```{r}
-# Claude coded, from my original script, abstracting sections that were previously repeated.
+turn total_risk into ordered categorical bins from a named threshold vector.
 
-# ---- Generalised risk calculation function ----
-# data: dataframe already joined with all relevant traits/habitat/taxonomy columns
-# trait_effects: tribble with columns trait, effect_score, notes (as before)
-# habitat_col: name (string) of the habitat effect score column (e.g. "goat_habitat_effect_score")
-# habitat_default: value to use when habitat_col is NA (default 0.5)
-# rescale_range: numeric vector c(min, max) for scales::rescale - the biologist-chosen calibration
-# confidence_low: multiplier for prop_traits_scored when habitat unknown (default 0.15)
-# confidence_high: multiplier for prop_traits_scored when habitat known (default 0.6)
-# bin_thresholds: named numeric vector of lower bounds for each bin, descending.
-#                  NULL (default) defers to create_risk_bins()'s own default, so the
-#                  standard 5-bin scheme is defined in exactly one place - see there.
-# extra_risk_terms: optional list of additional risk columns (already computed upstream,
-#                    e.g. taxonomic_risk, forb_risk) to include in the sum
+`bin_thresholds` defaults to the standard scheme used by most threats (0.8/0.6/0.4/0.2); pass a different named vector for threats
+that use different cutoffs (e.g. C4 grasses uses 0.7/0.4/0.3/0.15). This is the ONLY place the standard scheme's values should be defined - every threat section defers to this default rather than keeping its own copy, so there's a single source of truth.
 
-calculate_threat_risk <- function(
-    data,
-    trait_effects,
-    habitat_col,
-    rescale_range,
-    habitat_default = 0.5,
-    confidence_low = 0.15,
-    confidence_high = 0.6,
-    bin_thresholds = NULL,
-    extra_risk_terms = character(0)
-) {
-
-  habitat_col_sym <- sym(habitat_col)
-
-  # Step 1-2: confidence + habitat risk
-  data <- data %>%
-    calculate_prop_traits_scored_scaled(trait_table = trait_effects) %>%
-    mutate(
-      risk_confidence = ifelse(
-        is.na(!!habitat_col_sym),
-        confidence_low * prop_traits_scored,
-        confidence_high * prop_traits_scored
-      ),
-      habitat_risk = ifelse(is.na(!!habitat_col_sym), habitat_default, !!habitat_col_sym)
-    )
-
-  # Step 3: compute {trait}_risk for every trait in trait_effects
-  # (skips traits with effect_score = NA, e.g. ones handled separately/manually)
-  data <- data %>% add_trait_risks(trait_effects)
-  traits_to_score <- trait_effects %>% filter(!is.na(effect_score)) %>% pull(trait)
-
-  # Step 4: sum trait risks + any extra pre-computed terms (e.g. taxonomic_risk)
-  risk_cols <- c(paste0(traits_to_score, "_risk"), extra_risk_terms)
-  risk_cols <- risk_cols[risk_cols %in% names(data)]  # guard against typos/missing cols
-
-  data <- data %>%
-    mutate(
-      total_trait_effect_score = rowSums(across(all_of(risk_cols)), na.rm = TRUE),
-
-      # Step 5: rescale (biologist-calibrated range)
-      trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = rescale_range),
-
-      # Step 6: combine with habitat
-      total_risk = habitat_risk * trait_effect_score_scaled,
-
-      # Step 7: bin (NULL bin_thresholds falls through to create_risk_bins()'s own default)
-      total_risk_score = if (is.null(bin_thresholds)) create_risk_bins(total_risk) else create_risk_bins(total_risk, bin_thresholds)
-    )
-
-  data
-}
-
-# helper: turn total_risk into ordered categorical bins from a named threshold vector.
-# Replaces the repeated 5-line `total_risk_score = case_when(total_risk >= 0.8 ~ "5_extremely_high", ...)`
-# block used in every threat section. `bin_thresholds` defaults to the standard scheme
-# used by most threats (0.8/0.6/0.4/0.2); pass a different named vector for threats
-# that use different cutoffs (e.g. C4 grasses uses 0.7/0.4/0.3/0.15). This is the ONLY
-# place the standard scheme's values should be defined - calculate_threat_risk() defers
-# to this default rather than keeping its own copy, so there's a single source of truth.
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 create_risk_bins <- function(x, bin_thresholds = c(
       "5_extremely_high" = 0.8,
       "4_high"           = 0.6,
@@ -506,28 +436,24 @@ create_risk_bins <- function(x, bin_thresholds = c(
   }
   result
 }
+```
 
-# Formalises turning risk_confidence into a plausible range around a numeric risk
-# score, instead of the point estimate alone. Low confidence -> wide range; high
-# confidence -> narrow range.
-#
-#   margin = (1 - confidence) / divisor
-#   {output_base}_min = risk - margin
-#   {output_base}_max = risk + margin
-#   {output_base}_score_min = create_risk_bins(min)
-#   {output_base}_score_max = create_risk_bins(max)
-#
-# divisor defaults to 5 (i.e. at confidence 0, margin is 1/5 = 0.2 either side, rather
-# than the full 0-1 range; at confidence 0.6 - roughly the top of the observed range -
-# margin is 0.4/5 = 0.08) - change it here (or per-call) and every threat regenerates.
-#
-# risk_col/confidence_col: names (strings) of the numeric risk and confidence columns
-# to use as inputs. output_base: name to build the four new columns from - defaults to
-# risk_col, but can differ, e.g. for Phytophthora/myrtle rust, where the numeric value
-# that actually determines total_risk_score is total_risk_overwrite (not total_risk),
-# so risk_col = "total_risk_overwrite" but output_base = "total_risk" keeps the output
-# column names (total_risk_min/max/score_min/score_max) consistent with every other threat.
-# bin_thresholds: passed through to create_risk_bins(); NULL uses its own default.
+#### add_risk_range
+
+Formalises turning risk_confidence into a plausible range around a numeric risk score, instead of the point estimate alone. Low confidence -> wide range; high confidence -> narrow range.
+
+   margin = (1 - confidence) / divisor
+   {output_base}_min = risk - margin
+   {output_base}_max = risk + margin
+   {output_base}_score_min = create_risk_bins(min)
+   {output_base}_score_max = create_risk_bins(max)
+
+divisor defaults to 5 (i.e. at confidence 0, margin is 1/5 = 0.2 either side, rather than the full 0-1 range; at confidence 0.6 - roughly the top of the observed range - margin is 0.4/5 = 0.08) - change it here (or per-call) and every threat regenerates.
+
+risk_col/confidence_col: names (strings) of the numeric risk and confidence columns to use as inputs. output_base: name to build the four new columns from - defaults to risk_col, but can differ, e.g. for Phytophthora/myrtle rust, where the numeric value that actually determines total_risk_score is total_risk_overwrite (not total_risk), so risk_col = "total_risk_overwrite" but output_base = "total_risk" keeps the output column names (total_risk_min/max/score_min/score_max) consistent with every other threat. bin_thresholds: passed through to create_risk_bins(); NULL uses its own default.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
 add_risk_range <- function(data, risk_col, confidence_col, divisor = 5, output_base = risk_col, bin_thresholds = NULL) {
 
   min_col <- paste0(output_base, "_min")
@@ -548,6 +474,52 @@ add_risk_range <- function(data, risk_col, confidence_col, divisor = 5, output_b
   }
 
   data
+}
+
+```
+
+#### check_trait_correlations
+
+Runs a univariate lm(response_var ~ trait) for every trait in `vars`, collects r2/p-value/coefficient/n into a results tibble, and plots (point + jitter + lm smooth) any trait that clears both `r2_threshold` and `p_threshold`. Replaces the six near-identical for-loops previously copy-pasted across Phytophthora/myrtle rust/goats (one call per threat for categorical traits used directly, one for numeric traits with a log10 transform via `use_log10 = TRUE`) - each threat's own r2_threshold is kept as a parameter since they genuinely differ (0.01-0.04) rather than being unified. data/response_var/vars: as before - response_var and the entries of vars are column name strings (not symbols), matching every other trait-name convention in this file.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+check_trait_correlations <- function(data, response_var, vars, r2_threshold, p_threshold = 0.05, use_log10 = FALSE) {
+
+  results <- tibble(trait = character(), coeff = character(), r2 = character(), p_value = character(), n = character())
+
+  for (var in vars) {
+    data_tmp <- data %>% filter(!is.na(.data[[var]]), !is.na(.data[[response_var]]))
+    data_tmp$predictor <- if (use_log10) log10(as.numeric(data_tmp[[var]])) else data_tmp[[var]]
+
+    linearmodel_var <- lm(data_tmp[[response_var]] ~ predictor, data = data_tmp)
+
+    p     <- summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4)
+    coeff <- summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1)
+
+    new_row <- c(
+      trait   = var,
+      r2      = round(summary(linearmodel_var)$r.squared, 4),
+      p_value = round(p[2, 1], 4),
+      coeff   = round(coeff[2, 1], 3),
+      n       = nrow(data_tmp)
+    ) %>% t() %>% as.data.frame()
+
+    if (new_row[1, ]$r2 > r2_threshold & new_row[1, ]$p_value < p_threshold) {
+      plot(
+        ggplot(data_tmp, aes(x = predictor, y = data_tmp[[response_var]])) +
+          geom_point() +
+          geom_jitter() +
+          geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+          theme_classic() +
+          xlab(var)
+      )
+    }
+
+    results <- results %>% bind_rows(new_row)
+  }
+
+  results
 }
 ```
 
@@ -861,88 +833,16 @@ phytophthora_cinnamomi_susceptibility_data <- (all_traits %>% join_taxa(vars = "
   4.  Also in this chart are correlations with soil type/texture and geologic substrate. As also indicated in the literature, it isn't that taxa growing of "resistant substrates/soils" are themselves resistant, but that Phytophthora doesn't survive in these locations. Therefore, this information can be used to asses the **RISK** of a species to Phytophthora, but not its **SUSCEPTIBILITY** to Phytophthora.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-correlations_with_possible_traits <- tibble(
-  trait = character(),
-  coeff = character(),
-  r2 = character(), 
-  p_value = character(),
-  n = character()
-)
-
-for (var in c("life_history", "nitrogen_fixing", "resprouting_capacity", "woodiness", "bud_bank_location_scaled", 
-            "storage_organ_fleshy")) {
-  
-  data_tmp <- phytophthora_cinnamomi_susceptibility_data %>% filter(!is.na(phytophthora_cinnamomi_susceptibility_data[[var]]),
-                                         !is.na(phytophthora_cinnamomi_susceptibility))
-  
-  linearmodel_var <- lm(phytophthora_cinnamomi_susceptibility ~ data_tmp[[var]], data = data_tmp)
-  
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
-  
-  new_row <- c(
-    trait = var, 
-    r2= round(summary(linearmodel_var)$r.squared,4), 
-    p_value = round(p[2,1],4),
-    coeff = round(coeff[2,1],3),
-    n = nrow(data_tmp)
-  ) %>% 
-  t() %>%
-  as.data.frame()
-  
-  if(new_row[1,]$r2 > 0.03 & new_row[1,]$p_value < 0.05) {
-      plot(
-         ggplot(data_tmp, aes(x = data_tmp[[var]], y = phytophthora_cinnamomi_susceptibility)) +
-          geom_point() +
-          geom_jitter() +
-          geom_smooth(method = "lm", se = FALSE, color = "grey20") +
-          theme_classic() +
-          xlab(var)
-      )
-  }
-  
-  correlations_with_possible_traits <- correlations_with_possible_traits %>%
-    bind_rows(new_row)
-}
-
-for (var in c("seed_dry_mass", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass")) {
-  
-  data_tmp <- phytophthora_cinnamomi_susceptibility_data %>% filter(!is.na(phytophthora_cinnamomi_susceptibility_data[[var]]),
-                                         !is.na(phytophthora_cinnamomi_susceptibility))
-  
-  linearmodel_var <- lm(phytophthora_cinnamomi_susceptibility ~ log10(as.numeric(data_tmp[[var]])), data = data_tmp)
-  
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
-  
-  new_row <- c(
-    trait = var, 
-    r2= round(summary(linearmodel_var)$r.squared,4), 
-    p_value = round(p[2,1],4),
-    coeff = round(coeff[2,1],3),
-    n = nrow(data_tmp)
-      ) %>% 
-    t() %>%
-    as.data.frame()
-  
-  if(new_row[1,]$r2 > 0.03 & new_row[1,]$p_value < 0.05) {
-    
-    plot(
-           ggplot(data_tmp, aes(x = log10(as.numeric(data_tmp[[var]])), y = phytophthora_cinnamomi_susceptibility)) +
-            geom_point() +
-            geom_jitter() +
-            geom_smooth(method = "lm", se = FALSE, color = "grey20") +
-            theme_classic() +
-             xlab(var)
-    )
-  
-  }
-    
-  correlations_with_possible_traits <- correlations_with_possible_traits %>%
-    bind_rows(new_row)
-}
-
-correlations_with_possible_traits <- correlations_with_possible_traits %>% 
+correlations_with_possible_traits <- bind_rows(
+  check_trait_correlations(
+    phytophthora_cinnamomi_susceptibility_data, "phytophthora_cinnamomi_susceptibility",
+    c("life_history", "nitrogen_fixing", "resprouting_capacity", "woodiness", "bud_bank_location_scaled", "storage_organ_fleshy"),
+    r2_threshold = 0.03),
+  check_trait_correlations(
+    phytophthora_cinnamomi_susceptibility_data, "phytophthora_cinnamomi_susceptibility",
+    c("seed_dry_mass", "leaf_mass_per_area", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass"),
+    r2_threshold = 0.03, use_log10 = TRUE)
+) %>%
   arrange(-as.numeric(r2))
 
 Phytophthora_kable_table <- correlations_with_possible_traits %>% kableExtra::kable(caption = "Correlation between Phytophthora susceptibililty and trait value, for species with known susceptibility")
@@ -1330,88 +1230,19 @@ myrtle_rust_susceptibility_data <- myrtle_rust_susceptibility %>%
   3.  For categorical traits, each trait has different ordinal scores, sometimes on a scale of 0--1, but up to 0--5; see tables above.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-correlations_with_possible_traits_myrtle_rust <- tibble(
-  trait = character(),
-  coeff = character(),
-  r2 = character(), 
-  p_value = character(),
-  n = character()
+correlations_with_possible_traits_myrtle_rust <- bind_rows(
+  check_trait_correlations(
+    myrtle_rust_susceptibility_data, "myrtle_rust_susceptibility",
+    c("resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "bud_bank_location_scaled", "storage_organ_present"),
+    r2_threshold = 0.03),
+  check_trait_correlations(
+    myrtle_rust_susceptibility_data, "myrtle_rust_susceptibility",
+    c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "leaf_lignin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_tannin_per_dry_mass"),
+    r2_threshold = 0.04, use_log10 = TRUE)
 )
 
-for (var in c("resprouting_capacity", "leaf_glaucousness", "leaf_hairs_adult_leaves", "bud_bank_location_scaled", "storage_organ_present")) {
-  
-  data_tmp <- myrtle_rust_susceptibility_data %>% filter(!is.na(myrtle_rust_susceptibility_data[[var]]),
-                                         !is.na(myrtle_rust_susceptibility))
-  
-  linearmodel_var <- lm(myrtle_rust_susceptibility ~ data_tmp[[var]] , data = data_tmp)
-  
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
-  
-  new_row <- c(
-    trait = var, 
-    r2= round(summary(linearmodel_var)$r.squared,4), 
-    p_value = round(p[2,1],4),
-    coeff = round(coeff[2,1],3),
-    n = nrow(data_tmp)
-      ) %>% 
-    t() %>%
-    as.data.frame()
-  
-    if(new_row[1,]$r2 > 0.03 & new_row[1,]$p_value < 0.05) {
-      plot(
-         ggplot(data_tmp, aes(x = data_tmp[[var]], y = myrtle_rust_susceptibility)) +
-          geom_point() +
-          geom_jitter() +
-          geom_smooth(method = "lm", se = FALSE, color = "grey20") +
-          theme_classic() +
-          xlab(var)
-      )
-  }
-  
-  correlations_with_possible_traits_myrtle_rust <- correlations_with_possible_traits_myrtle_rust %>%
-    bind_rows(new_row)
-}
-
-for (var in c("seed_dry_mass", "leaf_mass_per_area", "plant_height", "leaf_length", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "leaf_lignin_per_dry_mass", "leaf_phenol_per_dry_mass", "leaf_tannin_per_dry_mass")) {
-  
-  data_tmp <- myrtle_rust_susceptibility_data %>% filter(!is.na(myrtle_rust_susceptibility_data[[var]]),
-                                         !is.na(myrtle_rust_susceptibility))
-  
-  linearmodel_var <- lm(myrtle_rust_susceptibility ~ log10(as.numeric(data_tmp[[var]])), data = data_tmp)
-  
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
-  
-  new_row <- c(
-    trait = var, 
-    r2= round(summary(linearmodel_var)$r.squared,4), 
-    p_value = round(p[2,1],4),
-    coeff = round(coeff[2,1],3),
-    n = nrow(data_tmp)
-      ) %>% 
-    t() %>%
-    as.data.frame()
-  
-    if(new_row[1,]$r2 > 0.04 & new_row[1,]$p_value < 0.05) {
-    
-      plot(
-             ggplot(data_tmp, aes(x = log10(as.numeric(data_tmp[[var]])), y = myrtle_rust_susceptibility)) +
-              geom_point() +
-              geom_jitter() +
-              geom_smooth(method = "lm", se = FALSE, color = "grey20") +
-              theme_classic() +
-               xlab(var)
-      )
-    }
-  
-  correlations_with_possible_traits_myrtle_rust <- correlations_with_possible_traits_myrtle_rust %>%
-    bind_rows(new_row)
-
-}
-
-myrtlerust_kable_table <- correlations_with_possible_traits_myrtle_rust %>% 
-  arrange(-as.numeric(r2)) %>% 
+myrtlerust_kable_table <- correlations_with_possible_traits_myrtle_rust %>%
+  arrange(-as.numeric(r2)) %>%
   kableExtra::kable(caption = "Correlation between myrtle rust susceptibililty and trait value, for species with known susceptibility")
 
 kableExtra::kable_classic(myrtlerust_kable_table) %>%
@@ -1776,92 +1607,19 @@ goat_susceptibility <- plant_goat_palatability %>%
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-correlations_with_possible_traits <- tibble(
-  trait = character(),
-  coeff = character(),
-  r2 = character(), 
-  p_value = character(),
-  n = character()
-)
-
-for (var in c("life_history", "resprouting_capacity", "leaf_hairs_adult_leaves", "plant_spinescence", "plant_physical_defence_structures", "herb_shrub_tree", "forb_graminoid", "woodiness")) {
-  
-  data_tmp <- goat_susceptibility %>% filter(!is.na(goat_susceptibility[[var]]),
-                                         !is.na(plant_goat_palatability))
-  
-  linearmodel_var <- lm(plant_goat_palatability ~ data_tmp[[var]], data = data_tmp)
-  
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
-  
-  new_row <- c(
-    trait = var, 
-    r2= round(summary(linearmodel_var)$r.squared,4), 
-    p_value = round(p[2,1],4),
-    coeff = round(coeff[2,1],3),
-    n = nrow(data_tmp)
-      ) %>% 
-    t() %>%
-    as.data.frame()
-  
-        if(new_row[1,]$r2 > 0.01 & new_row[1,]$p_value < 0.05) {
-    
-      plot(
-             ggplot(data_tmp, aes(x = data_tmp[[var]], y = plant_goat_palatability)) +
-              geom_point() +
-              geom_jitter() +
-              geom_smooth(method = "lm", se = FALSE, color = "grey20") +
-              theme_classic() +
-               xlab(var)
-      )
-    }
-  
-  correlations_with_possible_traits <- correlations_with_possible_traits %>%
-    bind_rows(new_row)
-}
-
-# other traits with too small sample sizes to bother with: c("leaf_phenol_per_dry_mass, "leaf_lignin_per_dry_mass", "leaf_tannin_per_dry_mass")
-for (var in c("leaf_mass_per_area", "plant_height", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "metabolisable_energy", "leaf_work_to_shear_adjusted")) {
-  
-  
-  data_tmp <- goat_susceptibility %>% filter(!is.na(goat_susceptibility[[var]]),
-                                         !is.na(plant_goat_palatability))
-  
-  linearmodel_var <- lm(plant_goat_palatability ~ log10(as.numeric(data_tmp[[var]])), data = data_tmp)
-  
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(4) -> p
-  summary(linearmodel_var)[4] %>% as.data.frame() %>% select(1) -> coeff
-  
-  new_row <- c(
-    trait = var, 
-    r2= round(summary(linearmodel_var)$r.squared,4), 
-    p_value = round(p[2,1],4),
-    coeff = round(coeff[2,1],3),
-    n = nrow(data_tmp)
-      ) %>% 
-    t() %>%
-    as.data.frame()
-  
-      if(new_row[1,]$r2 > 0.02 & new_row[1,]$p_value < 0.05) {
-    
-      plot(
-             ggplot(data_tmp, aes(x = log10(as.numeric(data_tmp[[var]])), y = plant_goat_palatability)) +
-              geom_point() +
-              geom_jitter() +
-              geom_smooth(method = "lm", se = FALSE, color = "grey20") +
-              theme_classic() +
-               xlab(var)
-      )
-    }
-  
-  
-  correlations_with_possible_traits <- correlations_with_possible_traits %>%
-    bind_rows(new_row)
-}
-
-correlations_with_possible_traits_goats <- correlations_with_possible_traits %>%
+correlations_with_possible_traits_goats <- bind_rows(
+  check_trait_correlations(
+    goat_susceptibility, "plant_goat_palatability",
+    c("life_history", "resprouting_capacity", "leaf_hairs_adult_leaves", "plant_spinescence", "plant_physical_defence_structures", "herb_shrub_tree", "forb_graminoid", "woodiness"),
+    r2_threshold = 0.01),
+  # other traits with too small sample sizes to bother with: c("leaf_phenol_per_dry_mass, "leaf_lignin_per_dry_mass", "leaf_tannin_per_dry_mass")
+  check_trait_correlations(
+    goat_susceptibility, "plant_goat_palatability",
+    c("leaf_mass_per_area", "plant_height", "leaf_N_per_dry_mass", "leaf_P_per_dry_mass", "digestible_mass_per_dry_mass", "leaf_crude_protein_per_dry_mass", "metabolisable_energy", "leaf_work_to_shear_adjusted"),
+    r2_threshold = 0.02, use_log10 = TRUE)
+) %>%
   mutate(r2 = as.numeric(r2), coeff = as.numeric(coeff)) %>%
-  arrange(-r2) %>% 
+  arrange(-r2) %>%
   filter(!is.na(trait))
 
 correlations_with_possible_traits_goats %>% 
@@ -1956,13 +1714,12 @@ goats_assigned_risk <- goats_assigned_risk %>%
 
     # add {trait}_risk for every trait in goat_trait_effects (plant height, resprouting
     # capacity, bud bank location, life history, bark thickness, forb, reproductive
-    # maturity, woodiness - NB woodiness_risk is computed here but, as in the original
-    # code, not included in the rowSums below; flagging in case that's an oversight)
+    # maturity, woodiness
     add_trait_risks(goat_trait_effects) %>%
 
     mutate(
       # sum together trait and taxonomic effect scores
-        total_trait_effect_score = rowSums(across(c(plant_height_4m_peak_scaled_risk, resprouting_capacity_risk, bud_bank_location_scaled_risk, forb_risk, life_history_risk, bark_thickness_scaled_risk, taxonomic_risk, reproductive_maturity_scaled_risk)), na.rm = TRUE),
+        total_trait_effect_score = rowSums(across(c(plant_height_4m_peak_scaled_risk, resprouting_capacity_risk, bud_bank_location_scaled_risk, forb_risk, life_history_risk, bark_thickness_scaled_risk, taxonomic_risk, reproductive_maturity_scaled_risk, woodiness_risk)), na.rm = TRUE),
 
       # rescale trait risk; this value then to be multiplied by habitat risk
       # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk
@@ -2249,10 +2006,7 @@ pigs_assigned_risk <- native_species %>%
 # calculate "risk effect scores" for habitat, traits, taxonomy
 pigs_assigned_risk <- pigs_assigned_risk %>%
    # calculate confidence in risk score, based on how much data available, weighted
-    # by trait effect size. (Comparison against the unweighted trait-count version
-    # checked out - see phytophthora - so commented out below rather than deleted). NB
-    # pigs_trait_effects has one NA-effect_score trait (fruit_fleshiness), treated as
-    # weight 0 in the scaled version, so it's counted in neither numerator nor denominator
+    # by trait effect size.
     # add_prop_traits_scored_variants(trait_table = pigs_trait_effects) %>%
       calculate_prop_traits_scored_scaled(trait_table = pigs_trait_effects) %>%
 
@@ -2272,9 +2026,7 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
   ) %>%
 
     # add {trait}_risk for every trait in pigs_trait_effects (plant height, woodiness,
-    # resprouting capacity, storage organ, fruit length - renamed from the old
-    # "fruit_risk" to "fruit_length_scaled_risk" to match every other threat's naming
-    # convention; NB this changes the column name in the exported CSV)
+    # resprouting capacity, storage organ, fruit length
     add_trait_risks(pigs_trait_effects) %>%
 
     mutate(
