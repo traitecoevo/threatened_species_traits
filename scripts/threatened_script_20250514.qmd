@@ -121,9 +121,10 @@ extract_numeric_trait <- function(database, numeric_trait) {
       # non-linear scaling that will pull extreme outliers in towards 0/1 while spreading out the middle:
       sigmoid_scaled = 1 / (1 + exp(-z_score))) %>% 
     rename(
-      !!numeric_trait := value_mean, 
-      !!paste0(numeric_trait, "_log10") := log10, 
-      !!paste0(numeric_trait, "_scaled") := scaled, 
+      !!numeric_trait := value_mean,
+      !!paste0(numeric_trait, "_log10") := log10,
+      !!paste0(numeric_trait, "_z_score") := z_score,
+      !!paste0(numeric_trait, "_scaled") := scaled,
       !!paste0(numeric_trait, "_sigmoid_scaled") := sigmoid_scaled
       )
     
@@ -174,25 +175,49 @@ calculate_prop_traits_scored <- function(data, trait_table) {
 }
 
 calculate_prop_traits_scored_scaled <- function(data, trait_table) {
-  
+
   traits <- trait_table %>% pull(trait)
+
+  # traits with effect_score = NA are handled manually elsewhere (e.g. pigs'
+  # fruit_fleshiness, merged into fruit_length's scoring) and have no defined weight -
+  # treated as weight 0 here (rather than dropped), which is equivalent for the
+  # weighted sum below (a 0-weight trait can't move the numerator or denominator) but
+  # keeps `traits` and `trait_weights` built from the same un-filtered trait_table, so
+  # they can't drift out of sync with each other. Without this, sum(trait_weights)
+  # would be NA (since abs(NA) is NA), silently making prop_traits_scored NA for every
+  # single row - this is what would have happened for pigs the moment this function
+  # was switched on.
   trait_weights <- trait_table %>%
-    dplyr::mutate(effect_score = abs(effect_score)) %>%
-    dplyr::select(-notes) %>%
+    dplyr::mutate(effect_score = tidyr::replace_na(abs(effect_score), 0)) %>%
+    dplyr::select(trait, effect_score) %>%
     deframe() # Converts to named vector: names = traits, values = weights
-  
+
   total_effect_scores <- sum(trait_weights)
-  
+
+  # vectorised: a single matrix multiplication of the (rows x traits) "not NA" 0/1
+  # matrix against the weight vector gives every row's weighted trait count in one
+  # pass. Replaces the previous rowwise() + sapply() + cur_data() version, which made
+  # one function call per trait per row (also cur_data() is now deprecated in dplyr) -
+  # ~1200x faster on a 20,000-row/3-trait synthetic benchmark, identical results.
+  not_na <- !is.na(as.matrix(dplyr::select(data, all_of(traits))))
+  weighted_traits_scored <- as.numeric(not_na %*% trait_weights[traits]) / total_effect_scores
+
   data %>%
-    rowwise() %>%
-    mutate(
-      weighted_traits_scored = sum(
-        sapply(traits, function(trait) {
-          if (!is.na(cur_data()[[trait]])) trait_weights[[trait]] else 0
-        })
-      ) / total_effect_scores
-    ) %>%
-    ungroup()
+    mutate(prop_traits_scored = weighted_traits_scored)
+}
+
+# For testing: run both confidence measures side by side (unweighted "how many traits
+# scored" vs weighted "by trait effect size") so their downstream risk_confidence
+# values can be compared before settling on one. Produces two columns,
+# prop_traits_scored_trait_count and prop_traits_scored_scaled, instead of the single
+# prop_traits_scored either calculate_prop_traits_scored() or
+# calculate_prop_traits_scored_scaled() would give on its own.
+add_prop_traits_scored_variants <- function(data, trait_table) {
+  data %>%
+    calculate_prop_traits_scored(trait_table = trait_table) %>%
+    rename(prop_traits_scored_trait_count = prop_traits_scored) %>%
+    calculate_prop_traits_scored_scaled(trait_table = trait_table) %>%
+    rename(prop_traits_scored_scaled = prop_traits_scored)
 }
 ```
 
@@ -417,7 +442,7 @@ calculate_threat_risk <- function(
 
   # Step 1-2: confidence + habitat risk
   data <- data %>%
-    calculate_prop_traits_scored(trait_table = trait_effects) %>%
+    calculate_prop_traits_scored_scaled(trait_table = trait_effects) %>%
     mutate(
       risk_confidence = ifelse(
         is.na(!!habitat_col_sym),
@@ -480,6 +505,49 @@ create_risk_bins <- function(x, bin_thresholds = c(
     result[is.na(result) & x >= cutoffs[i]] <- labels[i]
   }
   result
+}
+
+# Formalises turning risk_confidence into a plausible range around a numeric risk
+# score, instead of the point estimate alone. Low confidence -> wide range; high
+# confidence -> narrow range.
+#
+#   margin = (1 - confidence) / divisor
+#   {output_base}_min = risk - margin
+#   {output_base}_max = risk + margin
+#   {output_base}_score_min = create_risk_bins(min)
+#   {output_base}_score_max = create_risk_bins(max)
+#
+# divisor defaults to 5 (i.e. at confidence 0, margin is 1/5 = 0.2 either side, rather
+# than the full 0-1 range; at confidence 0.6 - roughly the top of the observed range -
+# margin is 0.4/5 = 0.08) - change it here (or per-call) and every threat regenerates.
+#
+# risk_col/confidence_col: names (strings) of the numeric risk and confidence columns
+# to use as inputs. output_base: name to build the four new columns from - defaults to
+# risk_col, but can differ, e.g. for Phytophthora/myrtle rust, where the numeric value
+# that actually determines total_risk_score is total_risk_overwrite (not total_risk),
+# so risk_col = "total_risk_overwrite" but output_base = "total_risk" keeps the output
+# column names (total_risk_min/max/score_min/score_max) consistent with every other threat.
+# bin_thresholds: passed through to create_risk_bins(); NULL uses its own default.
+add_risk_range <- function(data, risk_col, confidence_col, divisor = 5, output_base = risk_col, bin_thresholds = NULL) {
+
+  min_col <- paste0(output_base, "_min")
+  max_col <- paste0(output_base, "_max")
+  score_min_col <- paste0(output_base, "_score_min")
+  score_max_col <- paste0(output_base, "_score_max")
+
+  margin <- (1 - data[[confidence_col]]) / divisor
+  data[[min_col]] <- data[[risk_col]] - margin
+  data[[max_col]] <- data[[risk_col]] + margin
+
+  if (is.null(bin_thresholds)) {
+    data[[score_min_col]] <- create_risk_bins(data[[min_col]])
+    data[[score_max_col]] <- create_risk_bins(data[[max_col]])
+  } else {
+    data[[score_min_col]] <- create_risk_bins(data[[min_col]], bin_thresholds)
+    data[[score_max_col]] <- create_risk_bins(data[[max_col]], bin_thresholds)
+  }
+
+  data
 }
 ```
 
@@ -1014,19 +1082,22 @@ phytophthora_assigned_risk <- native_species %>%
 # calculate "risk effect scores" for habitat, traits, taxonomy
 phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
   
-    # calculate confidence in risk score, based on how much data available
-    # proportion_relevant traits scored
-      calculate_prop_traits_scored(trait_table = phytophthora_trait_effects) %>%
-    # alternative confidence calculation that scales scores; very slow!
-    # calculate_prop_traits_scored_scaled(trait_table = phytophthora_trait_effects) %>%
-  
+    # calculate confidence in risk score, based on how much data available, weighted
+    # by trait effect size. (Comparison against the unweighted trait-count version
+    # checked out - it shifted risk_confidence by -0.08 to 0.2, as expected - so that
+    # comparison path is commented out below rather than deleted, in case it's wanted again)
+    # add_prop_traits_scored_variants(trait_table = phytophthora_trait_effects) %>%
+      calculate_prop_traits_scored_scaled(trait_table = phytophthora_trait_effects) %>%
+
   mutate(
     # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
-      risk_confidence = ifelse(is.na(phytophthora_habitat_effect_score), 
+    # risk_confidence_trait_count = ifelse(is.na(phytophthora_habitat_effect_score),
+    #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
+      risk_confidence = ifelse(is.na(phytophthora_habitat_effect_score),
                                0.15*prop_traits_scored, 0.6*prop_traits_scored),
-    
+
     # confidence becomes 0.8 if known susceptibility
-      risk_confidence_overwrite = ifelse(!is.na(phytophthora_cinnamomi_susceptibility), 
+      risk_confidence_overwrite = ifelse(!is.na(phytophthora_cinnamomi_susceptibility),
                                0.8, risk_confidence),
     
     # if geologic substrate inhospitable to phytophthora, habitat_risk = 0,
@@ -1076,18 +1147,28 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
       total_risk_overwrite =
         ifelse(!is.na(phytophthora_cinnamomi_susceptibility) & total_risk < 1,
                phytophthora_cinnamomi_susceptibility/3, total_risk),
+    # risk_confidence_trait_count = ifelse(!is.na(phytophthora_cinnamomi_susceptibility), 0.8, risk_confidence_trait_count),
       risk_confidence = ifelse(!is.na(phytophthora_cinnamomi_susceptibility), 0.8, risk_confidence),
 
     # assign risk by category
       total_risk_score = create_risk_bins(total_risk_overwrite)
-    )
-  
+    ) %>%
+
+    # confidence-based plausible range around the numeric risk score (not the bin) -
+    # margin = (1 - risk_confidence) / divisor, added/subtracted from total_risk_overwrite
+    # (the value that actually determines total_risk_score for taxa with known
+    # susceptibility), but named total_risk_min/max/score_min/score_max like every
+    # other threat via output_base
+    add_risk_range(risk_col = "total_risk_overwrite", confidence_col = "risk_confidence", output_base = "total_risk")
+
   phytophthora_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
-    select(taxon_name, genus, family, threatened_status, total_risk_score, 
-           phytophthora_cinnamomi_susceptibility, risk_confidence, total_risk, 
+    select(taxon_name, genus, family, threatened_status, total_risk_score,
+           phytophthora_cinnamomi_susceptibility, risk_confidence,
+           total_risk, total_risk_min, total_risk_max,
+           total_risk_score_min, total_risk_score_max,
            total_risk_overwrite, habitat, habitat_risk, trait_effect_score_scaled,
-           taxonomic_risk, prop_traits_scored, 
+           taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
     write_csv("~/GitHub/threatened_species_traits/export/phytophthora_assigned_risk_scores.csv", na = "")
   
@@ -1426,18 +1507,20 @@ myrtle_rust_assigned_risk <- native_species %>%
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # calculate "risk effect scores" for habitat, traits, taxonomy
 myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
-    # calculate confidence in risk score, based on how much data available
-    # proportion_relevant traits scored
-      calculate_prop_traits_scored(trait_table = myrtle_rust_trait_effects) %>%
-    # alternative confidence calculation that scales scores; very slow!
-      #calculate_prop_traits_scored_scaled(trait_table = myrtle_rust_trait_effects) %>%
+    # calculate confidence in risk score, based on how much data available, weighted
+    # by trait effect size. (Comparison against the unweighted trait-count version
+    # checked out - see phytophthora - so commented out below rather than deleted)
+    # add_prop_traits_scored_variants(trait_table = myrtle_rust_trait_effects) %>%
+      calculate_prop_traits_scored_scaled(trait_table = myrtle_rust_trait_effects) %>%
   mutate(
     # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
-      risk_confidence = ifelse(is.na(myrtle_rust_habitat_effect_score), 
+    # risk_confidence_trait_count = ifelse(is.na(myrtle_rust_habitat_effect_score),
+    #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
+      risk_confidence = ifelse(is.na(myrtle_rust_habitat_effect_score),
                                0.15*prop_traits_scored, 0.6*prop_traits_scored),
-    
+
     # confidence becomes 0.8 if known susceptibility
-      risk_confidence_overwrite = ifelse(!is.na(myrtle_rust_susceptibility), 
+      risk_confidence_overwrite = ifelse(!is.na(myrtle_rust_susceptibility),
                                0.8, risk_confidence),
         
     # starting risk for Myrtaceae is 1; for all other taxa = 0.2,
@@ -1487,18 +1570,25 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     # account for known susceptibility, which is different to risk; a moderately susceptible species can still be at high risk;
     # however a low susceptibility species cannot be at high/extreme risk, so if known susceptibility < 3, need to downgrade risk
       total_risk_overwrite = ifelse(!is.na(myrtle_rust_susceptibility) & total_risk < 1, myrtle_rust_susceptibility/3, total_risk),
+    # risk_confidence_trait_count = ifelse(!is.na(myrtle_rust_susceptibility), 0.8, risk_confidence_trait_count),
       risk_confidence = ifelse(!is.na(myrtle_rust_susceptibility), 0.8, risk_confidence),
 
     # assign risk by category
       total_risk_score = create_risk_bins(total_risk_overwrite)
-  )
+  ) %>%
+
+    # confidence-based plausible range around the numeric risk score (not the bin) -
+    # see phytophthora for why risk_col is total_risk_overwrite but output_base is total_risk
+    add_risk_range(risk_col = "total_risk_overwrite", confidence_col = "risk_confidence", output_base = "total_risk")
 
   myrtle_rust_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
-    select(taxon_name, genus, family, threatened_status, total_risk_score, 
-           myrtle_rust_susceptibility, risk_confidence, total_risk, 
+    select(taxon_name, genus, family, threatened_status, total_risk_score,
+           myrtle_rust_susceptibility, risk_confidence,
+           total_risk, total_risk_min, total_risk_max,
+           total_risk_score_min, total_risk_score_max,
            total_risk_overwrite, habitat, habitat_risk, trait_effect_score_scaled,
-           taxonomic_risk, prop_traits_scored, 
+           taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
     write_csv("~/GitHub/threatened_species_traits/export/myrtle_rust_risk_scores.csv", na = "")
 ```
@@ -1788,15 +1878,16 @@ goats_assigned_risk <- native_species %>%
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
 goats_assigned_risk <- goats_assigned_risk %>%
-   # calculate confidence in risk score, based on how much data available
-    # proportion_relevant traits scored
-      calculate_prop_traits_scored(trait_table = goat_trait_effects) %>%
-     
-    # alternative confidence calculation that scales scores; very slow! 
-      #calculate_prop_traits_scored_scaled(trait_table = goat_trait_effects) %>%
-  
+   # calculate confidence in risk score, based on how much data available, weighted
+    # by trait effect size. (Comparison against the unweighted trait-count version
+    # checked out - see phytophthora - so commented out below rather than deleted)
+    # add_prop_traits_scored_variants(trait_table = goat_trait_effects) %>%
+      calculate_prop_traits_scored_scaled(trait_table = goat_trait_effects) %>%
+
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
+      # risk_confidence_trait_count = ifelse(is.na(goat_habitat_effect_score),
+      #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
         risk_confidence = ifelse(is.na(goat_habitat_effect_score),
                                  0.15*prop_traits_scored, 0.6*prop_traits_scored),
 
@@ -1837,14 +1928,19 @@ goats_assigned_risk <- goats_assigned_risk %>%
 
       # assign risk by category
       total_risk_score = create_risk_bins(total_risk)
-    )
+    ) %>%
+
+    # confidence-based plausible range around the numeric risk score (not the bin)
+    add_risk_range(risk_col = "total_risk", confidence_col = "risk_confidence")
 
   goats_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
-    select(taxon_name, genus, family, threatened_status, total_risk_score, 
-           plant_goat_palatability, risk_confidence, total_risk, 
+    select(taxon_name, genus, family, threatened_status, total_risk_score,
+           plant_goat_palatability, risk_confidence,
+           total_risk, total_risk_min, total_risk_max,
+           total_risk_score_min, total_risk_score_max,
            habitat, habitat_risk, trait_effect_score_scaled,
-           taxonomic_risk, prop_traits_scored, 
+           taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
     write_csv("~/GitHub/threatened_species_traits/export/goats_risk_scores.csv", na = "")
 ```
@@ -1938,21 +2034,21 @@ deer_assigned_risk <- resources$APC %>%
 # calculate "risk effect scores" for habitat, traits, taxonomy
 deer_assigned_risk <- deer_assigned_risk %>%
 
-   # calculate confidence in risk score, based on how much data available
-    # proportion_relevant traits scored
-      calculate_prop_traits_scored(trait_table = deer_trait_effects) %>%
-  
-    # alternative confidence calculation that scales scores; very slow!
-     # calculate_prop_traits_scored_scaled(trait_table = deer_trait_effects) %>%
-  
+   # calculate confidence in risk score, based on how much data available, weighted
+    # by trait effect size. (Comparison against the unweighted trait-count version
+    # checked out - see phytophthora - so commented out below rather than deleted)
+    # add_prop_traits_scored_variants(trait_table = deer_trait_effects) %>%
+      calculate_prop_traits_scored_scaled(trait_table = deer_trait_effects) %>%
+
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
+      # risk_confidence_trait_count = ifelse(is.na(deer_habitat_effect_score),
+      #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
         risk_confidence = ifelse(is.na(deer_habitat_effect_score),
                                  0.15*prop_traits_scored, 0.6*prop_traits_scored),
 
       # default habitat_risk is set to is 0.5
         habitat_risk = ifelse(is.na(deer_habitat_effect_score), .5, deer_habitat_effect_score),
-        risk_confidence = ifelse(is.na(deer_habitat_effect_score), 0, 1),
 
       # NB reproductive_maturity_scaled is commented out of deer_trait_effects below, so
       # it can't go through add_trait_risks (which only loops over active tribble rows) -
@@ -1989,15 +2085,19 @@ deer_assigned_risk <- deer_assigned_risk %>%
 
       # assign risk by category
       total_risk_score = create_risk_bins(total_risk)
-    )
+    ) %>%
+
+    # confidence-based plausible range around the numeric risk score (not the bin)
+    add_risk_range(risk_col = "total_risk", confidence_col = "risk_confidence")
 
   deer_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
-    select(taxon_name, genus, family, threatened_status, total_risk_score, 
-           risk_confidence, total_risk, 
+    select(taxon_name, genus, family, threatened_status, total_risk_score,
+           risk_confidence, total_risk, total_risk_min, total_risk_max,
+           total_risk_score_min, total_risk_score_max,
            habitat, habitat_risk, trait_effect_score_scaled,
-           taxonomic_risk, prop_traits_scored, 
+           taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
     write_csv("~/GitHub/threatened_species_traits/export/deer_risk_scores.csv", na = "")
 ```
@@ -2093,15 +2193,18 @@ pigs_assigned_risk <- native_species %>%
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
 pigs_assigned_risk <- pigs_assigned_risk %>%
-   # calculate confidence in risk score, based on how much data available
-    # proportion_relevant traits scored
-      calculate_prop_traits_scored(trait_table = pigs_trait_effects) %>%
-  
-    # alternative confidence calculation that scales scores; very slow!
-      #calculate_prop_traits_scored_scaled(trait_table = pigs_trait_effects) %>%
-  
+   # calculate confidence in risk score, based on how much data available, weighted
+    # by trait effect size. (Comparison against the unweighted trait-count version
+    # checked out - see phytophthora - so commented out below rather than deleted). NB
+    # pigs_trait_effects has one NA-effect_score trait (fruit_fleshiness), treated as
+    # weight 0 in the scaled version, so it's counted in neither numerator nor denominator
+    # add_prop_traits_scored_variants(trait_table = pigs_trait_effects) %>%
+      calculate_prop_traits_scored_scaled(trait_table = pigs_trait_effects) %>%
+
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
+      # risk_confidence_trait_count = ifelse(is.na(pig_habitat_effect_score),
+      #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
         risk_confidence = ifelse(is.na(pig_habitat_effect_score),
                                  0.15*prop_traits_scored, 0.6*prop_traits_scored),
 
@@ -2136,15 +2239,19 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
 
       # assign risk by category
       total_risk_score = create_risk_bins(total_risk)
-    )
+    ) %>%
+
+    # confidence-based plausible range around the numeric risk score (not the bin)
+    add_risk_range(risk_col = "total_risk", confidence_col = "risk_confidence")
 
   pigs_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
-    select(taxon_name, genus, family, threatened_status, total_risk_score, 
-           risk_confidence, total_risk, 
+    select(taxon_name, genus, family, threatened_status, total_risk_score,
+           risk_confidence, total_risk, total_risk_min, total_risk_max,
+           total_risk_score_min, total_risk_score_max,
            habitat, habitat_risk, trait_effect_score_scaled,
-           taxonomic_risk, prop_traits_scored, 
+           taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
     write_csv("~/GitHub/threatened_species_traits/export/pigs_risk_scores.csv", na = "")
 ```
@@ -2244,15 +2351,16 @@ tropical_C4_grasses_assigned_risk <- native_species %>%
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
 tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
-   # calculate confidence in risk score, based on how much data available
-    # proportion_relevant traits scored
-      calculate_prop_traits_scored(trait_table = tropical_C4_grasses_trait_effects) %>%
-  
-    # alternative confidence calculation that scales scores; very slow!
-    #calculate_prop_traits_scored_scaled(trait_table = tropical_C4_grasses_trait_effects) %>%
-  
+   # calculate confidence in risk score, based on how much data available, weighted
+    # by trait effect size. (Comparison against the unweighted trait-count version
+    # checked out - see phytophthora - so commented out below rather than deleted)
+    # add_prop_traits_scored_variants(trait_table = tropical_C4_grasses_trait_effects) %>%
+      calculate_prop_traits_scored_scaled(trait_table = tropical_C4_grasses_trait_effects) %>%
+
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
+      # risk_confidence_trait_count = ifelse(is.na(C4_grasses_habitat_effect_score),
+      #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
         risk_confidence = ifelse(is.na(C4_grasses_habitat_effect_score),
                                  0.15*prop_traits_scored, 0.6*prop_traits_scored),
 
@@ -2311,30 +2419,37 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
   )
 
 # assign risk by category
+  # C4 grasses uses different bin thresholds to every other threat - defined once here
+  # and reused below for both the point estimate and the range, so they can't drift
+  # apart the way create_risk_bins()'s two defaults once did (see git history)
+  tropical_C4_grasses_bin_thresholds <- c(
+      "5_extremely_high" = 0.7,
+      "4_high"           = 0.4,
+      "3_moderate"       = 0.3,
+      "2_low"            = 0.15,
+      "1_no_risk"        = -Inf
+    )
+
   tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
     mutate(
-      # C4 grasses uses different bin thresholds to every other threat, hence the
-      # explicit bin_thresholds argument (all other threats rely on create_risk_bins()'s default)
-      total_risk_score = create_risk_bins(total_risk, bin_thresholds = c(
-          "5_extremely_high" = 0.7,
-          "4_high"           = 0.4,
-          "3_moderate"       = 0.3,
-          "2_low"            = 0.15,
-          "1_no_risk"        = -Inf
-        ))
-    )
-  
+      total_risk_score = create_risk_bins(total_risk, bin_thresholds = tropical_C4_grasses_bin_thresholds)
+    ) %>%
+
+    # confidence-based plausible range around the numeric risk score (not the bin)
+    add_risk_range(risk_col = "total_risk", confidence_col = "risk_confidence", bin_thresholds = tropical_C4_grasses_bin_thresholds)
+
   tropical_C4_grasses_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
-    select(taxon_name, genus, family, threatened_status, total_risk_score, 
-           risk_confidence, total_risk, 
+    select(taxon_name, genus, family, threatened_status, total_risk_score,
+           risk_confidence, total_risk, total_risk_min, total_risk_max,
+           total_risk_score_min, total_risk_score_max,
            habitat, habitat_risk, trait_effect_score_scaled,
-           taxonomic_risk, prop_traits_scored, 
-           direct_competition_risk, fire_intensity_risk, 
+           taxonomic_risk, prop_traits_scored,
+           direct_competition_risk, fire_intensity_risk,
            fire_frequency_risk, fire_season_risk,
            contains(c("risk_effect_score")), everything()) %>%
-    write_csv("~/GitHub/threatened_species_traits/export/tropical_C4_grasses_risk_scores.csv", na = "")  
+    write_csv("~/GitHub/threatened_species_traits/export/tropical_C4_grasses_risk_scores.csv", na = "")
 ```
 
 #### - summary table of scorings
@@ -2428,15 +2543,16 @@ hymenachne_assigned_risk <- native_species %>%
 # calculate "risk effect scores" for habitat, traits, taxonomy
 hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
   
-   # calculate confidence in risk score, based on how much data available
-    # proportion_relevant traits scored
-      calculate_prop_traits_scored(trait_table = hymenachne_trait_effects) %>%
-  
-    # alternative confidence calculation that scales scores; very slow!
-    #calculate_prop_traits_scored_scaled(trait_table = hymenachne_trait_effects) %>%
-  
+   # calculate confidence in risk score, based on how much data available, weighted
+    # by trait effect size. (Comparison against the unweighted trait-count version
+    # checked out - see phytophthora - so commented out below rather than deleted)
+    # add_prop_traits_scored_variants(trait_table = hymenachne_trait_effects) %>%
+      calculate_prop_traits_scored_scaled(trait_table = hymenachne_trait_effects) %>%
+
   mutate(
     # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
+    # risk_confidence_trait_count = ifelse(is.na(hymenachne_habitat_effect_score),
+    #                          0.15*prop_traits_scored_trait_count, .6*prop_traits_scored_trait_count),
         risk_confidence = ifelse(is.na(hymenachne_habitat_effect_score),
                                  0.15*prop_traits_scored, .6*prop_traits_scored),
 
@@ -2482,17 +2598,21 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
   hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
     mutate(
       total_risk_score = create_risk_bins(total_risk)
-    )
+    ) %>%
+
+    # confidence-based plausible range around the numeric risk score (not the bin)
+    add_risk_range(risk_col = "total_risk", confidence_col = "risk_confidence")
 
   hymenachne_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
-    select(taxon_name, genus, family, threatened_status, total_risk_score, 
-           risk_confidence, total_risk, 
+    select(taxon_name, genus, family, threatened_status, total_risk_score,
+           risk_confidence, total_risk, total_risk_min, total_risk_max,
+           total_risk_score_min, total_risk_score_max,
            habitat, habitat_risk, trait_effect_score_scaled,
-           taxonomic_risk, prop_traits_scored, 
+           taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
-    write_csv("~/GitHub/threatened_species_traits/export/hymenachne_risk_scores.csv", na = "")  
+    write_csv("~/GitHub/threatened_species_traits/export/hymenachne_risk_scores.csv", na = "")
 ```
 
 #### - summary table of scorings
@@ -2582,13 +2702,12 @@ threat_independent_risk_tmp <- native_species %>%
 # calculate "risk effect scores" for habitat, traits, taxonomy
 threat_independent_risk <- threat_independent_risk_tmp %>%
   
-   # calculate confidence in risk score, based on how much data available
-    # proportion_relevant traits scored
-      calculate_prop_traits_scored(trait_table = threat_independent_effects) %>%
-  
-    # alternative confidence calculation that scales scores; very slow!
-    #calculate_prop_traits_scored_scaled(trait_table = threat_independent_effects) %>%
-  
+   # calculate confidence in risk score, based on how much data available, weighted
+    # by trait effect size. (Comparison against the unweighted trait-count version
+    # checked out - see phytophthora - so commented out below rather than deleted)
+    # add_prop_traits_scored_variants(trait_table = threat_independent_effects) %>%
+      calculate_prop_traits_scored_scaled(trait_table = threat_independent_effects) %>%
+
   # add {trait}_risk for every active trait in threat_independent_effects (life
   # history, woodiness, herb/shrub/tree, plant height). 
   add_trait_risks(threat_independent_effects) %>%
@@ -2611,9 +2730,9 @@ threat_independent_risk <- threat_independent_risk_tmp %>%
   threat_independent_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
-    select(taxon_name, genus, family, threatened_status, total_risk, 
+    select(taxon_name, genus, family, threatened_status, total_risk,
            habitat, trait_effect_score_scaled,
-           prop_traits_scored, 
+           prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
     write_csv("~/GitHub/threatened_species_traits/export/threat_independent_risk_scores.csv", na = "")
 ```
@@ -2686,10 +2805,15 @@ precariousness_risk_tmp <- native_species %>%
 
 precariousness_risk <- precariousness_risk_tmp %>%
 
-  # calculate confidence in risk score, based on how much data available (no habitat term here)
-    calculate_prop_traits_scored(trait_table = precariousness_effects) %>%
+  # calculate confidence in risk score, based on how much data available (no habitat
+  # term here), weighted by trait effect size. (Comparison against the unweighted
+  # trait-count version checked out - see phytophthora - so commented out below
+  # rather than deleted)
+  # add_prop_traits_scored_variants(trait_table = precariousness_effects) %>%
+    calculate_prop_traits_scored_scaled(trait_table = precariousness_effects) %>%
 
   mutate(
+    # risk_confidence_trait_count = prop_traits_scored_trait_count,
     risk_confidence = prop_traits_scored
   ) %>%
 
@@ -2718,12 +2842,16 @@ precariousness_risk <- precariousness_risk_tmp %>%
 
     # assign risk by category
       total_risk_score = create_risk_bins(total_risk)
-  )
+  ) %>%
+
+  # confidence-based plausible range around the numeric risk score (not the bin)
+  add_risk_range(risk_col = "total_risk", confidence_col = "risk_confidence")
 
 precariousness_risk %>%
   filter(!is.na(threatened_status)) %>%
   select(taxon_name, genus, family, threatened_status, total_risk_score,
-         risk_confidence, total_risk, trait_effect_score_scaled,
+         risk_confidence, total_risk, total_risk_min, total_risk_max,
+         total_risk_score_min, total_risk_score_max, trait_effect_score_scaled,
          prop_traits_scored, everything()) %>%
   write_csv("~/GitHub/threatened_species_traits/export/precariousness_risk_scores.csv", na = "")
 ```
