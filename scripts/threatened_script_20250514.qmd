@@ -1115,27 +1115,31 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
       calculate_prop_traits_scored_scaled(trait_table = phytophthora_trait_effects) %>%
 
   mutate(
-    # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
-    # risk_confidence_trait_count = ifelse(is.na(phytophthora_habitat_effect_score),
-    #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
-      risk_confidence = ifelse(is.na(phytophthora_habitat_effect_score),
-                               0.15*prop_traits_scored, 0.6*prop_traits_scored),
-
-    # confidence becomes 0.8 if known susceptibility
-      risk_confidence_overwrite = ifelse(!is.na(phytophthora_cinnamomi_susceptibility),
-                               0.8, risk_confidence),
-    
     # default habitat_risk is set to is 0.5
       habitat_risk = ifelse(!is.na(phytophthora_habitat_effect_score), phytophthora_habitat_effect_score, .5),
 
     # species growing on calcareous/inhospitable geologic substrate scales habitat_risk
     # down by 10x, regardless of the species' own habitat term or trait scores because the
     # pathogen can't survive there
-    # this only applies when the substrate_effect_score is low, 
+    # this only applies when the substrate_effect_score is low,
     # to avoid overrides when the plant grows on many substrates, only one of them inhospitable
       habitat_risk = ifelse(!is.na(substrate_effect_score) & substrate_effect_score < 0.35,
                             habitat_risk * 0.1, habitat_risk),
-    
+
+    # confidence drops to 0.15*prop_traits_scored (LOW) only if there's no habitat signal at
+    # all - neither a direct habitat score nor a known inhospitable substrate (computed
+    # after habitat_risk above, so this reflects both habitat sources, not just one)
+    # risk_confidence_trait_count = ifelse(is.na(phytophthora_habitat_effect_score),
+    #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
+      risk_confidence = ifelse(
+        is.na(phytophthora_habitat_effect_score) &
+          !(!is.na(substrate_effect_score) & substrate_effect_score < 0.35),
+        0.15*prop_traits_scored, 0.6*prop_traits_scored),
+
+    # confidence becomes 0.8 if known susceptibility
+      risk_confidence_overwrite = ifelse(!is.na(phytophthora_cinnamomi_susceptibility),
+                               0.8, risk_confidence),
+
     # Future addition:
     # while calcareous substrates are currently scored as reducing phytophtora habitat risk,
     # soils high in organic matter or loam which are also inhospitable to phytophthora
@@ -1557,16 +1561,6 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     # add_prop_traits_scored_variants(trait_table = myrtle_rust_trait_effects) %>%
       calculate_prop_traits_scored_scaled(trait_table = myrtle_rust_trait_effects) %>%
   mutate(
-    # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
-    # risk_confidence_trait_count = ifelse(is.na(myrtle_rust_habitat_effect_score),
-    #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
-      risk_confidence = ifelse(is.na(myrtle_rust_habitat_effect_score),
-                               0.15*prop_traits_scored, 0.6*prop_traits_scored),
-
-    # confidence becomes 0.8 if known susceptibility
-      risk_confidence_overwrite = ifelse(!is.na(myrtle_rust_susceptibility),
-                               0.8, risk_confidence),
-        
     # starting risk for Myrtaceae is 1; for all other taxa = 0.2,
     # since other rainforest plants might be impacted by changes in community structure
     # also incorporate list of epiphytic orchids known to be at risk
@@ -1576,7 +1570,7 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
           !is.na(orchid_risk) ~ orchid_risk,
           TRUE ~ 0.2),
 
-    # there are taxa where we have a `habitat_moisture` score, 
+    # there are taxa where we have a `habitat_moisture` score,
     # as well as, or instead of, a `habitat` score
     # If both exist, the "higher" score takes precedence
     # If only `habitat_moisture` exists, it is used over having a black `habitat_risk`
@@ -1588,6 +1582,19 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
             !is.na(myrtle_rust_habitat_effect_score) & !is.na(habitat_moisture_effect_score) &
               habitat_moisture_effect_score > myrtle_rust_habitat_effect_score,
             habitat_moisture_effect_score, myrtle_rust_habitat_effect_score)),
+
+    # confidence drops to 0.15*prop_traits_scored (LOW) only if there's no habitat signal at
+    # all - neither `habitat` nor `habitat_moisture` known (computed after habitat_risk
+    # above, which is genuinely NA only in that case, so this reflects both sources rather
+    # than just the `habitat` one)
+    # risk_confidence_trait_count = ifelse(is.na(myrtle_rust_habitat_effect_score),
+    #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
+      risk_confidence = ifelse(is.na(habitat_risk),
+                               0.15*prop_traits_scored, 0.6*prop_traits_scored),
+
+    # confidence becomes 0.8 if known susceptibility
+      risk_confidence_overwrite = ifelse(!is.na(myrtle_rust_susceptibility),
+                               0.8, risk_confidence),
 
     # merge habitat and taxonomy risks; a "0" in either means no risk
       habitat_taxonomy_risk = ifelse(is.na(habitat_risk),
@@ -2556,8 +2563,10 @@ hymenachne_trait_effects <- tribble(
   "woodiness", -0.4, "woody taxa = lower impact",
   "life_history", -0.3, "annuals, ephemerals = higher impact",
   "plant_height_scaled", -0.3, "taller plants = lower impact",
-  "plant_growth_substrate_hymenanche", 1, "aquatic plant at high risk",
   "pollination_syndrome", -0.3, "wind pollinated species more persistent"
+  # plant_growth_substrate_hymenanche deliberately NOT here - it's a habitat signal
+  # (aquatic vs not), not a plant trait, so it's scored directly into habitat_risk below
+  # instead of through this tribble
 )
 
 # 14 families that are associated with aquatic and wetland environments are identified
@@ -2606,14 +2615,9 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
       calculate_prop_traits_scored_scaled(trait_table = hymenachne_trait_effects) %>%
 
   mutate(
-    # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
-    # risk_confidence_trait_count = ifelse(is.na(hymenachne_habitat_effect_score),
-    #                          0.15*prop_traits_scored_trait_count, .6*prop_traits_scored_trait_count),
-        risk_confidence = ifelse(is.na(hymenachne_habitat_effect_score),
-                                 0.15*prop_traits_scored, .6*prop_traits_scored),
-
-    # plant_growth_substrate (aquatic vs not-aquatic in this case), is a core compoment of "habitat"
-    # with respect to hymenanche risk
+    # plant_growth_substrate (aquatic vs not-aquatic in this case), is a core component of "habitat"
+    # with respect to hymenachne risk - a straight 0/1 flag, not the usual
+    # effect_score * (value - mean(value)) formula
       plant_growth_substrate_hymenanche_risk = ifelse(plant_growth_substrate_hymenanche == 1, 1, NA),
 
     # when available use habitat risk based on species habitat; default habitat = 0.3
@@ -2626,17 +2630,22 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
                             plant_growth_substrate_hymenanche_risk,
                             habitat_risk),
 
+    # confidence drops to 0.15*prop_traits_scored (LOW) only if there's no habitat signal
+    # at all - neither a direct habitat score nor a known growth substrate (computed
+    # after habitat_risk above, so this reflects both habitat sources, not just one)
+    # risk_confidence_trait_count = ifelse(is.na(hymenachne_habitat_effect_score),
+    #                          0.15*prop_traits_scored_trait_count, .6*prop_traits_scored_trait_count),
+        risk_confidence = ifelse(
+          is.na(hymenachne_habitat_effect_score) & is.na(plant_growth_substrate_hymenanche_risk),
+          0.15*prop_traits_scored, .6*prop_traits_scored),
+
     # add taxonomic effect scores
       taxonomic_risk = calculate_risk("taxonomic_risk", taxonomic_risk, .)
   ) %>%
 
-    # 31-SPECIAL CASE add {trait}_risk for every remaining trait in hymenachne_trait_effects
-    # (plant height, woodiness, life history, pollination syndrome). plant_growth_substrate_hymenanche
-    # is excluded here - it's already handled above by the manual aquatic-taxa rule
-    # (a straight 0/1 flag, not the usual effect_score * (value - mean(value)) formula),
-    # so running it through add_trait_risks too would silently overwrite that with a
-    # different number under the same column name.
-    add_trait_risks(hymenachne_trait_effects %>% filter(trait != "plant_growth_substrate_hymenanche")) %>%
+    # add {trait}_risk for every trait in hymenachne_trait_effects (plant height,
+    # woodiness, life history, pollination syndrome)
+    add_trait_risks(hymenachne_trait_effects) %>%
 
     mutate(
     # sum trait risk effect scores
