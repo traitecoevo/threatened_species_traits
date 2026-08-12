@@ -315,10 +315,14 @@ make_risk_density_plot <- function(data, threat) {
     ggplot(plot_data, aes(x = risk, fill = category)) +
       geom_density(aes(y = ..scaled..), alpha = 0.4) +
       scale_fill_manual(values = risk_colors, name = "category") +
-      scale_x_continuous(
-        breaks = seq(0, 1, by = 0.2),
-        limits = c(-.1, 1.5)
-      ) +
+      scale_x_continuous(breaks = seq(0, 1, by = 0.2)) +
+      # coord_cartesian() (not scale_x_continuous(limits=...)) crops the *view* only -
+      # the density curve is still estimated from the full data first, then the window
+      # is cropped. scale_x_continuous(limits=...) instead silently drops any row outside
+      # the range BEFORE estimating the density, which badly distorted the min/max risk
+      # panels - up to 69% of a threat's total_risk_min values fall below -0.1, since
+      # margins can push values well past the range the original 3 categories ever used
+      coord_cartesian(xlim = c(-.1, 1.5)) +
       labs(x = "", y = "", fill = NULL) +
       theme_minimal()  +
       theme(
@@ -1141,7 +1145,12 @@ habitat_scores %>%
 df_long <- phytophthora_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled,
-         `combined risk` = total_risk,
+         # total_risk_overwrite (not total_risk) is what determines total_risk_score and
+         # what total_risk_min/max are built around (see add_risk_range() call above,
+         # risk_col = "total_risk_overwrite") - plotting plain total_risk here would show
+         # the pre-override modelled value, disconnected from the min/max band for any
+         # species with known susceptibility or an extinction-risk flag
+         `combined risk` = total_risk_overwrite,
          `min risk` = total_risk_min,
          `max risk` = total_risk_max,
          threatened_status) %>%
@@ -1504,7 +1513,12 @@ df_long <- myrtle_rust_assigned_risk %>%
   filter(family == "Myrtaceae") %>%
   select(`habitat risk` = habitat_taxonomy_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled,
-         `combined risk` = total_risk,
+         # total_risk_overwrite (not total_risk) is what determines total_risk_score and
+         # what total_risk_min/max are built around (see add_risk_range() call above,
+         # risk_col = "total_risk_overwrite") - plotting plain total_risk here would show
+         # the pre-override modelled value, disconnected from the min/max band for any
+         # species with known low susceptibility from inoculation experiments
+         `combined risk` = total_risk_overwrite,
          `min risk` = total_risk_min,
          `max risk` = total_risk_max,
          threatened_status) %>%
@@ -2190,12 +2204,22 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
 
     # combine trait risk effect scores
 
-    # dry_season_flowering: less direct competition if 1) you are tall or 2) you are an annual, e
-    # specially ones that grows outside the C4 grass growing season
+    # dry_season_flowering: less direct competition if 1) you are tall or 2) you are an annual,
+    # especially ones that grows outside the C4 grass growing season
       direct_competition_risk = ifelse(!is.na(plant_height) | (!is.na(dry_season_flowering) & life_history < 1.5),
                                        -0.3*dry_season_flowering + plant_height_scaled_risk + life_history_risk,
-                                       0.3),
-    
+                                       NA),
+
+    # rescue step: the formula above can still come out NA even when its own condition
+    # matched - e.g. plant_height known but dry_season_flowering unknown, so
+    # -0.3*dry_season_flowering poisons the whole sum with NA via arithmetic propagation.
+    # When that happens and plant_height is known, fall back to plant_height_scaled_risk
+    # alone rather than losing the signal entirely to the later blanket NA->0 replacement.
+    # Species with neither plant_height nor a qualifying dry_season_flowering get 0.3 (default).
+      direct_competition_risk = ifelse(!is.na(plant_height) & is.na(direct_competition_risk),
+                                       plant_height_scaled_risk,
+                                       ifelse(is.na(direct_competition_risk), 0.3, direct_competition_risk)),
+
     # most impacted by increased fire intensity if you are perennial, woody and with high bud bank location; having a storage organ offers a bit of reprieve
       fire_intensity_risk = rowSums(across(c(woodiness_risk, storage_organ_present_risk, bud_bank_location_scaled_risk, life_history_risk)), na.rm = TRUE),
     
