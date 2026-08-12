@@ -282,128 +282,109 @@ function to plot risk densities
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 make_risk_density_plot <- function(data, threat) {
-  
+
   get_legend <- function(myplot) {
     tmp <- ggplotGrob(myplot)
     legend_index <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
     tmp$grobs[[legend_index]]
   }
-  
+
   risk_colors <- c(
-    "habitat risk" = "#FFFF33",            
-    "trait and taxonomy risk" = "#F46D43", 
-    "combined risk" = "#74ADD1"
+    "habitat risk" = "#FFFF33",
+    "trait and taxonomy risk" = "#F46D43",
+    "combined risk" = "#74ADD1",
+    "min risk" = "#4DAF4A",
+    "max risk" = "#984EA3"
   )
-  
+
   data$category <- factor(data$category, levels = c(
-    "habitat risk", "trait and taxonomy risk", "combined risk"
+    "habitat risk", "trait and taxonomy risk", "combined risk", "min risk", "max risk"
   ))
-  
-  data_threatened <- data  %>% 
+
+  data_threatened <- data  %>%
     filter(!is.na(threatened_status))
-  
+
+  # the min/max row is only added when the caller supplied that data (most threats do,
+  # via total_risk_min/total_risk_max - see add_risk_range()); threat-independent has no
+  # confidence-based range, so it falls back to the original 2-row layout below
+  has_min_max <- any(c("min risk", "max risk") %in% data_threatened$category)
+
+  # shared panel styling, previously copy-pasted once per plot (plot1-4) - now built once
+  # and reused for every panel, including the new min/max ones
+  density_panel <- function(plot_data) {
+    ggplot(plot_data, aes(x = risk, fill = category)) +
+      geom_density(aes(y = ..scaled..), alpha = 0.4) +
+      scale_fill_manual(values = risk_colors, name = "category") +
+      scale_x_continuous(
+        breaks = seq(0, 1, by = 0.2),
+        limits = c(-.1, 1.5)
+      ) +
+      labs(x = "", y = "", fill = NULL) +
+      theme_minimal()  +
+      theme(
+        panel.grid.major.x = element_line(color = "gray80"),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none"
+      )
+  }
+
   dummy_plot <- ggplot(data, aes(x = risk, fill = category)) +
     geom_density(aes(y = ..scaled..), alpha = 0.4) +
     scale_fill_manual(values = risk_colors, name = "category")  +
     theme(legend.position = "bottom")
-    
+
   legend <- get_legend(dummy_plot)
-  
-  plot1 <- ggplot(data %>% filter(category != "combined risk"), aes(x = risk, fill = category)) +
-    geom_density(aes(y = ..scaled..), alpha = 0.4) +
-    scale_fill_manual(values = risk_colors, name = "category") +
-    scale_x_continuous(
-      breaks = seq(0, 1, by = 0.2),
-      limits = c(-.1, 1.5)
-    ) +
-    labs(x = "", y = "", fill = NULL) +
-  theme_minimal()  +
-    theme(
-      panel.grid.major.x = element_line(color = "gray80"),
-      panel.grid.major.y = element_blank(),
-      panel.grid.minor = element_blank(),
-      axis.text.y = element_blank(),
-      legend.position = "none"
-    )
-  
-  plot2 <- ggplot(data %>% filter(category == "combined risk"), aes(x = risk, fill = category)) +
-    geom_density(aes(y = ..scaled..), alpha = 0.4) +
-    scale_fill_manual(values = risk_colors, name = "category") +
-    scale_x_continuous(
-      breaks = seq(0, 1, by = 0.2),
-      limits = c(-.1, 1.5)
-    ) +
-    labs(x = "", y = "", fill = NULL) +
-    theme_minimal()  +
-    theme(
-      panel.grid.major.x = element_line(color = "gray80"),
-      panel.grid.major.y = element_blank(),
-      panel.grid.minor = element_blank(),
-      axis.text.y = element_blank(),
-      legend.position = "none"
-    )
-  
-  plot3 <- ggplot(data_threatened %>% filter(category != "combined risk"), aes(x = risk, fill = category)) +
-    geom_density(aes(y = ..scaled..), alpha = 0.4) +
-    scale_fill_manual(values = risk_colors, name = "category") +
-    scale_x_continuous(
-      breaks = seq(0, 1, by = 0.2),
-      limits = c(-.1, 1.5)
-    ) +
-    labs(x = "", y = "", fill = NULL) +
-  theme_minimal()  +
-    theme(
-      panel.grid.major.x = element_line(color = "gray80"),
-      panel.grid.major.y = element_blank(),
-      panel.grid.minor = element_blank(),
-      axis.text.y = element_blank(),
-      legend.position = "none"
-    )
-  
-  plot4 <- ggplot(data_threatened %>% filter(category == "combined risk"), aes(x = risk, fill = category)) +
-    geom_density(aes(y = ..scaled..), alpha = 0.4) +
-    scale_fill_manual(values = risk_colors, name = "category") +
-    scale_x_continuous(
-      breaks = seq(0, 1, by = 0.2),
-      limits = c(-.1, 1.5)
-    ) +
-    labs(x = "", y = "", fill = NULL) +
-    theme_minimal()  +
-    theme(
-      panel.grid.major.x = element_line(color = "gray80"),
-      panel.grid.major.y = element_blank(),
-      panel.grid.minor = element_blank(),
-      axis.text.y = element_blank(),
-      legend.position = "none"
-    )
-  
+
+  plot1 <- density_panel(data %>% filter(!category %in% c("combined risk", "min risk", "max risk")))
+  plot2 <- density_panel(data %>% filter(category == "combined risk"))
+  plot3 <- density_panel(data_threatened %>% filter(!category %in% c("combined risk", "min risk", "max risk")))
+  plot4 <- density_panel(data_threatened %>% filter(category == "combined risk"))
+
   title_row1 <- grid::textGrob(
   "risk scores for all Australian plant taxa",
-  x = 0.07, hjust = 0.1, 
+  x = 0.07, hjust = 0.1,
   gp = grid::gpar(fontsize = 10))
-  
+
   title_row2 <- grid::textGrob(
   "risk scores for listed plant taxa",
-  x = 0.07, hjust = 0.1, 
+  x = 0.07, hjust = 0.1,
   gp = grid::gpar(fontsize = 10))
-  
+
   title_x <- grid::textGrob(
   "risk",
   gp = grid::gpar(fontsize = 10))
-  
-    row1 <- gridExtra::arrangeGrob(plot1, plot2, nrow = 1, ncol = 2, top = title_row1)
-    
+
+  row1 <- gridExtra::arrangeGrob(plot1, plot2, nrow = 1, ncol = 2, top = title_row1)
+
+  if (has_min_max) {
+    plot5 <- density_panel(data_threatened %>% filter(category == "min risk"))
+    plot6 <- density_panel(data_threatened %>% filter(category == "max risk"))
+
+    title_row3 <- grid::textGrob(
+      "min/max risk range for listed plant taxa (from risk confidence)",
+      x = 0.07, hjust = 0.1,
+      gp = grid::gpar(fontsize = 10))
+
+    row2 <- gridExtra::arrangeGrob(plot3, plot4, nrow = 1, ncol = 2, top = title_row2)
+    row3 <- gridExtra::arrangeGrob(plot5, plot6, nrow = 1, ncol = 2, top = title_row3, bottom = title_x)
+
+    combined <- gridExtra::arrangeGrob(row1, row2, row3, nrow = 3, ncol = 1,
+                    top = paste0("Distribution of Threat-dependent Risk Scores for ", threat))
+  } else {
     row2 <- gridExtra::arrangeGrob(plot3, plot4, nrow = 1, ncol = 2, top = title_row2, bottom = title_x)
-    
-  combined <- gridExtra::arrangeGrob(row1, row2, nrow = 2, ncol = 1, 
-                  top = paste0("Distribution of Threat-dependent Risk Scores for ", threat))
-  
+
+    combined <- gridExtra::arrangeGrob(row1, row2, nrow = 2, ncol = 1,
+                    top = paste0("Distribution of Threat-dependent Risk Scores for ", threat))
+  }
+
   combined_with_legend <- gridExtra::arrangeGrob(combined, legend, nrow = 2, heights = c(0.9, 0.1))
-                   
-  grid::grid.draw(combined_with_legend)  
-  
+
+  grid::grid.draw(combined_with_legend)
+
   return(combined_with_legend)
-  
+
 }
 ```
 
@@ -1158,11 +1139,13 @@ habitat_scores %>%
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- phytophthora_assigned_risk %>%
-  select(`habitat risk` = habitat_risk, 
-         `trait and taxonomy risk` = trait_effect_score_scaled, 
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "Phytophthora cinnamomi")
@@ -1519,11 +1502,13 @@ habitat_moisture_scores %>%
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- myrtle_rust_assigned_risk %>%
   filter(family == "Myrtaceae") %>%
-  select(`habitat risk` = habitat_taxonomy_risk, 
-         `trait and taxonomy risk` = trait_effect_score_scaled, 
+  select(`habitat risk` = habitat_taxonomy_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "myrtle rust (Myrtaceae species only)")
@@ -1790,11 +1775,13 @@ habitat_scores %>%
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- goats_assigned_risk %>%
-  select(`habitat risk` = habitat_risk, 
-         `trait and taxonomy risk` = trait_effect_score_scaled, 
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "goats")
@@ -1934,11 +1921,13 @@ habitat_scores %>%
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- deer_assigned_risk %>%
-  select(`habitat risk` = habitat_risk, 
-         `trait and taxonomy risk` = trait_effect_score_scaled, 
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "deer")
@@ -2092,11 +2081,13 @@ habitat_scores %>%
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- pigs_assigned_risk %>%
-  select(`habitat risk` = habitat_risk, 
-         `trait and taxonomy risk` = trait_effect_score_scaled, 
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "pigs")
@@ -2293,11 +2284,13 @@ habitat_scores %>%
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- tropical_C4_grasses_assigned_risk %>%
-  select(`habitat risk` = habitat_risk, 
-         `trait and taxonomy risk` = trait_effect_score_scaled, 
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "C4 grasses")
@@ -2461,11 +2454,13 @@ habitat_scores %>%
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- hymenachne_assigned_risk %>%
-  select(`habitat risk` = habitat_risk, 
-         `trait and taxonomy risk` = trait_effect_score_scaled, 
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "hymenachne")
@@ -2687,8 +2682,10 @@ df_long <- precariousness_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "species precariousness (IGNORE HABITAT IN THIS PLOT - SET TO 0)")
