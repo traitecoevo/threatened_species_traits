@@ -321,8 +321,11 @@ make_risk_density_plot <- function(data, threat) {
       # is cropped. scale_x_continuous(limits=...) instead silently drops any row outside
       # the range BEFORE estimating the density, which badly distorted the min/max risk
       # panels - up to 69% of a threat's total_risk_min values fall below -0.1, since
-      # margins can push values well past the range the original 3 categories ever used
-      coord_cartesian(xlim = c(-.1, 1.5)) +
+      # margins can push values well past the range the original 3 categories ever used.
+      # This is a fixed window (not adaptive) so every threat plots on the same, directly
+      # comparable x-axis - if a rescale range (linear or soft_rescale) pushes total_risk
+      # outside c(-.1, 1.5), that's a cue to adjust the scaling range itself, not the plot.
+      coord_cartesian(xlim = c(-0.2, 1.5)) +
       labs(x = "", y = "", fill = NULL) +
       theme_minimal()  +
       theme(
@@ -459,6 +462,34 @@ add_risk_range <- function(data, risk_col, confidence_col, divisor = 5, output_b
   }
 
   data
+}
+
+# Alternative to scales::rescale() for trait_effect_score_scaled, offered as a secondary
+# output alongside the existing linear version for every threat (see each threat's
+# "calculate risk scores" chunk) so the two can be compared directly before deciding
+# whether to switch.
+#
+# scales::rescale() is a pure linear min-max stretch: whichever single species has the
+# most extreme total_trait_effect_score gets pinned exactly to `to`'s boundary, and
+# every other species' position is entirely relative to that one point. One outlier can
+# single-handedly determine how compressed everyone else looks, and - because habitat_risk
+# is often exactly 0 for a real cluster of species (see 12 Aug conversation) - the low end
+# of total_risk = habitat_risk * trait_effect_score_scaled is a hard, truncated wall,
+# while the high end tapers off smoothly. That asymmetry is what prompted this.
+#
+# soft_rescale() centers on the MEAN and SD of total_trait_effect_score instead of its
+# min/max, then lets values fall away from center via a sigmoid rather than a hard linear
+# ramp - so the average species' position no longer depends on how extreme the single
+# worst outlier happens to be, and extreme species approach `to`'s edges smoothly instead
+# of slamming into them. `k` is the spread knob: bigger k = gentler compression = fatter,
+# more spread-out tails, same center regardless. Start at k = 1 and adjust.
+soft_rescale_k <- 1
+
+soft_rescale <- function(x, to = c(0, 1), center = mean(x, na.rm = TRUE),
+                          spread = sd(x, na.rm = TRUE), k = soft_rescale_k) {
+  z <- (x - center) / (spread * k)
+  s <- 1 / (1 + exp(-z))          # sigmoid: s(0) = 0.5 exactly at the center, asymptotes to 0/1
+  to[1] + s * (to[2] - to[1])
 }
 
 ```
@@ -1160,6 +1191,31 @@ df_long <- phytophthora_assigned_risk %>%
 make_risk_density_plot(df_long, "Phytophthora cinnamomi")
 ```
 
+#### - risk scores density plot (soft_rescale, secondary/experimental)
+
+Same trait/taxonomy sum, rescaled with `soft_rescale()` (mean/SD-centered, sigmoid tails)
+instead of `scales::rescale()` (linear min-max) - see the function definition near the
+top of the file for why. `soft_rescale_k` (defined once, near `soft_rescale()` itself)
+controls tail spread for every threat at once - adjust it there and re-render to compare.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
+  mutate(
+    trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(0.05, 1.05)),
+    total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
+  )
+
+df_long_soft <- phytophthora_assigned_risk %>%
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled_soft,
+         `combined risk` = total_risk_soft,
+         threatened_status) %>%
+  pivot_longer(cols = c(1:3),
+               names_to = "category", values_to = "risk")
+
+make_risk_density_plot(df_long_soft, paste0("Phytophthora cinnamomi (soft_rescale, k = ", soft_rescale_k, ")"))
+```
+
 # Myrtle rust
 
 ### Are any traits good predictors?
@@ -1528,6 +1584,43 @@ df_long <- myrtle_rust_assigned_risk %>%
 make_risk_density_plot(df_long, "myrtle rust (Myrtaceae species only)")
 ```
 
+#### - risk scores density plot (soft_rescale, secondary/experimental)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# trait scoring only applies to Myrtaceae (see add_trait_risks(condition = family ==
+# "Myrtaceae") above), so the other 87% of species all get total_trait_effect_score == 0
+# exactly - not a real score, just "the model doesn't run for you". Centering/scaling
+# soft_rescale() on the whole population lets that non-informative majority anchor the
+# center and shrink the spread (whole-population SD is 0.073; Myrtaceae-only SD is 0.183,
+# more than double) - compressing the real Myrtaceae variation far more than it should.
+# Center/spread here are computed from Myrtaceae only, matching the same restriction the
+# trait scoring itself already uses.
+myrtle_rust_myrtaceae_scores <- myrtle_rust_assigned_risk %>%
+  filter(family == "Myrtaceae") %>%
+  pull(total_trait_effect_score)
+
+myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
+  mutate(
+    trait_effect_score_scaled_soft = soft_rescale(
+      total_trait_effect_score, to = c(0.2, 1.15),
+      center = mean(myrtle_rust_myrtaceae_scores, na.rm = TRUE),
+      spread = sd(myrtle_rust_myrtaceae_scores, na.rm = TRUE)
+    ),
+    total_risk_soft = habitat_taxonomy_risk * trait_effect_score_scaled_soft
+  )
+
+df_long_soft <- myrtle_rust_assigned_risk %>%
+  filter(family == "Myrtaceae") %>%
+  select(`habitat risk` = habitat_taxonomy_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled_soft,
+         `combined risk` = total_risk_soft,
+         threatened_status) %>%
+  pivot_longer(cols = c(1:3),
+               names_to = "category", values_to = "risk")
+
+make_risk_density_plot(df_long_soft, paste0("myrtle rust, Myrtaceae only (soft_rescale, k = ", soft_rescale_k, ")"))
+```
+
 # Goats
 
 ### Are any traits good predictors?
@@ -1801,6 +1894,33 @@ df_long <- goats_assigned_risk %>%
 make_risk_density_plot(df_long, "goats")
 ```
 
+#### - risk scores density plot (soft_rescale, secondary/experimental)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+goats_assigned_risk <- goats_assigned_risk %>%
+  mutate(
+    trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(-0.3, 1.55)),
+    total_risk_soft = habitat_risk * trait_effect_score_scaled_soft,
+    # mirror the same known-palatability adjustment applied to the linear version (above),
+    # so the only variable being compared between the two plots is the rescale function
+    total_risk_soft = case_when(
+      is.na(plant_goat_palatability) ~ 1*total_risk_soft,
+      plant_goat_palatability < 3 ~ 0.5*total_risk_soft,
+      plant_goat_palatability >= 3 ~ 1.5*total_risk_soft
+    )
+  )
+
+df_long_soft <- goats_assigned_risk %>%
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled_soft,
+         `combined risk` = total_risk_soft,
+         threatened_status) %>%
+  pivot_longer(cols = c(1:3),
+               names_to = "category", values_to = "risk")
+
+make_risk_density_plot(df_long_soft, paste0("goats (soft_rescale, k = ", soft_rescale_k, ")"))
+```
+
 # Deer
 
 ### Assign risks to all taxa
@@ -1945,6 +2065,26 @@ df_long <- deer_assigned_risk %>%
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "deer")
+```
+
+#### - risk scores density plot (soft_rescale, secondary/experimental)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+deer_assigned_risk <- deer_assigned_risk %>%
+  mutate(
+    trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(-0.1, 1.4)),
+    total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
+  )
+
+df_long_soft <- deer_assigned_risk %>%
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled_soft,
+         `combined risk` = total_risk_soft,
+         threatened_status) %>%
+  pivot_longer(cols = c(1:3),
+               names_to = "category", values_to = "risk")
+
+make_risk_density_plot(df_long_soft, paste0("deer (soft_rescale, k = ", soft_rescale_k, ")"))
 ```
 
 # Pigs
@@ -2105,6 +2245,26 @@ df_long <- pigs_assigned_risk %>%
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "pigs")
+```
+
+#### - risk scores density plot (soft_rescale, secondary/experimental)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+pigs_assigned_risk <- pigs_assigned_risk %>%
+  mutate(
+    trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(-0.1, 1.3)),
+    total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
+  )
+
+df_long_soft <- pigs_assigned_risk %>%
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled_soft,
+         `combined risk` = total_risk_soft,
+         threatened_status) %>%
+  pivot_longer(cols = c(1:3),
+               names_to = "category", values_to = "risk")
+
+make_risk_density_plot(df_long_soft, paste0("pigs (soft_rescale, k = ", soft_rescale_k, ")"))
 ```
 
 # C4 tropical grasses
@@ -2320,6 +2480,26 @@ df_long <- tropical_C4_grasses_assigned_risk %>%
 make_risk_density_plot(df_long, "C4 grasses")
 ```
 
+#### - risk scores density plot (soft_rescale, secondary/experimental)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
+  mutate(
+    trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(0.1, 1.3)),
+    total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
+  )
+
+df_long_soft <- tropical_C4_grasses_assigned_risk %>%
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled_soft,
+         `combined risk` = total_risk_soft,
+         threatened_status) %>%
+  pivot_longer(cols = c(1:3),
+               names_to = "category", values_to = "risk")
+
+make_risk_density_plot(df_long_soft, paste0("C4 grasses (soft_rescale, k = ", soft_rescale_k, ")"))
+```
+
 # Hymenachne
 
 ### Assign risks to all taxa
@@ -2488,6 +2668,26 @@ df_long <- hymenachne_assigned_risk %>%
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long, "hymenachne")
+```
+
+#### - risk scores density plot (soft_rescale, secondary/experimental)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
+  mutate(
+    trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(0.0, 1.2)),
+    total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
+  )
+
+df_long_soft <- hymenachne_assigned_risk %>%
+  select(`habitat risk` = habitat_risk,
+         `trait and taxonomy risk` = trait_effect_score_scaled_soft,
+         `combined risk` = total_risk_soft,
+         threatened_status) %>%
+  pivot_longer(cols = c(1:3),
+               names_to = "category", values_to = "risk")
+
+make_risk_density_plot(df_long_soft, paste0("hymenachne (soft_rescale, k = ", soft_rescale_k, ")"))
 ```
 
 # Threat independent effects
