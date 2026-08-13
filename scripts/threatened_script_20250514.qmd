@@ -179,14 +179,8 @@ calculate_prop_traits_scored_scaled <- function(data, trait_table) {
   traits <- trait_table %>% pull(trait)
 
   # traits with effect_score = NA are handled manually elsewhere (e.g. pigs'
-  # fruit_fleshiness, merged into fruit_length's scoring) and have no defined weight -
-  # treated as weight 0 here (rather than dropped), which is equivalent for the
-  # weighted sum below (a 0-weight trait can't move the numerator or denominator) but
-  # keeps `traits` and `trait_weights` built from the same un-filtered trait_table, so
-  # they can't drift out of sync with each other. Without this, sum(trait_weights)
-  # would be NA (since abs(NA) is NA), silently making prop_traits_scored NA for every
-  # single row - this is what would have happened for pigs the moment this function
-  # was switched on.
+  # fruit_fleshiness, merged into fruit_length's scoring) and have no defined weight
+  # they are still included in this table for display, but are not used in processing
   trait_weights <- trait_table %>%
     dplyr::mutate(effect_score = tidyr::replace_na(abs(effect_score), 0)) %>%
     dplyr::select(trait, effect_score) %>%
@@ -194,30 +188,16 @@ calculate_prop_traits_scored_scaled <- function(data, trait_table) {
 
   total_effect_scores <- sum(trait_weights)
 
-  # vectorised: a single matrix multiplication of the (rows x traits) "not NA" 0/1
+  # Claude-coded; to speed up processing by 1200x the data are vectorised: 
+  # a single matrix multiplication of the (rows x traits) "not NA" 0/1
   # matrix against the weight vector gives every row's weighted trait count in one
   # pass. Replaces the previous rowwise() + sapply() + cur_data() version, which made
-  # one function call per trait per row (also cur_data() is now deprecated in dplyr) -
-  # ~1200x faster on a 20,000-row/3-trait synthetic benchmark, identical results.
+  # one function call per trait per row
   not_na <- !is.na(as.matrix(dplyr::select(data, all_of(traits))))
   weighted_traits_scored <- as.numeric(not_na %*% trait_weights[traits]) / total_effect_scores
 
   data %>%
     mutate(prop_traits_scored = weighted_traits_scored)
-}
-
-# For testing: run both confidence measures side by side (unweighted "how many traits
-# scored" vs weighted "by trait effect size") so their downstream risk_confidence
-# values can be compared before settling on one. Produces two columns,
-# prop_traits_scored_trait_count and prop_traits_scored_scaled, instead of the single
-# prop_traits_scored either calculate_prop_traits_scored() or
-# calculate_prop_traits_scored_scaled() would give on its own.
-add_prop_traits_scored_variants <- function(data, trait_table) {
-  data %>%
-    calculate_prop_traits_scored(trait_table = trait_table) %>%
-    rename(prop_traits_scored_trait_count = prop_traits_scored) %>%
-    calculate_prop_traits_scored_scaled(trait_table = trait_table) %>%
-    rename(prop_traits_scored_scaled = prop_traits_scored)
 }
 ```
 
@@ -1126,9 +1106,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
   
     # calculate confidence in risk score, based on how much data available, weighted
     # by trait effect size. (Comparison against the unweighted trait-count version
-    # checked out - it shifted risk_confidence by -0.08 to 0.2, as expected - so that
-    # comparison path is commented out below rather than deleted, in case it's wanted again)
-    # add_prop_traits_scored_variants(trait_table = phytophthora_trait_effects) %>%
+    # checked out - it shifted risk_confidence by -0.08 to 0.2)
       calculate_prop_traits_scored_scaled(trait_table = phytophthora_trait_effects) %>%
 
   mutate(
@@ -1530,9 +1508,7 @@ myrtle_rust_assigned_risk <- native_species %>%
 # calculate "risk effect scores" for habitat, traits, taxonomy
 myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     # calculate confidence in risk score, based on how much data available, weighted
-    # by trait effect size. (Comparison against the unweighted trait-count version
-    # checked out - see phytophthora - so commented out below rather than deleted)
-    # add_prop_traits_scored_variants(trait_table = myrtle_rust_trait_effects) %>%
+    # by trait effect size. 
       calculate_prop_traits_scored_scaled(trait_table = myrtle_rust_trait_effects) %>%
   mutate(
     # starting risk for Myrtaceae is 1; for all other taxa = 0.2,
@@ -1871,9 +1847,7 @@ goats_assigned_risk <- native_species %>%
 # calculate "risk effect scores" for habitat, traits, taxonomy
 goats_assigned_risk <- goats_assigned_risk %>%
    # calculate confidence in risk score, based on how much data available, weighted
-    # by trait effect size. (Comparison against the unweighted trait-count version
-    # checked out - see phytophthora - so commented out below rather than deleted)
-    # add_prop_traits_scored_variants(trait_table = goat_trait_effects) %>%
+    # by trait effect size.
       calculate_prop_traits_scored_scaled(trait_table = goat_trait_effects) %>%
 
   mutate(
@@ -2051,9 +2025,7 @@ deer_assigned_risk <- resources$APC %>%
 deer_assigned_risk <- deer_assigned_risk %>%
 
    # calculate confidence in risk score, based on how much data available, weighted
-    # by trait effect size. (Comparison against the unweighted trait-count version
-    # checked out - see phytophthora - so commented out below rather than deleted)
-    # add_prop_traits_scored_variants(trait_table = deer_trait_effects) %>%
+    # by trait effect size.
       calculate_prop_traits_scored_scaled(trait_table = deer_trait_effects) %>%
 
   mutate(
@@ -2221,7 +2193,6 @@ pigs_assigned_risk <- native_species %>%
 pigs_assigned_risk <- pigs_assigned_risk %>%
    # calculate confidence in risk score, based on how much data available, weighted
     # by trait effect size.
-    # add_prop_traits_scored_variants(trait_table = pigs_trait_effects) %>%
       calculate_prop_traits_scored_scaled(trait_table = pigs_trait_effects) %>%
 
   mutate(
@@ -2390,9 +2361,7 @@ tropical_C4_grasses_assigned_risk <- native_species %>%
 # calculate "risk effect scores" for habitat, traits, taxonomy
 tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
    # calculate confidence in risk score, based on how much data available, weighted
-    # by trait effect size. (Comparison against the unweighted trait-count version
-    # checked out - see phytophthora - so commented out below rather than deleted)
-    # add_prop_traits_scored_variants(trait_table = tropical_C4_grasses_trait_effects) %>%
+    # by trait effect size.
       calculate_prop_traits_scored_scaled(trait_table = tropical_C4_grasses_trait_effects) %>%
 
   mutate(
@@ -2614,9 +2583,7 @@ hymenachne_assigned_risk <- native_species %>%
 hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
   
    # calculate confidence in risk score, based on how much data available, weighted
-    # by trait effect size. (Comparison against the unweighted trait-count version
-    # checked out - see phytophthora - so commented out below rather than deleted)
-    # add_prop_traits_scored_variants(trait_table = hymenachne_trait_effects) %>%
+    # by trait effect size.
       calculate_prop_traits_scored_scaled(trait_table = hymenachne_trait_effects) %>%
 
   mutate(
@@ -2787,9 +2754,7 @@ threat_independent_risk_tmp <- native_species %>%
 threat_independent_risk <- threat_independent_risk_tmp %>%
 
    # calculate confidence in risk score, based on how much data available, weighted
-    # by trait effect size. (Comparison against the unweighted trait-count version
-    # checked out - see phytophthora - so commented out below rather than deleted)
-    # add_prop_traits_scored_variants(trait_table = threat_independent_effects) %>%
+    # by trait effect size.
       calculate_prop_traits_scored_scaled(trait_table = threat_independent_effects) %>%
 
   mutate(
@@ -2841,14 +2806,6 @@ threat_independent_effects %>%
 
 #### - risk scores density plot
 
-Note, that this information is not being merged into the rest of the workflow at this point.
-
-We had to pull out the trait with the best coverage, life history, because the pattern is dominated by the fact that only 42 listed taxa are annuals (always or sometimes). Effectively, listed taxa are perennials - and possibly in part because they are not as good/fast at regenerating as co-occurring annuals.
-
-This left us with only 853 listed taxa with ANY of the other regeneration traits scored.
-
-Note that the distribution of traits is virtually identical for listed taxa and all taxa - the number of populations, area of extent will disadvantage threatened taxa, but it is not inherently because of their traits.
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- threat_independent_risk %>%
   select(`trait risk` = total_risk,
@@ -2856,7 +2813,8 @@ df_long <- threat_independent_risk %>%
          `max risk` = total_risk_max,
          threatened_status) %>%
   pivot_longer(cols = c(1:3),
-               names_to = "category", values_to = "risk")
+               names_to = "category", 
+               values_to = "risk")
 
 make_trait_risk_density_plot(df_long, "threat-independent regeneration ability")
 ```
@@ -2898,10 +2856,7 @@ precariousness_risk_tmp <- native_species %>%
 precariousness_risk <- precariousness_risk_tmp %>%
 
   # calculate confidence in risk score, based on how much data available (no habitat
-  # term here), weighted by trait effect size. (Comparison against the unweighted
-  # trait-count version checked out - see phytophthora - so commented out below
-  # rather than deleted)
-  # add_prop_traits_scored_variants(trait_table = precariousness_effects) %>%
+  # term here), weighted by trait effect size.
     calculate_prop_traits_scored_scaled(trait_table = precariousness_effects) %>%
 
   mutate(
@@ -2958,15 +2913,12 @@ precariousness_effects %>%
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- precariousness_risk %>%
-  mutate(habitat_risk = 0) %>%
-  select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_scaled,
-         `combined risk` = total_risk,
+  select(`trait risk` = total_risk,
          `min risk` = total_risk_min,
          `max risk` = total_risk_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:5),
+  pivot_longer(cols = c(1:3),
                names_to = "category", values_to = "risk")
 
-make_risk_density_plot(df_long, "species precariousness (IGNORE HABITAT IN THIS PLOT - SET TO 0)")
+make_trait_risk_density_plot(df_long, "species precariousness")
 ```
