@@ -395,6 +395,107 @@ make_risk_density_plot <- function(data, threat) {
 }
 ```
 
+#### make_trait_risk_density_plot
+
+Dedicated plotting function for threat-independent effects (currently just regeneration
+ability) - traits that are never multiplied by habitat risk. Kept separate from
+`make_risk_density_plot()` rather than routing this data through it via a `habitat_risk =
+0` workaround, since that produced a "habitat risk" panel that was always empty and needed
+a "(IGNORE HABITAT IN THIS PLOT)" note to explain. 4 panels: trait risk for all taxa, trait
+risk for listed taxa, and the min/max confidence range for listed taxa.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+make_trait_risk_density_plot <- function(data, threat) {
+
+  get_legend <- function(myplot) {
+    tmp <- ggplotGrob(myplot)
+    legend_index <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+    tmp$grobs[[legend_index]]
+  }
+
+  risk_colors <- c(
+    "trait risk" = "#F46D43",
+    "min risk" = "#4DAF4A",
+    "max risk" = "#984EA3"
+  )
+
+  data$category <- factor(data$category, levels = c("trait risk", "min risk", "max risk"))
+
+  data_threatened <- data %>%
+    filter(!is.na(threatened_status))
+
+  # shared panel styling - same fixed x-axis window as make_risk_density_plot() so every
+  # plot in the report is directly comparable
+  density_panel <- function(plot_data) {
+    ggplot(plot_data, aes(x = risk, fill = category)) +
+      geom_density(aes(y = ..scaled..), alpha = 0.4) +
+      scale_fill_manual(values = risk_colors, name = "category") +
+      scale_x_continuous(breaks = seq(0, 1, by = 0.2)) +
+      coord_cartesian(xlim = c(-0.2, 1.5)) +
+      labs(x = "", y = "", fill = NULL) +
+      theme_minimal() +
+      theme(
+        panel.grid.major.x = element_line(color = "gray80"),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none"
+      )
+  }
+
+  dummy_plot <- ggplot(data, aes(x = risk, fill = category)) +
+    geom_density(aes(y = ..scaled..), alpha = 0.4) +
+    scale_fill_manual(values = risk_colors, name = "category") +
+    theme(legend.position = "bottom")
+
+  legend <- get_legend(dummy_plot)
+
+  plot1 <- density_panel(data %>% filter(category == "trait risk"))
+  plot2 <- density_panel(data_threatened %>% filter(category == "trait risk"))
+  plot3 <- density_panel(data_threatened %>% filter(category == "min risk"))
+  plot4 <- density_panel(data_threatened %>% filter(category == "max risk"))
+
+  title_all <- grid::textGrob(
+    "risk scores for all Australian plant taxa",
+    x = 0.07, hjust = 0.1,
+    gp = grid::gpar(fontsize = 10))
+
+  title_listed <- grid::textGrob(
+    "risk scores for listed plant taxa",
+    x = 0.07, hjust = 0.1,
+    gp = grid::gpar(fontsize = 10))
+
+  title_row2 <- grid::textGrob(
+    "min/max risk range for listed plant taxa (from risk confidence)",
+    x = 0.07, hjust = 0.1,
+    gp = grid::gpar(fontsize = 10))
+
+  title_x <- grid::textGrob(
+    "risk",
+    gp = grid::gpar(fontsize = 10))
+
+  # row 1's two panels differ by population (all taxa vs listed taxa), not by category,
+  # so each gets its own title rather than one shared row title
+  row1 <- gridExtra::arrangeGrob(
+    gridExtra::arrangeGrob(plot1, top = title_all),
+    gridExtra::arrangeGrob(plot2, top = title_listed),
+    nrow = 1, ncol = 2
+  )
+
+  row2 <- gridExtra::arrangeGrob(plot3, plot4, nrow = 1, ncol = 2, top = title_row2, bottom = title_x)
+
+  combined <- gridExtra::arrangeGrob(row1, row2, nrow = 2, ncol = 1,
+                  top = paste0("Distribution of Trait-based Risk Scores for ", threat))
+
+  combined_with_legend <- gridExtra::arrangeGrob(combined, legend, nrow = 2, heights = c(0.9, 0.1))
+
+  grid::grid.draw(combined_with_legend)
+
+  return(combined_with_legend)
+
+}
+```
+
 #### create_risk_bins
 
 turn total_risk into ordered categorical bins from a named threshold vector.
@@ -1172,45 +1273,39 @@ habitat_scores %>%
 
 #### - risk scores density plot
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-df_long <- phytophthora_assigned_risk %>%
-  select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_scaled,
-         # total_risk_overwrite (not total_risk) is what determines total_risk_score and
-         # what total_risk_min/max are built around (see add_risk_range() call above,
-         # risk_col = "total_risk_overwrite") - plotting plain total_risk here would show
-         # the pre-override modelled value, disconnected from the min/max band for any
-         # species with known susceptibility or an extinction-risk flag
-         `combined risk` = total_risk_overwrite,
-         `min risk` = total_risk_min,
-         `max risk` = total_risk_max,
-         threatened_status) %>%
-  pivot_longer(cols = c(1:5),
-               names_to = "category", values_to = "risk")
-
-make_risk_density_plot(df_long, "Phytophthora cinnamomi")
-```
-
-#### - risk scores density plot (soft_rescale, secondary/experimental)
-
-Same trait/taxonomy sum, rescaled with `soft_rescale()` (mean/SD-centered, sigmoid tails)
+Uses `soft_rescale()` (mean/SD-centered, sigmoid tails) as the default scaling method
 instead of `scales::rescale()` (linear min-max) - see the function definition near the
-top of the file for why. `soft_rescale_k` (defined once, near `soft_rescale()` itself)
-controls tail spread for every threat at once - adjust it there and re-render to compare.
+top of the file for why. `soft_rescale_k` (defined next to it) controls tail spread for
+every threat at once - adjust it there and re-render to compare. The original
+`scales::rescale()`-based `total_risk`/`total_risk_overwrite` computed above are kept and
+still feed `total_risk_score`/the CSV export unchanged - only the density plot below has
+switched over.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
   mutate(
     trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(0.05, 1.05)),
-    total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
-  )
+    total_risk_soft = habitat_risk * trait_effect_score_scaled_soft,
+    # mirror the same known-susceptibility/extinction-risk overwrite applied to the
+    # (retained) linear version above - total_risk_soft_overwrite (not total_risk_soft) is
+    # what total_risk_soft_min/max get built around, so combined/min/max stay consistent
+    # with each other, exactly like the linear version
+    total_risk_soft_overwrite = case_when(
+      !is.na(phytophthora_extinction_risk_flag) ~ 1,
+      !is.na(phytophthora_cinnamomi_susceptibility) & total_risk_soft < 1 ~ phytophthora_cinnamomi_susceptibility/3,
+      TRUE ~ total_risk_soft
+    )
+  ) %>%
+  add_risk_range(risk_col = "total_risk_soft_overwrite", confidence_col = "risk_confidence", output_base = "total_risk_soft")
 
 df_long_soft <- phytophthora_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled_soft,
-         `combined risk` = total_risk_soft,
+         `combined risk` = total_risk_soft_overwrite,
+         `min risk` = total_risk_soft_min,
+         `max risk` = total_risk_soft_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long_soft, paste0("Phytophthora cinnamomi (soft_rescale, k = ", soft_rescale_k, ")"))
@@ -1564,37 +1659,21 @@ habitat_moisture_scores %>%
 
 #### - risk scores density plot (Myrtaceae only)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-df_long <- myrtle_rust_assigned_risk %>%
-  filter(family == "Myrtaceae") %>%
-  select(`habitat risk` = habitat_taxonomy_risk,
-         `trait and taxonomy risk` = trait_effect_score_scaled,
-         # total_risk_overwrite (not total_risk) is what determines total_risk_score and
-         # what total_risk_min/max are built around (see add_risk_range() call above,
-         # risk_col = "total_risk_overwrite") - plotting plain total_risk here would show
-         # the pre-override modelled value, disconnected from the min/max band for any
-         # species with known low susceptibility from inoculation experiments
-         `combined risk` = total_risk_overwrite,
-         `min risk` = total_risk_min,
-         `max risk` = total_risk_max,
-         threatened_status) %>%
-  pivot_longer(cols = c(1:5),
-               names_to = "category", values_to = "risk")
+Uses `soft_rescale()` as the default scaling method (see its definition near the top of
+the file). The original `scales::rescale()`-based `total_risk`/`total_risk_overwrite`
+computed above are kept and still feed `total_risk_score`/the CSV export unchanged - only
+the density plot below has switched over.
 
-make_risk_density_plot(df_long, "myrtle rust (Myrtaceae species only)")
-```
-
-#### - risk scores density plot (soft_rescale, secondary/experimental)
+Trait scoring only applies to Myrtaceae (see `add_trait_risks(condition = family ==
+"Myrtaceae")` above), so the other 87% of species all get `total_trait_effect_score == 0`
+exactly - not a real score, just "the model doesn't run for you". Centering/scaling
+`soft_rescale()` on the whole population would let that non-informative majority anchor
+the center and shrink the spread (whole-population SD is 0.073; Myrtaceae-only SD is
+0.183, more than double), compressing the real Myrtaceae variation far more than it
+should - so `center`/`spread` here are computed from Myrtaceae only, matching the same
+restriction the trait scoring itself already uses.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# trait scoring only applies to Myrtaceae (see add_trait_risks(condition = family ==
-# "Myrtaceae") above), so the other 87% of species all get total_trait_effect_score == 0
-# exactly - not a real score, just "the model doesn't run for you". Centering/scaling
-# soft_rescale() on the whole population lets that non-informative majority anchor the
-# center and shrink the spread (whole-population SD is 0.073; Myrtaceae-only SD is 0.183,
-# more than double) - compressing the real Myrtaceae variation far more than it should.
-# Center/spread here are computed from Myrtaceae only, matching the same restriction the
-# trait scoring itself already uses.
 myrtle_rust_myrtaceae_scores <- myrtle_rust_assigned_risk %>%
   filter(family == "Myrtaceae") %>%
   pull(total_trait_effect_score)
@@ -1606,16 +1685,24 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
       center = mean(myrtle_rust_myrtaceae_scores, na.rm = TRUE),
       spread = sd(myrtle_rust_myrtaceae_scores, na.rm = TRUE)
     ),
-    total_risk_soft = habitat_taxonomy_risk * trait_effect_score_scaled_soft
-  )
+    total_risk_soft = habitat_taxonomy_risk * trait_effect_score_scaled_soft,
+    # mirror the same known-low-susceptibility overwrite applied to the (retained) linear
+    # version above - total_risk_soft_overwrite (not total_risk_soft) is what
+    # total_risk_soft_min/max get built around, so combined/min/max stay consistent
+    total_risk_soft_overwrite = ifelse(!is.na(myrtle_rust_susceptibility) & total_risk_soft < 1,
+                                       myrtle_rust_susceptibility/3, total_risk_soft)
+  ) %>%
+  add_risk_range(risk_col = "total_risk_soft_overwrite", confidence_col = "risk_confidence", output_base = "total_risk_soft")
 
 df_long_soft <- myrtle_rust_assigned_risk %>%
   filter(family == "Myrtaceae") %>%
   select(`habitat risk` = habitat_taxonomy_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled_soft,
-         `combined risk` = total_risk_soft,
+         `combined risk` = total_risk_soft_overwrite,
+         `min risk` = total_risk_soft_min,
+         `max risk` = total_risk_soft_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long_soft, paste0("myrtle rust, Myrtaceae only (soft_rescale, k = ", soft_rescale_k, ")"))
@@ -1880,42 +1967,34 @@ habitat_scores %>%
 
 #### - risk scores density plot
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-df_long <- goats_assigned_risk %>%
-  select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_scaled,
-         `combined risk` = total_risk,
-         `min risk` = total_risk_min,
-         `max risk` = total_risk_max,
-         threatened_status) %>%
-  pivot_longer(cols = c(1:5),
-               names_to = "category", values_to = "risk")
-
-make_risk_density_plot(df_long, "goats")
-```
-
-#### - risk scores density plot (soft_rescale, secondary/experimental)
+Uses `soft_rescale()` (see its definition near the top of the file) as the default
+scaling method. The original `scales::rescale()`-based `total_risk` computed above is
+kept and still feeds `total_risk_score`/the CSV export unchanged - only the density plot
+below has switched over.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 goats_assigned_risk <- goats_assigned_risk %>%
   mutate(
     trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(-0.3, 1.55)),
     total_risk_soft = habitat_risk * trait_effect_score_scaled_soft,
-    # mirror the same known-palatability adjustment applied to the linear version (above),
-    # so the only variable being compared between the two plots is the rescale function
+    # mirror the same known-palatability adjustment applied to the (retained) linear
+    # version above, so the two rescale methods stay comparable
     total_risk_soft = case_when(
       is.na(plant_goat_palatability) ~ 1*total_risk_soft,
       plant_goat_palatability < 3 ~ 0.5*total_risk_soft,
       plant_goat_palatability >= 3 ~ 1.5*total_risk_soft
     )
-  )
+  ) %>%
+  add_risk_range(risk_col = "total_risk_soft", confidence_col = "risk_confidence", output_base = "total_risk_soft")
 
 df_long_soft <- goats_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled_soft,
          `combined risk` = total_risk_soft,
+         `min risk` = total_risk_soft_min,
+         `max risk` = total_risk_soft_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long_soft, paste0("goats (soft_rescale, k = ", soft_rescale_k, ")"))
@@ -2053,35 +2132,27 @@ habitat_scores %>%
 
 #### - risk scores density plot
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-df_long <- deer_assigned_risk %>%
-  select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_scaled,
-         `combined risk` = total_risk,
-         `min risk` = total_risk_min,
-         `max risk` = total_risk_max,
-         threatened_status) %>%
-  pivot_longer(cols = c(1:5),
-               names_to = "category", values_to = "risk")
-
-make_risk_density_plot(df_long, "deer")
-```
-
-#### - risk scores density plot (soft_rescale, secondary/experimental)
+Uses `soft_rescale()` as the default scaling method (see its definition near the top of
+the file). The original `scales::rescale()`-based `total_risk` computed above is kept
+and still feeds `total_risk_score`/the CSV export unchanged - only the density plot below
+has switched over.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 deer_assigned_risk <- deer_assigned_risk %>%
   mutate(
     trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(-0.1, 1.4)),
     total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
-  )
+  ) %>%
+  add_risk_range(risk_col = "total_risk_soft", confidence_col = "risk_confidence", output_base = "total_risk_soft")
 
 df_long_soft <- deer_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled_soft,
          `combined risk` = total_risk_soft,
+         `min risk` = total_risk_soft_min,
+         `max risk` = total_risk_soft_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long_soft, paste0("deer (soft_rescale, k = ", soft_rescale_k, ")"))
@@ -2233,35 +2304,27 @@ habitat_scores %>%
 
 #### - risk scores density plot
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-df_long <- pigs_assigned_risk %>%
-  select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_scaled,
-         `combined risk` = total_risk,
-         `min risk` = total_risk_min,
-         `max risk` = total_risk_max,
-         threatened_status) %>%
-  pivot_longer(cols = c(1:5),
-               names_to = "category", values_to = "risk")
-
-make_risk_density_plot(df_long, "pigs")
-```
-
-#### - risk scores density plot (soft_rescale, secondary/experimental)
+Uses `soft_rescale()` as the default scaling method (see its definition near the top of
+the file). The original `scales::rescale()`-based `total_risk` computed above is kept
+and still feeds `total_risk_score`/the CSV export unchanged - only the density plot below
+has switched over.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 pigs_assigned_risk <- pigs_assigned_risk %>%
   mutate(
     trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(-0.1, 1.3)),
     total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
-  )
+  ) %>%
+  add_risk_range(risk_col = "total_risk_soft", confidence_col = "risk_confidence", output_base = "total_risk_soft")
 
 df_long_soft <- pigs_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled_soft,
          `combined risk` = total_risk_soft,
+         `min risk` = total_risk_soft_min,
+         `max risk` = total_risk_soft_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long_soft, paste0("pigs (soft_rescale, k = ", soft_rescale_k, ")"))
@@ -2466,35 +2529,28 @@ habitat_scores %>%
 
 #### - risk scores density plot
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-df_long <- tropical_C4_grasses_assigned_risk %>%
-  select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_scaled,
-         `combined risk` = total_risk,
-         `min risk` = total_risk_min,
-         `max risk` = total_risk_max,
-         threatened_status) %>%
-  pivot_longer(cols = c(1:5),
-               names_to = "category", values_to = "risk")
-
-make_risk_density_plot(df_long, "C4 grasses")
-```
-
-#### - risk scores density plot (soft_rescale, secondary/experimental)
+Uses `soft_rescale()` as the default scaling method (see its definition near the top of
+the file). The original `scales::rescale()`-based `total_risk` computed above is kept
+and still feeds `total_risk_score`/the CSV export unchanged - only the density plot below
+has switched over.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
   mutate(
     trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(0.1, 1.3)),
     total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
-  )
+  ) %>%
+  add_risk_range(risk_col = "total_risk_soft", confidence_col = "risk_confidence",
+                  output_base = "total_risk_soft", bin_thresholds = tropical_C4_grasses_bin_thresholds)
 
 df_long_soft <- tropical_C4_grasses_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled_soft,
          `combined risk` = total_risk_soft,
+         `min risk` = total_risk_soft_min,
+         `max risk` = total_risk_soft_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long_soft, paste0("C4 grasses (soft_rescale, k = ", soft_rescale_k, ")"))
@@ -2656,35 +2712,27 @@ habitat_scores %>%
 
 #### - risk scores density plot
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-df_long <- hymenachne_assigned_risk %>%
-  select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_scaled,
-         `combined risk` = total_risk,
-         `min risk` = total_risk_min,
-         `max risk` = total_risk_max,
-         threatened_status) %>%
-  pivot_longer(cols = c(1:5),
-               names_to = "category", values_to = "risk")
-
-make_risk_density_plot(df_long, "hymenachne")
-```
-
-#### - risk scores density plot (soft_rescale, secondary/experimental)
+Uses `soft_rescale()` as the default scaling method (see its definition near the top of
+the file). The original `scales::rescale()`-based `total_risk` computed above is kept
+and still feeds `total_risk_score`/the CSV export unchanged - only the density plot below
+has switched over.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
   mutate(
     trait_effect_score_scaled_soft = soft_rescale(total_trait_effect_score, to = c(0.0, 1.2)),
     total_risk_soft = habitat_risk * trait_effect_score_scaled_soft
-  )
+  ) %>%
+  add_risk_range(risk_col = "total_risk_soft", confidence_col = "risk_confidence", output_base = "total_risk_soft")
 
 df_long_soft <- hymenachne_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_scaled_soft,
          `combined risk` = total_risk_soft,
+         `min risk` = total_risk_soft_min,
+         `max risk` = total_risk_soft_max,
          threatened_status) %>%
-  pivot_longer(cols = c(1:3),
+  pivot_longer(cols = c(1:5),
                names_to = "category", values_to = "risk")
 
 make_risk_density_plot(df_long_soft, paste0("hymenachne (soft_rescale, k = ", soft_rescale_k, ")"))
@@ -2737,15 +2785,20 @@ threat_independent_risk_tmp <- native_species %>%
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
 threat_independent_risk <- threat_independent_risk_tmp %>%
-  
+
    # calculate confidence in risk score, based on how much data available, weighted
     # by trait effect size. (Comparison against the unweighted trait-count version
     # checked out - see phytophthora - so commented out below rather than deleted)
     # add_prop_traits_scored_variants(trait_table = threat_independent_effects) %>%
       calculate_prop_traits_scored_scaled(trait_table = threat_independent_effects) %>%
 
+  mutate(
+    # no habitat term here - same pattern as precariousness
+    risk_confidence = prop_traits_scored
+  ) %>%
+
   # add {trait}_risk for every active trait in threat_independent_effects (life
-  # history, woodiness, herb/shrub/tree, plant height). 
+  # history, woodiness, herb/shrub/tree, plant height).
   add_trait_risks(threat_independent_effects) %>%
 
   mutate(
@@ -2754,19 +2807,23 @@ threat_independent_risk <- threat_independent_risk_tmp %>%
   ) %>%
 
   mutate(
-    # rescale trait risk; this value then to be multiplied by habitat risk
-    # decide on range by looking at distribution of values and deciding, for a given risk, how much traits are "allowed" to offset habitat risk  
+    # rescale trait risk
+    # decide on range by looking at distribution of values
       trait_effect_score_scaled = scales::rescale(total_trait_effect_score, to = c(-0.2, 1.4)),
 
-    # multiple scaled trait effect score risk by habitat risk
+    # no habitat risk to combine with here - total risk is just the scaled trait risk
       total_risk = trait_effect_score_scaled
-  )
+  ) %>%
+
+  # confidence-based plausible range around the numeric risk score (not the bin)
+  add_risk_range(risk_col = "total_risk", confidence_col = "risk_confidence")
 
 # assign risk by category
   threat_independent_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
     select(taxon_name, genus, family, threatened_status, total_risk,
+           risk_confidence, total_risk_min, total_risk_max,
            habitat, trait_effect_score_scaled,
            prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -2794,15 +2851,14 @@ Note that the distribution of traits is virtually identical for listed taxa and 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 df_long <- threat_independent_risk %>%
-  mutate(habitat_risk = 0) %>%
-  select(`habitat risk` = habitat_risk, 
-         `trait and taxonomy risk` = trait_effect_score_scaled, 
-         `combined risk` = total_risk,
+  select(`trait risk` = total_risk,
+         `min risk` = total_risk_min,
+         `max risk` = total_risk_max,
          threatened_status) %>%
   pivot_longer(cols = c(1:3),
                names_to = "category", values_to = "risk")
 
-make_risk_density_plot(df_long, "threat-independent (IGNORE HABITAT IN THIS PLOT - SET TO 0)")
+make_trait_risk_density_plot(df_long, "threat-independent regeneration ability")
 ```
 
 ## Species precariousness
