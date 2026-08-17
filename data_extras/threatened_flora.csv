@@ -238,7 +238,7 @@ Nematoceras dienemum = Corybas dienemus,Windswept Helmet-orchid,Critically Endan
 Nematolepis frondosa,Leafy Nematolepis,Critically Endangered,31-Mar-23,Yes
 Nematolepis rhytidophylla,,Critically Endangered,5-Mar-25,Yes
 Nitella parooensis,a green alga,Critically Endangered,11-Dec-20,Yes
-Notelaea ipsviciensis = Notelaea x ipsviciensis,Cooneana Olive,Critically Endangered,16-Jan-09,Yes
+Notelaea x ipsviciensis,Cooneana Olive,Critically Endangered,16-Jan-09,Yes
 Oberonia attenuata,Mossman Fairy Orchid,Critically Endangered,30-Apr-16,Yes
 Paragoodia crenulata,,Critically Endangered,14-May-13,No
 Persoonia micranthera,Small-flowered Snottygobble,Critically Endangered,7-Sep-23,Yes
@@ -618,14 +618,14 @@ Eucalyptus cuprea,Mallee Box,Endangered,16-Jul-00,No
 Eucalyptus dolorosa,"Dandaragan Mallee, Mount Misery Mallee",Endangered,16-Jul-00,Yes
 Eucalyptus forresterae,Brumby Sallee,Endangered,31-Mar-23,Yes
 Eucalyptus gunnii subsp. divaricata,Miena Cider Gum,Endangered,1-May-03,No
-Eucalyptus impensa = Eucalyptus x impensa,Eneabba Mallee,Endangered,16-Jul-00,Yes
+Eucalyptus x impensa,Eneabba Mallee,Endangered,16-Jul-00,Yes
 Eucalyptus insularis,Twin Peak Island Mallee,Endangered,16-Jul-00,Yes
 Eucalyptus largeana,Craven Grey Box,Endangered,11-May-18,Yes
 Eucalyptus leprophloia,"Scaly Butt Mallee, Scaly-butt Mallee",Endangered,16-Jul-00,Yes
 Eucalyptus macarthurii,"Camden Woollybutt, Paddys River Box",Endangered,5-May-16,Yes
 Eucalyptus nudicaulis,Mt Isa Mallee,Endangered,7-Sep-23,Yes
 Eucalyptus pachycalyx subsp. banyabba,Banyabba Shiny-barked Gum,Endangered,16-Jul-00,Yes
-Eucalyptus paludicola = Eucalyptus x paludicola,"Mount Compass Swamp Gum, Fleurieu Swamp Gum, Marsh Gum",Endangered,27-Nov-06,Yes
+Eucalyptus x paludicola,"Mount Compass Swamp Gum, Fleurieu Swamp Gum, Marsh Gum",Endangered,27-Nov-06,Yes
 Eucalyptus pruiniramis,"Midlands Gum, Jingymia Gum",Endangered,16-Jul-00,No
 Eucalyptus recta,Silver Mallet,Endangered,11-Jun-09,Yes
 Eucalyptus stenostoma,Jillaga Ash,Endangered,7-Sep-23,Yes
@@ -1169,7 +1169,7 @@ Eucalyptus johnsoniana,Johnson's Mallee,Vulnerable,16-Jul-00,No
 Eucalyptus kabiana,Mount Beerwah Mallee,Vulnerable,16-Jul-00,No
 Eucalyptus kartzoffiana,Araluen Gum,Vulnerable,16-Jul-00,No
 Eucalyptus langleyi,"Albatross Mallee, Green Mallee Ash",Vulnerable,16-Jul-00,Yes
-Eucalyptus lateritica = Eucalyptus x lateritica,Laterite Mallee,Vulnerable,16-Jul-00,No
+ucalyptus x lateritica,Laterite Mallee,Vulnerable,16-Jul-00,No
 Eucalyptus mckieana,McKie's Stringybark,Vulnerable,16-Jul-00,No
 Eucalyptus merrickiae,Goblet Mallee,Vulnerable,16-Jul-00,No
 Eucalyptus mooreana,"Mountain White Gum, King Leopold Range Mallee, Moore's Gum",Vulnerable,16-Jul-00,No
