@@ -272,14 +272,14 @@ make_8_panel_risk_density_plot <- function(data, threat) {
   risk_colors <- c(
     "habitat risk" = "#FFFF33",
     "trait and taxonomy risk" = "#F46D43",
-    "combined individual risk" = "#74ADD1",
+    "combined individual susceptibility" = "#74ADD1",
     "min population risk" = "#4DAF4A",
     "max population risk" = "#984EA3",
     "mean population risk" = "#E7298A"
   )
 
   data$category <- factor(data$category, levels = c(
-    "habitat risk", "trait and taxonomy risk", "combined individual risk", "min population risk", "max population risk",
+    "habitat risk", "trait and taxonomy risk", "combined individual susceptibility", "min population risk", "max population risk",
     "mean population risk"
   ))
 
@@ -308,10 +308,10 @@ make_8_panel_risk_density_plot <- function(data, threat) {
       # the density curve is still estimated from the full data first, then the window
       # is cropped. scale_x_continuous(limits=...) instead silently drops any row outside
       # the range BEFORE estimating the density, which badly distorted the min/max risk
-      # panels - up to 69% of a threat's total_susceptibility_min values fall below -0.1, since
+      # panels - up to 69% of a threat's total_individual_susceptibility_min values fall below -0.1, since
       # margins can push values well past the range the original 3 categories ever used.
       # This is a fixed window (not adaptive) so every threat plots on the same, directly
-      # comparable x-axis - if a rescale range (linear or sigmoidal_rescale) pushes total_susceptibility
+      # comparable x-axis - if a rescale range (linear or sigmoidal_rescale) pushes total_individual_susceptibility
       # outside c(-.1, 1.5), that's a cue to adjust the scaling range itself, not the plot.
       coord_cartesian(xlim = c(-0.2, 1.5)) +
       labs(x = "", y = "", fill = NULL) +
@@ -336,16 +336,16 @@ make_8_panel_risk_density_plot <- function(data, threat) {
   plot1 <- density_panel(data %>% filter(category %in% c("habitat risk", "trait and taxonomy risk")))
   plot2 <- density_panel(data_threatened %>% filter(category %in% c("habitat risk", "trait and taxonomy risk")))
                          
-  title_row1 <- grid::textGrob("Individual risks based on traits and habitat",
+  title_row1 <- grid::textGrob("Individual susceptibility components",
                                x = 0.07, hjust = 0.0,
                                gp = grid::gpar(fontsize = 10))
   row1 <- gridExtra::arrangeGrob(plot1, plot2, nrow = 1, ncol = 2, top = title_row1)
 
-# row 2, combined individual risk
-  plot3 <- density_panel(data %>% filter(category == "combined individual risk"))
-  plot4 <- density_panel(data_threatened %>% filter(category == "combined individual risk"))
+# row 2, combined individual susceptibility
+  plot3 <- density_panel(data %>% filter(category == "combined individual susceptibility"))
+  plot4 <- density_panel(data_threatened %>% filter(category == "combined individual susceptibility"))
   
-  title_row2 <- grid::textGrob("Individual combined risk",
+  title_row2 <- grid::textGrob("Total individual susceptibility (traits, taxonomy, habitat combined)",
                                x = 0.07, hjust = 0.0,
                                gp = grid::gpar(fontsize = 10))
   row2 <- gridExtra::arrangeGrob(plot3, plot4, nrow = 1, ncol = 2, top = title_row2)
@@ -355,7 +355,7 @@ make_8_panel_risk_density_plot <- function(data, threat) {
   plot6 <- density_panel(data_threatened %>% filter(category == "mean population risk"))
 
   title_row3 <- grid::textGrob(
-      "Population risk, including individual risk, regeneration ability & precariousness",
+      "Population risk, including individual susceptibility (50%), population regeneration ability (25%) & population precariousness (25%)",
       x = 0.07, hjust = 0.0,
       gp = grid::gpar(fontsize = 10))
 
@@ -524,7 +524,7 @@ Formalises turning susceptibility_confidence into a plausible range around a num
 
 divisor defaults to 5 (i.e. at confidence 0, margin is 1/5 = 0.2 either side, rather than the full 0-1 range; at confidence 0.6 - roughly the top of the observed range - margin is 0.4/5 = 0.08) - change it here (or per-call) and every threat regenerates.
 
-risk_col/confidence_col: names (strings) of the numeric risk and confidence columns to use as inputs. output_base: name to build the four new columns from - defaults to risk_col, but can differ, e.g. for Phytophthora/myrtle rust, where the numeric value that actually determines population_risk_bin is total_susceptibility_overwrite (not total_susceptibility), so risk_col = "total_susceptibility_overwrite" but output_base = "total_susceptibility" keeps the output column names (total_susceptibility_min/max/score_min/score_max) consistent with every other threat. bin_thresholds: passed through to create_risk_bins(); NULL uses its own default.
+risk_col/confidence_col: names (strings) of the numeric risk and confidence columns to use as inputs. output_base: name to build the four new columns from - defaults to risk_col, but can differ, e.g. for Phytophthora/myrtle rust, where the numeric value that actually determines population_risk_bin is total_individual_susceptibility_overwrite (not total_individual_susceptibility), so risk_col = "total_individual_susceptibility_overwrite" but output_base = "total_individual_susceptibility" keeps the output column names (total_individual_susceptibility_min/max/score_min/score_max) consistent with every other threat. bin_thresholds: passed through to create_risk_bins(); NULL uses its own default.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -1390,11 +1390,11 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_susceptibility_overwrite) + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_susceptibility_overwrite == 0, 0, population_risk),
+      population_risk = (1*total_individual_susceptibility_overwrite) + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk),
 
     # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_susceptibility),
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
       population_risk_bin = create_risk_bins(population_risk),
     ) |>
     
@@ -1408,12 +1408,12 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
     filter(!is.na(threatened_status)) %>%
     select(taxon_name, genus, family, threatened_status, population_risk_bin,
            phytophthora_cinnamomi_susceptibility, phytophthora_extinction_risk_flag, susceptibility_confidence,
-           # total_susceptibility is the threat-only (habitat x trait) score, pre-merge with
            # regeneration/precariousness
            total_susceptibility, total_susceptibility_overwrite,
            population_risk,
            population_risk_min, population_risk_max,
            population_risk_bin_min, population_risk_bin_max,
+    filter(!is.na(threatened_status)) |>
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -1461,18 +1461,18 @@ habitat_scores %>%
 phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
   mutate(
     trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(total_trait_effect_score, to = c(0.05, 1.05)),
-    total_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling,
-    total_susceptibility_overwrite = case_when(
+    total_individual_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling,
+    total_individual_susceptibility_overwrite = case_when(
       !is.na(phytophthora_extinction_risk_flag) ~ 1,
-      !is.na(phytophthora_cinnamomi_susceptibility) & total_susceptibility < 1 ~ phytophthora_cinnamomi_susceptibility/3,
-      TRUE ~ total_susceptibility
+      !is.na(phytophthora_cinnamomi_susceptibility) & total_individual_susceptibility < 1 ~ phytophthora_cinnamomi_susceptibility/3,
+      TRUE ~ total_individual_susceptibility
     )
   )
 
 df_long_scaled <- phytophthora_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
-         `combined individual risk` = total_susceptibility_overwrite,
+         `combined individual susceptibility` = total_individual_susceptibility_overwrite,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
          `max population risk` = population_risk_max,
@@ -1758,14 +1758,14 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
       trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.4, 1.35)),
 
     # total risk is the product of scaled trait risk and habitat/taxonomy risk
-      total_susceptibility = habitat_taxonomy_risk * trait_effect_score_scaled,
+      total_individual_susceptibility = habitat_taxonomy_risk * trait_effect_score_scaled,
 
     # for species with known low susceptibility to myrtle rust from inoculation experiments,
     # have their susceptibility score decreased, regardless of their trait-modeled score
-      total_susceptibility_overwrite = ifelse(
-        !is.na(myrtle_rust_susceptibility) & total_susceptibility < 1, 
+      total_individual_susceptibility_overwrite = ifelse(
+        !is.na(myrtle_rust_susceptibility) & total_individual_susceptibility < 1, 
         myrtle_rust_susceptibility/3, 
-        total_susceptibility
+        total_individual_susceptibility
       ),
     
     # if actual susceptibility is know, increase confidence
@@ -1775,9 +1775,9 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
       ),
 
     # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_susceptibility),
-      population_risk_bin = create_risk_bins(total_susceptibility_overwrite)
   ) %>%
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
+      population_risk_bin = create_risk_bins(total_individual_susceptibility_overwrite)
 
     # merge in non-threat components
     left_join(precariousness |> select(-threatened_status)) |>
@@ -1796,11 +1796,11 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_susceptibility_overwrite + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_susceptibility_overwrite == 0, 0, population_risk),
+      population_risk = total_individual_susceptibility_overwrite + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk),
 
     # assign risk bins      
-      individual_susceptibility_bin = create_risk_bins(total_susceptibility),
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
       population_risk_bin = create_risk_bins(population_risk)
 
     ) |>
@@ -1811,15 +1811,14 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
         confidence_col = "susceptibility_confidence"
       )
 
-  myrtle_rust_assigned_risk %>%
-    filter(!is.na(threatened_status)) %>%
-    select(taxon_name, genus, family, threatened_status, population_risk_bin,
-           myrtle_rust_susceptibility, susceptibility_confidence,
-           total_susceptibility,
-           total_susceptibility_overwrite,
-           population_risk,
-           population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max,
+  myrtle_rust_assigned_risk |>
+    filter(!is.na(threatened_status)) |>
+    select(taxon_name, genus, family, threatened_status,
+           myrtle_rust_susceptibility,
+           total_individual_susceptibility, total_individual_susceptibility_overwrite,
+           susceptibility_confidence, individual_susceptibility_bin,
+           population_risk, population_risk_min, population_risk_max,
+           population_risk_bin, population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -1881,17 +1880,17 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
       center = mean(myrtle_rust_myrtaceae_scores, na.rm = TRUE),
       spread = sd(myrtle_rust_myrtaceae_scores, na.rm = TRUE)
     ),
-    total_susceptibility = habitat_taxonomy_risk * trait_effect_score_sigmoidal_scaling,
+    total_individual_susceptibility = habitat_taxonomy_risk * trait_effect_score_sigmoidal_scaling,
 
-    total_susceptibility_overwrite = ifelse(!is.na(myrtle_rust_susceptibility) & total_susceptibility < 1,
-                                       myrtle_rust_susceptibility/3, total_susceptibility)
+    total_individual_susceptibility_overwrite = ifelse(!is.na(myrtle_rust_susceptibility) & total_individual_susceptibility < 1,
+                                       myrtle_rust_susceptibility/3, total_individual_susceptibility)
   )
 
 df_long_scaled <- myrtle_rust_assigned_risk %>%
   filter(family == "Myrtaceae") %>%
   select(`habitat risk` = habitat_taxonomy_risk,
          `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
-         `combined individual risk` = total_susceptibility_overwrite,
+         `combined individual susceptibility` = total_individual_susceptibility_overwrite,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
          `max population risk` = population_risk_max,
@@ -2098,17 +2097,18 @@ goats_assigned_risk <- goats_assigned_risk %>%
       trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(-1.5, 1.25)),
 
     # multiple scaled trait effect score risk by habitat risk
-      total_susceptibility = habitat_risk*trait_effect_score_scaled,
+      total_individual_susceptibility = habitat_risk*trait_effect_score_scaled,
 
+    # NOT USING THIS. VERY POOR PREDICTIVE POWER BASED ON MODEL VALIDATION
     # For species where independent data streams identify a species as having high or low
     # goat palatability, the trait-modeled susceptibility risk is adjusted: 
     # - Plants that are unpalatable (plant_goat_palatability < 3), their risk is *0.5
     # - Plants that are palatable (plant_goat_palatability > 3), their risk is *1.5
     # - Plants that don't have independent palatability data, their risk is *1
-      total_susceptibility_overwrite = case_when(
-        is.na(plant_goat_palatability) ~ 1*total_susceptibility,
-        plant_goat_palatability < 3 ~ 0.75*total_susceptibility,
-        plant_goat_palatability >= 3 ~ 1.5*total_susceptibility
+      total_individual_susceptibility_overwrite = case_when(
+        is.na(plant_goat_palatability) ~ 1*total_individual_susceptibility,
+        plant_goat_palatability < 3 ~ 0.75*total_individual_susceptibility,
+        plant_goat_palatability >= 3 ~ 1.5*total_individual_susceptibility
         )
     )
 
@@ -2131,11 +2131,11 @@ goats_assigned_risk <- goats_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_susceptibility_overwrite + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_susceptibility_overwrite == 0, 0, population_risk),
+      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_susceptibility),
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
       population_risk_bin = create_risk_bins(population_risk)
     ) |>
     
@@ -2149,7 +2149,7 @@ goats_assigned_risk <- goats_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     select(taxon_name, genus, family, threatened_status, 
            plant_goat_palatability,
-           total_susceptibility, susceptibility_confidence,
+           total_individual_susceptibility, susceptibility_confidence,
            individual_susceptibility_bin,
            population_risk, population_risk_min, population_risk_max,
            population_risk_bin, population_risk_bin_min, population_risk_bin_max,
@@ -2190,20 +2190,20 @@ habitat_scores %>%
 goats_assigned_risk <- goats_assigned_risk %>%
   mutate(
     trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(total_trait_effect_score, to = c(-0.3, 1.55)),
-    total_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling,
+    total_individual_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling,
     # mirror the same known-palatability adjustment applied to the (retained) linear
     # version above, so the two rescale methods stay comparable
-    total_susceptibility = case_when(
-      is.na(plant_goat_palatability) ~ 1*total_susceptibility,
-      plant_goat_palatability < 3 ~ 0.5*total_susceptibility,
-      plant_goat_palatability >= 3 ~ 1.5*total_susceptibility
+    total_individual_susceptibility = case_when(
+      is.na(plant_goat_palatability) ~ 1*total_individual_susceptibility,
+      plant_goat_palatability < 3 ~ 0.5*total_individual_susceptibility,
+      plant_goat_palatability >= 3 ~ 1.5*total_individual_susceptibility
     )
   )
 
 df_long_scaled <- goats_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
-         `combined individual risk` = total_susceptibility,
+         `combined individual susceptibility` = total_individual_susceptibility,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
          `max population risk` = population_risk_max,
@@ -2295,7 +2295,7 @@ deer_assigned_risk <- deer_assigned_risk %>%
         trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1.7)),
 
       # multiple scaled trait effect score risk by habitat risk
-        total_susceptibility = habitat_risk*trait_effect_score_scaled
+        total_individual_susceptibility = habitat_risk*trait_effect_score_scaled
   )
 
   deer_assigned_risk <- deer_assigned_risk %>%
@@ -2317,11 +2317,11 @@ deer_assigned_risk <- deer_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_susceptibility + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_susceptibility == 0, 0, population_risk),
+      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_susceptibility),
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
       population_risk_bin = create_risk_bins(population_risk)
     ) |>
     
@@ -2335,7 +2335,7 @@ deer_assigned_risk <- deer_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
     select(taxon_name, genus, family, threatened_status, 
-           total_susceptibility, susceptibility_confidence,
+           total_individual_susceptibility, susceptibility_confidence,
            individual_susceptibility_bin,
            population_risk, population_risk_min, population_risk_max,
            population_risk_bin, population_risk_bin_min, population_risk_bin_max,
@@ -2371,13 +2371,13 @@ habitat_scores %>%
 deer_assigned_risk <- deer_assigned_risk %>%
   mutate(
     trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(total_trait_effect_score, to = c(-0.1, 1.4)),
-    total_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
+    total_individual_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
   )
 
 df_long_scaled <- deer_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
-         `combined individual risk` = total_susceptibility,
+         `combined individual susceptibility` = total_individual_susceptibility,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
          `max population risk` = population_risk_max,
@@ -2482,7 +2482,7 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
         trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0, 1.2)),
 
       # multiple scaled trait effect score risk by habitat risk
-        total_susceptibility = habitat_risk*trait_effect_score_scaled
+        total_individual_susceptibility = habitat_risk*trait_effect_score_scaled
   )
 
   pigs_assigned_risk <- pigs_assigned_risk %>%
@@ -2504,8 +2504,8 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_susceptibility + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_susceptibility == 0, 0, population_risk),
+      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
       population_risk_bin = create_risk_bins(population_risk)
@@ -2518,14 +2518,14 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
     )
 
 
-  pigs_assigned_risk %>%
-    filter(!is.na(threatened_status)) %>%
-    mutate(taxonomic_risk = 0) %>%
-    select(taxon_name, genus, family, threatened_status, population_risk_bin,
-           susceptibility_confidence, total_susceptibility,
-           population_risk,
-           population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max,
+  pigs_assigned_risk |>
+    filter(!is.na(threatened_status)) |>
+    mutate(taxonomic_risk = 0) |>
+    select(taxon_name, genus, family, threatened_status, 
+           total_individual_susceptibility,
+           susceptibility_confidence, individual_susceptibility_bin,
+           population_risk, population_risk_min, population_risk_max,
+           population_risk_bin, population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -2563,13 +2563,13 @@ habitat_scores %>%
 pigs_assigned_risk <- pigs_assigned_risk %>%
   mutate(
     trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(total_trait_effect_score, to = c(-0.1, 1.3)),
-    total_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
+    total_individual_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
   )
 
 df_long_scaled <- pigs_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
-         `combined individual risk` = total_susceptibility,
+         `combined individual susceptibility` = total_individual_susceptibility,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
          `max population risk` = population_risk_max,
@@ -2714,7 +2714,7 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
       trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(-0.1, 1.1)),
 
     # multiple scaled trait effect score risk by habitat risk
-      total_susceptibility = habitat_risk*trait_effect_score_scaled
+      total_individual_susceptibility = habitat_risk*trait_effect_score_scaled
   )
 
 # assign risk by category
@@ -2731,7 +2731,7 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
   tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
     mutate(
       population_risk_bin = create_risk_bins(
-        total_susceptibility, 
+        total_individual_susceptibility, 
         bin_thresholds = tropical_C4_grasses_bin_thresholds
         )
     ) %>%
@@ -2753,11 +2753,11 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_susceptibility + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_susceptibility == 0, 0, population_risk),
+      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_susceptibility),
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
       population_risk_bin = create_risk_bins(population_risk)
     ) |>
     
@@ -2769,11 +2769,12 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
       bin_thresholds = tropical_C4_grasses_bin_thresholds
     )
 
-  tropical_C4_grasses_assigned_risk %>%
-    filter(!is.na(threatened_status)) %>%
-    mutate(taxonomic_risk = 0) %>%
-    select(taxon_name, genus, family, threatened_status,
-           susceptibility_confidence, total_susceptibility,
+  tropical_C4_grasses_assigned_risk |>
+    filter(!is.na(threatened_status)) |>
+    mutate(taxonomic_risk = 0) |>
+    select(taxon_name, genus, family, threatened_status, 
+           total_individual_susceptibility,
+           susceptibility_confidence, individual_susceptibility_bin,
            population_risk, population_risk_min, population_risk_max,
            population_risk_bin, population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
@@ -2815,13 +2816,13 @@ habitat_scores %>%
 tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
   mutate(
     trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(total_trait_effect_score, to = c(0.1, 1.3)),
-    total_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
+    total_individual_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
   )
 
 df_long_scaled <- tropical_C4_grasses_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
-         `combined individual risk` = total_susceptibility,
+         `combined individual susceptibility` = total_individual_susceptibility,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
          `max population risk` = population_risk_max,
@@ -2936,7 +2937,7 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
       trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.2, 1.2)),
 
     # multiple scaled trait effect score risk by habitat risk
-      total_susceptibility = habitat_risk*trait_effect_score_scaled
+      total_individual_susceptibility = habitat_risk*trait_effect_score_scaled
   )
 
   hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
@@ -2958,11 +2959,11 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_susceptibility + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_susceptibility == 0, 0, population_risk),
+      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_susceptibility),
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
       population_risk_bin = create_risk_bins(population_risk)
     ) |>
     
@@ -2976,7 +2977,6 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
     select(taxon_name, genus, family, threatened_status, 
-           susceptibility_confidence, total_susceptibility, 
            population_risk, population_risk_min, population_risk_max,
            population_risk_bin, population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
@@ -3016,7 +3016,7 @@ habitat_scores %>%
 hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
   mutate(
     trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1.2)),
-    total_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
+    total_individual_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
   )
   # no local add_risk_range() here anymore - min/max below now come from
   # population_risk_min/_max, since that's the range around the score actually
@@ -3025,7 +3025,7 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
 df_long_scaled <- hymenachne_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
          `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
-         `combined individual risk` = total_susceptibility,
+         `combined individual susceptibility` = total_individual_susceptibility,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
          `max population risk` = population_risk_max,
@@ -3042,7 +3042,7 @@ make_8_panel_risk_density_plot(df_long_scaled, paste0("hymenachne (sigmoidal_res
 
 Back-tests the trait+habitat composite score against independently-observed ground truth, for the three threats where such data exists: Phytophthora and myrtle rust (lab/field susceptibility trials, 0-3 ordinal scale) and goats (palatability observations, 1-4 ordinal scale). This directly answers "when we deliberately don't tell the model a species' known susceptibility, how well does its trait+habitat profile predict it anyway?" - a genuine out-of-sample-style check, not a restatement of data the model was already given.
 
-To avoid circularity, every threat here is validated on its **pre-overwrite** score - the trait/habitat-only prediction, before the known-susceptibility overwrite (see `total_susceptibility_overwrite` for Phytophthora/myrtle rust) or the known-palatability multiplier (goats) is applied. Those overwrites deliberately use the same ground-truth columns being validated against here, so scoring the post-overwrite value against them would just be checking whether a copy operation worked, not whether the trait model has any real predictive power.
+To avoid circularity, every threat here is validated on its **pre-overwrite** score - the trait/habitat-only prediction, before the known-susceptibility overwrite (see `total_individual_susceptibility_overwrite` for Phytophthora/myrtle rust) or the known-palatability multiplier (goats) is applied. Those overwrites deliberately use the same ground-truth columns being validated against here, so scoring the post-overwrite value against them would just be checking whether a copy operation worked, not whether the trait model has any real predictive power.
 
 Two metrics, both threshold-free where possible:
 
@@ -3105,16 +3105,16 @@ validate_against_known <- function(data, score_col, known_col, threat_label, pos
 validation_results <- bind_rows(
 
   validate_against_known(
-    phytophthora_assigned_risk, "total_susceptibility", "phytophthora_cinnamomi_susceptibility",
+    phytophthora_assigned_risk, "total_individual_susceptibility", "phytophthora_cinnamomi_susceptibility",
     "Phytophthora cinnamomi", positive_threshold = 1.5
   ),
 
   validate_against_known(
-    myrtle_rust_assigned_risk, "total_susceptibility", "myrtle_rust_susceptibility",
+    myrtle_rust_assigned_risk, "total_individual_susceptibility", "myrtle_rust_susceptibility",
     "Myrtle rust", positive_threshold = 1.5
   ),
 
-  # goats' exported total_susceptibility is already post-palatability-multiplier - reconstruct the
+  # goats' exported total_individual_susceptibility is already post-palatability-multiplier - reconstruct the
   # trait+habitat-only score the same way the multiplier itself starts from
   goats_assigned_risk %>%
     mutate(pre_multiplier_risk = habitat_risk * trait_effect_score_scaled) %>%
