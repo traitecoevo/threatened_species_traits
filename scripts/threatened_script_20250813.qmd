@@ -355,7 +355,7 @@ make_8_panel_risk_density_plot <- function(data, threat) {
   plot6 <- density_panel(data_threatened %>% filter(category == "mean population risk"))
 
   title_row3 <- grid::textGrob(
-      "Population risk, including individual susceptibility (50%), population regeneration ability (25%) & population precariousness (25%)",
+      "Population risk, including individual susceptibility (80%), population regeneration ability (10%) & population precariousness (10%)",
       x = 0.07, hjust = 0.0,
       gp = grid::gpar(fontsize = 10))
 
@@ -847,14 +847,12 @@ soil_type_scored <- extract_categorical_trait(all_traits, "soil_type", soil_type
 
 # high pH soils (limestone, other calcareous soils) & saline soils are inhospitable to phytophthora. These are assigned a risk = 0, all other soils risk = 1
 geologic_substrate_scored <- extract_categorical_trait(all_traits, "geologic_substrate", geologic_substrate_scores, "geologic_substrate")
-
-# list of threatened species
-threatened <- all_traits$traits %>%
-  filter(dataset_id == "DCCEEW_2024") %>%
-  select(taxon_name, threatened_status = value)
 ```
 
-### generate list of native plant species, per APC
+### generate list species
+
+- native species, per APC
+- threatened species, per SPRAT website (accessed 2026-08-17)
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 native_species <- resources$APC %>% 
@@ -864,6 +862,9 @@ native_species <- resources$APC %>%
   filter(str_detect(taxon_distribution, "[:alpha:]$") | 
            str_detect(taxon_distribution, "[:alpha:]\\,") |
            str_detect(taxon_distribution, "native and naturalised"))
+
+threatened <- read_csv("~/GitHub/threatened_species_traits/data_extras/threatened_flora.csv") %>%
+  select(taxon_name = `Scientific Name`, threatened_status = Status)
 ```
 
 # Threat independent effects
@@ -930,7 +931,7 @@ regeneration_ability <- regeneration_ability_tmp %>%
   mutate(
     # rescale trait risk
     # decide on range by looking at distribution of values
-      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0, 0.1)),
+      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.2, 0.8),
 
     # no habitat risk to combine with here - total risk is just the scaled trait risk
       regeneration_ability_risk = trait_effect_score_scaled
@@ -1027,7 +1028,7 @@ precariousness <- precariousness_risk_tmp %>%
   mutate(
     # rescale trait risk
     # decide on range by looking at distribution of values
-      precariousness_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0, 0.1))
+      precariousness_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.2, 0.8))
       ) |>
   select(precariousness_risk, taxon_name, threatened_status)
 ```
@@ -1286,7 +1287,7 @@ phytophthora_assigned_risk <- native_species %>%
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # calculate "risk effect scores" for habitat, traits, taxonomy
-phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
+phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
   
     # calculate confidence in risk score, based on how much data available, weighted
     # by trait effect size. (Comparison against the unweighted trait-count version
@@ -1345,7 +1346,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
 
     # now add in known susceptibility - showing
     # multiple scaled trait effect score risk by habitat risk
-      total_susceptibility = habitat_risk*trait_effect_score_scaled
+      total_individual_susceptibility = habitat_risk*trait_effect_score_scaled
   )
 
   phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
@@ -1361,10 +1362,10 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
     # The susceptibility_confidence is also increased to 0.8 rather than being based on the
     # trait-completeness-based value, as the susceptibility score is no longer trait-based.
 
-      total_susceptibility_overwrite = case_when(
+      total_individual_susceptibility_overwrite = case_when(
         !is.na(phytophthora_extinction_risk_flag) ~ 1,
-        !is.na(phytophthora_cinnamomi_susceptibility) & total_susceptibility < 1 ~ phytophthora_cinnamomi_susceptibility/3,
-        TRUE ~ total_susceptibility
+        !is.na(phytophthora_cinnamomi_susceptibility) & total_individual_susceptibility < 1 ~ phytophthora_cinnamomi_susceptibility/3,
+        TRUE ~ total_individual_susceptibility
       ),
     # susceptibility_confidence_trait_count = ifelse(!is.na(phytophthora_cinnamomi_susceptibility), 0.8, susceptibility_confidence_trait_count),
       susceptibility_confidence = case_when(
@@ -1390,7 +1391,8 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_individual_susceptibility_overwrite) + regeneration_ability_risk + precariousness_risk,
+      population_risk = (8*total_individual_susceptibility_overwrite) + regeneration_ability_risk + precariousness_risk,
+      population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk),
 
     # assign risk bins
@@ -1409,11 +1411,10 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk  %>%
     select(taxon_name, genus, family, threatened_status, population_risk_bin,
            phytophthora_cinnamomi_susceptibility, phytophthora_extinction_risk_flag, susceptibility_confidence,
            # regeneration/precariousness
-           total_susceptibility, total_susceptibility_overwrite,
+           total_individual_susceptibility, total_individual_susceptibility_overwrite,
            population_risk,
            population_risk_min, population_risk_max,
            population_risk_bin_min, population_risk_bin_max,
-    filter(!is.na(threatened_status)) |>
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -1772,12 +1773,8 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
       susceptibility_confidence = ifelse(
         !is.na(myrtle_rust_susceptibility), 
         0.8, susceptibility_confidence
-      ),
-
-    # assign risk bins
-  ) %>%
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
-      population_risk_bin = create_risk_bins(total_individual_susceptibility_overwrite)
+      )
+    ) |>
 
     # merge in non-threat components
     left_join(precariousness |> select(-threatened_status)) |>
@@ -1796,7 +1793,8 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_individual_susceptibility_overwrite + regeneration_ability_risk + precariousness_risk,
+      population_risk = (8*total_individual_susceptibility_overwrite) + regeneration_ability_risk + precariousness_risk,
+      population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk),
 
     # assign risk bins      
@@ -2131,7 +2129,8 @@ goats_assigned_risk <- goats_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = (8*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
+      population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
@@ -2317,7 +2316,8 @@ deer_assigned_risk <- deer_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = (8*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
+      population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
@@ -2504,10 +2504,12 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = (8*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
+      population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
       population_risk_bin = create_risk_bins(population_risk)
     ) |>
     
@@ -2753,7 +2755,8 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = (8*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
+      population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
@@ -2959,7 +2962,8 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = total_individual_susceptibility + regeneration_ability_risk + precariousness_risk,
+      population_risk = (8*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
+      population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
