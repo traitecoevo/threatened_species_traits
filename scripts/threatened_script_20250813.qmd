@@ -1029,7 +1029,7 @@ precariousness <- precariousness_risk_tmp %>%
   mutate(
     # rescale trait risk
     # decide on range by looking at distribution of values
-      precariousness_risk = sigmoidal_rescale(total_trait_effect_score, to = c(-0.05, 0.1))
+      precariousness_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0, 0.1))
       ) |>
   select(precariousness_risk, taxon_name, threatened_status)
 ```
@@ -1343,7 +1343,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
     # how much traits are "allowed" to offset habitat risk
     # to ensure actual trait effect scores aren't too clumped, 
     # often need a broader distribution than 0--1 and often need to recentre the distribution
-      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.15, 1.2)),
+      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.05, 1.05)),
 
     # now add in known susceptibility - showing
     # multiple scaled trait effect score risk by habitat risk
@@ -1368,7 +1368,6 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
         !is.na(phytophthora_cinnamomi_susceptibility) & total_individual_susceptibility < 1 ~ phytophthora_cinnamomi_susceptibility/3,
         TRUE ~ total_individual_susceptibility
       ),
-    # susceptibility_confidence_trait_count = ifelse(!is.na(phytophthora_cinnamomi_susceptibility), 0.8, susceptibility_confidence_trait_count),
       susceptibility_confidence = case_when(
         !is.na(phytophthora_extinction_risk_flag) ~ 1,
         !is.na(phytophthora_cinnamomi_susceptibility) ~ 0.8,
@@ -1393,7 +1392,6 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
     # sum together 3 components, normalise
     mutate(
       population_risk = (1*total_individual_susceptibility_overwrite) + regeneration_ability_risk + precariousness_risk,
-      #population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk),
 
     # assign risk bins
@@ -1460,20 +1458,9 @@ habitat_scores %>%
 #### - risk scores density plot
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=10, fig.height=13}
-phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
-  mutate(
-    trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(total_trait_effect_score, to = c(0.05, 1.05)),
-    total_individual_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling,
-    total_individual_susceptibility_overwrite = case_when(
-      !is.na(phytophthora_extinction_risk_flag) ~ 1,
-      !is.na(phytophthora_cinnamomi_susceptibility) & total_individual_susceptibility < 1 ~ phytophthora_cinnamomi_susceptibility/3,
-      TRUE ~ total_individual_susceptibility
-    )
-  )
-
 df_long_scaled <- phytophthora_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined individual susceptibility` = total_individual_susceptibility_overwrite,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
@@ -1757,7 +1744,7 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     # rescale trait risk
     # decide on range by looking at distribution of values and deciding, 
     # how much traits are "allowed" to offset habitat risk
-      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.4, 1.35)),
+      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.2, 1.15)), #0.4, 1.35
 
     # total risk is the product of scaled trait risk and habitat/taxonomy risk
       total_individual_susceptibility = habitat_taxonomy_risk * trait_effect_score_scaled,
@@ -1868,27 +1855,10 @@ Trait scoring only applies to Myrtaceae (see `add_trait_risks(condition = family
 `sigmoidal_rescale()` values are also computed from Myrtaceae only.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=10, fig.height=13}
-myrtle_rust_myrtaceae_scores <- myrtle_rust_assigned_risk %>%
-  filter(family == "Myrtaceae") %>%
-  pull(total_trait_effect_score)
-
-myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
-  mutate(
-    trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(
-      total_trait_effect_score, to = c(0.2, 1.15),
-      center = mean(myrtle_rust_myrtaceae_scores, na.rm = TRUE),
-      spread = sd(myrtle_rust_myrtaceae_scores, na.rm = TRUE)
-    ),
-    total_individual_susceptibility = habitat_taxonomy_risk * trait_effect_score_sigmoidal_scaling,
-
-    total_individual_susceptibility_overwrite = ifelse(!is.na(myrtle_rust_susceptibility) & total_individual_susceptibility < 1,
-                                       myrtle_rust_susceptibility/3, total_individual_susceptibility)
-  )
-
 df_long_scaled <- myrtle_rust_assigned_risk %>%
   filter(family == "Myrtaceae") %>%
   select(`habitat risk` = habitat_taxonomy_risk,
-         `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined individual susceptibility` = total_individual_susceptibility_overwrite,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
@@ -2091,7 +2061,7 @@ goats_assigned_risk <- goats_assigned_risk %>%
     # rescale trait risk
     # decide on range by looking at distribution of values and deciding, 
     # how much traits are "allowed" to offset habitat risk
-      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(-0.3, 1.55)),
+      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(-0.1, 1.2)),
 
     # multiple scaled trait effect score risk by habitat risk
       total_individual_susceptibility = habitat_risk*trait_effect_score_scaled,
@@ -2251,8 +2221,6 @@ deer_assigned_risk <- deer_assigned_risk %>%
 
   mutate(
       # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
-      # susceptibility_confidence_trait_count = ifelse(is.na(deer_habitat_effect_score),
-      #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
         susceptibility_confidence = ifelse(is.na(deer_habitat_effect_score),
                                  0.15*prop_traits_scored, 0.6*prop_traits_scored),
 
@@ -2433,9 +2401,7 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
       calculate_prop_traits_scored_scaled(trait_table = pigs_trait_effects) %>%
 
   mutate(
-      # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
-      # susceptibility_confidence_trait_count = ifelse(is.na(pig_habitat_effect_score),
-      #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
+      # confidence drops to 0.15*prop_traits_scored if no habitat data
         susceptibility_confidence = ifelse(is.na(pig_habitat_effect_score),
                                  0.15*prop_traits_scored, 0.6*prop_traits_scored),
 
@@ -2618,9 +2584,7 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
       calculate_prop_traits_scored_scaled(trait_table = tropical_C4_grasses_trait_effects) %>%
 
   mutate(
-      # confidence drops to 0.15*prop_traits_scored (LOW) if no habitat data
-      # susceptibility_confidence_trait_count = ifelse(is.na(C4_grasses_habitat_effect_score),
-      #                          0.15*prop_traits_scored_trait_count, 0.6*prop_traits_scored_trait_count),
+      # confidence drops to 0.15*prop_traits_scored if no habitat data
         susceptibility_confidence = ifelse(is.na(C4_grasses_habitat_effect_score),
                                  0.15*prop_traits_scored, 0.6*prop_traits_scored),
 
@@ -2878,11 +2842,7 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
                             plant_growth_substrate_hymenanche_risk,
                             habitat_risk),
 
-    # confidence drops to 0.15*prop_traits_scored (LOW) only if there's no habitat signal
-    # at all - neither a direct habitat score nor a known growth substrate (computed
-    # after habitat_risk above, so this reflects both habitat sources, not just one)
-    # susceptibility_confidence_trait_count = ifelse(is.na(hymenachne_habitat_effect_score),
-    #                          0.15*prop_traits_scored_trait_count, .6*prop_traits_scored_trait_count),
+    # confidence drops to 0.15*prop_traits_scored if there's no habitat score
         susceptibility_confidence = ifelse(
           is.na(hymenachne_habitat_effect_score) & is.na(plant_growth_substrate_hymenanche_risk),
           0.15*prop_traits_scored, .6*prop_traits_scored),
@@ -2902,7 +2862,7 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
     # rescale trait risk
     # decide on range by looking at distribution of values and deciding, 
     # how much traits are "allowed" to offset habitat risk
-      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.2, 1.2)),
+      trait_effect_score_scaled = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1.2)),
 
     # multiple scaled trait effect score risk by habitat risk
       total_individual_susceptibility = habitat_risk*trait_effect_score_scaled
@@ -2928,7 +2888,6 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
     # sum together 3 components, normalise
     mutate(
       population_risk = (1*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
-      #population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
       population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
@@ -2982,18 +2941,9 @@ habitat_scores %>%
 #### - risk scores density plot
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=10, fig.height=13}
-hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
-  mutate(
-    trait_effect_score_sigmoidal_scaling = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1.2)),
-    total_individual_susceptibility = habitat_risk * trait_effect_score_sigmoidal_scaling
-  )
-  # no local add_risk_range() here anymore - min/max below now come from
-  # population_risk_min/_max, since that's the range around the score actually
-  # reported/binned, now that regeneration ability & precariousness are merged in.
-
 df_long_scaled <- hymenachne_assigned_risk %>%
   select(`habitat risk` = habitat_risk,
-         `trait and taxonomy risk` = trait_effect_score_sigmoidal_scaling,
+         `trait and taxonomy risk` = trait_effect_score_scaled,
          `combined individual susceptibility` = total_individual_susceptibility,
          `mean population risk` = population_risk,
          `min population risk` = population_risk_min,
@@ -3012,6 +2962,8 @@ make_8_panel_risk_density_plot(df_long_scaled, paste0("hymenachne (sigmoidal_res
 Back-tests the trait+habitat composite score against independently-observed ground truth, for the three threats where such data exists: Phytophthora and myrtle rust (lab/field susceptibility trials, 0-3 ordinal scale) and goats (palatability observations, 1-4 ordinal scale). This directly answers "when we deliberately don't tell the model a species' known susceptibility, how well does its trait+habitat profile predict it anyway?" - a genuine out-of-sample-style check, not a restatement of data the model was already given.
 
 To avoid circularity, every threat here is validated on its **pre-overwrite** score - the trait/habitat-only prediction, before the known-susceptibility overwrite (see `total_individual_susceptibility_overwrite` for Phytophthora/myrtle rust) or the known-palatability multiplier (goats) is applied. Those overwrites deliberately use the same ground-truth columns being validated against here, so scoring the post-overwrite value against them would just be checking whether a copy operation worked, not whether the trait model has any real predictive power.
+
+As a result of these checks, the overwrite was removed for goats.
 
 Two metrics, both threshold-free where possible:
 
