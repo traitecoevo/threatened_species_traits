@@ -793,6 +793,7 @@ resprouting_capacity <- extract_categorical_trait(all_traits, "resprouting_capac
 nitrogen_fixing <- extract_categorical_trait(all_traits, "nitrogen_fixing", nitrogen_fixing_scores, "nitrogen_fixing")
 life_history <- extract_categorical_trait(all_traits %>% extract_dataset(c("Wenk_2023", "Wenk_2025")), "life_history", life_history_scores, "life_history")
 plant_growth_substrate_hymenanche <- extract_categorical_trait(all_traits, "plant_growth_substrate", plant_growth_substrate_scores %>% select(trait_name, trait_value, plant_growth_substrate = plant_growth_substrate_hymenanche), "plant_growth_substrate_hymenanche")
+plant_growth_substrate_pigs <- extract_categorical_trait(all_traits, "plant_growth_substrate", plant_growth_substrate_scores %>% select(trait_name, trait_value, plant_growth_substrate = plant_growth_substrate_pigs), "plant_growth_substrate_pigs")
 woodiness <- extract_categorical_trait(all_traits %>% extract_dataset(c("Wenk_2022", "Wenk_2025")), "woodiness_detailed", woodiness_scores, "woodiness")
 leaf_hairs_adult_leaves <- extract_categorical_trait(all_traits, "leaf_hairs_adult_leaves", leaf_hairs_adult_leaves_scores, "leaf_hairs_adult_leaves")
 leaf_glaucousness <- extract_categorical_trait(all_traits, "leaf_glaucousness", leaf_glaucousness_scores, "leaf_glaucousness")
@@ -1480,8 +1481,8 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
         # using max because scale rises above 1
         !is.na(phytophthora_extinction_risk_flag) ~ max(total_individual_susceptibility),
         phytophthora_cinnamomi_susceptibility == 0 ~ total_individual_susceptibility * 0.1,
-        phytophthora_cinnamomi_susceptibility == 1 ~ total_individual_susceptibility * 0.3,
-        phytophthora_cinnamomi_susceptibility == 3 ~ total_individual_susceptibility * 1.5,
+        phytophthora_cinnamomi_susceptibility == 1 ~ total_individual_susceptibility * 0.5,
+        phytophthora_cinnamomi_susceptibility > 2 ~ total_individual_susceptibility * 2,
         !is.na(phytophthora_cinnamomi_susceptibility) & phytophthora_cinnamomi_susceptibility/3 > total_individual_susceptibility ~ phytophthora_cinnamomi_susceptibility/3,
         !is.na(phytophthora_cinnamomi_susceptibility) & phytophthora_cinnamomi_susceptibility/3 <= 0.2 ~ phytophthora_cinnamomi_susceptibility/3,
         TRUE ~ total_individual_susceptibility
@@ -1530,7 +1531,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
            phytophthora_cinnamomi_susceptibility, phytophthora_extinction_risk_flag, susceptibility_confidence,
            # regeneration/precariousness
            total_individual_susceptibility, total_individual_susceptibility_overwrite,
-           population_risk,
+           population_risk, population_risk_bin,
            population_risk_min, population_risk_max,
            population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
@@ -1890,12 +1891,17 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     # total risk is the product of scaled trait risk and habitat/taxonomy risk
       total_individual_susceptibility = habitat_taxonomy_risk * trait_effect_score_scaled,
 
-    # for species with known low susceptibility to myrtle rust from inoculation experiments,
-    # have their susceptibility score decreased, regardless of their trait-modeled score
-      total_individual_susceptibility_overwrite = ifelse(
-        !is.na(myrtle_rust_susceptibility) & total_individual_susceptibility < 1, 
-        myrtle_rust_susceptibility/3, 
-        total_individual_susceptibility
+    # for species with known susceptibility to myrtle rust from inoculation experiments,
+    # the trait-modeled score is overwritten based on that known value:
+    # - known = "high" (5, the top of the 0-5 known scale) -> boost to 1.5x the modelled score
+    # - known = "medium"/"susceptible" (3) -> boost to 1.25x the modelled score
+    # - known = "resistant"/"low" (0/1) and the modelled score is already < 1 -> damp down to
+    #   known/3, regardless of trait-modeled score
+      total_individual_susceptibility_overwrite = case_when(
+        myrtle_rust_susceptibility == 5 ~ total_individual_susceptibility * 1.5,
+        myrtle_rust_susceptibility == 3 ~ total_individual_susceptibility * 1.25,
+        !is.na(myrtle_rust_susceptibility) & total_individual_susceptibility < 1 ~ myrtle_rust_susceptibility/3,
+        TRUE ~ total_individual_susceptibility
       ),
     
     # if actual susceptibility is know, increase confidence
@@ -1961,10 +1967,10 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
     kable(caption = "Traits scored for myrtle rust.") %>% 
     kable_classic()
 
-myrtle_rust_taxonomic_effects %>% 
+myrtle_rust_taxonomic_effects %>%
     select(taxon, family, taxon_rank, effect_score) %>%
-    arrange(-effect_score) %>% 
-    kable(caption = "Taxonomic effect scores for myrtle rust.") %>% 
+    arrange(-effect_score, family, taxon) %>%
+    kable(caption = "Taxonomic effect scores for myrtle rust.") %>%
     kable_classic()
 
 habitat_scores %>%
@@ -2022,7 +2028,7 @@ value to show, but they still belong in the other three panels.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, results='hide', include=FALSE}
 myrtle_rust_plot_data <- myrtle_rust_assigned_risk %>%
-  mutate(trait_effect_score_scaled = ifelse(family == "Myrtaceae", trait_effect_score_scaled, NA))
+  filter(family == "Myrtaceae")
 
 png("~/GitHub/threatened_species_traits/export/figures/myrtle_rust_4panel.png", width = 9, height = 6.5, units = "in", res = 150)
 make_4_panel_risk_density_plot(
@@ -2030,7 +2036,7 @@ make_4_panel_risk_density_plot(
   panel_cols = c("habitat_taxonomy_risk", "trait_effect_score_scaled", "total_individual_susceptibility_overwrite", "population_risk"),
   panel_labels = c("habitat & taxonomy risk", "trait risk (Myrtaceae only)", "individual susceptibility", "population risk"),
   x_min = 0,
-  x_max = 1.3
+  x_max = 1.6
 )
 dev.off()
 ```
@@ -2566,7 +2572,8 @@ pigs_trait_effects <- tribble(
   "plant_height_scaled", -0.2,  "shorter plants more impacted by pigs",
   "fruit_fleshiness",NA,       "fleshy fruit = higher impact, because preferred food source; merged with fruit_length for scoring",
   "fruit_length_scaled",0.25,    "large fruit = higher impact, because preferred food source; incorporates fruit_fleshiness for scoring, because length doesn't matter if not fleshy",
-  "storage_organ_fleshy",0.4,   "fleshy underground storage organ = much higher impact, because single most preferred food source"
+  "storage_organ_fleshy",0.4,   "fleshy underground storage organ = much higher impact, because single most preferred food source",
+  "plant_growth_substrate_pigs",0.4, "epiphytes and lithophytes at lower risk than terrestrial or aquatic species"
 )
 
 # For families & genera known to have fleshy underground storage organs or
@@ -2591,6 +2598,9 @@ pigs_assigned_risk <- native_species %>%
   left_join(fruit_fleshiness, by = "taxon_name") %>%
   left_join(fruit_length, by = "taxon_name") %>%
   left_join(woodiness, by = "taxon_name") %>%
+  left_join(plant_growth_substrate_pigs, by = "taxon_name") |>
+  # needed because most terrestrial plants unscored; trait well-filled for aquatic, epiphyte, lithophyte, but not terrestrial
+  mutate(plant_growth_substrate_pigs = ifelse(is.na(plant_growth_substrate_pigs), 0, plant_growth_substrate_pigs)) |>
   left_join(pigs_taxonomic_effects %>% filter(taxon_rank == "family") %>% rename(family = taxon) %>% select(-taxon_rank) %>% rename(taxonomic_effect = effect_score), by = "family") %>%
   left_join(pigs_taxonomic_effects %>% filter(taxon_rank == "genus") %>% rename(genus = taxon) %>% select(-taxon_rank) %>% rename(taxonomic_effect2 = effect_score), by = "genus") %>%
   mutate(taxonomic_effect = ifelse(!is.na(taxonomic_effect2), taxonomic_effect2, taxonomic_effect)) %>%
@@ -2638,7 +2648,7 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
         # taxonomic_risk weighted 3x a normal trait
         total_trait_effect_score = rowSums(across(
           c(plant_height_scaled_risk, woodiness_risk, fruit_length_scaled_risk, 
-            resprouting_capacity_risk, storage_organ_fleshy_risk)), na.rm = TRUE) + 
+            resprouting_capacity_risk, storage_organ_fleshy_risk, plant_growth_substrate_pigs_risk)), na.rm = TRUE) + 
           3*coalesce(taxonomic_risk, 0),
 
     # rescale trait risk
@@ -2756,7 +2766,9 @@ png("~/GitHub/threatened_species_traits/export/figures/pigs_4panel.png", width =
 make_4_panel_risk_density_plot(
   pigs_assigned_risk, "pigs",
   panel_cols = c("habitat_risk", "trait_effect_score_scaled", "total_individual_susceptibility", "population_risk"),
-  panel_labels = c("habitat risk", "trait and taxonomy risk", "individual susceptibility", "population risk")
+  panel_labels = c("habitat risk", "trait and taxonomy risk", "individual susceptibility", "population risk"),
+  x_min = 0,
+  x_max = 1.2
 )
 dev.off()
 ```
@@ -3012,7 +3024,8 @@ png("~/GitHub/threatened_species_traits/export/figures/C4_grasses_4panel.png", w
 make_4_panel_risk_density_plot(
   tropical_C4_grasses_assigned_risk, "C4 grasses",
   panel_cols = c("habitat_risk", "trait_effect_score_scaled", "total_individual_susceptibility", "population_risk"),
-  panel_labels = c("habitat risk", "trait and taxonomy risk", "individual susceptibility", "population risk")
+  panel_labels = c("habitat risk", "trait and taxonomy risk", "individual susceptibility", "population risk"),
+  x_min = 0, x_max = 1.5
 )
 dev.off()
 ```
@@ -3075,6 +3088,13 @@ hymenachne_assigned_risk <- native_species %>%
 5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+ hymenachne_bin_thresholds <- c(
+      "5_extremely_high" = 1.0,
+      "4_high"           = 0.6,
+      "3_moderate"       = 0.2,
+      "2_low"            = 0.01,
+      "1_no_risk"        = -Inf
+    )
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
 hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
@@ -3151,14 +3171,15 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
       population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
 
     # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility),
-      population_risk_bin = create_risk_bins(population_risk)
+      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility, bin_thresholds = hymenachne_bin_thresholds),
+      population_risk_bin = create_risk_bins(population_risk, bin_thresholds = hymenachne_bin_thresholds)
     ) |>
     
     # confidence-based plausible range around the numeric risk score
     add_risk_range(
       risk_col = "population_risk", 
-      confidence_col = "susceptibility_confidence"
+      confidence_col = "susceptibility_confidence", 
+      bin_thresholds = hymenachne_bin_thresholds
     )
 
   hymenachne_assigned_risk %>%
@@ -3169,7 +3190,7 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
            population_risk_bin, population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
-           contains(c("risk_effect_score")), everything()) %>%
+           contains(c("risk_effect_score")), everything()) %>% View()
     write_csv("~/GitHub/threatened_species_traits/export/hymenachne_risk_scores.csv", na = "")
 ```
 
@@ -3222,7 +3243,9 @@ png("~/GitHub/threatened_species_traits/export/figures/hymenachne_4panel.png", w
 make_4_panel_risk_density_plot(
   hymenachne_assigned_risk, "hymenachne",
   panel_cols = c("habitat_risk", "trait_effect_score_scaled", "total_individual_susceptibility", "population_risk"),
-  panel_labels = c("habitat risk", "trait and taxonomy risk", "individual susceptibility", "population risk")
+  panel_labels = c("habitat risk", "trait and taxonomy risk", "individual susceptibility", "population risk"),
+  x_min = 0,
+  x_max = 1.2
 )
 dev.off()
 ```
