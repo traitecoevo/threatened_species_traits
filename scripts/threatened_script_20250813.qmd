@@ -545,8 +545,7 @@ make_4_panel_risk_density_plot <- function(data, threat,
 
 turn continuous susceptibility or risk scores into ordered categorical bins from a named threshold vector.
 
-`bin_thresholds` defaults to the standard scheme used by most threats (0.8/0.6/0.4/0.2); pass a different named vector for threats
-that use different cutoffs (e.g. C4 grasses uses 0.7/0.4/0.3/0.15). This is the ONLY place the standard scheme's values should be defined - every threat section defers to this default rather than keeping its own copy, so there's a single source of truth.
+`bin_thresholds` defaults to the standard scheme used by most threats (0.8/0.6/0.4/0.2); pass a different named vector for threats that use different cutoffs (e.g. C4 grasses uses 0.7/0.4/0.3/0.15). This is the ONLY place the standard scheme's values should be defined - every threat section defers to this default rather than keeping its own copy, so there's a single source of truth.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 create_risk_bins <- function(x, bin_thresholds = c(
@@ -574,13 +573,9 @@ create_risk_bins <- function(x, bin_thresholds = c(
 
 #### add_risk_range
 
-Formalises turning susceptibility_confidence into a plausible range around a numeric risk score, instead of the point estimate alone. Low confidence -> wide range; high confidence -> narrow range.
+Formalises turning susceptibility_confidence into a plausible range around a numeric risk score, instead of the point estimate alone. Low confidence -\> wide range; high confidence -\> narrow range.
 
-   margin = (1 - confidence) / divisor
-   {output_base}_min = risk - margin
-   {output_base}_max = risk + margin
-   {output_base}_bin_min = create_risk_bins(min)
-   {output_base}_bin_max = create_risk_bins(max)
+margin = (1 - confidence) / divisor {output_base}\_min = risk - margin {output_base}\_max = risk + margin {output_base}\_bin_min = create_risk_bins(min) {output_base}\_bin_max = create_risk_bins(max)
 
 divisor defaults to 5 (i.e. at confidence 0, margin is 1/5 = 0.2 either side, rather than the full 0-1 range; at confidence 0.6 - roughly the top of the observed range - margin is 0.4/5 = 0.08) - change it here (or per-call) and every threat regenerates.
 
@@ -613,8 +608,7 @@ add_risk_range <- function(data, risk_col, confidence_col, divisor = 5, output_b
 
 #### sigmoidal_rescale
 
-scales::rescale() is a pure linear min-max stretch: whichever single species has the
-most extreme total_trait_effect_score gets pinned exactly to the top and bottom boundaries, and other species' positions are relative to that one point. A single outlier can strongly influence the distibution.
+scales::rescale() is a pure linear min-max stretch: whichever single species has the most extreme total_trait_effect_score gets pinned exactly to the top and bottom boundaries, and other species' positions are relative to that one point. A single outlier can strongly influence the distibution.
 
 sigmoidal_rescale() centers on the MEAN and SD of `total_trait_effect_score` instead of its min/max, then lets values fall away from center via a sigmoid rather than a linear ramp - so extreme species approach edges of the distribution smoothly
 
@@ -635,7 +629,7 @@ sigmoidal_rescale <- function(x, to = c(0, 1), center = mean(x, na.rm = TRUE),
 
 #### check_trait_correlations
 
-Runs a univariate lm(response_var ~ trait) for every trait in `vars`, collects r2/p-value/coefficient/n into a results tibble, and plots (point + jitter + lm smooth) any trait that clears both `r2_threshold` and `p_threshold`. Can be used for catgorical or numeric traits; for numeric traits use a log10 transform via `use_log10 = TRUE`.
+Runs a univariate lm(response_var \~ trait) for every trait in `vars`, collects r2/p-value/coefficient/n into a results tibble, and plots (point + jitter + lm smooth) any trait that clears both `r2_threshold` and `p_threshold`. Can be used for catgorical or numeric traits; for numeric traits use a log10 transform via `use_log10 = TRUE`.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -761,7 +755,6 @@ plant_height <- plant_height %>%
 
 #### special lifespan calculations because mostly bin data
 
-lifespan cannot directly be extracted using `extract_numeric_trait()` because most lifespan records are bin/range values (e.g. "<5"), which need to be converted to minimum and/or maximum values
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 lifespan_data <- all_traits %>% extract_trait("lifespan", partial_matches_allowed = FALSE)
@@ -3190,7 +3183,7 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
            population_risk_bin, population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
-           contains(c("risk_effect_score")), everything()) %>% View()
+           contains(c("risk_effect_score")), everything()) %>%
     write_csv("~/GitHub/threatened_species_traits/export/hymenachne_risk_scores.csv", na = "")
 ```
 
