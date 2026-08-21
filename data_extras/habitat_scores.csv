@@ -117,7 +117,7 @@ habitat,scrubland_heath,0,0.7,0,0.3,0.5,1,0
 habitat,scrubland_open,0,0.9,0,0.5,0,1,0
 habitat,scrubland_riparian,0,0.9,0,0.5,0,1,0
 habitat,sedgeland,0,0.9,0,0.5,0,0.3,0
-habitat,semiaquatic,1,0,0,1,1,0,0
+habitat,semiaquatic,1,0,0,1,1,0,0.75
 habitat,shrubland,0,0.9,0.5,0.5,0,1,0
 habitat,shrubland_chenopod,0,0.5,0,0,0,0,0
 habitat,shrubland_eucalypt,0,0.9,0.5,0.5,0,1,0
@@ -126,13 +126,13 @@ habitat,shrubland_open,0,0.9,0.5,0.5,0,1,0
 habitat,shrubland_tall,0,0.9,0.5,0.5,0,1,0
 habitat,snowbank,0,0,0,0,0.7,0,0
 habitat,steppe,0,0.9,1,0.5,0.7,1,0
-habitat,streambanks,1,0,1,1,1,0.5,0
-habitat,streams,1,0,0.5,1,0,0.5,0
+habitat,streambanks,1,0,1,1,1,0.5,0.5
+habitat,streams,1,0,0.5,1,0,0.5,0.75
 habitat,subalpine,0,0,0,0,1,1,0
 habitat,swamp,2,0,0,1,0.5,0.5,1
 habitat,swamp_forest,2,0,0,1,1,0.5,1
 habitat,swamp_lowland,2,0,0,1,0.5,0.5,1
-habitat,swamp_margin,2,0,0,1,0.5,0.5,0
+habitat,swamp_margin,2,0,0,1,0.5,0.5,.75
 habitat,thickets,0,0.5,0,0,0.7,1,0
 habitat,tidal_flats,0,0,0,0,0,0,0
 habitat,urban,0,0.5,0,0,0.7,0.5,0
@@ -167,7 +167,7 @@ habitat,slope,0,1,0,0.2,0.2,0.2,0
 habitat,feldmark,0,0,0,0,0.7,0,0
 habitat,summit,0,1,0,0,0.7,0.2,0
 habitat,ground_base,0,0.5,0,0,0.5,0.5,0
-habitat,swamp_headwater,1,0,0,1,0.5,0.5,0.7
+habitat,swamp_headwater,1,0,0,1,0.5,0.5,0.75
 habitat,rock_platforms,0,1,0,0,0,0,0
 habitat,wetlands,2,0,0.5,1,0.3,0.3,1
 habitat,gilgais,0,0.5,0.5,0.8,0.5,1,0
