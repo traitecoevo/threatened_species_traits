@@ -11,6 +11,34 @@ traits:
     file doesn't yet have, keeping this file and the crosswalk rows in sync.
   type: list
   elements:
+    plant_response_to_grazing:
+      label: Plant response to grazing
+      description: >
+        A species' response to grazing/browsing pressure. Distinguishes
+        tolerance/intolerance by broad grazer category - introduced/feral
+        ungulates (sheep, cattle, goats, deer, pigs: hoofed, typically
+        heavier-impact grazers/browsers with no evolutionary history with
+        Australian flora) versus native mammals (e.g. macropods), since a
+        species' response genuinely differs between the two in several
+        source documents (tolerant of light native browsing, intolerant of
+        introduced-ungulate impact). The plain grazing_tolerant/
+        grazing_intolerant values (no grazer-type qualifier) are for a
+        source describing a general grazing relationship without
+        distinguishing which kind of grazer is involved. Rabbits and other
+        non-ungulate feral herbivores are deliberately not yet covered by
+        any value here (maintainer decision, 2026-08-25) - leave a
+        rabbit-specific grazing impact unscored rather than force it under
+        the ungulate values.
+      type: categorical
+      allowed_values_levels:
+        grazing_tolerant: Not adversely affected by grazing, or benefits from it (e.g. via reduced competition) - grazer type not distinguished.
+        grazing_intolerant: Adversely affected by grazing - grazer type not distinguished.
+        grazing_tolerant_feral_ungulates: Not adversely affected by grazing/browsing from introduced, hoofed grazers (sheep, cattle, goats, deer, pigs, etc.).
+        grazing_intolerant_feral_ungulates: Adversely affected by grazing/browsing from introduced, hoofed grazers (sheep, cattle, goats, deer, pigs, etc.).
+        grazing_tolerant_native_mammals: Not adversely affected by grazing/browsing from native mammals (e.g. macropods).
+        grazing_intolerant_native_mammals: Adversely affected by grazing/browsing from native mammals (e.g. macropods).
+      status: accepted 2026-08-25
+      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes]
     peduncle_length:
       label: Peduncle length
       description: >
@@ -115,7 +143,7 @@ traits:
         in the released APD.
       type: categorical
       allowed_values_levels:
-        comma-shaped: A seed displaying a single arc of curvature, such that it bilaterally symmetrical.
+        comma-shaped: A fruit displaying a single arc of curvature, such that it bilaterally symmetrical. (Synonyms, comma-shaped, falcate, sickle-shaped scimitar-shaped)
         conical: Cone-shaped, with a broad flat base and narrow apex; turbinate refers to the inverse shape.
         cuneate: A 3-dimensional shape that is wedge-shaped or boat-shaped.
         cylindrical: A cylinder, a shape with a flat top and bottom that are circular or elliptical in outline and are linked by a curved surface.

@@ -484,6 +484,23 @@ many rows across many species, don't guess at the mapping alone if the right
 call is genuinely ambiguous or would require adding a new allowed value —
 ask first, the same way you would for any other `proposed_new_value`.
 
+**Any time the maintainer gives you new information — approves a value,
+adds a trait, extends a definition, corrects a mapping — sweep the whole
+combined file for every row that information now resolves, not just the
+row that prompted it.** This is a standing instruction, not a one-off: the
+value of a fix compounds across every species it applies to, and a gap the
+maintainer just closed will look exactly like a gap they haven't seen yet
+if it's still sitting there unmatched in twenty other species. Search
+`list_species_trait_data_apd.csv` for the same `raw_trait`/concept under
+its known aliases (not just an exact string match — a synonym extension to
+an allowed value, for instance, might resolve rows filed under several
+different `raw_trait` names), apply the fix to each per-species `_apd.csv`
+it touches, re-run the three integrity checks on every file you change, and
+only then regenerate the combined file. Report back which species were
+affected — the maintainer is tracking coverage and wants to know the fix
+actually landed everywhere it could, not just in the file open in front of
+you.
+
 `raw_trait`/`raw_value`/`value_type`/`context` are carried straight over from the
 stage-1 file (one crosswalk row per stage-1 row, same order). `value`/`units` are
 this stage's own output — un-converted, as described above. `match_confidence` is one of `high` /

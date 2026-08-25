@@ -59,3 +59,11 @@ ignore/
 *.png
 *.html
 
+# species-profile-traits skill output: per-species working CSVs are too
+# numerous for the repo (archived separately) - keep only the compiled
+# combined file (source of truth for downstream consumers) and the skill's
+# own trait-definition/reference files (data_from_profiles/APD_reference/,
+# a different directory, is unaffected by this rule)
+data_from_profiles/*.csv
+!data_from_profiles/list_species_trait_data_apd.csv
+

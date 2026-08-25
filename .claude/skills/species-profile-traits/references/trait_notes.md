@@ -516,6 +516,25 @@ released APD version — score them at `new_trait` confidence, not `medium`.
   population, not a broader one) and don't silently pick only one of the
   two granularities to record.
 
+## Site climate (rainfall, temperature)
+
+**Don't propose a project trait for annual rainfall, temperature, or other
+site-climate figures a source states — this is a deliberate decision (2026-08-25),
+not an oversight.** A conservation advice routinely states something like
+"average annual rainfall 350-400 mm" as a habitat descriptor, and it's worth
+extracting into the stage-1 raw file for completeness (it's genuine, useful
+context) — but score it `no_apd_trait` in the crosswalk and stop there, the
+same as water chemistry. These are environmental/climate conditions at a
+site, not a property of the plant, and unlike `habitat`/`soil_type`/
+`geologic_substrate` (which fill a genuine gap for site descriptors this
+project *does* want scored), climate variables are expected to come from a
+separate gridded-climate-data workflow rather than being hand-extracted and
+scored per species here. Two fire-response-adjacent site metrics
+(fire-return-interval requirements, and phyllode/gland micro-morphology
+traits) surfaced repeatedly in the same 2026-08-25 batch and are still open
+questions, not yet resolved either way — check back here for an update
+before deciding how to score them, rather than assuming either resolution.
+
 ## Project-proposed traits (see `new_traits.yml` for the definitive, current list)
 
 `new_traits.yml` is the single source of truth for every trait this project
@@ -569,6 +588,22 @@ these aliases on sight rather than waiting for the next audit to catch them:
   with the lip uppermost, unlike most orchids") is a different concept
   (internal floral-part orientation, not the whole flower's up/lateral/down
   orientation) and doesn't fit any of the four allowed values — `no_match`.
+- **`landform`** described as ridges, gullies, slopes, plateaus, boulders,
+  rock outcrops/platforms/ledges, cliffs, plains, valleys, watercourses, or
+  similar → the real project trait `topographic_position`
+  (`config/traits.yml`), not `no_apd_trait`. This one recurred across an
+  entire batch of species (2026-08-25) despite most other species correctly
+  finding it — a plain search for "landform" as a trait name won't surface
+  it, since the project's own name for the concept is `topographic_position`.
+  Several compound terms already exist (`slopes_rocky`, `cliffs_coastal`,
+  `gullies_sheltered`) — check for the more specific compound value before
+  defaulting to the generic one. A description naming more than one facet
+  (e.g. "gently undulating slopes and ridges") is a genuine multi-value case
+  (`undulating slopes ridges`), same pattern as elsewhere in this file — not
+  a reason to pick only one term. `boulders` itself isn't yet an allowed
+  value (the closest existing terms, `rocky`/`rocky_outcrop`, don't
+  specifically capture it) — propose it (`proposed_new_value`) rather than
+  force-fitting or leaving it unmatched.
 - **`pedicel_length`** (accepted 2026-08-25) — the stalk of a single flower
   within a multi-flowered inflorescence, explicitly distinct from
   `peduncle_length` (the stalk of the whole inflorescence; that trait's own
