@@ -45,6 +45,30 @@ has no real trait.
   (`plant_growth_form = climber`/`climber_herbaceous`/`climber_woody`);
   `stem_length` alone is the right call for a non-climbing plant with a
   notably long stem.
+- **`plant_growth_substrate`'s hedge words matter for whether you score one
+  value or two.** "May grow in rock crevices" (or similar "sometimes"/
+  "occasionally" phrasing) implies the taxon is *not exclusively* lithophytic
+  — it's normally `terrestrial` with an *additional*, optional `lithophyte`
+  habit, so score **both** values (`terrestrial lithophyte`), not `lithophyte`
+  alone. Read the hedge as information about how many substrate values apply,
+  not just noise to discard.
+- **`plant_canopy_form`'s allowed values cover more whole-plant silhouette
+  descriptions than you'd guess from the term list alone** — a shrub
+  described as "rush-like" or similarly sparse/upright/broom-shaped is
+  `broom-like`, not `no_apd_trait`. Check the full NVIS-branch list
+  (`broom-like`/`columnar`/`dense-crowned`/`diffuse`/`flat-topped`/`globose`/
+  `hemispherical`/`obconical`/`open-crowned`/`mounded`/`pine-like`/
+  `pyramidal`/`rounded`/`spreading`/`squat`) before giving up on a
+  silhouette-shaped description.
+- **`plant_photosynthetic_organ = phyllode` cross-maps to almost every Acacia
+  s.l. (wattle) species** — "leaf-like phyllodes" in a description is a
+  near-automatic high-confidence row, not something to check case by case;
+  score it whenever Acacia phyllodes are mentioned. A *leafless* Acacia (or
+  similar) that still photosynthesises through green stems instead is
+  `plant_photosynthetic_organ = cladode`, not `non-photosynthetic_plant` —
+  that value is for taxa with *no* photosynthetic tissue at all
+  (achlorophyllous parasites/saprophytes), not a photosynthetic-stemmed,
+  leafless plant.
 
 ## Leaves
 
@@ -135,23 +159,47 @@ has no real trait.
   `no_apd_trait` note at face value for common concepts like flower size,
   re-search yourself. Watch the unit: cm, not mm, unlike most other floral
   length/width traits.
-- **Inflorescence architecture terms (raceme, cyme, head, spike, umbel,
-  panicle, solitary, axillary) build toward one project trait:
-  `inflorescence_type`** (see `new_traits.yml` for the full accepted-value
-  list). Distinct from `inflorescence_shape` (silhouette — globose,
-  cylindrical, ovoid): "globose rounded head" is two facts, two rows.
+- **Inflorescence architecture terms build toward one project trait:
+  `inflorescence_type`** — but check `new_traits.yml`'s
+  `allowed_values_levels` before assuming a term is already accepted: only
+  `raceme`/`cyme`/`head`/`solitary`/`axillary` are confirmed accepted as of
+  2026-08-25. `spike`, `panicle`, and `umbel` come up constantly in source
+  text but are **not yet in the accepted list** — score them as
+  `proposed_new_value` (real trait, value not yet formally accepted) rather
+  than assuming they're already covered. Note: the trait's own description
+  field references a sibling `inflorescence_shape` trait for silhouette
+  (globose/cylindrical/ovoid) — that trait does **not actually exist**
+  anywhere searched (`APD_traits.csv`, `APD_categorical_values.csv`, either
+  `config/traits.yml` copy) as of this writing; a shape-only description like
+  "open elliptic panicle" should be scored `no_apd_trait` for the shape part,
+  not assumed covered by a trait that isn't there.
 - **`flower_count_maximum` (numeric, `{count}`) is real, but it's a
   whole-plant/whole-season total flower output — not a per-inflorescence
   count.** "Up to 35 flowers" on one raceme/spike/head/capitulum is a
-  different, currently-unmatched-in-APD concept: the project trait
-  `flowers_per_inflorescence` (numeric, `{count}`, any architecture — see
-  `new_traits.yml`). A composite-head floret count (ray florets, disc
-  florets) is also a `flowers_per_inflorescence` count, with `context`
-  naming which floret type — a "head" is one of `inflorescence_type`'s
-  accepted architectures, so a per-head count is a per-inflorescence count.
-  This bug (forcing a per-structure count onto `flower_count_maximum`)
-  recurred across seven species in this project before being caught — always
-  double-check which of the two a source's flower count actually is.
+  *different* concept, and it turns out APD already has a real, released
+  trait for exactly this: **`buds_per_inflorescence`** (continuous,
+  `{count}/{count}`, entity_URI `trait_0012351` — "the count of buds in an
+  inflorescence, where an inflorescence can be either a single cluster of
+  flowers or the entire reproductive shoot system"). This project spent a
+  long stretch treating the concept as an invented project trait
+  (`flowers_per_inflorescence`, now **superseded** — see the `SUPERSEDED`
+  entry still in `new_traits.yml` for the full correction history) before
+  discovering the real trait already covered it; score `buds_per_inflorescence`
+  directly at high confidence, never propose `flowers_per_inflorescence`
+  again. A composite-head floret count (ray florets, disc florets) is also a
+  `buds_per_inflorescence` count, with `context` naming which floret type —
+  a "head" is one of `inflorescence_type`'s accepted architectures, so a
+  per-head count is a per-inflorescence count. The trait's own "entire
+  reproductive shoot system" framing is flexible enough to also cover a
+  *heads-per-compound-cluster* count (e.g. "2-4 heads, each with 25-40
+  flowers" scores **two** `buds_per_inflorescence` rows — one for the
+  flowers-per-head, one for the heads-per-shoot-system — at appropriately
+  different confidence levels since the second is a looser reading).
+  This bug (forcing a per-structure count onto `flower_count_maximum`, or
+  inventing a project trait that duplicated a real one) recurred across many
+  species in this project before being caught — always double-check which
+  concept a source's flower count actually is, and re-search
+  `APD_traits.csv` for a real trait before proposing a new one.
 - **`reproductive_maturity`'s own definition is the age of *first*
   flowering/first ability to set any seed at all** ("this trait will often
   be scored as when plants first produce flowers, as this is easier to
@@ -225,6 +273,51 @@ has no real trait.
   `prickle` — read which structure the source actually calls sharp rather
   than defaulting to `spine` as the generic-sounding option.
 
+- **`fruit_shape`** (categorical, same allowed-value vocabulary as the real
+  APD trait `seed_shape` — `cylindrical`/`hemispheric`/`ovoid`/`globoid`/
+  `polyhedral`/`polyhedral_inflated`/etc.) is a project new_trait (accepted
+  2026-08-25, see `new_traits.yml`) — check it before defaulting a fruit-shape
+  description to `no_apd_trait`. "Cup-shaped"→`hemispheric`, "barrel-shaped"→
+  `cylindrical`, "egg-shaped"→`ovoid`, an inflated multi-lobed capsule→
+  `polyhedral_inflated`, a ribbed/angular capsule→`polyhedral`. A bare "flat"
+  (e.g. a legume pod with no further shape detail) genuinely doesn't map to
+  any of these rounded/faceted-solid terms — score that as `no_match` (real
+  trait, no defensible value) rather than force a guess or fall back to
+  `no_apd_trait`.
+- **`stem_cross_section_shape`** (categorical: `terete`/`winged`/`angular`/
+  `quadrangular`) is a project new_trait (accepted 2026-08-25) for stems,
+  branches, or branchlets described as "four-sided" (→`quadrangular`),
+  "angular", "winged", or "round/terete" in cross-section — also reusable
+  with a context note (e.g. `context="inflorescence axis"`) for other
+  elongated axis-like structures described the same way.
+
+## Bark
+
+- **`bark_texture`** (categorical: `smooth`/`flaky`/`fibrous`/`furrowed`/
+  `fissured`/`corky`/`curling`/`scaly`/`rough`/`papery`) and **`bark_colour`**
+  (categorical, `soil_colour`-style earthy palette: `black`/`brown`/
+  `brown_dark`/`brown_light`/`green`/`grey`/`orange`/`pink`/`red`/`white`/
+  `yellow`) are project new_traits (accepted 2026-08-25, see `new_traits.yml`)
+  for **non-Eucalyptus** bark description — `bark_morphology_eucalyptus` (the
+  real APD trait) is explicitly restricted to Eucalyptus/Corymbia/Angophora's
+  named bark types (stringybark/box/gum/ribbonbark/ironbark/peppermint/
+  stocking) and shouldn't be force-applied elsewhere, even when a term like
+  "smooth" would technically fit one of its values. A combined description
+  ("furrowed, dark grey bark") is a texture clause plus a colour clause —
+  split into two raw rows, one per trait, rather than picking just one.
+- A curling/peeling Acacia bark commonly called "minniritchi" in source text
+  is `bark_texture=curling`.
+
+## Stipules
+
+- **`stipule_presence`** (categorical: `present`/`absent`/`spine`/`scale`/
+  `leafy`) and **`stipule_length`** (numeric, mm) are project new_traits
+  (accepted 2026-08-25, see `new_traits.yml`). Stipules modified specifically
+  into sharp defensive spines should *also* get a `plant_physical_defence_structures`
+  row (value `spine`) alongside `stipule_presence=spine` — the two traits
+  capture different things (defence structure identity vs. the stipule's own
+  presence/form) from the same clause.
+
 ## Non-photosynthetic / parasitic plants
 
 - **A saprophyte/mycoheterotroph/parasite gets three separate real traits,
@@ -237,6 +330,31 @@ has no real trait.
   covers a fungal-partner symbiosis — a mycoheterotroph parasitises fungi,
   not another plant, so it's `not_parasitic` here). All three are usually
   worth a row when a source describes a non-photosynthetic plant.
+
+## Foliage time (deciduous geophytes especially)
+
+- `foliage_time` is a REAL, already-released APD trait (entity_URI
+  `trait_0030030`): "months during which taxon has leaves," keyed as the same
+  12-character Jan-start Y/N string as `flowering_time`/`fruiting_time`. Easy
+  to miss because it isn't one of the "obvious" flower/fruit phenology traits,
+  but any source that gives seasonal leaf-emergence/leaf-dieback wording is
+  scoring material for it — not just explicit deciduous orchids/geophytes.
+- Watch for the info showing up in two different places that need combining:
+  a direct statement ("leaf emerges in autumn... shrivels by mid-late
+  spring") vs. an indirect one (a stated dormant period for controlled burns,
+  or a fire-vulnerability window for "above-ground parts") — both describe
+  the same foliage-present/absent cycle and are usually mutually
+  corroborating. When only the indirect fire/dormancy framing is given, still
+  score `foliage_time` from it (don't wait for an explicit leaf-phenology
+  sentence) — held at high confidence when the fire-vulnerable window and the
+  dormant window are two independently-stated, non-overlapping periods that
+  complement each other to fill all 12 months; medium when only one
+  loosely-worded window ("autumn", "mid-late spring") is given and month
+  boundaries require interpretation.
+- Pairs naturally with `leaf_phenology` (`deciduous`/`drought_deciduous`/
+  etc.) when the source also uses that word directly — score both rather than
+  picking one, they're not redundant (`leaf_phenology` is the categorical
+  cause/pattern, `foliage_time` is the specific month-by-month timing).
 
 ## Vegetative reproduction & ploidy
 
@@ -402,8 +520,73 @@ released APD version — score them at `new_trait` confidence, not `medium`.
 
 `new_traits.yml` is the single source of truth for every trait this project
 has proposed and (at least tentatively) accepted — don't duplicate its
-allowed-value lists here; check it directly. As of the last major pass it
-includes: `peduncle_length`, `leaf_apex_shape`, `inflorescence_type`,
-`leaf_cross_section_shape`, `senescence_onset`,
-`reproductive_maturity_to_senescence`, `age_maximum_reproductive_capacity`,
-`flowers_per_inflorescence`, `flower_petal_width`.
+allowed-value lists here (a static list here goes stale the moment
+`new_traits.yml` gains another trait or another allowed value, which happens
+often); check it directly and re-check it fresh each session, since a
+parallel session may have added to it since you last looked.
+
+## Recurring raw_trait aliases — recognize these immediately, don't leave unmapped
+
+A 2026-08-25 corpus-wide audit (grouping every row with a blank `apd_trait`
+by `raw_trait` across the whole combined file, see the periodic-audit script
+in `SKILL.md`) turned up ~50 rows across ~25 species where the *real* trait
+match was missed — not because it didn't exist, but because the extraction
+used a different label than the one the real trait is keyed under. Recognize
+these aliases on sight rather than waiting for the next audit to catch them:
+
+- **`population_size`** → this is always `individual_count` (or occasionally
+  needs splitting into separate `individual_count` rows per the guidance
+  above) — never leave a raw `population_size` label unmapped or unsplit.
+- **`inflorescence_axis_length`** → the same concept as the real APD trait
+  `inflorescence_length` (the length of the whole inflorescence axis).
+- **`labellum_length` / `labellum_width`** (orchid-specific) → real APD
+  traits `flower_petal_length` / `flower_petal_width`, held at `medium`
+  since a labellum is a specialised, structurally distinct petal rather than
+  a typical undifferentiated one (established convention, first used for
+  Caladenia ovata/Sarcochilus hartmannii).
+- **`leaf_orientation`** described in terms of "pendulous" / "not pendulous"
+  / "hanging" → the real, binary APD trait `leaf_pendulousness`
+  (`pendulous`/`not_pendulous`), not `leaf_axil_angle` or
+  `leaf_inclination_angle` (both of those are numeric-degree traits that
+  need an actual angle figure, which sources essentially never give — check
+  for `leaf_pendulousness` first before concluding a qualitative leaf
+  direction/angle description is unmatchable). A description of upward
+  orientation ("antrorse", "ascending") can sometimes be inferred as
+  `not_pendulous` at `medium`/`low` if the source gives no more direct word,
+  but don't stretch this inference further than "clearly incompatible with
+  hanging downward".
+- **`flower_scent` / scent descriptions** ("honey-perfumed", "musky",
+  "fragrant") → the real, binary project trait `flower_scent_production`
+  (`scent_produced`/`scent_absent`, in the newer `austraits.build` config,
+  not yet in the released APD cache) — it only captures presence/absence,
+  not the specific scent character, so don't hold back a match just because
+  the qualitative description ("musky" vs "sweet") isn't itself captured.
+- **`flower_orientation`** described as "erect"/"spreading horizontally"/
+  "pendulous"/"reversed" → the real, released APD trait `flower_orientation`
+  (`up`/`lateral`/`down`/`mixed`) usually covers erect→`up`,
+  horizontal/spreading→`lateral`, pendulous/hanging→`down`. Watch for the
+  genuine non-match case though: orchid labellum *resupination* ("borne
+  with the lip uppermost, unlike most orchids") is a different concept
+  (internal floral-part orientation, not the whole flower's up/lateral/down
+  orientation) and doesn't fit any of the four allowed values — `no_match`.
+- **`pedicel_length`** (accepted 2026-08-25) — the stalk of a single flower
+  within a multi-flowered inflorescence, explicitly distinct from
+  `peduncle_length` (the stalk of the whole inflorescence; that trait's own
+  definition excludes pedicels). A pedicel length of 0 mm records a sessile
+  flower. Don't force a pedicel measurement onto `peduncle_length` just
+  because it's already an accepted trait — score `pedicel_length` instead.
+- **`EOO`/`AOO`** as raw_trait abbreviations, or a raw_trait already named
+  `extent_of_occurrence`/`area_of_occupancy` — these sometimes show up with
+  an empty `apd_trait` in older files (written before this project trait was
+  consistently applied). If you see the real figure sitting in `raw_value`
+  with a blank `apd_trait`, that's a missed mapping, not a genuine absence —
+  fix it in place rather than treating the row as already-handled.
+- **`inflorescence_type`** values `spike` and `panicle` (accepted
+  2026-08-25) join the existing `raceme`/`cyme`/`head`/`solitary`/
+  `axillary` — no longer `proposed_new_value`, score them at `high`
+  directly. Also remember `axillary` is explicitly a *position* descriptor
+  ("one per axil"/"in the leaf axils"), not an architecture term — it can
+  and should be scored as a second `inflorescence_type` row alongside
+  whatever architecture term (e.g. `head`) already covers the same source
+  clause, rather than being left unmatched as a seemingly-redundant
+  position detail.

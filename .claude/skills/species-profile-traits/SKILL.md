@@ -438,6 +438,52 @@ Run this on every new species file before reporting it done, and re-run it
 across every existing file after any bulk edit (a `new_trait` sweep, a
 retroactive fix) that touches many rows at once.
 
+**Common cause of check 2 failing — a range split where only one file got
+split.** When a source gives a range ("1–2 m") and you split it into
+separate min/max rows, you must split it in *both* files identically: the
+stage-1 raw row's own `value` column has to become the individual bound
+("1 m" / "2 m" in two rows), not stay as the shared range string while only
+the stage-2 crosswalk's `raw_value` holds the individual bound. This exact
+mistake — reusing the combined range text in both raw rows while the
+crosswalk rows hold the split bounds — recurred many times across a single
+session before check 2 caught it each time. Whenever you split a range,
+immediately re-run check 2 on that one species rather than assuming the
+split was done correctly on both sides.
+
+**Periodic corpus-wide audit — run this across the whole combined file every
+so often, not just per-species.** The per-species checks above catch
+structural bugs in one file; they won't catch a real trait match that was
+simply missed (the row is well-formed and internally consistent, just wrong).
+Group every row with a blank `apd_trait` by `raw_trait`, most-common first —
+a `raw_trait` recurring across many species with zero real matches is a
+strong signal either that no such trait genuinely exists (worth confirming
+once, then leaving alone) or that it does exist under a different name you
+haven't found yet (see "Recurring raw_trait aliases" in `trait_notes.md` for
+examples this exact audit turned up on 2026-08-25 — `population_size` for
+`individual_count`, `inflorescence_axis_length` for `inflorescence_length`,
+etc.):
+
+```python
+import csv
+from collections import Counter
+with open("data_from_profiles/list_species_trait_data_apd.csv") as f:
+    rows = list(csv.DictReader(f))
+no_apd = [r for r in rows if not r["apd_trait"].strip()]
+counts = Counter(r["raw_trait"] for r in no_apd)
+for trait, n in counts.most_common(30):
+    print(n, trait)
+```
+
+For each high-count `raw_trait`, grep the released `APD_traits.csv`, this
+project's `config/traits.yml`, and the newer `austraits.build/config/traits.yml`
+copy for the concept under plausible alternate names before concluding it's
+genuinely unmatchable — a surprising number turn out to be real traits hiding
+under a name the source's own wording didn't suggest (e.g. a "labellum
+length" measurement is really `flower_petal_length`). When a fix applies to
+many rows across many species, don't guess at the mapping alone if the right
+call is genuinely ambiguous or would require adding a new allowed value —
+ask first, the same way you would for any other `proposed_new_value`.
+
 `raw_trait`/`raw_value`/`value_type`/`context` are carried straight over from the
 stage-1 file (one crosswalk row per stage-1 row, same order). `value`/`units` are
 this stage's own output — un-converted, as described above. `match_confidence` is one of `high` /
@@ -473,9 +519,12 @@ Use `low` rather than omitting a shaky-but-real match, so a human reviewer knows
 where to look first, not just which rows are entirely unmapped.
 
 **After writing a species' `_apd.csv`, append it to the combined file**
-`data_from_profiles/list_species_trait_data_apd.csv` (same 13 columns, header once
-at the top) rather than leaving each species' crosswalk to be found and
-concatenated later — this is the file downstream processing should actually read.
+`data_from_profiles/list_species_trait_data_apd.csv` (the same 13 columns plus a
+14th, `source_file`, holding the basename of the per-species `_apd.csv` it came
+from — added 2026-08-25 so rows can be traced back to their species file without
+re-matching on `taxon_name`; header once at the top) rather than leaving each
+species' crosswalk to be found and concatenated later — this is the file
+downstream processing should actually read.
 Keep the per-species `_apd.csv` files too (they're the auditable,
 one-document-at-a-time working copy, and the user has confirmed they want both);
 the combined file is a derived rebuild of all of them concatenated, not a separate

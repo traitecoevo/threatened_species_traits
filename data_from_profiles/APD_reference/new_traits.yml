@@ -22,7 +22,20 @@ traits:
       allowed_values_min: 0.0
       allowed_values_max: 500.0
       status: accepted 2026-08-24
-      used_in: [acacia_lanuginophylla, boronia_boliviensis, hibbertia_abyssa]
+      used_in: [acacia_lanuginophylla, boronia_boliviensis, hibbertia_abyssa, acacia_curranii, acacia_lauta]
+    pedicel_length:
+      label: Pedicel length
+      description: >
+        The length of the pedicel - the stalk of a single flower within a
+        multi-flowered inflorescence, as distinct from a peduncle (the stalk
+        of the whole inflorescence). A pedicel length of 0 mm records a
+        sessile (stalkless) flower.
+      type: numeric
+      units: mm
+      allowed_values_min: 0.0
+      allowed_values_max: 500.0
+      status: accepted 2026-08-25
+      used_in: [asterolasia_phebalioides, boronia_boliviensis, daviesia_bursarioides, eucalyptus_benthamii, eucalyptus_ceracea, eucalyptus_conglomerata, eucalyptus_insularis, grevillea_rara, pomaderris_cotoneaster, vanda_hindsii, viola_improcera]
     leaf_apex_shape:
       label: Leaf apex shape
       description: >
@@ -38,7 +51,7 @@ traits:
         rounded: A leaf apex that is rounded rather than pointed.
         apiculate: A leaf apex ending abruptly in a small, sharp terminal point (a mucro).
       status: accepted 2026-08-24
-      used_in: [andersonia_axilliflora, boronia_boliviensis, darwinia_carnea, daviesia_bursarioides, eriocaulon_carsonii, grevillea_rara, hibbertia_abyssa, styphelia_capillaris]
+      used_in: [andersonia_axilliflora, boronia_boliviensis, darwinia_carnea, daviesia_bursarioides, eriocaulon_carsonii, grevillea_rara, hibbertia_abyssa, styphelia_capillaris, eucalyptus_insularis, hexaspora_pubescens, syzygium_hodgkinsoniae, acacia_ammophila, acacia_lauta, eucalyptus_crucis_crucis]
     inflorescence_type:
       label: Inflorescence type
       description: >
@@ -52,8 +65,10 @@ traits:
         head: A dense, condensed inflorescence of many sessile or subsessile flowers, resembling a single flower.
         solitary: A single flower borne alone, not part of a multi-flowered inflorescence.
         axillary: An inflorescence borne in a leaf axil (a position descriptor, often recorded alongside an architecture term in source descriptions).
+        spike: An unbranched, elongated inflorescence with sessile or subsessile flowers (as distinct from raceme, whose flowers are individually stalked).
+        panicle: A branched, compound inflorescence - typically a raceme whose branches are themselves racemes or other multi-flowered units.
       status: accepted 2026-08-24
-      used_in: [acacia_lanuginophylla, daviesia_bursarioides, eriocaulon_carsonii, hibbertia_abyssa, pityrodia_axillaris, styphelia_capillaris, tetratheca_aphylla, grevillea_flexuosa, cossinia_australiana, xerothamnella_parvifolia, acacia_flocktoniae, eucalyptus_conglomerata, cupaniopsis_tomentella, daviesia_euphorbioides, asterolasia_phebalioides, acacia_grandifolia, daviesia_discolor, conostylis_dielsii_teres, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea]
+      used_in: [acacia_lanuginophylla, daviesia_bursarioides, eriocaulon_carsonii, hibbertia_abyssa, pityrodia_axillaris, styphelia_capillaris, tetratheca_aphylla, grevillea_flexuosa, cossinia_australiana, xerothamnella_parvifolia, acacia_flocktoniae, eucalyptus_conglomerata, cupaniopsis_tomentella, daviesia_euphorbioides, asterolasia_phebalioides, acacia_grandifolia, daviesia_discolor, conostylis_dielsii_teres, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea, atriplex_infrequens, aristida_granitica, acacia_lauta, thelymitra_matthewsii, frankenia_plicata, grevillea_scortechinii_scortechinii, euphrasia_arguta, diuris_drummondii, euphrasia_bella, pomaderris_vacciniifolia, acacia_curranii]
     leaf_cross_section_shape:
       label: Leaf cross-section shape
       description: >
@@ -70,7 +85,7 @@ traits:
         flat: A leaf flat (not folded, ridged, or curved) in cross-section.
         concave_convex: A leaf slightly concave on the upper (adaxial) surface and slightly convex on the lower (abaxial) surface in cross-section.
       status: accepted 2026-08-24
-      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres]
+      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta]
     stem_cross_section_shape:
       label: Stem cross-section shape
       description: >
@@ -88,7 +103,7 @@ traits:
         angular: A stem with distinct angles or ridges in cross-section, of unspecified number.
         quadrangular: A stem square or four-angled in cross-section.
       status: accepted 2026-08-25
-      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris]
+      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta]
     fruit_shape:
       label: Fruit shape
       description: >
@@ -125,7 +140,80 @@ traits:
         sectoroid: Shaped like an orange segment or wedge of a sphere.
         sinusoidal: A shape with two arcs of curvature or a single arc, such that it lacks an axis of symmetry.
       status: accepted 2026-08-25
-      used_in: []
+      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera]
+    bark_texture:
+      label: Bark texture
+      description: >
+        The surface texture of bark on a stem or trunk - the non-Eucalyptus-
+        restricted counterpart to the real APD trait bark_morphology_eucalyptus,
+        which uses genus-specific named bark types (stringybark, box, gum,
+        ribbonbark, etc.) rather than a general texture vocabulary. Use
+        bark_morphology_eucalyptus where a named eucalypt type applies; use
+        this trait for other taxa, or for texture detail (e.g. corky,
+        curling) a source gives that isn't captured by the eucalypt type terms.
+      type: categorical
+      allowed_values_levels:
+        smooth: Bark with an unbroken, even surface.
+        flaky: Bark that peels off in small flakes or scales.
+        fibrous: Bark composed of long, interwoven fibres.
+        furrowed: Bark with long, deep longitudinal grooves.
+        fissured: Bark cracked into a network of narrow fissures.
+        corky: Bark with a soft, spongy, cork-like texture.
+        curling: Bark that peels away in tight curls or coils (e.g. "minniritchi" bark).
+        scaly: Bark that breaks into small, plate-like scales.
+        rough: Bark with an uneven, coarse surface not otherwise specified.
+        papery: Bark that peels away in thin, papery sheets.
+      status: accepted 2026-08-25
+      used_in: [acacia_ammophila, acacia_curranii, microcorys_eremophiloides, syzygium_hodgkinsoniae, eucalyptus_stenostoma, eucalyptus_crucis_crucis]
+    bark_colour:
+      label: Bark colour
+      description: >
+        The colour of a plant's bark. Vocabulary style follows the existing
+        project trait soil_colour (an earthy-tone palette) rather than
+        flower_colour's brighter palette, since it's the closer match for how
+        bark colours are actually described in source text.
+      type: categorical
+      allowed_values_levels:
+        black: XX
+        brown: XX
+        brown_dark: XX
+        brown_light: XX
+        green: XX
+        grey: XX
+        orange: XX
+        pink: XX
+        red: XX
+        white: XX
+        yellow: XX
+      status: accepted 2026-08-25
+      used_in: [acacia_ammophila, acacia_curranii, eucalyptus_benthamii, eucalyptus_ceracea, eucalyptus_conglomerata, eucalyptus_insularis, eucalyptus_synandra, syzygium_hodgkinsoniae, eucalyptus_stenostoma]
+    stipule_presence:
+      label: Stipule presence
+      description: >
+        Whether a leaf bears stipules (small appendages, often paired, at the
+        base of the petiole) and, where the source states it, their general
+        form. Note: stipules modified specifically into sharp defensive
+        spines should also be scored under the real APD trait
+        plant_physical_defence_structures (value: spine).
+      type: categorical
+      allowed_values_levels:
+        present: Stipules are present (form otherwise unspecified).
+        absent: Stipules are absent.
+        spine: Stipules modified into spines.
+        scale: Small, scale-like stipules.
+        leafy: Stipules that are leaf-like in size and texture.
+      status: accepted 2026-08-25
+      used_in: [acacia_awestoniana, acacia_aristulata, acacia_lobulata]
+    stipule_length:
+      label: Stipule length
+      description: >
+        The length of a stipule, where present (see stipule_presence).
+      type: numeric
+      units: mm
+      allowed_values_min: 0.1
+      allowed_values_max: 200.0
+      status: accepted 2026-08-25
+      used_in: [acacia_aristulata, pomaderris_cotoneaster, pultenaea_setulosa]
     senescence_onset:
       label: Age at senescence onset
       description: >
@@ -171,19 +259,30 @@ traits:
       status: accepted 2026-08-25
       used_in: [darwinia_carnea]
     flowers_per_inflorescence:
-      label: Flowers per inflorescence
+      label: Flowers per inflorescence [SUPERSEDED - do not use]
       description: >
-        The number of flowers borne on a single inflorescence (raceme, spike,
-        head, panicle, corymb, umbel, etc.), regardless of inflorescence
-        architecture. Distinct from the existing real APD trait
+        SUPERSEDED 2026-08-25: this whole concept turned out to already be a
+        real, released APD trait - `buds_per_inflorescence` (continuous,
+        {count}/{count}, entity_URI trait_0012351) - whose own definition
+        explicitly covers "either a single cluster of flowers or the entire
+        reproductive shoot system", i.e. exactly this project trait's intended
+        scope, including the flowers/buds-within-one-head/spike/raceme count
+        this was invented for. Every species previously using this new_trait
+        has been retroactively corrected to score buds_per_inflorescence
+        directly at high confidence instead. Do not propose this trait again
+        for new species - check buds_per_inflorescence first (see
+        references/trait_notes.md, "Flowers & reproduction").
+        Originally: The number of flowers borne on a single inflorescence
+        (raceme, spike, head, panicle, corymb, umbel, etc.), regardless of
+        inflorescence architecture. Distinct from the existing real APD trait
         flower_count_maximum, which records a whole-plant/whole-season total
         flower output, not a per-inflorescence count.
       type: numeric
       units: '{count}'
       allowed_values_min: 1.0
       allowed_values_max: 1000.0
-      status: accepted 2026-08-25
-      used_in: [caladenia_tessellata, zieria_collina, prasophyllum_affine, prasophyllum_goldsackii, olearia_flocktoniae, daviesia_bursarioides, acacia_lobulata, acacia_lanuginophylla, boronia_boliviensis, dryandra_montana, darwinia_carnea, wurmbea_calcicola, andersonia_axilliflora, dipodium_pictum, lasiopetalum_rotundifolium, eucalyptus_insularis, eucalyptus_conglomerata, daviesia_discolor, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea]
+      status: superseded 2026-08-25 by real APD trait buds_per_inflorescence - retroactively fixed in all species below
+      used_in: []
     flower_petal_width:
       label: Flower petal width
       description: >
