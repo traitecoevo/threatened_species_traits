@@ -95,8 +95,10 @@ has no real trait.
   equivalent (leaf width is normally the spread across the blade/leaflets,
   not the diameter of the central axis) — keep that as its own proposed trait.
 - **`leaf_phyllotaxis` (categorical: `alternate`/`opposite`/`whorled`)** is
-  the real trait for leaf position at a *single stem node* — newer-copy only.
-  Easy to conflate with `leaf_arrangement` (a genuinely different trait: the
+  the real trait for leaf position at a *single stem node* — **confirmed in
+  the released `APD_traits.csv` cache (re-checked 2026-08-25), not
+  newer-copy-only as this note used to say** — score a direct match at
+  `high`. Easy to conflate with `leaf_arrangement` (a genuinely different trait: the
   3D pattern along the *whole shoot* — `decussate`/`distichous`/`spiral`/
   `crowded`/etc. — with no alternate/opposite/whorled values of its own). A
   source description often warrants a row on *both*: "opposite pairs,
@@ -445,25 +447,25 @@ has no real trait.
   (frond stalk) is the petiole-equivalent structure. Flower/fruit/seed traits
   obviously don't apply at all to ferns; don't force them.
 - **`plant_growth_substrate`** (categorical: `aquatic`/`epiphyte`/
-  `hemiepiphyte`/`lithophyte`/`marine`/`semiaquatic`/`terrestrial`) is a real
-  trait defined in this project's `config/traits.yml` (carries its own APD
-  `entity_URI` but isn't yet in the released `APD_traits.csv` cache) —
-  exactly the right trait for "epiphyte on trees" / "lithophyte on rocks"
-  statements, which come up constantly for ferns and orchids. Score it at the
-  same confidence tier as other config/traits.yml-only vocab (`high` for a
-  direct match, not `no_apd_trait`) — it's easy to miss since it's a whole-
-  plant substrate trait, distinct from `habitat`.
+  `hemiepiphyte`/`lithophyte`/`marine`/`semiaquatic`/`terrestrial`) — **now
+  confirmed in the released `APD_traits.csv` cache (re-checked 2026-08-25)**,
+  not just `config/traits.yml`; score a direct match at `high`, not
+  `medium`/`new_trait`, and drop the "this project's own trait" framing in
+  `notes`. Exactly the right trait for "epiphyte on trees" / "lithophyte on
+  rocks" statements, which come up constantly for ferns and orchids — it's
+  easy to miss since it's a whole-plant substrate trait, distinct from
+  `habitat`.
 - `plant_growth_form`'s allowed values include `fern` and `lycophyte`
   directly — use them rather than falling back to `herb`.
 
 ## Dioecy / plant sex
 
 - **`sex_type`** (categorical: `dioecious`/`monoecious`/`hermaphrodite`/
-  `androdioecious`/`gynodioecious`/and other mixed-system terms) is a real
-  trait in this project's `config/traits.yml` (APD `entity_URI`, not yet in
-  the released `APD_traits.csv` cache) — score it directly whenever a source
-  states a species is dioecious/monoecious/etc., rather than treating it as
-  no_apd_trait. High confidence for a direct statement.
+  `androdioecious`/`gynodioecious`/and other mixed-system terms) — **now
+  confirmed in the released `APD_traits.csv` cache (re-checked 2026-08-25)**,
+  not just `config/traits.yml` — score it directly at `high` (not
+  `medium`/`new_trait`) whenever a source states a species is
+  dioecious/monoecious/etc., rather than treating it as `no_apd_trait`.
 
 ## Population & range metrics
 
@@ -604,6 +606,18 @@ these aliases on sight rather than waiting for the next audit to catch them:
   value (the closest existing terms, `rocky`/`rocky_outcrop`, don't
   specifically capture it) — propose it (`proposed_new_value`) rather than
   force-fitting or leaving it unmatched.
+- **`plant_tolerance_inundation`** — a real, released APD trait, but its
+  allowed values are *duration buckets* (`less_than_1_month`/`1-6_months`/
+  `greater_than_6_months`/`aquatic`/`not_applicable`), not a qualitative
+  tolerant/intolerant scale — don't propose this as a new trait (it nearly
+  happened, 2026-08-25) and don't force a qualitative "tolerates flooding"
+  statement onto it without a duration; if the source gives no duration,
+  that's a genuine `no_match`, not `no_apd_trait`.
+- **`fruit_colour`** — a real, released APD trait with a plain colour
+  palette (confirm current allowed values before assuming a shade is
+  missing) — don't default a fruit-colour description to `no_apd_trait`
+  without checking it first, the same way `flower_diameter` was
+  under-searched-for previously.
 - **`pedicel_length`** (accepted 2026-08-25) — the stalk of a single flower
   within a multi-flowered inflorescence, explicitly distinct from
   `peduncle_length` (the stalk of the whole inflorescence; that trait's own
