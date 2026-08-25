@@ -1,0 +1,58 @@
+taxon_name,trait_category,trait,value,value_type,context,source_section,source,notes
+Eriocaulon carsonii,taxonomy,family,Eriocaulaceae,categorical,,2.1,NSW Recovery Plan,
+Eriocaulon carsonii,taxonomy,growth_form,herb (forb),categorical,,2.2,NSW Recovery Plan,hairless
+Eriocaulon carsonii,taxonomy,habit,basal tuft/rosette,categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,taxonomy,life_history,perennial,categorical,,2.2;4.1,NSW Recovery Plan,persists via rhizomes; individual plant lifespan not established
+Eriocaulon carsonii,taxonomy,woodiness,non-woody,categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,taxonomy,vegetative_reproduction,clonal via underground rhizomes,categorical,,4.1,NSW Recovery Plan,
+Eriocaulon carsonii,taxonomy,reproduction_mode,sexual (seed) and asexual (rhizome),categorical,,4.1,NSW Recovery Plan,
+Eriocaulon carsonii,taxonomy,leaf_hairs,absent (glabrous),categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,leaf,leaf_shape,"broad, lanceolate, striate",categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,leaf,leaf_length,1.5 cm,min,,2.2,NSW Recovery Plan,range 1.5-6 cm; this row is the minimum
+Eriocaulon carsonii,leaf,leaf_length,6 cm,max,,2.2,NSW Recovery Plan,range 1.5-6 cm; this row is the maximum
+Eriocaulon carsonii,leaf,leaf_width,2 mm,min,,2.2,NSW Recovery Plan,range 2-10 mm; this row is the minimum
+Eriocaulon carsonii,leaf,leaf_width,10 mm,max,,2.2,NSW Recovery Plan,range 2-10 mm; this row is the maximum
+Eriocaulon carsonii,leaf,leaf_tip,"gradually narrowing, rounded, often incurved",categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,leaf,leaf_base,"enlarged, sheathing (forms basal rosette)",categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,inflorescence_shape,globose (rounded head),categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,inflorescence_diameter,3 mm,min,,2.2,NSW Recovery Plan,range 3-4 mm; this row is the minimum
+Eriocaulon carsonii,reproductive,inflorescence_diameter,4 mm,max,,2.2,NSW Recovery Plan,range 3-4 mm; this row is the maximum
+Eriocaulon carsonii,reproductive,flower_sex_sequence,protogynous (female flowers open first),categorical,,2.2,NSW Recovery Plan,may promote cross-pollination
+Eriocaulon carsonii,reproductive,female_flowers_per_inflorescence,12,numeric_mean,,4.1,NSW Recovery Plan,Hermit Hill Springs study (Davies 2000)
+Eriocaulon carsonii,reproductive,male_flowers_per_inflorescence,17,numeric_mean,,4.1,NSW Recovery Plan,Hermit Hill Springs study (Davies 2000)
+Eriocaulon carsonii,reproductive,stamen_number,6,numeric,,2.2,NSW Recovery Plan,mostly 6
+Eriocaulon carsonii,reproductive,fruit_type,"membranous, swollen, 3-celled capsule",categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,seed_shape,ellipsoid,categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,seed_colour,shining brown,categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,seed_length,0.6 mm,numeric,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,seed_dispersal_unit_size,800 um,numeric,,4.1,NSW Recovery Plan,one dimension of an 800 x 500 um dispersal unit
+Eriocaulon carsonii,reproductive,seed_dispersal_unit_size,500 um,numeric,,4.1,NSW Recovery Plan,other dimension of an 800 x 500 um dispersal unit
+Eriocaulon carsonii,reproductive,seeds_per_fruit,1 per cell (3 cells/capsule),numeric,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,viable_seeds_per_inflorescence,23,numeric_mean,,4.1,NSW Recovery Plan,Davies 2000
+Eriocaulon carsonii,reproductive,seedbank_depth,6 cm,max,,4.1,NSW Recovery Plan,persist to up to 6 cm below surface at Hermit Hill Springs
+Eriocaulon carsonii,reproductive,seedbank_longevity,10 years,max,,4.1,NSW Recovery Plan,"not likely to remain viable for ""more than a decade"" - treat as an upper-bound estimate, not typical"
+Eriocaulon carsonii,reproductive,flowering_time,summer to late autumn,categorical,,2.2,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,peak_flowering,October,categorical,,4.1,NSW Recovery Plan,
+Eriocaulon carsonii,reproductive,plant_height,250 mm,max,"Edgbaston (Qld) population - possibly a distinct, undescribed taxon, not typical E. carsonii",2.2,NSW Recovery Plan,"Edgbaston (Qld) population only; noted as possibly a distinct, undescribed taxon - not typical E. carsonii"
+Eriocaulon carsonii,habitat,habitat,flowing/active artesian mound springs,categorical,,4.2,NSW Recovery Plan,sole known habitat
+Eriocaulon carsonii,habitat,mound_height,1 m,min,,4.2,NSW Recovery Plan,range 1-10 m
+Eriocaulon carsonii,habitat,mound_height,10 m,max,,4.2,NSW Recovery Plan,range 1-10 m
+Eriocaulon carsonii,habitat,mound_diameter,2 m,min,,4.2,NSW Recovery Plan,range 2 to >100 m
+Eriocaulon carsonii,habitat,mound_diameter,100 m,max,,4.2,NSW Recovery Plan,"stated as "">100 m""; 100 used as the row value"
+Eriocaulon carsonii,habitat,soil_type,organic fen soil,categorical,,4.2,NSW Recovery Plan,alkaline analogue of peat
+Eriocaulon carsonii,habitat,position_in_spring,tail of spring or above the vent; shallow standing water; slow flow preferred,categorical,,4.2,NSW Recovery Plan,
+Eriocaulon carsonii,habitat,growth_substrate,aquatic/semiaquatic,categorical,,4.2,NSW Recovery Plan,standing water at spring vents
+Eriocaulon carsonii,habitat,water_pH,7,min,,4.2,NSW Recovery Plan,South Australian springs; range 7-9.5
+Eriocaulon carsonii,habitat,water_pH,9.5,max,,4.2,NSW Recovery Plan,South Australian springs; range 7-9.5
+Eriocaulon carsonii,habitat,water_conductivity,2000,min,South Australian springs (slow-flow),4.2,NSW Recovery Plan,uS/cm; slow-flow South Australian springs; range 2000-8000
+Eriocaulon carsonii,habitat,water_conductivity,8000,max,South Australian springs (slow-flow),4.2,NSW Recovery Plan,uS/cm; slow-flow South Australian springs; range 2000-8000
+Eriocaulon carsonii,habitat,water_conductivity,3330,min,Peery Lake bores (n=3),4.2,NSW Recovery Plan,uS/cm; Peery Lake bores (n=3); range 3330-9800
+Eriocaulon carsonii,habitat,water_conductivity,9800,max,Peery Lake bores (n=3),4.2,NSW Recovery Plan,uS/cm; Peery Lake bores (n=3); range 3330-9800
+Eriocaulon carsonii,habitat,preferred_conductivity,2000,max,,4.2,NSW Recovery Plan,uS/cm; most abundant where average conductivity is BELOW this value (Hermit Hill) - this is an upper threshold
+Eriocaulon carsonii,habitat,water_temperature,20,min,slow-flow springs,4.2,NSW Recovery Plan,degrees C; range 20-25
+Eriocaulon carsonii,habitat,water_temperature,25,max,slow-flow springs,4.2,NSW Recovery Plan,degrees C; range 20-25
+Eriocaulon carsonii,habitat,water_temperature,30,max,fast-flow springs,4.2,NSW Recovery Plan,"degrees C; stated as ""up to 30"""
+Eriocaulon carsonii,habitat,flood_tolerance,mounds can be fully submerged; Peery Lake floods in ~25% of years,categorical,,4.2,NSW Recovery Plan,
+Eriocaulon carsonii,habitat,fire_response,survives mound burning; may reduce competitor cover,categorical,,4.3,NSW Recovery Plan,South Australian trial burns
+Eriocaulon carsonii,habitat,key_competitors,"Phragmites, Baumea, Fimbristylis spp., Cyperus laevigatus",categorical,,4.3,NSW Recovery Plan,
+Eriocaulon carsonii,habitat,grazing_relationship,benefits from limited/moderate grazing (suppresses competitors); heavy trampling is a threat,categorical,,4.3;6.1,NSW Recovery Plan,

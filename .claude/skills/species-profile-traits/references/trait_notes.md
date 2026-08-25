@@ -1,0 +1,409 @@
+# Trait-specific notes
+
+A lookup reference for specific trait pitfalls, trait-pairs, and vocabulary
+gotchas discovered while extracting species profiles — not a tutorial to read
+start to finish. Skim the heading for the row you're working on; add a new
+entry under the right heading (create a heading if none fits) whenever a
+species surfaces a new one, rather than appending to the bottom.
+
+Every trait named here that isn't explicitly marked "project trait" or
+"NVIS-branch" is a real trait in `data_from_profiles/APD_reference/APD_traits.csv`
+(the released APD) or in `/Users/z3524079/GitHub/austraits.build/config/traits.yml`
+(the newer, richer copy — see SKILL.md's vocabulary-sources list for why
+several traits below live only there). Check both before concluding a concept
+has no real trait.
+
+## Growth form & habit
+
+- **A `growth_form`/`habit` row is almost never fully captured by
+  `plant_growth_form` alone** — check it against `stem_growth_habit`'s full
+  allowed-value list every time, not just when nothing else fits.
+  `plant_growth_form` only gets the coarse category (`shrub`/`herb`/`tree`/
+  ...); the descriptive words that usually come with it in the same sentence
+  — `erect`, `spreading`, `open`, `dense`, `sprawling`, `prostrate`, `bushy`,
+  `spindly`, `decumbent`, `tufted`, `compact`, and more — are themselves
+  direct `stem_growth_habit` allowed values (the *released* trait, not the
+  NVIS-branch ones) and were missed across four different species in this
+  project before this was caught, always because only `plant_growth_form` was
+  checked. When a leftover word still doesn't fit `stem_growth_habit`, check
+  `plant_canopy_form` (crown silhouette — `rounded`, `open-crowned`,
+  `spreading`, ...) and `stem_constitution` (mechanical character —
+  `spindly`, `wiry`, `robust`, `straggly`, ...), both NVIS-branch traits (see
+  `nvis_growth_form_traits.md`). `spindly` in particular is a real allowed
+  value of *both* `stem_growth_habit` and `stem_constitution` and can
+  genuinely warrant a row on each, since they're recording different facets
+  (architecture vs. rigidity) of the same word.
+- **A climbing plant's stem-length measurement scores on *two* real traits at
+  once: `stem_length` (continuous, m — "maximum length or extent of a
+  plant's stems", any growth form) and `plant_height_climbing_plant`
+  (continuous, m — specifically "maximum vertical height of the vegetative
+  shoot system of a non-self-supporting taxon"). Both genuinely apply to the
+  same source figure for a vine/liana/climber (e.g. "climbing stems are 3-5 m
+  long") — score the same value on both rows rather than picking one, same
+  one-clause-many-real-traits pattern as elsewhere in this file. Only use
+  `plant_height_climbing_plant` when the growth form is actually a climber
+  (`plant_growth_form = climber`/`climber_herbaceous`/`climber_woody`);
+  `stem_length` alone is the right call for a non-climbing plant with a
+  notably long stem.
+
+## Leaves
+
+- **Compound leaves — leaflet dimensions have their own real, dedicated
+  traits: `leaflet_length`/`leaflet_width` (continuous, cm) and
+  `leaflet_count` (numeric, `{count}`).** Don't force leaflet length/width
+  onto `leaf_length`/`leaf_width` (those are whole-leaf traits) — this
+  happened once in this project and was corrected. **Leaflet *shape*, by
+  contrast, has no dedicated trait — map it directly to `leaf_shape` with
+  `context = "leaflet"`,** not a proposed new trait; this is a legitimate
+  direct use of `leaf_shape`'s own concept (2D outline) applied to a
+  leaflet, not an unrelated-structure vocabulary reuse the "never name the
+  donor trait" rule is meant to catch (that rule is about borrowing a
+  trait's *vocabulary style* for a genuinely different concept, like reusing
+  `leaf_base_shape`'s terms for a petal tip — not about the same concept
+  measured on a smaller leaf-like organ). **When a compound leaf's overall
+  length is given as the length of its rachis** (the axis the leaflets
+  attach to — sometimes stated as its own figure alongside individual
+  leaflet dimensions), **that rachis length is the real APD trait
+  `leaf_length`** (whole-leaf length, base to tip) — score both the raw
+  `rachis_length` observation and `leaf_length` from the same figure, rather
+  than treating rachis length as merely a proposed trait with no released
+  equivalent. Rachis *width*, by contrast, doesn't have a `leaf_width`
+  equivalent (leaf width is normally the spread across the blade/leaflets,
+  not the diameter of the central axis) — keep that as its own proposed trait.
+- **`leaf_phyllotaxis` (categorical: `alternate`/`opposite`/`whorled`)** is
+  the real trait for leaf position at a *single stem node* — newer-copy only.
+  Easy to conflate with `leaf_arrangement` (a genuinely different trait: the
+  3D pattern along the *whole shoot* — `decussate`/`distichous`/`spiral`/
+  `crowded`/etc. — with no alternate/opposite/whorled values of its own). A
+  source description often warrants a row on *both*: "opposite pairs,
+  alternate pairs at right angles to each other" is `leaf_arrangement =
+  decussate` **and** `leaf_phyllotaxis = opposite` (decussate is by
+  definition opposite phyllotaxis rotated 90° between nodes).
+- **A stated leaf angle is `leaf_axil_angle` or `leaf_inclination_angle`, not
+  prose to leave unmatched.** `leaf_axil_angle` (continuous, deg, 0-180) is
+  the angle between the leaf and the stem at the axil — "spreading to
+  slightly more than 90° to the stem" is a direct, numeric match (record the
+  stated bound; "slightly more than 90" is a `min` of 90, not a range).
+  `leaf_inclination_angle` (continuous, deg, -90 to 90) is a different
+  measurement — the slope of the leaf blade itself relative to
+  horizontal/the sun — don't conflate the two just because both are called
+  an "angle"; check which one the source is actually describing (angle *at
+  the stem attachment* vs angle *of the blade*).
+- **`petiole_length`/`petiole_width` (continuous, cm) are real APD traits.**
+  A "sessile"/"stalkless" leaf is a genuine `petiole_length = 0` match, not a
+  gap — a sessile/stalkless structure is a real measurement (zero), not an
+  absence of one. A sessile *inflorescence* or *pedicel* is a different
+  structure with no real trait found so far — propose one (e.g.
+  `pedicel_length`) rather than reusing `petiole_length` for a non-leaf
+  stalk.
+- **"Egg-shaped" is the everyday name for both `ovate` and `obovate`** (an
+  inverted egg) — not a shape `leaf_shape` fails to cover, just described in
+  lay terms. Translate a plain-language synonym rather than defaulting to
+  `no_match`; record both plausible values as a space-delimited multi-value
+  string if nothing else in the source settles which one.
+- **`leaf_cross_section_shape`** (project trait, not APD; renamed from
+  `leaf_cross_section` — a cross-section is a "thing", a trait needs a
+  measured property) covers `keeled`/`conduplicate`/`terete`/`subterete`/
+  `flat`/`concave_convex`. See `new_traits.yml`.
+
+## Flowers & reproduction
+
+- **A part count for sepals, petals, *or* tepals is all the same APD trait**:
+  `flower_perianth_merism` (continuous, `{count}`) is explicitly "the count
+  of perianth parts (sepals, petals, and tepals) in each floral whorl" — not
+  tepal-specific despite that being its first use in this project.
+- **A "tubular" flower/corolla is a fusion measurement**: `flower_perianth_fusion`
+  (0-1 fusion-proportion; a stated partial fusion like "connate for 1/4 of
+  length" is `0.25`) scores a tubular corolla as `1` — the tube shape *is*
+  what full perianth-part fusion looks like. Check whether a fused-sounding
+  shape word ("tubular"/"funnel-shaped") is actually describing fusion
+  before leaving it `no_apd_trait`.
+- **`flower_length` (continuous, cm) is for the *whole flower*** — a single
+  length for an entire corolla/perianth (tube + limb, base to tip), even
+  when the source calls it "corolla length" or "perianth length". Does
+  *not* apply to one petal/tepal/sepal among several (a Fabaceae standard/
+  wing/keel measurement is a part measurement, not the whole flower).
+- **`flower_petal_length` (continuous, mm) is real** — petal *length* always
+  goes there directly, no need to propose anything. `flower_petal_width` has
+  no APD equivalent — that's `flower_petal_width` (project trait, mm) sibling
+  in `new_traits.yml`. A source describing multiple petal types on one
+  flower (Fabaceae standard/wing/keel) still maps each to
+  `flower_petal_length`/`flower_petal_width`, with a single-word `context`
+  naming which petal (`standard`, `wing`, `keel` — not phrases).
+- **`flower_diameter` (continuous, **cm**) is real** and has been in the
+  local `APD_traits.csv` cache the whole time — don't trust an older row's
+  `no_apd_trait` note at face value for common concepts like flower size,
+  re-search yourself. Watch the unit: cm, not mm, unlike most other floral
+  length/width traits.
+- **Inflorescence architecture terms (raceme, cyme, head, spike, umbel,
+  panicle, solitary, axillary) build toward one project trait:
+  `inflorescence_type`** (see `new_traits.yml` for the full accepted-value
+  list). Distinct from `inflorescence_shape` (silhouette — globose,
+  cylindrical, ovoid): "globose rounded head" is two facts, two rows.
+- **`flower_count_maximum` (numeric, `{count}`) is real, but it's a
+  whole-plant/whole-season total flower output — not a per-inflorescence
+  count.** "Up to 35 flowers" on one raceme/spike/head/capitulum is a
+  different, currently-unmatched-in-APD concept: the project trait
+  `flowers_per_inflorescence` (numeric, `{count}`, any architecture — see
+  `new_traits.yml`). A composite-head floret count (ray florets, disc
+  florets) is also a `flowers_per_inflorescence` count, with `context`
+  naming which floret type — a "head" is one of `inflorescence_type`'s
+  accepted architectures, so a per-head count is a per-inflorescence count.
+  This bug (forcing a per-structure count onto `flower_count_maximum`)
+  recurred across seven species in this project before being caught — always
+  double-check which of the two a source's flower count actually is.
+- **`reproductive_maturity`'s own definition is the age of *first*
+  flowering/first ability to set any seed at all** ("this trait will often
+  be scored as when plants first produce flowers, as this is easier to
+  score" — per the trait's own comments). Watch for sources that use the
+  words "reproductive maturity" for something else — a later, secondary
+  milestone (full/maximum reproductive output), distinguished from an
+  earlier "age of first flowering" figure in the same paragraph. The
+  *earlier* figure maps to APD's `reproductive_maturity`; the *later* one is
+  the project trait `age_maximum_reproductive_capacity` (see
+  `new_traits.yml`) — don't default to `reproductive_maturity` just because
+  the source happens to use that exact phrase for the later milestone.
+- **`senescence_onset` / `reproductive_maturity_to_senescence`** (project
+  traits, both age/duration in years) — age at which crown/whole-plant
+  senescence begins, and the sibling duration from reproductive maturity to
+  that point. See `new_traits.yml`. When both are given alongside a
+  `lifespan`/`max_lifespan` figure for the same species, sanity-check the
+  arithmetic: `reproductive_maturity` (age) + `reproductive_maturity_to_senescence`
+  (duration) sets a lower bound on when senescence begins, which itself sets
+  a lower bound on total lifespan — a `lifespan` figure smaller than that sum
+  is an internal inconsistency worth flagging (or correcting, with the
+  derivation shown) rather than silently recording as-is.
+- **`generation_time`** (raw-extraction label; not `generation_length` —
+  length is a spatial dimension, not a duration) — left as `no_apd_trait`/
+  unformalized for now, not yet a project trait.
+- **Pollination — three distinct traits, pick by what kind of evidence the
+  sentence reports, not just whether a pollinator taxon is named:**
+  - `pollination_syndrome` — a *flower-morphology-based inference* about
+    what probably pollinates a flower shaped a certain way.
+  - `pollination_vector_possible` (newer-copy only; values incl. `wasp`/
+    `bee`/`bird`/`ant`/`autonomous`/etc.) — an *actual or likely floral
+    visitor* a source names (observed, or "potential pollinators recorded
+    interacting with"). If a source names a wasp genus, "beetles directly
+    observed," "at least 12 genera of bee recorded interacting with," etc.,
+    that's vector-possible data, not syndrome data, even when the wording
+    sounds similar.
+  - `pollination_vector_known` — direct pollen-transfer/seed-set evidence.
+    Rarer in these profiles, but keep it in mind for exclusion-experiment or
+    explicit-observation language.
+- **`dispersers`** (newer-copy only; categorical, values incl. `ants`/
+  `wind`/`birds`/`water`/`abiotic`/etc.) is the disperser-side counterpart to
+  `pollination_vector_possible` — the actual/likely dispersal agent, distinct
+  from `dispersal_syndrome`'s morphology-based mechanism classification.
+  Whenever a source names an actual disperser ("dispersed by ants," "wind
+  dispersed"), score **both** `dispersal_syndrome` (e.g. `myrmecochory`/
+  `anemochory`) **and** `dispersers` (the named agent) from the same clause
+  — same cross-mapping relationship as `dispersal_syndrome`/
+  `dispersal_appendage` below.
+- **Dispersal structure vs dispersal mechanism are two different real
+  traits from one source clause**: an aril/elaiosome is `dispersal_appendage`
+  (the physical structure); the resulting dispersal syndrome (e.g.
+  `myrmecochory`) is `dispersal_syndrome` (the mechanism) — score both when
+  a source describes an appendage that explains a dispersal syndrome, rather
+  than picking one.
+
+## Fruit & seed
+
+- **A "pod" is a fruit, not a separate structure**: Acacia/legume "pod"
+  dimensions and shape are `fruit_length`/`fruit_width`/`fruit_type`
+  (`legume`/`legume_indehiscent`) — the same traits any other fruit maps to.
+- **Spines, thorns, and prickles have their own dedicated trait —
+  `plant_physical_defence_structures`** (`absent`/`sharp_pointed_defence`/
+  `prickle`/`pungent_leaf_apex`/`spine`/`stinging_or_irritant_hairs`/
+  `thorn`) — check this before reaching for `plant_spinescence`, whose
+  allowed values are density-*and*-size buckets (e.g.
+  `high_density_hard_spines_to_5mm`) that a plain qualitative statement like
+  "spine-tipped branches" usually can't support with any confidence.
+  `plant_physical_defence_structures` also distinguishes *which structure*
+  is sharp: a modified stem is `thorn`, a modified leaf/leaf-part (petiole,
+  midrib, stipule) is `spine`, a whole leaf ending sharply is
+  `pungent_leaf_apex`, a bark/epidermis outgrowth that's neither is
+  `prickle` — read which structure the source actually calls sharp rather
+  than defaulting to `spine` as the generic-sounding option.
+
+## Non-photosynthetic / parasitic plants
+
+- **A saprophyte/mycoheterotroph/parasite gets three separate real traits,
+  not one**: `plant_alternative_energy_and_nutrient_acquisition_strategy`
+  (`saprophyte`/`carnivorous`/`nutrient_mining` — use the source's own word
+  directly, it's usually a literal allowed value), `plant_photosynthetic_organ`
+  (`leaf`/`cladode`/`phyllode`/`non-photosynthetic_plant` — a leafless,
+  achlorophyllous, or "translucent white" plant is `non-photosynthetic_plant`),
+  and `parasitic` (whose `not_parasitic` value explicitly, deliberately
+  covers a fungal-partner symbiosis — a mycoheterotroph parasitises fungi,
+  not another plant, so it's `not_parasitic` here). All three are usually
+  worth a row when a source describes a non-photosynthetic plant.
+
+## Vegetative reproduction & ploidy
+
+- **`ploidy`** (numeric, count of chromosome sets, 1-4) is real - score directly
+  for "diploid"/"triploid"/"tetraploid" statements (triploid=3, etc.).
+- **`vegetative_reproduction_ability`** (categorical: `vegetative`/
+  `not_vegetative`) is a real, binary trait for whether a taxon can reproduce
+  asexually at all - distinct from `clonal_spread_mechanism` (categorical:
+  `root_buds`/`rhizome`/`stolon`/`bulb`/`corm`/etc. - the *specific structure*
+  used) which is a sibling trait for the mechanism itself. Both are in this
+  project's `config/traits.yml`, not yet in the released APD cache.
+- **`bud_bank_location`** (categorical: `bud-bearing_root` for root suckering,
+  `basal_stem_buds`/`epicormic_buds`/`rhizome`/etc.) records *where* the buds
+  that allow post-disturbance resprouting are located - overlapping in
+  concept with `clonal_spread_mechanism` but framed around disturbance
+  survival rather than vegetative spread; score both when the source
+  supports it, since they capture related but distinct angles on the same
+  underlying regeneration structure.
+
+## Fire & disturbance response
+
+- **Fire survival is a standing convention**: a source stating a species
+  "survives fire" or "survives burning" maps to `resprouting_capacity:
+  resprouts`, always — don't treat this as under-specified just because the
+  source doesn't spell out the mechanism. Only mark it unmatched if the
+  source is silent on fire response entirely.
+- **`resprouting_capacity` is specifically *post-fire* resprouting
+  capacity** ("fewer than 30% of plants resprout following a fire with 100%
+  leaf scorch" is its `fire_killed` definition, for scale) — don't blend it
+  with resprouting after a *different* disturbance (browsing, cyclone,
+  drought, mechanical damage). Those get `resprouting_capacity_non_fire_disturbance`
+  (`resprouts_non_fire_disturbance`/`resprouts_after_cyclone`/
+  `resprouts_after_drought`) — an obligate-seeding (fire-killed) species that
+  still shows some resprouting after heavy browsing is `fire_killed` on
+  `resprouting_capacity` **and** `resprouts_non_fire_disturbance` on
+  `resprouting_capacity_non_fire_disturbance`, two rows, never one blended
+  `partial_resprouting` guess. Narrower siblings worth checking when a
+  source gives that level of detail: `resprouting_capacity_juvenile`,
+  `resprouting_capacity_proportion_individuals`,
+  `resprouting_capacity_time_from_germination`,
+  `resprouting_capacity_stem_ratio`.
+- **`seedling_establishment_conditions`** (newer-copy only; categorical:
+  `establish_anytime`/`establish_post_disturbance`/`establish_post_fire`/
+  `establish_intermediate_to_mature_vegetation`) — the successional
+  conditions under which seedlings establish. Distinct from
+  `post_fire_recruitment` (binary: was post-fire germination observed at
+  all) and worth adding *alongside* it whenever a fire-recruitment sentence
+  is precise enough to also support `establish_post_fire`. General
+  disturbance language that isn't fire-specific ("responds to disturbance,"
+  "early recruit in newly disturbed areas," "pioneer species") maps to
+  `establish_post_disturbance` — watch for this especially in "Fluctuating
+  populations"/"Disturbance"/habitat-ecology prose, which is easy to skim
+  past without extracting a row at all.
+- **`flowering_cues` and `post_fire_flowering`** (newer-copy only) — for
+  "flowering is promoted/stimulated by fire" language. `flowering_cues`
+  (categorical: `fire`/`floods`/`rain`/`rain_obligate`/etc.) is the simple
+  presence check; `post_fire_flowering` (categorical:
+  `fire_dependent_flowering`/`fire_enhanced_flowering`/
+  `fire_independent_flowering`/`fire_suppressed_flowering`) is more precise
+  when before/after counts are given (usually `fire_enhanced_flowering`).
+  Neither is `post_fire_recruitment` — that's specifically about seed
+  germination/seedling establishment, not increased flowering in
+  already-established plants.
+- **`life_history_ephemeral_class`** (newer-copy only; categorical:
+  `disturbance_ephemeral`/`fire_ephemeral`/`fire_ephemeral_obligate`/
+  `fire_ephemeral_facultative`/`rain_ephemeral`) — for genuinely short-lived,
+  disturbance/fire/rain-triggered species. Not every species with *a*
+  disturbance response is ephemeral — check the plant itself germinates,
+  completes its life cycle, and dies within roughly a single
+  disturbance-to-disturbance interval before using this.
+
+## Other whole-plant traits
+
+- **Salt tolerance has two distinct APD traits** — pick based on what the
+  source actually states: `plant_tolerance_salt` (categorical:
+  `glycophyte`/`halophyte`/`halophyte_moderate`/`hydrohalophyte`/
+  `salt_spray_tolerant`/`xerohalophyte`/`salinity_tolerance_undefined`) for a
+  qualitative statement ("not salt tolerant" → `glycophyte`, the standard
+  term for a salt-*intolerant* plant); reserve `plant_tolerance_soil_salinity`
+  (continuous, dS/m) for when the source gives an actual numeric conductivity
+  threshold. Don't force a qualitative statement onto the continuous trait
+  just because it sounds like the same topic.
+
+## Ferns (non-flowering species)
+
+- **A fern's fronds are its leaves** — map frond length/width straight onto
+  `leaf_length`/`leaf_width` (high confidence, not a stretch reuse); the stipe
+  (frond stalk) is the petiole-equivalent structure. Flower/fruit/seed traits
+  obviously don't apply at all to ferns; don't force them.
+- **`plant_growth_substrate`** (categorical: `aquatic`/`epiphyte`/
+  `hemiepiphyte`/`lithophyte`/`marine`/`semiaquatic`/`terrestrial`) is a real
+  trait defined in this project's `config/traits.yml` (carries its own APD
+  `entity_URI` but isn't yet in the released `APD_traits.csv` cache) —
+  exactly the right trait for "epiphyte on trees" / "lithophyte on rocks"
+  statements, which come up constantly for ferns and orchids. Score it at the
+  same confidence tier as other config/traits.yml-only vocab (`high` for a
+  direct match, not `no_apd_trait`) — it's easy to miss since it's a whole-
+  plant substrate trait, distinct from `habitat`.
+- `plant_growth_form`'s allowed values include `fern` and `lycophyte`
+  directly — use them rather than falling back to `herb`.
+
+## Dioecy / plant sex
+
+- **`sex_type`** (categorical: `dioecious`/`monoecious`/`hermaphrodite`/
+  `androdioecious`/`gynodioecious`/and other mixed-system terms) is a real
+  trait in this project's `config/traits.yml` (APD `entity_URI`, not yet in
+  the released `APD_traits.csv` cache) — score it directly whenever a source
+  states a species is dioecious/monoecious/etc., rather than treating it as
+  no_apd_trait. High confidence for a direct statement.
+
+## Population & range metrics
+
+`population_count`, `subpopulation_count`, `individual_count` (all numeric,
+`{count}`), `extent_of_occurrence`, `area_of_occupancy` (both numeric, km² —
+the standard IUCN EOO/AOO metrics; use these exact names) live in this
+project's own `config/traits.yml`, not the released APD. A source's "known
+from N populations" and "approximately X mature individuals" are two
+distinct real traits, not one blended `population_size` prose row — keep
+them as separate rows even when the source states them in the same
+sentence. Unlike the largely-undocumented habitat/soil vocabulary in
+`config/traits.yml` (labels/descriptions still literal `XX` placeholders,
+term-matching judgment calls, hold at `medium`), these five are
+fully-defined, unambiguous project traits expected to feed into a future
+released APD version — score them at `new_trait` confidence, not `medium`.
+
+- **When a source gives both a per-site/per-population breakdown and an
+  overall total, record both — always, not just when it's convenient.** A
+  source that says "Population A: 350 individuals, Population B: 2,000
+  individuals... approximately 2,500 individuals in total" is reporting two
+  distinct, both-worth-keeping facts: several `individual_count` rows, one
+  per named population (`context` = the population/site name), **and** a
+  separate `individual_count` row for the overall total (`context` = e.g.
+  "total across all populations", or naming which census/estimate the total
+  came from if the source gives more than one over time). The per-population
+  rows let a reader see the actual distribution across sites (which one
+  dominates, which are small and vulnerable); the total is what most
+  consumers of the combined file will actually want to filter on. Don't
+  drop the total because the per-population rows already imply it (the
+  source did the summing, not you — recording both is more faithful than
+  making a reader re-derive the total, and a source's stated total sometimes
+  doesn't exactly equal the simple sum of the parts given, e.g. because of
+  unsampled areas), and don't drop the per-population rows because the total
+  is more concise. Same pattern applies to `population_count`/
+  `subpopulation_count` when a source gives both a count of fine-grained
+  units and a count of the broader groupings they fall into — record
+  both levels, never only the one that seems more "official".
+- **A source's "locality"/"area"/"region" count is still `population_count`
+  — map it there, don't leave it unmatched.** A source frequently uses its
+  own looser vocabulary ("two general localities", "three disjunct areas")
+  for what is, functionally, a population-level breakdown, even when the
+  same document separately gives a finer-grained count under the word
+  "population" itself. Both are genuine `population_count` facts at
+  different granularities — map both to `population_count`, and use
+  `context` to say which grouping each row counts (e.g. `context =
+  "localities"` for the broader figure, blank or naming the finer unit for
+  the other) so a reader can tell them apart without guessing. Don't invent
+  a reason to leave the looser figure unmatched (it is not a
+  `subpopulation_count`, which is normally a *finer* subdivision than
+  population, not a broader one) and don't silently pick only one of the
+  two granularities to record.
+
+## Project-proposed traits (see `new_traits.yml` for the definitive, current list)
+
+`new_traits.yml` is the single source of truth for every trait this project
+has proposed and (at least tentatively) accepted — don't duplicate its
+allowed-value lists here; check it directly. As of the last major pass it
+includes: `peduncle_length`, `leaf_apex_shape`, `inflorescence_type`,
+`leaf_cross_section_shape`, `senescence_onset`,
+`reproductive_maturity_to_senescence`, `age_maximum_reproductive_capacity`,
+`flowers_per_inflorescence`, `flower_petal_width`.
