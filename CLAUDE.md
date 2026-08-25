@@ -16,6 +16,23 @@ scaffold (`build.R`, `remake.yml`, `config/`) — that machinery is vestigial
 boilerplate for this project and not part of the active susceptibility
 pipeline described below.
 
+**A second, also-active workflow lives in `data_from_profiles/`**: extracting
+trait data from threatened-species conservation-advice/recovery-plan PDFs via
+the `species-profile-traits` Claude Code skill
+(`.claude/skills/species-profile-traits/SKILL.md` — read that first, and
+`data_from_profiles/README.md` for the column reference). This feeds the
+`habitat_risk`/trait-effect lookup tables the susceptibility pipeline above
+consumes, but is its own multi-session body of work, not a one-off task.
+Elizabeth runs this from two separate Claude Code accounts on alternating
+sessions (no live sync between them — both read/write the same files on
+disk, so an apparently half-finished batch mid-`data_from_profiles/` is
+normal evidence of a handoff between sessions, not a sign something broke).
+As of 2026-08-25: 91 species extracted (raw + APD-crosswalk CSV pairs,
+concatenated into `data_from_profiles/list_species_trait_data_apd.csv`),
+`data_from_profiles/APD_reference/new_traits.yml` holds every project-
+proposed trait/value accepted so far — check it fresh each session, since
+the other account may have added to it since you last looked.
+
 ## The master pipeline
 
 **`scripts/threatened_script_20250813.qmd`** is the single source of truth —
