@@ -1,0 +1,200 @@
+traits:
+  description: >
+    Trait proposals arising from the species-profile-traits extraction workflow
+    (see .claude/skills/species-profile-traits/SKILL.md). Each of these started
+    as a `proposed_new_trait` in one or more species' *_apd.csv crosswalk files
+    and has since been reviewed and accepted (match_confidence upgraded to
+    `new_trait` in those files). Structured to mirror config/traits.yml so it
+    can be merged there directly. Values listed under each trait are the ones
+    actually used so far in data_from_profiles/*_apd.csv - not necessarily
+    exhaustive; add a new allowed value here whenever a species needs one this
+    file doesn't yet have, keeping this file and the crosswalk rows in sync.
+  type: list
+  elements:
+    peduncle_length:
+      label: Peduncle length
+      description: >
+        The length of the peduncle - the stalk of a whole inflorescence, as
+        distinct from a pedicel (the stalk of one flower within a
+        multi-flowered inflorescence).
+      type: numeric
+      units: mm
+      allowed_values_min: 0.0
+      allowed_values_max: 500.0
+      status: accepted 2026-08-24
+      used_in: [acacia_lanuginophylla, boronia_boliviensis, hibbertia_abyssa]
+    leaf_apex_shape:
+      label: Leaf apex shape
+      description: >
+        The shape of the tip (apex) of a leaf. Parallel in structure and
+        naming convention to the existing APD trait leaf_base_shape, and
+        intended to reuse that trait's own vocabulary style where a term
+        genuinely fits, adding new terms only where leaf_base_shape's
+        vocabulary has no equivalent (e.g. apiculate).
+      type: categorical
+      allowed_values_levels:
+        acute: A leaf apex that comes to a point at an angle of less than 90 degrees.
+        obtuse: A leaf apex that comes to a point at an angle of more than 90 degrees.
+        rounded: A leaf apex that is rounded rather than pointed.
+        apiculate: A leaf apex ending abruptly in a small, sharp terminal point (a mucro).
+      status: accepted 2026-08-24
+      used_in: [andersonia_axilliflora, boronia_boliviensis, darwinia_carnea, daviesia_bursarioides, eriocaulon_carsonii, grevillea_rara, hibbertia_abyssa, styphelia_capillaris]
+    inflorescence_type:
+      label: Inflorescence type
+      description: >
+        The branching architecture category of an inflorescence - distinct
+        from inflorescence_shape, which records the overall silhouette
+        (e.g. globose, cylindrical) rather than the architecture.
+      type: categorical
+      allowed_values_levels:
+        raceme: An unbranched, elongated inflorescence with individually stalked flowers.
+        cyme: A branched inflorescence in which each growing point terminates in a flower.
+        head: A dense, condensed inflorescence of many sessile or subsessile flowers, resembling a single flower.
+        solitary: A single flower borne alone, not part of a multi-flowered inflorescence.
+        axillary: An inflorescence borne in a leaf axil (a position descriptor, often recorded alongside an architecture term in source descriptions).
+      status: accepted 2026-08-24
+      used_in: [acacia_lanuginophylla, daviesia_bursarioides, eriocaulon_carsonii, hibbertia_abyssa, pityrodia_axillaris, styphelia_capillaris, tetratheca_aphylla, grevillea_flexuosa, cossinia_australiana, xerothamnella_parvifolia, acacia_flocktoniae, eucalyptus_conglomerata, cupaniopsis_tomentella, daviesia_euphorbioides, asterolasia_phebalioides, acacia_grandifolia, daviesia_discolor, conostylis_dielsii_teres, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea]
+    leaf_cross_section_shape:
+      label: Leaf cross-section shape
+      description: >
+        The shape of a leaf in transverse (cross) section - distinct from
+        leaf_shape, which records the leaf's 2D outline as seen face-on, and
+        from leaf_lamina_division, which records how deeply/how a leaf is
+        divided or lobed.
+      type: categorical
+      allowed_values_levels:
+        keeled: A leaf with a ridge (keel) along the midline in cross-section, like the keel of a boat.
+        conduplicate: A leaf folded lengthwise along the midrib, V-shaped in cross-section.
+        terete: A leaf circular in cross-section.
+        subterete: A leaf almost circular in cross-section.
+        flat: A leaf flat (not folded, ridged, or curved) in cross-section.
+        concave_convex: A leaf slightly concave on the upper (adaxial) surface and slightly convex on the lower (abaxial) surface in cross-section.
+      status: accepted 2026-08-24
+      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres]
+    stem_cross_section_shape:
+      label: Stem cross-section shape
+      description: >
+        The shape of a stem, branch, or branchlet in transverse (cross)
+        section - the stem-axis parallel to the existing project trait
+        leaf_cross_section_shape, and reused with a context note (e.g.
+        context="inflorescence axis", context="filament") for other
+        elongated axis-like structures a source describes the same way.
+        Distinct from stem_cross_sectional_area, a dimension trait, not a
+        shape descriptor.
+      type: categorical
+      allowed_values_levels:
+        terete: A stem circular in cross-section.
+        winged: A stem with flattened, wing-like extensions running along its length.
+        angular: A stem with distinct angles or ridges in cross-section, of unspecified number.
+        quadrangular: A stem square or four-angled in cross-section.
+      status: accepted 2026-08-25
+      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris]
+    fruit_shape:
+      label: Fruit shape
+      description: >
+        The 3-dimensional shape of a fruit. Allowed values are identical to
+        the existing APD trait seed_shape, applied here to the fruit as a
+        whole (pod, capsule, drupe, etc.) rather than the seed inside it -
+        the two structures are routinely described with the same shape
+        vocabulary in source text, and no dedicated fruit-shape trait exists
+        in the released APD.
+      type: categorical
+      allowed_values_levels:
+        comma-shaped: A seed displaying a single arc of curvature, such that it bilaterally symmetrical.
+        conical: Cone-shaped, with a broad flat base and narrow apex; turbinate refers to the inverse shape.
+        cuneate: A 3-dimensional shape that is wedge-shaped or boat-shaped.
+        cylindrical: A cylinder, a shape with a flat top and bottom that are circular or elliptical in outline and are linked by a curved surface.
+        discoid: A subset of cylinder, a shape with a flat, circular or elliptical top and bottom, linked by a curved surface, where the length of the curved surface is much shorter than the cross-section of the flat surfaces.
+        ellipsoid: A 3-dimensional shape that is elliptic in long section and circular in cross section; length-to-width ratio between 2:1 and 3:2.
+        ellipsoid_flattened: A 3-dimensional shape that is elliptic in long section and laterally compressed/flattened such that it is non-circular in cross section; length-to-width ratio between 2:1 and 3:2.
+        fusiform: Spindle-shaped; a 3-dimensional shape that is narrowly ellipsoid, circular in cross-section and tapering sharply toward both ends.
+        globoid: A 3-dimensional shape that is circular in both long section and cross section.
+        globoid_flattened: A 3-dimensional shape that is circular in both long section and somewhat flattened such that it is non-circular in cross section.
+        hemispheric: Half a sphere or globe, with a flat base, domed top, and circular in cross-section.
+        hemispheric_flattened: A 3-dimensional shape that is a laterally compressed/flattened half-sphere or globe; shape has a flat base, a domed top, and is elliptical in cross-section.
+        lenticular: Shaped like a biconvex lens and circular in cross section; shaped like a lentil.
+        orbicular: A poorly defined term that remains in AusTraits only as a placeholder; it appears to be used as both globoid (spherical) and lenticular by different authors.
+        ovoid: A 3-dimensional shape that is egg-shaped in long section and circular in cross section, including variants such as pyriform (pear-shaped) and obovoid (inversely egg-shaped).
+        ovoid_elongated: A 3-dimensional shape that is egg-shaped in long section and circular in cross section, where the length dimension is much longer than the width/height dimensions - includes club-shaped (clavate/obclavate) and tear-shaped (lachrimiform) variants.
+        ovoid_flattened: A 3-dimensional shape that is egg-shaped in long section and laterally compressed/flattened such that it is non-circular in cross section.
+        polyhedral: A 3-dimensional shape with distinct, fairly flat faces and edges; includes prisms and tetrahedral shapes.
+        polyhedral_elongated: A 3-dimensional shape with distinct, fairly flat faces and edges, where the length dimension is much longer than the width/height dimensions; includes elongate prisms and elongate tetrahedral shapes.
+        polyhedral_inflated: A 3-dimensional shape with distinct faces and edges but the faces tend to bulge outwards.
+        reniform: Having a cross-section that is roughly circular with a notch; strictly a kidney-shape but the definition applied here includes heart-shaped and other notched shapes.
+        winged: A fruit with wings.
+        sectoroid: Shaped like an orange segment or wedge of a sphere.
+        sinusoidal: A shape with two arcs of curvature or a single arc, such that it lacks an axis of symmetry.
+      status: accepted 2026-08-25
+      used_in: []
+    senescence_onset:
+      label: Age at senescence onset
+      description: >
+        The age of a plant when whole-plant or crown senescence (dieback)
+        begins - distinct from lifespan (total duration, germination to
+        death) and reproductive_maturity (age of first seed set). Name is
+        provisional; may be renamed once formally reviewed.
+      type: numeric
+      units: a
+      allowed_values_min: 0.1
+      allowed_values_max: 1000.0
+      status: tentatively accepted 2026-08-25 - name not yet finalised
+      used_in: [daviesia_bursarioides]
+    reproductive_maturity_to_senescence:
+      label: Duration from reproductive maturity to senescence
+      description: >
+        The time interval (duration) from when a plant first reaches
+        reproductive maturity to when senescence onset begins - a sibling
+        measure to senescence_onset (an age) and distinct from lifespan
+        (total duration, germination to death).
+      type: numeric
+      units: a
+      allowed_values_min: 0.1
+      allowed_values_max: 1000.0
+      status: tentatively accepted 2026-08-25 - name not yet finalised
+      used_in: [boronia_boliviensis]
+    age_maximum_reproductive_capacity:
+      label: Age of maximum reproductive capacity
+      description: >
+        The age at which a plant reaches its full/maximum reproductive
+        output (flower and seed production), as distinct from the real APD
+        trait reproductive_maturity (the age of first flowering/ability to
+        set any seed at all). Some sources describe a two-stage reproductive
+        development - an earlier age of first flowering, then a later age
+        of full reproductive capacity - and label the *later* milestone
+        "reproductive maturity" in their own terminology; that later
+        milestone should be scored here, not under APD's reproductive_maturity,
+        which by its own definition corresponds to first flowering.
+      type: numeric
+      units: a
+      allowed_values_min: 0.1
+      allowed_values_max: 1000.0
+      status: accepted 2026-08-25
+      used_in: [darwinia_carnea]
+    flowers_per_inflorescence:
+      label: Flowers per inflorescence
+      description: >
+        The number of flowers borne on a single inflorescence (raceme, spike,
+        head, panicle, corymb, umbel, etc.), regardless of inflorescence
+        architecture. Distinct from the existing real APD trait
+        flower_count_maximum, which records a whole-plant/whole-season total
+        flower output, not a per-inflorescence count.
+      type: numeric
+      units: '{count}'
+      allowed_values_min: 1.0
+      allowed_values_max: 1000.0
+      status: accepted 2026-08-25
+      used_in: [caladenia_tessellata, zieria_collina, prasophyllum_affine, prasophyllum_goldsackii, olearia_flocktoniae, daviesia_bursarioides, acacia_lobulata, acacia_lanuginophylla, boronia_boliviensis, dryandra_montana, darwinia_carnea, wurmbea_calcicola, andersonia_axilliflora, dipodium_pictum, lasiopetalum_rotundifolium, eucalyptus_insularis, eucalyptus_conglomerata, daviesia_discolor, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea]
+    flower_petal_width:
+      label: Flower petal width
+      description: >
+        The width of an individual flower petal - the width-axis sibling of
+        the existing real APD trait flower_petal_length. Note: petal
+        *length* already has a real, dedicated APD trait
+        (flower_petal_length) and should always be scored there directly,
+        never proposed as a new trait.
+      type: numeric
+      units: mm
+      allowed_values_min: 1.0
+      allowed_values_max: 100.0
+      status: accepted 2026-08-25
+      used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla]
