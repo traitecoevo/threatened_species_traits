@@ -37,7 +37,7 @@ Eremophila glabra subsp. Scaddan (C.Turley s.n. 10/11/2005), found in highly dis
 Eremophila resinosa, occurs on soil types from sandy loams to loams and clays in open mallee ,,,,,,,,,,,mallee,mallee,,,,,clay loam sand,clays loams sandy,,
 Eremophila subangustifolia, woodland with a mixed Acacia scrub understorey ,,,,,,,,,,,scrubland woodland,scrub woodland,,,,,,,,
 Eremophila virens, preferred habitat appears to be areas of lightbrown to red ,,,,,,,,,,,,,brown_light red,lightbrown red,,,,,,
-Eryngium fontanum, sandy loam over granite in rocky situations growing in thicket or shrub with acacias and sheoaks ,,,,,,,,,,,thickets rocky,thicket rocky,,,granitic,granite,loam sand soil_rocky,loam sandy rocky,,
+Eryngium fontanum, sandy loam over granite in rocky situations growing in thicket or shrub with acacias and sheoaks ,,,,,,,,,,,error,thicket rocky,,,granitic,granite,loam sand soil_rocky,loam sandy rocky,,
 Euphorbia obliqua, sandy beach herbland ,,,,,,,,,,,herbfield beach,herbland beach,,,,,sand,sandy,,
 Euphrasia amphisysepala, restricted to coastal dolerite southeast or southwest facing cliffs on the Tasman Peninsula It tends to occur on relatively moist and shady ledges rock crevices and on patches of bareground extending from the base to the tops of cliffs ,,,,,,,moist,moist,cliff coastal rock_ledge,cliffs coastal ledges,ground_base crevices cliffs,bareground crevices cliffs cliffs,,,dolerite,dolerite,,,,
 Euphrasia collina subsp. osbornii, also occurs in vastly different habitats from malleescrubland heathy openings in wetsclerophyllforests to exposed coastal cliffs Barker 1982 has been recorded from eight main habitat types  generally open eucalyptus woodland coastal cliffs and inland swamps Even though these habitats vary greatly they have two features in common they are relatively moist and relatively open ,,,,,common,common,wet moist,swamps moist wets,cliff coastal,cliffs coastal,forest_wet_sclerophyll mallee swamp cliffs woodland,wetsclerophyllforests mallees swamps cliffs cliffs woodland,,,,,,,,
@@ -153,3 +153,4 @@ Pomaderris cocoparrana, rockysites ,,,,,,,,,rocky,rockysites,rocky,rockys,,,,,so
 Xanthorrhoea arenaria, occurs in coastal sandy heath ,,,,,,,,,coastal,coastal,heath,heath,,,,,sand,sandy,,
 Grevillea hodgei, in welldrained sandy or rockysoils in openforests and woodlands ,,,,,,,,,,,forest_open rocky woodland,openforests rockys woodlands,,,,,soil_rocky sand,rockysoils sandy rockys,draining,welldrained welldrained
 Hibbertia carinata, scrub or openscrub on welldrained gravelly sand or yellow sand with some gravel ,,,,,,,,,,,scrubland_open scrubland,openscrub scrub,yellow,yellow,,,gravel sand,gravel gravelly sand,draining,welldrained welldrained
+Eryngium fontanum,,,,,,,,,,,,springs,springs,,,,,,,,

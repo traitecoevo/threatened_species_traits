@@ -1,0 +1,121 @@
+source:
+  primary:
+    key: SNES_2019
+    bibtype: Unpublished
+    year: 2019
+    author: Rachael Gallagher
+    title: 'Unpublished dataset: Species of National Environmental Significance maps,
+      Western Sydney University'
+contributors:
+  data_collectors:
+  - last_name: Gallagher
+    given_name: Rachael
+    ORCID: unknown
+    affiliation: unknown
+  dataset_curators: Elizabeth Wenk
+dataset:
+  data_is_long_format: no
+  custom_R_code: .na
+  collection_date: 2019/2019
+  taxon_name: Taxon
+  location_name: .na
+  description: Species range based on 'known to occur' data in the Species of National
+    Environmental Significance maps.
+  basis_of_record: field
+  life_stage: adult
+  sampling_strategy: Species range based on 'known to occur' data in the Species of
+    National Environmental Significance maps.
+  original_file: .na
+  notes: none
+identifiers: .na
+locations: .na
+contexts: .na
+traits:
+- var_in: MNES_DCCEEW maps
+  unit_in: km2
+  trait_name: area_of_occupancy
+  entity_type: species
+  value_type: raw
+  basis_of_value: measurement
+  replicates: 1
+  methods: Species range based on 'known to occur' data in the Species of National
+    Environmental Significance maps.
+substitutions: .na
+taxonomic_updates:
+- find: Eucalyptus sp. Cattai (Gregson s.n., 28 Aug 1954)
+  replace: Eucalyptus sp. Cattai (Gregson s.n. 28 Aug 1954)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Latrobea colophona
+  replace: Latrobea colophon
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Melaleuca sp. Wanneroo (G.J. Keighery 16705)
+  replace: Melaleuca sp. Wanneroo (G.J.Keighery 16705)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Pterostylis X aenigma
+  replace: Pterostylis x aenigma
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Synaphea sp. Fairbridge Farm (D. Papenfus 696)
+  replace: Synaphea sp. Fairbridge Farm (D.Papenfus 696)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Synaphea sp. Pinjarra (R. Davis 6578)
+  replace: Synaphea sp. Pinjarra (R.Davis 6578)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Synaphea sp. Serpentine (G.R. Brand 103)
+  replace: Synaphea sp. Serpentine (G.R.Brand 103)
+  reason: Fuzzy match of taxon name to an APC-accepted canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Lasiopetalum sp. Mount Caroline (S.D. Hopper SDH 6381)
+  replace: Lasiopetalum sp. Mount Caroline (S.D.Hopper SDH 6381)
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Leucopogon sp. Ongerup (A.S. George 16682)
+  replace: Leucopogon sp. Ongerup (A.S.George 16682)
+  reason: Fuzzy match of taxon name to an APC-known canonical name once punctuation
+    and filler words are removed (2026-09-01)
+  taxonomic_resolution: species
+- find: Acacia terminalis subsp. terminalis MS
+  replace: Acacia terminalis
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2026-09-01)
+  taxonomic_resolution: species
+- find: Bruguiera hainesii
+  replace: Bruguiera x hainesii
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2026-09-01)
+  taxonomic_resolution: species
+- find: Eucalyptus lateritica
+  replace: Eucalyptus x lateritica
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2026-09-01)
+  taxonomic_resolution: species
+- find: Gaultheria viridicarpa J.B.Williams subsp. viridicarpa ms.
+  replace: Gaultheria viridicarpa
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2026-09-01)
+  taxonomic_resolution: species
+- find: Hypocalymma sp. Cascade (R. Bruhn 20896)
+  replace: Hypocalymma sp. Cascade (R.Bruhn 20896 CAS)
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2026-09-01)
+  taxonomic_resolution: species
+- find: Synaphea sp. Pinjarra Plain (A.S. George 17182)
+  replace: Synaphea sp. Pinjarra Plain (A.S.George 17182)
+  reason: Exact match of the first two words of the taxon name to an APC-accepted
+    canonical name (2026-09-01)
+  taxonomic_resolution: species
+exclude_observations: .na
+questions: .na
