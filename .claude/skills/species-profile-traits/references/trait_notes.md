@@ -7,8 +7,9 @@ entry under the right heading (create a heading if none fits) whenever a
 species surfaces a new one, rather than appending to the bottom.
 
 Every trait named here that isn't explicitly marked "project trait" or
-"NVIS-branch" is a real trait in `data_from_profiles/APD_reference/APD_traits.csv`
-(the released APD) or in `/Users/z3524079/GitHub/austraits.build/config/traits.yml`
+"NVIS-branch" is a real trait in the cached `APD_traits.csv` (see SKILL.md's
+"File locations" section for its current path — it moved off the git repo
+2026-09-01) (the released APD) or in `/Users/z3524079/GitHub/austraits.build/config/traits.yml`
 (the newer, richer copy — see SKILL.md's vocabulary-sources list for why
 several traits below live only there). Check both before concluding a concept
 has no real trait.
@@ -481,6 +482,21 @@ sentence. Unlike the largely-undocumented habitat/soil vocabulary in
 term-matching judgment calls, hold at `medium`), these five are
 fully-defined, unambiguous project traits expected to feed into a future
 released APD version — score them at `new_trait` confidence, not `medium`.
+
+**`extent_of_occurrence`/`area_of_occupancy` specifically need consistent,
+active extraction on every species (maintainer directive, 2026-09-01) — treat
+this as a checklist item, not an incidental catch.** Most conservation
+advices state at least one of the two explicitly (often in a "Distribution
+and Habitat" or listing-assessment section, sometimes only in an attachment/
+appendix with the formal IUCN criteria) — actively look for "extent of
+occurrence", "EOO", "area of occupancy", "AOO", or a stated km² figure tied
+to either concept, rather than waiting for it to surface incidentally. Always
+use the exact raw_trait names `extent_of_occurrence` and `area_of_occupancy`
+(never the bare abbreviations `EOO`/`AOO` as the raw_trait label — that's a
+recurring alias problem, see below) so rows are findable and comparable
+across species without a corpus-wide grep for synonyms. If the source
+genuinely states neither figure, that's fine — but don't skip the search
+just because a species' profile is short.
 
 - **When a source gives both a per-site/per-population breakdown and an
   overall total, record both — always, not just when it's convenient.** A

@@ -24,6 +24,32 @@ whenever you're deciding where a row belongs and the answer isn't obvious from
 the rules below; add a new entry there (not here) whenever a species surfaces
 something not yet covered.**
 
+## File locations (updated 2026-09-01)
+
+Per-species working files and the two large read-only APD reference caches
+moved out of the git repo to keep the repo from filling up with clutter —
+don't write per-species files under the repo's `data_from_profiles/` anymore:
+
+- **Source PDFs**: `/Users/z3524079/Library/CloudStorage/OneDrive-UNSW(2)/Documents/threatened_species/threatened species susceptibility/threatened species profiles/approved_conservation_advice/`
+- **Per-species stage-1/stage-2 files** (`<species>.csv`, `<species>_apd.csv`) —
+  write these to `/Users/z3524079/Library/CloudStorage/OneDrive-UNSW(2)/Documents/threatened_species/threatened species susceptibility/threatened species profiles/scraped convseration advice files/`
+  (yes, "convseration" — that's the real folder name, a typo baked into the
+  path; don't "fix" it). Not tracked by git.
+- **APD reference — read-only caches** (`APD_traits.csv`,
+  `APD_categorical_values.csv`): also at `.../scraped convseration advice
+  files/APD_reference/`, alongside the per-species files. Not tracked by git.
+- **APD reference — trait definitions this project maintains**
+  (`new_traits.yml`, `project_approved_extensions.csv`): stay in the git repo
+  at `data_from_profiles/APD_reference/` — the maintainer wants these
+  version-controlled since they're actively-edited decisions, not a static
+  cache. **Read and write these at the git repo path, not the OneDrive one**,
+  even though a copy also happens to exist on OneDrive from an earlier move —
+  the git copy is authoritative; don't let the two drift.
+- **Combined table** (`list_species_trait_data_apd.csv`) — stays at the git
+  repo path, `data_from_profiles/list_species_trait_data_apd.csv`. This is
+  "the overall table" the maintainer refers to — the only per-run output that
+  belongs in git besides the trait definitions above.
+
 ## Stage 1 — extract raw traits from the PDF
 
 **Locate the right section before reading everything.** These PDFs run 5–40+ pages.
@@ -51,8 +77,9 @@ fire response, flood tolerance, competing species, disturbance relationships). S
 anything that's pure conservation-status/legislative bookkeeping (listing category,
 Act citations, review dates) — that's not a trait.
 
-**Write `data_from_profiles/<species_name_snake_case>.csv`** (taxon name lowercased, spaces
-→ underscores, e.g. `Eriocaulon carsonii` → `eriocaulon_carsonii.csv`) with columns:
+**Write `<species_name_snake_case>.csv`** (taxon name lowercased, spaces
+→ underscores, e.g. `Eriocaulon carsonii` → `eriocaulon_carsonii.csv`) in the
+per-species folder (see "File locations" above) with columns:
 
 ```
 taxon_name,trait_category,trait,value,value_type,context,source_section,source,notes
@@ -156,10 +183,11 @@ or from an atypical population.
 
 ### Vocabulary sources, in order of authority
 
-The APD (AusTraits Plant Dictionary) reference files are cached locally at
-`data_from_profiles/APD_reference/APD_traits.csv` (the trait dictionary — trait names,
-`trait_type`, `units`, `label`, `trait_groupings`) and
-`data_from_profiles/APD_reference/APD_categorical_values.csv` (allowed values, one per
+The APD (AusTraits Plant Dictionary) reference files are cached locally in the
+per-species folder's own `APD_reference/` subfolder (see "File locations"
+above — this is on OneDrive, not the git repo) at `APD_traits.csv` (the trait
+dictionary — trait names, `trait_type`, `units`, `label`, `trait_groupings`)
+and `APD_categorical_values.csv` (allowed values, one per
 row, in the `allowed_values_levels` column — **not** a column called `value`;
 double-check the header before concluding a term is "missing", since a wrong
 column name silently returns nothing and reads exactly like a genuine absence).
@@ -370,7 +398,8 @@ things here (see the last bullet), not a sign it doesn't exist:
    `max` rows, carry that split through here too (one crosswalk row per stage-1
    row) — never collapse back to a midpoint.
 
-**Write `data_from_profiles/<species_name_snake_case>_apd.csv`** with columns:
+**Write `<species_name_snake_case>_apd.csv`** in the same per-species folder,
+with columns:
 
 ```
 taxon_name,source,raw_trait,raw_value,value_type,context,value,units,apd_trait,apd_trait_type,apd_units,match_confidence,notes
@@ -407,10 +436,11 @@ running this check does:
 
 ```python
 import csv
-with open("data_from_profiles/APD_reference/APD_traits.csv") as f:
+SPECIES_DIR = "/Users/z3524079/Library/CloudStorage/OneDrive-UNSW(2)/Documents/threatened_species/threatened species susceptibility/threatened species profiles/scraped convseration advice files"
+with open(f"{SPECIES_DIR}/APD_reference/APD_traits.csv") as f:
     real_traits = set(row['trait'] for row in csv.DictReader(f))
 
-fp_raw, fp_apd = "data_from_profiles/<species>.csv", "data_from_profiles/<species>_apd.csv"
+fp_raw, fp_apd = f"{SPECIES_DIR}/<species>.csv", f"{SPECIES_DIR}/<species>_apd.csv"
 
 # 1. field-count integrity (every row has all 13 columns)
 with open(fp_apd, newline='') as f:
@@ -546,8 +576,9 @@ Keep the per-species `_apd.csv` files too (they're the auditable,
 one-document-at-a-time working copy, and the user has confirmed they want both);
 the combined file is a derived rebuild of all of them concatenated, not a separate
 hand-maintained thing. If you're not sure it's current, regenerate it from every
-`*_apd.csv` in `data_from_profiles/` (excluding the combined file itself) rather
-than trust a hand-edit to have kept it in sync.
+`*_apd.csv` in the per-species folder on OneDrive (see "File locations" above —
+not the git repo's `data_from_profiles/`, which no longer holds per-species
+files) rather than trust a hand-edit to have kept it in sync.
 
 **`references/example_apd_crosswalk.csv`** in this skill is the stage-2 counterpart
 to the worked example above — same *Eriocaulon carsonii* case, showing the min/max

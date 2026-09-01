@@ -59,11 +59,15 @@ ignore/
 *.png
 *.html
 
-# species-profile-traits skill output: per-species working CSVs are too
-# numerous for the repo (archived separately) - keep only the compiled
-# combined file (source of truth for downstream consumers) and the skill's
-# own trait-definition/reference files (data_from_profiles/APD_reference/,
-# a different directory, is unaffected by this rule)
+# species-profile-traits skill output: per-species working CSVs and the large
+# read-only APD reference caches live on OneDrive now (2026-09-01), not this
+# repo - keep only the compiled combined file (source of truth for downstream
+# consumers) and the trait-definition files in data_from_profiles/APD_reference/
+# (new_traits.yml, project_approved_extensions.csv - a different directory,
+# unaffected by this rule). This rule is now mostly a safety net against
+# accidentally re-adding per-species files here.
 data_from_profiles/*.csv
 !data_from_profiles/list_species_trait_data_apd.csv
+
+.DS_Store
 
