@@ -207,12 +207,18 @@ has no real trait.
   `{count}/{count}`, entity_URI `trait_0012351` — "the count of buds in an
   inflorescence, where an inflorescence can be either a single cluster of
   flowers or the entire reproductive shoot system"). This project spent a
-  long stretch treating the concept as an invented project trait
-  (`flowers_per_inflorescence`, now **superseded** — see the `SUPERSEDED`
-  entry still in `new_traits.yml` for the full correction history) before
-  discovering the real trait already covered it; score `buds_per_inflorescence`
-  directly at high confidence, never propose `flowers_per_inflorescence`
-  again. A composite-head floret count (ray florets, disc florets) is also a
+  long stretch treating the concept as an invented project trait,
+  `flowers_per_inflorescence` (numeric, `{count}`, allowed range 1–1000),
+  described as "the number of flowers borne on a single inflorescence
+  (raceme, spike, head, panicle, corymb, umbel, etc.), regardless of
+  inflorescence architecture" — before discovering, on 2026-08-25, that this
+  whole concept was already a real, released APD trait. `flowers_per_inflorescence`
+  is now **superseded** and must never be proposed again for a new species;
+  every species previously scored under it was retroactively corrected to
+  score `buds_per_inflorescence` directly at high confidence instead. Its
+  entry has been removed from `new_traits.yml` (this note is now the sole
+  record of the correction, kept here rather than there since it's a closed
+  historical fix, not a pending trait). A composite-head floret count (ray florets, disc florets) is also a
   `buds_per_inflorescence` count, with `context` naming which floret type —
   a "head" is one of `inflorescence_type`'s accepted architectures, so a
   per-head count is a per-inflorescence count. The trait's own "entire
@@ -234,9 +240,13 @@ has no real trait.
   milestone (full/maximum reproductive output), distinguished from an
   earlier "age of first flowering" figure in the same paragraph. The
   *earlier* figure maps to APD's `reproductive_maturity`; the *later* one is
-  the project trait `age_maximum_reproductive_capacity` (see
-  `new_traits.yml`) — don't default to `reproductive_maturity` just because
-  the source happens to use that exact phrase for the later milestone.
+  `reproduction_time_to_maximum_seeding` — a real, merged trait in
+  `austraits.build/config/traits.yml` as of 2026-09-02 (this project
+  originally proposed it as `age_maximum_reproductive_capacity`, still
+  findable under that old name in *Darwinia carnea*'s extraction notes and
+  git history, but score new species directly under the current name at
+  `high` confidence, not `new_trait`) — don't default to `reproductive_maturity`
+  just because the source happens to use that exact phrase for the later milestone.
 - **`senescence_onset` / `reproductive_maturity_to_senescence`** (project
   traits, both age/duration in years) — age at which crown/whole-plant
   senescence begins, and the sibling duration from reproductive maturity to
