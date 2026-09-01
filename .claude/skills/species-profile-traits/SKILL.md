@@ -253,10 +253,15 @@ things here (see the last bullet), not a sign it doesn't exist:
   (the `label`/`description` fields are still literal `XX` placeholders), so a
   match here is a term-matching judgment call, not a verified-definition one
   — hold confidence at `medium` unless the fit is unambiguous (the five
-  population/range metrics are an exception — score those at `new_trait`, see
-  the reference file); and always say "this project's own trait
-  (`config/traits.yml`), not core APD" in `notes`, so nobody mistakes it for a
-  released-APD match.
+  population/range metrics — `population_count`, `subpopulation_count`,
+  `individual_count`, `extent_of_occurrence`, `area_of_occupancy` — are
+  fully-defined numeric traits with no vocabulary-matching ambiguity, so an
+  unambiguous value match there scores `high`, same as any other unambiguous
+  fit; **don't** score these at `new_trait` — that tier is reserved for
+  traits still living only in `new_traits.yml`, pending merge into
+  `config/traits.yml`, and these five are already merged); and always say
+  "this project's own trait (`config/traits.yml`), not core APD" in `notes`,
+  so nobody mistakes it for a released-APD match.
 - **`/Users/z3524079/GitHub/austraits.build/config/traits.yml`** — a separate,
   newer, and noticeably richer copy of the trait dictionary than the one
   cached in this project's own `config/traits.yml` (last touched 2025-06-07).
@@ -402,15 +407,42 @@ things here (see the last bullet), not a sign it doesn't exist:
 with columns:
 
 ```
-taxon_name,source,raw_trait,raw_value,value_type,context,value,units,apd_trait,apd_trait_type,apd_units,match_confidence,notes
+taxon_name,source,raw_trait,raw_value,value_type,context,value,units,apd_trait,apd_trait_type,apd_units,match_confidence,notes,evidence_level,reference
 ```
 
 `taxon_name` and `source` carry the same meaning and values as in the stage-1 file
 (same species, same document) — repeated here too so this file stands alone and
 survives being combined with other species' crosswalk files later.
 
+**`evidence_level`** (added 2026-09-01, maintainer directive) records how the
+*source itself* backs the raw fact — independent of `match_confidence`, which
+scores the APD vocabulary match, not the underlying evidence. One of:
+- `stated` — the source gives this as a directly observed/measured/reported fact
+  with no hedging language.
+- `estimated` — the source itself flags the figure as an approximation
+  ("approximately", "estimated", "up to", "~").
+- `modelled` — the source states the figure was derived by calculation/GIS/
+  modelling (common for EOO/AOO, e.g. "calculated using a minimum convex
+  polygon").
+- `assumed` — genuinely vague sourcing (a `pers. comm.` with no number, "a few
+  hundred") or a plausible inference the extractor made rather than a value
+  the source stated outright (e.g. mapping "recurved" to the nearest allowed
+  `leaf_margin_posture` value).
+- `unknown` — can't be determined from the source language; use sparingly,
+  prefer actually reading the surrounding sentence first.
+
+**`reference`** (added 2026-09-01, maintainer directive) is the specific
+in-text citation the source itself attributes to that fact, verbatim (e.g.
+`Halford & Henderson, 2002`, `DPIWE 2006`), when the document gives one **for
+that specific fact** — not the generic `source` document type already
+captured in the `source` column. Leave blank when the advice states the fact
+as its own assessment with no inline citation, or when it isn't cheaply
+determinable from context already at hand — don't guess or fabricate a
+citation, and don't reopen a species' source PDF solely to backfill this
+retroactively unless asked; fill it in going forward as you read each PDF.
+
 **Write this file's rows as dicts keyed by column name, not positional tuples.**
-With 13 columns and most rows leaving several blank (a `no_apd_trait` row has six
+With 15 columns and most rows leaving several blank (a `no_apd_trait` row has six
 blanks in a row between `value_type` and `match_confidence`), a positional tuple
 is one miscounted comma away from silently shifting every field after it —
 `match_confidence` ending up in the `notes` column and vice versa, invisible
@@ -418,7 +450,7 @@ until something greps for it. A small `row(raw_trait, raw_value, value_type,
 context="", value="", ...)` helper that returns a dict (defaulting the columns
 most rows leave blank) removes the whole failure mode, since a missing argument
 just keeps its named default instead of shifting every field after it. After
-writing, verify every row actually has all 13 fields — `len(row) == len(header)`
+writing, verify every row actually has all 15 fields — `len(row) == len(header)`
 for each row via `csv.reader` — before trusting the file; a positional-tuple
 version of this exact mistake happened twice in this project before this
 row-count check caught it.
@@ -442,7 +474,7 @@ with open(f"{SPECIES_DIR}/APD_reference/APD_traits.csv") as f:
 
 fp_raw, fp_apd = f"{SPECIES_DIR}/<species>.csv", f"{SPECIES_DIR}/<species>_apd.csv"
 
-# 1. field-count integrity (every row has all 13 columns)
+# 1. field-count integrity (every row has all 15 columns)
 with open(fp_apd, newline='') as f:
     rd = csv.reader(f); header = next(rd); n = len(header)
     bad = [(i, len(row)) for i, row in enumerate(rd, start=2) if len(row) != n]
@@ -566,8 +598,8 @@ Use `low` rather than omitting a shaky-but-real match, so a human reviewer knows
 where to look first, not just which rows are entirely unmapped.
 
 **After writing a species' `_apd.csv`, append it to the combined file**
-`data_from_profiles/list_species_trait_data_apd.csv` (the same 13 columns plus a
-14th, `source_file`, holding the basename of the per-species `_apd.csv` it came
+`data_from_profiles/list_species_trait_data_apd.csv` (the same 15 columns plus a
+16th, `source_file`, holding the basename of the per-species `_apd.csv` it came
 from — added 2026-08-25 so rows can be traced back to their species file without
 re-matching on `taxon_name`; header once at the top) rather than leaving each
 species' crosswalk to be found and concatenated later — this is the file

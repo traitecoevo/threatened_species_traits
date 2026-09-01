@@ -325,3 +325,26 @@ traits:
       allowed_values_max: 100.0
       status: accepted 2026-08-25
       used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla]
+    fire_minimum_fire_interval:
+      label: Minimum fire-free interval
+      description: >
+        The minimum interval between successive fires needed for a
+        population of this species to persist - long enough for plants (in
+        an obligate-seeder population) to reach reproductive maturity and
+        rebuild a canopy or soil seed bank sufficient to recover from the
+        next fire, or (in a resprouter population) to recover carbohydrate
+        reserves. Distinct from the existing real APD trait
+        plant_tolerance_fire (a categorical fire-response classification)
+        and from the fire_time_from_fire_to_* traits (time from a single
+        fire event to a life-history milestone, not a recurrence-interval
+        threshold). Named with a fire_ prefix to sit alongside the existing
+        fire_* trait family. Recurring gap identified 2026-09-01: appeared
+        5 times in a single 10-species batch of Conservation Advice
+        documents (Banksia brownii, B. goodii, B. montana, B. verticillata),
+        each as a clean stated number of years.
+      type: numeric
+      units: a
+      allowed_values_min: 1.0
+      allowed_values_max: 100.0
+      status: accepted 2026-09-01
+      used_in: [banksia_brownii, banksia_goodii, banksia_montana, banksia_verticillata]

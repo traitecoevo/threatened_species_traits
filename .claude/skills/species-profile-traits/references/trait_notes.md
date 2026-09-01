@@ -480,8 +480,15 @@ them as separate rows even when the source states them in the same
 sentence. Unlike the largely-undocumented habitat/soil vocabulary in
 `config/traits.yml` (labels/descriptions still literal `XX` placeholders,
 term-matching judgment calls, hold at `medium`), these five are
-fully-defined, unambiguous project traits expected to feed into a future
-released APD version — score them at `new_trait` confidence, not `medium`.
+fully-defined, unambiguous project traits already merged into
+`config/traits.yml` — score an unambiguous value match at `high` confidence,
+not `medium`. **Do not score these at `new_trait`** — despite living outside
+core APD, they are not pending-merge proposals (that's what `new_trait`
+means; see the crosswalk-scoring section) — they're already-established
+traits this project's pipeline reads today. (Corrected 2026-09-01 — a
+maintainer caught 507 rows mis-scored `new_trait` across 140 species files
+under an earlier, incorrect version of this guidance; all have been swept
+back to `high`.)
 
 **`extent_of_occurrence`/`area_of_occupancy` specifically need consistent,
 active extraction on every species (maintainer directive, 2026-09-01) — treat
