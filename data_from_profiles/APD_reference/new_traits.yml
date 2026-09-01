@@ -38,7 +38,7 @@ traits:
         grazing_tolerant_native_mammals: Not adversely affected by grazing/browsing from native mammals (e.g. macropods).
         grazing_intolerant_native_mammals: Adversely affected by grazing/browsing from native mammals (e.g. macropods).
       status: accepted 2026-08-25
-      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes]
+      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes, colobanthus_curtisiae]
     peduncle_length:
       label: Peduncle length
       description: >
@@ -80,7 +80,7 @@ traits:
         apiculate: A leaf apex ending abruptly in a small, sharp terminal point (a mucro).
         acuminate: A leaf apex that tapers gradually to a slender, extended point - more drawn-out than a plain acute apex.
       status: accepted 2026-08-24; acuminate value added 2026-09-02
-      used_in: [andersonia_axilliflora, boronia_boliviensis, darwinia_carnea, daviesia_bursarioides, eriocaulon_carsonii, grevillea_rara, hibbertia_abyssa, styphelia_capillaris, eucalyptus_insularis, hexaspora_pubescens, syzygium_hodgkinsoniae, acacia_ammophila, acacia_lauta, eucalyptus_crucis_crucis, bothriochloa_bunyensis, canarium_acutifolium_var_acutifolium]
+      used_in: [andersonia_axilliflora, boronia_boliviensis, darwinia_carnea, daviesia_bursarioides, eriocaulon_carsonii, grevillea_rara, hibbertia_abyssa, styphelia_capillaris, eucalyptus_insularis, hexaspora_pubescens, syzygium_hodgkinsoniae, acacia_ammophila, acacia_lauta, eucalyptus_crucis_crucis, bothriochloa_bunyensis, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, cassinia_heleniae, chamelaucium_sp_cataby, comesperma_oblongatum, coopernookia_scabridiuscula, corybas_montanus]
     inflorescence_type:
       label: Inflorescence type
       description: >
@@ -97,7 +97,7 @@ traits:
         spike: An unbranched, elongated inflorescence with sessile or subsessile flowers (as distinct from raceme, whose flowers are individually stalked).
         panicle: A branched, compound inflorescence - typically a raceme whose branches are themselves racemes or other multi-flowered units.
       status: accepted 2026-08-24
-      used_in: [acacia_lanuginophylla, daviesia_bursarioides, eriocaulon_carsonii, hibbertia_abyssa, pityrodia_axillaris, styphelia_capillaris, tetratheca_aphylla, grevillea_flexuosa, cossinia_australiana, xerothamnella_parvifolia, acacia_flocktoniae, eucalyptus_conglomerata, cupaniopsis_tomentella, daviesia_euphorbioides, asterolasia_phebalioides, acacia_grandifolia, daviesia_discolor, conostylis_dielsii_teres, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea, atriplex_infrequens, aristida_granitica, acacia_lauta, thelymitra_matthewsii, frankenia_plicata, grevillea_scortechinii_scortechinii, euphrasia_arguta, diuris_drummondii, euphrasia_bella, pomaderris_vacciniifolia, acacia_curranii, canarium_acutifolium_var_acutifolium]
+      used_in: [acacia_lanuginophylla, daviesia_bursarioides, eriocaulon_carsonii, hibbertia_abyssa, pityrodia_axillaris, styphelia_capillaris, tetratheca_aphylla, grevillea_flexuosa, cossinia_australiana, xerothamnella_parvifolia, acacia_flocktoniae, eucalyptus_conglomerata, cupaniopsis_tomentella, daviesia_euphorbioides, asterolasia_phebalioides, acacia_grandifolia, daviesia_discolor, conostylis_dielsii_teres, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea, atriplex_infrequens, aristida_granitica, acacia_lauta, thelymitra_matthewsii, frankenia_plicata, grevillea_scortechinii_scortechinii, euphrasia_arguta, diuris_drummondii, euphrasia_bella, pomaderris_vacciniifolia, acacia_curranii, canarium_acutifolium_var_acutifolium, acacia_sp_graveside_gorge, acriopsis_javanica, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, capparis_thozetiana, carronia_pedicellata, cassinia_heleniae, centrolepis_pedderensis, chamaesyce_carissoides, chamelaucium_sp_cataby, choretrum_spicatum_subsp_spicatum, chorizema_varium, colobanthus_curtisiae, coopernookia_georgei, coopernookia_scabridiuscula, corchorus_cunninghamii, correa_baeuerlenii, correa_lawrenceana_var_genoensis, corunastylis_ectopa, corunastylis_littoralis, corybas_dentatus, corybas_montanus, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope]
     leaf_cross_section_shape:
       label: Leaf cross-section shape
       description: >
@@ -114,7 +114,7 @@ traits:
         flat: A leaf flat (not folded, ridged, or curved) in cross-section.
         concave_convex: A leaf slightly concave on the upper (adaxial) surface and slightly convex on the lower (abaxial) surface in cross-section.
       status: accepted 2026-08-24
-      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta]
+      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta, conostylis_drummondii, conostylis_lepidospermoides, conostylis_setigera_subsp_dasys, corybas_sulcatus]
     stem_cross_section_shape:
       label: Stem cross-section shape
       description: >
@@ -132,7 +132,7 @@ traits:
         angular: A stem with distinct angles or ridges in cross-section, of unspecified number.
         quadrangular: A stem square or four-angled in cross-section.
       status: accepted 2026-08-25
-      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta]
+      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum]
     fruit_shape:
       label: Fruit shape
       description: >
@@ -169,7 +169,7 @@ traits:
         sectoroid: Shaped like an orange segment or wedge of a sphere.
         sinusoidal: A shape with two arcs of curvature or a single arc, such that it lacks an axis of symmetry.
       status: accepted 2026-08-25
-      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium]
+      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, capparis_thozetiana, carronia_pedicellata, chamaesyce_carissoides, colobanthus_curtisiae, conospermum_hookeri, corchorus_cunninghamii, corokia_whiteana, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, corynocarpus_rupestris_subsp_rupestris]
     bark_texture:
       label: Bark texture
       description: >
@@ -193,7 +193,7 @@ traits:
         rough: Bark with an uneven, coarse surface not otherwise specified.
         papery: Bark that peels away in thin, papery sheets.
       status: accepted 2026-08-25
-      used_in: [acacia_ammophila, acacia_curranii, microcorys_eremophiloides, syzygium_hodgkinsoniae, eucalyptus_stenostoma, eucalyptus_crucis_crucis]
+      used_in: [acacia_ammophila, acacia_curranii, microcorys_eremophiloides, syzygium_hodgkinsoniae, eucalyptus_stenostoma, eucalyptus_crucis_crucis, babingtonia_tozerensis, cassinia_heleniae, cassinia_tegulata, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope]
     bark_colour:
       label: Bark colour
       description: >
@@ -232,7 +232,7 @@ traits:
         scale: Small, scale-like stipules.
         leafy: Stipules that are leaf-like in size and texture.
       status: accepted 2026-08-25
-      used_in: [acacia_awestoniana, acacia_aristulata, acacia_lobulata]
+      used_in: [acacia_awestoniana, acacia_aristulata, acacia_lobulata, chorizema_varium]
     stipule_length:
       label: Stipule length
       description: >
@@ -242,7 +242,7 @@ traits:
       allowed_values_min: 0.1
       allowed_values_max: 200.0
       status: accepted 2026-08-25
-      used_in: [acacia_aristulata, pomaderris_cotoneaster, pultenaea_setulosa]
+      used_in: [acacia_aristulata, pomaderris_cotoneaster, pultenaea_setulosa, chorizema_varium]
     senescence_onset:
       label: Age at senescence onset
       description: >
@@ -348,7 +348,7 @@ traits:
       allowed_values_min: 1.0
       allowed_values_max: 100.0
       status: accepted 2026-09-01
-      used_in: [banksia_brownii, banksia_goodii, banksia_montana, banksia_verticillata]
+      used_in: [banksia_brownii, banksia_goodii, banksia_montana, banksia_verticillata, correa_lawrenceana_var_genoensis]
     generation_time:
       label: Generation time
       description: >
@@ -372,4 +372,4 @@ traits:
       allowed_values_min: 1.0
       allowed_values_max: 500.0
       status: accepted 2026-09-02
-      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek]
+      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek, astrotricha_sp_wingan_inlet, chiloglottis_anaticeps, choretrum_spicatum_subsp_spicatum, corchorus_cunninghamii, corokia_whiteana, correa_lawrenceana_var_genoensis]

@@ -67,7 +67,12 @@ don't write per-species files under the repo's `data_from_profiles/` anymore:
   `proposed_new_value`), and the single trait most in need of being added to
   `new_traits.yml` (the most frequent, well-defined `no_apd_trait` gap from
   that batch — see the corpus-wide `no_apd_trait` tally pattern used in past
-  check-ins for how to identify this).
+  check-ins for how to identify this). Exclude site/community descriptors
+  from that nomination even when they dominate the tally — `family`
+  (taxonomic metadata), and `associated_vegetation_community`/
+  `associated_species` (site context, not a plant trait — see
+  `trait_notes.md`'s "Associated species & vegetation community" section)
+  are never candidates, no matter how often they recur.
 - **Commit (git) only every 50 species**, not every 10 — batch several
   check-ins' worth of work into one commit. Still commit only the four core
   files per the existing commit-scope rule (`SKILL.md`, `trait_notes.md`,

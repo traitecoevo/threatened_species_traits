@@ -612,6 +612,21 @@ traits) surfaced repeatedly in the same 2026-08-25 batch and are still open
 questions, not yet resolved either way — check back here for an update
 before deciding how to score them, rather than assuming either resolution.
 
+## Associated species & vegetation community
+
+**Don't propose a project trait for `associated_vegetation_community` or
+`associated_species` either — this is also a deliberate decision (maintainer
+correction, 2026-09-01), not a gap to fill.** A conservation advice routinely
+lists the community a species grows within ("open scrubland with sparse
+stunted *Eucalyptus* spp.") or the other species it co-occurs with
+("Associated species include *Melaleuca scabra*..."). Keep extracting this
+into the stage-1 raw file — it's good background context worth having on
+record — but score it `no_apd_trait` in the crosswalk and stop there, the
+same as site climate above. This describes the community/site, not a trait
+of the species itself, so it should never appear as a candidate when
+nominating "the trait most needing addition to `new_traits.yml`" in a batch
+check-in, no matter how often it recurs in the `no_apd_trait` tally.
+
 ## Project-proposed traits (see `new_traits.yml` for the definitive, current list)
 
 `new_traits.yml` is the single source of truth for every trait this project
