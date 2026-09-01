@@ -178,20 +178,27 @@ has no real trait.
   `no_apd_trait` note at face value for common concepts like flower size,
   re-search yourself. Watch the unit: cm, not mm, unlike most other floral
   length/width traits.
-- **Inflorescence architecture terms build toward one project trait:
-  `inflorescence_type`** — but check `new_traits.yml`'s
-  `allowed_values_levels` before assuming a term is already accepted: only
-  `raceme`/`cyme`/`head`/`solitary`/`axillary` are confirmed accepted as of
-  2026-08-25. `spike`, `panicle`, and `umbel` come up constantly in source
-  text but are **not yet in the accepted list** — score them as
-  `proposed_new_value` (real trait, value not yet formally accepted) rather
-  than assuming they're already covered. Note: the trait's own description
-  field references a sibling `inflorescence_shape` trait for silhouette
-  (globose/cylindrical/ovoid) — that trait does **not actually exist**
-  anywhere searched (`APD_traits.csv`, `APD_categorical_values.csv`, either
-  `config/traits.yml` copy) as of this writing; a shape-only description like
-  "open elliptic panicle" should be scored `no_apd_trait` for the shape part,
-  not assumed covered by a trait that isn't there.
+- **`inflorescence_type` is a real APD trait, not yet in the released
+  version, confirmed 2026-09-01 to be present (with all ten allowed values)
+  in the newer austraits.build copy of `config/traits.yml`** — this
+  supersedes an earlier, incorrect run where it was treated as this
+  project's own invention and scored `new_trait`/`proposed_new_value`; a
+  corpus-wide sweep corrected every prior row to `medium` (the same
+  treatment given to `plant_canopy_form` and `rhizome_form`). All ten
+  values — `raceme`/`cyme`/`head`/`solitary`/`axillary`/`spike`/`panicle`/
+  `umbel`/`terminal`/`corymb` — score at `medium` going forward; don't
+  reintroduce `new_trait`/`proposed_new_value` for any of them.
+  `axillary`/`terminal` are position descriptors ("one per axil"/"at the
+  branch tip"), not architecture terms — either can and should be scored as
+  a second `inflorescence_type` row alongside whatever architecture term
+  (e.g. `head`, `umbel`) already covers the same source clause, rather than
+  being left unmatched as a seemingly-redundant position detail. Note: the
+  trait's own description field references a sibling `inflorescence_shape`
+  trait for silhouette (globose/cylindrical/ovoid) — that trait does exist
+  in the same newer austraits.build copy (values: `spherical`/`cylindrical`/
+  `elongated`/`narrow`), also not yet released, also score at `medium`; a
+  shape-only description like "open elliptic panicle" should score the
+  shape half `no_apd_trait` only if it doesn't fit one of those four terms.
 - **`flower_count_maximum` (numeric, `{count}`) is real, but it's a
   whole-plant/whole-season total flower output — not a per-inflorescence
   count.** "Up to 35 flowers" on one raceme/spike/head/capitulum is a
@@ -720,12 +727,9 @@ these aliases on sight rather than waiting for the next audit to catch them:
   consistently applied). If you see the real figure sitting in `raw_value`
   with a blank `apd_trait`, that's a missed mapping, not a genuine absence —
   fix it in place rather than treating the row as already-handled.
-- **`inflorescence_type`** values `spike` and `panicle` (accepted
-  2026-08-25) join the existing `raceme`/`cyme`/`head`/`solitary`/
-  `axillary` — no longer `proposed_new_value`, score them at `high`
-  directly. Also remember `axillary` is explicitly a *position* descriptor
-  ("one per axil"/"in the leaf axils"), not an architecture term — it can
-  and should be scored as a second `inflorescence_type` row alongside
-  whatever architecture term (e.g. `head`) already covers the same source
-  clause, rather than being left unmatched as a seemingly-redundant
-  position detail.
+- **`inflorescence_type` scoring guidance lives earlier in this file**
+  (search for `inflorescence_type` — it's the entry right after the
+  `flower_diameter` bullet): all ten values score `medium`, confirmed
+  against the newer austraits.build copy of `config/traits.yml`. Don't
+  reintroduce a `spike`/`panicle`-specific `high` exception here — that was
+  an earlier, since-corrected scoring.
