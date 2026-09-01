@@ -348,3 +348,27 @@ traits:
       allowed_values_max: 100.0
       status: accepted 2026-09-01
       used_in: [banksia_brownii, banksia_goodii, banksia_montana, banksia_verticillata]
+    generation_time:
+      label: Generation time
+      description: >
+        The average age of parents of the current cohort, reflecting the
+        turnover rate of breeding individuals in a population - the standard
+        IUCN Red List assessment parameter (IUCN 2019 Guidelines), used to
+        set the time window for population-reduction (Criterion A) and
+        extreme-fluctuation assessments. Distinct from lifespan (germination
+        to death) and reproductive_maturity (age of first seed set):
+        generation time is a population-turnover statistic, often
+        approximated in listing assessments as roughly midway between age at
+        first reproduction and maximum lifespan, or simply inferred from
+        congeneric species when direct data are unavailable. Recurring gap
+        identified 2026-09-01/02: a standard, frequently-reported metric in
+        formal IUCN-criteria listing assessments (reported with point/min/max
+        structure, same as extent_of_occurrence and area_of_occupancy),
+        appearing in 15+ species profiles across this project with nowhere
+        to be recorded.
+      type: numeric
+      units: a
+      allowed_values_min: 1.0
+      allowed_values_max: 500.0
+      status: accepted 2026-09-02
+      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek]

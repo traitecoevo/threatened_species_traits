@@ -50,6 +50,30 @@ don't write per-species files under the repo's `data_from_profiles/` anymore:
   "the overall table" the maintainer refers to — the only per-run output that
   belongs in git besides the trait definitions above.
 
+## Workflow cadence (maintainer directives, 2026-09-01/02)
+
+- **Do not use sub-agents for this work.** Process species one at a time,
+  yourself, directly. Sub-agent batches for this task have previously died
+  mid-run after burning significant tokens re-reading reference files, with
+  no partial results saved along the way — the maintainer has explicitly
+  asked this not happen again.
+- **After each species, append its `_apd.csv` rows to the bottom of the
+  combined file** — don't regenerate the whole combined file sorted
+  alphabetically by species name each time. Newly-added species should be
+  easy to find at the end of the file for a quick review pass, not buried
+  wherever they'd alphabetically sort.
+- **Stop after every 10 species and check in** with: a table of the new
+  values captured (anything scored `new_trait`/`proposed_new_trait`/
+  `proposed_new_value`), and the single trait most in need of being added to
+  `new_traits.yml` (the most frequent, well-defined `no_apd_trait` gap from
+  that batch — see the corpus-wide `no_apd_trait` tally pattern used in past
+  check-ins for how to identify this).
+- **Commit (git) only every 50 species**, not every 10 — batch several
+  check-ins' worth of work into one commit. Still commit only the four core
+  files per the existing commit-scope rule (`SKILL.md`, `trait_notes.md`,
+  `new_traits.yml`, the combined table) — never the per-species files, which
+  live outside the repo anyway (see File locations above).
+
 ## Stage 1 — extract raw traits from the PDF
 
 **Locate the right section before reading everything.** These PDFs run 5–40+ pages.
