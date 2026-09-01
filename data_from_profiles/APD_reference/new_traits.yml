@@ -78,8 +78,9 @@ traits:
         obtuse: A leaf apex that comes to a point at an angle of more than 90 degrees.
         rounded: A leaf apex that is rounded rather than pointed.
         apiculate: A leaf apex ending abruptly in a small, sharp terminal point (a mucro).
-      status: accepted 2026-08-24
-      used_in: [andersonia_axilliflora, boronia_boliviensis, darwinia_carnea, daviesia_bursarioides, eriocaulon_carsonii, grevillea_rara, hibbertia_abyssa, styphelia_capillaris, eucalyptus_insularis, hexaspora_pubescens, syzygium_hodgkinsoniae, acacia_ammophila, acacia_lauta, eucalyptus_crucis_crucis]
+        acuminate: A leaf apex that tapers gradually to a slender, extended point - more drawn-out than a plain acute apex.
+      status: accepted 2026-08-24; acuminate value added 2026-09-02
+      used_in: [andersonia_axilliflora, boronia_boliviensis, darwinia_carnea, daviesia_bursarioides, eriocaulon_carsonii, grevillea_rara, hibbertia_abyssa, styphelia_capillaris, eucalyptus_insularis, hexaspora_pubescens, syzygium_hodgkinsoniae, acacia_ammophila, acacia_lauta, eucalyptus_crucis_crucis, bothriochloa_bunyensis, canarium_acutifolium_var_acutifolium]
     inflorescence_type:
       label: Inflorescence type
       description: >
@@ -96,7 +97,7 @@ traits:
         spike: An unbranched, elongated inflorescence with sessile or subsessile flowers (as distinct from raceme, whose flowers are individually stalked).
         panicle: A branched, compound inflorescence - typically a raceme whose branches are themselves racemes or other multi-flowered units.
       status: accepted 2026-08-24
-      used_in: [acacia_lanuginophylla, daviesia_bursarioides, eriocaulon_carsonii, hibbertia_abyssa, pityrodia_axillaris, styphelia_capillaris, tetratheca_aphylla, grevillea_flexuosa, cossinia_australiana, xerothamnella_parvifolia, acacia_flocktoniae, eucalyptus_conglomerata, cupaniopsis_tomentella, daviesia_euphorbioides, asterolasia_phebalioides, acacia_grandifolia, daviesia_discolor, conostylis_dielsii_teres, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea, atriplex_infrequens, aristida_granitica, acacia_lauta, thelymitra_matthewsii, frankenia_plicata, grevillea_scortechinii_scortechinii, euphrasia_arguta, diuris_drummondii, euphrasia_bella, pomaderris_vacciniifolia, acacia_curranii]
+      used_in: [acacia_lanuginophylla, daviesia_bursarioides, eriocaulon_carsonii, hibbertia_abyssa, pityrodia_axillaris, styphelia_capillaris, tetratheca_aphylla, grevillea_flexuosa, cossinia_australiana, xerothamnella_parvifolia, acacia_flocktoniae, eucalyptus_conglomerata, cupaniopsis_tomentella, daviesia_euphorbioides, asterolasia_phebalioides, acacia_grandifolia, daviesia_discolor, conostylis_dielsii_teres, eucalyptus_synandra, acacia_ammophila, eucalyptus_ceracea, atriplex_infrequens, aristida_granitica, acacia_lauta, thelymitra_matthewsii, frankenia_plicata, grevillea_scortechinii_scortechinii, euphrasia_arguta, diuris_drummondii, euphrasia_bella, pomaderris_vacciniifolia, acacia_curranii, canarium_acutifolium_var_acutifolium]
     leaf_cross_section_shape:
       label: Leaf cross-section shape
       description: >
@@ -168,7 +169,7 @@ traits:
         sectoroid: Shaped like an orange segment or wedge of a sphere.
         sinusoidal: A shape with two arcs of curvature or a single arc, such that it lacks an axis of symmetry.
       status: accepted 2026-08-25
-      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera]
+      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium]
     bark_texture:
       label: Bark texture
       description: >

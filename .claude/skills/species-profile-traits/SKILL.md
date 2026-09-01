@@ -455,6 +455,18 @@ scores the APD vocabulary match, not the underlying evidence. One of:
 - `unknown` — can't be determined from the source language; use sparingly,
   prefer actually reading the surrounding sentence first.
 
+**Use `context` to distinguish current vs. historical, and per-site vs.
+whole-species, values — for every trait, not just population/range metrics**
+(maintainer feedback, 2026-09-02: "context is so important! For all
+traits!"). A newer listing assessment's Table 4 giving both a current
+estimate and a historical/pre-disturbance maximum plausible value is the
+clearest case (`context="current estimate"` vs. `context="maximum plausible
+(historical)"`), but the same instinct applies everywhere a source gives a
+figure that only means what it means alongside a caveat — a per-population
+count vs. a species-wide total, a single-site habitat description vs. a
+species-wide generalisation, a pre-fire vs. post-fire estimate. Don't let a
+qualifier like this collapse into the bare number.
+
 **`reference`** (added 2026-09-01, maintainer directive) is the specific
 in-text citation the source itself attributes to that fact, verbatim (e.g.
 `Halford & Henderson, 2002`, `DPIWE 2006`), when the document gives one **for

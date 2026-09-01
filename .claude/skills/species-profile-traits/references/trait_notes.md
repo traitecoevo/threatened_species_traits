@@ -53,6 +53,22 @@ has no real trait.
   habit, so score **both** values (`terrestrial lithophyte`), not `lithophyte`
   alone. Read the hedge as information about how many substrate values apply,
   not just noise to discard.
+- **"Epiphyte" (and "lithophyte"/"terrestrial"/etc.) scores on
+  `plant_growth_substrate`, not `life_form`.** Both traits happen to share an
+  `epiphyte` allowed value, but they're different concepts — `life_form` is
+  a Raunkiaer-style classification (`phanerophyte`, `chamaephyte`,
+  `geophyte`, `therophyte`, `epiphyte`, ...) about where a plant's
+  perennating buds sit relative to ground/soil surface across seasons;
+  `plant_growth_substrate` is specifically what the plant is rooted in or
+  attached to (`epiphyte`, `lithophyte`, `terrestrial`, `aquatic`,
+  `semiaquatic`, `marine`, `hemiepiphyte`). A source saying a plant "grows on
+  the bark of trees" or "is a terrestrial herb" is describing substrate —
+  score `plant_growth_substrate`, not `life_form` (corrected 2026-09-02
+  after two epiphytic orchids were mis-scored against `life_form`). Only use
+  `life_form` when the source is actually making a Raunkiaer-style claim
+  (e.g. an explicitly tuberous/bulbous terrestrial species genuinely
+  supports `life_form = geophyte`, which is a distinct fact worth its own
+  row *alongside*, not instead of, `plant_growth_substrate = terrestrial`).
 - **`plant_canopy_form`'s allowed values cover more whole-plant silhouette
   descriptions than you'd guess from the term list alone** — a shrub
   described as "rush-like" or similarly sparse/upright/broom-shaped is
@@ -259,6 +275,18 @@ has no real trait.
 
 ## Fruit & seed
 
+- **A stated fruit "diameter" (round/spherical fruits — drupes, berries,
+  cones) scores on *both* `fruit_length` and `fruit_width`, not a missing
+  `fruit_diameter` trait** (maintainer directive, 2026-09-02). There's no
+  dedicated diameter trait in APD, but for a fruit where width and length
+  are the same measurement (a round fruit has no separate long/short axis),
+  the single stated diameter value genuinely satisfies both real traits —
+  score the identical value on both, at `high` confidence, rather than
+  treating it as `no_apd_trait` or picking only one. This is the same
+  one-fact-many-real-traits pattern as elsewhere in this file (e.g. the
+  climbing-plant stem-length case above); the corpus had several
+  `fruit_diameter` rows mis-scored `no_apd_trait` or mapped to only
+  `fruit_width` before this was caught.
 - **A "pod" is a fruit, not a separate structure**: Acacia/legume "pod"
   dimensions and shape are `fruit_length`/`fruit_width`/`fruit_type`
   (`legume`/`legume_indehiscent`) — the same traits any other fruit maps to.
@@ -379,6 +407,18 @@ has no real trait.
 
 ## Fire & disturbance response
 
+- **`plant_tolerance_fire` and `resprouting_capacity` are two different real
+  traits — don't reach for the first when you mean the second** (corrected
+  2026-09-02, after 8 rows across 8 species were mis-scored this way).
+  `plant_tolerance_fire`'s allowed values are about fire-*resistance*
+  mechanisms (`fire_retardant`, `fire_retardant_bark`, `thick_bark`) — a
+  species with fire-retardant foliage chemistry or protective bark, nothing
+  to do with what happens to the plant after fire. Whether the plant is
+  **killed by fire and regenerates from seed** vs. **resprouts** is
+  `resprouting_capacity` (`fire_killed`/`resprouts`/`partial_resprouting`),
+  covered next. A source saying a species is "fire sensitive" or "an
+  obligate seeder" or "killed by fire" scores `resprouting_capacity:
+  fire_killed` — never `plant_tolerance_fire`.
 - **Fire survival is a standing convention**: a source stating a species
   "survives fire" or "survives burning" maps to `resprouting_capacity:
   resprouts`, always — don't treat this as under-specified just because the
@@ -504,6 +544,18 @@ recurring alias problem, see below) so rows are findable and comparable
 across species without a corpus-wide grep for synonyms. If the source
 genuinely states neither figure, that's fine — but don't skip the search
 just because a species' profile is short.
+
+**Always fill in `apd_trait` (`extent_of_occurrence`/`area_of_occupancy`,
+`apd_trait_type=numeric`, `apd_units=km2`) on these two rows even when the
+figure is genuinely absent and `match_confidence=no_match` with `value`
+blank** (maintainer directive, 2026-09-02). This is a deliberate exception to
+the usual `no_match`/`no_apd_trait` convention of leaving `apd_trait` blank —
+because both are real, fully-defined project traits (unlike a genuine
+`no_apd_trait` gap where no trait exists to name), keeping `apd_trait`
+populated lets a `group_by(apd_trait)` on the combined file directly count
+how many species have vs. lack each metric, without having to separately
+filter on `raw_trait` for just these two rows. 20 pre-existing rows across
+10 species were missing this and have been backfilled.
 
 - **When a source gives both a per-site/per-population breakdown and an
   overall total, record both — always, not just when it's convenient.** A
