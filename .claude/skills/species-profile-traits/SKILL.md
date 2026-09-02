@@ -738,6 +738,14 @@ this stage's own output — un-converted, as described above. `match_confidence`
   value. Check `data_from_profiles/APD_reference/project_approved_extensions.csv` first —
   if the user has already approved this exact term, use it at `high` confidence
   instead of re-proposing.
+  **`value` must actually be populated** — 6 rows across 6 species were found
+  scoring `match_confidence=proposed_new_value` with `value` left blank
+  (2026-09-03, maintainer-caught), even though the row's own `notes` had
+  already worked out and named the exact proposed term. Leaving `value`
+  blank defeats the entire point: the maintainer's own traits.build workflow
+  surfaces any value it doesn't recognise for review regardless of whether
+  it's a good guess — that's what makes proposing one safe and useful. Don't
+  hedge by writing the proposal only in prose.
 - `no_apd_trait`: no APD trait exists for this concept, and no best-guess value has
   been proposed either — `apd_trait` and `value` are both blank, `units` may still
   be populated. This is the right resting state right after stage 1, before anyone's

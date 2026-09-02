@@ -53,6 +53,32 @@ has no real trait.
   habit, so score **both** values (`terrestrial lithophyte`), not `lithophyte`
   alone. Read the hedge as information about how many substrate values apply,
   not just noise to discard.
+- **`lithophyte` means the plant is physically rooted on/in a rock surface**
+  (the way some orchids and ferns grow directly on boulders or cliff faces)
+  — it does **not** mean "grows in an area with rocky/bouldery terrain."
+  A tree or shrub rooted in ordinary soil that happens to sit among granite
+  boulders or on a stony rise is `terrestrial`, not `lithophyte`, even when
+  the source's habitat description is full of rock language (corrected
+  2026-09-03, Brachychiton guymeri) — `geologic_substrate`, `soil_type`, and
+  `habitat` already exist specifically to carry that rocky-terrain context,
+  so don't reach for `plant_growth_substrate` to do the same job a second
+  time with the wrong value.
+- **A "basal rosette" leaf arrangement is `stem_growth_habit=rosette`, not
+  `leaf_arrangement`** — `leaf_arrangement`'s own vocabulary
+  (`decussate`/`distichous`/`spiral`/`crowded`/...) has no rosette value;
+  `stem_growth_habit` is the real, released trait that carries it (corrected
+  2026-09-03, two Drosera species mis-scored this the same way).
+- **`stem_branching_form`** (real trait, newer austraits.build copy) records
+  stem/trunk *count and branching pattern* — `single_basal_stem`/
+  `multiple_basal_stems`/`multiple_near_basal_stems`/`unbranched`/`branched`/
+  `few-stemmed`/`multi-stemmed`/`many-stemmed`, plus branching-density and
+  -pattern terms (`openly-branched`, `much-branched`, `divaricately-branched`,
+  etc.). Distinct from `stem_growth_habit` (erect/spreading/prostrate/...) —
+  a "single trunked or multi-stemmed" description needs *both* traits, one
+  for stem count/origin, one for overall carriage; don't let scoring one
+  substitute for the other (missed for Brachychiton guymeri, 2026-09-03,
+  despite the source stating it plainly in the very first description
+  sentence).
 - **"Epiphyte" (and "lithophyte"/"terrestrial"/etc.) scores on
   `plant_growth_substrate`, not `life_form`.** Both traits happen to share an
   `epiphyte` allowed value, but they're different concepts — `life_form` is
@@ -336,6 +362,14 @@ has no real trait.
   — that's still `generation_time`, not `no_apd_trait`, even though it's a
   calculated rather than directly-observed figure; note the derivation in
   `notes`).
+- **`lifespan` is numeric, but a source stating a species "can live
+  indefinitely" (typically because it resprouts rather than senescing) still
+  gets a row — write `indefinite` into `value` verbatim rather than leaving
+  the fact unscored just because it won't parse as a number** (maintainer
+  instruction, 2026-09-03, Brachychiton guymeri) — the maintainer will decide
+  downstream how to encode it numerically. Don't invent a large placeholder
+  number (e.g. "100 years") to force it to look numeric; that fabricates
+  precision the source doesn't support.
 - **Pollination — a whole cluster of real traits was missed for most of this
   project's history (found 2026-09-02 on a full read-through of
   `austraits.build/config/traits.yml` after a maintainer caught a
@@ -506,6 +540,19 @@ has no real trait.
   covers a fungal-partner symbiosis — a mycoheterotroph parasitises fungi,
   not another plant, so it's `not_parasitic` here). All three are usually
   worth a row when a source describes a non-photosynthetic plant.
+- **Carnivorous plants (Drosera/sundews, Utricularia, Nepenthes, etc.) are a
+  separate case from the non-photosynthetic plants above — they're still
+  fully photosynthetic, just supplementing nutrition via prey capture — but
+  still need `plant_alternative_energy_and_nutrient_acquisition_strategy=
+  carnivorous` scored.** Missed for two Drosera species in a row
+  (2026-09-03, maintainer-caught) despite one of them stating "As an unusual
+  carnivorous plant..." directly in its Threats section, and despite the
+  other's own row *notes* already saying "glandular hairs expected for this
+  carnivorous genus" without ever actually scoring the trait. If the genus is
+  Drosera (or another well-known carnivorous genus) and the source describes
+  sticky/glandular trapping leaves, score this even when the document itself
+  never uses the word "carnivorous" — that's common enough taxonomic
+  knowledge to support `evidence_level=assumed` at `medium` confidence.
 
 ## Foliage time (deciduous geophytes especially)
 
@@ -552,6 +599,39 @@ has no real trait.
 
 ## Fire & disturbance response
 
+- **`fire_response` is not a trait at all — never write it into `apd_trait`.**
+  It's a reasonable *raw_trait* label, but the real trait for what happens to
+  a plant after fire is always `resprouting_capacity` (or occasionally
+  `bud_bank_location`/`post_fire_flowering`/`seed_germination_treatment`,
+  depending what the sentence actually describes — see the rest of this
+  section). This exact invented-trait mistake recurred across 7 species
+  (Drakaea micrantha, Drakaea isolata, Acacia atrox, Acacia lumholtzii,
+  Aristida thompsonii, Asperula tetraphylla, Acacia pubifolia, Brachychiton
+  guymeri) before being maintainer-caught 2026-09-03 — despite this section
+  already documenting the correct trait name right below. If you catch
+  yourself typing `apd_trait="fire_response"`, stop: that string is never
+  correct no matter how the raw_trait column reads.
+- **A source describing genuinely different fire responses in different
+  seasons is two `resprouting_capacity` rows, not one** — common in
+  terrestrial Orchidaceae, whose above-ground parts and replacement tuber
+  are only actively growing (and therefore vulnerable) for part of the year.
+  "Fire between June and early October, when its above ground parts and
+  replacement tuber are actively growing" is the species' main threat implies
+  `fire_killed` with `context` naming that growing-season window, **and** a
+  second row, `resprouts`, with `context` naming the rest of the year
+  (dormant season, mature unexposed tuber) — even when the source only
+  explicitly states the vulnerable half and the survival half has to be
+  inferred (`evidence_level=assumed`) from the same sentence (maintainer
+  example, 2026-09-03: Drakaea micrantha). The maintainer may eventually
+  define a dedicated trait for this pattern pending expert input — don't
+  pre-empt that, just use the two-row `context`-split approach for now.
+- **A basal/epicormic/lignotuberous resprouting-location detail is
+  `bud_bank_location`, not a second `resprouting_capacity` row.**
+  "Re-sprouted from basal shoots" is `bud_bank_location=basal_buds`
+  *alongside* the already-scored `resprouting_capacity=resprouts` fact from
+  the same source, not a duplicate/competing `resprouting_capacity` row with
+  an invented value like `basal_resprouting` (not a real value — corrected
+  2026-09-03, Brachychiton guymeri).
 - **`plant_tolerance_fire` and `resprouting_capacity` are two different real
   traits — don't reach for the first when you mean the second** (corrected
   2026-09-02, after 8 rows across 8 species were mis-scored this way).
@@ -863,6 +943,20 @@ match was missed — not because it didn't exist, but because the extraction
 used a different label than the one the real trait is keyed under. Recognize
 these aliases on sight rather than waiting for the next audit to catch them:
 
+- **A cluster of invented, never-real trait names found together in two old
+  (pre-2026-08) Drosera files during a 2026-09-03 maintainer review** —
+  a reminder that `apd_trait` names from early sessions in this project
+  cannot be assumed correct just because they read plausibly; verify every
+  one, not just the ones that feel uncertain. Aliases found:
+  `root_type` → `root_system_type` (allowed value `fibrous_roots` for
+  "fibrous roots" - not a bare `fibrous`), `stamen_number` →
+  `flower_fertile_stamens_count`, `carpel_number` →
+  `flower_structural_carpels_count`, `bract_length` → `flower_bract_length`,
+  `petal_length` → `flower_petal_length`, `petal_shape` → `leaf_shape` with
+  `context="petal"` (the same legitimate cross-organ vocabulary reuse as
+  leaflet shape, not the donor-trait-name-misuse pattern). `leaf_number`
+  (count of leaves in a rosette/on a plant) has no matching trait anywhere
+  and is a genuine `no_apd_trait` gap, not an alias.
 - **`population_size`** → this is always `individual_count` (or occasionally
   needs splitting into separate `individual_count` rows per the guidance
   above) — never leave a raw `population_size` label unmapped or unsplit.
