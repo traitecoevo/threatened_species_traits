@@ -256,6 +256,20 @@ has no real trait.
   species in this project before being caught — always double-check which
   concept a source's flower count actually is, and re-search
   `APD_traits.csv` for a real trait before proposing a new one.
+- **Correction to the above, 2026-09-02**: `flowers_per_inflorescence` has
+  reappeared as its own real (unreleased, entity_URI `XX`) APD trait in the
+  newer austraits.build copy of `config/traits.yml`, immediately alongside
+  `buds_per_inflorescence` — same `{count}/{count}` units, same "single
+  cluster or entire reproductive shoot system" framing, but counting
+  *flowers* rather than *buds*. These are legitimately two different
+  concepts that the dictionary now separately supports. Going forward,
+  score whichever concept the source actually describes (an explicit flower
+  count → `flowers_per_inflorescence`; a bud count → `buds_per_inflorescence`)
+  at `high` confidence, rather than forcing every per-inflorescence count
+  onto `buds_per_inflorescence` as the note above once required — that
+  blanket rule is now superseded for this specific pairing (the rest of the
+  note above, on not inventing a duplicate project trait and not conflating
+  with `flower_count_maximum`, still stands).
 - **`reproductive_maturity`'s own definition is the age of *first*
   flowering/first ability to set any seed at all** ("this trait will often
   be scored as when plants first produce flowers, as this is easier to
@@ -353,6 +367,20 @@ has no real trait.
   a source describes an appendage that explains a dispersal syndrome, rather
   than picking one.
 
+- **Araceae spathe-spadix structures are not the "flower" of `flower_colour`/
+  `perianth_colour`** — a spathe is a bract subtending the true, tiny
+  florets on the spadix, and an appendix is a sterile zone of the spadix,
+  neither a perianth part. Colour/shape/size detail for these structures
+  (e.g. "dark purple-black spathe," "maroon-black appendix," "septate tube")
+  has no equivalent AusTraits floral-organ trait and should be documented in
+  `raw_value`/`notes` only, not force-mapped onto `flower_colour`. By
+  contrast, `flower_scent_production` (a whole-inflorescence-level
+  presence/absence trait) and `inflorescence_type` (`solitary` is one of its
+  ten allowed values) still apply normally to an Araceae inflorescence —
+  don't over-generalise the "no equivalent trait" reasoning to every
+  Araceae-specific noun in the same sentence (established while extracting
+  *Typhonium praetermissum*/*Typhonium* sp. Cox Peninsula, 2026-09-02).
+
 ## Fruit & seed
 
 - **A stated fruit "diameter" (round/spherical fruits — drupes, berries,
@@ -408,14 +436,20 @@ has no real trait.
   `fissured`/`corky`/`curling`/`scaly`/`rough`/`papery`) and **`bark_colour`**
   (categorical, `soil_colour`-style earthy palette: `black`/`brown`/
   `brown_dark`/`brown_light`/`green`/`grey`/`orange`/`pink`/`red`/`white`/
-  `yellow`) are project new_traits (accepted 2026-08-25, see `new_traits.yml`)
-  for **non-Eucalyptus** bark description — `bark_morphology_eucalyptus` (the
-  real APD trait) is explicitly restricted to Eucalyptus/Corymbia/Angophora's
-  named bark types (stringybark/box/gum/ribbonbark/ironbark/peppermint/
-  stocking) and shouldn't be force-applied elsewhere, even when a term like
-  "smooth" would technically fit one of its values. A combined description
-  ("furrowed, dark grey bark") is a texture clause plus a colour clause —
-  split into two raw rows, one per trait, rather than picking just one.
+  `yellow`) are project new_traits (accepted 2026-08-25, see `new_traits.yml`).
+  `bark_morphology_eucalyptus` (the real APD trait) is explicitly restricted
+  to Eucalyptus/Corymbia/Angophora's named bark types (stringybark/box/gum/
+  ribbonbark/ironbark/peppermint/stocking) and shouldn't be force-applied to
+  other genera, even when a term like "smooth" would technically fit one of
+  its values. **`bark_texture` is not restricted the other way** (2026-09-02,
+  maintainer-confirmed) — it's the appropriate trait for all non-eucalypt
+  genera, but can *also* be scored on a Eucalyptus/Corymbia/Angophora species
+  alongside `bark_morphology_eucalyptus`, for texture detail the named
+  eucalypt type doesn't capture (e.g. "stringybark ... with included thin
+  scales" → `bark_morphology_eucalyptus=eucalypt_stringybark` AND
+  `bark_texture=scaly`, both scored). A combined description ("furrowed, dark
+  grey bark") is a texture clause plus a colour clause — split into two raw
+  rows, one per trait, rather than picking just one.
 - A curling/peeling Acacia bark commonly called "minniritchi" in source text
   is `bark_texture=curling`.
 
@@ -879,3 +913,34 @@ these aliases on sight rather than waiting for the next audit to catch them:
   against the newer austraits.build copy of `config/traits.yml`. Don't
   reintroduce a `spike`/`panicle`-specific `high` exception here — that was
   an earlier, since-corrected scoring.
+- **A "glaucous"/"not glaucous" description is `leaf_glaucousness`
+  (categorical: `glaucous`/`not_glaucous`), NOT `leaf_wax`** (a numeric mg/mg
+  wax-content-by-mass measurement trait, a completely different concept -
+  confused once this session, 2026-09-02, for Eucalyptus boliviana and
+  Lordhowea pilosicrista, both retroactively corrected). `leaf_glaucousness`
+  is a real, already-well-used APD trait in this project's own history
+  (already scored high/medium confidence for many prior species) - check it
+  first for any "glaucous"/"waxy bloom"/"pruinose"/greyish-or-silvery-leaf
+  description before reaching for `leaf_wax`.
+- **Non-vascular-plant species (marine algae, and presumably lichens/fungi
+  if they ever appear) need a fundamentally more conservative extraction**
+  (first hit 2026-09-02, *Nereia lophocladia*, a Fisheries Scientific
+  Committee CAM assessment for a brown alga). All three trait dictionaries
+  are scoped to vascular land plants — leaf/flower/fruit/seed morphology,
+  fire response, pollination, `habitat`'s terrestrial vocabulary, and
+  `geologic_substrate`'s soil-forming-rock vocabulary are categorical scope
+  mismatches for algae, not merely unmatched values, and should be
+  documented in `raw_value` only (`no_apd_trait`) rather than force-mapped
+  to the nearest-sounding vascular-plant trait (e.g. don't score thallus
+  length under `plant_height` - that trait's own definition is specifically
+  about a vegetative shoot system). What *does* transfer cleanly: the
+  taxon-agnostic IUCN-style population parameters
+  (`individual_count`/`subpopulation_count`/`extent_of_occurrence`/
+  `area_of_occupancy`/`generation_time`) and `threatened_species_key_threatening_processes`'
+  generic categories that happen to apply (e.g. `population_small` for a
+  genetically-bottlenecked, wildly-fluctuating population) - score those at
+  their usual confidence levels. A native species undergoing a
+  climate-driven range expansion into the habitat (e.g. the sea urchin
+  *Centrostephanus rodgersii* grazing algal beds) is not `invasive_species`
+  (that value is for introduced organisms) - document as `no_apd_trait`
+  instead of stretching the value to fit.
