@@ -501,6 +501,28 @@ scores the APD vocabulary match, not the underlying evidence. One of:
 - `unknown` — can't be determined from the source language; use sparingly,
   prefer actually reading the surrounding sentence first.
 
+**This is a fixed five-value enum — `stated`/`estimated`/`modelled`/`assumed`/
+`unknown`, nothing else.** A 6th value, `inferred`, crept into this project's
+extractions across ~460 rows/~130 species (most heavily in the
+ConservationAdvice_2026-folder batch) before being caught by the maintainer
+2026-09-03 — always for a hedged, non-numeric categorical judgement the source
+itself flagged as likely/probable ("likely an obligate seeder", "probably a
+product of disjunct speciation divergence"). That's exactly what `assumed`
+already covers ("a plausible inference... rather than a value the source
+stated outright") — score it there, never invent `inferred` as a sixth value.
+Also watch for the more common mirror-image mistake this same audit found:
+`evidence_level = stated` on a row whose `raw_value` itself contains a hedge
+word next to a number ("about 6 mm long", "c. 3 mm diam.", "estimated to be
+120 km2", "~500 individuals") — a hedged number is `estimated` even when the
+sentence otherwise reads like a normal taxonomic description; formal
+botanical descriptions routinely use "c."/"about" as their own standard
+approximation notation, and that still counts as the source flagging the
+figure as approximate, not as a fully precise stated fact. 245 rows had this
+exact mismatch, corrected in the same sweep. Rule of thumb: a hedge word
+next to a *number* → `estimated`; a hedge word on a *category/conclusion*
+with no number → `assumed`; only a fact with zero hedging language at all is
+`stated`.
+
 **Use `context` to distinguish current vs. historical, and per-site vs.
 whole-species, values — for every trait, not just population/range metrics**
 (maintainer feedback, 2026-09-02: "context is so important! For all
