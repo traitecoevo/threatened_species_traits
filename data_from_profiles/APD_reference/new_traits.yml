@@ -38,7 +38,7 @@ traits:
         grazing_tolerant_native_mammals: Not adversely affected by grazing/browsing from native mammals (e.g. macropods).
         grazing_intolerant_native_mammals: Adversely affected by grazing/browsing from native mammals (e.g. macropods).
       status: accepted 2026-08-25
-      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes, colobanthus_curtisiae]
+      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes, colobanthus_curtisiae, dichanthium_queenslandicum, dichanthium_setosum]
     leaf_apex_shape:
       label: Leaf apex shape
       description: >
@@ -72,7 +72,7 @@ traits:
         flat: A leaf flat (not folded, ridged, or curved) in cross-section.
         concave_convex: A leaf slightly concave on the upper (adaxial) surface and slightly convex on the lower (abaxial) surface in cross-section.
       status: accepted 2026-08-24
-      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta, conostylis_drummondii, conostylis_lepidospermoides, conostylis_setigera_subsp_dasys, corybas_sulcatus, cyperus_cephalotes, darwinia_masonii, darwinia_sp_carnamah, darwinia_wittwerorum, daviesia_dielsii]
+      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta, conostylis_drummondii, conostylis_lepidospermoides, conostylis_setigera_subsp_dasys, corybas_sulcatus, cyperus_cephalotes, darwinia_masonii, darwinia_sp_carnamah, darwinia_wittwerorum, daviesia_dielsii, dendrobium_carronii, dendrobium_nindii, deyeuxia_appressa, deyeuxia_drummondii]
     stem_cross_section_shape:
       label: Stem cross-section shape
       description: >
@@ -90,7 +90,7 @@ traits:
         angular: A stem with distinct angles or ridges in cross-section, of unspecified number.
         quadrangular: A stem square or four-angled in cross-section.
       status: accepted 2026-08-25
-      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum, ctenopteris_blechnoides, cyperus_cephalotes, cyperus_semifertilis]
+      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum, ctenopteris_blechnoides, cyperus_cephalotes, cyperus_semifertilis, dendrobium_antennatum, dendrobium_bigibbum, dendrobium_mirbelianum, dendrobium_nindii, dichanthium_queenslandicum]
     fruit_shape:
       label: Fruit shape
       description: >
@@ -127,7 +127,7 @@ traits:
         sectoroid: Shaped like an orange segment or wedge of a sphere.
         sinusoidal: A shape with two arcs of curvature or a single arc, such that it lacks an axis of symmetry.
       status: accepted 2026-08-25
-      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, capparis_thozetiana, carronia_pedicellata, chamaesyce_carissoides, colobanthus_curtisiae, conospermum_hookeri, corchorus_cunninghamii, corokia_whiteana, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, corynocarpus_rupestris_subsp_rupestris, cryptocarya_foetida]
+      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, capparis_thozetiana, carronia_pedicellata, chamaesyce_carissoides, colobanthus_curtisiae, conospermum_hookeri, corchorus_cunninghamii, corokia_whiteana, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, corynocarpus_rupestris_subsp_rupestris, cryptocarya_foetida, denhamia_parvifolia]
     bark_texture:
       label: Bark texture
       description: >
@@ -205,24 +205,6 @@ traits:
       allowed_values_max: 1000.0
       status: tentatively accepted 2026-08-25 - name not yet finalised
       used_in: [boronia_boliviensis]
-    age_maximum_reproductive_capacity:
-      label: Age of maximum reproductive capacity
-      description: >
-        The age at which a plant reaches its full/maximum reproductive
-        output (flower and seed production), as distinct from the real APD
-        trait reproductive_maturity (the age of first flowering/ability to
-        set any seed at all). Some sources describe a two-stage reproductive
-        development - an earlier age of first flowering, then a later age
-        of full reproductive capacity - and label the *later* milestone
-        "reproductive maturity" in their own terminology; that later
-        milestone should be scored here, not under APD's reproductive_maturity,
-        which by its own definition corresponds to first flowering.
-      type: numeric
-      units: a
-      allowed_values_min: 0.1
-      allowed_values_max: 1000.0
-      status: accepted 2026-08-25
-      used_in: [darwinia_carnea]
     flower_petal_width:
       label: Flower petal width
       description: >
@@ -237,29 +219,6 @@ traits:
       allowed_values_max: 100.0
       status: accepted 2026-08-25
       used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla]
-    fire_minimum_fire_interval:
-      label: Minimum fire-free interval
-      description: >
-        The minimum interval between successive fires needed for a
-        population of this species to persist - long enough for plants (in
-        an obligate-seeder population) to reach reproductive maturity and
-        rebuild a canopy or soil seed bank sufficient to recover from the
-        next fire, or (in a resprouter population) to recover carbohydrate
-        reserves. Distinct from the existing real APD trait
-        plant_tolerance_fire (a categorical fire-response classification)
-        and from the fire_time_from_fire_to_* traits (time from a single
-        fire event to a life-history milestone, not a recurrence-interval
-        threshold). Named with a fire_ prefix to sit alongside the existing
-        fire_* trait family. Recurring gap identified 2026-09-01: appeared
-        5 times in a single 10-species batch of Conservation Advice
-        documents (Banksia brownii, B. goodii, B. montana, B. verticillata),
-        each as a clean stated number of years.
-      type: numeric
-      units: a
-      allowed_values_min: 1.0
-      allowed_values_max: 100.0
-      status: accepted 2026-09-01
-      used_in: [banksia_brownii, banksia_goodii, banksia_montana, banksia_verticillata, correa_lawrenceana_var_genoensis, darwinia_collina, darwinia_squarrosa]
     generation_time:
       label: Generation time
       description: >
