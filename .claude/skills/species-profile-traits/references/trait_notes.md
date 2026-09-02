@@ -77,6 +77,30 @@ has no real trait.
   `hemispherical`/`obconical`/`open-crowned`/`mounded`/`pine-like`/
   `pyramidal`/`rounded`/`spreading`/`squat`) before giving up on a
   silhouette-shaped description.
+- **`plant_height` is vegetative-only — never score an inflorescence/
+  flowering-stem height there.** Its own APD definition is explicit: "maximum
+  vertical height of the *vegetative* shoot system... not the height reached
+  by reproductive shoots." APD already has the exact machinery for the
+  common case where a source *only* gives a flowering-stem height (orchids
+  with a single leaf and one flowering stem, leafless mycoheterotrophs,
+  corm/bulb/tuber geophytes with no persistent aboveground parts, rosette or
+  leaf-tuft plants): score `plant_height_type = na_geophyte` (or
+  `na_rosette`/`na_leaf_tuft`, whichever fits the described habit) to
+  document *why* `plant_height` isn't used, and put the actual numeric
+  height on `plant_height_reproductive` (m, whole reproductive shoot) —
+  **and**, from the same clause, `inflorescence_length` (cm, just the
+  inflorescence/flower-cluster portion) is very often *also* a correct,
+  distinct row (both apply to a single-flowering-stem plant, since the
+  entire stem essentially *is* the inflorescence there). **This project
+  scored a "flowering stem as a proxy for whole-plant height" pattern
+  directly onto `plant_height` for multiple orchid/geophyte species before
+  this was caught by the maintainer 2026-09-02** (confirmed and fixed for
+  *Danhatchia copelandii* and *Thelymitra variegata* within the current
+  session's batch) — **this is flagged as a likely systemic, corpus-wide
+  issue needing a dedicated retrospective sweep across earlier sessions'
+  orchid/geophyte/rosette species, which the maintainer will scope**; don't
+  assume it's already been swept just because these two instances were
+  fixed.
 - **`plant_photosynthetic_organ = phyllode` cross-maps to almost every Acacia
   s.l. (wattle) species** — "leaf-like phyllodes" in a description is a
   near-automatic high-confidence row, not something to check case by case;
@@ -90,10 +114,17 @@ has no real trait.
 ## Leaves
 
 - **Compound leaves — leaflet dimensions have their own real, dedicated
-  traits: `leaflet_length`/`leaflet_width` (continuous, cm) and
+  traits: `leaflet_length`/`leaflet_width` (continuous, **cm**, not mm) and
   `leaflet_count` (numeric, `{count}`).** Don't force leaflet length/width
-  onto `leaf_length`/`leaf_width` (those are whole-leaf traits) — this
-  happened once in this project and was corrected. **Leaflet *shape*, by
+  onto `leaf_length`/`leaf_width` (those are whole-leaf traits, mm) — this
+  happened at least twice in this project (most recently *Zieria odorifera
+  subsp. copelandii*, 2026-09-02, corrected in place) despite the raw_trait
+  label already correctly saying "leaflet_length"/"leaflet_width" — check
+  the `apd_trait`, not just the raw label. A named leaflet-number word
+  ("trifoliate" = 3, "quinquefoliate"/"digitately 5-foliolate" = 5, etc.)
+  should always be scored as an explicit `leaflet_count` row at `high`
+  confidence alongside `leaf_compoundness = compound` — don't record the
+  compoundness fact without also recording the count it directly implies. **Leaflet *shape*, by
   contrast, has no dedicated trait — map it directly to `leaf_shape` with
   `context = "leaflet"`,** not a proposed new trait; this is a legitimate
   direct use of `leaf_shape`'s own concept (2D outline) applied to a
