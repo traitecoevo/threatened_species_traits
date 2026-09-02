@@ -625,6 +625,29 @@ has no real trait.
   example, 2026-09-03: Drakaea micrantha). The maintainer may eventually
   define a dedicated trait for this pattern pending expert input — don't
   pre-empt that, just use the two-row `context`-split approach for now.
+  **Also score `fire_exposure_level=seasonal_fire_avoidance`** (real,
+  released APD trait — other values: `aquatic_taxon`,
+  `fire_avoidance_among_rocks`, `fire_avoidance_in_swamp`,
+  `fire_avoidance_near_water`) alongside the two-row split above — it's a
+  direct, dedicated match for exactly this "vulnerable above ground only
+  part of the year, otherwise safely dormant" pattern (maintainer addition,
+  2026-09-03, after being initially missed for both Drakaea species). Check
+  `plant_tolerance_fire` too when a source describes a *morphological*
+  fire-avoidance mechanism (thick bark, fire-retardant tissue chemistry) —
+  a different concept again from either of the traits above.
+- **`post_fire_recruitment` (binary: `post_fire_recruitment`/
+  `post_fire_recruitment_absent`) is the primary trait for "germinates from
+  seed following fire" — score it whenever a source states or clearly
+  implies post-fire seedling recruitment was observed, not just
+  `seed_germination_treatment`** (maintainer correction, 2026-09-03,
+  Eucalyptus beardiana — "this is a really important one to score whenever
+  applicable"). `seed_germination_treatment` (`heat`/`smoke`/`heat+smoke`/
+  ...) is still worth adding alongside it for the specific breaking-cue
+  detail when given, but isn't itself the right primary match. When the
+  source doesn't specify whether heat, smoke, or both are the actual cue,
+  record `heat smoke` as two space-delimited plausible values (the standard
+  "source doesn't narrow it down" convention) rather than the compound
+  `heat+smoke` value, which asserts both are jointly required.
 - **A basal/epicormic/lignotuberous resprouting-location detail is
   `bud_bank_location`, not a second `resprouting_capacity` row.**
   "Re-sprouted from basal shoots" is `bud_bank_location=basal_buds`
@@ -810,6 +833,17 @@ how many species have vs. lack each metric, without having to separately
 filter on `raw_trait` for just these two rows. 20 pre-existing rows across
 10 species were missing this and have been backfilled.
 
+**This same "keep `apd_trait` populated, use `no_match`" pattern applies to
+*any* real trait a source explicitly says is unknown/unavailable** — not
+just EOO/AOO. `reproductive_maturity` in particular was found scored
+`apd_trait` blank / `match_confidence=no_apd_trait` for a source stating
+"the time taken for this species to reach maturity is unknown" (maintainer
+correction, 2026-09-03, Eucalyptus beardiana and Thismia clavarioides) —
+`reproductive_maturity` **is** a real, released APD trait (numeric, years);
+a stated data gap for a real trait's *value* is `no_match`, never
+`no_apd_trait` (that verdict is reserved for when no matching trait exists
+at all, a different and much rarer situation than "the source didn't say").
+
 - **When a source gives both a per-site/per-population breakdown and an
   overall total, record both — always, not just when it's convenient.** A
   source that says "Population A: 350 individuals, Population B: 2,000
@@ -863,6 +897,20 @@ filter on `raw_trait` for just these two rows. 20 pre-existing rows across
   convention as `plant_response_to_grazing`'s ungulate/native-mammal split
   in `new_traits.yml`) — a rabbit-specific threat has no value here yet,
   leave it unscored rather than forcing it under `ungulate` or `grazer`.
+- **`plant_response_to_grazing` needs the source to actually describe the
+  *plant itself* being grazed/browsed and responding poorly — not merely
+  that stock or feral herbivores are present, could access the site, or have
+  degraded the surrounding habitat.** "Stock have degraded the habitat...the
+  potential threat exists for 12 populations...which may be accessed by
+  stock and feral goats" is habitat-degradation-plus-access-risk, not a
+  grazing-intolerance fact — it does not support this trait at all
+  (maintainer correction, 2026-09-03, Eucalyptus beardiana); score
+  `threatened_species_key_threatening_processes` for the herbivore/habitat
+  threat instead (as was already correctly done in the same row-pair here).
+  Reserve `plant_response_to_grazing` for language that actually states or
+  strongly implies an effect *on the plant* — observed browsing/defoliation/
+  death, reduced recruitment attributed to grazing, exclusion-fencing
+  experiments showing a difference, etc.
 
 ## Habitat, soil & substrate — naming gotchas
 
