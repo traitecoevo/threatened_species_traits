@@ -230,4 +230,4 @@ traits:
       allowed_values_min: 1.0
       allowed_values_max: 500.0
       status: accepted 2026-09-02
-      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek, astrotricha_sp_wingan_inlet, chiloglottis_anaticeps, choretrum_spicatum_subsp_spicatum, corchorus_cunninghamii, corokia_whiteana, correa_lawrenceana_var_genoensis, conospermum_quadripetalum]
+      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek, astrotricha_sp_wingan_inlet, chiloglottis_anaticeps, choretrum_spicatum_subsp_spicatum, corchorus_cunninghamii, corokia_whiteana, correa_lawrenceana_var_genoensis, conospermum_quadripetalum, dillwynia_rupestris]
