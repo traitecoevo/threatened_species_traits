@@ -43,7 +43,7 @@ traits:
         grazing_intolerant_native_mammals: Adversely affected by grazing/browsing from native mammals (e.g. macropods).
         intolerant_to_grazing_by_rabbits: Adversely affected by grazing/browsing from rabbits (Oryctolagus cuniculus) specifically.
       status: accepted 2026-08-25; intolerant_to_grazing_by_rabbits value added 2026-09-02
-      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes, colobanthus_curtisiae, dichanthium_queenslandicum, dichanthium_setosum, zieria_odorifera_subsp_copelandii, nematolepis_rhytidophylla]
+      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes, colobanthus_curtisiae, dichanthium_queenslandicum, dichanthium_setosum, zieria_odorifera_subsp_copelandii, nematolepis_rhytidophylla, boronia_grimshawii, kardomia_silvestris, prostanthera_tallowa, coleus_insularis]
     leaf_cross_section_shape:
       label: Leaf cross-section shape
       description: >
@@ -60,7 +60,7 @@ traits:
         flat: A leaf flat (not folded, ridged, or curved) in cross-section.
         concave_convex: A leaf slightly concave on the upper (adaxial) surface and slightly convex on the lower (abaxial) surface in cross-section.
       status: accepted 2026-08-24
-      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta, conostylis_drummondii, conostylis_lepidospermoides, conostylis_setigera_subsp_dasys, corybas_sulcatus, cyperus_cephalotes, darwinia_masonii, darwinia_sp_carnamah, darwinia_wittwerorum, daviesia_dielsii, dendrobium_carronii, dendrobium_nindii, deyeuxia_appressa, deyeuxia_drummondii, conospermum_quadripetalum, homoranthus_croftianus, leptospermum_crassifolium, olearia_suffruticosa, persoonia_flexifolia, pherosphaera_fitzgeraldii, deyeuxia_talariata]
+      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta, conostylis_drummondii, conostylis_lepidospermoides, conostylis_setigera_subsp_dasys, corybas_sulcatus, cyperus_cephalotes, darwinia_masonii, darwinia_sp_carnamah, darwinia_wittwerorum, daviesia_dielsii, dendrobium_carronii, dendrobium_nindii, deyeuxia_appressa, deyeuxia_drummondii, conospermum_quadripetalum, homoranthus_croftianus, leptospermum_crassifolium, olearia_suffruticosa, persoonia_flexifolia, pherosphaera_fitzgeraldii, deyeuxia_talariata, boronia_deanei_acutifolia, boronia_deanei_deanei]
     stem_cross_section_shape:
       label: Stem cross-section shape
       description: >
@@ -139,7 +139,7 @@ traits:
         rough: Bark with an uneven, coarse surface not otherwise specified.
         papery: Bark that peels away in thin, papery sheets.
       status: accepted 2026-08-25
-      used_in: [acacia_ammophila, acacia_curranii, microcorys_eremophiloides, syzygium_hodgkinsoniae, eucalyptus_stenostoma, eucalyptus_crucis_crucis, babingtonia_tozerensis, cassinia_heleniae, cassinia_tegulata, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, cycas_silvestris, eucalyptus_boliviana, leptospermum_crassifolium, pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, eucalyptus_sturgissiana, leptospermum_thompsonii, eucalyptus_paliformis, nematolepis_rhytidophylla, eucalyptus_scopulorum]
+      used_in: [acacia_ammophila, acacia_curranii, microcorys_eremophiloides, syzygium_hodgkinsoniae, eucalyptus_stenostoma, eucalyptus_crucis_crucis, babingtonia_tozerensis, cassinia_heleniae, cassinia_tegulata, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, cycas_silvestris, eucalyptus_boliviana, leptospermum_crassifolium, pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, eucalyptus_sturgissiana, leptospermum_thompsonii, eucalyptus_paliformis, nematolepis_rhytidophylla, eucalyptus_scopulorum, kardomia_silvestris, prostanthera_tallowa, brachychiton_guymeri]
     bark_colour:
       label: Bark colour
       description: >
@@ -164,7 +164,7 @@ traits:
         white: Bark is white.
         yellow: Bark is yellow.
       status: accepted 2026-08-25 (file entry restored 2026-09-02)
-      used_in: [pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, eucalyptus_sturgissiana, eucalyptus_paliformis, nematolepis_rhytidophylla, eucalyptus_scopulorum]
+      used_in: [pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, eucalyptus_sturgissiana, eucalyptus_paliformis, nematolepis_rhytidophylla, eucalyptus_scopulorum, kardomia_silvestris, prostanthera_tallowa, brachychiton_guymeri]
     stipule_presence:
       label: Stipule presence
       description: >
@@ -181,7 +181,7 @@ traits:
         scale: Small, scale-like stipules.
         leafy: Stipules that are leaf-like in size and texture.
       status: accepted 2026-08-25
-      used_in: [acacia_awestoniana, acacia_aristulata, acacia_lobulata, chorizema_varium, rhodamnia_sessiliflora, rhodamnia_whiteana]
+      used_in: [acacia_awestoniana, acacia_aristulata, acacia_lobulata, chorizema_varium, rhodamnia_sessiliflora, rhodamnia_whiteana, androcalva_inglewoodensis, androcalva_beeronensis, brachychiton_guymeri]
     stipule_length:
       label: Stipule length
       description: >
@@ -191,7 +191,7 @@ traits:
       allowed_values_min: 0.1
       allowed_values_max: 200.0
       status: accepted 2026-08-25
-      used_in: [acacia_aristulata, pomaderris_cotoneaster, pultenaea_setulosa, chorizema_varium]
+      used_in: [acacia_aristulata, pomaderris_cotoneaster, pultenaea_setulosa, chorizema_varium, androcalva_inglewoodensis, androcalva_beeronensis, brachychiton_guymeri]
     senescence_onset:
       label: Age at senescence onset
       description: >
@@ -231,7 +231,7 @@ traits:
       allowed_values_min: 1.0
       allowed_values_max: 100.0
       status: accepted 2026-08-25
-      used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla, conospermum_quadripetalum, danhatchia_copelandii, drosera_oreopodion, homoranthus_croftianus, persoonia_flexifolia, pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, zieria_odorifera_subsp_copelandii, pterostylis_metcalfei]
+      used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla, conospermum_quadripetalum, danhatchia_copelandii, drosera_oreopodion, homoranthus_croftianus, persoonia_flexifolia, pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, zieria_odorifera_subsp_copelandii, pterostylis_metcalfei, boronia_grimshawii]
     generation_time:
       label: Generation time
       description: >
@@ -255,4 +255,4 @@ traits:
       allowed_values_min: 1.0
       allowed_values_max: 500.0
       status: accepted 2026-09-02
-      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek, astrotricha_sp_wingan_inlet, chiloglottis_anaticeps, choretrum_spicatum_subsp_spicatum, corchorus_cunninghamii, corokia_whiteana, correa_lawrenceana_var_genoensis, conospermum_quadripetalum, dillwynia_rupestris, drosera_oreopodion, eucalyptus_boliviana, gentiana_baeuerlenii, gentiana_wissmannii, hibbertia_superans, homoranthus_croftianus, leptospermum_crassifolium, lordhowea_pilosicrista, olearia_suffruticosa, pittosporum_kororoense, prostanthera_rowleys_creek, pultenaea_insularis, rhodamnia_sessiliflora, rhodamnia_whiteana, typhonium_sp_cox_peninsula, cyphanthera_scabrella, eucalyptus_sturgissiana, leptospermum_thompsonii, pherosphaera_fitzgeraldii, deyeuxia_talariata, eucalyptus_paliformis, grevillea_rhizomatosa, nematolepis_rhytidophylla, pterostylis_metcalfei, eucalyptus_scopulorum]
+      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek, astrotricha_sp_wingan_inlet, chiloglottis_anaticeps, choretrum_spicatum_subsp_spicatum, corchorus_cunninghamii, corokia_whiteana, correa_lawrenceana_var_genoensis, conospermum_quadripetalum, dillwynia_rupestris, drosera_oreopodion, eucalyptus_boliviana, gentiana_baeuerlenii, gentiana_wissmannii, hibbertia_superans, homoranthus_croftianus, leptospermum_crassifolium, lordhowea_pilosicrista, olearia_suffruticosa, pittosporum_kororoense, prostanthera_rowleys_creek, pultenaea_insularis, rhodamnia_sessiliflora, rhodamnia_whiteana, typhonium_sp_cox_peninsula, cyphanthera_scabrella, eucalyptus_sturgissiana, leptospermum_thompsonii, pherosphaera_fitzgeraldii, deyeuxia_talariata, eucalyptus_paliformis, grevillea_rhizomatosa, nematolepis_rhytidophylla, pterostylis_metcalfei, eucalyptus_scopulorum, boronia_subulifolia, boronia_deanei_acutifolia, boronia_deanei_deanei, boronia_grimshawii, cassinia_theodorii, kunzea_juniperoides_pernervosa, prostanthera_tallowa, brachychiton_guymeri]
