@@ -926,6 +926,16 @@ these aliases on sight rather than waiting for the next audit to catch them:
   missing) — don't default a fruit-colour description to `no_apd_trait`
   without checking it first, the same way `flower_diameter` was
   under-searched-for previously.
+- **`bud_length` / `bud_width`** — real traits in the newer austraits.build
+  copy (units: cm), for a *flower bud's* own length/width — distinct from
+  `flower_length` (open flowers only). Missed for a whole batch of Eucalyptus
+  species (2026-09-03, maintainer-caught) by assuming no bud-dimension trait
+  existed at all and filing every eucalypt bud measurement as `no_apd_trait`
+  — the mistake this section exists to prevent, and a direct repeat of the
+  `flower_diameter`/`fruit_colour` under-search pattern above. Buds are a
+  primary Eucalyptus diagnostic character (length, width, shape, cap/operculum
+  form all routinely given together) — always check `bud_length`/`bud_width`
+  by name before reaching for `no_apd_trait` on a eucalypt bud measurement.
 - **`pedicel_length`** (accepted 2026-08-25) — the stalk of a single flower
   within a multi-flowered inflorescence, explicitly distinct from
   `peduncle_length` (the stalk of the whole inflorescence; that trait's own
