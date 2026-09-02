@@ -39,24 +39,7 @@ traits:
         grazing_intolerant_native_mammals: Adversely affected by grazing/browsing from native mammals (e.g. macropods).
       status: accepted 2026-08-25
       used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes, colobanthus_curtisiae, dichanthium_queenslandicum, dichanthium_setosum]
-    leaf_apex_shape:
-      label: Leaf apex shape
-      description: >
-        The shape of the tip (apex) of a leaf. Parallel in structure and
-        naming convention to the existing APD trait leaf_base_shape, and
-        intended to reuse that trait's own vocabulary style where a term
-        genuinely fits, adding new terms only where leaf_base_shape's
-        vocabulary has no equivalent (e.g. apiculate).
-      type: categorical
-      allowed_values_levels:
-        acute: A leaf apex that comes to a point at an angle of less than 90 degrees.
-        obtuse: A leaf apex that comes to a point at an angle of more than 90 degrees.
-        rounded: A leaf apex that is rounded rather than pointed.
-        apiculate: A leaf apex ending abruptly in a small, sharp terminal point (a mucro).
-        acuminate: A leaf apex that tapers gradually to a slender, extended point - more drawn-out than a plain acute apex.
-      status: accepted 2026-08-24; acuminate value added 2026-09-02
-      used_in: [andersonia_axilliflora, boronia_boliviensis, darwinia_carnea, daviesia_bursarioides, eriocaulon_carsonii, grevillea_rara, hibbertia_abyssa, styphelia_capillaris, eucalyptus_insularis, hexaspora_pubescens, syzygium_hodgkinsoniae, acacia_ammophila, acacia_lauta, eucalyptus_crucis_crucis, bothriochloa_bunyensis, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, cassinia_heleniae, chamelaucium_sp_cataby, comesperma_oblongatum, coopernookia_scabridiuscula, corybas_montanus, cryptocarya_foetida, darwinia_acerosa, darwinia_apiculata, daviesia_dielsii, daviesia_glossosema, daviesia_speciosa]
-   leaf_cross_section_shape:
+    leaf_cross_section_shape:
       label: Leaf cross-section shape
       description: >
         The shape of a leaf in transverse (cross) section - distinct from
@@ -90,7 +73,7 @@ traits:
         angular: A stem with distinct angles or ridges in cross-section, of unspecified number.
         quadrangular: A stem square or four-angled in cross-section.
       status: accepted 2026-08-25
-      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum, ctenopteris_blechnoides, cyperus_cephalotes, cyperus_semifertilis, dendrobium_antennatum, dendrobium_bigibbum, dendrobium_mirbelianum, dendrobium_nindii, dichanthium_queenslandicum]
+      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum, ctenopteris_blechnoides, cyperus_cephalotes, cyperus_semifertilis, dendrobium_antennatum, dendrobium_bigibbum, dendrobium_mirbelianum, dendrobium_nindii, dichanthium_queenslandicum, dodonaea_rupicola]
     fruit_shape:
       label: Fruit shape
       description: >

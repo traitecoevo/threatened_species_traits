@@ -24,6 +24,21 @@ whenever you're deciding where a row belongs and the answer isn't obvious from
 the rules below; add a new entry there (not here) whenever a species surfaces
 something not yet covered.**
 
+**Re-read this file and `references/trait_notes.md` in full at the start of
+every session that does this work — don't rely on your own memory of past
+sessions, even a recent one.** On 2026-09-02, most of a session's extraction
+work (naming a fire-response trait `fire_response` instead of the documented
+`resprouting_capacity`, treating `associated_species` as a real trait despite
+that being corrected here four separate times already, skipping the entire
+pollination cluster, converting units this file already says not to convert)
+turned out to already be documented correctly in these two files — the
+mistakes happened because the work was done from recalled context rather than
+from actually opening and reading the current version of these files first.
+These files exist specifically so this doesn't have to be re-discovered or
+re-explained every session across what will eventually be thousands of
+species profiles; treat "I already know this from before" as a reason to
+double-check against the file, not a reason to skip reading it.
+
 ## File locations (updated 2026-09-01)
 
 Per-species working files and the two large read-only APD reference caches
@@ -134,8 +149,8 @@ taxon_name,trait_category,trait,value,value_type,context,source_section,source,n
   any controlled vocabulary yet — that's stage 2's job).
 - `value`: a single bare value (a number, or a categorical term/phrase) — **never a
   range**. When the source gives a range (`"1.5-6 cm"`), split it into **two rows**
-  with the same `trait` name: one with `value_type = min` and the bounding value,
-  one with `value_type = max` and the other bounding value. Don't collapse a range
+  with the same `trait` name: one with `value_type = minimum` and the bounding value,
+  one with `value_type = maximum` and the other bounding value. Don't collapse a range
   to its midpoint or average — that discards real information (the actual spread)
   and invents a number the source never stated. Keep the unit *with* the number in
   this file (e.g. `"1.5 cm"`) since this file is a faithful human-readable summary,
@@ -148,11 +163,27 @@ taxon_name,trait_category,trait,value,value_type,context,source_section,source,n
     subgroup (see `context`, below), which should stay one `trait` name.
   - A single stated bound that isn't part of a two-sided range (a threshold like
     "most abundant below 2000 µS/cm", or an upper limit like "up to 30°C") is not a
-    range to split — keep it as one row, `value_type = numeric_threshold` or
-    `numeric_upper_bound` as appropriate.
-- `value_type`: one of `categorical`, `numeric`, `numeric_mean`, `min`, `max`,
-  `numeric_threshold`, `numeric_upper_bound` — pick whichever describes the shape of
-  the value, add another type if none of these fit rather than forcing a bad match.
+    range to split — keep it as one row, `value_type = minimum` or `maximum`
+    as appropriate (a "below X"/"at most X" ceiling is `maximum`; an "at least
+    X"/"X or more" floor is `minimum`).
+- `value_type`: **exactly one of `minimum`, `maximum`, `raw`, `mode`, `mean`** —
+  this is the traits.build schema's own fixed vocabulary (confirmed against
+  `config/traits.yml` 2026-09-02), not a free choice. `mode` covers every
+  categorical/qualitative value (the term traits.build uses where you might
+  reach for "categorical"); `raw` covers a single specific reported number that
+  isn't a min/max/mean (a point measurement, "n = 9" chromosome count, etc.).
+  **A retrofit is needed**: this project used a much larger, non-conforming set
+  (`categorical`, `numeric`, `min`, `max`, `numeric_threshold`,
+  `numeric_upper_bound`, `numeric_lower_bound`, `numeric_mean`, `point`,
+  `single`, `NA`) for most of its history before this was caught 2026-09-02 —
+  map old→new as: `categorical`→`mode`, `max`/`numeric_upper_bound`→`maximum`,
+  `min`/`numeric_lower_bound`/`numeric_threshold`→`minimum`,
+  `numeric`/`point`/`single`→`raw`, `numeric_mean`→`mean`, `NA`→blank (empty
+  string, not the literal text "NA" — these are `no_match` rows with no real
+  value to type). The full corpus retrofit is done as of 2026-09-02 (see the
+  combined file and every per-species `_apd.csv`) — this note exists so it
+  doesn't regress. If genuinely nothing fits, that's a sign the row itself
+  needs rethinking, not a sign to add a sixth value to this list.
 - `context`: leave blank on most rows. Use it when the *same* trait genuinely
   needs more than one row and each row needs a short qualifier to be read
   correctly on its own — a source giving different values for different
@@ -436,12 +467,22 @@ things here (see the last bullet), not a sign it doesn't exist:
 with columns:
 
 ```
-taxon_name,source,raw_trait,raw_value,value_type,context,value,units,apd_trait,apd_trait_type,apd_units,match_confidence,notes,evidence_level,reference
+taxon_name,source,raw_trait,raw_value,value_type,context,value,units,apd_trait,apd_trait_type,apd_units,match_confidence,notes,evidence_level,reference,source_pdf
 ```
 
 `taxon_name` and `source` carry the same meaning and values as in the stage-1 file
 (same species, same document) — repeated here too so this file stands alone and
 survives being combined with other species' crosswalk files later.
+
+**`source_pdf`** (added 2026-09-02, maintainer directive) is the actual source
+PDF's filename (e.g. `82665-conservation-advice-06022026.pdf`) — not the
+derived per-species `_apd.csv` filename that `source_file` (below, on the
+combined table) already holds. Before this column existed there was no way to
+trace a row back to the literal document it came from, only the intermediate
+file this project generated — populate it on every new species going forward.
+Historical rows (everything before 2026-09-02) have this column blank since
+the original PDF filename usually isn't recoverable after the fact — don't
+backfill by guessing.
 
 **`evidence_level`** (added 2026-09-01, maintainer directive) records how the
 *source itself* backs the raw fact — independent of `match_confidence`, which
@@ -639,12 +680,13 @@ Use `low` rather than omitting a shaky-but-real match, so a human reviewer knows
 where to look first, not just which rows are entirely unmapped.
 
 **After writing a species' `_apd.csv`, append it to the combined file**
-`data_from_profiles/list_species_trait_data_apd.csv` (the same 15 columns plus a
-16th, `source_file`, holding the basename of the per-species `_apd.csv` it came
-from — added 2026-08-25 so rows can be traced back to their species file without
-re-matching on `taxon_name`; header once at the top) rather than leaving each
-species' crosswalk to be found and concatenated later — this is the file
-downstream processing should actually read.
+`data_from_profiles/list_species_trait_data_apd.csv` (the same 16 columns —
+including `source_pdf` — plus a 17th, `source_file`, holding the basename of
+the per-species `_apd.csv` it came from — added 2026-08-25 so rows can be
+traced back to their species file without re-matching on `taxon_name`; header
+once at the top) rather than leaving each species' crosswalk to be found and
+concatenated later — this is the file downstream processing should actually
+read.
 Keep the per-species `_apd.csv` files too (they're the auditable,
 one-document-at-a-time working copy, and the user has confirmed they want both);
 the combined file is a derived rebuild of all of them concatenated, not a separate

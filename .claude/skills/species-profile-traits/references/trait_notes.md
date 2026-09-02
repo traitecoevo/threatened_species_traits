@@ -148,6 +148,30 @@ has no real trait.
   `leaf_cross_section` — a cross-section is a "thing", a trait needs a
   measured property) covers `keeled`/`conduplicate`/`terete`/`subterete`/
   `flat`/`concave_convex`. See `new_traits.yml`.
+- **`leaf_apex_shape` is a real, already-released APD trait** (`acuminate`/
+  `acute`/`obtuse`/`rounded`/`apiculate`) — **not** a pending project trait.
+  This project incorrectly carried it in `new_traits.yml` as a `new_trait`
+  from 2026-08-24 until 2026-09-02, when a full read-through of
+  `austraits.build/config/traits.yml` found it was real all along; that
+  incorrect `new_traits.yml` entry has been removed. Score a direct match at
+  `high`, not `new_trait` — species previously scored `new_trait` for this
+  trait (a batch of ~29, listed in git history for the removed entry) still
+  need retroactively correcting to `high` (not yet done as of 2026-09-02).
+  None of its 5 values cover a notched/bilobed apex ("truncate" doesn't fit
+  either) — a source describing one is a genuine `proposed_new_value` against
+  this *real* trait (e.g. `emarginate` for notched, `truncate` for
+  flat/squared-off), not something to add to `new_traits.yml`, since that
+  file is for traits pending merge, not values pending merge into an
+  already-merged trait.
+- **`leaf_margin_posture`** (real APD trait: `flat`/`involute`/`revolute`/
+  `undulate` — margin curvature/curling, distinct from `leaf_margin`'s
+  entire/toothed edge-shape concept) is easy to miss and easy to reinvent as
+  a project trait instead. "Margins rolled upward" → `involute`; "rolled
+  under/downward" → `revolute`; "wavy" → `undulate`. A grass leaf described
+  as "stiffly involute" is this trait directly at `high` — don't propose
+  `involute` as a new value of `leaf_cross_section_shape` (a different,
+  project-only trait) instead, a mistake this project made once before the
+  real trait was found.
 
 ## Flowers & reproduction
 
@@ -258,22 +282,61 @@ has no real trait.
   is an internal inconsistency worth flagging (or correcting, with the
   derivation shown) rather than silently recording as-is.
 - **`generation_time`** (raw-extraction label; not `generation_length` —
-  length is a spatial dimension, not a duration) — left as `no_apd_trait`/
-  unformalized for now, not yet a project trait.
-- **Pollination — three distinct traits, pick by what kind of evidence the
+  length is a spatial dimension, not a duration) — **accepted as a project
+  trait 2026-09-02** (numeric, `a`, 1-500) after recurring in 15+ species'
+  IUCN-criteria assessments with nowhere to be recorded; see `new_traits.yml`.
+  Score a direct match at `high` once a species gives an explicit generation-
+  length figure or formula-derived estimate (IUCN assessments often show the
+  derivation, e.g. "age at first reproduction + [0.5 x reproductive length]"
+  — that's still `generation_time`, not `no_apd_trait`, even though it's a
+  calculated rather than directly-observed figure; note the derivation in
+  `notes`).
+- **Pollination — a whole cluster of real traits was missed for most of this
+  project's history (found 2026-09-02 on a full read-through of
+  `austraits.build/config/traits.yml` after a maintainer caught a
+  sexually-deceptive orchid species with no pollination data recorded at
+  all). Check every reproductive-ecology section against all of these, not
+  just `pollination_syndrome`/`pollination_vector_possible`/`dispersers`
+  below (which were already documented) — pick by what kind of evidence the
   sentence reports, not just whether a pollinator taxon is named:**
   - `pollination_syndrome` — a *flower-morphology-based inference* about
     what probably pollinates a flower shaped a certain way.
-  - `pollination_vector_possible` (newer-copy only; values incl. `wasp`/
-    `bee`/`bird`/`ant`/`autonomous`/etc.) — an *actual or likely floral
-    visitor* a source names (observed, or "potential pollinators recorded
-    interacting with"). If a source names a wasp genus, "beetles directly
-    observed," "at least 12 genera of bee recorded interacting with," etc.,
-    that's vector-possible data, not syndrome data, even when the wording
-    sounds similar.
-  - `pollination_vector_known` — direct pollen-transfer/seed-set evidence.
-    Rarer in these profiles, but keep it in mind for exclusion-experiment or
-    explicit-observation language.
+  - `pollination_vector_possible` (values incl. `wasp`/`bee`/`bird`/`ant`/
+    `autonomous`/etc.) — an *actual or likely floral visitor* a source names
+    (observed, or "potential pollinators recorded interacting with"). If a
+    source names a wasp genus, "beetles directly observed," "at least 12
+    genera of bee recorded interacting with," etc., that's vector-possible
+    data, not syndrome data, even when the wording sounds similar. Also
+    covers "pollen removed/deposited observed" language even when the
+    visiting animal itself wasn't identified — that's still evidence of an
+    (unidentified) vector's activity, not full `pollination_vector_known`.
+  - `pollination_vector_known` — direct pollen-transfer/seed-set evidence
+    from a pollinator-exclusion experiment or explicit identified-species
+    observation. Rarer in these profiles than `_possible`, but don't default
+    everything to `_possible` just because it's more common — check whether
+    the source's evidence is actually this strong. A source phrase like
+    "obligate insect pollinator" (a confirmed, named relationship) maps here
+    directly, not to `_possible`.
+  - `pollination_system` (values incl. `biotic_specialised`/
+    `biotic_unspecialised`/named taxa/`self`/`abiotic`) — a field-study-based
+    (preferred) or morphology-plus-observation-based classification of the
+    *system*, distinct from `pollination_syndrome` (morphology-only
+    inference). "Almost certainly has an obligate pollination relationship
+    with one or few species of thynnine wasp" is `biotic_specialised` here,
+    **and** `pollination_syndrome: wasp` from the same sentence — score both,
+    they're different facets of the same fact, not competing options.
+  - `flower_pollinator_reward` (values: `deceit`/`food`/`heat`/`nectar`/
+    `oil`/`pollen`/`reproduction`/`scent`/`stigmatic_exudate`/
+    `sugary_exudate`) — what (if anything) the pollinator gets. **Sexually
+    deceptive pseudocopulation (thynnine wasp orchids, hammer orchids,
+    Chiloglottis, Caladenia, Drakaea, etc.) is always `deceit`** — the male
+    wasp gets nothing, a fact this project missed for every sexually
+    deceptive orchid species done before 2026-09-02.
+  - `flower_scent_production` / `flower_nectar_production` (both simple
+    presence/absence binaries: `scent_produced`/`scent_absent`,
+    `nectar_produced`/`nectar_absent`) — score whenever the source states or
+    clearly implies either. Pheromone-mimicking chemical compounds (sexual
+    deception) count as `scent_produced`.
 - **`dispersers`** (newer-copy only; categorical, values incl. `ants`/
   `wind`/`birds`/`water`/`abiotic`/etc.) is the disperser-side counterpart to
   `pollination_vector_possible` — the actual/likely dispersal agent, distinct
@@ -485,6 +548,34 @@ has no real trait.
   disturbance response is ephemeral — check the plant itself germinates,
   completes its life cycle, and dies within roughly a single
   disturbance-to-disturbance interval before using this.
+- **Always record the fire season/timing as `context` on fire-cued rows**
+  (`post_fire_flowering`, `flowering_cues`, `resprouting_capacity`, etc.)
+  whenever the source states or implies it (maintainer directive,
+  2026-09-02) — e.g. `context = "summer fire"`, not just a bare categorical
+  value. This matches these traits' own documented guidance (fire severity,
+  season, and frequency should all be captured as context properties
+  wherever available) and matters a lot ecologically: spring/out-of-season
+  fire and summer fire have opposite effects on the same species in several
+  documented cases in this project.
+- **Fire-stimulated/enhanced flowering from a dormant underground organ
+  implies `resprouting_capacity: resprouts`, even without a separate
+  explicit resprouting statement** (maintainer-confirmed inference rule,
+  2026-09-02) — a plant that flowers *because of* a fire necessarily
+  survived that fire underground; don't leave `resprouting_capacity`
+  unscored just because the source's language is all about flowering, not
+  survival. Score both rows from the same fact. Don't over-apply this to a
+  case where the source explicitly casts doubt on individual-level survival
+  (as opposed to population-level uncertainty, which doesn't contradict the
+  inference) — read the actual caveat before applying the rule mechanically.
+  When the underlying organ is specifically a tuber (or bulb/corm/stem
+  tuber/root tuber/belowground caudex), `bud_bank_location` should be scored
+  `fleshy_underground_organ` — that value's own definition explicitly covers
+  tubers (listed synonym: "geophyte"); there is no literal `tuber` token in
+  `bud_bank_location`'s allowed values, so don't invent one.
+- **`resprouting_capacity`'s real `clonal_spread_mechanism` sibling value for
+  root-suckering is `root_buds`** (synonym: `root_suckers`), **not**
+  `root_suckering` — a plausible-sounding but non-existent value this
+  project used for several species before 2026-09-02.
 
 ## Other whole-plant traits
 
@@ -609,6 +700,51 @@ filter on `raw_trait` for just these two rows. 20 pre-existing rows across
   `subpopulation_count`, which is normally a *finer* subdivision than
   population, not a broader one) and don't silently pick only one of the
   two granularities to record.
+
+## Threats
+
+- **`threatened_species_key_threatening_processes`** (project trait, real,
+  categorical — values include `fire`/`fire_suppression`/`fire_increase`/
+  `fire_regime`/`disease`/`chytrid`/`phytophthora_cinnamomi`/`myrtle_rust`/
+  `invasive_species`/`invasive_plant`/`livestock`/`ungulate`/`grazer`/`cats`/
+  `cane_toads`/`foxes`/`goats`/`pigs`/`rabbits`/`rats_offshore_islands`/
+  `population_small`) went unused for most of this project's history despite
+  every species profile having a Threats section — found 2026-09-02.
+  **Actively score this for every species from its Threats section**, not
+  just narrate the threats in prose/notes elsewhere. Space-delimited
+  multi-value when several apply (most species have 2-4). `ungulate` covers
+  deer/goats/pigs/cattle/horses/donkeys collectively when a source doesn't
+  distinguish; rabbits are deliberately **not** covered by `ungulate` (same
+  convention as `plant_response_to_grazing`'s ungulate/native-mammal split
+  in `new_traits.yml`) — a rabbit-specific threat has no value here yet,
+  leave it unscored rather than forcing it under `ungulate` or `grazer`.
+
+## Habitat, soil & substrate — naming gotchas
+
+- **A rock/granite/sandstone/basalt substrate is `geologic_substrate`
+  (`granitic`/`sandstone`/`basaltic`/`limestone`/`metamorphic`/etc.), not
+  `soil_type`** — `soil_type`'s vocabulary has no plain `rock` value (it has
+  soil-texture/rockiness terms like `skeletal`, `gravel`, `stony`, but not a
+  bare "the substrate is rock" token). A source saying a species grows
+  "among rocks" or "on granite" is `geologic_substrate`, not a forced
+  `soil_type: rock` (used incorrectly by this project before 2026-09-02).
+- **Soil colour is a separate real project trait, `soil_colour`**
+  (`black`/`brown`/`brown_dark`/`brown_light`/`grey`/`orange`/`red`/`white`/
+  `yellow`) — don't fold a stated soil colour ("red sandy soil", "black clay
+  soils", "grey silt") into the `soil_type` value string; score both traits
+  separately from the same clause.
+- **`topographic_position`'s real vocabulary has no `summit`/`crest`/`rise`
+  value** — the closest real terms are `hills`/`mountains`/`ridges`/
+  `rocky_outcrop`/`slopes` (habitat itself has a separate `mountain_summit`
+  value if that's specifically what's needed instead). Note the spelling is
+  `rocky_outcrop`, not `rock_outcrop` — both `habitat` and
+  `topographic_position` use the `rocky_` form.
+- **`associated_species`/`associated_vegetation_community` are documented,
+  never scored as real traits — see "Associated species & vegetation
+  community" below. This has been corrected/re-explained to this project at
+  least 4 times (2026-09-01, then three more times on 2026-09-02) — if you
+  find yourself scoring either at `high`/`medium` confidence as if it were
+  an established project trait, stop and re-read that section.**
 
 ## Site climate (rainfall, temperature)
 
