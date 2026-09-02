@@ -215,6 +215,54 @@ taxon_name,trait_category,trait,value,value_type,context,source_section,source,n
     growth — record those with `context = "juvenile"` (and the corresponding
     adult-stage row, if the source gives one, as `context = "adult"`) on the
     same trait name, following the pattern above.
+  - **A normal min/max pair plus a separately-flagged rare extreme is a
+    three-row pattern, not two** (maintainer-confirmed convention, 2026-09-03):
+    "herb 12-25 cm tall (up to 40 cm)" is `plant_height` minimum=12,
+    maximum=25 (the normal min/max pair) **plus** a third row, maximum=40,
+    `context = "occasional extreme"` — the maintainer's own shorthand for
+    this third row is "extreme_maximum" (or "extreme_minimum" for the
+    low-end equivalent, e.g. "usually 2-5 m, rarely as low as 0.5 m"). This
+    was already the project's working practice before being formally named
+    here — don't second-guess it when a source gives this three-part shape.
+  - **A "mainly/peak X, but continuing sporadically to Y" phenology
+    statement is two rows, not one collapsed value** (maintainer directive,
+    2026-09-03): score the full stated range (`context = "full flowering
+    time range"` / `"full fruiting time range"`) **and** the narrower peak
+    period the source calls out as typical (`context = "peak flowering
+    period"` / `"peak fruiting period"`), both under the same
+    `flowering_time`/`fruiting_time` trait name, both in the real trait's
+    12-character Jan-first Y/N month-string format (never spelled-out month
+    names, see the `flowering_time` special-case rule above). When the
+    document's formal taxonomic description states a different, disagreeing
+    phenology window from the general-description prose (e.g. "spring" vs.
+    "mainly October, extending to early summer"), note the discrepancy in
+    `notes` on the relevant row(s) rather than silently picking one — see
+    the disagreeing-source-documents pattern above.
+- `context_type` (added 2026-09-03, maintainer directive): a short snake_case
+  category naming *what kind* of qualifier a populated `context` value is —
+  `context` itself is free text, and this project's `context` values have
+  organically grown into several genuinely different kinds of thing
+  (life-stage, plant part, leaf surface, phenological range, geography,
+  frequency/typicality, assessment-estimate basis, disagreeing sources, plant
+  sex) that are useful to filter or group by separately from reading the free
+  text itself. Leave blank when `context` is blank. Populate going forward
+  (this is a schema addition, not a retrospective-fix mandate — the ~1,150
+  distinct pre-existing `context` values across the corpus are **not** being
+  backfilled with a `context_type` right now, per the maintainer's own
+  "now or retrofit later, your choice" framing when this column was added).
+  Suggested starting vocabulary (extend as new kinds of context turn up,
+  the same way `new_traits.yml` grows — don't treat this list as closed):
+  `life_stage` (juvenile/adult/intermediate/mature/flower_bud),
+  `plant_part` (leaflet vs whole leaf, labellum, phyllode, branchlets, ...),
+  `leaf_surface` (adaxial/abaxial), `phenological_range` (peak vs full/
+  extended timing, see the flowering/fruiting-time bullet above),
+  `population` (a named subpopulation, region, or state), `frequency`
+  (typical/usually/occasionally/`occasional_extreme` — pairs with the
+  extreme-max/min three-row pattern above), `estimate_basis` (current vs.
+  maximum-plausible vs. assessment-estimate, the IUCN-table-style
+  qualifiers), `source_disagreement` (two source documents/citations giving
+  different values for the same fact), `sex` (male/female flowers or cones on
+  a dioecious/monoecious species).
 - `source_section`: the section/subsection number (or page, if the document has no
   numbered sections) the value came from — this is what makes the row auditable
   later.
