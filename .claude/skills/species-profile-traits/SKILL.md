@@ -510,6 +510,26 @@ things here (see the last bullet), not a sign it doesn't exist:
    measured. If the raw value is a range that stage 1 already split into `min`/
    `max` rows, carry that split through here too (one crosswalk row per stage-1
    row) — never collapse back to a midpoint.
+   **`units` doesn't have to equal the trait's own canonical unit — it holds
+   whatever unit the source actually used, in correct syntax** (maintainer
+   clarification, 2026-09-03) — a `leaf_length` given in the source as "12 cm"
+   stays `units=cm` even though `apd_units=mm`; that's the system working as
+   designed, not a mismatch to "fix". What genuinely does need fixing is
+   *syntax* — matching the token conventions in `config/unit_conversions.csv`
+   (e.g. `{count}` for a bare count, `{count}/{count}` for a count-per-count
+   ratio like `flowers_per_inflorescence`) rather than sloppy variants
+   (blank, the bare word `count`, `count/inflorescence`, `{count}/head`). A
+   2026-09-03 sweep found ~460 rows across ~160 species using such variants
+   and normalized them to the correct syntax. **Never normalize a unit that
+   carries real semantic content just because it looks unusual** — `pairs`
+   or `pairs/pinna` on a `leaflet_count` row means the *value itself* is
+   expressed in pair-units (value=6 means 6 pairs = 12 leaflets), not that
+   the syntax is wrong; collapsing that to `{count}` without also doubling
+   the value silently changes what the row means, not just how it's
+   formatted (caught and reverted in the same sweep, Atalaya collina and
+   Acacia blayana). Before normalizing any non-standard unit token, check
+   whether the row's own `value` was scored *in* that unit (pairs, dozens,
+   whatever) rather than merely labelled with it.
 
 **Write `<species_name_snake_case>_apd.csv`** in the same per-species folder,
 with columns:
