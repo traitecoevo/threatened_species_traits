@@ -622,8 +622,7 @@ bin_thresholds_table <- function(bin_thresholds) {
     mutate(
       upper = lag(threshold),
       range = case_when(
-        is.na(upper)      ~ paste0("from ", threshold),
-        threshold == -Inf ~ paste0("to ", upper),
+        is.na(upper)      ~ paste0(threshold, "–1.0"),
         TRUE              ~ paste0(threshold, "–", upper)
       )
     ) %>%
@@ -1428,11 +1427,11 @@ phytophthora_assigned_risk <- native_species %>%
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
   phytophthora_bin_thresholds <- c(
-      "5_extremely_high" = 1.35,
-      "4_high"           = 0.9,
-      "3_moderate"       = 0.5,
-      "2_low"            = 0.2,
-      "1_no_risk"        = -Inf
+      "5_extremely_high" = 0.4,
+      "4_high"           = 0.25,
+      "3_moderate"       = 0.15,
+      "2_low"            = 0.1,
+      "1_no_risk"        = 0
     )
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
@@ -1553,21 +1552,39 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
       regeneration_ability_risk = ifelse(is.na(regeneration_ability_risk),
                                    mean(regeneration_ability_risk, na.rm = TRUE),
                                    regeneration_ability_risk)
+    )
+
+  # rescale individual susceptibility to 0-1 across all taxa before combining with
+  # regeneration/precariousness, so those two terms (fixed to a narrow +/-0.1-ish
+  # range everywhere) have a consistent relative influence across every threat,
+  # rather than one that depends on this threat's own raw susceptibility spread
+  phytophthora_IS_range <- range(phytophthora_assigned_risk$total_individual_susceptibility_overwrite, na.rm = TRUE)
+
+  phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
+    mutate(
+      total_individual_susceptibility_scaled = (total_individual_susceptibility_overwrite - phytophthora_IS_range[1]) / diff(phytophthora_IS_range)
     ) %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_individual_susceptibility_overwrite) + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk),
+      population_risk = (1*total_individual_susceptibility_scaled) + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk)
+    )
 
-    # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility, bin_thresholds = phytophthora_bin_thresholds),
+  # linearly rescale population_risk to 0-1 across taxa
+  phytophthora_risk_range <- range(phytophthora_assigned_risk$population_risk, na.rm = TRUE)
+
+  phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
+    mutate(
+      population_risk = (population_risk - phytophthora_risk_range[1]) / diff(phytophthora_risk_range),
+
+    # assign risk bin (individual_susceptibility_bin removed - not reported to DCCEEW)
       population_risk_bin = create_risk_bins(population_risk, bin_thresholds = phytophthora_bin_thresholds),
     ) |>
-    
+
     # confidence-based plausible range around the numeric risk score
     add_risk_range(
-      risk_col = "population_risk", 
+      risk_col = "population_risk",
       confidence_col = "susceptibility_confidence",
       bin_thresholds = phytophthora_bin_thresholds
     )
@@ -1579,8 +1596,7 @@ phytophthora_assigned_risk <- phytophthora_assigned_risk %>%
            total_individual_susceptibility, total_individual_susceptibility_overwrite,
            population_risk, population_risk_bin, susceptibility_confidence,
            population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max, 
-           individual_susceptibility_bin,
+           population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -1878,11 +1894,11 @@ myrtle_rust_assigned_risk <- native_species %>%
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
  myrtle_rust_bin_thresholds <- c(
-      "5_extremely_high" = 0.8,
-      "4_high"           = 0.5,
-      "3_moderate"       = 0.35,
-      "2_low"            = 0.01,
-      "1_no_risk"        = -Inf
+      "5_extremely_high" = 0.25,
+      "4_high"           = 0.15,
+      "3_moderate"       = 0.1,
+      "2_low"            = 0.05,
+      "1_no_risk"        = 0
     )
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
@@ -1979,23 +1995,41 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
       regeneration_ability_risk = ifelse(is.na(regeneration_ability_risk),
                                    mean(regeneration_ability_risk, na.rm = TRUE),
                                    regeneration_ability_risk)
+    )
+
+  # rescale individual susceptibility to 0-1 across all taxa before combining with
+  # regeneration/precariousness, so those two terms (fixed to a narrow +/-0.1-ish
+  # range everywhere) have a consistent relative influence across every threat,
+  # rather than one that depends on this threat's own raw susceptibility spread
+  myrtle_rust_IS_range <- range(myrtle_rust_assigned_risk$total_individual_susceptibility_overwrite, na.rm = TRUE)
+
+  myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
+    mutate(
+      total_individual_susceptibility_scaled = (total_individual_susceptibility_overwrite - myrtle_rust_IS_range[1]) / diff(myrtle_rust_IS_range)
     ) %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_individual_susceptibility_overwrite) + regeneration_ability_risk + precariousness_risk,
+      population_risk = (1*total_individual_susceptibility_scaled) + regeneration_ability_risk + precariousness_risk,
       #population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
-      population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk),
+      population_risk = ifelse(total_individual_susceptibility_overwrite == 0, 0, population_risk)
+    )
 
-    # assign risk bins      
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility, bin_thresholds = myrtle_rust_bin_thresholds),
+  # linearly rescale population_risk to 0-1 across taxa
+  myrtle_rust_risk_range <- range(myrtle_rust_assigned_risk$population_risk, na.rm = TRUE)
+
+  myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk |>
+    mutate(
+      population_risk = (population_risk - myrtle_rust_risk_range[1]) / diff(myrtle_rust_risk_range),
+
+    # assign risk bin (individual_susceptibility_bin removed - not reported to DCCEEW)
       population_risk_bin = create_risk_bins(population_risk, bin_thresholds = myrtle_rust_bin_thresholds)
 
     ) |>
-  
+
     # confidence-based plausible range around the numeric risk score
       add_risk_range(
-        risk_col = "population_risk", 
+        risk_col = "population_risk",
         confidence_col = "susceptibility_confidence",
         bin_thresholds = myrtle_rust_bin_thresholds
       )
@@ -2007,8 +2041,7 @@ myrtle_rust_assigned_risk <- myrtle_rust_assigned_risk %>%
            total_individual_susceptibility, total_individual_susceptibility_overwrite,
            population_risk, population_risk_bin, susceptibility_confidence,
            population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max, 
-           individual_susceptibility_bin,
+           population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) |>
@@ -2268,6 +2301,13 @@ goats_assigned_risk <- native_species %>%
 5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+ goat_bin_thresholds <- c(
+      "5_extremely_high" = 0.85,
+      "4_high"           = 0.7,
+      "3_moderate"       = 0.5,
+      "2_low"            = 0.35,
+      "1_no_risk"        = 0
+    )
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
 goats_assigned_risk <- goats_assigned_risk %>%
@@ -2323,14 +2363,6 @@ goats_assigned_risk <- goats_assigned_risk %>%
         )
     )
 
- goat_bin_thresholds <- c(
-      "5_extremely_high" = 0.9,
-      "4_high"           = 0.75,
-      "3_moderate"       = 0.6,
-      "2_low"            = 0.3,
-      "1_no_risk"        = -Inf
-    )
-
   goats_assigned_risk <- goats_assigned_risk %>%
 
     # merge in non-threat components
@@ -2346,35 +2378,51 @@ goats_assigned_risk <- goats_assigned_risk %>%
       regeneration_ability_risk = ifelse(is.na(regeneration_ability_risk),
                                    mean(regeneration_ability_risk, na.rm = TRUE),
                                    regeneration_ability_risk)
+    )
+
+  # rescale individual susceptibility to 0-1 across all taxa before combining with
+  # regeneration/precariousness, so those two terms (fixed to a narrow +/-0.1-ish
+  # range everywhere) have a consistent relative influence across every threat,
+  # rather than one that depends on this threat's own raw susceptibility spread
+  goat_IS_range <- range(goats_assigned_risk$total_individual_susceptibility, na.rm = TRUE)
+
+  goats_assigned_risk <- goats_assigned_risk %>%
+    mutate(
+      total_individual_susceptibility_scaled = (total_individual_susceptibility - goat_IS_range[1]) / diff(goat_IS_range)
     ) %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
+      population_risk = (1*total_individual_susceptibility_scaled) + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk)
+    )
 
-    # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility, 
-                                                       bin_thresholds = goat_bin_thresholds),
+  # linearly rescale population_risk to 0-1 across taxa
+  goat_risk_range <- range(goats_assigned_risk$population_risk, na.rm = TRUE)
+
+  goats_assigned_risk <- goats_assigned_risk %>%
+    mutate(
+      population_risk = (population_risk - goat_risk_range[1]) / diff(goat_risk_range),
+
+    # assign risk bin (individual_susceptibility_bin removed - not reported to DCCEEW)
       population_risk_bin = create_risk_bins(population_risk, bin_thresholds = goat_bin_thresholds)
     ) |>
-    
+
     # confidence-based plausible range around the numeric risk score
     add_risk_range(
-      risk_col = "population_risk", 
+      risk_col = "population_risk",
       confidence_col = "susceptibility_confidence",
       bin_thresholds = goat_bin_thresholds
     )
 
   goats_assigned_risk_threatened <- goats_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
-    select(taxon_name, genus, family, threatened_status, 
+    select(taxon_name, genus, family, threatened_status,
            plant_goat_palatability,
            total_individual_susceptibility,
            population_risk, population_risk_bin, susceptibility_confidence,
            population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max, 
-           individual_susceptibility_bin,
+           population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -2488,6 +2536,13 @@ deer_assigned_risk <- native_species %>%
 5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+ deer_bin_thresholds <- c(
+      "5_extremely_high" = 0.75,
+      "4_high"           = 0.5,
+      "3_moderate"       = 0.35,
+      "2_low"            = 0.2,
+      "1_no_risk"        = 0
+    )
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
 deer_assigned_risk <- deer_assigned_risk %>%
@@ -2527,14 +2582,6 @@ deer_assigned_risk <- deer_assigned_risk %>%
         total_individual_susceptibility = habitat_risk*trait_effect_score_scaled
   )
 
- deer_bin_thresholds <- c(
-      "5_extremely_high" = 1,
-      "4_high"           = 0.7,
-      "3_moderate"       = 0.5,
-      "2_low"            = 0.3,
-      "1_no_risk"        = -Inf
-    )
-
   deer_assigned_risk <- deer_assigned_risk %>%
 
     # merge in non-threat components
@@ -2550,24 +2597,41 @@ deer_assigned_risk <- deer_assigned_risk %>%
       regeneration_ability_risk = ifelse(is.na(regeneration_ability_risk),
                                    mean(regeneration_ability_risk, na.rm = TRUE),
                                    regeneration_ability_risk)
+    )
+
+  # rescale individual susceptibility to 0-1 across all taxa before combining with
+  # regeneration/precariousness, so those two terms (fixed to a narrow +/-0.1-ish
+  # range everywhere) have a consistent relative influence across every threat,
+  # rather than one that depends on this threat's own raw susceptibility spread
+  deer_IS_range <- range(deer_assigned_risk$total_individual_susceptibility, na.rm = TRUE)
+
+  deer_assigned_risk <- deer_assigned_risk %>%
+    mutate(
+      total_individual_susceptibility_scaled = (total_individual_susceptibility - deer_IS_range[1]) / diff(deer_IS_range)
     ) %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
+      population_risk = (1*total_individual_susceptibility_scaled) + regeneration_ability_risk + precariousness_risk,
       #population_risk = sigmoidal_rescale(total_trait_effect_score, to = c(0.0, 1)),
-      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk)
+    )
 
-    # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility, 
-                                             bin_thresholds = deer_bin_thresholds),
-      population_risk_bin = create_risk_bins(population_risk, 
+  # linearly rescale population_risk to 0-1 across taxa
+  deer_risk_range <- range(deer_assigned_risk$population_risk, na.rm = TRUE)
+
+  deer_assigned_risk <- deer_assigned_risk %>%
+    mutate(
+      population_risk = (population_risk - deer_risk_range[1]) / diff(deer_risk_range),
+
+    # assign risk bin (individual_susceptibility_bin removed - not reported to DCCEEW)
+      population_risk_bin = create_risk_bins(population_risk,
                                              bin_thresholds = deer_bin_thresholds)
     ) |>
-    
+
     # confidence-based plausible range around the numeric risk score
     add_risk_range(
-      risk_col = "population_risk", 
+      risk_col = "population_risk",
       confidence_col = "susceptibility_confidence",
       bin_thresholds = deer_bin_thresholds
     )
@@ -2575,12 +2639,11 @@ deer_assigned_risk <- deer_assigned_risk %>%
   deer_assigned_risk_threatened <- deer_assigned_risk %>%
     filter(!is.na(threatened_status)) %>%
     mutate(taxonomic_risk = 0) %>%
-    select(taxon_name, genus, family, threatened_status, 
+    select(taxon_name, genus, family, threatened_status,
            total_individual_susceptibility,
            population_risk, population_risk_bin, susceptibility_confidence,
            population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max, 
-           individual_susceptibility_bin,
+           population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -2708,7 +2771,14 @@ pigs_assigned_risk <- native_species %>%
 5.  assign risk susceptibility bins, confidence bins to each taxon
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-
+ pig_bin_thresholds <- c(
+      "5_extremely_high" = 0.95,
+      "4_high"           = 0.7,
+      "3_moderate"       = 0.5,
+      "2_low"            = 0.3,
+      "1_no_risk"        = 0
+    )
+ 
 # calculate "risk effect scores" for habitat, traits, taxonomy
 pigs_assigned_risk <- pigs_assigned_risk %>%
    # calculate confidence in risk score, based on how much data available, weighted
@@ -2749,14 +2819,6 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
         total_individual_susceptibility = habitat_risk*trait_effect_score_scaled
   )
 
- pig_bin_thresholds <- c(
-      "5_extremely_high" = 1.2,
-      "4_high"           = 1.1,
-      "3_moderate"       = 0.8,
-      "2_low"            = 0.5,
-      "1_no_risk"        = -Inf
-    )
- 
   pigs_assigned_risk <- pigs_assigned_risk %>%
 
     # merge in non-threat components
@@ -2772,22 +2834,40 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
       regeneration_ability_risk = ifelse(is.na(regeneration_ability_risk),
                                    mean(regeneration_ability_risk, na.rm = TRUE),
                                    regeneration_ability_risk)
+    )
+
+  # rescale individual susceptibility to 0-1 across all taxa before combining with
+  # regeneration/precariousness, so those two terms (fixed to a narrow +/-0.1-ish
+  # range everywhere) have a consistent relative influence across every threat,
+  # rather than one that depends on this threat's own raw susceptibility spread
+  pig_IS_range <- range(pigs_assigned_risk$total_individual_susceptibility, na.rm = TRUE)
+
+  pigs_assigned_risk <- pigs_assigned_risk %>%
+    mutate(
+      total_individual_susceptibility_scaled = (total_individual_susceptibility - pig_IS_range[1]) / diff(pig_IS_range)
     ) %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
+      population_risk = (1*total_individual_susceptibility_scaled) + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk)
+    )
 
-    # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility, bin_thresholds = pig_bin_thresholds),
+  # linearly rescale population_risk to 0-1 across taxa
+  pig_risk_range <- range(pigs_assigned_risk$population_risk, na.rm = TRUE)
+
+  pigs_assigned_risk <- pigs_assigned_risk %>%
+    mutate(
+      population_risk = (population_risk - pig_risk_range[1]) / diff(pig_risk_range),
+
+    # assign risk bin (individual_susceptibility_bin removed - not reported to DCCEEW)
       population_risk_bin = create_risk_bins(population_risk, bin_thresholds = pig_bin_thresholds)
     ) |>
-    
+
     # confidence-based plausible range around the numeric risk score
     add_risk_range(
-      risk_col = "population_risk", 
-      confidence_col = "susceptibility_confidence", 
+      risk_col = "population_risk",
+      confidence_col = "susceptibility_confidence",
       bin_thresholds = pig_bin_thresholds
     )
 
@@ -2795,13 +2875,12 @@ pigs_assigned_risk <- pigs_assigned_risk %>%
   pigs_assigned_risk_threatened <- pigs_assigned_risk |>
     filter(!is.na(threatened_status)) |>
     mutate(taxonomic_risk = 0) |>
-    select(taxon_name, genus, family, threatened_status, 
+    select(taxon_name, genus, family, threatened_status,
            total_individual_susceptibility,
            total_individual_susceptibility,
            population_risk, population_risk_bin, susceptibility_confidence,
            population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max, 
-           individual_susceptibility_bin,
+           population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -2932,11 +3011,11 @@ tropical_C4_grasses_assigned_risk <- native_species %>%
   # C4 grasses uses different bin thresholds to every other threat - defined once here
   # and reused below for both the point estimate and the range
   tropical_C4_grasses_bin_thresholds <- c(
-      "5_extremely_high" = 0.75,
-      "4_high"           = 0.45,
-      "3_moderate"       = 0.3,
+      "5_extremely_high" = 0.4,
+      "4_high"           = 0.3,
+      "3_moderate"       = 0.2,
       "2_low"            = 0.15,
-      "1_no_risk"        = -Inf
+      "1_no_risk"        = 0
     )
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
@@ -3037,25 +3116,42 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
       regeneration_ability_risk = ifelse(is.na(regeneration_ability_risk),
                                    mean(regeneration_ability_risk, na.rm = TRUE),
                                    regeneration_ability_risk)
+    )
+
+  # rescale individual susceptibility to 0-1 across all taxa before combining with
+  # regeneration/precariousness, so those two terms (fixed to a narrow +/-0.1-ish
+  # range everywhere) have a consistent relative influence across every threat,
+  # rather than one that depends on this threat's own raw susceptibility spread
+  tropical_C4_grasses_IS_range <- range(tropical_C4_grasses_assigned_risk$total_individual_susceptibility, na.rm = TRUE)
+
+  tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
+    mutate(
+      total_individual_susceptibility_scaled = (total_individual_susceptibility - tropical_C4_grasses_IS_range[1]) / diff(tropical_C4_grasses_IS_range)
     ) %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
+      population_risk = (1*total_individual_susceptibility_scaled) + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk)
+    )
 
-    # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility,
-        bin_thresholds = tropical_C4_grasses_bin_thresholds),
+  # linearly rescale population_risk to 0-1 across taxa
+  tropical_C4_grasses_risk_range <- range(tropical_C4_grasses_assigned_risk$population_risk, na.rm = TRUE)
+
+  tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
+    mutate(
+      population_risk = (population_risk - tropical_C4_grasses_risk_range[1]) / diff(tropical_C4_grasses_risk_range),
+
+    # assign risk bin (individual_susceptibility_bin removed - not reported to DCCEEW)
       population_risk_bin = create_risk_bins(population_risk,
         bin_thresholds = tropical_C4_grasses_bin_thresholds)
     ) |>
-    
+
     # confidence-based plausible range around the numeric risk score
     # special bins for C4 grasses due to extreme risks
     add_risk_range(
-      risk_col = "population_risk", 
-      confidence_col = "susceptibility_confidence", 
+      risk_col = "population_risk",
+      confidence_col = "susceptibility_confidence",
       bin_thresholds = tropical_C4_grasses_bin_thresholds
     )
 
@@ -3070,8 +3166,7 @@ tropical_C4_grasses_assigned_risk <- tropical_C4_grasses_assigned_risk %>%
            total_individual_susceptibility,
            population_risk, population_risk_bin, susceptibility_confidence,
            population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max, 
-           individual_susceptibility_bin,
+           population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            direct_competition_risk, fire_intensity_risk,
@@ -3203,11 +3298,11 @@ hymenachne_assigned_risk <- native_species %>%
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
  hymenachne_bin_thresholds <- c(
-      "5_extremely_high" = 1.0,
+      "5_extremely_high" = 0.8,
       "4_high"           = 0.6,
-      "3_moderate"       = 0.2,
-      "2_low"            = 0.01,
-      "1_no_risk"        = -Inf
+      "3_moderate"       = 0.4,
+      "2_low"            = 0.1,
+      "1_no_risk"        = 0
     )
 
 # calculate "risk effect scores" for habitat, traits, taxonomy
@@ -3277,22 +3372,40 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
       regeneration_ability_risk = ifelse(is.na(regeneration_ability_risk),
                                    mean(regeneration_ability_risk, na.rm = TRUE),
                                    regeneration_ability_risk)
+    )
+
+  # rescale individual susceptibility to 0-1 across all taxa before combining with
+  # regeneration/precariousness, so those two terms (fixed to a narrow +/-0.1-ish
+  # range everywhere) have a consistent relative influence across every threat,
+  # rather than one that depends on this threat's own raw susceptibility spread
+  hymenachne_IS_range <- range(hymenachne_assigned_risk$total_individual_susceptibility, na.rm = TRUE)
+
+  hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
+    mutate(
+      total_individual_susceptibility_scaled = (total_individual_susceptibility - hymenachne_IS_range[1]) / diff(hymenachne_IS_range)
     ) %>%
 
     # sum together 3 components, normalise
     mutate(
-      population_risk = (1*total_individual_susceptibility) + regeneration_ability_risk + precariousness_risk,
-      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk),
+      population_risk = (1*total_individual_susceptibility_scaled) + regeneration_ability_risk + precariousness_risk,
+      population_risk = ifelse(total_individual_susceptibility == 0, 0, population_risk)
+    )
 
-    # assign risk bins
-      individual_susceptibility_bin = create_risk_bins(total_individual_susceptibility, bin_thresholds = hymenachne_bin_thresholds),
+  # linearly rescale population_risk to 0-1 across taxa
+  hymenachne_risk_range <- range(hymenachne_assigned_risk$population_risk, na.rm = TRUE)
+
+  hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
+    mutate(
+      population_risk = (population_risk - hymenachne_risk_range[1]) / diff(hymenachne_risk_range),
+
+    # assign risk bin (individual_susceptibility_bin removed - not reported to DCCEEW)
       population_risk_bin = create_risk_bins(population_risk, bin_thresholds = hymenachne_bin_thresholds)
     ) |>
-    
+
     # confidence-based plausible range around the numeric risk score
     add_risk_range(
-      risk_col = "population_risk", 
-      confidence_col = "susceptibility_confidence", 
+      risk_col = "population_risk",
+      confidence_col = "susceptibility_confidence",
       bin_thresholds = hymenachne_bin_thresholds
     )
 
@@ -3307,8 +3420,7 @@ hymenachne_assigned_risk <- hymenachne_assigned_risk %>%
            total_individual_susceptibility,
            population_risk, population_risk_bin, susceptibility_confidence,
            population_risk_min, population_risk_max,
-           population_risk_bin_min, population_risk_bin_max, 
-           individual_susceptibility_bin,
+           population_risk_bin_min, population_risk_bin_max,
            habitat, habitat_risk, trait_effect_score_scaled,
            taxonomic_risk, prop_traits_scored,
            contains(c("risk_effect_score")), everything()) %>%
@@ -3458,7 +3570,6 @@ hymenachne_assigned_risk_threatened |>
   kable(caption = "50 taxa scored at highest risk from olive hymenachne", col.names = c("Family", "Species", "Population risk", "Pop'n risk bin", "Pop'n risk bin, min",  "Pop'n risk bin, max")) %>%
   kable_classic()
 ```
-
 
 # Model validation
 
