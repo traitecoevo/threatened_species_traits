@@ -60,7 +60,7 @@ traits:
         flat: A leaf flat (not folded, ridged, or curved) in cross-section.
         concave_convex: A leaf slightly concave on the upper (adaxial) surface and slightly convex on the lower (abaxial) surface in cross-section.
       status: accepted 2026-08-24
-      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta, conostylis_drummondii, conostylis_lepidospermoides, conostylis_setigera_subsp_dasys, corybas_sulcatus, cyperus_cephalotes, darwinia_masonii, darwinia_sp_carnamah, darwinia_wittwerorum, daviesia_dielsii, dendrobium_carronii, dendrobium_nindii, deyeuxia_appressa, deyeuxia_drummondii]
+      used_in: [darwinia_carnea, hibbertia_abyssa, styphelia_capillaris, wurmbea_calcicola, anigozanthos_viridis_terraspectans, conostylis_dielsii_teres, acacia_lauta, conostylis_drummondii, conostylis_lepidospermoides, conostylis_setigera_subsp_dasys, corybas_sulcatus, cyperus_cephalotes, darwinia_masonii, darwinia_sp_carnamah, darwinia_wittwerorum, daviesia_dielsii, dendrobium_carronii, dendrobium_nindii, deyeuxia_appressa, deyeuxia_drummondii, conospermum_quadripetalum]
     stem_cross_section_shape:
       label: Stem cross-section shape
       description: >
@@ -78,7 +78,7 @@ traits:
         angular: A stem with distinct angles or ridges in cross-section, of unspecified number.
         quadrangular: A stem square or four-angled in cross-section.
       status: accepted 2026-08-25
-      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum, ctenopteris_blechnoides, cyperus_cephalotes, cyperus_semifertilis, dendrobium_antennatum, dendrobium_bigibbum, dendrobium_mirbelianum, dendrobium_nindii, dichanthium_queenslandicum, dodonaea_rupicola]
+      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum, ctenopteris_blechnoides, cyperus_cephalotes, cyperus_semifertilis, dendrobium_antennatum, dendrobium_bigibbum, dendrobium_mirbelianum, dendrobium_nindii, dichanthium_queenslandicum, dodonaea_rupicola, conospermum_quadripetalum]
     fruit_shape:
       label: Fruit shape
       description: >
@@ -115,7 +115,7 @@ traits:
         sectoroid: Shaped like an orange segment or wedge of a sphere.
         sinusoidal: A shape with two arcs of curvature or a single arc, such that it lacks an axis of symmetry.
       status: accepted 2026-08-25
-      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, capparis_thozetiana, carronia_pedicellata, chamaesyce_carissoides, colobanthus_curtisiae, conospermum_hookeri, corchorus_cunninghamii, corokia_whiteana, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, corynocarpus_rupestris_subsp_rupestris, cryptocarya_foetida, denhamia_parvifolia]
+      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, capparis_thozetiana, carronia_pedicellata, chamaesyce_carissoides, colobanthus_curtisiae, conospermum_hookeri, corchorus_cunninghamii, corokia_whiteana, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, corynocarpus_rupestris_subsp_rupestris, cryptocarya_foetida, denhamia_parvifolia, danhatchia_copelandii]
     bark_texture:
       label: Bark texture
       description: >
@@ -206,7 +206,7 @@ traits:
       allowed_values_min: 1.0
       allowed_values_max: 100.0
       status: accepted 2026-08-25
-      used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla]
+      used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla, conospermum_quadripetalum, danhatchia_copelandii]
     generation_time:
       label: Generation time
       description: >
@@ -230,4 +230,4 @@ traits:
       allowed_values_min: 1.0
       allowed_values_max: 500.0
       status: accepted 2026-09-02
-      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek, astrotricha_sp_wingan_inlet, chiloglottis_anaticeps, choretrum_spicatum_subsp_spicatum, corchorus_cunninghamii, corokia_whiteana, correa_lawrenceana_var_genoensis]
+      used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek, astrotricha_sp_wingan_inlet, chiloglottis_anaticeps, choretrum_spicatum_subsp_spicatum, corchorus_cunninghamii, corokia_whiteana, correa_lawrenceana_var_genoensis, conospermum_quadripetalum]
