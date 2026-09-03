@@ -84,10 +84,14 @@ don't write per-species files under the repo's `data_from_profiles/` anymore:
   that batch — see the corpus-wide `no_apd_trait` tally pattern used in past
   check-ins for how to identify this). Exclude site/community descriptors
   from that nomination even when they dominate the tally — `family`
-  (taxonomic metadata), and `associated_vegetation_community`/
+  (taxonomic metadata), `associated_vegetation_community`/
   `associated_species` (site context, not a plant trait — see
-  `trait_notes.md`'s "Associated species & vegetation community" section)
-  are never candidates, no matter how often they recur.
+  `trait_notes.md`'s "Associated species & vegetation community" section),
+  and `altitude`/elevation (maintainer confirmed 2026-09-03: worth
+  recording every time it's given, same as `family`/associated species,
+  but it is not itself a trait nomination — stop naming it as the batch's
+  top candidate even though it recurs constantly) are never candidates,
+  no matter how often they recur.
 - **Commit (git) only every 50 species**, not every 10 — batch several
   check-ins' worth of work into one commit. Still commit only the four core
   files per the existing commit-scope rule (`SKILL.md`, `trait_notes.md`,

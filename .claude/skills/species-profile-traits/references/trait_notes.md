@@ -1164,13 +1164,18 @@ these aliases on sight rather than waiting for the next audit to catch them:
 - **No altitude/elevation trait exists anywhere** (real APD, this
   project's config/traits.yml, or new_traits.yml) despite elevation
   ranges being routinely reported in these conservation advice documents
-  (a recurring gap, first flagged 2026-09-03, Eucalyptus pulverulenta;
-  recurred same day, Hicksbeachia pinnatifolia).
+  (first flagged 2026-09-03, Eucalyptus pulverulenta; recurred at least
+  7 more times the same day across Hicksbeachia pinnatifolia, Homoranthus
+  decumbens/montanus, Huperzia lockyeri/marsupiiformis/prolifera,
+  Hydriastele costata). **Maintainer decision 2026-09-03: keep recording
+  it every time it's given (same as `family`/`associated_species`), but
+  it is not itself a trait needing a `new_traits.yml` addition and must
+  not be nominated as a batch's top candidate, however often it recurs**
+  - see SKILL.md's check-in exclusion list.
   Score `apd_trait=altitude`, `match_confidence=proposed_new_trait`,
   `apd_units=m`, value populated - per SKILL.md's "propose a best-guess
   value/trait name, don't just flag the gap" instruction - rather than
-  leaving it `no_apd_trait`. Revisit whether this should be formally
-  added to new_traits.yml once it recurs a few more times.
+  leaving it `no_apd_trait`.
 - **`seed_colour`'s `allowed_values_levels` descriptions in
   austraits.build/config/traits.yml appear internally scrambled/corrupted
   relative to their own key names** (e.g. the `black` key's description
@@ -1271,3 +1276,135 @@ these aliases on sight rather than waiting for the next audit to catch them:
   Grevillea kennedyana. Also confirmed `plant_width` (real APD trait,
   units m) as the correct trait for a stated plant spread/breadth
   dimension, sibling to `plant_height`.
+- **`threatened_species_key_threatening_processes` has no allowed value
+  for illegal collection/harvesting** (of seed, cuttings, whole plants,
+  or spores, for the horticultural trade or by plant enthusiasts) -
+  this is one of the single most frequently recurring `no_apd_trait`
+  gaps in the whole corpus so far, having come up for Hicksbeachia
+  pinnatifolia, Homoranthus decumbens, Homoranthus montanus (as
+  "removal of specimens"), and all three Huperzia species processed
+  2026-09-03 alone. Score it `no_apd_trait` with a note (`"no matching
+  \"collection\"/harvesting key threatening process value..."`) and
+  flag it as the top new_traits.yml candidate at the next check-in
+  until a maintainer decision is made - a plausible new value name is
+  `collection` or `illegal_collection`.
+- **Lycophytes ("fern allies" - Huperzia/Phlegmariurus) need a distinct
+  extraction approach**: no flower/fruit/seed traits apply (they
+  reproduce via spores, not seeds); `plant_growth_form=fern` is the
+  closest available value (its own definition covers spore-reproducing,
+  seedless/flowerless vascular plants generally, not just true ferns);
+  `plant_growth_substrate=epiphyte`/`lithophyte` covers the growth
+  substrate (a separate real trait from plant_growth_form, easy to
+  miss); `leaf_axil_angle` (real trait, deg) fits a stated leaf-to-stem
+  angle exactly; `leaf_cross_section_shape=keeled` is already an
+  existing allowed value for this project's pending trait, not a new
+  proposal, and comes up often for these strongly keeled leaves;
+  `leaf_phyllotaxis` covers both `whorled` and `spiral` arrangements.
+  Sporophylls (spore-bearing leaves) are morphologically distinct from
+  vegetative leaves and were scored under the same APD traits
+  (`leaf_length`, `leaf_margin`, `leaf_cross_section_shape`) with
+  `context`/`context_type` marking them as the sporophyll, not the
+  vegetative leaf - there is no separate sporophyll-specific trait.
+  The sterile-to-fertile-zone transition and the spore-body-to-leaf
+  length ratio have no matching traits anywhere. Found 2026-09-03,
+  Huperzia carinata/dalhousieana/filiformis.
+- **`Jacksonia` (Fabaceae) is aphyllous - "leaves" described in these
+  sources are actually phyllodes** (flattened, leaf-like petioles/stems
+  that take over photosynthesis) or the ribbed/angular branches
+  themselves acting as cladodes. No dedicated phyllode/cladode trait
+  exists in APD or this project's config - resist the temptation to
+  force phyllode descriptions (apex shape, colour) onto ordinary
+  leaf_apex_shape/leaf_surface_colour traits, since those traits'
+  definitions are specifically about true leaf lamina. `stem_cross_section_shape`
+  (this project's pending trait) DOES apply correctly here, since it is
+  explicitly stem-scoped - e.g. "angular, prominently ribbed" branches
+  scored as `angular`. Pea-flower (Faboideae) colour is often described
+  per-petal-type (standard/wings/keel), each a different colour -
+  score `flower_colour` three times with `context`/`context_type`
+  identifying which petal, rather than picking just one. Found
+  2026-09-03, Jacksonia sp. Collie (C.J.Koch 177).
+- **Maintainer directive 2026-09-03: be more thorough on floral
+  morphology, not less** - the project is actively building out this
+  part of the dictionary, so a source's floral description deserves the
+  same row-by-row treatment as leaves/fire ecology, not a quick pass.
+  Caught missing `flower_shape=tubular` for Homoranthus montanus's "1-6
+  small tubular flowers" despite `flower_shape` being a REAL APD trait
+  (allowed values: `bell-shaped`, `tubular` - only two values, so
+  narrow applicability, but check every flower description against it).
+  Also check for `flower_style_differentiation` (categorical: absent/
+  continuous/present_long_and_narrow/present_long_and_wide/
+  present_petaloid/present_short_and_narrow/present_short_and_thick/
+  present_length_and_shape_unknown - style presence and shape *relative
+  to ovary size*, not to sepals), `flower_stigma_length` (numeric, mm),
+  and `flower_style_fusion` (numeric 0-1, proportion of style length
+  fused) whenever style/stigma detail is given. When a described detail
+  (floral tube presence/absence, a specific colour pattern, a stigma
+  shape) has no matching trait at all even after checking, still
+  document it in `raw_value`/`notes` as `no_apd_trait` rather than
+  skipping the row outright - per SKILL.md's standing instruction, and
+  per this correction.
+- **A sparse allowed-values list on a REAL (core APD) trait is not a
+  ceiling - propose a new value rather than force-fitting a poor match,
+  the same as for this project's own pending traits.** Maintainer
+  correction 2026-09-03: `flower_shape` currently has only two defined
+  values (`bell-shaped`, `tubular`) because that part of APD is still
+  being actively built out, not because those are the only flower
+  shapes that exist. Initially scored Lambertia echinata's "trumpet-
+  shaped flowers" as `tubular` at `medium` confidence reasoning it was
+  "closest of only two options" - wrong instinct. Fixed to
+  `proposed_new_value=funnelform` (a tube gradually flaring to a wide
+  mouth, meaningfully distinct from tubular's uniform width). Apply
+  this same openness to any other core trait that turns out to have a
+  thin value list for the structure being described - the trait being
+  "real APD" doesn't mean its value list is exhaustive.
+- **`stem_hairs` and `leaf_hairs_adult_leaves` are both binary
+  (glabrous/hairy only) - propose `hairs_branched` (stellate/branched
+  hairs) as a new value when a source specifies "star-shaped"/stellate
+  hairs**, rather than collapsing to the generic `hairy`. APD already
+  uses exactly this vocabulary for `seed_surface_hairs`
+  (`hairs_branched`, synonym stellate/plumose, vs `hairs_simple`,
+  synonym tomentose/velutinous/sericeous) - reuse those same value
+  names for consistency when proposing the same distinction on other
+  hair traits. Stellate hairs are common and often diagnostic in
+  Malvaceae/Sterculiaceae (e.g. Lasiopetalum) and several other
+  families - expect this to recur. Found 2026-09-03, Lasiopetalum
+  longistamineum. Do NOT, however, force a floral/bracteole hair
+  observation onto `leaf_hairs_adult_leaves` just to attach a proposed
+  value to *something* - that trait is leaf-specific by definition, and
+  scoring a different structure against it is a structural mismatch,
+  not a shaky-but-defensible value match. When no trait exists for the
+  structure at all (e.g. bracteole/flower hairs specifically), document
+  in `raw_value`/`notes` as `no_apd_trait` with no `apd_trait` assigned,
+  same as any other true gap.
+- **More `flower_shape` proposals**: `turbinate` (top-shaped/inverted
+  cone - already used as a cross-reference inside fruit_shape's own
+  "conical" definition, so reuse the term for consistency) for a
+  "top-shaped" calyx (Lawrencia buchananensis). Keep proposing distinct
+  values here rather than collapsing everything to bell-shaped/tubular
+  - this trait is one of the sparsest in APD relative to how often
+  flower shape is actually described in these sources.
+- **`fruit_type` DOES already include `schizocarp`** ("fruits derived
+  from a compound pistil that separate into individual carpellary
+  constituents at maturity... includes mericarps, nutlets, fruitlets")
+  - don't miss it in a quick scan of the fruit_type list (it's easy to
+  stop scanning after nut/nutlet/pyrene and miss schizocarp further
+  down). Matches Malvaceae-style fruits that split into several
+  segments at maturity (Lawrencia buchananensis, "breaking apart into
+  five segments when ripe") - distinct from `mericarp`, which is the
+  individual segment, not the whole pre-split fruit.
+- **No `flower_petal_fusion`/`flower_sepal_fusion` proportion trait
+  exists** (unlike the style, which has `flower_style_fusion`, 0-1
+  proportion) - a stated fusion fraction for sepals/petals ("fused for
+  up to three quarters of their length") has no matching trait;
+  document in `raw_value` only. Found 2026-09-03, Lawrencia
+  buchananensis.
+- **Goodeniaceae corolla lobes routinely have "wings"** (flattened,
+  membranous flanges along the lobe margins) - no matching trait exists
+  in APD for this. Recurred twice same day (Lechenaultia chlorantha,
+  Leschenaultia laricina), alongside the pollen presenter gap already
+  noted above - both genus-wide, taxonomically standard structures.
+  Keep documenting in `raw_value` only for now; if it keeps recurring
+  across more Goodeniaceae genera (Scaevola, Dampiera, Goodenia,
+  Velleia), it may be worth nominating as a genuinely new trait (not
+  just a new value) at a future check-in, rather than a value on an
+  existing trait.
