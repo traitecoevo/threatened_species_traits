@@ -1127,3 +1127,55 @@ these aliases on sight rather than waiting for the next audit to catch them:
   *Centrostephanus rodgersii* grazing algal beds) is not `invasive_species`
   (that value is for introduced organisms) - document as `no_apd_trait`
   instead of stretching the value to fit.
+- **`soil_type`, `topographic_position` and `geologic_substrate` (this
+  project's own habitat traits, config/traits.yml) are strict controlled
+  vocabularies with specific tokens - always check `allowed_values_levels`
+  before inventing a value.** Found 2026-09-03 (Eucalyptus hallii,
+  langleyi, parramattensis subsp. decadens): scored made-up
+  prefixed-compound values (`soil_sandy`, `soil_skeletal`) that don't
+  exist - the real tokens are bare (`sand`, `skeletal`, `loam_sandy`,
+  `loam_gravelly`, `gravel`, `clay`, `silt`, etc; some are literal
+  multi-word compounds like `soil_shallow soil_rocky` - these are single
+  values, not two space-delimited ones). Similarly `topographic_position`
+  uses `flats`/`hills`/`mountains`/`slopes`/`slopes_steep`/`plateaus`/
+  `undulating`/`streams`/`watercourses` (not `flat`, not `plateau`
+  singular). `geologic_substrate` has no bare `sedimentary` value (only
+  specific rock types: `sandstone`/`mudstone`/`shale`/`limestone`/etc) -
+  when a source only says "sedimentary rock" without specifying which,
+  score `proposed_new_value` with `sedimentary`, matching the established
+  Endiandra hayesii precedent, not `medium` confidence against a
+  near-enough-sounding real value. All 5 wrong values found this session
+  were corrected in both the combined table and the per-species files.
+- **`leaf_glaucousness` (real APD trait) is the match for "glaucous" /
+  "waxy bloom" / "pruinose" / "blue-grey" / "grey-blue" leaf colour
+  descriptions** - but its definition is explicitly scoped to *mature,
+  fully-expanded leaves on adult plants only*. A source describing
+  glaucous *juvenile* leaves, stems, buds, or fruit does not fit this
+  trait (no sibling trait exists for those structures) - documented in
+  `raw_value` only, `no_apd_trait`. (Eucalyptus pulverulenta had all four:
+  glaucous juvenile leaves, young stems, buds and fruit, but only the
+  glaucous *adult* leaves scored under `leaf_glaucousness`.)
+- **`leaf_phyllotaxis` (not `leaf_arrangement`) is the real APD trait for
+  "opposite"/"alternate" leaf attachment at a single stem node.**
+  `leaf_arrangement`'s own definition explicitly defers this to
+  `leaf_phyllotaxis` and instead covers multi-node patterns (decussate,
+  distichous, spiral, rosette, clustered, etc). Found 2026-09-03
+  (Eucalyptus pulverulenta, rhodantha).
+- **No altitude/elevation trait exists anywhere** (real APD, this
+  project's config/traits.yml, or new_traits.yml) despite elevation
+  ranges being routinely reported in these conservation advice documents
+  (a recurring gap, first flagged 2026-09-03, Eucalyptus pulverulenta).
+  Score `apd_trait=altitude`, `match_confidence=proposed_new_trait`,
+  `apd_units=m`, value populated - per SKILL.md's "propose a best-guess
+  value/trait name, don't just flag the gap" instruction - rather than
+  leaving it `no_apd_trait`. Revisit whether this should be formally
+  added to new_traits.yml once it recurs a few more times.
+- **`seed_colour`'s `allowed_values_levels` descriptions in
+  austraits.build/config/traits.yml appear internally scrambled/corrupted
+  relative to their own key names** (e.g. the `black` key's description
+  reads "Seed coat is white.", `red_brown` reads "...is yellow.") - found
+  2026-09-03, Eucalyptus rhodantha. Trust the key name itself (it reads
+  as a sensible colour vocabulary: black/blue_purple/green/grey/pink/
+  red_brown/white_cream/yellow_orange), not the paired description text,
+  until this is confirmed fixed upstream; note the discrepancy in `notes`
+  when scoring this trait.
