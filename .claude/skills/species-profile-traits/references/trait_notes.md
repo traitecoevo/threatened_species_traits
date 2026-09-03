@@ -1219,3 +1219,46 @@ these aliases on sight rather than waiting for the next audit to catch them:
   need to be sourced (from SPRAT online or elsewhere) and added to the
   corpus before they can be extracted; not something to fetch from the
   web unprompted mid-sweep.
+- **Root-suckering / rhizome-clonal species routinely carry an explicit
+  counting-reliability caveat** that's worth preserving whenever present:
+  a source will give a population estimate but flag that connected
+  ramets/suckers were often counted as one individual rather than
+  separately, making the true count likely higher than stated (seen
+  2026-09-03 for Grevillea celata, Grevillea infecunda, and Grevillea
+  kennedyana - the last via rhizome "clumps" rather than root suckers).
+  Score the number as given but always carry the caveat into `notes`.
+- **`plant_height_type=na_geophyte` + `plant_height_reproductive`
+  applies cleanly beyond eucalypt-adjacent orchids** - confirmed again
+  2026-09-03 for Genoplesium vernale (a terrestrial tuberous orchid with
+  one leaf and a separate flowering stem), reinforcing the convention
+  already noted for Diuris/Drakaea-type geophytes.
+- **A species can have no known viable seed production at all** -
+  Grevillea infecunda (2026-09-03) produces no confirmed viable seed and
+  reproduces only by root-suckering. This is a stronger condition than
+  `dispersal_syndrome=atelochory` (which describes seed whose dispersal
+  is prevented, implying seed exists) - score `dispersal_syndrome` as
+  `no_match`/`unknown` instead of reaching for atelochory in this case.
+- **`leaf_lamina_division` has precise pinnate-division terms worth
+  checking for** beyond the broad lobed/compound terms first noticed:
+  `pinnatifid` (lobes <halfway to midrib), `pinnatipartite` (>halfway),
+  `pinnatisect` (nearly to midrib), and their `bipinnatifid` /
+  `bipinnatipartite` / `bipinnatisect` doubled forms - a source giving
+  "pinnatisect to pinnatifid" or "bipinnatisect" should be scored with
+  these exact terms, not the coarser `pinnately_lobed`/`pinnately_compound`.
+- **`sex_type` (not "sexual_system") is the real APD trait for
+  dioecious/monoecious/hermaphrodite etc.** - found 2026-09-03 (Fontainea
+  australis).
+- **Two genuinely opposite fire-interval threats can both be evidenced
+  for the same species** - too-frequent fire depleting the soil seedbank
+  before it replenishes (`fire_increase`) AND too-infrequent fire failing
+  to trigger the germination cue at all while unburnt mature plants
+  senesce (`fire_suppression`). Score both when the source gives concrete
+  evidence for each side, rather than picking one (seen 2026-09-03 for
+  Grevillea floripendula and Grevillea raybrownii).
+- **Proposing a new `geologic_substrate` value beyond the "sedimentary"
+  gap**: found 2026-09-03 that "silcrete" (a specific, well-known
+  Australian substrate term) has no allowed value either (closest is the
+  more generic "siliceous") - proposed as `proposed_new_value` for
+  Grevillea kennedyana. Also confirmed `plant_width` (real APD trait,
+  units m) as the correct trait for a stated plant spread/breadth
+  dimension, sibling to `plant_height`.
