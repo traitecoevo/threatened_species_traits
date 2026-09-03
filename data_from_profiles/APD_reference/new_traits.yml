@@ -43,7 +43,7 @@ traits:
         grazing_intolerant_native_mammals: Adversely affected by grazing/browsing from native mammals (e.g. macropods).
         intolerant_to_grazing_by_rabbits: Adversely affected by grazing/browsing from rabbits (Oryctolagus cuniculus) specifically.
       status: accepted 2026-08-25; intolerant_to_grazing_by_rabbits value added 2026-09-02
-      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes, colobanthus_curtisiae, dichanthium_queenslandicum, dichanthium_setosum, zieria_odorifera_subsp_copelandii, nematolepis_rhytidophylla, boronia_grimshawii, kardomia_silvestris, prostanthera_tallowa, coleus_insularis, diuris_ochroma, eleocharis_keigheryi, eleocharis_obicis, eucalyptus_aggregata, eucalyptus_alligatrix_miscella, eucalyptus_argutifolia, eucalyptus_beardiana, eucalyptus_crispata, eucalyptus_glaucina, eucalyptus_rhodantha]
+      used_in: [eriocaulon_carsonii, acacia_pinguifolia, acacia_imitans, acacia_lanigera_var_gracilipes, colobanthus_curtisiae, dichanthium_queenslandicum, dichanthium_setosum, zieria_odorifera_subsp_copelandii, nematolepis_rhytidophylla, boronia_grimshawii, kardomia_silvestris, prostanthera_tallowa, coleus_insularis, diuris_ochroma, eleocharis_keigheryi, eleocharis_obicis, eucalyptus_aggregata, eucalyptus_alligatrix_miscella, eucalyptus_argutifolia, eucalyptus_beardiana, eucalyptus_crispata, eucalyptus_glaucina, eucalyptus_rhodantha, eucalyptus_strzeleckii]
     leaf_cross_section_shape:
       label: Leaf cross-section shape
       description: >
@@ -78,7 +78,7 @@ traits:
         angular: A stem with distinct angles or ridges in cross-section, of unspecified number.
         quadrangular: A stem square or four-angled in cross-section.
       status: accepted 2026-08-25
-      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum, ctenopteris_blechnoides, cyperus_cephalotes, cyperus_semifertilis, dendrobium_antennatum, dendrobium_bigibbum, dendrobium_mirbelianum, dendrobium_nindii, dichanthium_queenslandicum, dodonaea_rupicola, conospermum_quadripetalum, eucalyptus_boliviana, persoonia_flexifolia, pittosporum_kororoense, eleocharis_obicis, eucalyptus_beardiana, eucalyptus_langleyi]
+      used_in: [acacia_anomala, acacia_curranii, daviesia_bursarioides, daviesia_discolor, eucalyptus_insularis, grevillea_rara, pityrodia_axillaris, styphelia_capillaris, acacia_lauta, babingtonia_tozerensis, canthium_costatum, choretrum_spicatum_subsp_spicatum, ctenopteris_blechnoides, cyperus_cephalotes, cyperus_semifertilis, dendrobium_antennatum, dendrobium_bigibbum, dendrobium_mirbelianum, dendrobium_nindii, dichanthium_queenslandicum, dodonaea_rupicola, conospermum_quadripetalum, eucalyptus_boliviana, persoonia_flexifolia, pittosporum_kororoense, eleocharis_obicis, eucalyptus_beardiana, eucalyptus_langleyi, eucalyptus_robertsonii_hemisphaerica, eucalyptus_steedmanii]
     fruit_shape:
       label: Fruit shape
       description: >
@@ -115,7 +115,25 @@ traits:
         sectoroid: Shaped like an orange segment or wedge of a sphere.
         sinusoidal: A shape with two arcs of curvature or a single arc, such that it lacks an axis of symmetry.
       status: accepted 2026-08-25
-      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, capparis_thozetiana, carronia_pedicellata, chamaesyce_carissoides, colobanthus_curtisiae, conospermum_hookeri, corchorus_cunninghamii, corokia_whiteana, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, corynocarpus_rupestris_subsp_rupestris, cryptocarya_foetida, denhamia_parvifolia, danhatchia_copelandii, eucalyptus_boliviana, rhodamnia_sessiliflora, rhodamnia_whiteana, eleocharis_obicis, endiandra_hayesii, eucalyptus_aggregata, eucalyptus_alligatrix_miscella, eucalyptus_argutifolia, eucalyptus_beardiana, eucalyptus_crispata, eucalyptus_hallii, eucalyptus_langleyi, eucalyptus_parramattensis_decadens, eucalyptus_pulverulenta, eucalyptus_raveretiana, eucalyptus_rhodantha]
+      used_in: [eucalyptus_insularis, cossinia_australiana, eucalyptus_conglomerata, cupaniopsis_shirleyana, daviesia_euphorbioides, gardenia_actinocarpa, eucalyptus_synandra, acacia_grandifolia, acacia_ammophila, acacia_curranii, eucalyptus_ceracea, eucalyptus_stenostoma, sarcochilus_hartmannii, atriplex_infrequens, acacia_lauta, daviesia_bursarioides, dryandra_montana, eremophila_viscida, euphrasia_eichleri, grevillea_rara, pityrodia_axillaris, prasophyllum_affine, pultenaea_setulosa, styphelia_capillaris, taraxacum_cygnorum, viola_improcera, canarium_acutifolium_var_acutifolium, astrotricha_sp_wingan_inlet, babingtonia_tozerensis, capparis_thozetiana, carronia_pedicellata, chamaesyce_carissoides, colobanthus_curtisiae, conospermum_hookeri, corchorus_cunninghamii, corokia_whiteana, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, corynocarpus_rupestris_subsp_rupestris, cryptocarya_foetida, denhamia_parvifolia, danhatchia_copelandii, eucalyptus_boliviana, rhodamnia_sessiliflora, rhodamnia_whiteana, eleocharis_obicis, endiandra_hayesii, eucalyptus_aggregata, eucalyptus_alligatrix_miscella, eucalyptus_argutifolia, eucalyptus_beardiana, eucalyptus_crispata, eucalyptus_hallii, eucalyptus_langleyi, eucalyptus_parramattensis_decadens, eucalyptus_pulverulenta, eucalyptus_raveretiana, eucalyptus_rhodantha, eucalyptus_steedmanii, eucalyptus_strzeleckii, euphrasia_crassiuscula_glandulifera, floydia_praealta, fontainea_australis, gastrolobium_lehmannii]
+    bark_transition_height:
+      label: Bark transition height
+      description: >
+        For trees (particularly eucalypts) with rough, persistent bark on
+        the lower trunk and smooth, shedding bark above - a common
+        "half-bark" pattern - the height above ground at which the bark
+        changes from rough to smooth. Provisional name; the maintainer may
+        rename this once formally reviewed. Only score when a source gives
+        an explicit height for the transition, not merely a rough/smooth
+        two-zone description with no height stated (see bark_texture /
+        bark_morphology_eucalyptus with context="trunk"/"branches" for that
+        weaker case).
+      type: numeric
+      units: m
+      allowed_values_min: 0.1
+      allowed_values_max: 30.0
+      status: maintainer-specified 2026-09-03 (name provisional - "I might come up with a better term later, but that will do for now")
+      used_in: []
     bark_texture:
       label: Bark texture
       description: >
@@ -139,7 +157,7 @@ traits:
         rough: Bark with an uneven, coarse surface not otherwise specified.
         papery: Bark that peels away in thin, papery sheets.
       status: accepted 2026-08-25
-      used_in: [acacia_ammophila, acacia_curranii, microcorys_eremophiloides, syzygium_hodgkinsoniae, eucalyptus_stenostoma, eucalyptus_crucis_crucis, babingtonia_tozerensis, cassinia_heleniae, cassinia_tegulata, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, cycas_silvestris, eucalyptus_boliviana, leptospermum_crassifolium, pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, eucalyptus_sturgissiana, leptospermum_thompsonii, eucalyptus_paliformis, nematolepis_rhytidophylla, eucalyptus_scopulorum, kardomia_silvestris, prostanthera_tallowa, brachychiton_guymeri, endiandra_hayesii, eucalyptus_aggregata, eucalyptus_alligatrix_miscella, eucalyptus_argutifolia, eucalyptus_beardiana, eucalyptus_camfieldii, eucalyptus_crispata, eucalyptus_glaucina, eucalyptus_langleyi, eucalyptus_nicholii, eucalyptus_parramattensis_decadens, eucalyptus_pulverulenta, eucalyptus_raveretiana, eucalyptus_rhodantha]
+      used_in: [acacia_ammophila, acacia_curranii, microcorys_eremophiloides, syzygium_hodgkinsoniae, eucalyptus_stenostoma, eucalyptus_crucis_crucis, babingtonia_tozerensis, cassinia_heleniae, cassinia_tegulata, corymbia_leptoloma, corymbia_rhodops, corymbia_xanthope, cycas_silvestris, eucalyptus_boliviana, leptospermum_crassifolium, pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, eucalyptus_sturgissiana, leptospermum_thompsonii, eucalyptus_paliformis, nematolepis_rhytidophylla, eucalyptus_scopulorum, kardomia_silvestris, prostanthera_tallowa, brachychiton_guymeri, endiandra_hayesii, eucalyptus_aggregata, eucalyptus_alligatrix_miscella, eucalyptus_argutifolia, eucalyptus_beardiana, eucalyptus_camfieldii, eucalyptus_crispata, eucalyptus_glaucina, eucalyptus_langleyi, eucalyptus_nicholii, eucalyptus_parramattensis_decadens, eucalyptus_pulverulenta, eucalyptus_raveretiana, eucalyptus_rhodantha, eucalyptus_robertsonii_hemisphaerica, eucalyptus_steedmanii, eucalyptus_strzeleckii, floydia_praealta]
     bark_colour:
       label: Bark colour
       description: >
@@ -164,7 +182,7 @@ traits:
         white: Bark is white.
         yellow: Bark is yellow.
       status: accepted 2026-08-25 (file entry restored 2026-09-02)
-      used_in: [pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, eucalyptus_sturgissiana, eucalyptus_paliformis, nematolepis_rhytidophylla, eucalyptus_scopulorum, kardomia_silvestris, prostanthera_tallowa, brachychiton_guymeri, endiandra_hayesii, eucalyptus_aggregata, eucalyptus_alligatrix_miscella, eucalyptus_argutifolia, eucalyptus_beardiana, eucalyptus_camfieldii, eucalyptus_crispata, eucalyptus_glaucina, eucalyptus_hallii, eucalyptus_langleyi, eucalyptus_nicholii, eucalyptus_parramattensis_decadens, eucalyptus_pulverulenta, eucalyptus_raveretiana, eucalyptus_rhodantha]
+      used_in: [pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, eucalyptus_sturgissiana, eucalyptus_paliformis, nematolepis_rhytidophylla, eucalyptus_scopulorum, kardomia_silvestris, prostanthera_tallowa, brachychiton_guymeri, endiandra_hayesii, eucalyptus_aggregata, eucalyptus_alligatrix_miscella, eucalyptus_argutifolia, eucalyptus_beardiana, eucalyptus_camfieldii, eucalyptus_crispata, eucalyptus_glaucina, eucalyptus_hallii, eucalyptus_langleyi, eucalyptus_nicholii, eucalyptus_parramattensis_decadens, eucalyptus_pulverulenta, eucalyptus_raveretiana, eucalyptus_rhodantha, eucalyptus_robertsonii_hemisphaerica, eucalyptus_steedmanii, eucalyptus_strzeleckii, floydia_praealta]
     stipule_presence:
       label: Stipule presence
       description: >
@@ -231,7 +249,7 @@ traits:
       allowed_values_min: 1.0
       allowed_values_max: 100.0
       status: accepted 2026-08-25
-      used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla, conospermum_quadripetalum, danhatchia_copelandii, drosera_oreopodion, homoranthus_croftianus, persoonia_flexifolia, pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, zieria_odorifera_subsp_copelandii, pterostylis_metcalfei, boronia_grimshawii]
+      used_in: [boronia_boliviensis, daviesia_bursarioides, darwinia_carnea, dipodium_pictum, tetratheca_aphylla, conospermum_quadripetalum, danhatchia_copelandii, drosera_oreopodion, homoranthus_croftianus, persoonia_flexifolia, pittosporum_kororoense, rhodamnia_sessiliflora, rhodamnia_whiteana, zieria_odorifera_subsp_copelandii, pterostylis_metcalfei, boronia_grimshawii, gastrolobium_lehmannii]
     generation_time:
       label: Generation time
       description: >

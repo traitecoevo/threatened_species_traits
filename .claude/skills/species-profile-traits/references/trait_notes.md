@@ -1179,3 +1179,43 @@ these aliases on sight rather than waiting for the next audit to catch them:
   red_brown/white_cream/yellow_orange), not the paired description text,
   until this is confirmed fixed upstream; note the discrepancy in `notes`
   when scoring this trait.
+- **`bark_transition_height`** (new project-pending trait, maintainer-
+  specified 2026-09-03; see new_traits.yml) - for trees, particularly
+  eucalypts, with a "half-bark" pattern (rough persistent bark low on the
+  trunk, smooth shedding bark above), the height above ground where the
+  bark changes from rough to smooth. Numeric, units m. Only score this
+  when the source states an actual height for the transition - a plain
+  two-zone rough-trunk/smooth-branches description with no height given
+  (e.g. Eucalyptus raveretiana, this project, 2026-09-03) still only
+  supports `bark_texture`/`bark_morphology_eucalyptus` scored separately
+  by context ("trunk and largest branches" vs "branches"), not this
+  trait. Name is provisional - maintainer may rename later.
+- **The "already done?" check against the combined table can miss a
+  species filed under a taxonomic synonym.** Found 2026-09-03: about to
+  extract "Euphorbia carissoides" (the current name, per
+  `threatened_flora.csv`) as new, when it was already fully done (35
+  rows, high quality) from an earlier session - just filed under its
+  older synonym "Chamaesyce carissoides" (the name the source PDF itself
+  uses in its header). A simple lowercase taxon_name match against
+  `threatened_flora.csv`'s current name won't catch this. Caught here
+  only because the PDF's own header said "Chamaesyce carissoides" and
+  that name rang a bell in `new_traits.yml`'s `fruit_shape` used_in list.
+  **Before starting a species whose PDF header uses an unfamiliar or
+  older-looking genus/epithet, grep the combined table for that name too,
+  not just the `threatened_flora.csv` name** - a mismatch between the
+  master list's current name and the source document's name is the
+  tell. No corpus-wide sweep has been done to check for other
+  already-done synonym duplicates; flagging as a possible gap, not
+  something to chase down unprompted.
+- **Some `threatened_flora.csv` rows marked "Profile Available: Yes" have
+  no PDF in the local `approved_conservation_advice` folder** (verified
+  against the complete 1221-file first-page index, and also checked the
+  sibling `ConservationAdvice_2024/2025/2026` folders - not there
+  either). Found 2026-09-03: Euphorbia obliqua, Euphrasia amphisysepala,
+  Euphrasia phragmostoma all skipped for this reason and replaced with
+  the next available species in the alphabetical sweep (Fontainea
+  australis, Gastrolobium lehmannii, Gastrolobium modestum respectively)
+  to keep the batch at 10. These three remain outstanding - their PDFs
+  need to be sourced (from SPRAT online or elsewhere) and added to the
+  corpus before they can be extracted; not something to fetch from the
+  web unprompted mid-sweep.
