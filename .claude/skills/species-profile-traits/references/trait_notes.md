@@ -1164,7 +1164,8 @@ these aliases on sight rather than waiting for the next audit to catch them:
 - **No altitude/elevation trait exists anywhere** (real APD, this
   project's config/traits.yml, or new_traits.yml) despite elevation
   ranges being routinely reported in these conservation advice documents
-  (a recurring gap, first flagged 2026-09-03, Eucalyptus pulverulenta).
+  (a recurring gap, first flagged 2026-09-03, Eucalyptus pulverulenta;
+  recurred same day, Hicksbeachia pinnatifolia).
   Score `apd_trait=altitude`, `match_confidence=proposed_new_trait`,
   `apd_units=m`, value populated - per SKILL.md's "propose a best-guess
   value/trait name, don't just flag the gap" instruction - rather than
