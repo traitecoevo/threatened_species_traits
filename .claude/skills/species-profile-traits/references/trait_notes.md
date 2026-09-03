@@ -1232,12 +1232,20 @@ these aliases on sight rather than waiting for the next audit to catch them:
   2026-09-03 for Genoplesium vernale (a terrestrial tuberous orchid with
   one leaf and a separate flowering stem), reinforcing the convention
   already noted for Diuris/Drakaea-type geophytes.
-- **A species can have no known viable seed production at all** -
-  Grevillea infecunda (2026-09-03) produces no confirmed viable seed and
-  reproduces only by root-suckering. This is a stronger condition than
-  `dispersal_syndrome=atelochory` (which describes seed whose dispersal
-  is prevented, implying seed exists) - score `dispersal_syndrome` as
-  `no_match`/`unknown` instead of reaching for atelochory in this case.
+- **A species can have no known viable seed production at all - this is
+  exactly the case `vegetative_reproduction_ability=vegetative_obligate`
+  exists for, don't just leave it as a raw-only curiosity.** Grevillea
+  infecunda (2026-09-03, corrected after maintainer review) produces no
+  confirmed viable seed and reproduces only by root-suckering. Score all
+  of: `vegetative_reproduction_ability=vegetative_obligate` (real trait,
+  matches "never or very rarely regenerates from seed" exactly),
+  `clonal_spread_mechanism=root_buds` ("root-suckering" is a listed
+  synonym), and `seed_viability=0` (real trait, a proportion 0-1 - "no
+  viable seed appears to have been produced" is a stated 0, not merely
+  an unmatched observation). `dispersal_syndrome` still stays
+  `no_match`/`unknown` for the species itself - `atelochory` describes
+  seed whose dispersal is prevented (implying seed exists), which is a
+  weaker condition than never producing viable seed at all.
 - **`leaf_lamina_division` has precise pinnate-division terms worth
   checking for** beyond the broad lobed/compound terms first noticed:
   `pinnatifid` (lobes <halfway to midrib), `pinnatipartite` (>halfway),
