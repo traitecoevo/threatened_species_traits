@@ -722,6 +722,57 @@ many rows across many species, don't guess at the mapping alone if the right
 call is genuinely ambiguous or would require adding a new allowed value —
 ask first, the same way you would for any other `proposed_new_value`.
 
+**Known open corpus debt (as of 2026-09-04) — `leaf_colour`/`leaf_surface_colour`
+mapping, still not actually fixed despite a commit claiming otherwise.** A
+2026-09-02 commit (`65750ed`, "fix leaf_surface_colour trait mapping
+corpus-wide") claimed to correct ~85 files, and `trait_notes.md` already
+names `leaf_surface_colour` as the real trait (see the Jacksonia entry under
+"Growth form & habit" — read before this session's batch and still missed).
+Despite both of those, a fresh corpus count on 2026-09-04 found **80 rows
+across 75 species** still sitting with a blank `apd_trait` for a plain
+leaf-colour observation (`raw_trait` variants: `leaf_colour` ×57,
+`leaf_colour_adult`/`_juvenile`/`_immature`/`_upper`/`_lower`, `leaf_sheath_colour`,
+`leaf_colour_pattern`, `floral_leaf_colour`, `leaf_relative_colour` — run the
+Counter script above filtered to `"colour" in raw_trait and "leaf" in
+raw_trait` to regenerate this list). Most are direct `leaf_surface_colour`
+matches at `high` confidence (its allowed-value vocabulary is dominant-hue
+descriptors: `green`, `dark_green`, `grey_green`, `blue_green`, `brown`,
+etc. — no adult-only scope restriction found in its definition, unlike
+`leaf_glaucousness`/`leaf_hairs_adult_leaves`, so juvenile/upper/lower
+variants can likely score too with `context` naming which). A couple of the
+variants are a genuinely different trait, not a scope match: `leaf_colour_pattern`
+(concolorous/discolorous) is about lamina-surface colour *symmetry*, not a
+hue — check `leaf_heterogeneity` or similar before defaulting it to
+`leaf_surface_colour`. **This is flagged as a scoped, deliberately-deferred
+fix (maintainer decision 2026-09-04) — the alphabetical species sweep
+continues first; do this as its own dedicated pass, not a rushed tail-end
+addition to a species batch.** Don't re-close this note until the fix is
+actually verified done (a zero count from the query above), and don't trust
+a past commit message's claim of "corpus-wide" without re-running the count
+yourself first — that's exactly what went wrong here twice.
+
+**Known open corpus debt (as of 2026-09-07) — new `threats` project trait,
+not yet backfilled.** Maintainer directive 2026-09-07: `threatened_species_key_threatening_processes`
+is scoped only to the officially-gazetted EPBC Act Key Threatening Processes
+(its own description says so explicitly) — a large family of real,
+recurring threats this project had been logging as `no_apd_trait` gaps all
+session (`illegal_collection`, `timber_harvesting`/forestry, `land_clearing`,
+`mining`, `climate_change`, `native_species_competition`, `altered_hydrology`,
+`recreational_disturbance`, `human_trampling`, `visitor_settlement_pressure`,
+`pollination_mutualism_failure`, `genetic_inbreeding_risk`,
+`survey_disturbance`, `infrastructure_disturbance`) don't belong there and
+never will, no matter how often they recur. A new project trait, `threats`
+(see `new_traits.yml`), was created the same day to hold exactly these —
+score a threat there **only** when it is not also an official KTP (don't
+double-score the same fact on both traits). **Explicitly queued, not yet
+applied to any already-processed species** (maintainer chose "apply going
+forward, don't sweep unprompted" over an immediate retroactive pass, the
+same choice made for the `leaf_surface_colour` debt above) — many species
+processed before 2026-09-07 have these exact threat facts sitting in
+`notes`/`raw_value` only with a blank `apd_trait`, waiting to be rescored
+once a dedicated backfill pass is scoped. Use `threats` for every new
+species from here on; don't sweep the older files unprompted.
+
 **Any time the maintainer gives you new information — approves a value,
 adds a trait, extends a definition, corrects a mapping — sweep the whole
 combined file for every row that information now resolves, not just the

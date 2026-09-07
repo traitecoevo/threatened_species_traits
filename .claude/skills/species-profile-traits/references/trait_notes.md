@@ -882,6 +882,35 @@ at all, a different and much rarer situation than "the source didn't say").
 
 ## Threats
 
+- **Two different traits now split this domain (maintainer directive,
+  2026-09-07) — check which one a threat belongs to before scoring either.**
+  `threatened_species_key_threatening_processes` is scoped *only* to the
+  officially-gazetted EPBC Act Key Threatening Processes (its own
+  description says exactly this) — score a threat there only when it's
+  actually one of those. Everything else real-but-not-gazetted (illegal
+  collection, timber harvesting/forestry, land clearing, mining,
+  native-species competition, altered hydrology,
+  recreational disturbance, human trampling, visitor/settlement pressure,
+  pollination-mutualism failure, genetic inbreeding risk, survey
+  disturbance, infrastructure construction/maintenance) goes on the newer
+  project trait **`threats`** (see `new_traits.yml` for the full vocabulary
+  and to add a new value when a species surfaces one not yet listed) — never
+  score the same threat on both traits. `threats` was created 2026-09-07 and
+  is not yet backfilled onto species processed before that date — see
+  SKILL.md's corpus-debt note; apply it going forward, don't sweep
+  unprompted.
+- **Climate change is a gazetted EPBC KTP, not a `threats`-trait residual —
+  found the same day `threats` was created (Melichrus gibberagee, 2026-09-07),
+  corrected immediately.** `threatened_species_key_threatening_processes`'s
+  own comment already flags it as "only a subset of Ward's designations" —
+  climate change (officially "Loss of Climatic Habitat Caused by
+  Anthropogenic Greenhouse Gas Emissions", DEH 2001) is a real, gazetted KTP
+  this project's cached copy just hasn't added a value for yet. Score it
+  there as `proposed_new_value` (candidate value name: `loss_of_climatic_habitat`),
+  not on `threats` — `climate_change` was briefly listed as a `threats` value
+  and has been removed; don't re-add it there.
+  unprompted.
+  unprompted.
 - **`threatened_species_key_threatening_processes`** (project trait, real,
   categorical — values include `fire`/`fire_suppression`/`fire_increase`/
   `fire_regime`/`disease`/`chytrid`/`phytophthora_cinnamomi`/`myrtle_rust`/
@@ -1408,3 +1437,73 @@ these aliases on sight rather than waiting for the next audit to catch them:
   Velleia), it may be worth nominating as a genuinely new trait (not
   just a new value) at a future check-in, rather than a value on an
   existing trait.
+- **Three more real leaf traits found 2026-09-04 (Macadamia jansenii),
+  all in the newer austraits.build copy, none yet in the released APD
+  cache** - easy to miss and worth checking by name rather than
+  defaulting a leaf-surface observation to `no_apd_trait`:
+  `leaf_surface_colour` (categorical - a dominant-hue vocabulary of
+  green/grey/purple/red/blue/white/yellow/brown shades, e.g. "mid-green"
+  scores directly as `green`; retroactively fixed the same day for
+  Lysiosepalum abollatum, which had scored an identical "mid-green"
+  leaf-colour statement `no_apd_trait` earlier the same session before
+  this trait was found - a reminder that a fresh, more thorough search
+  can resolve a gap scored just a few species earlier in the same
+  session, worth sweeping back over immediately rather than only on a
+  future audit), `leaf_surface_reflectivity` (categorical: `dull`/
+  `shiny` - direct match for "glossy"/"scarcely glossy"/"dull" leaf
+  descriptions, distinct from `leaf_glaucousness`'s wax-bloom concept),
+  and `leaf_hairs_immature_leaves` (categorical: `glabrous`/`hairy` -
+  specifically for a *still-expanding* leaf on an already-adult plant,
+  e.g. "leaves ... gradually become hairless as they mature" scores
+  `hairy` here for the young/expanding state and `glabrous` on
+  `leaf_hairs_adult_leaves` for the final mature state). **Don't
+  conflate `leaf_hairs_immature_leaves` with a whole-plant juvenile
+  developmental stage** (heteroblasty, e.g. "juvenile leaves are
+  longest and are glabrous" in Macadamia ternifolia, the same day) -
+  that trait's own definition is scoped to an expanding leaf on an
+  adult plant, not a seedling/juvenile-phase plant's leaves; the latter
+  has no matching trait at all (the same adult-only scope restriction
+  already documented for `leaf_glaucousness`), so it stays `no_apd_trait`.
+- **`rhizome_form` (real trait, newer austraits.build copy:
+  `woody`/`stout`/`branched`/`slender`/`short_creeping`/`long_creeping`)
+  has no value for a *climbing* rhizome** - proposed `climbing` as a new
+  value for Lindsaea pulchella var. blanda (a climbing-rhizome fern),
+  2026-09-04. A rhizome's own diameter scores on the real `stem_diameter`
+  trait (mm) with `context="rhizome"`, medium confidence, since that
+  trait's definition is technically "diameter at the base of the plant"
+  rather than rhizome-specific.
+- **A calyx/perianth-part measurement is not automatically `flower_length`
+  just because no calyx-specific trait exists** (Macropteranthes montana,
+  2026-09-04) - when a source separately measures a calyx (or calyx tube)
+  *and* separate petals as two distinct structures, scoring the calyx
+  figure onto `flower_length` (defined as the whole flower/perianth, base
+  to tip) would double-count/conflate two different structures the source
+  itself distinguishes - leave the calyx-only measurement `no_apd_trait`
+  instead, the same structural-mismatch reasoning as elsewhere in this
+  file. `flower_perianth_fusion` still applies normally to a "tubular"
+  calyx (scores `1`, complete fusion) since that trait is explicitly about
+  perianth-part fusion in general, not a whole-flower length claim.
+  `flower_bract_length` (real trait, newer copy) is the right match for
+  a bracteole's own length, including an enlarged/wing-like *fruiting*-stage
+  bracteole - scored normally with `context` naming the fruiting stage.
+- **"Paired flowers" (or any other spelled-out flower-pair/number word on
+  an inflorescence) scores directly as a `flowers_per_inflorescence`
+  count** (e.g. "paired" -> `2`) - the same convention already
+  established for leaflet-count words ("trifoliate" -> 3, etc.), applied
+  here to inflorescence flower counts (Macropteranthes montana, 2026-09-04).
+- **A per-site "occupied area" figure (e.g. "estimated to occur in an
+  area of 5 ha at a site between X and Y") is not the same thing as the
+  species' overall `area_of_occupancy`** (an IUCN range-wide metric,
+  km²) - scoring a single surveyed site's hectare figure there would
+  misrepresent the species' actual range. Document these per-site area
+  figures `no_apd_trait` with `context` naming the site and year instead
+  (Macropteranthes montana, 2026-09-04) - the same reasoning already
+  applied to a Regional Forest Agreement planning-region's own area
+  (Macadamia integrifolia, same day): a region/site boundary size is not
+  the species' EOO/AOO just because both are areas in km²/ha.
+- **Two more `threatened_species_key_threatening_processes` gaps found
+  2026-09-04**: inappropriate/illegal timber harvesting (Macadamia
+  jansenii, alongside the already-documented illegal-collection gap from
+  the same species) and water-quality/hydrology threats - turbidity,
+  water extraction, impoundments, eutrophication (Lychnothamnus
+  barbatus). Both `no_apd_trait`, documented in `raw_value`/`notes` only.

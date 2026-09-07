@@ -279,3 +279,59 @@ traits:
       allowed_values_max: 500.0
       status: accepted 2026-09-02
       used_in: [acacia_baueri_subsp_aspera, acacia_blayana, acacia_constablei, acacia_courtii, acacia_lanigera_var_gracilipes, almaleea_cambagei, asterolasia_buxifolia, boronia_boliviensis, viola_improcera, bertya_mollissima, bertya_sp_clouds_creek, astrotricha_sp_wingan_inlet, chiloglottis_anaticeps, choretrum_spicatum_subsp_spicatum, corchorus_cunninghamii, corokia_whiteana, correa_lawrenceana_var_genoensis, conospermum_quadripetalum, dillwynia_rupestris, drosera_oreopodion, eucalyptus_boliviana, gentiana_baeuerlenii, gentiana_wissmannii, hibbertia_superans, homoranthus_croftianus, leptospermum_crassifolium, lordhowea_pilosicrista, olearia_suffruticosa, pittosporum_kororoense, prostanthera_rowleys_creek, pultenaea_insularis, rhodamnia_sessiliflora, rhodamnia_whiteana, typhonium_sp_cox_peninsula, cyphanthera_scabrella, eucalyptus_sturgissiana, leptospermum_thompsonii, pherosphaera_fitzgeraldii, deyeuxia_talariata, eucalyptus_paliformis, grevillea_rhizomatosa, nematolepis_rhytidophylla, pterostylis_metcalfei, eucalyptus_scopulorum, boronia_subulifolia, boronia_deanei_acutifolia, boronia_deanei_deanei, boronia_grimshawii, cassinia_theodorii, kunzea_juniperoides_pernervosa, prostanthera_tallowa, brachychiton_guymeri]
+    threats:
+      label: Threats
+      description: >
+        A broader, deliberately-growing categorical vocabulary for threats
+        described in a source document that are NOT one of the
+        officially-gazetted EPBC Act Key Threatening Processes covered by
+        the real trait `threatened_species_key_threatening_processes`
+        (whose own description explicitly restricts it to "a pressure
+        identified by the EPBC Act" - illegal collection, for instance, is
+        not on that gazetted list no matter how often it recurs in these
+        sources). Maintainer directive 2026-09-07: score a threat on
+        `threats` only when it is NOT also an official KTP - do not
+        double-score the same fact on both traits. This mirrors the
+        habitat/soil_type/geologic_substrate pattern (a project-specific,
+        openly-extensible vocabulary for a real concept APD/the official KTP
+        list doesn't cover), not a pending-APD-merge proposal.
+
+        Correction 2026-09-07 (Melichrus gibberagee, same day as this trait's
+        creation): climate change was initially listed here as a value, but
+        Melichrus gibberagee's own conservation advice explicitly cites "loss
+        of terrestrial climatic habitat caused by anthropogenic emissions of
+        greenhouse gases" as a Key Threatening Process under the EPBC Act
+        (DEH 2001) - i.e. climate change genuinely IS an official, gazetted
+        KTP, this project's own `threatened_species_key_threatening_processes`
+        copy in config/traits.yml just hasn't had a matching value added yet
+        (consistent with that trait's own comment that "only a subset of
+        Ward's designations are currently included"). Climate-change threats
+        belong there as a `proposed_new_value` (e.g. `loss_of_climatic_habitat`),
+        not here - removed from this trait's vocabulary accordingly. Don't
+        re-add it without re-checking this reasoning first.
+      type: categorical
+      allowed_values_levels:
+        illegal_collection: Illegal collection/harvesting of whole plants, seed, or other propagules from the wild, typically for the horticultural trade or by specialist collectors - one of the single most frequently recurring threat gaps in this project's corpus.
+        timber_harvesting: Logging/timber harvesting operations and associated forestry activity.
+        land_clearing: Clearing of habitat for agriculture, urban/residential development, or other land-use conversion.
+        mining: Mining, quarrying, or associated exploration/leasing activity.
+        bushrock_removal: Removal of surface sandstone/bushrock (e.g. for landscaping or building material) - a real, recurring Sydney-sandstone-habitat threat explicitly listed as a Key Threatening Process under NSW state legislation (not the federal EPBC Act, so it doesn't belong on threatened_species_key_threatening_processes). Proposed 2026-09-07 (Micromyrtus blakelyi).
+        native_species_competition: Competitive or facilitative decline pressure from a native (not introduced/feral) species - e.g. canopy closure by a native tree following long fire absence, or a native parasitic vine - distinct from threatened_species_key_threatening_processes, whose values are scoped to introduced/feral pressures.
+        altered_hydrology: Changes to water tables, water extraction, impoundments, or altered flow/water-quality regimes (turbidity, eutrophication, sedimentation, run-off).
+        recreational_disturbance: Damage from recreational activity such as off-road vehicles, trail bikes, or rubbish dumping.
+        human_trampling: Direct mechanical trampling or plant damage from human activity (e.g. foot traffic, military/training exercises) - distinct from the animal grazing/trampling values already covered by threatened_species_key_threatening_processes.
+        visitor_settlement_pressure: Pressure from nearby or localised visitor access or human settlement.
+        pollination_mutualism_failure: Failure or breakdown of an obligate pollination mutualism, e.g. loss or decline of a specialist pollinator.
+        genetic_inbreeding_risk: Risk of genetic inbreeding depression affecting long-term population viability, typically due to small or fragmented populations.
+        survey_disturbance: Habitat disturbance caused by geological or other scientific survey activity.
+        infrastructure_disturbance: Disturbance from the construction or maintenance of tracks, roads, easements, or other infrastructure.
+        soil_compaction: Physical soil compaction, typically from trampling by livestock or feral animals, distinct from the grazing/trampling impact on the plant itself already covered by threatened_species_key_threatening_processes. Proposed 2026-09-07 (Micromyrtus grandis).
+        nutrient_enrichment: Addition of nutrients to naturally low-nutrient soils (e.g. from livestock/feral animal waste or agricultural runoff), altering soil chemistry in a way that can favour weeds over native low-nutrient specialists. Proposed 2026-09-07 (Micromyrtus grandis).
+      status: accepted 2026-09-07 (maintainer directive)
+      used_in: [melaleuca_sciotostyla, melichrus_gibberagee, melichrus_sp_newfoundland, microcarpaea_agonis, microlepidium_alatum, micromyrtus_blakelyi, micromyrtus_grandis, micromyrtus_minutiflora]
+      # See SKILL.md's "known open corpus debt" entry for the queued
+      # retroactive backfill of already-logged no_apd_trait threat-gap rows
+      # (illegal_collection, timber_harvesting, etc.) predating this trait's
+      # creation. Populate this list as new species use it, and add a new
+      # allowed value here whenever a species surfaces a threat concept not
+      # yet covered, same as any other project trait.
