@@ -33,7 +33,7 @@ contexts: .na
 traits:
 - var_in: MNES_DCCEEW maps
   unit_in: km2
-  trait_name: area_of_occupancy
+  trait_name: geographic_range
   entity_type: species
   value_type: raw
   basis_of_value: measurement
