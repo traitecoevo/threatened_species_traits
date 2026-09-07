@@ -1439,6 +1439,8 @@ these aliases on sight rather than waiting for the next audit to catch them:
 - **`globular`** added to the same list for Microtis globula ("lateral
   sepals curve inwards, giving each flower a globular appearance") -
   fittingly matches the species epithet itself.
+- **`star-shaped`** added to the same list for Nematolepis frondosa ("Flowers
+  are... star-shaped, to 9 mm across").
 - **`fruit_type` DOES already include `schizocarp`** ("fruits derived
   from a compound pistil that separate into individual carpellary
   constituents at maturity... includes mericarps, nutlets, fruitlets")
@@ -1534,3 +1536,51 @@ these aliases on sight rather than waiting for the next audit to catch them:
   the same species) and water-quality/hydrology threats - turbidity,
   water extraction, impoundments, eutrophication (Lychnothamnus
   barbatus). Both `no_apd_trait`, documented in `raw_value`/`notes` only.
+- **Five self-caught trait-name errors in one species (Olearia
+  macdonnellensis, 2026-09-07) - a reminder to verify every apd_trait
+  name character-by-character against the real files before writing it
+  down, not just because it "sounds like" a plausible trait.** All five
+  were invented/misremembered names that don't exist in APD or either
+  cached copy: (1) `leaf_colour` → real trait is
+  [[leaf_surface_colour]] (already documented above, line ~1473 - this
+  is a *repeat* of that exact same lapse); (2) `leaf_petiole_presence`
+  → doesn't exist at all (only `petiole_length`/`petiole_shape`/
+  `petiole_width`, which need an actual measurement, not a bare
+  presence/absence statement) - already correctly scored `no_apd_trait`
+  for this exact fact in Newcastelia velutina earlier in this project,
+  which should have been checked first; (3) "varnished" leaves scored
+  `no_apd_trait` when the real trait `leaf_surface_reflectivity`
+  (categorical `dull`/`shiny`, "varnished" is its own listed synonym
+  for `shiny`) was sitting right there, found only when re-checking;
+  (4) "silky and villous" seeds scored under a fabricated
+  `seed_surface_texture=hairy` (neither the trait name for that fact
+  nor the value `hairy` are real) when the real trait is
+  `seed_surface_hairs` (categorical `glabrous`/`hairs`/`hairs_branched`/
+  `hairs_simple`, with `hairs_simple`'s own synonyms listing
+  sericeous/velvety/velutinous - "silky" maps directly to this); (5) a
+  composite-flower female-ray-floret + bisexual-disc-floret fact scored
+  under a fabricated `flower_sex` trait/value when the real match is
+  `sex_type=gynomonoecious` ("hermaphrodite and pistillate flowers on
+  the same plant, no staminate-only flowers" - an exact definitional
+  match), following the same pattern already correctly used for
+  Actephila foetida's mixed male/female clusters (`sex_type=monoecious`,
+  not a fabricated `flower_sex`). All five caught and fixed in place
+  (combined table + both per-species files + source script) before
+  moving to the next species. **Lesson: for every non-trivial trait
+  match, actually grep the candidate trait name in both `traits.yml`
+  copies (and check the mind map for the concept) before writing the
+  row - don't rely on a name feeling familiar from having scored
+  similar facts many times before.**
+- **Floral part counts (sepals/petals/stamens) DO have matching real traits -
+  maintainer correction 2026-09-08, after these were scored `no_apd_trait`
+  for Ornduffia calthifolia's "5 broad sepals and 5 petals... and 5
+  stamens".** `flower_perianth_merism` (numeric, `{count}`) is the number
+  of perianth parts (sepals/petals/tepals) *per floral whorl* - score one
+  row per whorl with `context` naming which (e.g. "calyx whorl (sepals)"
+  vs "corolla whorl (petals)"), not a single combined count. A related
+  trait, `flower_perianth_parts_count`, gives the *total* across all
+  perianth whorls when that's what the source states instead. For
+  stamens, `flower_fertile_stamens_count` (numeric, `{count}`) covers
+  "N stamens" on a bisexual or male flower directly - don't leave a bare
+  stamen count as `no_apd_trait` either. All three were retroactively
+  fixed in place for Ornduffia calthifolia the same day.
