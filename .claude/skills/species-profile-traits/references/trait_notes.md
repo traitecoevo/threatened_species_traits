@@ -745,6 +745,26 @@ has no real trait.
   `root_suckering` — a plausible-sounding but non-existent value this
   project used for several species before 2026-09-02.
 
+## Root structure & mycorrhizae
+
+- **`root_structure`** (real APD trait, categorical) is where ALL
+  mycorrhizal-interaction facts belong — a very important trait, flagged by
+  the maintainer 2026-09-07 after it was missed on Microtis angusii (scored
+  `no_apd_trait` instead, then corrected in place). Allowed values include
+  `orchid_mycorrhizal` ("A mycorrhizal relationship specific to orchid taxa,
+  and for most orchids, essential for seedlings to establish" — the single
+  most likely value for any orchid conservation advice that mentions
+  mycorrhizal dependency for germination/seedling establishment, which comes
+  up constantly in this corpus), plus `arbuscular_mycorrhizal`,
+  `ectomycorrhizal`, `ericoid_mycorrhizal`, `mycorrhizal` (type unspecified),
+  `non_mycorrhizal`, and non-mycorrhizal root specialisations: `carnivorous`,
+  `cluster_roots`/`proteoid_root`/`dauciform_root`, `cord_roots`,
+  `haustorium`/`parasitic_root`/`hemiparasitic_root`, `fine_roots`,
+  `long_root_hairs`/`root_hairs`, `sand-binding`. **Always check for this
+  trait when a source mentions mycorrhiza, root symbiosis, or (for orchids)
+  fungal dependency for germination/seedling establishment** — don't let it
+  default to `no_apd_trait`.
+
 ## Other whole-plant traits
 
 - **Salt tolerance has two distinct APD traits** — pick based on what the
@@ -1412,6 +1432,13 @@ these aliases on sight rather than waiting for the next audit to catch them:
   values here rather than collapsing everything to bell-shaped/tubular
   - this trait is one of the sparsest in APD relative to how often
   flower shape is actually described in these sources.
+- **`hood-shaped`** added to the same running `flower_shape` proposal
+  list for Microtis angusii's orchid flower ("hood-shaped with a short
+  point on the dorsal sepal") - none of bell-shaped/tubular/turbinate/
+  urn-shaped/cup-shaped fit an orchid's dorsal-sepal-hood gestalt.
+- **`globular`** added to the same list for Microtis globula ("lateral
+  sepals curve inwards, giving each flower a globular appearance") -
+  fittingly matches the species epithet itself.
 - **`fruit_type` DOES already include `schizocarp`** ("fruits derived
   from a compound pistil that separate into individual carpellary
   constituents at maturity... includes mericarps, nutlets, fruitlets")

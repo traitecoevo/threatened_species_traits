@@ -327,8 +327,9 @@ traits:
         infrastructure_disturbance: Disturbance from the construction or maintenance of tracks, roads, easements, or other infrastructure.
         soil_compaction: Physical soil compaction, typically from trampling by livestock or feral animals, distinct from the grazing/trampling impact on the plant itself already covered by threatened_species_key_threatening_processes. Proposed 2026-09-07 (Micromyrtus grandis).
         nutrient_enrichment: Addition of nutrients to naturally low-nutrient soils (e.g. from livestock/feral animal waste or agricultural runoff), altering soil chemistry in a way that can favour weeds over native low-nutrient specialists. Proposed 2026-09-07 (Micromyrtus grandis).
+        seed_predation_by_granivores: Seed loss to desert/native granivores (ants, birds, etc.) at a rate significant enough to constrain recruitment - distinct from the animal grazing/trampling KTP values, which concern vegetative damage rather than seed loss. Proposed 2026-09-07 (Minuria tridens).
       status: accepted 2026-09-07 (maintainer directive)
-      used_in: [melaleuca_sciotostyla, melichrus_gibberagee, melichrus_sp_newfoundland, microcarpaea_agonis, microlepidium_alatum, micromyrtus_blakelyi, micromyrtus_grandis, micromyrtus_minutiflora]
+      used_in: [melaleuca_sciotostyla, melichrus_gibberagee, melichrus_sp_newfoundland, microcarpaea_agonis, microlepidium_alatum, micromyrtus_blakelyi, micromyrtus_grandis, micromyrtus_minutiflora, microtis_angusii, minuria_tridens, mitrantia_bilocularis, monotoca_rotundifolia, muehlenbeckia_horrida_abdita, muehlenbeckia_tuggeranong, muelleranthus_crenulatus, myoporum_cordifolium, myriophyllum_coronatum, myriophyllum_lapidicola]
       # See SKILL.md's "known open corpus debt" entry for the queued
       # retroactive backfill of already-logged no_apd_trait threat-gap rows
       # (illegal_collection, timber_harvesting, etc.) predating this trait's
